@@ -9,8 +9,6 @@ GO
 USE SistemaControlAlmuerzos;
 GO
 
--- Tabla de Usuarios eliminada - Se usa autenticación por lugar con ComboBox
-
 -- Tabla de Empresas del predio
 CREATE TABLE Empresas (
     IdEmpresa INT IDENTITY(1,1) PRIMARY KEY,
@@ -81,8 +79,6 @@ INSERT INTO Empresas (Nombre) VALUES
 ('Empresa H'),
 ('Empresa I'),
 ('Empresa J');
-
--- Usuarios eliminados - Autenticación por ComboBox de lugares
 
 -- Empleados de prueba (50 empleados distribuidos en las 10 empresas)
 INSERT INTO Empleados (Nombre, Apellido, IdEmpresa, IdCredencial) VALUES 
@@ -210,10 +206,4 @@ RESTRICCIONES IMPORTANTES:
 - La autenticación se realiza por selección de lugar (ComboBox)
 - Comedor y Quincho: acceso directo sin contraseña
 - Administrador: contraseña hardcodeada en código (admin123)
-
-MODELO DE AUTENTICACIÓN:
-- Sin tabla Usuarios en base de datos
-- ComboBox con opciones: Comedor, Quincho, Administrador
-- Campo contraseña visible solo para Administrador
-- Validación de contraseña en código para rol admin
 */
