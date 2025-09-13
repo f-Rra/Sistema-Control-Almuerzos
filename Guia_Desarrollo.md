@@ -7,11 +7,12 @@
 SistemaControlAlmuerzos.sln
 ├── 📁 app (Capa de Presentación)
 │   ├── Forms/
-│   │   ├── FormLogin.cs
-│   │   ├── FormPrincipal.cs
-│   │   ├── FormRegistroManual.cs
-│   │   ├── FormReportes.cs
-│   │   └── FormAdmin.cs
+│   │   └── FormPrincipal.cs
+│   ├── UserControls/
+│   │   ├── ucVistaPrincipal.cs
+│   │   ├── ucRegistroManual.cs
+│   │   ├── ucReportes.cs
+│   │   └── ucAdministrador.cs
 │   ├── Program.cs
 │   ├── App.config
 │   └── app.csproj
@@ -35,24 +36,34 @@ SistemaControlAlmuerzos.sln
     └── Negocio.csproj
 ```
 
-## 🎨 Interfaz de Usuario - GUNA UI2
+## 🎨 Interfaz de Usuario - MaterialSkin.NET
 
 ### **Componentes Principales:**
-- **Guna.UI2.WinForms.Guna2Form**: Formularios base
-- **Guna.UI2.WinForms.Guna2Button**: Botones estilizados
-- **Guna.UI2.WinForms.Guna2TextBox**: Campos de texto
-- **Guna.UI2.WinForms.Guna2DataGridView**: GridView mejorado
-- **Guna.UI2.WinForms.Guna2ComboBox**: ComboBox estilizado
-- **Guna.UI2.WinForms.Guna2Panel**: Paneles contenedores
+- **MaterialSkin.Controls.MaterialForm**: Formularios base con Material Design
+- **MaterialSkin.Controls.MaterialButton**: Botones estilizados Material
+- **MaterialSkin.Controls.MaterialTextBox**: Campos de texto Material
+- **MaterialSkin.Controls.MaterialComboBox**: ComboBox estilizado Material
+- **System.Windows.Forms.DataGridView**: GridView estándar con tema Material
+- **System.Windows.Forms.Panel**: Paneles con colores Material
 
-### **Tema y Colores:**
+### **Instalación:**
+```powershell
+Install-Package MaterialSkin
+```
+
+### **Configuración del Tema:**
 ```csharp
-// Colores principales del sistema
-Color PrimaryColor = Color.FromArgb(94, 148, 255);    // Azul principal
-Color SecondaryColor = Color.FromArgb(255, 255, 255); // Blanco
-Color AccentColor = Color.FromArgb(255, 193, 7);      // Amarillo
-Color DangerColor = Color.FromArgb(220, 53, 69);      // Rojo
-Color SuccessColor = Color.FromArgb(40, 167, 69);     // Verde
+// Configuración MaterialSkin en FormPrincipal
+var materialSkinManager = MaterialSkinManager.Instance;
+materialSkinManager.AddFormToManage(this);
+materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+materialSkinManager.ColorScheme = new ColorScheme(
+    Primary.Blue600,      // Color primario
+    Primary.Blue700,      // Color primario oscuro
+    Primary.Blue200,      // Color primario claro
+    Accent.LightBlue200,  // Color de acento
+    TextShade.WHITE       // Color de texto
+);
 
 
 
@@ -189,60 +200,76 @@ Color SuccessColor = Color.FromArgb(40, 167, 69);     // Verde
 
 ## 🚀 Orden de Desarrollo
 
-### **Fase 1: Configuración Base**
-1. **Crear solución** con estructura de 3 proyectos
-2. **Configurar referencias** entre proyectos
-3. **Instalar GUNA UI2** desde NuGet
-4. **Crear clases de modelo** en Dominio
-5. **Configurar AccesoDatos** en Negocio
+### **✅ Fase 1: Configuración Base - COMPLETADA**
+1. **✅ Crear solución** con estructura de 3 proyectos
+2. **✅ Configurar referencias** entre proyectos
+3. **✅ Instalar MaterialSkin** desde NuGet: `Install-Package MaterialSkin`
+4. **✅ Crear clases de modelo** en Dominio
+5. **✅ Configurar AccesoDatos** en Negocio
 
-### **Fase 2: Interfaz Unificada (Single Window)**
-1. **FormPrincipal único** con panel superior integrado
-2. **Panel superior**: ComboBox de lugares + botón Iniciar/Finalizar Servicio
-3. **Panel lateral**: Botones de navegación (Principal, Reg.Manual, Reportes, Admin)
-4. **Área dinámica**: UserControls que se cargan según selección
-5. **Estados dinámicos**: ComboBox habilitado/deshabilitado según servicio
+### **❌ Fase 2: Interfaz Unificada (Single Window) - PENDIENTE**
+1. **❌ FormPrincipal único** con panel superior integrado
+2. **❌ Panel superior**: ComboBox de lugares + botón Iniciar/Finalizar Servicio
+3. **❌ Panel lateral**: Botones de navegación (Principal, Reg.Manual, Reportes, Admin)
+4. **❌ Área dinámica**: UserControls que se cargan según selección
+5. **❌ Estados dinámicos**: ComboBox habilitado/deshabilitado según servicio
 
-### **Fase 3: Formularios Integrados**
-1. **FormReportes** configurado para integrarse en panel
-2. **FormRegistroManual** configurado para integrarse en panel
-3. **FormAdmin** configurado para integrarse en panel
-4. **Sistema de navegación** con formularios sin borde
-5. **Estados compartidos** entre FormPrincipal y formularios
-6. **Método MostrarFormularioEnPanel** para integración
+### **❌ Fase 3: User Controls Integrados - PENDIENTE**
+1. **❌ ucReportes** User Control para reportes
+2. **❌ ucRegistroManual** User Control para registro manual
+3. **❌ ucAdministrador** User Control para administración
+4. **❌ ucVistaPrincipal** User Control para vista principal
+5. **❌ Sistema de navegación** con User Controls
+6. **❌ Método CargarUserControl** para integración
 
-### **Fase 4: Lógica de Servicios**
-1. **ServicioNegocio** para gestión de servicios
-2. **Cronómetro** integrado en panel superior
-3. **Estados dinámicos** del sistema
-4. **Validaciones** de servicio activo/inactivo
+### **🔄 Fase 4: Lógica de Servicios - PARCIALMENTE COMPLETADA**
+1. **✅ ServicioNegocio** para gestión de servicios
+2. **❌ Cronómetro** integrado en panel superior (lógica lista, falta UI)
+3. **❌ Estados dinámicos** del sistema (lógica lista, falta UI)
+4. **✅ Validaciones** de servicio activo/inactivo
 
-### **Fase 5: Funcionalidades Específicas**
-1. **EmpleadoNegocio** para registro manual
-2. **ReporteNegocio** para consultas y exportación
-3. **Integración RFID** simulada
-4. **Validaciones** y manejo de errores
+### **🔄 Fase 5: Funcionalidades Específicas - PARCIALMENTE COMPLETADA**
+1. **✅ EmpleadoNegocio** para registro manual
+2. **✅ ReporteNegocio** para consultas y exportación
+3. **❌ Integración RFID** simulada (lógica lista, falta UI)
+4. **✅ Validaciones** y manejo de errores
 
-### **Fase 6: Módulo Administrativo**
-1. **Gestión de empleados** (CRUD completo)
-2. **Gestión de empresas** (CRUD completo)
-3. **Asignación de credenciales** RFID
-4. **Configuración del sistema** y respaldos
+### **🔄 Fase 6: Módulo Administrativo - PARCIALMENTE COMPLETADA**
+1. **✅ Gestión de empleados** (CRUD completo - backend)
+2. **✅ Gestión de empresas** (CRUD completo - backend)
+3. **✅ Asignación de credenciales** RFID (lógica lista)
+4. **❌ Configuración del sistema** y respaldos (falta UI)
 
-### **Fase 7: Integración RFID (Futuro)**
-1. **RFIDReader** para lectura de credenciales
-2. **Integración** con FormPrincipal
-3. **Manejo de errores** de dispositivo
-4. **Registro automático**
+### **❌ Fase 7: Integración RFID (Futuro) - NO INICIADA**
+1. **❌ RFIDReader** para lectura de credenciales
+2. **❌ Integración** con FormPrincipal
+3. **❌ Manejo de errores** de dispositivo
+4. **❌ Registro automático**
+
+## 📊 Estado Actual del Proyecto
+
+**🎯 Progreso General: ~60% Backend / 0% Frontend**
+
+**✅ COMPLETADO:**
+- Arquitectura de 3 capas establecida
+- Todas las entidades del dominio implementadas
+- Lógica de negocio completa (EmpleadoNegocio, ServicioNegocio, ReporteNegocio, etc.)
+- AccesoDatos configurado para SQL Server
+- MaterialSkin.NET instalado y configurado
+
+**⏳ SIGUIENTE PRIORIDAD:**
+- **Fase 2**: Crear FormPrincipal con MaterialForm
+- **Fase 3**: Implementar los 4 User Controls principales
+- Conectar la UI con la lógica de negocio existente
 
 ## 🔧 Arquitectura Single Window Application
 
 ### **Estructura de Componentes:**
-- **FormPrincipal**: Formulario contenedor único
+- **FormPrincipal**: Formulario contenedor único (MaterialForm)
 - **Panel Superior**: ComboBox + Botón Servicio + Cronómetro + Estado
-- **Panel Lateral**: Botones de navegación entre módulos
-- **Panel Contenido**: Área donde se integran los formularios
-- **Formularios Integrados**: FormReportes, FormRegistroManual, FormAdmin (sin borde, TopLevel=false)
+- **Panel Lateral**: Botones de navegación entre módulos (MaterialButton)
+- **Panel Contenido**: Área donde se cargan los User Controls
+- **User Controls Integrados**: ucVistaPrincipal, ucRegistroManual, ucReportes, ucAdministrador
 
 ### **Gestión de Estados:**
 - **Estado Inactivo**: ComboBox habilitado, botón "Iniciar Servicio"
@@ -251,10 +278,42 @@ Color SuccessColor = Color.FromArgb(40, 167, 69);     // Verde
 
 ### **Patrones de Diseño:**
 - **Single Window Pattern**: Una sola ventana con navegación interna
-- **Embedded Forms Pattern**: Formularios independientes integrados sin borde
+- **User Control Pattern**: Controles de usuario reutilizables y modulares
 - **State Management**: Control centralizado de estados del sistema
 - **Repository Pattern**: AccesoDatos.cs para persistencia
 - **Service Layer**: Clases de negocio para lógica específica
+- **Material Design Pattern**: Interfaz consistente con MaterialSkin.NET
+
+## 🎯 Implementación de User Controls
+
+### **Ventajas de User Controls sobre Formularios:**
+- **Mejor Rendimiento**: Menor consumo de memoria al no crear ventanas
+- **Reutilización**: Controles modulares que se pueden usar en múltiples contextos
+- **Mantenimiento**: Código más organizado y fácil de mantener
+- **Experiencia Fluida**: Transiciones instantáneas sin parpadeo
+- **Gestión de Estado**: Comunicación directa con FormPrincipal
+
+### **Patrón de Implementación:**
+```csharp
+// Método en FormPrincipal para cargar User Controls
+private void CargarUserControl(UserControl userControl)
+{
+    panelContenido.Controls.Clear();
+    userControl.Dock = DockStyle.Fill;
+    panelContenido.Controls.Add(userControl);
+}
+
+// Navegación entre módulos
+private void btnPrincipal_Click(object sender, EventArgs e)
+{
+    CargarUserControl(new ucVistaPrincipal());
+}
+```
+
+### **Comunicación entre User Controls y FormPrincipal:**
+- **Eventos Personalizados**: User Controls exponen eventos para comunicar acciones
+- **Referencias Directas**: FormPrincipal puede acceder a propiedades públicas
+- **Patrón Observer**: Notificaciones de cambios de estado
 
 ## 🎯 Experiencia de Usuario (UX)
 
@@ -263,6 +322,7 @@ Color SuccessColor = Color.FromArgb(40, 167, 69);     // Verde
 - **Navegación Intuitiva**: Panel lateral con iconos y estados claros
 - **Transiciones Fluidas**: Cambio entre módulos sin perder contexto
 - **Feedback Inmediato**: Estados visuales claros (habilitado/deshabilitado)
+- **Material Design**: Interfaz moderna y consistente con MaterialSkin.NET
 
 ### **Ventajas de la Interfaz Unificada:**
 - **Eliminación de Ventanas Múltiples**: Reduce complejidad de navegación
@@ -278,10 +338,10 @@ Color SuccessColor = Color.FromArgb(40, 167, 69);     // Verde
 ## 📊 Testing y Validación
 
 ### **Pruebas de Interfaz Unificada:**
-1. **Navegación entre Módulos**: Transiciones fluidas entre formularios integrados
+1. **Navegación entre Módulos**: Transiciones fluidas entre User Controls
 2. **Estados del Sistema**: Validación de comportamientos dinámicos
 3. **Gestión de Servicios**: Inicio, funcionamiento y finalización
-4. **Integración de Formularios**: Carga correcta sin borde en panel contenido
+4. **Integración de User Controls**: Carga correcta en panel contenido
 
 ### **Pruebas de Funcionalidad:**
 1. **Selección de Lugar**: ComboBox y validaciones de acceso

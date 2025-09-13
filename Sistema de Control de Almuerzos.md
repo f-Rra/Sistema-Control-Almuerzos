@@ -62,7 +62,7 @@ El modelo de datos está compuesto por las siguientes tablas principales:
 
 ### Arquitectura de la Aplicación
 
-La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Framework 4.7.2) y se compone de los siguientes módulos principales:
+La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Framework 4.7.2) utilizando MaterialSkin.NET para el diseño Material Design y se compone de los siguientes módulos principales:
 
 #### 1. Interfaz Unificada (Single Window)
 - **Funcionalidad**: Aplicación integrada sin ventanas separadas
@@ -74,47 +74,51 @@ La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Fr
   - Cronómetro y estado del servicio siempre visibles
   - Panel lateral para navegación entre módulos
 
-#### 2. Vista Principal (Área Dinámica)
-- **Funcionalidad**: Vista principal integrada en el área de contenido
+#### 2. User Control Vista Principal (ucVistaPrincipal)
+- **Funcionalidad**: User Control principal integrado en el área de contenido
 - **Características**:
   - GridView de registros en tiempo real del servicio activo
   - Panel de estadísticas en tiempo real (empleados, invitados, total)
   - Actualización automática cada 2 segundos durante servicio activo
   - Interfaz limpia sin elementos de navegación (están en panel superior/lateral)
+  - Implementado como UserControl para mejor rendimiento y reutilización
 - **Comportamiento Dinámico**:
   - **Sin Servicio Activo**: GridView vacío, estadísticas en cero, mensaje informativo
   - **Con Servicio Activo**: GridView con registros actualizándose, estadísticas dinámicas
 
-#### 3. Formulario de Registro Manual (Integrado)
+#### 3. User Control de Registro Manual (ucRegistroManual)
 - **Funcionalidad**: Registro manual de empleados sin credencial RFID
 - **Características**:
-  - Formulario independiente que se integra sin borde en panel contenido
+  - User Control independiente que se carga en panel contenido
   - GridView con lista de empleados que aún no han almorzado
   - Filtros de búsqueda por nombre, empresa o credencial
   - Selección directa del empleado desde el GridView
   - Registro inmediato en el servicio activo
-  - Se cierra automáticamente tras registro exitoso
+  - Comunicación con FormPrincipal mediante eventos
+  - Mejor rendimiento al no crear ventanas adicionales
 
-#### 4. Formulario de Reportes (Integrado)
+#### 4. User Control de Reportes (ucReportes)
 - **Funcionalidad**: Generación y visualización de reportes
 - **Características**:
-  - Formulario independiente que se integra sin borde en panel contenido
+  - User Control independiente que se carga en panel contenido
   - Filtros de fecha (desde/hasta) y lugar
   - GridView con servicios anteriores
   - Estadísticas por empresa y distribución horaria
   - Exportación a PDF para mejor legibilidad
   - Botones para ver detalles de servicios específicos
+  - Interfaz Material Design consistente
 
-#### 5. Formulario Administrador (Integrado)
+#### 5. User Control Administrador (ucAdministrador)
 - **Funcionalidad**: Gestión completa del sistema
 - **Características**:
-  - Formulario independiente que se integra sin borde en panel contenido
+  - User Control independiente que se carga en panel contenido
   - Acceso restringido solo para usuarios administrador
   - Gestión de empleados (CRUD completo)
   - Gestión de empresas (CRUD completo)
   - Asignación de credenciales RFID
   - Panel de estadísticas del sistema
   - Funciones de respaldo y configuración
+  - Controles Material Design para mejor experiencia de usuario
 
 
 
@@ -129,30 +133,33 @@ La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Fr
 - Para Administrador: validación de contraseña hardcodeada en código
 - No hay formulario de login separado
 
-#### 2. FormPrincipal - Interfaz Unificada
+#### 2. FormPrincipal - Interfaz Unificada (MaterialForm)
 - **Panel Superior**: Información del lugar seleccionado y estado del servicio
-- **Panel Lateral**: Botones de navegación (Principal, Reg.Manual, Reportes, Admin)
-- **Área de Contenido**: Muestra vista principal o formularios integrados
+- **Panel Lateral**: Botones de navegación Material Design (Principal, Reg.Manual, Reportes, Admin)
+- **Área de Contenido**: Muestra vista principal o User Controls integrados
 - **Comportamiento Dinámico**:
   - **Sin Servicio Activo**: Botón "Iniciar Servicio" visible, "Finalizar Servicio" oculto, "Registrar Manualmente" deshabilitado, cronómetro en 00:00:00
   - **Con Servicio Activo**: Botón "Finalizar Servicio" visible, "Iniciar Servicio" oculto, "Registrar Manualmente" habilitado, cronómetro funcionando
 - **Cronómetro**: Se inicia automáticamente al activar el servicio, muestra formato HH:MM:SS, siempre visible en panel superior
-- **Navegación**: Los botones del panel lateral cargan formularios sin borde en el área de contenido
+- **Navegación**: Los botones del panel lateral cargan User Controls en el área de contenido
+- **Tema Material**: Utiliza MaterialSkin.NET para interfaz moderna y consistente
 
 #### 3. Navegación a Registro Manual
 - Click en botón "Reg.Manual" del panel lateral
 - Validación: solo disponible si hay servicio activo
-- FormRegistroManual se carga sin borde en área de contenido
+- ucRegistroManual se carga en área de contenido
 - Muestra GridView con empleados que aún no han almorzado
 - Incluye filtros de búsqueda para encontrar empleados rápidamente
-- Al registrar, se actualiza automáticamente la vista principal
+- Al registrar, se actualiza automáticamente la vista principal mediante eventos
 - Panel superior mantiene cronómetro y estado del servicio visible
+- Transición instantánea sin parpadeo gracias a User Controls
 
 #### 4. Navegación a Otros Módulos
-- **Reportes**: Click en botón "Reportes" carga FormReportes en área de contenido
-- **Admin**: Click en botón "Admin" valida permisos y carga FormAdmin
-- **Principal**: Click en botón "Principal" vuelve a la vista principal
-- Todos los formularios se integran sin borde, manteniendo panel superior visible
+- **Reportes**: Click en botón "Reportes" carga ucReportes en área de contenido
+- **Admin**: Click en botón "Admin" valida permisos y carga ucAdministrador
+- **Principal**: Click en botón "Principal" vuelve a ucVistaPrincipal
+- Todos los User Controls se integran perfectamente, manteniendo panel superior visible
+- Mejor rendimiento y experiencia de usuario con Material Design
 
 #### 5. Finalización de Servicio
 - Botón "Finalizar Servicio" disponible desde cualquier vista
@@ -168,13 +175,29 @@ La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Fr
 - Cambio de lugar resetea la interfaz al estado inicial
 
 
+## Ventajas de la Arquitectura con User Controls y MaterialSkin
+
+### **Beneficios Técnicos:**
+- **Mejor Rendimiento**: User Controls consumen menos memoria que formularios separados
+- **Experiencia Fluida**: Transiciones instantáneas sin parpadeo entre módulos
+- **Mantenimiento Simplificado**: Código más organizado y modular
+- **Reutilización**: Controles que se pueden usar en múltiples contextos
+- **Material Design**: Interfaz moderna y consistente con MaterialSkin.NET
+
+### **Beneficios de Usuario:**
+- **Interfaz Moderna**: Diseño Material Design profesional y atractivo
+- **Navegación Intuitiva**: Transiciones suaves entre módulos
+- **Contexto Siempre Visible**: Estado del servicio y cronómetro siempre presentes
+- **Menor Complejidad**: Una sola ventana principal sin ventanas emergentes
+
 ## Conclusión
 
 El sistema de control de almuerzos con credenciales RFID representa una solución práctica y eficiente para la gestión diaria en el comedor y el quincho del predio.
 
-Su implementación permitirá agilizar el registro de comensales, eliminar la dependencia de conectividad móvil, facilitar el uso a todos los empleados, llevar un control más preciso, y generar reportes automáticos y confiables.
+Su implementación con User Controls y MaterialSkin.NET permitirá agilizar el registro de comensales, eliminar la dependencia de conectividad móvil, facilitar el uso a todos los empleados, llevar un control más preciso, generar reportes automáticos y confiables, y proporcionar una experiencia de usuario moderna y profesional.
 
 Asimismo, se deja planteada la posibilidad de futuras mejoras, como:
-- **Módulo ASP.NET**: para que los empleados elijan el lugar de almuerzo al inicio del día.
-- **Sistema de puntos**: similar al utilizado actualmente.
+- **Módulo ASP.NET**: para que los empleados elijan el lugar de almuerzo al inicio del día
+- **Sistema de puntos**: similar al utilizado actualmente
+- **Temas personalizables**: Aprovechando las capacidades de MaterialSkin.NET
 
