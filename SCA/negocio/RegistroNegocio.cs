@@ -44,11 +44,11 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Registro registro = new Registro();
-                    registro.id = (int)datos.Lector["IdRegistro"];
-                    registro.hora = (TimeSpan)datos.Lector["Hora"];
-                    registro.fecha = (DateTime)datos.Lector["Fecha"];
-                    registro.nombreEmpleado = (string)datos.Lector["Empleado"];
-                    registro.nombreEmpresa = (string)datos.Lector["Empresa"];
+                    registro.IdRegistro = (int)datos.Lector["IdRegistro"];
+                    registro.Hora = (TimeSpan)datos.Lector["Hora"];
+                    registro.Fecha = (DateTime)datos.Lector["Fecha"];
+                    registro.NombreEmpleado = (string)datos.Lector["Empleado"];
+                    registro.NombreEmpresa = (string)datos.Lector["Empresa"];
 
                     lista.Add(registro);
                 }

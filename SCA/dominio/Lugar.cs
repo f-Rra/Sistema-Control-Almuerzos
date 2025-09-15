@@ -9,21 +9,21 @@ namespace Dominio
 {
     public class Lugar
     {
-        public int id { get; set; }
+        public int IdLugar { get; set; }
 
         [DisplayName("Nombre")]
-        public string nombre { get; set; }
+        public string Nombre { get; set; }
 
         [DisplayName("Descripción")]
-        public string descripcion { get; set; }
+        public string Descripcion { get; set; }
 
         [DisplayName("Estado")]
-        public bool estado { get; set; }
+        public bool Estado { get; set; }
 
         // Método de negocio en la entidad
-        public bool estaActivo()
+        public bool EstaActivo()
         {
-            return estado;
+            return Estado;
         }
     }
 }

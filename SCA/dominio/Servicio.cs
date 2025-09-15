@@ -9,43 +9,43 @@ namespace Dominio
 {
     public class Servicio
     {
-        public int id { get; set; }
+        public int IdServicio { get; set; }
 
-        public int idLugar { get; set; }
+        public int IdLugar { get; set; }
 
         [DisplayName("Lugar")]
-        public string nombreLugar { get; set; }
+        public string NombreLugar { get; set; }
 
         [DisplayName("Fecha")]
-        public DateTime fecha { get; set; }
+        public DateTime Fecha { get; set; }
 
         [DisplayName("Total Comensales")]
-        public int totalComensales { get; set; }
+        public int TotalComensales { get; set; }
 
         [DisplayName("Total Invitados")]
-        public int totalInvitados { get; set; }
+        public int TotalInvitados { get; set; }
 
         [DisplayName("Total General")]
-        public int totalGeneral
+        public int TotalGeneral
         {
-            get { return totalComensales + totalInvitados; }
+            get { return TotalComensales + TotalInvitados; }
         }
 
         [DisplayName("Estado")]
-        public string estado
+        public string Estado
         {
-            get { return totalComensales == 0 ? "Activo" : "Finalizado"; }
+            get { return TotalComensales == 0 ? "Activo" : "Finalizado"; }
         }
 
         // Métodos de negocio en la entidad
-        public bool estaActivo()
+        public bool EstaActivo()
         {
-            return totalComensales == 0;
+            return TotalComensales == 0;
         }
 
-        public bool estaFinalizado()
+        public bool EstaFinalizado()
         {
-            return totalComensales > 0;
+            return TotalComensales > 0;
         }
     }
 }

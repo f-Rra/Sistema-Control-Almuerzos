@@ -9,35 +9,35 @@ namespace Dominio
 {
     public class Empleado
     {
-        public int id { get; set; }
+        public int IdEmpleado { get; set; }
 
         [DisplayName("Nombre")]
-        public string nombre { get; set; }
+        public string Nombre { get; set; }
 
         [DisplayName("Apellido")]
-        public string apellido { get; set; }
+        public string Apellido { get; set; }
 
         [DisplayName("Credencial RFID")]
-        public string idCredencial { get; set; }
+        public string IdCredencial { get; set; }
 
-        public int idEmpresa { get; set; }
+        public int IdEmpresa { get; set; }
 
         [DisplayName("Empresa")]
-        public string nombreEmpresa { get; set; }
+        public string NombreEmpresa { get; set; }
 
         [DisplayName("Estado")]
-        public bool estado { get; set; }
+        public bool Estado { get; set; }
 
         [DisplayName("Nombre Completo")]
-        public string nombreCompleto
+        public string NombreCompleto
         {
-            get { return $"{nombre} {apellido}"; }
+            get { return $"{Nombre} {Apellido}"; }
         }
 
         // Método de negocio en la entidad
-        public bool estaActivo()
+        public bool EstaActivo()
         {
-            return estado;
+            return Estado;
         }
     }
 }
