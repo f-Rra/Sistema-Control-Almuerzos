@@ -9,41 +9,41 @@ namespace Dominio
 {
     public class Registro
     {
-        public int id { get; set; }
+        public int IdRegistro { get; set; }
 
-        public int idEmpleado { get; set; }
+        public int IdEmpleado { get; set; }
 
         [DisplayName("Empleado")]
-        public string nombreEmpleado { get; set; }
+        public string NombreEmpleado { get; set; }
 
-        public int idEmpresa { get; set; }
+        public int IdEmpresa { get; set; }
 
         [DisplayName("Empresa")]
-        public string nombreEmpresa { get; set; }
+        public string NombreEmpresa { get; set; }
 
-        public int idServicio { get; set; }
+        public int IdServicio { get; set; }
 
-        public int idLugar { get; set; }
+        public int IdLugar { get; set; }
 
         [DisplayName("Lugar")]
-        public string nombreLugar { get; set; }
+        public string NombreLugar { get; set; }
 
         [DisplayName("Fecha")]
-        public DateTime fecha { get; set; }
+        public DateTime Fecha { get; set; }
 
         [DisplayName("Hora")]
-        public TimeSpan hora { get; set; }
+        public TimeSpan Hora { get; set; }
 
         [DisplayName("Hora Formateada")]
-        public string horaFormateada
+        public string HoraFormateada
         {
-            get { return hora.ToString(@"hh\:mm"); }
+            get { return Hora.ToString(@"hh\:mm"); }
         }
 
         // Método de negocio en la entidad
-        public bool esDelDiaActual()
+        public bool EsDelDiaActual()
         {
-            return fecha.Date == DateTime.Now.Date;
+            return Fecha.Date == DateTime.Now.Date;
         }
     }
 }

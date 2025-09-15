@@ -24,11 +24,11 @@ namespace Negocio
                 if (datos.Lector.Read())
                 {
                     Servicio servicio = new Servicio();
-                    servicio.id = (int)datos.Lector["IdServicio"];
-                    servicio.idLugar = (int)datos.Lector["IdLugar"];
-                    servicio.fecha = (DateTime)datos.Lector["Fecha"];
-                    servicio.totalComensales = (int)datos.Lector["TotalComensales"];
-                    servicio.totalInvitados = (int)datos.Lector["TotalInvitados"];
+                    servicio.IdServicio = (int)datos.Lector["IdServicio"];
+                    servicio.IdLugar = (int)datos.Lector["IdLugar"];
+                    servicio.Fecha = (DateTime)datos.Lector["Fecha"];
+                    servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
+                    servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
 
                     return servicio;
                 }
@@ -97,11 +97,11 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Servicio servicio = new Servicio();
-                    servicio.id = (int)datos.Lector["IdServicio"];
-                    servicio.fecha = (DateTime)datos.Lector["Fecha"];
-                    servicio.totalComensales = (int)datos.Lector["TotalComensales"];
-                    servicio.totalInvitados = (int)datos.Lector["TotalInvitados"];
-                    servicio.nombreLugar = (string)datos.Lector["Lugar"];
+                    servicio.IdServicio = (int)datos.Lector["IdServicio"];
+                    servicio.Fecha = (DateTime)datos.Lector["Fecha"];
+                    servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
+                    servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
+                    servicio.NombreLugar = (string)datos.Lector["Lugar"];
 
                     lista.Add(servicio);
                 }
@@ -135,10 +135,10 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Servicio servicio = new Servicio();
-                    servicio.id = (int)datos.Lector["IdServicio"];
-                    servicio.fecha = (DateTime)datos.Lector["Fecha"];
-                    servicio.totalComensales = (int)datos.Lector["TotalComensales"];
-                    servicio.totalInvitados = (int)datos.Lector["TotalInvitados"];
+                    servicio.IdServicio = (int)datos.Lector["IdServicio"];
+                    servicio.Fecha = (DateTime)datos.Lector["Fecha"];
+                    servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
+                    servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
 
                     lista.Add(servicio);
                 }

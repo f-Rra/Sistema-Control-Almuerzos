@@ -24,12 +24,12 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Empleado empleado = new Empleado();
-                    empleado.id = (int)datos.Lector["IdEmpleado"];
-                    empleado.nombre = (string)datos.Lector["Nombre"];
-                    empleado.apellido = (string)datos.Lector["Apellido"];
-                    empleado.idCredencial = (string)datos.Lector["IdCredencial"];
-                    empleado.idEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empleado.nombreEmpresa = (string)datos.Lector["Empresa"];
+                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                    empleado.Nombre = (string)datos.Lector["Nombre"];
+                    empleado.Apellido = (string)datos.Lector["Apellido"];
+                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
+                    empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                    empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
 
                     lista.Add(empleado);
                 }
@@ -61,12 +61,12 @@ namespace Negocio
                 if (datos.Lector.Read())
                 {
                     Empleado empleado = new Empleado();
-                    empleado.id = (int)datos.Lector["IdEmpleado"];
-                    empleado.nombre = (string)datos.Lector["Nombre"];
-                    empleado.apellido = (string)datos.Lector["Apellido"];
-                    empleado.idCredencial = (string)datos.Lector["IdCredencial"];
-                    empleado.idEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empleado.nombreEmpresa = (string)datos.Lector["Empresa"];
+                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                    empleado.Nombre = (string)datos.Lector["Nombre"];
+                    empleado.Apellido = (string)datos.Lector["Apellido"];
+                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
+                    empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                    empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
 
                     return empleado;
                 }
@@ -98,12 +98,12 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Empleado empleado = new Empleado();
-                    empleado.id = (int)datos.Lector["IdEmpleado"];
-                    empleado.nombre = (string)datos.Lector["Nombre"];
-                    empleado.apellido = (string)datos.Lector["Apellido"];
-                    empleado.idCredencial = (string)datos.Lector["IdCredencial"];
-                    empleado.idEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empleado.nombreEmpresa = (string)datos.Lector["Empresa"];
+                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                    empleado.Nombre = (string)datos.Lector["Nombre"];
+                    empleado.Apellido = (string)datos.Lector["Apellido"];
+                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
+                    empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                    empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
 
                     lista.Add(empleado);
                 }
@@ -135,10 +135,10 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Empleado empleado = new Empleado();
-                    empleado.id = (int)datos.Lector["IdEmpleado"];
-                    empleado.nombre = (string)datos.Lector["Nombre"];
-                    empleado.apellido = (string)datos.Lector["Apellido"];
-                    empleado.idCredencial = (string)datos.Lector["IdCredencial"];
+                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                    empleado.Nombre = (string)datos.Lector["Nombre"];
+                    empleado.Apellido = (string)datos.Lector["Apellido"];
+                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
 
                     lista.Add(empleado);
                 }
@@ -170,12 +170,12 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Empleado empleado = new Empleado();
-                    empleado.id = (int)datos.Lector["IdEmpleado"];
-                    empleado.nombre = (string)datos.Lector["Nombre"];
-                    empleado.apellido = (string)datos.Lector["Apellido"];
-                    empleado.idCredencial = (string)datos.Lector["IdCredencial"];
-                    empleado.idEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empleado.nombreEmpresa = (string)datos.Lector["Empresa"];
+                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                    empleado.Nombre = (string)datos.Lector["Nombre"];
+                    empleado.Apellido = (string)datos.Lector["Apellido"];
+                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
+                    empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                    empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
 
                     lista.Add(empleado);
                 }

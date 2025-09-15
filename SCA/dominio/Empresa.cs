@@ -9,18 +9,18 @@ namespace Dominio
 {
     public class Empresa
     {
-        public int id { get; set; }
+        public int IdEmpresa { get; set; }
 
         [DisplayName("Nombre")]
-        public string nombre { get; set; }
+        public string Nombre { get; set; }
 
         [DisplayName("Estado")]
-        public bool estado { get; set; }
+        public bool Estado { get; set; }
 
         // Método de negocio en la entidad
-        public bool estaActiva()
+        public bool EstaActiva()
         {
-            return estado;
+            return Estado;
         }
     }
 }

@@ -12,35 +12,35 @@ namespace Dominio
 {
     public class Empleado
     {
-        public int id { get; set; }
+        public int IdEmpleado { get; set; }
 
         [DisplayName("Nombre")]
-        public string nombre { get; set; }
+        public string Nombre { get; set; }
 
         [DisplayName("Apellido")]
-        public string apellido { get; set; }
+        public string Apellido { get; set; }
 
         [DisplayName("Credencial RFID")]
-        public string idCredencial { get; set; }
+        public string IdCredencial { get; set; }
 
-        public int idEmpresa { get; set; }
+        public int IdEmpresa { get; set; }
 
         [DisplayName("Empresa")]
-        public string nombreEmpresa { get; set; }
+        public string NombreEmpresa { get; set; }
 
         [DisplayName("Estado")]
-        public bool estado { get; set; }
+        public bool Estado { get; set; }
 
         [DisplayName("Nombre Completo")]
-        public string nombreCompleto
+        public string NombreCompleto
         {
-            get { return $"{nombre} {apellido}"; }
+            get { return $"{Nombre} {Apellido}"; }
         }
 
         // Método de negocio en la entidad
-        public bool estaActivo()
+        public bool EstaActivo()
         {
-            return estado;
+            return Estado;
         }
     }
 }
@@ -54,18 +54,18 @@ namespace Dominio
 {
     public class Empresa
     {
-        public int id { get; set; }
+        public int IdEmpresa { get; set; }
 
         [DisplayName("Nombre")]
-        public string nombre { get; set; }
+        public string Nombre { get; set; }
 
         [DisplayName("Estado")]
-        public bool estado { get; set; }
+        public bool Estado { get; set; }
 
         // Método de negocio en la entidad
-        public bool estaActiva()
+        public bool EstaActiva()
         {
-            return estado;
+            return Estado;
         }
     }
 }
@@ -79,21 +79,21 @@ namespace Dominio
 {
     public class Lugar
     {
-        public int id { get; set; }
+        public int IdLugar { get; set; }
 
         [DisplayName("Nombre")]
-        public string nombre { get; set; }
+        public string Nombre { get; set; }
 
         [DisplayName("Descripción")]
-        public string descripcion { get; set; }
+        public string Descripcion { get; set; }
 
         [DisplayName("Estado")]
-        public bool estado { get; set; }
+        public bool Estado { get; set; }
 
         // Método de negocio en la entidad
-        public bool estaActivo()
+        public bool EstaActivo()
         {
-            return estado;
+            return Estado;
         }
     }
 }
@@ -108,43 +108,43 @@ namespace Dominio
 {
     public class Servicio
     {
-        public int id { get; set; }
+        public int IdServicio { get; set; }
 
-        public int idLugar { get; set; }
+        public int IdLugar { get; set; }
 
         [DisplayName("Lugar")]
-        public string nombreLugar { get; set; }
+        public string NombreLugar { get; set; }
 
         [DisplayName("Fecha")]
-        public DateTime fecha { get; set; }
+        public DateTime Fecha { get; set; }
 
         [DisplayName("Total Comensales")]
-        public int totalComensales { get; set; }
+        public int TotalComensales { get; set; }
 
         [DisplayName("Total Invitados")]
-        public int totalInvitados { get; set; }
+        public int TotalInvitados { get; set; }
 
         [DisplayName("Total General")]
-        public int totalGeneral
+        public int TotalGeneral
         {
-            get { return totalComensales + totalInvitados; }
+            get { return TotalComensales + TotalInvitados; }
         }
 
         [DisplayName("Estado")]
-        public string estado
+        public string Estado
         {
-            get { return totalComensales == 0 ? "Activo" : "Finalizado"; }
+            get { return TotalComensales == 0 ? "Activo" : "Finalizado"; }
         }
 
         // Métodos de negocio en la entidad
-        public bool estaActivo()
+        public bool EstaActivo()
         {
-            return totalComensales == 0;
+            return TotalComensales == 0;
         }
 
-        public bool estaFinalizado()
+        public bool EstaFinalizado()
         {
-            return totalComensales > 0;
+            return TotalComensales > 0;
         }
     }
 }
@@ -159,41 +159,41 @@ namespace Dominio
 {
     public class Registro
     {
-        public int id { get; set; }
+        public int IdRegistro { get; set; }
 
-        public int idEmpleado { get; set; }
+        public int IdEmpleado { get; set; }
 
         [DisplayName("Empleado")]
-        public string nombreEmpleado { get; set; }
+        public string NombreEmpleado { get; set; }
 
-        public int idEmpresa { get; set; }
+        public int IdEmpresa { get; set; }
 
         [DisplayName("Empresa")]
-        public string nombreEmpresa { get; set; }
+        public string NombreEmpresa { get; set; }
 
-        public int idServicio { get; set; }
+        public int IdServicio { get; set; }
 
-        public int idLugar { get; set; }
+        public int IdLugar { get; set; }
 
         [DisplayName("Lugar")]
-        public string nombreLugar { get; set; }
+        public string NombreLugar { get; set; }
 
         [DisplayName("Fecha")]
-        public DateTime fecha { get; set; }
+        public DateTime Fecha { get; set; }
 
         [DisplayName("Hora")]
-        public TimeSpan hora { get; set; }
+        public TimeSpan Hora { get; set; }
 
         [DisplayName("Hora Formateada")]
-        public string horaFormateada
+        public string HoraFormateada
         {
-            get { return hora.ToString(@"hh\:mm"); }
+            get { return Hora.ToString(@"hh\:mm"); }
         }
 
         // Método de negocio en la entidad
-        public bool esDelDiaActual()
+        public bool EsDelDiaActual()
         {
-            return fecha.Date == DateTime.Now.Date;
+            return Fecha.Date == DateTime.Now.Date;
         }
     }
 }
@@ -1282,7 +1282,7 @@ namespace Negocio
 
 ---
 
-**Versión**: 1.0  
-**Fecha**: Enero 2024  
+**Versión**: 1.1  
+**Fecha**: Septiembre 2025  
 **Autor**: Equipo de Desarrollo  
-**Basado en**: Patrones del proyecto "Tienda de Videojuegos"
+**Actualización**: Estandarización de propiedades con PascalCase y migración a ReaLTaiizor

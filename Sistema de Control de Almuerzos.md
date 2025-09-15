@@ -62,7 +62,7 @@ El modelo de datos está compuesto por las siguientes tablas principales:
 
 ### Arquitectura de la Aplicación
 
-La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Framework 4.7.2) utilizando MaterialSkin.NET para el diseño Material Design y se compone de los siguientes módulos principales:
+La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Framework 4.8.1) utilizando ReaLTaiizor para el diseño Material Design y se compone de los siguientes módulos principales:
 
 #### 1. Interfaz Unificada (Single Window)
 - **Funcionalidad**: Aplicación integrada sin ventanas separadas
@@ -142,7 +142,7 @@ La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Fr
   - **Con Servicio Activo**: Botón "Finalizar Servicio" visible, "Iniciar Servicio" oculto, "Registrar Manualmente" habilitado, cronómetro funcionando
 - **Cronómetro**: Se inicia automáticamente al activar el servicio, muestra formato HH:MM:SS, siempre visible en panel superior
 - **Navegación**: Los botones del panel lateral cargan User Controls en el área de contenido
-- **Tema Material**: Utiliza MaterialSkin.NET para interfaz moderna y consistente
+- **Tema Material**: Utiliza ReaLTaiizor para interfaz moderna y consistente
 
 #### 3. Navegación a Registro Manual
 - Click en botón "Reg.Manual" del panel lateral
@@ -175,14 +175,14 @@ La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Fr
 - Cambio de lugar resetea la interfaz al estado inicial
 
 
-## Ventajas de la Arquitectura con User Controls y MaterialSkin
+## Ventajas de la Arquitectura con User Controls y ReaLTaiizor
 
 ### **Beneficios Técnicos:**
 - **Mejor Rendimiento**: User Controls consumen menos memoria que formularios separados
 - **Experiencia Fluida**: Transiciones instantáneas sin parpadeo entre módulos
 - **Mantenimiento Simplificado**: Código más organizado y modular
 - **Reutilización**: Controles que se pueden usar en múltiples contextos
-- **Material Design**: Interfaz moderna y consistente con MaterialSkin.NET
+- **Material Design**: Interfaz moderna y consistente con ReaLTaiizor
 
 ### **Beneficios de Usuario:**
 - **Interfaz Moderna**: Diseño Material Design profesional y atractivo
@@ -194,10 +194,10 @@ La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Fr
 
 El sistema de control de almuerzos con credenciales RFID representa una solución práctica y eficiente para la gestión diaria en el comedor y el quincho del predio.
 
-Su implementación con User Controls y MaterialSkin.NET permitirá agilizar el registro de comensales, eliminar la dependencia de conectividad móvil, facilitar el uso a todos los empleados, llevar un control más preciso, generar reportes automáticos y confiables, y proporcionar una experiencia de usuario moderna y profesional.
+Su implementación con User Controls y ReaLTaiizor permitirá agilizar el registro de comensales, eliminar la dependencia de conectividad móvil, facilitar el uso a todos los empleados, llevar un control más preciso, generar reportes automáticos y confiables, y proporcionar una experiencia de usuario moderna y profesional.
 
 Asimismo, se deja planteada la posibilidad de futuras mejoras, como:
 - **Módulo ASP.NET**: para que los empleados elijan el lugar de almuerzo al inicio del día
 - **Sistema de puntos**: similar al utilizado actualmente
-- **Temas personalizables**: Aprovechando las capacidades de MaterialSkin.NET
+- **Temas personalizables**: Aprovechando las capacidades de ReaLTaiizor
 

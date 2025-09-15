@@ -24,8 +24,8 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Empresa empresa = new Empresa();
-                    empresa.id = (int)datos.Lector["IdEmpresa"];
-                    empresa.nombre = (string)datos.Lector["Nombre"];
+                    empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                    empresa.Nombre = (string)datos.Lector["Nombre"];
 
                     lista.Add(empresa);
                 }
@@ -57,10 +57,10 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Empleado empleado = new Empleado();
-                    empleado.id = (int)datos.Lector["IdEmpleado"];
-                    empleado.nombre = (string)datos.Lector["Nombre"];
-                    empleado.apellido = (string)datos.Lector["Apellido"];
-                    empleado.idCredencial = (string)datos.Lector["IdCredencial"];
+                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                    empleado.Nombre = (string)datos.Lector["Nombre"];
+                    empleado.Apellido = (string)datos.Lector["Apellido"];
+                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
 
                     lista.Add(empleado);
                 }

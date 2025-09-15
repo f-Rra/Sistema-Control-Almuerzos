@@ -36,34 +36,35 @@ SistemaControlAlmuerzos.sln
     └── Negocio.csproj
 ```
 
-## 🎨 Interfaz de Usuario - MaterialSkin.NET
+## 🎨 Interfaz de Usuario - ReaLTaiizor
 
 ### **Componentes Principales:**
-- **MaterialSkin.Controls.MaterialForm**: Formularios base con Material Design
-- **MaterialSkin.Controls.MaterialButton**: Botones estilizados Material
-- **MaterialSkin.Controls.MaterialTextBox**: Campos de texto Material
-- **MaterialSkin.Controls.MaterialComboBox**: ComboBox estilizado Material
+- **ReaLTaiizor.Forms.MaterialForm**: Formularios base con Material Design
+- **ReaLTaiizor.Controls.MaterialButton**: Botones estilizados Material
+- **ReaLTaiizor.Controls.MaterialTextBox**: Campos de texto Material
+- **ReaLTaiizor.Controls.MaterialComboBox**: ComboBox estilizado Material
 - **System.Windows.Forms.DataGridView**: GridView estándar con tema Material
-- **System.Windows.Forms.Panel**: Paneles con colores Material
+- **ReaLTaiizor.Controls.MaterialCard**: Paneles con colores Material
 
 ### **Instalación:**
 ```powershell
-Install-Package MaterialSkin
+Install-Package ReaLTaiizor
 ```
 
 ### **Configuración del Tema:**
 ```csharp
-// Configuración MaterialSkin en FormPrincipal
-var materialSkinManager = MaterialSkinManager.Instance;
-materialSkinManager.AddFormToManage(this);
-materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-materialSkinManager.ColorScheme = new ColorScheme(
-    Primary.Blue600,      // Color primario
-    Primary.Blue700,      // Color primario oscuro
-    Primary.Blue200,      // Color primario claro
-    Accent.LightBlue200,  // Color de acento
-    TextShade.WHITE       // Color de texto
-);
+// Configuración ReaLTaiizor en FormPrincipal
+public partial class frmPrincipal : MaterialForm
+{
+    public frmPrincipal()
+    {
+        InitializeComponent();
+        
+        // Configuración automática con ReaLTaiizor MaterialForm
+        // Los controles MaterialCard, MaterialButton, etc. 
+        // mantienen automáticamente el tema Material Design
+    }
+}
 
 
 
@@ -203,7 +204,7 @@ materialSkinManager.ColorScheme = new ColorScheme(
 ### **✅ Fase 1: Configuración Base - COMPLETADA**
 1. **✅ Crear solución** con estructura de 3 proyectos
 2. **✅ Configurar referencias** entre proyectos
-3. **✅ Instalar MaterialSkin** desde NuGet: `Install-Package MaterialSkin`
+3. **✅ Instalar ReaLTaiizor** desde NuGet: `Install-Package ReaLTaiizor`
 4. **✅ Crear clases de modelo** en Dominio
 5. **✅ Configurar AccesoDatos** en Negocio
 
@@ -255,7 +256,7 @@ materialSkinManager.ColorScheme = new ColorScheme(
 - Todas las entidades del dominio implementadas
 - Lógica de negocio completa (EmpleadoNegocio, ServicioNegocio, ReporteNegocio, etc.)
 - AccesoDatos configurado para SQL Server
-- MaterialSkin.NET instalado y configurado
+- ReaLTaiizor instalado y configurado
 
 **⏳ SIGUIENTE PRIORIDAD:**
 - **Fase 2**: Crear FormPrincipal con MaterialForm
@@ -282,7 +283,7 @@ materialSkinManager.ColorScheme = new ColorScheme(
 - **State Management**: Control centralizado de estados del sistema
 - **Repository Pattern**: AccesoDatos.cs para persistencia
 - **Service Layer**: Clases de negocio para lógica específica
-- **Material Design Pattern**: Interfaz consistente con MaterialSkin.NET
+- **Material Design Pattern**: Interfaz consistente con ReaLTaiizor
 
 ## 🎯 Implementación de User Controls
 
@@ -322,7 +323,7 @@ private void btnPrincipal_Click(object sender, EventArgs e)
 - **Navegación Intuitiva**: Panel lateral con iconos y estados claros
 - **Transiciones Fluidas**: Cambio entre módulos sin perder contexto
 - **Feedback Inmediato**: Estados visuales claros (habilitado/deshabilitado)
-- **Material Design**: Interfaz moderna y consistente con MaterialSkin.NET
+- **Material Design**: Interfaz moderna y consistente con ReaLTaiizor
 
 ### **Ventajas de la Interfaz Unificada:**
 - **Eliminación de Ventanas Múltiples**: Reduce complejidad de navegación

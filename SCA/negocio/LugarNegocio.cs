@@ -24,8 +24,8 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Lugar lugar = new Lugar();
-                    lugar.id = (int)datos.Lector["IdLugar"];
-                    lugar.nombre = (string)datos.Lector["Nombre"];
+                    lugar.IdLugar = (int)datos.Lector["IdLugar"];
+                    lugar.Nombre = (string)datos.Lector["Nombre"];
 
                     lista.Add(lugar);
                 }
