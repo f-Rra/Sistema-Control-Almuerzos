@@ -1,0 +1,199 @@
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+using ReaLTaiizor.Forms;
+using ReaLTaiizor.Controls;
+using Negocio;
+
+namespace app
+{
+    public partial class frmPrincipal : MaterialForm
+    {
+        // Componentes principales de la interfaz
+        private MaterialDrawer drawerMenu;
+        private Panel panelContenido;
+        private Panel panelSuperior;
+        private MaterialComboBox cmbLugar;
+        private MaterialButton btnServicio;
+        private Label lblCronometro;
+        private Timer timerServicio;
+        private DateTime horaInicio;
+        private bool servicioActivo = false;
+
+        public frmPrincipal()
+        {
+            InitializeComponent();
+
+            // Configuración del formulario
+            Text = "Sistema de Control de Almuerzos";
+            MaximizeBox = true;
+            MinimizeBox = true;
+            FormStyle = FormStyles.ActionBar_40;
+            StartPosition = FormStartPosition.CenterScreen;
+            Size = new Size(1024, 768);
+            
+            // Inicializar componentes
+            InicializarComponentes();
+            InicializarEventos();
+        }
+
+        private void InicializarComponentes()
+        {
+            // Panel Superior
+            panelSuperior = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 60,
+                BackColor = Color.FromArgb(63, 81, 181)
+            };
+            Controls.Add(panelSuperior);
+
+            // ComboBox de selección de lugar
+            cmbLugar = new MaterialComboBox
+            {
+                Location = new Point(20, 15),
+                Width = 200,
+                Hint = "Seleccione lugar"
+            };
+            cmbLugar.Items.AddRange(new object[] { "Comedor", "Quincho", "Administrador" });
+            panelSuperior.Controls.Add(cmbLugar);
+
+            // Botón para iniciar/finalizar servicio
+            btnServicio = new MaterialButton
+            {
+                Location = new Point(240, 15),
+                Width = 180,
+                Text = "Iniciar Servicio",
+                BackColor = Color.FromArgb(67, 160, 71)
+            };
+            panelSuperior.Controls.Add(btnServicio);
+
+            // Cronómetro
+            lblCronometro = new Label
+            {
+                Location = new Point(440, 20),
+                AutoSize = true,
+                Font = new Font("Segoe UI", 12F, FontStyle.Bold),
+                Text = "00:00:00",
+                ForeColor = Color.White
+            };
+            panelSuperior.Controls.Add(lblCronometro);
+
+            // Timer para el cronómetro
+            timerServicio = new Timer
+            {
+                Interval = 1000
+            };
+
+            // Panel de contenido principal
+            panelContenido = new Panel
+            {
+                Dock = DockStyle.Fill,
+                BackColor = Color.White
+            };
+            Controls.Add(panelContenido);
+
+            // Menú lateral
+            drawerMenu = new MaterialDrawer
+            {
+                AutoHide = false,
+                DrawerIndicatorWidth = 4,
+                DrawerShowIconsWhenHidden = true,
+                DrawerHighlightWithAccent = true,
+                Width = 220
+            };
+            
+            // Opciones del menú lateral
+            drawerMenu.AddItem("Principal", string.Empty, 0, () => CargarUserControl(new UserControl()));
+            drawerMenu.AddItem("Registro Manual", string.Empty, 1, () => CargarUserControl(new UserControl()));
+            drawerMenu.AddItem("Reportes", string.Empty, 2, () => CargarUserControl(new UserControl()));
+            drawerMenu.AddItem("Administración", string.Empty, 3, () => CargarUserControl(new UserControl()));
+            
+            Controls.Add(drawerMenu);
+        }
+
+        private void InicializarEventos()
+        {
+            // Eventos del formulario principal
+            cmbLugar.SelectedIndexChanged += CmbLugar_SelectedIndexChanged;
+            btnServicio.Click += BtnServicio_Click;
+            timerServicio.Tick += TimerServicio_Tick;
+            Load += FrmPrincipal_Load;
+        }
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+            cmbLugar.SelectedIndex = 0;
+            ActualizarEstadoInterfaz();
+            // Cargar el UserControl inicial
+            CargarUserControl(new UserControl());
+        }
+
+        private void CmbLugar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Actualizar interfaz según el lugar seleccionado
+            ActualizarEstadoInterfaz();
+        }
+
+        private void BtnServicio_Click(object sender, EventArgs e)
+        {
+            servicioActivo = !servicioActivo;
+
+            if (servicioActivo)
+            {
+                // Iniciar servicio
+                horaInicio = DateTime.Now;
+                timerServicio.Start();
+                btnServicio.Text = "Finalizar Servicio";
+                btnServicio.BackColor = Color.FromArgb(211, 47, 47); // Rojo
+                cmbLugar.Enabled = false;
+            }
+            else
+            {
+                // Finalizar servicio
+                timerServicio.Stop();
+                btnServicio.Text = "Iniciar Servicio";
+                btnServicio.BackColor = Color.FromArgb(67, 160, 71); // Verde
+                cmbLugar.Enabled = true;
+                lblCronometro.Text = "00:00:00";
+            }
+        }
+
+        private void TimerServicio_Tick(object sender, EventArgs e)
+        {
+            // Actualizar cronómetro
+            TimeSpan duracion = DateTime.Now - horaInicio;
+            lblCronometro.Text = duracion.ToString(@"hh\:mm\:ss");
+        }
+
+        private void ActualizarEstadoInterfaz()
+        {
+            // Actualizar la interfaz según el lugar seleccionado
+            string lugarSeleccionado = cmbLugar.SelectedItem?.ToString();
+            
+            // Mostrar u ocultar opciones del menú según el lugar seleccionado
+            bool esAdmin = lugarSeleccionado == "Administrador";
+            
+            // El último ítem (Administración) solo visible para admin
+            drawerMenu.ItemArray[3].Visible = esAdmin;
+            
+            // Cambiar apariencia del panel superior según el lugar
+            if (esAdmin)
+            {
+                panelSuperior.BackColor = Color.FromArgb(121, 85, 72); // Marrón para administrador
+            }
+            else
+            {
+                panelSuperior.BackColor = Color.FromArgb(63, 81, 181); // Azul para los demás
+            }
+        }
+
+        // Método para cargar User Controls en el panel de contenido
+        private void CargarUserControl(UserControl userControl)
+        {
+            panelContenido.Controls.Clear();
+            userControl.Dock = DockStyle.Fill;
+            panelContenido.Controls.Add(userControl);
+        }
+    }
+}

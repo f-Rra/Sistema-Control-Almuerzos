@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,18 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ReaLTaiizor.Forms;
-using Negocio;
+
+
+/*("#fdf39d"),  // Dorado claro
+  ("#ffd024"),  // Dorado oscuro
+  ("#FFF8E1"),  // Fondo crema
+  ("#232221"),  // Negro*/
+
 
 namespace app
 {
-    public partial class frmPrincipal : MaterialForm
+    public partial class frmPrincipal : Form
     {
         public frmPrincipal()
         {
             InitializeComponent();
         }
-        
-       
     }
 }
