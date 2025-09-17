@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 /*("#fdf39d"),  // Dorado claro
   ("#ffd024"),  // Dorado oscuro
-  ("#FFF8E1"),  // Fondo crema
+  ("#FFF8E1"),  // crema
   ("#232221"),  // Negro*/
 
 
