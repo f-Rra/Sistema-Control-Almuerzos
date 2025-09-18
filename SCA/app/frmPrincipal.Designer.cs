@@ -29,76 +29,92 @@ namespace app
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlBarra = new System.Windows.Forms.Panel();
             this.pnlLateral = new System.Windows.Forms.Panel();
-            this.spaceSeparatorVertical2 = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
+            this.ssVertical = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
+            this.btnInfo = new System.Windows.Forms.Label();
             this.ssLogo = new ReaLTaiizor.Controls.SpaceSeparatorHorizontal();
             this.ssSidebar = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
+            this.pbxLogo = new System.Windows.Forms.PictureBox();
+            this.pHome = new System.Windows.Forms.Panel();
+            this.btnHome = new System.Windows.Forms.Label();
+            this.pRegistros = new System.Windows.Forms.Panel();
+            this.btnRegistros = new System.Windows.Forms.Label();
+            this.pReportes = new System.Windows.Forms.Panel();
+            this.btnReportes = new System.Windows.Forms.Label();
+            this.pAdmin = new System.Windows.Forms.Panel();
+            this.btnAdmin = new System.Windows.Forms.Label();
             this.pnlSuperior = new System.Windows.Forms.Panel();
             this.ssSuperior = new ReaLTaiizor.Controls.SpaceSeparatorHorizontal();
             this.cbLugar = new ReaLTaiizor.Controls.PoisonComboBox();
-            this.pnlPrincipal = new System.Windows.Forms.Panel();
-            this.pnlSeleccion = new ReaLTaiizor.Controls.NightPanel();
-            this.ce = new ReaLTaiizor.Controls.ParrotControlEllipse();
-            this.parrotPictureBox1 = new ReaLTaiizor.Controls.ParrotPictureBox();
-            this.pbxHome = new System.Windows.Forms.Label();
             this.pbxUbicacion = new System.Windows.Forms.PictureBox();
             this.btnServicio = new ReaLTaiizor.Controls.Button();
-            this.pbxRegistro = new System.Windows.Forms.PictureBox();
-            this.pbxAdmin = new System.Windows.Forms.PictureBox();
-            this.pbxInfo = new System.Windows.Forms.PictureBox();
-            this.pbxReporte = new System.Windows.Forms.PictureBox();
-            this.pbxLogo = new System.Windows.Forms.PictureBox();
+            this.pnlPrincipal = new System.Windows.Forms.Panel();
+            this.cHome = new ReaLTaiizor.Controls.ParrotControlEllipse();
+            this.cRegistros = new ReaLTaiizor.Controls.ParrotControlEllipse();
+            this.cReportes = new ReaLTaiizor.Controls.ParrotControlEllipse();
+            this.cAdmin = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.pnlLateral.SuspendLayout();
-            this.pnlSuperior.SuspendLayout();
-            this.pnlPrincipal.SuspendLayout();
-            this.pnlSeleccion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxUbicacion)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxRegistro)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxAdmin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxReporte)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
+            this.pHome.SuspendLayout();
+            this.pRegistros.SuspendLayout();
+            this.pReportes.SuspendLayout();
+            this.pAdmin.SuspendLayout();
+            this.pnlSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxUbicacion)).BeginInit();
+            this.pnlPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlBarra
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1280, 25);
-            this.panel1.TabIndex = 0;
+            this.pnlBarra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.pnlBarra.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlBarra.Location = new System.Drawing.Point(0, 0);
+            this.pnlBarra.Name = "pnlBarra";
+            this.pnlBarra.Size = new System.Drawing.Size(1280, 25);
+            this.pnlBarra.TabIndex = 0;
             // 
             // pnlLateral
             // 
-            this.pnlLateral.Controls.Add(this.pbxRegistro);
-            this.pnlLateral.Controls.Add(this.pbxAdmin);
-            this.pnlLateral.Controls.Add(this.pbxInfo);
-            this.pnlLateral.Controls.Add(this.pbxReporte);
-            this.pnlLateral.Controls.Add(this.spaceSeparatorVertical2);
+            this.pnlLateral.Controls.Add(this.ssVertical);
+            this.pnlLateral.Controls.Add(this.btnInfo);
             this.pnlLateral.Controls.Add(this.ssLogo);
             this.pnlLateral.Controls.Add(this.ssSidebar);
             this.pnlLateral.Controls.Add(this.pbxLogo);
-            this.pnlLateral.Controls.Add(this.pnlSeleccion);
+            this.pnlLateral.Controls.Add(this.pHome);
+            this.pnlLateral.Controls.Add(this.pRegistros);
+            this.pnlLateral.Controls.Add(this.pReportes);
+            this.pnlLateral.Controls.Add(this.pAdmin);
             this.pnlLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLateral.Location = new System.Drawing.Point(0, 25);
             this.pnlLateral.Name = "pnlLateral";
-            this.pnlLateral.Size = new System.Drawing.Size(137, 695);
+            this.pnlLateral.Size = new System.Drawing.Size(125, 695);
             this.pnlLateral.TabIndex = 2;
             // 
-            // spaceSeparatorVertical2
+            // ssVertical
             // 
-            this.spaceSeparatorVertical2.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
-            this.spaceSeparatorVertical2.Font = new System.Drawing.Font("Verdana", 8F);
-            this.spaceSeparatorVertical2.Image = null;
-            this.spaceSeparatorVertical2.Location = new System.Drawing.Point(127, 6);
-            this.spaceSeparatorVertical2.Name = "spaceSeparatorVertical2";
-            this.spaceSeparatorVertical2.NoRounding = false;
-            this.spaceSeparatorVertical2.Size = new System.Drawing.Size(4, 683);
-            this.spaceSeparatorVertical2.TabIndex = 3;
-            this.spaceSeparatorVertical2.Text = "spaceSeparatorVertical1";
-            this.spaceSeparatorVertical2.Transparent = false;
+            this.ssVertical.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
+            this.ssVertical.Font = new System.Drawing.Font("Verdana", 8F);
+            this.ssVertical.Image = null;
+            this.ssVertical.Location = new System.Drawing.Point(118, 6);
+            this.ssVertical.Name = "ssVertical";
+            this.ssVertical.NoRounding = false;
+            this.ssVertical.Size = new System.Drawing.Size(4, 683);
+            this.ssVertical.TabIndex = 3;
+            this.ssVertical.Transparent = false;
+            // 
+            // btnInfo
+            // 
+            this.btnInfo.BackColor = System.Drawing.Color.Transparent;
+            this.btnInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInfo.ForeColor = System.Drawing.Color.Transparent;
+            this.btnInfo.Image = global::app.Properties.Resources.info;
+            this.btnInfo.Location = new System.Drawing.Point(19, 605);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(75, 81);
+            this.btnInfo.TabIndex = 1;
+            this.btnInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnInfo.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // ssLogo
             // 
@@ -109,7 +125,7 @@ namespace app
             this.ssLogo.Location = new System.Drawing.Point(12, 132);
             this.ssLogo.Name = "ssLogo";
             this.ssLogo.NoRounding = false;
-            this.ssLogo.Size = new System.Drawing.Size(103, 4);
+            this.ssLogo.Size = new System.Drawing.Size(100, 4);
             this.ssLogo.TabIndex = 0;
             this.ssLogo.Text = "spaceSeparatorHorizontal1";
             this.ssLogo.Transparent = false;
@@ -119,12 +135,134 @@ namespace app
             this.ssSidebar.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
             this.ssSidebar.Font = new System.Drawing.Font("Verdana", 8F);
             this.ssSidebar.Image = null;
-            this.ssSidebar.Location = new System.Drawing.Point(12, 169);
+            this.ssSidebar.Location = new System.Drawing.Point(9, 170);
             this.ssSidebar.Name = "ssSidebar";
             this.ssSidebar.NoRounding = false;
             this.ssSidebar.Size = new System.Drawing.Size(4, 53);
             this.ssSidebar.TabIndex = 3;
             this.ssSidebar.Transparent = false;
+            // 
+            // pbxLogo
+            // 
+            this.pbxLogo.Image = global::app.Properties.Resources.logo;
+            this.pbxLogo.Location = new System.Drawing.Point(0, 6);
+            this.pbxLogo.Name = "pbxLogo";
+            this.pbxLogo.Size = new System.Drawing.Size(112, 120);
+            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxLogo.TabIndex = 2;
+            this.pbxLogo.TabStop = false;
+            // 
+            // pHome
+            // 
+            this.pHome.BackColor = System.Drawing.Color.Transparent;
+            this.pHome.Controls.Add(this.btnHome);
+            this.pHome.Location = new System.Drawing.Point(19, 156);
+            this.pHome.Name = "pHome";
+            this.pHome.Size = new System.Drawing.Size(78, 81);
+            this.pHome.TabIndex = 10;
+            this.pHome.Click += new System.EventHandler(this.btnHome_Click);
+            this.pHome.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.pHome.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // btnHome
+            // 
+            this.btnHome.BackColor = System.Drawing.Color.Transparent;
+            this.btnHome.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHome.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnHome.ForeColor = System.Drawing.Color.Transparent;
+            this.btnHome.Image = global::app.Properties.Resources.home;
+            this.btnHome.Location = new System.Drawing.Point(0, 0);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(78, 81);
+            this.btnHome.TabIndex = 1;
+            this.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            this.btnHome.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.btnHome.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // pRegistros
+            // 
+            this.pRegistros.BackColor = System.Drawing.Color.Transparent;
+            this.pRegistros.Controls.Add(this.btnRegistros);
+            this.pRegistros.Location = new System.Drawing.Point(22, 237);
+            this.pRegistros.Name = "pRegistros";
+            this.pRegistros.Size = new System.Drawing.Size(75, 81);
+            this.pRegistros.TabIndex = 11;
+            this.pRegistros.Click += new System.EventHandler(this.btnRegistros_Click);
+            this.pRegistros.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.pRegistros.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // btnRegistros
+            // 
+            this.btnRegistros.BackColor = System.Drawing.Color.Transparent;
+            this.btnRegistros.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegistros.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRegistros.ForeColor = System.Drawing.Color.Transparent;
+            this.btnRegistros.Image = global::app.Properties.Resources.registro;
+            this.btnRegistros.Location = new System.Drawing.Point(0, 0);
+            this.btnRegistros.Name = "btnRegistros";
+            this.btnRegistros.Size = new System.Drawing.Size(75, 81);
+            this.btnRegistros.TabIndex = 1;
+            this.btnRegistros.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnRegistros.Click += new System.EventHandler(this.btnRegistros_Click);
+            this.btnRegistros.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.btnRegistros.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // pReportes
+            // 
+            this.pReportes.BackColor = System.Drawing.Color.Transparent;
+            this.pReportes.Controls.Add(this.btnReportes);
+            this.pReportes.Location = new System.Drawing.Point(22, 318);
+            this.pReportes.Name = "pReportes";
+            this.pReportes.Size = new System.Drawing.Size(75, 81);
+            this.pReportes.TabIndex = 12;
+            this.pReportes.Click += new System.EventHandler(this.btnReportes_Click);
+            this.pReportes.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.pReportes.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // btnReportes
+            // 
+            this.btnReportes.BackColor = System.Drawing.Color.Transparent;
+            this.btnReportes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReportes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReportes.ForeColor = System.Drawing.Color.Transparent;
+            this.btnReportes.Image = global::app.Properties.Resources.Reporte;
+            this.btnReportes.Location = new System.Drawing.Point(0, 0);
+            this.btnReportes.Name = "btnReportes";
+            this.btnReportes.Size = new System.Drawing.Size(75, 81);
+            this.btnReportes.TabIndex = 1;
+            this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
+            this.btnReportes.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.btnReportes.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // pAdmin
+            // 
+            this.pAdmin.BackColor = System.Drawing.Color.Transparent;
+            this.pAdmin.Controls.Add(this.btnAdmin);
+            this.pAdmin.Location = new System.Drawing.Point(19, 524);
+            this.pAdmin.Name = "pAdmin";
+            this.pAdmin.Size = new System.Drawing.Size(75, 81);
+            this.pAdmin.TabIndex = 13;
+            this.pAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
+            this.pAdmin.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.pAdmin.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // btnAdmin
+            // 
+            this.btnAdmin.BackColor = System.Drawing.Color.Transparent;
+            this.btnAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdmin.ForeColor = System.Drawing.Color.Transparent;
+            this.btnAdmin.Image = global::app.Properties.Resources.admin;
+            this.btnAdmin.Location = new System.Drawing.Point(0, 0);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(75, 81);
+            this.btnAdmin.TabIndex = 1;
+            this.btnAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
+            this.btnAdmin.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.btnAdmin.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // pnlSuperior
             // 
@@ -133,9 +271,9 @@ namespace app
             this.pnlSuperior.Controls.Add(this.pbxUbicacion);
             this.pnlSuperior.Controls.Add(this.btnServicio);
             this.pnlSuperior.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSuperior.Location = new System.Drawing.Point(137, 25);
+            this.pnlSuperior.Location = new System.Drawing.Point(125, 25);
             this.pnlSuperior.Name = "pnlSuperior";
-            this.pnlSuperior.Size = new System.Drawing.Size(1143, 142);
+            this.pnlSuperior.Size = new System.Drawing.Size(1155, 142);
             this.pnlSuperior.TabIndex = 3;
             // 
             // ssSuperior
@@ -144,12 +282,11 @@ namespace app
             this.ssSuperior.Customization = "nfP9/53z/f+d8/3/nfP9/w==";
             this.ssSuperior.Font = new System.Drawing.Font("Verdana", 8F);
             this.ssSuperior.Image = null;
-            this.ssSuperior.Location = new System.Drawing.Point(3, 132);
+            this.ssSuperior.Location = new System.Drawing.Point(6, 132);
             this.ssSuperior.Name = "ssSuperior";
             this.ssSuperior.NoRounding = false;
             this.ssSuperior.Size = new System.Drawing.Size(1125, 4);
             this.ssSuperior.TabIndex = 0;
-            this.ssSuperior.Text = "spaceSeparatorHorizontal1";
             this.ssSuperior.Transparent = false;
             // 
             // cbLugar
@@ -162,75 +299,16 @@ namespace app
             this.cbLugar.Items.AddRange(new object[] {
             "Comedor",
             "Quincho"});
-            this.cbLugar.Location = new System.Drawing.Point(55, 56);
+            this.cbLugar.Location = new System.Drawing.Point(56, 53);
             this.cbLugar.Name = "cbLugar";
             this.cbLugar.Size = new System.Drawing.Size(121, 35);
             this.cbLugar.TabIndex = 0;
             this.cbLugar.UseSelectable = true;
             // 
-            // pnlPrincipal
-            // 
-            this.pnlPrincipal.Controls.Add(this.parrotPictureBox1);
-            this.pnlPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPrincipal.Location = new System.Drawing.Point(137, 167);
-            this.pnlPrincipal.Name = "pnlPrincipal";
-            this.pnlPrincipal.Size = new System.Drawing.Size(1143, 553);
-            this.pnlPrincipal.TabIndex = 4;
-            // 
-            // pnlSeleccion
-            // 
-            this.pnlSeleccion.Controls.Add(this.pbxHome);
-            this.pnlSeleccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.pnlSeleccion.LeftSideColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(229)))), ((int)(((byte)(201)))));
-            this.pnlSeleccion.Location = new System.Drawing.Point(22, 156);
-            this.pnlSeleccion.Name = "pnlSeleccion";
-            this.pnlSeleccion.RightSideColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(61)))));
-            this.pnlSeleccion.Side = ReaLTaiizor.Controls.NightPanel.PanelSide.Left;
-            this.pnlSeleccion.Size = new System.Drawing.Size(78, 75);
-            this.pnlSeleccion.TabIndex = 0;
-            // 
-            // ce
-            // 
-            this.ce.CornerRadius = 20;
-            this.ce.EffectedControl = this.pnlSeleccion;
-            // 
-            // parrotPictureBox1
-            // 
-            this.parrotPictureBox1.ColorLeft = System.Drawing.Color.DodgerBlue;
-            this.parrotPictureBox1.ColorRight = System.Drawing.Color.DodgerBlue;
-            this.parrotPictureBox1.CompositingQualityType = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-            this.parrotPictureBox1.FilterAlpha = 200;
-            this.parrotPictureBox1.FilterEnabled = true;
-            this.parrotPictureBox1.Image = null;
-            this.parrotPictureBox1.InterpolationType = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            this.parrotPictureBox1.IsElipse = false;
-            this.parrotPictureBox1.IsParallax = false;
-            this.parrotPictureBox1.Location = new System.Drawing.Point(180, 95);
-            this.parrotPictureBox1.Name = "parrotPictureBox1";
-            this.parrotPictureBox1.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-            this.parrotPictureBox1.Size = new System.Drawing.Size(150, 150);
-            this.parrotPictureBox1.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            this.parrotPictureBox1.TabIndex = 0;
-            this.parrotPictureBox1.Text = "parrotPictureBox1";
-            this.parrotPictureBox1.TextRenderingType = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            // 
-            // pbxHome
-            // 
-            this.pbxHome.BackColor = System.Drawing.Color.Transparent;
-            this.pbxHome.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbxHome.ForeColor = System.Drawing.Color.Transparent;
-            this.pbxHome.Image = global::app.Properties.Resources.home;
-            this.pbxHome.Location = new System.Drawing.Point(2, -3);
-            this.pbxHome.Name = "pbxHome";
-            this.pbxHome.Size = new System.Drawing.Size(73, 78);
-            this.pbxHome.TabIndex = 1;
-            this.pbxHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.pbxHome.Click += new System.EventHandler(this.pbxHome_Click);
-            // 
             // pbxUbicacion
             // 
             this.pbxUbicacion.Image = global::app.Properties.Resources.lugar;
-            this.pbxUbicacion.Location = new System.Drawing.Point(22, 56);
+            this.pbxUbicacion.Location = new System.Drawing.Point(23, 53);
             this.pbxUbicacion.Name = "pbxUbicacion";
             this.pbxUbicacion.Size = new System.Drawing.Size(27, 35);
             this.pbxUbicacion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -244,11 +322,11 @@ namespace app
             this.btnServicio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnServicio.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.btnServicio.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnServicio.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnServicio.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnServicio.Image = global::app.Properties.Resources.iniciar;
             this.btnServicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnServicio.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnServicio.Location = new System.Drawing.Point(192, 50);
+            this.btnServicio.Location = new System.Drawing.Point(193, 47);
             this.btnServicio.Name = "btnServicio";
             this.btnServicio.Padding = new System.Windows.Forms.Padding(14, 0, 12, 0);
             this.btnServicio.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
@@ -258,58 +336,33 @@ namespace app
             this.btnServicio.Text = "  Iniciar Servicio";
             this.btnServicio.TextAlignment = System.Drawing.StringAlignment.Center;
             // 
-            // pbxRegistro
+            // pnlPrincipal
             // 
-            this.pbxRegistro.BackgroundImage = global::app.Properties.Resources.registro;
-            this.pbxRegistro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbxRegistro.Location = new System.Drawing.Point(33, 237);
-            this.pbxRegistro.Name = "pbxRegistro";
-            this.pbxRegistro.Size = new System.Drawing.Size(82, 53);
-            this.pbxRegistro.TabIndex = 4;
-            this.pbxRegistro.TabStop = false;
-            this.pbxRegistro.Click += new System.EventHandler(this.pbxRegistro_Click);
+            this.pnlPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPrincipal.Location = new System.Drawing.Point(125, 167);
+            this.pnlPrincipal.Name = "pnlPrincipal";
+            this.pnlPrincipal.Size = new System.Drawing.Size(1155, 553);
+            this.pnlPrincipal.TabIndex = 4;
             // 
-            // pbxAdmin
+            // cHome
             // 
-            this.pbxAdmin.BackgroundImage = global::app.Properties.Resources.admin;
-            this.pbxAdmin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbxAdmin.Location = new System.Drawing.Point(33, 567);
-            this.pbxAdmin.Name = "pbxAdmin";
-            this.pbxAdmin.Size = new System.Drawing.Size(67, 53);
-            this.pbxAdmin.TabIndex = 4;
-            this.pbxAdmin.TabStop = false;
-            this.pbxAdmin.Click += new System.EventHandler(this.pbxAdmin_Click);
+            this.cHome.CornerRadius = 20;
+            this.cHome.EffectedControl = this.pHome;
             // 
-            // pbxInfo
+            // cRegistros
             // 
-            this.pbxInfo.BackgroundImage = global::app.Properties.Resources.info;
-            this.pbxInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbxInfo.Location = new System.Drawing.Point(33, 636);
-            this.pbxInfo.Name = "pbxInfo";
-            this.pbxInfo.Size = new System.Drawing.Size(67, 53);
-            this.pbxInfo.TabIndex = 4;
-            this.pbxInfo.TabStop = false;
+            this.cRegistros.CornerRadius = 20;
+            this.cRegistros.EffectedControl = this.pRegistros;
             // 
-            // pbxReporte
+            // cReportes
             // 
-            this.pbxReporte.BackgroundImage = global::app.Properties.Resources.Reporte;
-            this.pbxReporte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbxReporte.Location = new System.Drawing.Point(33, 307);
-            this.pbxReporte.Name = "pbxReporte";
-            this.pbxReporte.Size = new System.Drawing.Size(67, 53);
-            this.pbxReporte.TabIndex = 4;
-            this.pbxReporte.TabStop = false;
-            this.pbxReporte.Click += new System.EventHandler(this.pbxReporte_Click);
+            this.cReportes.CornerRadius = 20;
+            this.cReportes.EffectedControl = this.pReportes;
             // 
-            // pbxLogo
+            // cAdmin
             // 
-            this.pbxLogo.Image = global::app.Properties.Resources.logo;
-            this.pbxLogo.Location = new System.Drawing.Point(3, 6);
-            this.pbxLogo.Name = "pbxLogo";
-            this.pbxLogo.Size = new System.Drawing.Size(112, 120);
-            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxLogo.TabIndex = 2;
-            this.pbxLogo.TabStop = false;
+            this.cAdmin.CornerRadius = 20;
+            this.cAdmin.EffectedControl = this.pAdmin;
             // 
             // frmPrincipal
             // 
@@ -320,27 +373,26 @@ namespace app
             this.Controls.Add(this.pnlPrincipal);
             this.Controls.Add(this.pnlSuperior);
             this.Controls.Add(this.pnlLateral);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlBarra);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.pnlLateral.ResumeLayout(false);
-            this.pnlSuperior.ResumeLayout(false);
-            this.pnlPrincipal.ResumeLayout(false);
-            this.pnlSeleccion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxUbicacion)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxRegistro)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxAdmin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxReporte)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
+            this.pHome.ResumeLayout(false);
+            this.pRegistros.ResumeLayout(false);
+            this.pReportes.ResumeLayout(false);
+            this.pAdmin.ResumeLayout(false);
+            this.pnlSuperior.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxUbicacion)).EndInit();
+            this.pnlPrincipal.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlBarra;
         private System.Windows.Forms.Panel pnlLateral;
         private System.Windows.Forms.Panel pnlSuperior;
         private System.Windows.Forms.PictureBox pbxLogo;
@@ -351,14 +403,21 @@ namespace app
         private ReaLTaiizor.Controls.SpaceSeparatorHorizontal ssLogo;
         private ReaLTaiizor.Controls.SpaceSeparatorVertical ssSidebar;
         private ReaLTaiizor.Controls.SpaceSeparatorHorizontal ssSuperior;
-        private ReaLTaiizor.Controls.SpaceSeparatorVertical spaceSeparatorVertical2;
-        private System.Windows.Forms.PictureBox pbxRegistro;
-        private System.Windows.Forms.PictureBox pbxReporte;
-        private System.Windows.Forms.PictureBox pbxAdmin;
-        private System.Windows.Forms.PictureBox pbxInfo;
-        private ReaLTaiizor.Controls.NightPanel pnlSeleccion;
-        private ReaLTaiizor.Controls.ParrotControlEllipse ce;
-        private ReaLTaiizor.Controls.ParrotPictureBox parrotPictureBox1;
-        private System.Windows.Forms.Label pbxHome;
+        private ReaLTaiizor.Controls.SpaceSeparatorVertical ssVertical;
+        private ReaLTaiizor.Controls.ParrotControlEllipse cHome;
+        private System.Windows.Forms.Label btnHome;
+        private System.Windows.Forms.Label btnReportes;
+        private System.Windows.Forms.Label btnRegistros;
+        private System.Windows.Forms.Label btnInfo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label btnAdmin;
+        private System.Windows.Forms.Panel pHome;
+        private System.Windows.Forms.Panel pRegistros;
+        private System.Windows.Forms.Panel pReportes;
+        private System.Windows.Forms.Panel pAdmin;
+        private ReaLTaiizor.Controls.ParrotControlEllipse cRegistros;
+        private ReaLTaiizor.Controls.ParrotControlEllipse cReportes;
+        private ReaLTaiizor.Controls.ParrotControlEllipse cAdmin;
+        private System.Windows.Forms.Label label1;
     }
 }
