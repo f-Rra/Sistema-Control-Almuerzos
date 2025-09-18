@@ -14,4 +14,5 @@ C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\app\obj\Debug\app.exe
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\app\obj\Debug\app.pdb
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\app\bin\Debug\ReaLTaiizor.dll
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\app\bin\Debug\ReaLTaiizor.xml
-C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\app\obj\Debug\app.csproj.CopyComplete
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\app\obj\Debug\app.exe.config
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\app\obj\Debug\app.csproj.Up2Date

@@ -107,5 +107,20 @@
   <ItemGroup>
     <None Include="Iconos\iniciar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\registro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\Reporte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\admin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\info.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
