@@ -122,5 +122,14 @@
   <ItemGroup>
     <None Include="Iconos\info.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\salir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\inactivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\reloj.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
