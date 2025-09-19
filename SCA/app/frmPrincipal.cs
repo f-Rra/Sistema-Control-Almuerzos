@@ -77,5 +77,10 @@ namespace app
                 if (lblChild != null) AplicarHover(p2, lblChild, false);
             }
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
