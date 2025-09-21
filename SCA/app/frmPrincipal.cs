@@ -43,6 +43,7 @@ namespace app
             CargarLugares();
             CargarFecha();
             IniciarCronometro();
+            ActualizarEstadisticas();
         }
 
         private void CargarVistaPrincipal()
@@ -50,9 +51,9 @@ namespace app
             var contenedor = this.Controls.Find("pnlPrincipal", true).FirstOrDefault() as Control ?? this;
             if (vistaPrincipal != null && contenedor.Controls.Contains(vistaPrincipal))
                 contenedor.Controls.Remove(vistaPrincipal);
-            vistaPrincipal = new ucVistaPrincipal();
-            contenedor.Controls.Add(vistaPrincipal);
-            vistaPrincipal.BringToFront();
+                vistaPrincipal = new ucVistaPrincipal();
+                contenedor.Controls.Add(vistaPrincipal);
+                vistaPrincipal.BringToFront();
         }
 
 
@@ -85,7 +86,7 @@ namespace app
         private void IniciarCronometro()
         {
             lblCronometro.Text = "00:00:00";
-            tmrCrono.Tick += (s, ev) => ActualizarCronometroUI();
+            tmrCrono.Tick += (s, ev) => { ActualizarCronometroUI(); };
         }
 
         private void ActualizarCronometroUI()
@@ -130,6 +131,7 @@ namespace app
                 mtxtProyeccion.ReadOnly = true;
                 mtxtInvitados.ReadOnly = true;
                 vistaPrincipal?.SetServicio(idServicioActual);
+                ActualizarEstadisticas();
             }
             catch (Exception ex)
             {
@@ -153,6 +155,7 @@ namespace app
                     int.TryParse(mtxtInvitados.Text, out totalInvitados);
 
                     negS.finalizarServicio(idServicioActual.Value, totalComensales, totalInvitados, duracionMinutos);
+                    ActualizarEstadisticas();
                 }
             }
             catch (Exception ex)
@@ -166,7 +169,46 @@ namespace app
                 mtxtInvitados.ReadOnly = false;
                 idServicioActual = null;
                 vistaPrincipal?.SetServicio(idServicioActual);
+                mtxtProyeccion.Text = string.Empty;
+                mtxtInvitados.Text = string.Empty;
+                crono.Reset();
+                lblCronometro.Text = "00:00:00";
+                ActualizarEstadisticas();
             }
+        }
+        private void ActualizarEstadisticas()
+        {
+            try
+            {
+                int registrados = vistaPrincipal?.CountRegistros() ?? 0;
+                int proyeccion = 0; int invitados = 0;
+                int.TryParse(mtxtProyeccion.Text, out proyeccion);
+                int.TryParse(mtxtInvitados.Text, out invitados);
+
+                int objetivo = Math.Max(0, proyeccion + invitados);
+                int faltan = Math.Max(0, objetivo - registrados);
+                int porcentaje = 0;
+                if (objetivo > 0)
+                {
+                    porcentaje = (int)Math.Round((registrados * 100.0) / objetivo);
+                    if (porcentaje > 100) porcentaje = 100;
+                    if (porcentaje < 0) porcentaje = 0;
+                }
+                else if (registrados > 0)
+                {
+                    porcentaje = 100;
+                }
+                try
+                {
+                    if (pbProgreso.Maximum != 100) pbProgreso.Maximum = 100;
+                    if (pbProgreso.Minimum != 0) pbProgreso.Minimum = 0;
+                    pbProgreso.Value = Math.Max(pbProgreso.Minimum, Math.Min(pbProgreso.Maximum, porcentaje));
+                }
+                catch {}
+                lblProgreso.Text = porcentaje.ToString() + "%";
+                lblEstadisticas.Text = $"Registrados: {registrados} │ Faltan: {faltan}";
+            }
+            catch {}
         }
 
         private void ToggleServicio()
