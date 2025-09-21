@@ -12,7 +12,7 @@ namespace Negocio
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
-        private string ruta = "server=.\\SQLEXPRESS; database=SistemaControlAlmuerzos; integrated security=true";
+        private string ruta = "server=.\\SQLEXPRESS; database=BD_Control_Almuerzos; integrated security=true";
 
         public SqlDataReader Lector
         {

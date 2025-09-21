@@ -46,36 +46,36 @@ namespace app
             this.pAdmin = new System.Windows.Forms.Panel();
             this.btnAdmin = new System.Windows.Forms.Label();
             this.pnlSuperior = new System.Windows.Forms.Panel();
-            this.ssControl = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
-            this.lblLugar = new ReaLTaiizor.Controls.SmallLabel();
-            this.lblProyeccion = new ReaLTaiizor.Controls.SmallLabel();
-            this.txtProyeccion = new System.Windows.Forms.TextBox();
-            this.ssTitulo = new ReaLTaiizor.Controls.SpaceSeparatorHorizontal();
-            this.pbxTitulo = new System.Windows.Forms.PictureBox();
-            this.pbxEmpresas = new System.Windows.Forms.PictureBox();
-            this.ssSuperior = new ReaLTaiizor.Controls.SpaceSeparatorHorizontal();
-            this.cbLugar = new ReaLTaiizor.Controls.PoisonComboBox();
-            this.btnServicio = new ReaLTaiizor.Controls.Button();
+            this.gbxEstadisticas = new ReaLTaiizor.Controls.ThunderGroupBox();
+            this.lblEstadisticas = new ReaLTaiizor.Controls.BigLabel();
             this.gbxProgreso = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.lblProgreso = new ReaLTaiizor.Controls.BigLabel();
             this.pbProgreso = new ReaLTaiizor.Controls.AloneProgressBar();
+            this.ssControl = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
             this.gbxDuracion = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
             this.pbxDuracion = new System.Windows.Forms.Label();
             this.gbxEstado = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.lblEstado = new ReaLTaiizor.Controls.BigLabel();
             this.pbxEstado = new System.Windows.Forms.Label();
+            this.ssSuperior = new ReaLTaiizor.Controls.SpaceSeparatorHorizontal();
+            this.lblLugar = new ReaLTaiizor.Controls.SmallLabel();
+            this.lblInvitados = new ReaLTaiizor.Controls.SmallLabel();
+            this.lblProyeccion = new ReaLTaiizor.Controls.SmallLabel();
+            this.lblFecha = new ReaLTaiizor.Controls.SmallLabel();
+            this.txtFecha = new System.Windows.Forms.TextBox();
+            this.ssTitulo = new ReaLTaiizor.Controls.SpaceSeparatorHorizontal();
+            this.pbxTitulo = new System.Windows.Forms.PictureBox();
+            this.pbxEmpresas = new System.Windows.Forms.PictureBox();
+            this.btnServicio = new ReaLTaiizor.Controls.Button();
             this.pnlPrincipal = new System.Windows.Forms.Panel();
             this.cHome = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.cRegistros = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.cReportes = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.cAdmin = new ReaLTaiizor.Controls.ParrotControlEllipse();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.smallLabel1 = new ReaLTaiizor.Controls.SmallLabel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.smallLabel2 = new ReaLTaiizor.Controls.SmallLabel();
-            this.thunderGroupBox1 = new ReaLTaiizor.Controls.ThunderGroupBox();
-            this.bigLabel2 = new ReaLTaiizor.Controls.BigLabel();
+            this.mtxtProyeccion = new System.Windows.Forms.MaskedTextBox();
+            this.mtxtInvitados = new System.Windows.Forms.MaskedTextBox();
+            this.cbLugar = new System.Windows.Forms.ComboBox();
             this.pnlBarra.SuspendLayout();
             this.pnlLateral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
@@ -84,12 +84,12 @@ namespace app
             this.pReportes.SuspendLayout();
             this.pAdmin.SuspendLayout();
             this.pnlSuperior.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxEmpresas)).BeginInit();
+            this.gbxEstadisticas.SuspendLayout();
             this.gbxProgreso.SuspendLayout();
             this.gbxDuracion.SuspendLayout();
             this.gbxEstado.SuspendLayout();
-            this.thunderGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxEmpresas)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBarra
@@ -306,23 +306,23 @@ namespace app
             // 
             // pnlSuperior
             // 
-            this.pnlSuperior.Controls.Add(this.thunderGroupBox1);
+            this.pnlSuperior.Controls.Add(this.cbLugar);
+            this.pnlSuperior.Controls.Add(this.mtxtInvitados);
+            this.pnlSuperior.Controls.Add(this.mtxtProyeccion);
+            this.pnlSuperior.Controls.Add(this.gbxEstadisticas);
             this.pnlSuperior.Controls.Add(this.gbxProgreso);
             this.pnlSuperior.Controls.Add(this.ssControl);
             this.pnlSuperior.Controls.Add(this.gbxDuracion);
             this.pnlSuperior.Controls.Add(this.gbxEstado);
             this.pnlSuperior.Controls.Add(this.ssSuperior);
             this.pnlSuperior.Controls.Add(this.lblLugar);
-            this.pnlSuperior.Controls.Add(this.smallLabel2);
-            this.pnlSuperior.Controls.Add(this.smallLabel1);
+            this.pnlSuperior.Controls.Add(this.lblInvitados);
             this.pnlSuperior.Controls.Add(this.lblProyeccion);
-            this.pnlSuperior.Controls.Add(this.textBox2);
-            this.pnlSuperior.Controls.Add(this.textBox1);
-            this.pnlSuperior.Controls.Add(this.txtProyeccion);
+            this.pnlSuperior.Controls.Add(this.lblFecha);
+            this.pnlSuperior.Controls.Add(this.txtFecha);
             this.pnlSuperior.Controls.Add(this.ssTitulo);
             this.pnlSuperior.Controls.Add(this.pbxTitulo);
             this.pnlSuperior.Controls.Add(this.pbxEmpresas);
-            this.pnlSuperior.Controls.Add(this.cbLugar);
             this.pnlSuperior.Controls.Add(this.btnServicio);
             this.pnlSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSuperior.Location = new System.Drawing.Point(125, 25);
@@ -330,136 +330,33 @@ namespace app
             this.pnlSuperior.Size = new System.Drawing.Size(1155, 191);
             this.pnlSuperior.TabIndex = 3;
             // 
-            // ssControl
+            // gbxEstadisticas
             // 
-            this.ssControl.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
-            this.ssControl.Font = new System.Drawing.Font("Verdana", 8F);
-            this.ssControl.Image = null;
-            this.ssControl.Location = new System.Drawing.Point(286, 8);
-            this.ssControl.Name = "ssControl";
-            this.ssControl.NoRounding = false;
-            this.ssControl.Size = new System.Drawing.Size(4, 155);
-            this.ssControl.TabIndex = 14;
-            this.ssControl.Transparent = false;
+            this.gbxEstadisticas.BackColor = System.Drawing.Color.Transparent;
+            this.gbxEstadisticas.BodyColorA = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.gbxEstadisticas.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.gbxEstadisticas.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.gbxEstadisticas.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
+            this.gbxEstadisticas.Controls.Add(this.lblEstadisticas);
+            this.gbxEstadisticas.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbxEstadisticas.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.gbxEstadisticas.Location = new System.Drawing.Point(876, 85);
+            this.gbxEstadisticas.Name = "gbxEstadisticas";
+            this.gbxEstadisticas.Size = new System.Drawing.Size(244, 68);
+            this.gbxEstadisticas.TabIndex = 4;
+            this.gbxEstadisticas.Text = "                              Estadisticas del Servicio";
             // 
-            // lblLugar
+            // lblEstadisticas
             // 
-            this.lblLugar.AutoSize = true;
-            this.lblLugar.BackColor = System.Drawing.Color.Transparent;
-            this.lblLugar.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
-            this.lblLugar.Location = new System.Drawing.Point(312, 11);
-            this.lblLugar.Name = "lblLugar";
-            this.lblLugar.Size = new System.Drawing.Size(39, 13);
-            this.lblLugar.TabIndex = 15;
-            this.lblLugar.Text = "Lugar:";
-            // 
-            // lblProyeccion
-            // 
-            this.lblProyeccion.AutoSize = true;
-            this.lblProyeccion.BackColor = System.Drawing.Color.Transparent;
-            this.lblProyeccion.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblProyeccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
-            this.lblProyeccion.Location = new System.Drawing.Point(470, 11);
-            this.lblProyeccion.Name = "lblProyeccion";
-            this.lblProyeccion.Size = new System.Drawing.Size(40, 13);
-            this.lblProyeccion.TabIndex = 15;
-            this.lblProyeccion.Text = "Fecha:";
-            // 
-            // txtProyeccion
-            // 
-            this.txtProyeccion.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.txtProyeccion.Location = new System.Drawing.Point(473, 27);
-            this.txtProyeccion.Name = "txtProyeccion";
-            this.txtProyeccion.Size = new System.Drawing.Size(121, 36);
-            this.txtProyeccion.TabIndex = 0;
-            // 
-            // ssTitulo
-            // 
-            this.ssTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
-            this.ssTitulo.Customization = "JND//yTQ//8k0P//JND//w==";
-            this.ssTitulo.Font = new System.Drawing.Font("Verdana", 8F);
-            this.ssTitulo.Image = null;
-            this.ssTitulo.Location = new System.Drawing.Point(39, 96);
-            this.ssTitulo.Name = "ssTitulo";
-            this.ssTitulo.NoRounding = false;
-            this.ssTitulo.Size = new System.Drawing.Size(220, 4);
-            this.ssTitulo.TabIndex = 14;
-            this.ssTitulo.Text = "spaceSeparatorHorizontal1";
-            this.ssTitulo.Transparent = false;
-            // 
-            // pbxTitulo
-            // 
-            this.pbxTitulo.BackColor = System.Drawing.Color.Transparent;
-            this.pbxTitulo.BackgroundImage = global::app.Properties.Resources.cda;
-            this.pbxTitulo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbxTitulo.Location = new System.Drawing.Point(18, 38);
-            this.pbxTitulo.Name = "pbxTitulo";
-            this.pbxTitulo.Size = new System.Drawing.Size(262, 60);
-            this.pbxTitulo.TabIndex = 7;
-            this.pbxTitulo.TabStop = false;
-            // 
-            // pbxEmpresas
-            // 
-            this.pbxEmpresas.BackColor = System.Drawing.Color.Transparent;
-            this.pbxEmpresas.BackgroundImage = global::app.Properties.Resources.roemmers_southex;
-            this.pbxEmpresas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbxEmpresas.Location = new System.Drawing.Point(60, 96);
-            this.pbxEmpresas.Name = "pbxEmpresas";
-            this.pbxEmpresas.Size = new System.Drawing.Size(180, 46);
-            this.pbxEmpresas.TabIndex = 6;
-            this.pbxEmpresas.TabStop = false;
-            // 
-            // ssSuperior
-            // 
-            this.ssSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
-            this.ssSuperior.Customization = "nfP9/53z/f+d8/3/nfP9/w==";
-            this.ssSuperior.Font = new System.Drawing.Font("Verdana", 8F);
-            this.ssSuperior.Image = null;
-            this.ssSuperior.Location = new System.Drawing.Point(0, 170);
-            this.ssSuperior.Name = "ssSuperior";
-            this.ssSuperior.NoRounding = false;
-            this.ssSuperior.Size = new System.Drawing.Size(1137, 4);
-            this.ssSuperior.TabIndex = 0;
-            this.ssSuperior.Transparent = false;
-            // 
-            // cbLugar
-            // 
-            this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.cbLugar.FontSize = ReaLTaiizor.Extension.Poison.PoisonComboBoxSize.Tall;
-            this.cbLugar.FormattingEnabled = true;
-            this.cbLugar.ItemHeight = 29;
-            this.cbLugar.Items.AddRange(new object[] {
-            "Comedor",
-            "Quincho"});
-            this.cbLugar.Location = new System.Drawing.Point(315, 27);
-            this.cbLugar.Name = "cbLugar";
-            this.cbLugar.Size = new System.Drawing.Size(121, 35);
-            this.cbLugar.TabIndex = 0;
-            this.cbLugar.UseSelectable = true;
-            // 
-            // btnServicio
-            // 
-            this.btnServicio.BackColor = System.Drawing.Color.Transparent;
-            this.btnServicio.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnServicio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnServicio.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnServicio.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnServicio.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnServicio.Image = null;
-            this.btnServicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnServicio.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnServicio.Location = new System.Drawing.Point(941, 28);
-            this.btnServicio.Name = "btnServicio";
-            this.btnServicio.Padding = new System.Windows.Forms.Padding(14, 0, 12, 0);
-            this.btnServicio.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnServicio.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnServicio.Size = new System.Drawing.Size(179, 35);
-            this.btnServicio.TabIndex = 0;
-            this.btnServicio.Text = " Iniciar Servicio";
-            this.btnServicio.TextAlignment = System.Drawing.StringAlignment.Center;
-            
+            this.lblEstadisticas.AutoSize = true;
+            this.lblEstadisticas.BackColor = System.Drawing.Color.Transparent;
+            this.lblEstadisticas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstadisticas.ForeColor = System.Drawing.Color.White;
+            this.lblEstadisticas.Location = new System.Drawing.Point(6, 34);
+            this.lblEstadisticas.Name = "lblEstadisticas";
+            this.lblEstadisticas.Size = new System.Drawing.Size(233, 21);
+            this.lblEstadisticas.TabIndex = 2;
+            this.lblEstadisticas.Text = "Registrados: 150 │ Faltan: 210";
             // 
             // gbxProgreso
             // 
@@ -505,6 +402,18 @@ namespace app
             this.pbProgreso.TabIndex = 1;
             this.pbProgreso.Text = "aloneProgressBar1";
             this.pbProgreso.Value = 50;
+            // 
+            // ssControl
+            // 
+            this.ssControl.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
+            this.ssControl.Font = new System.Drawing.Font("Verdana", 8F);
+            this.ssControl.Image = null;
+            this.ssControl.Location = new System.Drawing.Point(286, 8);
+            this.ssControl.Name = "ssControl";
+            this.ssControl.NoRounding = false;
+            this.ssControl.Size = new System.Drawing.Size(4, 155);
+            this.ssControl.TabIndex = 14;
+            this.ssControl.Transparent = false;
             // 
             // gbxDuracion
             // 
@@ -589,6 +498,135 @@ namespace app
             this.pbxEstado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.pbxEstado.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // ssSuperior
+            // 
+            this.ssSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
+            this.ssSuperior.Customization = "nfP9/53z/f+d8/3/nfP9/w==";
+            this.ssSuperior.Font = new System.Drawing.Font("Verdana", 8F);
+            this.ssSuperior.Image = null;
+            this.ssSuperior.Location = new System.Drawing.Point(0, 170);
+            this.ssSuperior.Name = "ssSuperior";
+            this.ssSuperior.NoRounding = false;
+            this.ssSuperior.Size = new System.Drawing.Size(1137, 4);
+            this.ssSuperior.TabIndex = 0;
+            this.ssSuperior.Transparent = false;
+            // 
+            // lblLugar
+            // 
+            this.lblLugar.AutoSize = true;
+            this.lblLugar.BackColor = System.Drawing.Color.Transparent;
+            this.lblLugar.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
+            this.lblLugar.Location = new System.Drawing.Point(312, 11);
+            this.lblLugar.Name = "lblLugar";
+            this.lblLugar.Size = new System.Drawing.Size(39, 13);
+            this.lblLugar.TabIndex = 15;
+            this.lblLugar.Text = "Lugar:";
+            // 
+            // lblInvitados
+            // 
+            this.lblInvitados.AutoSize = true;
+            this.lblInvitados.BackColor = System.Drawing.Color.Transparent;
+            this.lblInvitados.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblInvitados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
+            this.lblInvitados.Location = new System.Drawing.Point(782, 11);
+            this.lblInvitados.Name = "lblInvitados";
+            this.lblInvitados.Size = new System.Drawing.Size(57, 13);
+            this.lblInvitados.TabIndex = 15;
+            this.lblInvitados.Text = "Invitados:";
+            // 
+            // lblProyeccion
+            // 
+            this.lblProyeccion.AutoSize = true;
+            this.lblProyeccion.BackColor = System.Drawing.Color.Transparent;
+            this.lblProyeccion.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblProyeccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
+            this.lblProyeccion.Location = new System.Drawing.Point(628, 11);
+            this.lblProyeccion.Name = "lblProyeccion";
+            this.lblProyeccion.Size = new System.Drawing.Size(65, 13);
+            this.lblProyeccion.TabIndex = 15;
+            this.lblProyeccion.Text = "Proyeccion:";
+            // 
+            // lblFecha
+            // 
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.BackColor = System.Drawing.Color.Transparent;
+            this.lblFecha.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblFecha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
+            this.lblFecha.Location = new System.Drawing.Point(472, 11);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(40, 13);
+            this.lblFecha.TabIndex = 15;
+            this.lblFecha.Text = "Fecha:";
+            // 
+            // txtFecha
+            // 
+            this.txtFecha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.txtFecha.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFecha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.txtFecha.Location = new System.Drawing.Point(475, 27);
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.Size = new System.Drawing.Size(121, 33);
+            this.txtFecha.TabIndex = 0;
+            this.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // ssTitulo
+            // 
+            this.ssTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
+            this.ssTitulo.Customization = "JND//yTQ//8k0P//JND//w==";
+            this.ssTitulo.Font = new System.Drawing.Font("Verdana", 8F);
+            this.ssTitulo.Image = null;
+            this.ssTitulo.Location = new System.Drawing.Point(27, 100);
+            this.ssTitulo.Name = "ssTitulo";
+            this.ssTitulo.NoRounding = false;
+            this.ssTitulo.Size = new System.Drawing.Size(220, 4);
+            this.ssTitulo.TabIndex = 14;
+            this.ssTitulo.Text = "spaceSeparatorHorizontal1";
+            this.ssTitulo.Transparent = false;
+            // 
+            // pbxTitulo
+            // 
+            this.pbxTitulo.BackColor = System.Drawing.Color.Transparent;
+            this.pbxTitulo.BackgroundImage = global::app.Properties.Resources.cda;
+            this.pbxTitulo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbxTitulo.Location = new System.Drawing.Point(6, 42);
+            this.pbxTitulo.Name = "pbxTitulo";
+            this.pbxTitulo.Size = new System.Drawing.Size(262, 60);
+            this.pbxTitulo.TabIndex = 7;
+            this.pbxTitulo.TabStop = false;
+            // 
+            // pbxEmpresas
+            // 
+            this.pbxEmpresas.BackColor = System.Drawing.Color.Transparent;
+            this.pbxEmpresas.BackgroundImage = global::app.Properties.Resources.roemmers_southex;
+            this.pbxEmpresas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbxEmpresas.Location = new System.Drawing.Point(48, 100);
+            this.pbxEmpresas.Name = "pbxEmpresas";
+            this.pbxEmpresas.Size = new System.Drawing.Size(180, 46);
+            this.pbxEmpresas.TabIndex = 6;
+            this.pbxEmpresas.TabStop = false;
+            // 
+            // btnServicio
+            // 
+            this.btnServicio.BackColor = System.Drawing.Color.Transparent;
+            this.btnServicio.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnServicio.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnServicio.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.btnServicio.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnServicio.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnServicio.Image = null;
+            this.btnServicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnServicio.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnServicio.Location = new System.Drawing.Point(941, 25);
+            this.btnServicio.Name = "btnServicio";
+            this.btnServicio.Padding = new System.Windows.Forms.Padding(14, 0, 12, 0);
+            this.btnServicio.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.btnServicio.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.btnServicio.Size = new System.Drawing.Size(179, 35);
+            this.btnServicio.TabIndex = 0;
+            this.btnServicio.Text = " Iniciar Servicio";
+            this.btnServicio.TextAlignment = System.Drawing.StringAlignment.Center;
+            // 
             // pnlPrincipal
             // 
             this.pnlPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -617,73 +655,44 @@ namespace app
             this.cAdmin.CornerRadius = 20;
             this.cAdmin.EffectedControl = this.pAdmin;
             // 
-            // textBox1
+            // mtxtProyeccion
             // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.textBox1.Location = new System.Drawing.Point(631, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 36);
-            this.textBox1.TabIndex = 0;
+            this.mtxtProyeccion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.mtxtProyeccion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mtxtProyeccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.mtxtProyeccion.HidePromptOnLeave = true;
+            this.mtxtProyeccion.Location = new System.Drawing.Point(631, 27);
+            this.mtxtProyeccion.Mask = "000";
+            this.mtxtProyeccion.Name = "mtxtProyeccion";
+            this.mtxtProyeccion.ResetOnSpace = false;
+            this.mtxtProyeccion.Size = new System.Drawing.Size(121, 33);
+            this.mtxtProyeccion.TabIndex = 0;
+            this.mtxtProyeccion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // smallLabel1
+            // mtxtInvitados
             // 
-            this.smallLabel1.AutoSize = true;
-            this.smallLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.smallLabel1.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.smallLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
-            this.smallLabel1.Location = new System.Drawing.Point(628, 11);
-            this.smallLabel1.Name = "smallLabel1";
-            this.smallLabel1.Size = new System.Drawing.Size(65, 13);
-            this.smallLabel1.TabIndex = 15;
-            this.smallLabel1.Text = "Proyeccion:";
+            this.mtxtInvitados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.mtxtInvitados.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mtxtInvitados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.mtxtInvitados.HidePromptOnLeave = true;
+            this.mtxtInvitados.Location = new System.Drawing.Point(785, 27);
+            this.mtxtInvitados.Mask = "000";
+            this.mtxtInvitados.Name = "mtxtInvitados";
+            this.mtxtInvitados.ResetOnSpace = false;
+            this.mtxtInvitados.Size = new System.Drawing.Size(121, 33);
+            this.mtxtInvitados.TabIndex = 0;
+            this.mtxtInvitados.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox2
+            // cbLugar
             // 
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.textBox2.Location = new System.Drawing.Point(785, 27);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 36);
-            this.textBox2.TabIndex = 0;
-            // 
-            // smallLabel2
-            // 
-            this.smallLabel2.AutoSize = true;
-            this.smallLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.smallLabel2.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.smallLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
-            this.smallLabel2.Location = new System.Drawing.Point(782, 11);
-            this.smallLabel2.Name = "smallLabel2";
-            this.smallLabel2.Size = new System.Drawing.Size(57, 13);
-            this.smallLabel2.TabIndex = 15;
-            this.smallLabel2.Text = "Invitados:";
-            // 
-            // thunderGroupBox1
-            // 
-            this.thunderGroupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.thunderGroupBox1.BodyColorA = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.thunderGroupBox1.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.thunderGroupBox1.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.thunderGroupBox1.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
-            this.thunderGroupBox1.Controls.Add(this.bigLabel2);
-            this.thunderGroupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.thunderGroupBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.thunderGroupBox1.Location = new System.Drawing.Point(876, 85);
-            this.thunderGroupBox1.Name = "thunderGroupBox1";
-            this.thunderGroupBox1.Size = new System.Drawing.Size(244, 68);
-            this.thunderGroupBox1.TabIndex = 4;
-            this.thunderGroupBox1.Text = "                              Estadisticas del Servicio";
-            // 
-            // bigLabel2
-            // 
-            this.bigLabel2.AutoSize = true;
-            this.bigLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.bigLabel2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bigLabel2.ForeColor = System.Drawing.Color.White;
-            this.bigLabel2.Location = new System.Drawing.Point(6, 34);
-            this.bigLabel2.Name = "bigLabel2";
-            this.bigLabel2.Size = new System.Drawing.Size(233, 21);
-            this.bigLabel2.TabIndex = 2;
-            this.bigLabel2.Text = "Registrados: 150 │ Faltan: 210";
+            this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.cbLugar.FormattingEnabled = true;
+            this.cbLugar.Location = new System.Drawing.Point(315, 27);
+            this.cbLugar.Name = "cbLugar";
+            this.cbLugar.Size = new System.Drawing.Size(121, 33);
+            this.cbLugar.TabIndex = 0;
             // 
             // frmPrincipal
             // 
@@ -698,6 +707,7 @@ namespace app
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.pnlBarra.ResumeLayout(false);
             this.pnlLateral.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
@@ -707,16 +717,16 @@ namespace app
             this.pAdmin.ResumeLayout(false);
             this.pnlSuperior.ResumeLayout(false);
             this.pnlSuperior.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxEmpresas)).EndInit();
+            this.gbxEstadisticas.ResumeLayout(false);
+            this.gbxEstadisticas.PerformLayout();
             this.gbxProgreso.ResumeLayout(false);
             this.gbxProgreso.PerformLayout();
             this.gbxDuracion.ResumeLayout(false);
             this.gbxDuracion.PerformLayout();
             this.gbxEstado.ResumeLayout(false);
             this.gbxEstado.PerformLayout();
-            this.thunderGroupBox1.ResumeLayout(false);
-            this.thunderGroupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxEmpresas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -728,7 +738,6 @@ namespace app
         private System.Windows.Forms.Panel pnlSuperior;
         private System.Windows.Forms.PictureBox pbxLogo;
         private ReaLTaiizor.Controls.Button btnServicio;
-        private ReaLTaiizor.Controls.PoisonComboBox cbLugar;
         private System.Windows.Forms.Panel pnlPrincipal;
         private ReaLTaiizor.Controls.SpaceSeparatorVertical ssSidebar;
         private ReaLTaiizor.Controls.SpaceSeparatorHorizontal ssSuperior;
@@ -758,19 +767,20 @@ namespace app
         private System.Windows.Forms.PictureBox pbxTitulo;
         private ReaLTaiizor.Controls.SpaceSeparatorHorizontal ssTitulo;
         private ReaLTaiizor.Controls.SpaceSeparatorHorizontal ssLogo;
-        private System.Windows.Forms.TextBox txtProyeccion;
+        private System.Windows.Forms.TextBox txtFecha;
         private ReaLTaiizor.Controls.BigLabel bigLabel1;
-        private ReaLTaiizor.Controls.SmallLabel lblProyeccion;
+        private ReaLTaiizor.Controls.SmallLabel lblFecha;
         private ReaLTaiizor.Controls.SmallLabel lblLugar;
         private ReaLTaiizor.Controls.SpaceSeparatorVertical ssControl;
         private ReaLTaiizor.Controls.ThunderGroupBox gbxProgreso;
         private ReaLTaiizor.Controls.AloneProgressBar pbProgreso;
         private ReaLTaiizor.Controls.BigLabel lblProgreso;
-        private ReaLTaiizor.Controls.SmallLabel smallLabel2;
-        private ReaLTaiizor.Controls.SmallLabel smallLabel1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private ReaLTaiizor.Controls.ThunderGroupBox thunderGroupBox1;
-        private ReaLTaiizor.Controls.BigLabel bigLabel2;
+        private ReaLTaiizor.Controls.SmallLabel lblInvitados;
+        private ReaLTaiizor.Controls.SmallLabel lblProyeccion;
+        private ReaLTaiizor.Controls.ThunderGroupBox gbxEstadisticas;
+        private ReaLTaiizor.Controls.BigLabel lblEstadisticas;
+        private System.Windows.Forms.MaskedTextBox mtxtProyeccion;
+        private System.Windows.Forms.MaskedTextBox mtxtInvitados;
+        private System.Windows.Forms.ComboBox cbLugar;
     }
 }
