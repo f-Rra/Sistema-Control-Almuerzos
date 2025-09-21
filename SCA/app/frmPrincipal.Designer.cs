@@ -459,6 +459,7 @@ namespace app
             this.btnServicio.TabIndex = 0;
             this.btnServicio.Text = " Iniciar Servicio";
             this.btnServicio.TextAlignment = System.Drawing.StringAlignment.Center;
+            
             // 
             // gbxProgreso
             // 

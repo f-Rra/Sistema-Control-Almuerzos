@@ -19,6 +19,12 @@ namespace Dominio
         [DisplayName("Fecha")]
         public DateTime Fecha { get; set; }
 
+    [DisplayName("Proyección")]
+    public int? Proyeccion { get; set; }
+
+    [DisplayName("Duración (min)")]
+    public int? DuracionMinutos { get; set; }
+
         [DisplayName("Total Comensales")]
         public int TotalComensales { get; set; }
 
