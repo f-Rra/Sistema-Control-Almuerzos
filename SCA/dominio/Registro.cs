@@ -31,10 +31,10 @@ namespace Dominio
         [DisplayName("Fecha")]
         public DateTime Fecha { get; set; }
 
-        [DisplayName("Hora")]
+        [DisplayName("HoraF")]
         public TimeSpan Hora { get; set; }
 
-        [DisplayName("Hora Formateada")]
+        [DisplayName("Hora")]
         public string HoraFormateada
         {
             get { return Hora.ToString(@"hh\:mm"); }

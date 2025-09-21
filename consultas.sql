@@ -146,7 +146,7 @@ BEGIN
     INSERT INTO Servicios (IdLugar, Fecha, Proyeccion, DuracionMinutos, TotalComensales, TotalInvitados)
     VALUES (@IdLugar, CAST(GETDATE() AS DATE), @Proyeccion, NULL, 0, 0);
     
-    SELECT SCOPE_IDENTITY() as IdServicio;
+    SELECT CAST(SCOPE_IDENTITY() AS INT) as IdServicio;
 END
 GO
 

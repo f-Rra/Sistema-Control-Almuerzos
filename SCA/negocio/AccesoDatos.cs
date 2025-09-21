@@ -82,7 +82,10 @@ namespace Negocio
             try
             {
                 conexion.Open();
-                return (int)comando.ExecuteScalar();
+                var result = comando.ExecuteScalar();
+                if (result == null || result == DBNull.Value)
+                    return 0;
+                return Convert.ToInt32(result);
             }
             catch (Exception ex)
             {

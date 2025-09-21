@@ -46,6 +46,9 @@ namespace app
             this.pAdmin = new System.Windows.Forms.Panel();
             this.btnAdmin = new System.Windows.Forms.Label();
             this.pnlSuperior = new System.Windows.Forms.Panel();
+            this.cbLugar = new System.Windows.Forms.ComboBox();
+            this.mtxtInvitados = new System.Windows.Forms.MaskedTextBox();
+            this.mtxtProyeccion = new System.Windows.Forms.MaskedTextBox();
             this.gbxEstadisticas = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.lblEstadisticas = new ReaLTaiizor.Controls.BigLabel();
             this.gbxProgreso = new ReaLTaiizor.Controls.ThunderGroupBox();
@@ -53,7 +56,7 @@ namespace app
             this.pbProgreso = new ReaLTaiizor.Controls.AloneProgressBar();
             this.ssControl = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
             this.gbxDuracion = new ReaLTaiizor.Controls.ThunderGroupBox();
-            this.bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
+            this.lblCronometro = new ReaLTaiizor.Controls.BigLabel();
             this.pbxDuracion = new System.Windows.Forms.Label();
             this.gbxEstado = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.lblEstado = new ReaLTaiizor.Controls.BigLabel();
@@ -73,9 +76,6 @@ namespace app
             this.cRegistros = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.cReportes = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.cAdmin = new ReaLTaiizor.Controls.ParrotControlEllipse();
-            this.mtxtProyeccion = new System.Windows.Forms.MaskedTextBox();
-            this.mtxtInvitados = new System.Windows.Forms.MaskedTextBox();
-            this.cbLugar = new System.Windows.Forms.ComboBox();
             this.pnlBarra.SuspendLayout();
             this.pnlLateral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
@@ -327,8 +327,47 @@ namespace app
             this.pnlSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSuperior.Location = new System.Drawing.Point(125, 25);
             this.pnlSuperior.Name = "pnlSuperior";
-            this.pnlSuperior.Size = new System.Drawing.Size(1155, 191);
+            this.pnlSuperior.Size = new System.Drawing.Size(1155, 185);
             this.pnlSuperior.TabIndex = 3;
+            // 
+            // cbLugar
+            // 
+            this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.cbLugar.FormattingEnabled = true;
+            this.cbLugar.Location = new System.Drawing.Point(315, 27);
+            this.cbLugar.Name = "cbLugar";
+            this.cbLugar.Size = new System.Drawing.Size(121, 33);
+            this.cbLugar.TabIndex = 0;
+            // 
+            // mtxtInvitados
+            // 
+            this.mtxtInvitados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.mtxtInvitados.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mtxtInvitados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.mtxtInvitados.HidePromptOnLeave = true;
+            this.mtxtInvitados.Location = new System.Drawing.Point(785, 27);
+            this.mtxtInvitados.Mask = "000";
+            this.mtxtInvitados.Name = "mtxtInvitados";
+            this.mtxtInvitados.ResetOnSpace = false;
+            this.mtxtInvitados.Size = new System.Drawing.Size(121, 33);
+            this.mtxtInvitados.TabIndex = 0;
+            this.mtxtInvitados.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // mtxtProyeccion
+            // 
+            this.mtxtProyeccion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.mtxtProyeccion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mtxtProyeccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.mtxtProyeccion.HidePromptOnLeave = true;
+            this.mtxtProyeccion.Location = new System.Drawing.Point(631, 27);
+            this.mtxtProyeccion.Mask = "000";
+            this.mtxtProyeccion.Name = "mtxtProyeccion";
+            this.mtxtProyeccion.ResetOnSpace = false;
+            this.mtxtProyeccion.Size = new System.Drawing.Size(121, 33);
+            this.mtxtProyeccion.TabIndex = 0;
+            this.mtxtProyeccion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // gbxEstadisticas
             // 
@@ -422,7 +461,7 @@ namespace app
             this.gbxDuracion.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.gbxDuracion.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.gbxDuracion.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
-            this.gbxDuracion.Controls.Add(this.bigLabel1);
+            this.gbxDuracion.Controls.Add(this.lblCronometro);
             this.gbxDuracion.Controls.Add(this.pbxDuracion);
             this.gbxDuracion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxDuracion.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -432,17 +471,17 @@ namespace app
             this.gbxDuracion.TabIndex = 4;
             this.gbxDuracion.Text = "        Duracion del Servicio";
             // 
-            // bigLabel1
+            // lblCronometro
             // 
-            this.bigLabel1.AutoSize = true;
-            this.bigLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.bigLabel1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bigLabel1.ForeColor = System.Drawing.Color.White;
-            this.bigLabel1.Location = new System.Drawing.Point(40, 30);
-            this.bigLabel1.Name = "bigLabel1";
-            this.bigLabel1.Size = new System.Drawing.Size(88, 25);
-            this.bigLabel1.TabIndex = 2;
-            this.bigLabel1.Text = "00:00:00";
+            this.lblCronometro.AutoSize = true;
+            this.lblCronometro.BackColor = System.Drawing.Color.Transparent;
+            this.lblCronometro.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCronometro.ForeColor = System.Drawing.Color.White;
+            this.lblCronometro.Location = new System.Drawing.Point(40, 30);
+            this.lblCronometro.Name = "lblCronometro";
+            this.lblCronometro.Size = new System.Drawing.Size(88, 25);
+            this.lblCronometro.TabIndex = 2;
+            this.lblCronometro.Text = "00:00:00";
             // 
             // pbxDuracion
             // 
@@ -507,7 +546,7 @@ namespace app
             this.ssSuperior.Location = new System.Drawing.Point(0, 170);
             this.ssSuperior.Name = "ssSuperior";
             this.ssSuperior.NoRounding = false;
-            this.ssSuperior.Size = new System.Drawing.Size(1137, 4);
+            this.ssSuperior.Size = new System.Drawing.Size(1147, 4);
             this.ssSuperior.TabIndex = 0;
             this.ssSuperior.Transparent = false;
             // 
@@ -626,13 +665,14 @@ namespace app
             this.btnServicio.TabIndex = 0;
             this.btnServicio.Text = " Iniciar Servicio";
             this.btnServicio.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnServicio.Click += new System.EventHandler(this.btnServicio_Click);
             // 
             // pnlPrincipal
             // 
             this.pnlPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPrincipal.Location = new System.Drawing.Point(125, 216);
+            this.pnlPrincipal.Location = new System.Drawing.Point(125, 210);
             this.pnlPrincipal.Name = "pnlPrincipal";
-            this.pnlPrincipal.Size = new System.Drawing.Size(1155, 504);
+            this.pnlPrincipal.Size = new System.Drawing.Size(1155, 510);
             this.pnlPrincipal.TabIndex = 4;
             // 
             // cHome
@@ -654,45 +694,6 @@ namespace app
             // 
             this.cAdmin.CornerRadius = 20;
             this.cAdmin.EffectedControl = this.pAdmin;
-            // 
-            // mtxtProyeccion
-            // 
-            this.mtxtProyeccion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.mtxtProyeccion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mtxtProyeccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.mtxtProyeccion.HidePromptOnLeave = true;
-            this.mtxtProyeccion.Location = new System.Drawing.Point(631, 27);
-            this.mtxtProyeccion.Mask = "000";
-            this.mtxtProyeccion.Name = "mtxtProyeccion";
-            this.mtxtProyeccion.ResetOnSpace = false;
-            this.mtxtProyeccion.Size = new System.Drawing.Size(121, 33);
-            this.mtxtProyeccion.TabIndex = 0;
-            this.mtxtProyeccion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // mtxtInvitados
-            // 
-            this.mtxtInvitados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.mtxtInvitados.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mtxtInvitados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.mtxtInvitados.HidePromptOnLeave = true;
-            this.mtxtInvitados.Location = new System.Drawing.Point(785, 27);
-            this.mtxtInvitados.Mask = "000";
-            this.mtxtInvitados.Name = "mtxtInvitados";
-            this.mtxtInvitados.ResetOnSpace = false;
-            this.mtxtInvitados.Size = new System.Drawing.Size(121, 33);
-            this.mtxtInvitados.TabIndex = 0;
-            this.mtxtInvitados.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // cbLugar
-            // 
-            this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.cbLugar.FormattingEnabled = true;
-            this.cbLugar.Location = new System.Drawing.Point(315, 27);
-            this.cbLugar.Name = "cbLugar";
-            this.cbLugar.Size = new System.Drawing.Size(121, 33);
-            this.cbLugar.TabIndex = 0;
             // 
             // frmPrincipal
             // 
@@ -768,7 +769,7 @@ namespace app
         private ReaLTaiizor.Controls.SpaceSeparatorHorizontal ssTitulo;
         private ReaLTaiizor.Controls.SpaceSeparatorHorizontal ssLogo;
         private System.Windows.Forms.TextBox txtFecha;
-        private ReaLTaiizor.Controls.BigLabel bigLabel1;
+        private ReaLTaiizor.Controls.BigLabel lblCronometro;
         private ReaLTaiizor.Controls.SmallLabel lblFecha;
         private ReaLTaiizor.Controls.SmallLabel lblLugar;
         private ReaLTaiizor.Controls.SpaceSeparatorVertical ssControl;
@@ -782,5 +783,6 @@ namespace app
         private System.Windows.Forms.MaskedTextBox mtxtProyeccion;
         private System.Windows.Forms.MaskedTextBox mtxtInvitados;
         private System.Windows.Forms.ComboBox cbLugar;
+        
     }
 }
