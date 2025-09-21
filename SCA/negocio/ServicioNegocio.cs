@@ -27,6 +27,8 @@ namespace Negocio
                     servicio.IdServicio = (int)datos.Lector["IdServicio"];
                     servicio.IdLugar = (int)datos.Lector["IdLugar"];
                     servicio.Fecha = (DateTime)datos.Lector["Fecha"];
+                    if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
+                    if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
                     servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
                     servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
 
@@ -45,8 +47,8 @@ namespace Negocio
             }
         }
 
-        // Crear nuevo servicio
-        public int crearServicio(int idLugar)
+        // Crear nuevo servicio (opcionalmente con proyección)
+        public int crearServicio(int idLugar, int? proyeccion = null)
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -54,6 +56,10 @@ namespace Negocio
             {
                 datos.setearProcedimiento("SP_AltaServicio");
                 datos.setearParametro("@IdLugar", idLugar);
+                if (proyeccion.HasValue)
+                    datos.setearParametro("@Proyeccion", proyeccion.Value);
+                else
+                    datos.setearParametro("@Proyeccion", System.DBNull.Value);
                 return datos.ejecutarAccionReturn();
             }
             catch (Exception ex)
@@ -63,7 +69,7 @@ namespace Negocio
         }
 
         // Finalizar servicio
-        public void finalizarServicio(int idServicio, int totalComensales, int totalInvitados)
+        public void finalizarServicio(int idServicio, int totalComensales, int totalInvitados, int? duracionMinutos = null)
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -73,6 +79,10 @@ namespace Negocio
                 datos.setearParametro("@IdServicio", idServicio);
                 datos.setearParametro("@TotalComensales", totalComensales);
                 datos.setearParametro("@TotalInvitados", totalInvitados);
+                if (duracionMinutos.HasValue)
+                    datos.setearParametro("@DuracionMinutos", duracionMinutos.Value);
+                else
+                    datos.setearParametro("@DuracionMinutos", System.DBNull.Value);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -99,6 +109,8 @@ namespace Negocio
                     Servicio servicio = new Servicio();
                     servicio.IdServicio = (int)datos.Lector["IdServicio"];
                     servicio.Fecha = (DateTime)datos.Lector["Fecha"];
+                    if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
+                    if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
                     servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
                     servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
                     servicio.NombreLugar = (string)datos.Lector["Lugar"];
@@ -137,6 +149,8 @@ namespace Negocio
                     Servicio servicio = new Servicio();
                     servicio.IdServicio = (int)datos.Lector["IdServicio"];
                     servicio.Fecha = (DateTime)datos.Lector["Fecha"];
+                    if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
+                    if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
                     servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
                     servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
 

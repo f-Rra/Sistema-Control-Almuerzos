@@ -39,10 +39,14 @@ CREATE TABLE Servicios (
     IdServicio INT IDENTITY(1,1) PRIMARY KEY,
     IdLugar INT NOT NULL,
     Fecha DATE NOT NULL,
+    -- Proyección prevista de comensales para el servicio (opcional)
+    Proyeccion INT NULL,
+    -- Duración total del servicio en minutos (se gestiona con cronómetro desde backend)
+    DuracionMinutos INT NULL,
     TotalComensales INT DEFAULT 0,
     TotalInvitados INT DEFAULT 0,
     FOREIGN KEY (IdLugar) REFERENCES Lugares(IdLugar),
-    CONSTRAINT CK_Servicios_Fecha CHECK (Fecha <= GETDATE())
+    CONSTRAINT CK_Servicios_Fecha CHECK (Fecha <= CAST(GETDATE() AS DATE))
 );
 
 -- Tabla de Registros (cada asistencia)
@@ -197,7 +201,7 @@ DESCRIPCIÓN DE TABLAS:
 - Empleados: almacena la información de cada empleado con su credencial RFID
 - Empresas: contiene los datos de las empresas del predio
 - Lugares: Contiene los datos de los lugares disponibles para almorzar (Comedor, Quincho)
-- Servicios: representa cada jornada realizada en comedor o quincho
+- Servicios: representa cada jornada realizada en comedor o quincho. Incluye Proyección (estimación de comensales) y Duración total en minutos (gestionada por cronómetro en backend).
 - Registros: guarda cada asistencia vinculada a un servicio
 
 RESTRICCIONES IMPORTANTES:
@@ -207,3 +211,5 @@ RESTRICCIONES IMPORTANTES:
 - Comedor y Quincho: acceso directo sin contraseña
 - Administrador: contraseña hardcodeada en código (admin123)
 */
+
+-- Nota: Los procedimientos almacenados se mantienen en Consultas_SQL.md

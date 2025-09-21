@@ -53,7 +53,7 @@ El modelo de datos está compuesto por las siguientes tablas principales:
 - **Empleados**: almacena la información de cada empleado (IdEmpleado, Nombre, Apellido, IdEmpresa, IdCredencial, Estado). 
 - **Empresas**: contiene los datos de las empresas del predio (IdEmpresa, Nombre, Estado).
 - **Lugares**: contiene los datos de los lugares disponibles para almorzar (IdLugar, Nombre, Descripcion, Estado).
-- **Servicios**: representa cada jornada realizada en comedor o quincho (IdServicio, IdLugar, Fecha, TotalComensales, TotalInvitados). 
+- **Servicios**: representa cada jornada realizada en comedor o quincho (IdServicio, IdLugar, Fecha, Proyeccion, DuracionMinutos, TotalComensales, TotalInvitados). 
 - **Registros**: guarda cada asistencia vinculada a un servicio (IdRegistro, IdEmpleado, IdEmpresa, IdServicio, Fecha, Hora, IdLugar).
 
 **Nota**: La tabla Usuarios fue eliminada del diseño final, simplificando la autenticación mediante selección directa de lugares.
@@ -67,11 +67,18 @@ La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Fr
 #### 1. Interfaz Unificada (Single Window)
 - **Funcionalidad**: Aplicación integrada sin ventanas separadas
 - **Características**:
-  - Panel superior con ComboBox de selección de lugar
+  - Panel superior con controles de operación del servicio:
+    - ComboBox de selección de lugar (Comedor/Quincho)
+    - Campo de Fecha del servicio
+    - Campo de Proyección prevista de comensales
+    - Campo de Invitados (cantidad)
+    - Botón Iniciar/Finalizar servicio
+    - Estado del servicio visible (Activo/Inactivo)
+    - Cronómetro de duración del servicio (solo UI)
+    - Indicadores de Progreso y Estadísticas rápidas
   - Acceso directo para Comedor y Quincho (sin contraseña)
   - Campo de contraseña visible solo para Administrador
   - Validación de contraseña hardcodeada ("admin123") para administrador
-  - Cronómetro y estado del servicio siempre visibles
   - Panel lateral para navegación entre módulos
 
 #### 2. User Control Vista Principal (ucVistaPrincipal)
@@ -164,7 +171,8 @@ La aplicación de escritorio está desarrollada en C# con Windows Forms (.NET Fr
 #### 5. Finalización de Servicio
 - Botón "Finalizar Servicio" disponible desde cualquier vista
 - Se solicita la cantidad de invitados
-- Se actualiza la columna CantidadInvitados en la tabla Servicios
+- Se actualiza la columna TotalInvitados en la tabla Servicios
+- Se calcula la duración con el cronómetro en backend y se persiste en `DuracionMinutos`
 - Se cierra el servicio y se vuelve al estado inactivo
 - ComboBox se habilita nuevamente para seleccionar otro lugar
 
@@ -200,4 +208,9 @@ Asimismo, se deja planteada la posibilidad de futuras mejoras, como:
 - **Módulo ASP.NET**: para que los empleados elijan el lugar de almuerzo al inicio del día
 - **Sistema de puntos**: similar al utilizado actualmente
 - **Temas personalizables**: Aprovechando las capacidades de ReaLTaiizor
+
+## Anexo: Cambios recientes
+
+- UI: `frmPrincipal` actualizado con campos de Fecha, Proyección, Invitados, Estado, Cronómetro, Progreso y Estadísticas rápidas en el panel superior.
+- BD: `Servicios` incorpora `Proyeccion INT` y `DuracionMinutos INT`. No se almacenan `HoraInicio/HoraFin`; la duración se calcula por cronómetro y se persiste solo el total en minutos.
 

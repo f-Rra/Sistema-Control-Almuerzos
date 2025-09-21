@@ -146,24 +146,27 @@ BEGIN
     SELECT 
         IdServicio, 
         IdLugar, 
-        Fecha, 
+        Fecha,
+        Proyeccion,
+        DuracionMinutos,
         TotalComensales, 
         TotalInvitados
     FROM Servicios
     WHERE IdLugar = @IdLugar 
       AND Fecha = CAST(GETDATE() AS DATE)
-      AND TotalComensales = 0; -- Servicio iniciado pero no finalizado
+      AND DuracionMinutos IS NULL; -- Activo si aún no se estableció la duración final
 END
 ```
 
 ### **9. Alta de Servicio**
 ```sql
 CREATE OR ALTER PROCEDURE SP_AltaServicio
-    @IdLugar INT
+    @IdLugar INT,
+    @Proyeccion INT = NULL
 AS
 BEGIN
-    INSERT INTO Servicios (IdLugar, Fecha, TotalComensales, TotalInvitados)
-    VALUES (@IdLugar, CAST(GETDATE() AS DATE), 0, 0);
+    INSERT INTO Servicios (IdLugar, Fecha, Proyeccion, DuracionMinutos, TotalComensales, TotalInvitados)
+    VALUES (@IdLugar, CAST(GETDATE() AS DATE), @Proyeccion, NULL, 0, 0);
     
     SELECT SCOPE_IDENTITY() as IdServicio;
 END
@@ -174,12 +177,14 @@ END
 CREATE OR ALTER PROCEDURE SP_FinalizarServicio
     @IdServicio INT,
     @TotalComensales INT,
-    @TotalInvitados INT
+    @TotalInvitados INT,
+    @DuracionMinutos INT = NULL
 AS
 BEGIN
     UPDATE Servicios 
     SET TotalComensales = @TotalComensales,
-        TotalInvitados = @TotalInvitados
+        TotalInvitados = @TotalInvitados,
+        DuracionMinutos = @DuracionMinutos
     WHERE IdServicio = @IdServicio;
 END
 ```
@@ -194,6 +199,8 @@ BEGIN
     SELECT 
         s.IdServicio, 
         s.Fecha, 
+        s.Proyeccion,
+        s.DuracionMinutos,
         s.TotalComensales, 
         s.TotalInvitados,
         l.Nombre as Lugar,
@@ -216,6 +223,8 @@ BEGIN
     SELECT 
         s.IdServicio, 
         s.Fecha, 
+        s.Proyeccion,
+        s.DuracionMinutos,
         s.TotalComensales, 
         s.TotalInvitados,
         (s.TotalComensales + s.TotalInvitados) as Total

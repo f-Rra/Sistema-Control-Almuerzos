@@ -71,10 +71,11 @@ public partial class frmPrincipal : MaterialForm
 
 ### Interfaz de Usuario - Single Window Application
 
-#### FormPrincipal - Interfaz Unificada Completa
+#### FormPrincipal - Interfaz Unificada Completa (Estado actual)
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  [Comedor ▼] [Iniciar Servicio] │ Estado: Inactivo │ 🕐 00:00:00 │ ← Panel Superior
+│  [Comedor ▼] [Fecha: __/__/__] [Proyección: ___] [Invitados: ___] [Iniciar Servicio]
+│   │ Estado: Inactivo │ 🕐 00:00:00 │ Progreso: 50% │ Estadísticas: Reg: 150/Faltan: 210 │ ← Panel Superior
 ├─────────────────────────────────────────────────────────────┤
 │ ┌─────────────┐ │                                           │
 │ │ ● Principal │ │           VISTA PRINCIPAL                 │
@@ -97,7 +98,7 @@ public partial class frmPrincipal : MaterialForm
 
 ** Estado con Servicio Activo **
 ┌─────────────────────────────────────────────────────────────┐
-│ [Comedor] [Finalizar Servicio] │ Estado: Activo │ 🕐 02:45:30  │
+│ [Comedor] [Finalizar Servicio] │ Estado: Activo │ 🕐 02:45:30 │ Progreso: 80% │ Reg: 220/Faltan: 40 │
 ├─────────────────────────────────────────────────────────────┤
 │ ┌─────────────┐ │  ┌─────────────────────────────────────┐  │
 │ │ ● Principal │ │  │        REGISTROS EN TIEMPO REAL     │  │
@@ -208,10 +209,10 @@ public partial class frmPrincipal : MaterialForm
 4. **✅ Crear clases de modelo** en Dominio
 5. **✅ Configurar AccesoDatos** en Negocio
 
-### **❌ Fase 2: Interfaz Unificada (Single Window) - PENDIENTE**
-1. **❌ FormPrincipal único** con panel superior integrado
-2. **❌ Panel superior**: ComboBox de lugares + botón Iniciar/Finalizar Servicio
-3. **❌ Panel lateral**: Botones de navegación (Principal, Reg.Manual, Reportes, Admin)
+### **🔄 Fase 2: Interfaz Unificada (Single Window) - EN PROGRESO**
+1. **✅ FormPrincipal único** con panel superior integrado (base visual)
+2. **🔄 Panel superior**: Lugar, Fecha, Proyección, Invitados, Estado, Duración, Progreso, Estadísticas
+3. **✅ Panel lateral**: Botones de navegación (Principal, Registros, Reportes, Admin)
 4. **❌ Área dinámica**: UserControls que se cargan según selección
 5. **❌ Estados dinámicos**: ComboBox habilitado/deshabilitado según servicio
 
@@ -225,8 +226,8 @@ public partial class frmPrincipal : MaterialForm
 
 ### **🔄 Fase 4: Lógica de Servicios - PARCIALMENTE COMPLETADA**
 1. **✅ ServicioNegocio** para gestión de servicios
-2. **❌ Cronómetro** integrado en panel superior (lógica lista, falta UI)
-3. **❌ Estados dinámicos** del sistema (lógica lista, falta UI)
+2. **🔄 Cronómetro/Duración**: UI agregada (panel superior). La duración se gestiona por cronómetro en backend y se persiste solo en `DuracionMinutos`.
+3. **🔄 Estados/Progreso**: UI presente; falta actualización en tiempo real
 4. **✅ Validaciones** de servicio activo/inactivo
 
 ### **🔄 Fase 5: Funcionalidades Específicas - PARCIALMENTE COMPLETADA**
@@ -274,7 +275,7 @@ public partial class frmPrincipal : MaterialForm
 
 ### **Gestión de Estados:**
 - **Estado Inactivo**: ComboBox habilitado, botón "Iniciar Servicio"
-- **Estado Activo**: ComboBox deshabilitado, botón "Finalizar Servicio", cronómetro activo
+- **Estado Activo**: ComboBox deshabilitado, botón "Finalizar Servicio", cronómetro activo, cálculo de duración
 - **Estado Admin**: Panel superior modificado, acceso completo a funciones
 
 ### **Patrones de Diseño:**
@@ -346,9 +347,21 @@ private void btnPrincipal_Click(object sender, EventArgs e)
 
 ### **Pruebas de Funcionalidad:**
 1. **Selección de Lugar**: ComboBox y validaciones de acceso
-2. **Cronómetro de Servicio**: Inicio, pausa y finalización correcta
+2. **Cronómetro/Duración de Servicio**: Inicio, pausa y finalización correcta; validación de `DuracionMinutos` persistido
 3. **Registro Manual**: Filtros, selección y registro de empleados
 4. **Módulo Admin**: Acceso restringido y funciones administrativas
+## 📝 ChangeLog breve
+
+- UI: `frmPrincipal` actualizado con campos de Fecha, Proyección, Invitados, Estado, Duración, Progreso y Estadísticas rápidas.
+- DB: `Servicios` ahora incluye `Proyeccion INT` y `DuracionMinutos INT` (sin `HoraInicio`/`HoraFin`).
+- Pendiente: mapear campos en Negocio y enlazar controles del formulario.
+- Pendiente: mapear nuevas columnas en Dominio/Negocio y enlazar controles del formulario.
+
+## 🔗 Integración de nuevas columnas
+
+- Dominio: `Dominio.Servicio` incluye `int? Proyeccion` y `int? DuracionMinutos`.
+- Negocio: actualizar `ServicioNegocio` (SELECT/INSERT/UPDATE) para leer/escribir `Proyeccion` y `DuracionMinutos`.
+- UI/Backend: el cronómetro calcula la duración y la persiste en `DuracionMinutos` al finalizar el servicio.
 
 ### **Pruebas de Usabilidad:**
 1. **Flujo de Trabajo**: Tareas comunes sin interrupciones
