@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,19 +11,39 @@ using System.Windows.Forms;
  
 
 
-/*("#fdf39d"),  // Dorado claro
-  ("#ffd024"),  // Dorado oscuro
-  ("#FFF8E1"),  // crema
-  ("#232221"),  // Negro*/
+/*("#fdf39d"),Dorado claro
+  ("#ffd024"),Dorado oscuro
+  ("#FFF8E1"),Crema
+  ("#232221"),Negro*/
 
 
 namespace app
 {
     public partial class frmPrincipal : Form
     {
+        private LugarNegocio negL = new LugarNegocio();
         public frmPrincipal()
         {
             InitializeComponent();
+        }
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+            CargarLugares();
+            CargarFecha();
+        }
+
+        private void CargarLugares()
+        {
+            cbLugar.DataSource = negL.listar();
+            cbLugar.ValueMember = "IdLugar";
+            cbLugar.DisplayMember = "Nombre";
+        }
+
+        private void CargarFecha()
+        {
+            txtFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txtFecha.ReadOnly = true;    
+            txtFecha.TabStop = false; 
         }
 
         private void btnHome_Click(object sender, EventArgs e)
@@ -83,5 +104,6 @@ namespace app
         {
             Application.Exit();
         }
+
     }
 }

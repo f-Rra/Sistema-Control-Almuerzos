@@ -3,10 +3,10 @@
 -- =====================================================
 
 -- Creación de la base de datos
-CREATE DATABASE SistemaControlAlmuerzos;
+CREATE DATABASE BD_Control_Almuerzos;
 GO
 
-USE SistemaControlAlmuerzos;
+USE BD_Control_Almuerzos;
 GO
 
 -- Tabla de Empresas del predio
@@ -68,8 +68,8 @@ CREATE TABLE Registros (
 -- Datos iniciales
 -- Lugares
 INSERT INTO Lugares (Nombre) VALUES 
-('Comedor'),
-('Quincho');
+(' Comedor'),
+(' Quincho');
 
 -- Empresas del predio (10 empresas)
 INSERT INTO Empresas (Nombre) VALUES 
