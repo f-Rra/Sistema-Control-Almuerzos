@@ -26,22 +26,22 @@ namespace app
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 169);
+            ssSidebar.Location = new System.Drawing.Point(9, 205);
         }
 
         private void btnRegistros_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 251);
+            ssSidebar.Location = new System.Drawing.Point(9, 286);
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 332);
+            ssSidebar.Location = new System.Drawing.Point(9, 368);
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 537);
+            ssSidebar.Location = new System.Drawing.Point(9, 538);
         }
 
    
