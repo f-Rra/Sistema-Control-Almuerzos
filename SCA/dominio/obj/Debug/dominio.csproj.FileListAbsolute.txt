@@ -13,3 +13,12 @@ C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.pdb
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\ReaLTaiizor.dll
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\ReaLTaiizor.xml
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.csproj.Up2Date
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\dominio.dll
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\dominio.pdb
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\ReaLTaiizor.dll
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\ReaLTaiizor.xml
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.csproj.AssemblyReference.cache
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.csproj.CoreCompileInputs.cache
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.csproj.Up2Date
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.dll
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.pdb

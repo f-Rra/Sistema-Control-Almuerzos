@@ -14,8 +14,8 @@ namespace app.UserControls
 {
     public partial class ucVistaPrincipal : UserControl
     {
-    private readonly RegistroNegocio negR = new RegistroNegocio();
-    private int? servicioIdActual = null;
+        private readonly RegistroNegocio negR = new RegistroNegocio();
+        private int? servicioIdActual = null;
 
         public ucVistaPrincipal()
         {
