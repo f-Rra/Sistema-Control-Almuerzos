@@ -230,10 +230,12 @@ BEGIN
         r.Hora, 
         r.Fecha,
         e.Nombre + ' ' + e.Apellido as Empleado,
-        emp.Nombre as Empresa
+        emp.Nombre as Empresa,
+        l.Nombre as Lugar
     FROM Registros r
     INNER JOIN Empleados e ON r.IdEmpleado = e.IdEmpleado
     INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
+    INNER JOIN Lugares l ON r.IdLugar = l.IdLugar
     WHERE r.IdServicio = @IdServicio
     ORDER BY r.Hora;
 END

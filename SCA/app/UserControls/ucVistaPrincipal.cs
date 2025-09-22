@@ -15,11 +15,23 @@ namespace app.UserControls
     public partial class ucVistaPrincipal : UserControl
     {
         private readonly RegistroNegocio negR = new RegistroNegocio();
+        private readonly EmpleadoNegocio negE = new EmpleadoNegocio();  
         private int? servicioIdActual = null;
+        private int idLugarActual = 1;
+
+        public event EventHandler RegistroRealizado;
 
         public ucVistaPrincipal()
         {
             InitializeComponent();
+            ConfigurarDataGridView();
+        }
+        
+        private void ConfigurarDataGridView()
+        {
+            // Permitir que las columnas se generen automáticamente
+            dgvRegistros.AutoGenerateColumns = true;
+            dgvRegistros.DataSource = registrosBinding;
         }
 
         private void BindRegistros(IList<Registro> registros)
@@ -32,9 +44,10 @@ namespace app.UserControls
             dgvRegistros?.Refresh();
         }
 
-        public void SetServicio(int? servicioId)
+        public void SetServicio(int? servicioId, int idLugar)
         {
             servicioIdActual = servicioId;
+            idLugarActual = idLugar;
             CargarRegistros();
         }
 
@@ -53,11 +66,20 @@ namespace app.UserControls
 
                 BindRegistros(regs);
                 OcultarColumnas();
+                
+                // Asegurar que el DataGridView sea visible
+                dgvRegistros.Visible = true;
+                dgvRegistros.Refresh();
             }
-            catch
+            catch (Exception ex)
             {
                 BindRegistros(new List<Registro>());
                 OcultarColumnas();
+                dgvRegistros.Visible = true;
+                dgvRegistros.Refresh();
+                
+                // Solo mostrar el error si es crítico
+                Console.WriteLine($"Error al cargar registros: {ex.Message}");
             }
         }
 
@@ -71,6 +93,62 @@ namespace app.UserControls
            c = dgvRegistros.Columns["IdServicio"]; if (c != null) c.Visible = false;
            c = dgvRegistros.Columns["IdLugar"]; if (c != null) c.Visible = false;
            c = dgvRegistros.Columns["Hora"]; if (c != null) c.Visible = false;
+        }
+
+        private void btnRegistro_Click(object sender, EventArgs e)
+        {
+            if (!servicioIdActual.HasValue)
+            {
+                MessageBox.Show("No hay un servicio activo", "Servicio Inactivo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            string credencial = txtRegistro.Text.Trim();
+            if (string.IsNullOrEmpty(credencial))
+            {
+                MessageBox.Show("Ingrese una credencial válida", "Credencial Requerida", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            try
+            {
+                Empleado empleado = negE.buscarPorCredencial(credencial);
+                if (empleado == null)
+                {
+                    MessageBox.Show($"No se encontró un empleado con la credencial {credencial}", 
+                        "Empleado No Encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                
+                // Usar el IdEmpleado en lugar de convertir IdCredencial
+                if (negR.empleadoYaRegistrado(empleado.IdEmpleado, servicioIdActual.Value))
+                {
+                    MessageBox.Show($"El empleado {empleado.NombreCompleto} ya está registrado en este servicio", 
+                        "Registro Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                
+                // Registrar usando IdEmpleado
+                negR.registrarEmpleado(empleado.IdEmpleado, empleado.IdEmpresa, servicioIdActual.Value, idLugarActual);
+                
+                // Actualizar la vista
+                CargarRegistros();
+                txtRegistro.Clear();
+                txtRegistro.Focus();
+                
+                // Disparar evento para actualizar estadísticas
+                RegistroRealizado?.Invoke(this, EventArgs.Empty);
+                
+                MessageBox.Show($"Empleado {empleado.NombreCompleto} registrado correctamente", 
+                    "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al procesar el registro: {ex.Message}", 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
