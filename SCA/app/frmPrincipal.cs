@@ -38,8 +38,7 @@ namespace app
         }
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            CargarVistaPrincipal();
-            vistaPrincipal?.SetServicio(idServicioActual);
+            
             CargarLugares();
             CargarFecha();
             IniciarCronometro();
@@ -48,21 +47,30 @@ namespace app
 
         private void CargarVistaPrincipal()
         {
-            var contenedor = this.Controls.Find("pnlPrincipal", true).FirstOrDefault() as Control ?? this;
-            if (vistaPrincipal != null && contenedor.Controls.Contains(vistaPrincipal))
-                contenedor.Controls.Remove(vistaPrincipal);
-        vistaPrincipal = new ucVistaPrincipal();
-                vistaPrincipal.Dock = DockStyle.Fill;
-                vistaPrincipal.Visible = true;
-                contenedor.Controls.Add(vistaPrincipal);
-                vistaPrincipal.BringToFront();
+            // Limpiar el panel antes de agregar la nueva vista
+            pnlPrincipal.Controls.Clear();
+            
+            // Crear nueva instancia de la vista principal
+            vistaPrincipal = new ucVistaPrincipal();
+            vistaPrincipal.Dock = DockStyle.Fill;
+            
+            // Suscribirse al evento de registro realizado
+            vistaPrincipal.RegistroRealizado += VistaPrincipal_RegistroRealizado;
+            
+            // Agregar al panel principal
+            pnlPrincipal.Controls.Add(vistaPrincipal);
+            vistaPrincipal.BringToFront();
         }
 
+        private void VistaPrincipal_RegistroRealizado(object sender, EventArgs e)
+        {
+            // Actualizar estadísticas cuando se realiza un registro
+            ActualizarEstadisticas();
+        }
 
         private void MostrarVistaPrincipal()
         {
-            var contenedor = this.Controls.Find("pnlPrincipal", true).FirstOrDefault() as Control ?? this;
-            if (vistaPrincipal == null || !contenedor.Controls.Contains(vistaPrincipal))
+            if (vistaPrincipal == null || !pnlPrincipal.Controls.Contains(vistaPrincipal))
             {
                 CargarVistaPrincipal();
             }
@@ -132,7 +140,9 @@ namespace app
                 cbLugar.Enabled = false;
                 mtxtProyeccion.ReadOnly = true;
                 mtxtInvitados.ReadOnly = true;
-                vistaPrincipal?.SetServicio(idServicioActual);
+                CargarVistaPrincipal();
+                MostrarVistaPrincipal();
+                vistaPrincipal.SetServicio(idServicioActual, idLugar);
                 ActualizarEstadisticas();
             }
             catch (Exception ex)
@@ -170,7 +180,6 @@ namespace app
                 mtxtProyeccion.ReadOnly = false;
                 mtxtInvitados.ReadOnly = false;
                 idServicioActual = null;
-                vistaPrincipal?.SetServicio(idServicioActual);
                 mtxtProyeccion.Text = string.Empty;
                 mtxtInvitados.Text = string.Empty;
                 crono.Reset();
