@@ -51,7 +51,9 @@ namespace app
             var contenedor = this.Controls.Find("pnlPrincipal", true).FirstOrDefault() as Control ?? this;
             if (vistaPrincipal != null && contenedor.Controls.Contains(vistaPrincipal))
                 contenedor.Controls.Remove(vistaPrincipal);
-                vistaPrincipal = new ucVistaPrincipal();
+        vistaPrincipal = new ucVistaPrincipal();
+                vistaPrincipal.Dock = DockStyle.Fill;
+                vistaPrincipal.Visible = true;
                 contenedor.Controls.Add(vistaPrincipal);
                 vistaPrincipal.BringToFront();
         }
@@ -280,6 +282,8 @@ namespace app
             ToggleServicio();
             ActulizarEstadoServicio();
         }
+
+        
 
     }
 }
