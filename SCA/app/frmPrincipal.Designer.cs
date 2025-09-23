@@ -196,7 +196,7 @@ namespace app
             // 
             this.pHome.BackColor = System.Drawing.Color.Transparent;
             this.pHome.Controls.Add(this.btnHome);
-            this.pHome.Location = new System.Drawing.Point(16, 191);
+            this.pHome.Location = new System.Drawing.Point(16, 194);
             this.pHome.Name = "pHome";
             this.pHome.Size = new System.Drawing.Size(78, 81);
             this.pHome.TabIndex = 10;
@@ -224,7 +224,7 @@ namespace app
             // 
             this.pRegistros.BackColor = System.Drawing.Color.Transparent;
             this.pRegistros.Controls.Add(this.btnRegistros);
-            this.pRegistros.Location = new System.Drawing.Point(19, 272);
+            this.pRegistros.Location = new System.Drawing.Point(18, 275);
             this.pRegistros.Name = "pRegistros";
             this.pRegistros.Size = new System.Drawing.Size(75, 81);
             this.pRegistros.TabIndex = 11;
@@ -252,7 +252,7 @@ namespace app
             // 
             this.pReportes.BackColor = System.Drawing.Color.Transparent;
             this.pReportes.Controls.Add(this.btnReportes);
-            this.pReportes.Location = new System.Drawing.Point(19, 353);
+            this.pReportes.Location = new System.Drawing.Point(18, 356);
             this.pReportes.Name = "pReportes";
             this.pReportes.Size = new System.Drawing.Size(75, 81);
             this.pReportes.TabIndex = 12;
@@ -393,9 +393,9 @@ namespace app
             this.lblEstadisticas.ForeColor = System.Drawing.Color.White;
             this.lblEstadisticas.Location = new System.Drawing.Point(6, 34);
             this.lblEstadisticas.Name = "lblEstadisticas";
-            this.lblEstadisticas.Size = new System.Drawing.Size(233, 21);
+            this.lblEstadisticas.Size = new System.Drawing.Size(191, 21);
             this.lblEstadisticas.TabIndex = 2;
-            this.lblEstadisticas.Text = "Registrados: 150 │ Faltan: 210";
+            this.lblEstadisticas.Text = "Registrados: - │ Faltan: -";
             // 
             // gbxProgreso
             // 

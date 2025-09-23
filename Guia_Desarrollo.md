@@ -35,40 +35,6 @@ SistemaControlAlmuerzos.sln
     ├── AccesoDatos.cs
     └── Negocio.csproj
 ```
-
-## 🎨 Interfaz de Usuario - ReaLTaiizor
-
-### **Componentes Principales:**
-- **ReaLTaiizor.Forms.MaterialForm**: Formularios base con Material Design
-- **ReaLTaiizor.Controls.MaterialButton**: Botones estilizados Material
-- **ReaLTaiizor.Controls.MaterialTextBox**: Campos de texto Material
-- **ReaLTaiizor.Controls.MaterialComboBox**: ComboBox estilizado Material
-- **System.Windows.Forms.DataGridView**: GridView estándar con tema Material
-- **ReaLTaiizor.Controls.MaterialCard**: Paneles con colores Material
-
-### **Instalación:**
-```powershell
-Install-Package ReaLTaiizor
-```
-
-### **Configuración del Tema:**
-```csharp
-// Configuración ReaLTaiizor en FormPrincipal
-public partial class frmPrincipal : MaterialForm
-{
-    public frmPrincipal()
-    {
-        InitializeComponent();
-        
-        // Configuración automática con ReaLTaiizor MaterialForm
-        // Los controles MaterialCard, MaterialButton, etc. 
-        // mantienen automáticamente el tema Material Design
-    }
-}
-
-
-
-
 ### Interfaz de Usuario - Single Window Application
 
 #### FormPrincipal - Interfaz Unificada Completa (Estado actual)
@@ -196,12 +162,10 @@ public partial class frmPrincipal : MaterialForm
 │ │             │ │  │  └─────────────────────────────────┘ │  │
 │ └─────────────┘ │  └─────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────┘
+
+
+### 🚀 Orden de Desarrollo
 ```
-
-```
-
-## 🚀 Orden de Desarrollo
-
 ### **✅ Fase 1: Configuración Base - COMPLETADA**
 1. **✅ Crear solución** con estructura de 3 proyectos
 2. **✅ Configurar referencias** entre proyectos
@@ -211,22 +175,22 @@ public partial class frmPrincipal : MaterialForm
 
 ### **🔄 Fase 2: Interfaz Unificada (Single Window) - EN PROGRESO**
 1. **✅ FormPrincipal único** con panel superior integrado (base visual)
-2. **🔄 Panel superior**: Lugar, Fecha, Proyección, Invitados, Estado, Duración, Progreso, Estadísticas
+2. **✅ Panel superior**: Lugar, Fecha, Proyección, Invitados, Estado, Duración, Progreso, Estadísticas
 3. **✅ Panel lateral**: Botones de navegación (Principal, Registros, Reportes, Admin)
 4. **❌ Área dinámica**: UserControls que se cargan según selección
-5. **❌ Estados dinámicos**: ComboBox habilitado/deshabilitado según servicio
+5. **✅ Estados dinámicos**: ComboBox habilitado/deshabilitado según servicio
 
 ### **❌ Fase 3: User Controls Integrados - PENDIENTE**
 1. **❌ ucReportes** User Control para reportes
 2. **❌ ucRegistroManual** User Control para registro manual
 3. **❌ ucAdministrador** User Control para administración
-4. **❌ ucVistaPrincipal** User Control para vista principal
+4. **✅ ucVistaPrincipal** User Control para vista principal
 5. **❌ Sistema de navegación** con User Controls
 6. **❌ Método CargarUserControl** para integración
 
 ### **🔄 Fase 4: Lógica de Servicios - PARCIALMENTE COMPLETADA**
 1. **✅ ServicioNegocio** para gestión de servicios
-2. **🔄 Cronómetro/Duración**: UI agregada (panel superior). La duración se gestiona por cronómetro en backend y se persiste solo en `DuracionMinutos`.
+2. **✅ Cronómetro/Duración**: UI agregada (panel superior). La duración se gestiona por cronómetro en backend y se persiste solo en `DuracionMinutos`.
 3. **🔄 Estados/Progreso**: UI presente; falta actualización en tiempo real
 4. **✅ Validaciones** de servicio activo/inactivo
 
@@ -237,9 +201,9 @@ public partial class frmPrincipal : MaterialForm
 4. **✅ Validaciones** y manejo de errores
 
 ### **🔄 Fase 6: Módulo Administrativo - PARCIALMENTE COMPLETADA**
-1. **✅ Gestión de empleados** (CRUD completo - backend)
-2. **✅ Gestión de empresas** (CRUD completo - backend)
-3. **✅ Asignación de credenciales** RFID (lógica lista)
+1. **❌ Gestión de empleados** (CRUD completo - backend)
+2. **❌ Gestión de empresas** (CRUD completo - backend)
+3. **❌ Asignación de credenciales** RFID (lógica lista)
 4. **❌ Configuración del sistema** y respaldos (falta UI)
 
 ### **❌ Fase 7: Integración RFID (Futuro) - NO INICIADA**
@@ -248,126 +212,37 @@ public partial class frmPrincipal : MaterialForm
 3. **❌ Manejo de errores** de dispositivo
 4. **❌ Registro automático**
 
-## 📊 Estado Actual del Proyecto
 
-**🎯 Progreso General: ~60% Backend / 0% Frontend**
 
-**✅ COMPLETADO:**
-- Arquitectura de 3 capas establecida
-- Todas las entidades del dominio implementadas
-- Lógica de negocio completa (EmpleadoNegocio, ServicioNegocio, ReporteNegocio, etc.)
-- AccesoDatos configurado para SQL Server
-- ReaLTaiizor instalado y configurado
+## Prioridades
 
-**⏳ SIGUIENTE PRIORIDAD:**
-- **Fase 2**: Crear FormPrincipal con MaterialForm
-- **Fase 3**: Implementar los 4 User Controls principales
-- Conectar la UI con la lógica de negocio existente
+1) Área dinámica y navegación
+    - Implementar el método central para cargar UserControls en `frmPrincipal` (CargarUserControl/MostrarVista)
+    - Conectar botones del panel lateral a la carga de vistas (Principal, Reg.Manual, Reportes, Admin)
 
-## 🔧 Arquitectura Single Window Application
+2) ucRegistroManual (MVP)
+    - Listar “Empleados sin almorzar” por servicio (usa SP_EmpleadosSinAlmorzar)
+    - Filtros por nombre y empresa; acción “Registrar seleccionado” usando `RegistroNegocio.registrarEmpleado`
 
-### **Estructura de Componentes:**
-- **FormPrincipal**: Formulario contenedor único (MaterialForm)
-- **Panel Superior**: ComboBox + Botón Servicio + Cronómetro + Estado
-- **Panel Lateral**: Botones de navegación entre módulos (MaterialButton)
-- **Panel Contenido**: Área donde se cargan los User Controls
-- **User Controls Integrados**: ucVistaPrincipal, ucRegistroManual, ucReportes, ucAdministrador
+3) ucReportes (básico)
+    - Filtros por fecha/lugar; listar servicios (SP_ListarServiciosPorFecha/PorLugar)
+    - Totales y gráficos simples en una segunda iteración
 
-### **Gestión de Estados:**
-- **Estado Inactivo**: ComboBox habilitado, botón "Iniciar Servicio"
-- **Estado Activo**: ComboBox deshabilitado, botón "Finalizar Servicio", cronómetro activo, cálculo de duración
-- **Estado Admin**: Panel superior modificado, acceso completo a funciones
+4) Estadísticas en tiempo real en la UI
+    - Actualizar progreso/estadísticas de `frmPrincipal` ante cada registro (ya se invoca ActualizarEstadisticas)
+    - Opcional: timer o eventos para refrescar componentes asociados
 
-### **Patrones de Diseño:**
-- **Single Window Pattern**: Una sola ventana con navegación interna
-- **User Control Pattern**: Controles de usuario reutilizables y modulares
-- **State Management**: Control centralizado de estados del sistema
-- **Repository Pattern**: AccesoDatos.cs para persistencia
-- **Service Layer**: Clases de negocio para lógica específica
-- **Material Design Pattern**: Interfaz consistente con ReaLTaiizor
+5) Configuración de conexión
+    - Mover cadena de conexión de `AccesoDatos.cs` a `App.config` para facilitar despliegues
 
-## 🎯 Implementación de User Controls
+6) Módulo Admin (iteración 1)
+    - Pantalla básica para listar empresas y empleados (solo lectura)
+    - Definir endpoints/métodos de negocio para CRUD en iteración 2
 
-### **Ventajas de User Controls sobre Formularios:**
-- **Mejor Rendimiento**: Menor consumo de memoria al no crear ventanas
-- **Reutilización**: Controles modulares que se pueden usar en múltiples contextos
-- **Mantenimiento**: Código más organizado y fácil de mantener
-- **Experiencia Fluida**: Transiciones instantáneas sin parpadeo
-- **Gestión de Estado**: Comunicación directa con FormPrincipal
+7) RFID (futuro)
+    - Definir interfaz del lector (abstracción) y simulación para pruebas
+    - Integrar lectura con el flujo de `ucVistaPrincipal`
 
-### **Patrón de Implementación:**
-```csharp
-// Método en FormPrincipal para cargar User Controls
-private void CargarUserControl(UserControl userControl)
-{
-    panelContenido.Controls.Clear();
-    userControl.Dock = DockStyle.Fill;
-    panelContenido.Controls.Add(userControl);
-}
-
-// Navegación entre módulos
-private void btnPrincipal_Click(object sender, EventArgs e)
-{
-    CargarUserControl(new ucVistaPrincipal());
-}
-```
-
-### **Comunicación entre User Controls y FormPrincipal:**
-- **Eventos Personalizados**: User Controls exponen eventos para comunicar acciones
-- **Referencias Directas**: FormPrincipal puede acceder a propiedades públicas
-- **Patrón Observer**: Notificaciones de cambios de estado
-
-## 🎯 Experiencia de Usuario (UX)
-
-### **Principios del Diseño Single Window:**
-- **Contexto Siempre Visible**: Estado del servicio y cronómetro siempre presentes
-- **Navegación Intuitiva**: Panel lateral con iconos y estados claros
-- **Transiciones Fluidas**: Cambio entre módulos sin perder contexto
-- **Feedback Inmediato**: Estados visuales claros (habilitado/deshabilitado)
-- **Material Design**: Interfaz moderna y consistente con ReaLTaiizor
-
-### **Ventajas de la Interfaz Unificada:**
-- **Eliminación de Ventanas Múltiples**: Reduce complejidad de navegación
-- **Estado Centralizado**: Información del servicio siempre visible
-- **Flujo Simplificado**: Sin necesidad de login separado
-- **Experiencia Cohesiva**: Sensación de aplicación integrada
-
-### **Comportamientos Dinámicos:**
-- **Panel Superior Adaptativo**: Cambia según lugar seleccionado (Comedor/Quincho/Admin)
-- **Botones Contextuales**: Habilitación/deshabilitación según estado del servicio
-- **Área de Contenido Dinámica**: Carga módulos según selección del panel lateral
-
-## 📊 Testing y Validación
-
-### **Pruebas de Interfaz Unificada:**
-1. **Navegación entre Módulos**: Transiciones fluidas entre User Controls
-2. **Estados del Sistema**: Validación de comportamientos dinámicos
-3. **Gestión de Servicios**: Inicio, funcionamiento y finalización
-4. **Integración de User Controls**: Carga correcta en panel contenido
-
-### **Pruebas de Funcionalidad:**
-1. **Selección de Lugar**: ComboBox y validaciones de acceso
-2. **Cronómetro/Duración de Servicio**: Inicio, pausa y finalización correcta; validación de `DuracionMinutos` persistido
-3. **Registro Manual**: Filtros, selección y registro de empleados
-4. **Módulo Admin**: Acceso restringido y funciones administrativas
-## 📝 ChangeLog breve
-
-- UI: `frmPrincipal` actualizado con campos de Fecha, Proyección, Invitados, Estado, Duración, Progreso y Estadísticas rápidas.
-- DB: `Servicios` ahora incluye `Proyeccion INT` y `DuracionMinutos INT` (sin `HoraInicio`/`HoraFin`).
-- Pendiente: mapear campos en Negocio y enlazar controles del formulario.
-- Pendiente: mapear nuevas columnas en Dominio/Negocio y enlazar controles del formulario.
-
-## 🔗 Integración de nuevas columnas
-
-- Dominio: `Dominio.Servicio` incluye `int? Proyeccion` y `int? DuracionMinutos`.
-- Negocio: actualizar `ServicioNegocio` (SELECT/INSERT/UPDATE) para leer/escribir `Proyeccion` y `DuracionMinutos`.
-- UI/Backend: el cronómetro calcula la duración y la persiste en `DuracionMinutos` al finalizar el servicio.
-
-### **Pruebas de Usabilidad:**
-1. **Flujo de Trabajo**: Tareas comunes sin interrupciones
-2. **Feedback Visual**: Estados claros y comprensibles
-3. **Accesibilidad**: Navegación con teclado y elementos grandes
-4. **Rendimiento**: Carga rápida de módulos y datos en tiempo real
 
 
 
