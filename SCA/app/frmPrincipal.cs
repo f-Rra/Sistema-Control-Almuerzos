@@ -47,25 +47,11 @@ namespace app
 
         private void CargarVistaPrincipal()
         {
-            // Limpiar el panel antes de agregar la nueva vista
             pnlPrincipal.Controls.Clear();
-            
-            // Crear nueva instancia de la vista principal
-            vistaPrincipal = new ucVistaPrincipal();
+            vistaPrincipal = new ucVistaPrincipal(this);
             vistaPrincipal.Dock = DockStyle.Fill;
-            
-            // Suscribirse al evento de registro realizado
-            vistaPrincipal.RegistroRealizado += VistaPrincipal_RegistroRealizado;
-            
-            // Agregar al panel principal
             pnlPrincipal.Controls.Add(vistaPrincipal);
             vistaPrincipal.BringToFront();
-        }
-
-        private void VistaPrincipal_RegistroRealizado(object sender, EventArgs e)
-        {
-            // Actualizar estadísticas cuando se realiza un registro
-            ActualizarEstadisticas();
         }
 
         private void MostrarVistaPrincipal()
@@ -187,39 +173,22 @@ namespace app
                 ActualizarEstadisticas();
             }
         }
-        private void ActualizarEstadisticas()
+        public void ActualizarEstadisticas()
         {
-            try
-            {
-                int registrados = vistaPrincipal?.CountRegistros() ?? 0;
-                int proyeccion = 0; int invitados = 0;
-                int.TryParse(mtxtProyeccion.Text, out proyeccion);
-                int.TryParse(mtxtInvitados.Text, out invitados);
+            int registrados = vistaPrincipal?.CountRegistros() ?? 0;
+            
+            int.TryParse(mtxtProyeccion.Text, out int proyeccion);
+            int.TryParse(mtxtInvitados.Text, out int invitados);
 
-                int objetivo = Math.Max(0, proyeccion + invitados);
-                int faltan = Math.Max(0, objetivo - registrados);
-                int porcentaje = 0;
-                if (objetivo > 0)
-                {
-                    porcentaje = (int)Math.Round((registrados * 100.0) / objetivo);
-                    if (porcentaje > 100) porcentaje = 100;
-                    if (porcentaje < 0) porcentaje = 0;
-                }
-                else if (registrados > 0)
-                {
-                    porcentaje = 100;
-                }
-                try
-                {
-                    if (pbProgreso.Maximum != 100) pbProgreso.Maximum = 100;
-                    if (pbProgreso.Minimum != 0) pbProgreso.Minimum = 0;
-                    pbProgreso.Value = Math.Max(pbProgreso.Minimum, Math.Min(pbProgreso.Maximum, porcentaje));
-                }
-                catch {}
-                lblProgreso.Text = porcentaje.ToString() + "%";
-                lblEstadisticas.Text = $"Registrados: {registrados} │ Faltan: {faltan}";
-            }
-            catch {}
+            int objetivo = proyeccion + invitados;
+            int faltan = Math.Max(0, objetivo - registrados);
+            
+            int porcentaje = objetivo > 0 ? Math.Min(100, (registrados * 100) / objetivo) : 
+                             registrados > 0 ? 100 : 0;
+
+            pbProgreso.Value = porcentaje;
+            lblProgreso.Text = $"{porcentaje}%";
+            lblEstadisticas.Text = $"Registrados: {registrados} │ Faltan: {faltan}";
         }
 
         private void ToggleServicio()
