@@ -53,14 +53,15 @@ namespace app.UserControls
 
         private void OcultarColumnas()
         {
-            if (dgvRegistros?.Columns == null) return;
+            var cols = dgvRegistros?.Columns;
+            if (cols == null) return;
 
-            var c = dgvRegistros.Columns["IdRegistro"]; if (c != null) c.Visible = false;
-            c = dgvRegistros.Columns["IdEmpleado"]; if (c != null) c.Visible = false;
-            c = dgvRegistros.Columns["IdEmpresa"]; if (c != null) c.Visible = false;
-            c = dgvRegistros.Columns["IdServicio"]; if (c != null) c.Visible = false;
-            c = dgvRegistros.Columns["IdLugar"]; if (c != null) c.Visible = false;
-            c = dgvRegistros.Columns["Hora"]; if (c != null) c.Visible = false;
+            string[] aOcultar = { "IdRegistro", "IdEmpleado", "IdEmpresa", "IdServicio", "IdLugar", "Hora" };
+            foreach (var nombre in aOcultar)
+            {
+                var col = cols[nombre];
+                if (col != null) col.Visible = false;
+            }
         }
 
         private void btnRegistro_Click(object sender, EventArgs e)
