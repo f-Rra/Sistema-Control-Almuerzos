@@ -32,11 +32,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvRegistros = new System.Windows.Forms.DataGridView();
-            this.registrosBinding = new System.Windows.Forms.BindingSource(this.components);
             this.txtRegistro = new System.Windows.Forms.TextBox();
             this.btnRegistro = new ReaLTaiizor.Controls.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.registrosBinding)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvRegistros
@@ -46,7 +44,7 @@
             this.dgvRegistros.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvRegistros.AutoGenerateColumns = false;
+            this.dgvRegistros.AutoGenerateColumns = true;
             this.dgvRegistros.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvRegistros.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.dgvRegistros.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -62,7 +60,7 @@
             this.dgvRegistros.ColumnHeadersHeight = 28;
             this.dgvRegistros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRegistros.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dgvRegistros.DataSource = this.registrosBinding;
+            // DataSource se establecerá en tiempo de ejecución desde el código
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -122,7 +120,6 @@
             this.Name = "ucVistaPrincipal";
             this.Size = new System.Drawing.Size(1155, 510);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.registrosBinding)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,7 +127,7 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dgvRegistros;
-        private System.Windows.Forms.BindingSource registrosBinding;
+        
         private System.Windows.Forms.TextBox txtRegistro;
         private ReaLTaiizor.Controls.Button btnRegistro;
     }

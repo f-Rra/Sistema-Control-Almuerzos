@@ -27,6 +27,10 @@ namespace Negocio
             {
                 throw ex;
             }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
 
         // Listar registros de un servicio
