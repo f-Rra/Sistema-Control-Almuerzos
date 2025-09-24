@@ -61,6 +61,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ucAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucAdmin.Designer.cs">
+      <DependentUpon>ucAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucRegistroManual.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucRegistroManual.Designer.cs">
+      <DependentUpon>ucRegistroManual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucReportes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucReportes.Designer.cs">
+      <DependentUpon>ucReportes.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucVistaPrincipal.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -80,6 +98,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserControls\ucAdmin.resx">
+      <DependentUpon>ucAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucRegistroManual.resx">
+      <DependentUpon>ucRegistroManual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucReportes.resx">
+      <DependentUpon>ucReportes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucVistaPrincipal.resx">
       <DependentUpon>ucVistaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
