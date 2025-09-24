@@ -24,11 +24,14 @@ namespace app
     {
         private readonly Color MenuBase = Color.FromArgb(35, 34, 33);
         private readonly Color MenuHover = Color.FromArgb(243, 229, 201);
+        private readonly Stopwatch crono = new Stopwatch();
+        private readonly Timer tmrCrono = new Timer { Interval = 1000 };
         private LugarNegocio negL = new LugarNegocio();
         private ServicioNegocio negS = new ServicioNegocio();
         private ucVistaPrincipal vistaPrincipal;
-        private readonly Stopwatch crono = new Stopwatch();
-        private readonly Timer tmrCrono = new Timer { Interval = 1000 };
+        private ucRegistroManual vistaRegManual;
+        private ucReportes vistaReportes;
+        private ucAdmin vistaAdmin;
         private int duracionMinutos = 0;
         private int? idServicioActual = null;
 
@@ -47,23 +50,113 @@ namespace app
 
         private void CargarVistaPrincipal()
         {
-            pnlPrincipal.Controls.Clear();
-            vistaPrincipal = new ucVistaPrincipal(this);
-            vistaPrincipal.Dock = DockStyle.Fill;
-            pnlPrincipal.Controls.Add(vistaPrincipal);
-            vistaPrincipal.BringToFront();
+            if (vistaPrincipal == null)
+                vistaPrincipal = new ucVistaPrincipal(this);
+            if (vistaPrincipal.Parent != pnlPrincipal)
+            {
+                vistaPrincipal.Dock = DockStyle.Fill;
+                vistaPrincipal.Visible = false;
+                pnlPrincipal.Controls.Add(vistaPrincipal);
+            }
+        }
+
+        private void CargarVistaRegistroManual()
+        {
+            if (vistaRegManual == null)
+                vistaRegManual = new ucRegistroManual();
+            if (vistaRegManual.Parent != pnlPrincipal)
+            {
+                vistaRegManual.Dock = DockStyle.Fill;
+                vistaRegManual.Visible = false;
+                pnlPrincipal.Controls.Add(vistaRegManual);
+            }
+        }
+
+        private void CargarVistaReportes()
+        {
+            if (vistaReportes == null)
+                vistaReportes = new ucReportes();
+
+            if (vistaReportes.Parent != pnlPrincipal)
+            {
+                vistaReportes.Dock = DockStyle.Fill;
+                vistaReportes.Visible = false;
+                pnlPrincipal.Controls.Add(vistaReportes);
+            }
+        }
+
+        private void CargarVistaAdmin()
+        {
+            if (vistaAdmin == null)
+                vistaAdmin = new ucAdmin();
+
+            if (vistaAdmin.Parent != pnlPrincipal)
+            {
+                vistaAdmin.Dock = DockStyle.Fill;
+                vistaAdmin.Visible = false;
+                pnlPrincipal.Controls.Add(vistaAdmin);
+            }
+        }
+
+        private void MostrarVista(UserControl vista)
+        {
+            if (vista == null) return;
+
+            pnlPrincipal.SuspendLayout();
+
+            foreach (Control c in pnlPrincipal.Controls)
+                c.Visible = false;
+
+            vista.Visible = true;
+            vista.BringToFront();
+
+            pnlPrincipal.ResumeLayout();
         }
 
         private void MostrarVistaPrincipal()
         {
-            if (vistaPrincipal == null || !pnlPrincipal.Controls.Contains(vistaPrincipal))
+            CargarVistaPrincipal();
+            MostrarVista(vistaPrincipal);
+        }
+
+        private void MostrarVistaRegistroManual()
+        {
+            if (!idServicioActual.HasValue)
             {
-                CargarVistaPrincipal();
+                MessageBox.Show("El servicio no está activo.");
+                return;
             }
-            else
+
+            CargarVistaRegistroManual();
+            if (cbLugar.SelectedValue is int idLugar)
             {
-                vistaPrincipal.BringToFront();
+                vistaRegManual.SetServicio(idServicioActual.Value, idLugar);
             }
+            MostrarVista(vistaRegManual);
+        }
+
+        private void MostrarVistaReportes()
+        {
+            if (idServicioActual.HasValue)
+            {
+                MessageBox.Show("Reportes está disponible sólo con el servicio inactivo.");
+                return;
+            }
+
+            CargarVistaReportes();
+            MostrarVista(vistaReportes);
+        }
+
+        private void MostrarVistaAdmin()
+        {
+            if (idServicioActual.HasValue)
+            {
+                MessageBox.Show("Admin está disponible sólo con el servicio inactivo.");
+                return;
+            }
+
+            CargarVistaAdmin();
+            MostrarVista(vistaAdmin);
         }
 
         private void CargarLugares()
@@ -130,6 +223,10 @@ namespace app
                 MostrarVistaPrincipal();
                 vistaPrincipal.SetServicio(idServicioActual, idLugar);
                 ActualizarEstadisticas();
+                btnReportes.Enabled = false;
+                btnAdmin.Enabled = false;
+                btnRegistros.Enabled = true;
+                btnHome.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -171,6 +268,10 @@ namespace app
                 crono.Reset();
                 lblCronometro.Text = "00:00:00";
                 ActualizarEstadisticas();
+                btnReportes.Enabled = true;
+                btnAdmin.Enabled = true;
+                btnRegistros.Enabled = true;
+                btnHome.Enabled = true;
             }
         }
         public void ActualizarEstadisticas()
@@ -238,16 +339,19 @@ namespace app
         private void btnRegistros_Click(object sender, EventArgs e)
         {
             ssSidebar.Location = new System.Drawing.Point(9, 286);
+            MostrarVistaRegistroManual();
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
             ssSidebar.Location = new System.Drawing.Point(9, 368);
+            MostrarVistaReportes();
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
             ssSidebar.Location = new System.Drawing.Point(9, 538);
+            MostrarVistaAdmin();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -260,8 +364,5 @@ namespace app
             ToggleServicio();
             ActulizarEstadoServicio();
         }
-
-        
-
     }
 }
