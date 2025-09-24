@@ -197,32 +197,70 @@ namespace app
             }
         }
 
+        private void SetEstadoServicio(bool activo)
+        {
+            if (activo)
+            {
+                lblEstado.Text = " ACTIVO";
+                pbxEstado.Image = Properties.Resources.activo;
+            }
+            else
+            {
+                lblEstado.Text = "INACTIVO";
+                pbxEstado.Image = Properties.Resources.inactivo;
+            }
+        }
+
         private void IniciarServicio()
         {
-            duracionMinutos = 0;
-            crono.Reset();
-            crono.Start();
-            tmrCrono.Start();
-            btnServicio.Text = "Finalizar Servicio";
             try
             {
+                // Validaciones previas: lugar y proyección obligatoria (número)
                 if (cbLugar.SelectedValue == null)
                 {
-                    MessageBox.Show("Seleccioná un lugar.");
+                    MessageBox.Show("Seleccioná un lugar");
                     return;
                 }
+
+                string proyText = mtxtProyeccion.Text.Trim();
+                if (string.IsNullOrEmpty(proyText))
+                {
+                    MessageBox.Show("Ingresá una proyección de comensales");
+                    return;
+                }
+
+                if (!int.TryParse(proyText, out int proy))
+                {
+                    MessageBox.Show("Ingresá una proyección válida (solo números)");
+                    return;
+                }
+
                 int idLugar = (int)cbLugar.SelectedValue;
-                int proy = 0;
-                int? proyeccion = int.TryParse(mtxtProyeccion.Text, out proy) ? (int?)proy : null;
-                int nuevoId = negS.crearServicio(idLugar, proyeccion);
+
+                // Crear servicio con proyección ingresada
+                int nuevoId = negS.crearServicio(idLugar, proy);
                 idServicioActual = nuevoId;
+
+                // Ahora sí: iniciar cronómetro y bloquear campos
+                duracionMinutos = 0;
+                crono.Reset();
+                crono.Start();
+                tmrCrono.Start();
+                btnServicio.Text = "Finalizar Servicio";
+
                 cbLugar.Enabled = false;
                 mtxtProyeccion.ReadOnly = true;
-                mtxtInvitados.ReadOnly = true;
+                mtxtInvitados.ReadOnly = true; // invitados pueden quedar vacíos, no son obligatorios
+
                 CargarVistaPrincipal();
                 MostrarVistaPrincipal();
                 vistaPrincipal.SetServicio(idServicioActual, idLugar);
                 ActualizarEstadisticas();
+
+                // Estado de servicio: ACTIVO
+                SetEstadoServicio(true);
+
+                // Navegación durante servicio activo
                 btnReportes.Enabled = false;
                 btnAdmin.Enabled = false;
                 btnRegistros.Enabled = true;
@@ -268,6 +306,8 @@ namespace app
                 crono.Reset();
                 lblCronometro.Text = "00:00:00";
                 ActualizarEstadisticas();
+                // Estado de servicio: INACTIVO
+                SetEstadoServicio(false);
                 btnReportes.Enabled = true;
                 btnAdmin.Enabled = true;
                 btnRegistros.Enabled = true;
@@ -362,7 +402,6 @@ namespace app
         private void btnServicio_Click(object sender, EventArgs e)
         {
             ToggleServicio();
-            ActulizarEstadoServicio();
         }
     }
 }
