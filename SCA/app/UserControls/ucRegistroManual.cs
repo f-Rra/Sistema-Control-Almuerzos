@@ -26,6 +26,7 @@ namespace app.UserControls
             InitializeComponent();
             this.formularioPrincipal = formPrincipal;
         }
+        
         private void ucRegistroManual_Load(object sender, EventArgs e)
         {
             CargarEmpresas();
@@ -40,9 +41,19 @@ namespace app.UserControls
 
         private void CargarEmpresas()
         {
-            cbLugar.DataSource = negEmp.listar();
+            var empresas = negEmp.listar();
+            var empresaCompleta = new List<dynamic>();
+            empresaCompleta.Add(new { IdEmpresa = -1, Nombre = "" });
+            
+            foreach (var emp in empresas)
+            {
+                empresaCompleta.Add(new { IdEmpresa = emp.IdEmpresa, Nombre = emp.Nombre });
+            }
+            
+            cbLugar.DataSource = empresaCompleta;
             cbLugar.ValueMember = "IdEmpresa";
             cbLugar.DisplayMember = "Nombre";
+            cbLugar.SelectedIndex = 0; 
         }
 
         public int CountRegistros()
@@ -86,9 +97,55 @@ namespace app.UserControls
             }
         }
 
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarEmpleados();
+        }
+
+        public void LimpiarFiltros()
+        {
+            txtNombre.Text = "";
+            FiltrarEmpleados();
+        }
+
+        private void cbLugar_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            FiltrarEmpleados();
+        }
+
+        private void FiltrarEmpleados()
+        {
+            try
+            {
+                if (servicioIdActual.HasValue)
+                {
+                    string nombre = string.IsNullOrWhiteSpace(txtNombre.Text) ? null : txtNombre.Text.Trim();
+                    int? empresaId = null;
+                    
+                    if (cbLugar.SelectedValue != null && cbLugar.SelectedValue != DBNull.Value)
+                    {
+                        int selectedValue = (int)cbLugar.SelectedValue;
+                        if (selectedValue != -1) 
+                        {
+                            empresaId = selectedValue;
+                        }
+                    }
+                    
+                    var empleadosFiltrados = negE.filtrarEmpleadosSinAlmorzar(servicioIdActual.Value, empresaId, nombre);
+                    
+                    dgvFaltantes.DataSource = empleadosFiltrados;
+                    OcultarColumnas();
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al filtrar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            // Verificar que hay una fila seleccionada
             if (dgvFaltantes.CurrentRow != null && 
                 dgvFaltantes.CurrentRow.DataBoundItem != null)
             {
@@ -97,15 +154,7 @@ namespace app.UserControls
                 try
                 {
                     negR.registrarEmpleado(seleccionado.IdEmpleado, seleccionado.IdEmpresa, servicioIdActual.Value, idLugarActual);
-                    
-                    // Mensaje de confirmación
-                    MessageBox.Show($"Empleado {seleccionado.NombreCompleto} registrado exitosamente.", 
-                        "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
-                    // Refrescar la lista para eliminar al empleado registrado
                     CargarRegistros();
-                    
-                    // Refrescar los registros en la vista principal (esto también actualiza estadísticas)
                     formularioPrincipal?.RefrescarRegistros();
                 }
                 catch (Exception ex)

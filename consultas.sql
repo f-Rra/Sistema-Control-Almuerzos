@@ -104,17 +104,68 @@ BEGIN
         e.Nombre, 
         e.Apellido, 
         e.IdCredencial,
-        emp.Nombre as Empresa, 
-        emp.IdEmpresa
-    FROM Empleados e
-    INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
-    WHERE e.Estado = 1
-      AND e.IdEmpleado NOT IN (
+        e.NombreEmpresa as Empresa, 
+        e.IdEmpresa,
+        e.NombreCompleto
+    FROM vw_EmpleadosSinAlmorzarBase e
+    WHERE e.IdEmpleado NOT IN (
         SELECT IdEmpleado 
         FROM Registros 
         WHERE IdServicio = @IdServicio
-      )
+    )
     ORDER BY e.Nombre, e.Apellido;
+END
+GO
+
+-- Procedimiento unificado para filtrar empleados sin almorzar
+CREATE OR ALTER PROCEDURE SP_FiltrarEmpleadosSinAlmorzar
+    @IdServicio INT,
+    @IdEmpresa INT = NULL,        -- Opcional: filtrar por empresa
+    @Nombre NVARCHAR(100) = NULL  -- Opcional: filtrar por nombre
+AS
+BEGIN
+    SELECT 
+        e.IdEmpleado, 
+        e.Nombre, 
+        e.Apellido, 
+        e.IdCredencial,
+        e.NombreEmpresa as Empresa, 
+        e.IdEmpresa,
+        e.NombreCompleto
+    FROM vw_EmpleadosSinAlmorzarBase e
+    WHERE e.IdEmpleado NOT IN (
+        SELECT IdEmpleado 
+        FROM Registros 
+        WHERE IdServicio = @IdServicio
+    )
+    -- Filtro opcional por empresa
+    AND (@IdEmpresa IS NULL OR e.IdEmpresa = @IdEmpresa)
+    -- Filtro opcional por nombre
+    AND (@Nombre IS NULL OR e.NombreCompleto LIKE '%' + @Nombre + '%')
+    ORDER BY e.Nombre, e.Apellido;
+END
+GO
+
+-- Procedimientos anteriores ahora deprecados, pero mantenidos por compatibilidad
+-- Nuevo: Empleados sin almorzar filtrados por empresa
+CREATE OR ALTER PROCEDURE SP_EmpleadosSinAlmorzarPorEmpresa
+    @IdServicio INT,
+    @IdEmpresa INT
+AS
+BEGIN
+    -- Redirigir al procedimiento unificado
+    EXEC SP_FiltrarEmpleadosSinAlmorzar @IdServicio, @IdEmpresa, NULL;
+END
+GO
+
+-- Nuevo: Empleados sin almorzar filtrados por nombre
+CREATE OR ALTER PROCEDURE SP_EmpleadosSinAlmorzarPorNombre
+    @IdServicio INT,
+    @Nombre NVARCHAR(100)
+AS
+BEGIN
+    -- Redirigir al procedimiento unificado
+    EXEC SP_FiltrarEmpleadosSinAlmorzar @IdServicio, NULL, @Nombre;
 END
 GO
 
@@ -440,6 +491,21 @@ SELECT
     e.IdCredencial,
     emp.Nombre as Empresa,
     emp.IdEmpresa
+FROM Empleados e
+INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
+WHERE e.Estado = 1;
+GO
+
+-- Vista de empleados sin almorzar para un servicio específico
+CREATE OR ALTER VIEW vw_EmpleadosSinAlmorzarBase AS
+SELECT 
+    e.IdEmpleado,
+    e.Nombre,
+    e.Apellido,
+    e.IdCredencial,
+    e.IdEmpresa,
+    emp.Nombre as NombreEmpresa,
+    CONCAT(e.Nombre, ' ', e.Apellido) as NombreCompleto
 FROM Empleados e
 INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
 WHERE e.Estado = 1;

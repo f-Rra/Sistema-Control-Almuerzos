@@ -91,6 +91,7 @@
             this.cbLugar.Name = "cbLugar";
             this.cbLugar.Size = new System.Drawing.Size(121, 33);
             this.cbLugar.TabIndex = 16;
+            this.cbLugar.SelectionChangeCommitted += new System.EventHandler(this.cbLugar_SelectionChangeCommitted);
             // 
             // lblEmpresa
             // 
@@ -126,6 +127,7 @@
             this.txtNombre.Size = new System.Drawing.Size(121, 33);
             this.txtNombre.TabIndex = 18;
             this.txtNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // btnServicio
             // 
@@ -147,6 +149,7 @@
             this.btnServicio.TabIndex = 20;
             this.btnServicio.Text = "Buscar";
             this.btnServicio.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnServicio.Visible = false;
             // 
             // btnAgregar
             // 
