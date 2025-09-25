@@ -36,7 +36,17 @@ namespace app.UserControls
 
         public int CountRegistros()
         {
-            return dgvRegistros?.Rows?.Count ?? 0;
+            // En lugar de contar filas del DataGridView, consultar directamente la base de datos
+            if (servicioIdActual.HasValue)
+            {
+                return negR.contarRegistrosPorServicio(servicioIdActual.Value);
+            }
+            return 0;
+        }
+
+        public void RefrescarRegistros()
+        {
+            CargarRegistros();
         }
 
         private void CargarRegistros()
