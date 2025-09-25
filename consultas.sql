@@ -215,9 +215,19 @@ CREATE OR ALTER PROCEDURE SP_RegistrarEmpleado
     @IdLugar INT
 AS
 BEGIN
-    INSERT INTO Registros (IdEmpleado, IdEmpresa, IdServicio, IdLugar, Fecha, Hora)
-    VALUES (@IdEmpleado, @IdEmpresa, @IdServicio, @IdLugar, 
-            CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME));
+    -- Verificar si el empleado ya está registrado en este servicio
+    IF NOT EXISTS (SELECT 1 FROM Registros WHERE IdEmpleado = @IdEmpleado AND IdServicio = @IdServicio)
+    BEGIN
+        INSERT INTO Registros (IdEmpleado, IdEmpresa, IdServicio, IdLugar, Fecha, Hora)
+        VALUES (@IdEmpleado, @IdEmpresa, @IdServicio, @IdLugar, 
+                CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME));
+    END
+    ELSE
+    BEGIN
+        -- No generar error, simplemente no insertar (ignore silencioso)
+        -- Esto evita errores de concurrencia en la interfaz
+        RETURN;
+    END
 END
 GO
 

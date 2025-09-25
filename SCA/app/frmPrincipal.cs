@@ -63,7 +63,7 @@ namespace app
         private void CargarVistaRegistroManual()
         {
             if (vistaRegManual == null)
-                vistaRegManual = new ucRegistroManual();
+                vistaRegManual = new ucRegistroManual(this);
             if (vistaRegManual.Parent != pnlPrincipal)
             {
                 vistaRegManual.Dock = DockStyle.Fill;
@@ -330,6 +330,13 @@ namespace app
             pbProgreso.Value = porcentaje;
             lblProgreso.Text = $"{porcentaje}%";
             lblEstadisticas.Text = $"Registrados: {registrados} │ Faltan: {faltan}";
+        }
+
+        public void RefrescarRegistros()
+        {
+            vistaPrincipal?.RefrescarRegistros();
+            // Actualizar estadísticas después de refrescar los registros
+            ActualizarEstadisticas();
         }
 
         private void ToggleServicio()
