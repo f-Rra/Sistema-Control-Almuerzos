@@ -287,3 +287,68 @@ SistemaControlAlmuerzos.sln
 
 
 
+## Mockup de ucReportes (seleccionado)
+
+Sugerencia: filtros y botones en el panel superior (frmPrincipal); el UC solo contiene grillas (DGVs).
+
+### Mockup C — Panel superior (original) + Tipo de reporte (4 opciones), y un único DGV
+
+Panel superior (frmPrincipal) — filtros globales (como en la imagen base) + tipo de reporte
+
+```
+┌───────────────────────────────────────────────────────────────────────────────────────────┐
+│                                    FILTROS DE REPORTE                                      │
+│  Desde: [__/__]   Hasta: [__/__]    Lugar: [Todos ▼]    Tipo de reporte: [ Lista de servicios ▼ ]  │
+│                                                                                   [GENERAR]│
+└───────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+Área de datos (UC) — un solo DGV (Servicios)
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         SERVICIOS ANTERIORES                                  │
+│ +--------------------------------------------------------------------------+ │
+│ |                                DGV ÚNICO                                  | │
+│ |   (Columnas según "Tipo de reporte" seleccionado)                         | │
+│ +--------------------------------------------------------------------------+ │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
+
+Alcance de filtros:
+- Desde/Hasta/Lugar: se aplican a todos los tipos de reporte.
+- Tipo de reporte (Combo): define qué dataset se carga en el DGV (ver opciones abajo).
+
+Interacciones sugeridas:
+- Generar aplica filtros (Desde/Hasta/Lugar) y el tipo de reporte seleccionado, cargando el DGV.
+- (Opcional) Doble clic en una fila puede abrir un detalle del servicio en otra vista o diálogo.
+
+Notas generales
+- Los filtros y acciones viven en el panel superior; el UC contiene únicamente el DGV.
+- Usar WaitCursor durante cargas; evitar bloqueos en UI.
+- Recordar la última selección de "Tipo de reporte" para persistir tras recargas.
+
+Tipo de reporte (4 opciones)
+- Lista de servicios: Fecha, Lugar, IdServicio, Proyección, Empleados, Invitados, Total, Duración, Cumplimiento%.
+- Asistencias por empresas (ranking): Empresa, Total, % sobre el total del período. (Si Lugar=Todos, ranking global; si hay Lugar, ranking por comedor.)
+- Cobertura vs proyección: Fecha, Lugar, Proyección, Total, Diferencia (Total−Proy), Cumplimiento%.
+- Distribución por día de semana: DíaSemana (Lun..Dom), Total, OcurrenciasEnElRango, PromedioPorOcurrencia (=Total/Ocurrencias), % sobre el total. Si Lugar=Todos, global; si hay Lugar, específico.
+
+Nota: Si preferís otra cuarta opción (p. ej. Intensidad por franjas de 15 min o Estabilidad por lugar), decime y la reemplazo sin problema.
+
+Mapeo de detalle automático (DGV derecho) según la columna seleccionada en el DGV izquierdo:
+- Fecha (o click en la fila): mostrar Registros del servicio seleccionado (detalle completo). Empresa y Texto (si existiera) filtran aquí.
+- Lugar: mostrar Ranking “Por empresa” del servicio seleccionado.
+- Comensales (empleados): mostrar Registros del servicio filtrando tipo Empleado (excluye invitados).
+- Invitados: mostrar Registros del servicio filtrando tipo Invitado.
+- Total: mostrar Registros del servicio (todos).
+- Duración: mostrar Concurrencia por hora del servicio seleccionado.
+
+Notas del mapeo:
+- Si una columna no aplica a un tipo de detalle, usar el default: Registros del servicio.
+- Si no hay selección en el DGV izquierdo, mantener el derecho vacío con una indicación amigable.
+
+
+
+
+

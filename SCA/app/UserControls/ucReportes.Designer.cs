@@ -28,36 +28,226 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.btnGenerar = new ReaLTaiizor.Controls.Button();
+            this.cbTipoReporte = new System.Windows.Forms.ComboBox();
+            this.lblTipoReporte = new ReaLTaiizor.Controls.SmallLabel();
+            this.cbLugar = new System.Windows.Forms.ComboBox();
+            this.lblLugar = new ReaLTaiizor.Controls.SmallLabel();
+            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
+            this.lblHasta = new ReaLTaiizor.Controls.SmallLabel();
+            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
+            this.lblDesde = new ReaLTaiizor.Controls.SmallLabel();
+            this.dgvReporte = new System.Windows.Forms.DataGridView();
+            this.panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReporte)).BeginInit();
             this.SuspendLayout();
             // 
-            // bigLabel1
+            // panelTop
             // 
-            this.bigLabel1.AutoSize = true;
-            this.bigLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.bigLabel1.Font = new System.Drawing.Font("Segoe UI", 25F);
-            this.bigLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.bigLabel1.Location = new System.Drawing.Point(435, 198);
-            this.bigLabel1.Name = "bigLabel1";
-            this.bigLabel1.Size = new System.Drawing.Size(153, 46);
-            this.bigLabel1.TabIndex = 0;
-            this.bigLabel1.Text = "Reportes";
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.panelTop.Controls.Add(this.btnGenerar);
+            this.panelTop.Controls.Add(this.cbTipoReporte);
+            this.panelTop.Controls.Add(this.lblTipoReporte);
+            this.panelTop.Controls.Add(this.cbLugar);
+            this.panelTop.Controls.Add(this.lblLugar);
+            this.panelTop.Controls.Add(this.dtpHasta);
+            this.panelTop.Controls.Add(this.lblHasta);
+            this.panelTop.Controls.Add(this.dtpDesde);
+            this.panelTop.Controls.Add(this.lblDesde);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(1155, 113);
+            this.panelTop.TabIndex = 0;
+            // 
+            // btnGenerar
+            // 
+            this.btnGenerar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenerar.BackColor = System.Drawing.Color.Transparent;
+            this.btnGenerar.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnGenerar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGenerar.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.btnGenerar.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnGenerar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnGenerar.Image = null;
+            this.btnGenerar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGenerar.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnGenerar.Location = new System.Drawing.Point(901, 43);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.btnGenerar.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.btnGenerar.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.btnGenerar.Size = new System.Drawing.Size(171, 32);
+            this.btnGenerar.TabIndex = 8;
+            this.btnGenerar.Text = " Generar Reporte";
+            this.btnGenerar.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            // 
+            // cbTipoReporte
+            // 
+            this.cbTipoReporte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.cbTipoReporte.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoReporte.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.cbTipoReporte.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.cbTipoReporte.FormattingEnabled = true;
+            this.cbTipoReporte.Location = new System.Drawing.Point(605, 46);
+            this.cbTipoReporte.Name = "cbTipoReporte";
+            this.cbTipoReporte.Size = new System.Drawing.Size(250, 29);
+            this.cbTipoReporte.TabIndex = 7;
+            // 
+            // lblTipoReporte
+            // 
+            this.lblTipoReporte.AutoSize = true;
+            this.lblTipoReporte.BackColor = System.Drawing.Color.Transparent;
+            this.lblTipoReporte.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblTipoReporte.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
+            this.lblTipoReporte.Location = new System.Drawing.Point(602, 30);
+            this.lblTipoReporte.Name = "lblTipoReporte";
+            this.lblTipoReporte.Size = new System.Drawing.Size(90, 13);
+            this.lblTipoReporte.TabIndex = 6;
+            this.lblTipoReporte.Text = "Tipo de reporte:";
+            // 
+            // cbLugar
+            // 
+            this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.cbLugar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.cbLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.cbLugar.FormattingEnabled = true;
+            this.cbLugar.Location = new System.Drawing.Point(384, 46);
+            this.cbLugar.Name = "cbLugar";
+            this.cbLugar.Size = new System.Drawing.Size(180, 29);
+            this.cbLugar.TabIndex = 5;
+            // 
+            // lblLugar
+            // 
+            this.lblLugar.AutoSize = true;
+            this.lblLugar.BackColor = System.Drawing.Color.Transparent;
+            this.lblLugar.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
+            this.lblLugar.Location = new System.Drawing.Point(381, 30);
+            this.lblLugar.Name = "lblLugar";
+            this.lblLugar.Size = new System.Drawing.Size(39, 13);
+            this.lblLugar.TabIndex = 4;
+            this.lblLugar.Text = "Lugar:";
+            // 
+            // dtpHasta
+            // 
+            this.dtpHasta.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dtpHasta.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpHasta.Location = new System.Drawing.Point(227, 46);
+            this.dtpHasta.Name = "dtpHasta";
+            this.dtpHasta.Size = new System.Drawing.Size(120, 29);
+            this.dtpHasta.TabIndex = 3;
+            // 
+            // lblHasta
+            // 
+            this.lblHasta.AutoSize = true;
+            this.lblHasta.BackColor = System.Drawing.Color.Transparent;
+            this.lblHasta.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblHasta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
+            this.lblHasta.Location = new System.Drawing.Point(224, 30);
+            this.lblHasta.Name = "lblHasta";
+            this.lblHasta.Size = new System.Drawing.Size(39, 13);
+            this.lblHasta.TabIndex = 2;
+            this.lblHasta.Text = "Hasta:";
+            // 
+            // dtpDesde
+            // 
+            this.dtpDesde.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dtpDesde.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDesde.Location = new System.Drawing.Point(67, 46);
+            this.dtpDesde.Name = "dtpDesde";
+            this.dtpDesde.Size = new System.Drawing.Size(120, 29);
+            this.dtpDesde.TabIndex = 1;
+            // 
+            // lblDesde
+            // 
+            this.lblDesde.AutoSize = true;
+            this.lblDesde.BackColor = System.Drawing.Color.Transparent;
+            this.lblDesde.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblDesde.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
+            this.lblDesde.Location = new System.Drawing.Point(64, 30);
+            this.lblDesde.Name = "lblDesde";
+            this.lblDesde.Size = new System.Drawing.Size(42, 13);
+            this.lblDesde.TabIndex = 0;
+            this.lblDesde.Text = "Desde:";
+            // 
+            // dgvReporte
+            // 
+            this.dgvReporte.AllowUserToAddRows = false;
+            this.dgvReporte.AllowUserToDeleteRows = false;
+            this.dgvReporte.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvReporte.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvReporte.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.dgvReporte.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvReporte.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvReporte.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvReporte.ColumnHeadersHeight = 40;
+            this.dgvReporte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReporte.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvReporte.EnableHeadersVisualStyles = false;
+            this.dgvReporte.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.dgvReporte.Location = new System.Drawing.Point(30, 128);
+            this.dgvReporte.MultiSelect = false;
+            this.dgvReporte.Name = "dgvReporte";
+            this.dgvReporte.ReadOnly = true;
+            this.dgvReporte.RowHeadersVisible = false;
+            this.dgvReporte.RowTemplate.Height = 40;
+            this.dgvReporte.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvReporte.Size = new System.Drawing.Size(1097, 362);
+            this.dgvReporte.TabIndex = 1;
             // 
             // ucReportes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.Controls.Add(this.bigLabel1);
+            this.Controls.Add(this.dgvReporte);
+            this.Controls.Add(this.panelTop);
             this.Name = "ucReportes";
             this.Size = new System.Drawing.Size(1155, 510);
+            this.Load += new System.EventHandler(this.ucReportes_Load);
+            this.panelTop.ResumeLayout(false);
+            this.panelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReporte)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private ReaLTaiizor.Controls.BigLabel bigLabel1;
+        private System.Windows.Forms.Panel panelTop;
+    private ReaLTaiizor.Controls.Button btnGenerar;
+        private System.Windows.Forms.ComboBox cbTipoReporte;
+    private ReaLTaiizor.Controls.SmallLabel lblTipoReporte;
+        private System.Windows.Forms.ComboBox cbLugar;
+    private ReaLTaiizor.Controls.SmallLabel lblLugar;
+        private System.Windows.Forms.DateTimePicker dtpHasta;
+    private ReaLTaiizor.Controls.SmallLabel lblHasta;
+        private System.Windows.Forms.DateTimePicker dtpDesde;
+    private ReaLTaiizor.Controls.SmallLabel lblDesde;
+        private System.Windows.Forms.DataGridView dgvReporte;
     }
 }
