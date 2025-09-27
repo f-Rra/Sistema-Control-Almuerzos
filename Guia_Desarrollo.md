@@ -173,31 +173,31 @@ SistemaControlAlmuerzos.sln
 4. **✅ Crear clases de modelo** en Dominio
 5. **✅ Configurar AccesoDatos** en Negocio
 
-### **🔄 Fase 2: Interfaz Unificada (Single Window) - EN PROGRESO**
+### **✅ Fase 2: Interfaz Unificada (Single Window) - COMPLETADA**
 1. **✅ FormPrincipal único** con panel superior integrado (base visual)
 2. **✅ Panel superior**: Lugar, Fecha, Proyección, Invitados, Estado, Duración, Progreso, Estadísticas
 3. **✅ Panel lateral**: Botones de navegación (Principal, Registros, Reportes, Admin)
-4. **❌ Área dinámica**: UserControls que se cargan según selección
+4. **✅ Área dinámica**: UserControls que se cargan según selección (MostrarVista + métodos CargarVistaX)
 5. **✅ Estados dinámicos**: ComboBox habilitado/deshabilitado según servicio
 
-### **❌ Fase 3: User Controls Integrados - PENDIENTE**
-1. **❌ ucReportes** User Control para reportes
-2. **❌ ucRegistroManual** User Control para registro manual
+### **🔄 Fase 3: User Controls Integrados - EN PROGRESO**
+1. **❌ ucReportes** User Control para reportes (estructura creada, funcionalidad pendiente)
+2. **✅ ucRegistroManual** User Control para registro manual (filtros automáticos y registro)
 3. **❌ ucAdministrador** User Control para administración
 4. **✅ ucVistaPrincipal** User Control para vista principal
-5. **❌ Sistema de navegación** con User Controls
-6. **❌ Método CargarUserControl** para integración
+5. **✅ Sistema de navegación** con User Controls (MostrarVista/MostrarVistaX)
+6. **✅ Métodos CargarVistaX** para integración (Principal, Reg.Manual, Reportes, Admin)
 
-### **🔄 Fase 4: Lógica de Servicios - PARCIALMENTE COMPLETADA**
+### **✅ Fase 4: Lógica de Servicios - COMPLETADA**
 1. **✅ ServicioNegocio** para gestión de servicios
 2. **✅ Cronómetro/Duración**: UI agregada (panel superior). La duración se gestiona por cronómetro en backend y se persiste solo en `DuracionMinutos`.
-3. **🔄 Estados/Progreso**: UI presente; falta actualización en tiempo real
+3. **✅ Estados/Progreso**: UI y actualización en tiempo real (llamadas a `ActualizarEstadisticas()` en eventos clave)
 4. **✅ Validaciones** de servicio activo/inactivo
 
 ### **🔄 Fase 5: Funcionalidades Específicas - PARCIALMENTE COMPLETADA**
-1. **✅ EmpleadoNegocio** para registro manual
-2. **✅ ReporteNegocio** para consultas y exportación
-3. **❌ Integración RFID** simulada (lógica lista, falta UI)
+1. **✅ EmpleadoNegocio** para registro manual (búsqueda por credencial, filtros y listados)
+2. **🔄 ReporteNegocio**: consultas disponibles; exportación pendiente
+3. **❌ Integración RFID** simulada (futuro)
 4. **✅ Validaciones** y manejo de errores
 
 ### **🔄 Fase 6: Módulo Administrativo - PARCIALMENTE COMPLETADA**
@@ -216,21 +216,21 @@ SistemaControlAlmuerzos.sln
 
 ## Prioridades
 
-1) Área dinámica y navegación
-    - Implementar el método central para cargar UserControls en `frmPrincipal` (CargarUserControl/MostrarVista)
-    - Conectar botones del panel lateral a la carga de vistas (Principal, Reg.Manual, Reportes, Admin)
+1) Reportes y visualización
+    - Implementar `ucReportes` (listar servicios, filtros por fecha/lugar, KPIs)
+    - Agregar exportación (PDF/CSV) en una iteración siguiente
 
-2) ucRegistroManual (MVP)
-    - Listar “Empleados sin almorzar” por servicio (usa SP_EmpleadosSinAlmorzar)
-    - Filtros por nombre y empresa; acción “Registrar seleccionado” usando `RegistroNegocio.registrarEmpleado`
+2) ucRegistroManual (mejoras menores)
+    - Ajustes de UX (resaltado selección, atajos de teclado)
+    - Validaciones adicionales en registro concurrente
 
-3) ucReportes (básico)
-    - Filtros por fecha/lugar; listar servicios (SP_ListarServiciosPorFecha/PorLugar)
-    - Totales y gráficos simples en una segunda iteración
+3) Último servicio (inicio y fin)
+    - Mostrar detalle del último servicio en `gbxUltimo` al iniciar y al finalizar servicio
+    - Agregar desglose por empresa (opcional) bajo `gbxUltimo`
 
 4) Estadísticas en tiempo real en la UI
-    - Actualizar progreso/estadísticas de `frmPrincipal` ante cada registro (ya se invoca ActualizarEstadisticas)
-    - Opcional: timer o eventos para refrescar componentes asociados
+    - Mantener llamada a `ActualizarEstadisticas()` desde `ucVistaPrincipal` y `ucRegistroManual`
+    - Considerar refresco periódico si se agregan fuentes externas
 
 5) Configuración de conexión
     - Mover cadena de conexión de `AccesoDatos.cs` a `App.config` para facilitar despliegues
@@ -242,6 +242,47 @@ SistemaControlAlmuerzos.sln
 7) RFID (futuro)
     - Definir interfaz del lector (abstracción) y simulación para pruebas
     - Integrar lectura con el flujo de `ucVistaPrincipal`
+
+---
+
+## ✅ Cambios realizados recientemente
+
+### Backend/SQL
+- Agregado `SP_ObtenerUltimoServicio` (sin parámetros) que devuelve el último servicio finalizado incluyendo `NombreLugar` mediante JOIN con `Lugares`.
+- Unificación de filtros de empleados: `SP_FiltrarEmpleadosSinAlmorzar(@IdServicio, @IdEmpresa=NULL, @Nombre=NULL)` sobre la vista base `vw_EmpleadosSinAlmorzarBase`.
+- Mantenidos `SP_EmpleadosSinAlmorzarPorEmpresa` y `SP_EmpleadosSinAlmorzarPorNombre` como wrappers de compatibilidad.
+- Refuerzo de unicidad de registros en `SP_RegistrarEmpleado` (idempotente ante duplicados).
+
+### Negocio (C#)
+- `ServicioNegocio.obtenerUltimoServicio()` para consumir `SP_ObtenerUltimoServicio` y mapear `NombreLugar`.
+- `EmpleadoNegocio.filtrarEmpleadosSinAlmorzar(...)` con parámetros opcionales y manejo de `DBNull`.
+
+### Presentación (WinForms)
+- `frmPrincipal`:
+  - `CargarUltimoServicio()` muestra datos en `gbxUltimo` al iniciar la app y al finalizar un servicio.
+  - `OcultarTodasLasVistas()` para limpiar el área dinámica antes de mostrar `gbxUltimo`.
+  - Navegación por vistas consolidada: `MostrarVista`, `MostrarVistaPrincipal/RegistroManual/Reportes/Admin`.
+- `ucRegistroManual`:
+  - Filtros automáticos por nombre (TextChanged) y empresa (SelectionChangeCommitted) sin botón de búsqueda.
+  - Opción inicial de empresa en blanco (en lugar de “Todas las empresas”).
+  - Uso del SP unificado de filtros, columnas ordenadas y ocultamiento de internas.
+- `ucVistaPrincipal`:
+  - Registro por credencial con validaciones y actualización de estadísticas en `frmPrincipal`.
+
+### UX/Comportamiento
+- Al finalizar servicio se actualizan estadísticas y se muestra el panel `gbxUltimo` con el resumen del servicio.
+- Estado visual ACTIVO/INACTIVO con íconos y cronómetro funcional.
+
+---
+
+## Estado actual resumido
+- Interfaz unificada y navegación: ✅
+- Registro manual con filtros unificados: ✅
+- Último servicio visible al iniciar y al finalizar: ✅ (detalle básico)
+- Reportes: 🔄 (estructura creada, funcionalidad pendiente)
+- Admin: ❌
+- RFID: ❌ (futuro)
+
 
 
 
