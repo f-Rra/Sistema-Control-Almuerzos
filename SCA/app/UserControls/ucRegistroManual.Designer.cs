@@ -35,7 +35,6 @@
             this.lblEmpresa = new ReaLTaiizor.Controls.SmallLabel();
             this.lblFecha = new ReaLTaiizor.Controls.SmallLabel();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.btnServicio = new ReaLTaiizor.Controls.Button();
             this.btnAgregar = new ReaLTaiizor.Controls.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFaltantes)).BeginInit();
             this.SuspendLayout();
@@ -89,7 +88,7 @@
             this.cbLugar.FormattingEnabled = true;
             this.cbLugar.Location = new System.Drawing.Point(103, 30);
             this.cbLugar.Name = "cbLugar";
-            this.cbLugar.Size = new System.Drawing.Size(121, 33);
+            this.cbLugar.Size = new System.Drawing.Size(155, 33);
             this.cbLugar.TabIndex = 16;
             this.cbLugar.SelectionChangeCommitted += new System.EventHandler(this.cbLugar_SelectionChangeCommitted);
             // 
@@ -113,9 +112,9 @@
             this.lblFecha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
             this.lblFecha.Location = new System.Drawing.Point(278, 14);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(98, 13);
+            this.lblFecha.Size = new System.Drawing.Size(51, 13);
             this.lblFecha.TabIndex = 19;
-            this.lblFecha.Text = "Nombre/Apellido:";
+            this.lblFecha.Text = "Nombre:";
             // 
             // txtNombre
             // 
@@ -124,32 +123,10 @@
             this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.txtNombre.Location = new System.Drawing.Point(281, 30);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(121, 33);
+            this.txtNombre.Size = new System.Drawing.Size(155, 33);
             this.txtNombre.TabIndex = 18;
             this.txtNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
-            // 
-            // btnServicio
-            // 
-            this.btnServicio.BackColor = System.Drawing.Color.Transparent;
-            this.btnServicio.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnServicio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnServicio.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnServicio.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnServicio.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnServicio.Image = null;
-            this.btnServicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnServicio.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnServicio.Location = new System.Drawing.Point(437, 28);
-            this.btnServicio.Name = "btnServicio";
-            this.btnServicio.Padding = new System.Windows.Forms.Padding(14, 0, 12, 0);
-            this.btnServicio.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnServicio.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnServicio.Size = new System.Drawing.Size(179, 35);
-            this.btnServicio.TabIndex = 20;
-            this.btnServicio.Text = "Buscar";
-            this.btnServicio.TextAlignment = System.Drawing.StringAlignment.Center;
-            this.btnServicio.Visible = false;
             // 
             // btnAgregar
             // 
@@ -179,7 +156,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.btnServicio);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.cbLugar);
@@ -201,7 +177,6 @@
         private ReaLTaiizor.Controls.SmallLabel lblEmpresa;
         private ReaLTaiizor.Controls.SmallLabel lblFecha;
         private System.Windows.Forms.TextBox txtNombre;
-        private ReaLTaiizor.Controls.Button btnServicio;
         private ReaLTaiizor.Controls.Button btnAgregar;
     }
 }

@@ -40,7 +40,6 @@ namespace Dominio
             get { return Hora.ToString(@"hh\:mm"); }
         }
 
-        // Método de negocio en la entidad
         public bool EsDelDiaActual()
         {
             return Fecha.Date == DateTime.Now.Date;

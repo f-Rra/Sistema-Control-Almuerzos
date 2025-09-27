@@ -23,7 +23,6 @@ namespace app
 {
     public partial class frmPrincipal : Form
     {
-        private readonly Color MenuBase = Color.FromArgb(35, 34, 33);
         private readonly Color MenuHover = Color.FromArgb(243, 229, 201);
         private readonly Stopwatch crono = new Stopwatch();
         private readonly Timer tmrCrono = new Timer { Interval = 1000 };
@@ -46,7 +45,7 @@ namespace app
             CargarFecha();
             IniciarCronometro();
             ActualizarEstadisticas();
-            CargarUltimoServicio();
+            gbxUltimo.Visible = false;
         }
 
         private void CargarUltimoServicio()
@@ -56,18 +55,13 @@ namespace app
                 Servicio ultimo = negS.obtenerUltimoServicio();
                 if (ultimo != null)
                 {
-                    // Limpiar los textos previos y cargar nuevos datos
-                    lblUlugar.Text = "Lugar: " + ultimo.NombreLugar;
+                    lblUlugar.Text = "Lugar:" + ultimo.NombreLugar;
                     lblUfecha.Text = "Fecha: " + ultimo.Fecha.ToString("dd/MM/yyyy");
                     lblUproyeccion.Text = "Proyección: " + (ultimo.Proyeccion?.ToString() ?? "N/A");
                     lblUcomensales.Text = "Comensales: " + ultimo.TotalComensales.ToString();
                     lblUinvitados.Text = "Invitados: " + ultimo.TotalInvitados.ToString();
                 }
-                
-                // Ocultar todos los UserControls del panel principal
                 OcultarTodasLasVistas();
-                
-                // Hacer visible y traer al frente el GroupBox del último servicio
                 gbxUltimo.Visible = true;
                 gbxUltimo.BringToFront();
             }
@@ -181,7 +175,6 @@ namespace app
                 MessageBox.Show("Reportes está disponible sólo con el servicio inactivo.");
                 return;
             }
-
             CargarVistaReportes();
             MostrarVista(vistaReportes);
         }
@@ -220,20 +213,6 @@ namespace app
         private void ActualizarCronometroUI()
         {
             lblCronometro.Text = crono.Elapsed.ToString(@"hh\:mm\:ss");
-        }
-
-        private void ActulizarEstadoServicio()
-        {
-            if (lblEstado.Text == "INACTIVO")
-            {
-                lblEstado.Text = " ACTIVO";
-                pbxEstado.Image = Properties.Resources.activo;
-            }
-            else
-            {
-                lblEstado.Text = "INACTIVO";
-                pbxEstado.Image = Properties.Resources.inactivo;
-            }
         }
 
         private void SetEstadoServicio(bool activo)
@@ -282,18 +261,14 @@ namespace app
                 crono.Start();
                 tmrCrono.Start();
                 btnServicio.Text = "Finalizar Servicio";
-
                 cbLugar.Enabled = false;
                 mtxtProyeccion.ReadOnly = true;
                 mtxtInvitados.ReadOnly = true; 
-
                 CargarVistaPrincipal();
                 MostrarVistaPrincipal();
                 vistaPrincipal.SetServicio(idServicioActual, idLugar);
                 ActualizarEstadisticas();
-
                 SetEstadoServicio(true);
-
                 btnReportes.Enabled = false;
                 btnAdmin.Enabled = false;
                 btnRegistros.Enabled = true;
@@ -338,7 +313,8 @@ namespace app
                 mtxtInvitados.Text = string.Empty;
                 crono.Reset();
                 lblCronometro.Text = "00:00:00";
-                ActualizarEstadisticas();
+                lblEstadisticas.Text = "Registrados: 0 │ Faltan: 0";
+                lblProgreso.Text = "0%";
                 SetEstadoServicio(false);
                 btnReportes.Enabled = true;
                 btnAdmin.Enabled = true;
@@ -368,7 +344,6 @@ namespace app
         public void RefrescarRegistros()
         {
             vistaPrincipal?.RefrescarRegistros();
-            // Actualizar estadísticas después de refrescar los registros
             ActualizarEstadisticas();
         }
 
