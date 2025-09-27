@@ -342,93 +342,110 @@ BEGIN
 END
 GO
 
--- Reportes y Estadisticas
-CREATE OR ALTER PROCEDURE SP_EstadisticasServicioActivo
-    @IdServicio INT
-AS
-BEGIN
-    SELECT 
-        COUNT(r.IdRegistro) as TotalEmpleados,
-        ISNULL(s.TotalInvitados, 0) as TotalInvitados,
-        COUNT(r.IdRegistro) + ISNULL(s.TotalInvitados, 0) as TotalGeneral
-    FROM Servicios s
-    LEFT JOIN Registros r ON r.IdServicio = s.IdServicio
-    WHERE s.IdServicio = @IdServicio
-    GROUP BY ISNULL(s.TotalInvitados, 0);
-END
-GO
+-- Reportes (limpieza de no usados y nuevas SPs unificadas para reducir lógica en C#)
 
-CREATE OR ALTER PROCEDURE SP_RegistrosPorEmpresa
-    @IdServicio INT
+-- Unificado: Lista de servicios por rango, opcional por lugar
+CREATE OR ALTER PROCEDURE SP_ListarServiciosRango
+    @FechaDesde DATE,
+    @FechaHasta DATE,
+    @IdLugar INT = NULL
 AS
 BEGIN
     SELECT 
-        emp.Nombre as Empresa, 
-        COUNT(*) as Cantidad
-    FROM Registros r
-    INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
-    WHERE r.IdServicio = @IdServicio
-    GROUP BY emp.Nombre, emp.IdEmpresa
-    ORDER BY Cantidad DESC;
-END
-GO
-
-CREATE OR ALTER PROCEDURE SP_PicosConcurrencia
-    @IdServicio INT
-AS
-BEGIN
-    SELECT 
-        DATEPART(HOUR, r.Hora) as Hora,
-        COUNT(*) as Cantidad
-    FROM Registros r
-    WHERE r.IdServicio = @IdServicio
-    GROUP BY DATEPART(HOUR, r.Hora)
-    ORDER BY Hora;
-END
-GO
-
-CREATE OR ALTER PROCEDURE SP_ResumenDiarioPorLugar
-    @Fecha DATE
-AS
-BEGIN
-    SELECT 
-        s.Fecha,
-        l.Nombre as Lugar,
-        s.TotalComensales,
+        s.IdServicio, 
+        s.Fecha, 
+        s.Proyeccion,
+        s.DuracionMinutos,
+        s.TotalComensales, 
         s.TotalInvitados,
+        l.Nombre as Lugar,
         (s.TotalComensales + s.TotalInvitados) as Total
     FROM Servicios s
     INNER JOIN Lugares l ON s.IdLugar = l.IdLugar
-    WHERE s.Fecha = @Fecha
-    ORDER BY l.Nombre;
+    WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta
+      AND (@IdLugar IS NULL OR s.IdLugar = @IdLugar)
+    ORDER BY s.Fecha DESC, s.IdServicio DESC;
 END
 GO
 
-CREATE OR ALTER PROCEDURE SP_TopEmpresasAsistencia
+-- Asistencias por empresas en un rango, opcional por lugar
+CREATE OR ALTER PROCEDURE SP_AsistenciasPorEmpresas
     @FechaDesde DATE,
-    @FechaHasta DATE
+    @FechaHasta DATE,
+    @IdLugar INT = NULL
 AS
 BEGIN
-    SELECT TOP 5
+    SELECT 
         emp.Nombre as Empresa,
         COUNT(*) as TotalAsistencias
     FROM Registros r
     INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
     WHERE r.Fecha BETWEEN @FechaDesde AND @FechaHasta
+      AND (@IdLugar IS NULL OR r.IdLugar = @IdLugar)
     GROUP BY emp.Nombre, emp.IdEmpresa
     ORDER BY TotalAsistencias DESC;
 END
 GO
 
-CREATE OR ALTER PROCEDURE SP_PromedioDiarioAsistencia
+-- Cobertura vs proyección por rango, opcional por lugar
+CREATE OR ALTER PROCEDURE SP_ReporteCoberturaVsProyeccion
     @FechaDesde DATE,
-    @FechaHasta DATE
+    @FechaHasta DATE,
+    @IdLugar INT = NULL
 AS
 BEGIN
     SELECT 
-        AVG(CAST(s.TotalComensales + s.TotalInvitados AS FLOAT)) as PromedioDiario
+        s.Fecha,
+        l.Nombre as Lugar,
+        ISNULL(s.Proyeccion, 0) as Proyeccion,
+        (s.TotalComensales + s.TotalInvitados) as Atendidos,
+        CASE WHEN ISNULL(s.Proyeccion, 0) > 0 
+             THEN CAST((s.TotalComensales + s.TotalInvitados) * 100.0 / s.Proyeccion AS DECIMAL(10,2))
+             ELSE NULL END as CoberturaPorcentaje,
+        (s.TotalComensales + s.TotalInvitados) - ISNULL(s.Proyeccion, 0) as Diferencia
     FROM Servicios s
-    WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta;
+    INNER JOIN Lugares l ON s.IdLugar = l.IdLugar
+    WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta
+      AND (@IdLugar IS NULL OR s.IdLugar = @IdLugar)
+    ORDER BY s.Fecha DESC, l.Nombre;
+END
+GO
+
+-- Distribución por día de semana (sumatoria de atendidos) por rango, opcional por lugar
+CREATE OR ALTER PROCEDURE SP_DistribucionPorDiaSemana
+    @FechaDesde DATE,
+    @FechaHasta DATE,
+    @IdLugar INT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Establecer lunes como primer día para que 1 = Lunes ... 7 = Domingo
+    SET DATEFIRST 1;
+
+    WITH Datos AS (
+        SELECT 
+            DATEPART(WEEKDAY, s.Fecha) as DiaNumero,
+            (s.TotalComensales + s.TotalInvitados) as Total
+        FROM Servicios s
+        WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta
+          AND (@IdLugar IS NULL OR s.IdLugar = @IdLugar)
+    )
+    SELECT 
+        DiaNumero as Orden,
+        CASE DiaNumero
+            WHEN 1 THEN 'Lunes'
+            WHEN 2 THEN 'Martes'
+            WHEN 3 THEN 'Miércoles'
+            WHEN 4 THEN 'Jueves'
+            WHEN 5 THEN 'Viernes'
+            WHEN 6 THEN 'Sábado'
+            WHEN 7 THEN 'Domingo'
+            ELSE CAST(DiaNumero AS VARCHAR(10))
+        END as Dia,
+        SUM(Total) as Total
+    FROM Datos
+    GROUP BY DiaNumero
+    ORDER BY Orden;
 END
 GO
 

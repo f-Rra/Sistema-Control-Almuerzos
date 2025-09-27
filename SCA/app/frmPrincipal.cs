@@ -149,6 +149,7 @@ namespace app
         private void MostrarVistaPrincipal()
         {
             CargarVistaPrincipal();
+            pnlSuperior.Visible = true; // mostrar barra superior para vistas comunes
             MostrarVista(vistaPrincipal);
         }
 
@@ -165,6 +166,7 @@ namespace app
             {
                 vistaRegManual.SetServicio(idServicioActual.Value, idLugar);
             }
+            pnlSuperior.Visible = true; // esta vista usa la barra superior
             MostrarVista(vistaRegManual);
         }
 
@@ -176,6 +178,8 @@ namespace app
                 return;
             }
             CargarVistaReportes();
+            // Oculta la barra superior, ya que ucReportes incluye su propio panel de filtros
+            pnlSuperior.Visible = false;
             MostrarVista(vistaReportes);
         }
 
@@ -188,6 +192,7 @@ namespace app
             }
 
             CargarVistaAdmin();
+            pnlSuperior.Visible = true; // mantener barra superior visible
             MostrarVista(vistaAdmin);
         }
 
