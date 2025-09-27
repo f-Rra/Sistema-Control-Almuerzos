@@ -1,4 +1,5 @@
 ﻿using Negocio;
+using Dominio;  
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -41,11 +42,39 @@ namespace app
         }
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            
             CargarLugares();
             CargarFecha();
             IniciarCronometro();
             ActualizarEstadisticas();
+            CargarUltimoServicio();
+        }
+
+        private void CargarUltimoServicio()
+        {
+            try
+            {
+                Servicio ultimo = negS.obtenerUltimoServicio();
+                if (ultimo != null)
+                {
+                    // Limpiar los textos previos y cargar nuevos datos
+                    lblUlugar.Text = "Lugar: " + ultimo.NombreLugar;
+                    lblUfecha.Text = "Fecha: " + ultimo.Fecha.ToString("dd/MM/yyyy");
+                    lblUproyeccion.Text = "Proyección: " + (ultimo.Proyeccion?.ToString() ?? "N/A");
+                    lblUcomensales.Text = "Comensales: " + ultimo.TotalComensales.ToString();
+                    lblUinvitados.Text = "Invitados: " + ultimo.TotalInvitados.ToString();
+                }
+                
+                // Ocultar todos los UserControls del panel principal
+                OcultarTodasLasVistas();
+                
+                // Hacer visible y traer al frente el GroupBox del último servicio
+                gbxUltimo.Visible = true;
+                gbxUltimo.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("No se pudo cargar el último servicio: " + ex.Message);
+            }
         }
 
         private void CargarVistaPrincipal()
@@ -109,6 +138,16 @@ namespace app
 
             vista.Visible = true;
             vista.BringToFront();
+
+            pnlPrincipal.ResumeLayout();
+        }
+
+        private void OcultarTodasLasVistas()
+        {
+            pnlPrincipal.SuspendLayout();
+
+            foreach (Control c in pnlPrincipal.Controls)
+                c.Visible = false;
 
             pnlPrincipal.ResumeLayout();
         }
@@ -215,7 +254,6 @@ namespace app
         {
             try
             {
-                // Validaciones previas: lugar y proyección obligatoria (número)
                 if (cbLugar.SelectedValue == null)
                 {
                     MessageBox.Show("Seleccioná un lugar");
@@ -237,11 +275,8 @@ namespace app
 
                 int idLugar = (int)cbLugar.SelectedValue;
 
-                // Crear servicio con proyección ingresada
                 int nuevoId = negS.crearServicio(idLugar, proy);
                 idServicioActual = nuevoId;
-
-                // Ahora sí: iniciar cronómetro y bloquear campos
                 duracionMinutos = 0;
                 crono.Reset();
                 crono.Start();
@@ -250,17 +285,15 @@ namespace app
 
                 cbLugar.Enabled = false;
                 mtxtProyeccion.ReadOnly = true;
-                mtxtInvitados.ReadOnly = true; // invitados pueden quedar vacíos, no son obligatorios
+                mtxtInvitados.ReadOnly = true; 
 
                 CargarVistaPrincipal();
                 MostrarVistaPrincipal();
                 vistaPrincipal.SetServicio(idServicioActual, idLugar);
                 ActualizarEstadisticas();
 
-                // Estado de servicio: ACTIVO
                 SetEstadoServicio(true);
 
-                // Navegación durante servicio activo
                 btnReportes.Enabled = false;
                 btnAdmin.Enabled = false;
                 btnRegistros.Enabled = true;
@@ -306,12 +339,12 @@ namespace app
                 crono.Reset();
                 lblCronometro.Text = "00:00:00";
                 ActualizarEstadisticas();
-                // Estado de servicio: INACTIVO
                 SetEstadoServicio(false);
                 btnReportes.Enabled = true;
                 btnAdmin.Enabled = true;
                 btnRegistros.Enabled = true;
                 btnHome.Enabled = true;
+                CargarUltimoServicio(); 
             }
         }
         public void ActualizarEstadisticas()
