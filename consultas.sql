@@ -189,6 +189,25 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE SP_ObtenerUltimoServicio
+AS
+BEGIN
+    SELECT TOP 1
+        s.IdServicio, 
+        s.IdLugar, 
+        l.Nombre as NombreLugar,
+        s.Fecha,
+        s.Proyeccion,
+        s.DuracionMinutos,
+        s.TotalComensales, 
+        s.TotalInvitados
+    FROM Servicios s
+    INNER JOIN Lugares l ON s.IdLugar = l.IdLugar
+    WHERE s.DuracionMinutos IS NOT NULL -- Solo servicios finalizados
+    ORDER BY s.Fecha DESC, s.IdServicio DESC;
+END
+GO
+
 CREATE OR ALTER PROCEDURE SP_AltaServicio
     @IdLugar INT,
     @Proyeccion INT = NULL

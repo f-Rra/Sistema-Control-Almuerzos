@@ -47,6 +47,42 @@ namespace Negocio
             }
         }
 
+        public Servicio obtenerUltimoServicio()
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("SP_ObtenerUltimoServicio");
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Servicio servicio = new Servicio();
+                    servicio.IdServicio = (int)datos.Lector["IdServicio"];
+                    servicio.IdLugar = (int)datos.Lector["IdLugar"];
+                    servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
+                    servicio.Fecha = (DateTime)datos.Lector["Fecha"];
+                    if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
+                    if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
+                    servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
+                    servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
+
+                    return servicio;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         // Crear nuevo servicio (opcionalmente con proyección)
         public int crearServicio(int idLugar, int? proyeccion = null)
         {
