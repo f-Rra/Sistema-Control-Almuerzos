@@ -25,6 +25,8 @@ namespace app.UserControls
         {
             InitializeComponent();
             this.formularioPrincipal = formPrincipal;
+            dgvFaltantes.MultiSelect = true; 
+            dgvFaltantes.SelectionChanged += dgvFaltantes_SelectionChanged;
         }
         
         private void ucRegistroManual_Load(object sender, EventArgs e)
@@ -70,6 +72,8 @@ namespace app.UserControls
                 dgvFaltantes.DataSource = negE.empleadosSinAlmorzar(servicioIdActual.Value);
             }
             OcultarColumnas();
+            dgvFaltantes.ClearSelection();
+            btnAgregar.Enabled = dgvFaltantes.SelectedRows.Count > 0;
         }
 
         private void OcultarColumnas()
@@ -113,6 +117,11 @@ namespace app.UserControls
             FiltrarEmpleados();
         }
 
+        private void dgvFaltantes_SelectionChanged(object sender, EventArgs e)
+        {
+            btnAgregar.Enabled = dgvFaltantes.SelectedRows.Count > 0;
+        }
+
         private void FiltrarEmpleados()
         {
             try
@@ -146,28 +155,43 @@ namespace app.UserControls
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (dgvFaltantes.CurrentRow != null && 
-                dgvFaltantes.CurrentRow.DataBoundItem != null)
+            if (!servicioIdActual.HasValue)
             {
-                Empleado seleccionado = (Empleado)dgvFaltantes.CurrentRow.DataBoundItem;
-                
-                try
+                MessageBox.Show("No hay un servicio activo.", "Servicio Inactivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (dgvFaltantes.SelectedRows == null || dgvFaltantes.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione al menos un empleado de la lista.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Cursor anterior = Cursor.Current;
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                foreach (DataGridViewRow row in dgvFaltantes.SelectedRows)
                 {
-                    negR.registrarEmpleado(seleccionado.IdEmpleado, seleccionado.IdEmpresa, servicioIdActual.Value, idLugarActual);
-                    CargarRegistros();
-                    formularioPrincipal?.RefrescarRegistros();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al registrar empleado: {ex.Message}", 
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (row?.DataBoundItem is Empleado emp)
+                    {
+                        try
+                        {
+                            negR.registrarEmpleado(emp.IdEmpleado, emp.IdEmpresa, servicioIdActual.Value, idLugarActual);
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
                 }
             }
-            else
+            finally
             {
-                MessageBox.Show("Por favor, seleccione un empleado de la lista.", 
-                    "Empleado No Seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Cursor.Current = anterior;
             }
+            CargarRegistros();
+            formularioPrincipal?.RefrescarRegistros();
+            formularioPrincipal?.ActualizarEstadisticas();
         }
     }
 }
