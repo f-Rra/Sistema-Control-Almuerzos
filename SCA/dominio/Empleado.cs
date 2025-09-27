@@ -33,8 +33,6 @@ namespace Dominio
         {
             get { return $"{Nombre} {Apellido}"; }
         }
-
-        // Método de negocio en la entidad
         public bool EstaActivo()
         {
             return Estado;

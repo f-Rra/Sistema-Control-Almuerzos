@@ -9,7 +9,6 @@ namespace Negocio
 {
     public class LugarNegocio
     {
-        // Obtener todos los lugares para el ComboBox
         public List<Lugar> listar()
         {
             List<Lugar> lista = new List<Lugar>();
@@ -42,7 +41,6 @@ namespace Negocio
             }
         }
 
-        // Obtener ID de lugar por nombre
         public int obtenerIdPorNombre(string nombreLugar)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -58,8 +56,7 @@ namespace Negocio
                 {
                     return (int)datos.Lector["IdLugar"];
                 }
-
-                return 0; // Si no encuentra el lugar
+                return 0; 
             }
             catch (Exception ex)
             {
@@ -69,12 +66,6 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
-        }
-
-        // Validar contraseña de administrador (hardcodeada)
-        public static bool validarPasswordAdmin(string password)
-        {
-            return password == "admin123"; // Contraseña hardcodeada
         }
     }
 }

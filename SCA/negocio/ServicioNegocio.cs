@@ -10,7 +10,6 @@ namespace Negocio
 {
     public class ServicioNegocio
     {
-        // Obtener servicio activo por lugar
         public Servicio obtenerServicioActivo(int idLugar)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -83,7 +82,6 @@ namespace Negocio
             }
         }
 
-        // Crear nuevo servicio (opcionalmente con proyección)
         public int crearServicio(int idLugar, int? proyeccion = null)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -104,7 +102,6 @@ namespace Negocio
             }
         }
 
-        // Finalizar servicio
         public void finalizarServicio(int idServicio, int totalComensales, int totalInvitados, int? duracionMinutos = null)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -127,7 +124,6 @@ namespace Negocio
             }
         }
 
-        // Listar servicios por fecha
         public List<Servicio> listarPorFecha(DateTime fechaDesde, DateTime fechaHasta)
         {
             List<Servicio> lista = new List<Servicio>();
@@ -165,8 +161,6 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
-        // Listar servicios por lugar
         public List<Servicio> listarPorLugar(int idLugar, DateTime fechaDesde, DateTime fechaHasta)
         {
             List<Servicio> lista = new List<Servicio>();

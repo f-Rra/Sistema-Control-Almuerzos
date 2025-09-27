@@ -20,7 +20,6 @@ namespace Dominio
         [DisplayName("Estado")]
         public bool Estado { get; set; }
 
-        // Método de negocio en la entidad
         public bool EstaActivo()
         {
             return Estado;

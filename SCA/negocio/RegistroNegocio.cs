@@ -9,7 +9,6 @@ namespace Negocio
 {
     public class RegistroNegocio
     {
-        // Registrar empleado en servicio
         public void registrarEmpleado(int idEmpleado, int idEmpresa, int idServicio, int idLugar)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -33,7 +32,6 @@ namespace Negocio
             }
         }
 
-        // Listar registros de un servicio
         public List<Registro> listarPorServicio(int idServicio)
         {
             List<Registro> lista = new List<Registro>();
@@ -70,7 +68,6 @@ namespace Negocio
             }
         }
 
-        // Verificar si empleado ya está registrado
         public bool empleadoYaRegistrado(int idEmpleado, int idServicio)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -99,7 +96,6 @@ namespace Negocio
             }
         }
 
-        // Contar registros por servicio
         public int contarRegistrosPorServicio(int idServicio)
         {
             AccesoDatos datos = new AccesoDatos();

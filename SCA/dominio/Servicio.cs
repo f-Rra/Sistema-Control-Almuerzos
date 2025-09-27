@@ -43,7 +43,6 @@ namespace Dominio
             get { return TotalComensales == 0 ? "Activo" : "Finalizado"; }
         }
 
-        // Métodos de negocio en la entidad
         public bool EstaActivo()
         {
             return TotalComensales == 0;

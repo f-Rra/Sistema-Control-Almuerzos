@@ -36,7 +36,6 @@ namespace app.UserControls
 
         public int CountRegistros()
         {
-            // En lugar de contar filas del DataGridView, consultar directamente la base de datos
             if (servicioIdActual.HasValue)
             {
                 return negR.contarRegistrosPorServicio(servicioIdActual.Value);
