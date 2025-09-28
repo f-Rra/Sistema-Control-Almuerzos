@@ -844,7 +844,6 @@ namespace app
         private System.Windows.Forms.Label btnReportes;
         private System.Windows.Forms.Label btnRegistros;
         private System.Windows.Forms.Label btnInfo;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label btnAdmin;
         private System.Windows.Forms.Panel pHome;
         private System.Windows.Forms.Panel pRegistros;
@@ -853,7 +852,6 @@ namespace app
         private ReaLTaiizor.Controls.ParrotControlEllipse cRegistros;
         private ReaLTaiizor.Controls.ParrotControlEllipse cReportes;
         private ReaLTaiizor.Controls.ParrotControlEllipse cAdmin;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label btnSalir;
         private ReaLTaiizor.Controls.ThunderGroupBox gbxEstado;
         private System.Windows.Forms.Label pbxEstado;
