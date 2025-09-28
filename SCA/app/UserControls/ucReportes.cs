@@ -9,11 +9,102 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Negocio;
 using Dominio;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace app.UserControls
 {
     public partial class ucReportes : UserControl
     {
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvReporte.DataSource == null || dgvReporte.Rows.Count == 0)
+                {
+                    MessageBox.Show("No hay datos para exportar. Genere un reporte primero.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                using (SaveFileDialog saveDialog = new SaveFileDialog())
+                {
+                    saveDialog.Filter = "Archivos PDF|*.pdf";
+                    saveDialog.Title = "Guardar Reporte como PDF";
+                    saveDialog.FileName = $"Reporte_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+
+                    if (saveDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        ExportarPDF(saveDialog.FileName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al exportar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExportarPDF(string rutaArchivo)
+        {
+            try
+            {
+                var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 20, 20, 20, 20);
+                iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new System.IO.FileStream(rutaArchivo, System.IO.FileMode.Create));
+                doc.Open();
+
+                // Título
+                var fontTitulo = iTextSharp.text.FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD);
+                var fontNormal = iTextSharp.text.FontFactory.GetFont("Arial", 10, iTextSharp.text.Font.NORMAL);
+                doc.Add(new iTextSharp.text.Paragraph("SISTEMA DE CONTROL DE ALMUERZOS", fontTitulo));
+                doc.Add(new iTextSharp.text.Paragraph("Reporte de servicios", fontNormal));
+                doc.Add(new iTextSharp.text.Paragraph($"Generado: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal));
+                doc.Add(new iTextSharp.text.Paragraph(" "));
+
+                // Tabla
+                int colCount = dgvReporte.Columns.GetColumnCount(DataGridViewElementStates.Visible);
+                var table = new iTextSharp.text.pdf.PdfPTable(colCount);
+                table.WidthPercentage = 100;
+
+                // Encabezados
+                foreach (DataGridViewColumn col in dgvReporte.Columns)
+                {
+                    if (col.Visible)
+                    {
+                        var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(col.HeaderText, fontNormal));
+                        cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
+                        table.AddCell(cell);
+                    }
+                }
+
+                // Filas
+                foreach (DataGridViewRow row in dgvReporte.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        foreach (DataGridViewColumn col in dgvReporte.Columns)
+                        {
+                            if (col.Visible)
+                            {
+                                var value = row.Cells[col.Index].Value?.ToString() ?? "";
+                                table.AddCell(new iTextSharp.text.Phrase(value, fontNormal));
+                            }
+                        }
+                    }
+                }
+
+                doc.Add(table);
+                doc.Close();
+                writer.Close();
+
+                MessageBox.Show($"Reporte guardado como PDF:\n{rutaArchivo}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Diagnostics.Process.Start(rutaArchivo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public ucReportes()
         {
             InitializeComponent();
@@ -23,11 +114,9 @@ namespace app.UserControls
         {
             try
             {
-                // Rango por defecto: últimos 7 días
                 dtpHasta.Value = DateTime.Today;
                 dtpDesde.Value = DateTime.Today.AddDays(-7);
 
-                // Lugares con primera opción "Todos"
                 var negL = new LugarNegocio();
                 var lugares = negL.listar() ?? new List<Lugar>();
                 lugares.Insert(0, new Lugar { IdLugar = 0, Nombre = "Todos" });
@@ -36,7 +125,6 @@ namespace app.UserControls
                 cbLugar.ValueMember = "IdLugar";
                 cbLugar.SelectedIndex = 0;
 
-                // Tipos de reporte (4 opciones finales)
                 cbTipoReporte.Items.Clear();
                 cbTipoReporte.Items.Add("Lista de servicios");
                 cbTipoReporte.Items.Add("Asistencias por empresas");
@@ -86,18 +174,14 @@ namespace app.UserControls
                         dgvReporte.DataSource = rep.DistribucionPorDiaSemana(desde, hasta, idLugar);
                         break;
                     default:
-                        // Nada seleccionado
                         break;
                 }
 
-                // Formato mínimo de columnas y ocultar/renombrar columnas según reporte
                 if (dgvReporte.DataSource != null)
                 {
-                    // Formato general para todos los reportes
                     if (dgvReporte.Columns.Contains("Fecha"))
                         dgvReporte.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
-                    // Encabezados para todos los reportes
                     if (dgvReporte.Columns.Contains("NombreLugar")) dgvReporte.Columns["NombreLugar"].HeaderText = "Lugar";
                     if (dgvReporte.Columns.Contains("Proyeccion")) dgvReporte.Columns["Proyeccion"].HeaderText = "Proyección";
                     if (dgvReporte.Columns.Contains("DuracionMinutos")) dgvReporte.Columns["DuracionMinutos"].HeaderText = "Duración (min)";
@@ -113,13 +197,11 @@ namespace app.UserControls
                     if (dgvReporte.Columns.Contains("Diferencia")) dgvReporte.Columns["Diferencia"].HeaderText = "Diferencia";
                     if (dgvReporte.Columns.Contains("Atendidos")) dgvReporte.Columns["Atendidos"].HeaderText = "Atendidos";
 
-                    // Ocultar columnas innecesarias
                     if (dgvReporte.Columns.Contains("IdServicio")) dgvReporte.Columns["IdServicio"].Visible = false;
                     if (dgvReporte.Columns.Contains("IdLugar")) dgvReporte.Columns["IdLugar"].Visible = false;
                     if (dgvReporte.Columns.Contains("Estado")) dgvReporte.Columns["Estado"].Visible = false;
                     if (dgvReporte.Columns.Contains("Orden")) dgvReporte.Columns["Orden"].Visible = false;
 
-                    // Orden sugerido de columnas para Lista de servicios
                     if (tipo == "Lista de servicios")
                     {
                         if (dgvReporte.Columns.Contains("NombreLugar")) dgvReporte.Columns["NombreLugar"].Visible = false;

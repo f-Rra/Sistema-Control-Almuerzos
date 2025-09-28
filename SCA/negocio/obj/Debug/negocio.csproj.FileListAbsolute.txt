@@ -20,3 +20,7 @@ C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\neg
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\negocio\obj\Debug\negocio.csproj.Up2Date
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\negocio\obj\Debug\negocio.dll
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\negocio\obj\Debug\negocio.pdb
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\negocio\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\negocio\bin\Debug\itextsharp.dll
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\negocio\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\negocio\bin\Debug\itextsharp.xml

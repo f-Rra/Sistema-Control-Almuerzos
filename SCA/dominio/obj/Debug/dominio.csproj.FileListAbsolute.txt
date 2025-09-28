@@ -22,3 +22,7 @@ C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dom
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.csproj.Up2Date
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.dll
 C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\obj\Debug\dominio.pdb
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\itextsharp.dll
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\710\Desktop\Sistema-Control-Almuerzos\Sistema-Control-Almuerzos\SCA\dominio\bin\Debug\itextsharp.xml
