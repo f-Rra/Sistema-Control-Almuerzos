@@ -58,6 +58,10 @@ namespace app.UserControls
                 doc.Add(new iTextSharp.text.Paragraph("SISTEMA DE CONTROL DE ALMUERZOS", fontTitulo));
                 doc.Add(new iTextSharp.text.Paragraph("Reporte de servicios", fontNormal));
                 doc.Add(new iTextSharp.text.Paragraph($"Generado: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal));
+
+                // Información de filtros
+                string infoFiltros = $"Fechas: {dtpDesde.Value:dd/MM/yyyy} - {dtpHasta.Value:dd/MM/yyyy}    Lugar: {cbLugar.Text}    Tipo de reporte: {cbTipoReporte.Text}";
+                doc.Add(new iTextSharp.text.Paragraph(infoFiltros, fontNormal));
                 doc.Add(new iTextSharp.text.Paragraph(" "));
 
                 // Tabla
