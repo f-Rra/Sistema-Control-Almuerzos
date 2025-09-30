@@ -181,7 +181,12 @@ SistemaControlAlmuerzos.sln
 5. **✅ Estados dinámicos**: ComboBox habilitado/deshabilitado según servicio
 
 ### **🔄 Fase 3: User Controls Integrados - EN PROGRESO**
-1. **❌ ucReportes** User Control para reportes (estructura creada, funcionalidad pendiente)
+1. **✅ ucReportes** User Control para reportes (implementado y validado)
+    - Estado actual: estructura implementada y verificada. Se aplicaron mejoras de UI (panelTop aumentado, etiquetas sobre controles, DGV redimensionado), ComboBox `Lugar` carga `Todos` por defecto, cabeceras renombradas y columnas internas ocultas.
+    - Exportación: exportar a PDF implementado en `ucReportes` (método `ExportarPDF` usando iTextSharp). Dependencia instalada y verificada; Designer y compilación OK.
+    - Verificación: exportación a PDF probada y valida — la salida incluye título, timestamp y la línea de filtros justo debajo de "Generado:".
+    - Fecha verificación: 29/09/2025.
+    - Pendientes: ajustes menores de UX/columnas según feedback, pero funcionalidad principal lista.
 2. **✅ ucRegistroManual** User Control para registro manual (filtros automáticos y registro)
 3. **❌ ucAdministrador** User Control para administración
 4. **✅ ucVistaPrincipal** User Control para vista principal
@@ -196,7 +201,7 @@ SistemaControlAlmuerzos.sln
 
 ### **🔄 Fase 5: Funcionalidades Específicas - PARCIALMENTE COMPLETADA**
 1. **✅ EmpleadoNegocio** para registro manual (búsqueda por credencial, filtros y listados)
-2. **🔄 ReporteNegocio**: consultas disponibles; exportación pendiente
+2. **🔄 ReporteNegocio**: consultas disponibles; la capa de presentación incluye exportación a PDF (implementada y verificada en `ucReportes`). Se recomienda añadir pruebas unitarias/integración para la generación de datos y, si se requiere, exponer una generación en negocio para exportaciones batch o en otros formatos (CSV/Excel).
 3. **❌ Integración RFID** simulada (futuro)
 4. **✅ Validaciones** y manejo de errores
 
@@ -216,32 +221,27 @@ SistemaControlAlmuerzos.sln
 
 ## Prioridades
 
-1) Reportes y visualización
-    - Implementar `ucReportes` (listar servicios, filtros por fecha/lugar, KPIs)
-    - Agregar exportación (PDF/CSV) en una iteración siguiente
+1) Reportes y visualización (alta prioridad)
+    - Estado: ✅ Implementado y validado. `ucReportes` y la exportación a PDF funcionan correctamente en el entorno de desarrollo (iTextSharp instalado, Designer y build OK).
+    - Acciones inmediatas: recoger feedback de UX y ajustar anchos/orden de columnas si es necesario; planificar tests automáticos para la generación de datos del reporte.
 
-2) ucRegistroManual (mejoras menores)
-    - Ajustes de UX (resaltado selección, atajos de teclado)
-    - Validaciones adicionales en registro concurrente
+2) ucRegistroManual (media-alta)
+    - Estado: funcional y con filtros automáticos. Quedan mejoras UX menores (atajos, resaltado) y validaciones de concurrencia.
 
-3) Último servicio (inicio y fin)
-    - Mostrar detalle del último servicio en `gbxUltimo` al iniciar y al finalizar servicio
-    - Agregar desglose por empresa (opcional) bajo `gbxUltimo`
+3) Último servicio (media)
+    - Estado: implementado (resumen en `gbxUltimo` al iniciar y al finalizar). Evaluar desglose por empresa si se requiere.
 
-4) Estadísticas en tiempo real en la UI
-    - Mantener llamada a `ActualizarEstadisticas()` desde `ucVistaPrincipal` y `ucRegistroManual`
-    - Considerar refresco periódico si se agregan fuentes externas
+4) Estadísticas en tiempo real en la UI (media)
+    - Mantener `ActualizarEstadisticas()` desde `ucVistaPrincipal` y `ucRegistroManual`. Evaluar refresco periódico si se agregan fuentes externas.
 
-5) Configuración de conexión
-    - Mover cadena de conexión de `AccesoDatos.cs` a `App.config` para facilitar despliegues
+5) Configuración de conexión (baja-media)
+    - Mover cadena de conexión de `AccesoDatos.cs` a `App.config` para facilitar despliegues.
 
 6) Módulo Admin (iteración 1)
-    - Pantalla básica para listar empresas y empleados (solo lectura)
-    - Definir endpoints/métodos de negocio para CRUD en iteración 2
+    - Estado: pendiente. Priorizar pantalla de lectura para empresas y empleados y luego CRUD.
 
 7) RFID (futuro)
-    - Definir interfaz del lector (abstracción) y simulación para pruebas
-    - Integrar lectura con el flujo de `ucVistaPrincipal`
+    - No iniciado. Diseñar interfaz y simulador antes de integrar.
 
 ---
 
@@ -268,6 +268,46 @@ SistemaControlAlmuerzos.sln
   - Uso del SP unificado de filtros, columnas ordenadas y ocultamiento de internas.
 - `ucVistaPrincipal`:
   - Registro por credencial con validaciones y actualización de estadísticas en `frmPrincipal`.
+
+### ✅ Cambios recientes (resumen rápido)
+
+- Se movió el ORDER BY para la lista de servicios al procedimiento almacenado correspondiente (ahora ordena Fecha DESC, IdServicio DESC) para que los reportes muestren del último al primero.
+- Se agregó una función de exportación a PDF desde `ucReportes` (archivo generado con iTextSharp) que incluye los filtros aplicados en una línea bajo el campo "Generado:".
+
+### Reportes / ucReportes (avance reciente)
+
+- **Estado:** 🔄 En progreso — la estructura del `ucReportes` está implementada y se han aplicado varias mejoras de UI y funcionalidad; queda verificar y compilar tras añadir la dependencia PDF.
+- **Cambios principales realizados:**
+    - Ajustes de layout: `panelTop` se amplió verticalmente para igualar el alto del panel superior; las etiquetas de filtros (labels) se colocaron sobre los controles y alineadas a la izquierda para coherencia visual con los otros UCs.
+    - DataGridView (`dgvReporte`) redimensionado para aproximarse al tamaño de `dgvRegistros` y mejorar legibilidad.
+    - ComboBox de `Lugar` carga la opción inicial como `Todos` (en lugar de un ítem en blanco) y se usa como selección por defecto al generar el reporte.
+    - Columnas: se renombraron cabeceras que contenían palabras pegadas; algunas columnas internas/código (`IdServicio`, `IdLugar`, `Estado`) se ocultan en la lista principal por defecto.
+    - SQL: el ordenamiento de la lista de servicios se movió al procedimiento almacenado (ORDER BY Fecha DESC, IdServicio DESC) para devolver del último al primero.
+    - Exportación: se implementó exportación a PDF (`ExportarPDF`) usando iTextSharp; el PDF incluye título, fecha/hora de generación y, justo debajo de "Generado:", una línea con los filtros aplicados (Fechas, Lugar, Tipo de reporte).
+
+- **Notas técnicas y dependencias:**
+    - La implementación del export a PDF utiliza la librería `iTextSharp` y los namespaces `iTextSharp.text` y `iTextSharp.text.pdf` en `ucReportes.cs`.
+    - Es necesario instalar el paquete NuGet `iTextSharp` en el proyecto `app` antes de compilar.
+
+- **Pasos de verificación (recomendado):**
+    1. Abrir la solución en Visual Studio.
+    2. Instalar iTextSharp en el proyecto `app` (dos opciones):
+
+```powershell
+# Opción A: Package Manager Console (Visual Studio)
+Install-Package iTextSharp
+
+# Opción B: dotnet CLI (desde la raíz del repo en PowerShell)
+dotnet add .\SCA\app\app.csproj package iTextSharp
+```
+
+    3. Abrir `ucReportes` en el Designer de Visual Studio y confirmar que no hay errores de parsing (si Visual Studio marca líneas en el Designer, inspeccionar las líneas indicadas y eliminar referencias a controles obsoletos o handlers huérfanos).
+    4. Compilar la solución (Build -> Rebuild Solution) y ejecutar la UC: generar un reporte y usar el botón "Exportar" para crear un PDF. Verificar que el PDF contiene la tabla con las columnas visibles y la línea de filtros bajo "Generado:".
+
+- **Siguientes pasos recomendados:**
+    - Validar en máquina local que el Designer carga correctamente; si hay errores, revisar `ucReportes.Designer.cs` por declaraciones duplicadas o asignaciones a handlers inexistentes (esto se corrigió parcialmente en la última iteración pero conviene confirmar).
+    - Si se quiere exportar la grilla completa como imagen (no solo el área visible), considerar implementar una rutina que dibuje fila por fila en un lienzo o que temporalmente expanda la grilla para captura.
+    - (Opcional) Añadir pruebas unitarias básicas para la generación de datos del reporte en `ReporteNegocio` y una prueba de integración mínima que verifique el número de columnas/filas exportadas.
 
 ### UX/Comportamiento
 - Al finalizar servicio se actualizan estadísticas y se muestra el panel `gbxUltimo` con el resumen del servicio.

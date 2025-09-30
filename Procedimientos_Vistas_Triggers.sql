@@ -1,9 +1,4 @@
-# Consultas SQL - Sistema de Control de Almuerzos
 
-## 🏢 Gestión de Lugares (Reemplaza Autenticación de Usuarios)
-
-### **1. Listar Lugares para ComboBox**
-```sql
 CREATE OR ALTER PROCEDURE SP_ListarLugares
 AS
 BEGIN
@@ -14,10 +9,8 @@ BEGIN
     WHERE Estado = 1
     ORDER BY Nombre;
 END
-```
+GO
 
-### **2. Obtener Lugar por Nombre**
-```sql
 CREATE OR ALTER PROCEDURE SP_ObtenerLugarPorNombre
     @Nombre NVARCHAR(50)
 AS
@@ -25,17 +18,12 @@ BEGIN
     SELECT 
         IdLugar,
         Nombre,
-        Descripcion,
         Estado
     FROM Lugares 
     WHERE Nombre = @Nombre AND Estado = 1;
 END
-```
+GO
 
-## 🏢 Gestión de Empleados
-
-### **3. Listar Todos los Empleados Activos**
-```sql
 CREATE OR ALTER PROCEDURE SP_ListarEmpleados
 AS
 BEGIN
@@ -51,10 +39,8 @@ BEGIN
     WHERE e.Estado = 1
     ORDER BY e.Nombre, e.Apellido;
 END
-```
+GO
 
-### **4. Buscar Empleado por Credencial RFID**
-```sql
 CREATE OR ALTER PROCEDURE SP_BuscarEmpleadoPorCredencial
     @Credencial NVARCHAR(50)
 AS
@@ -70,10 +56,8 @@ BEGIN
     INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
     WHERE e.IdCredencial = @Credencial AND e.Estado = 1;
 END
-```
+GO
 
-### **5. Buscar Empleados por Nombre**
-```sql
 CREATE OR ALTER PROCEDURE SP_BuscarEmpleadosPorNombre
     @Nombre NVARCHAR(100)
 AS
@@ -91,10 +75,8 @@ BEGIN
       AND e.Estado = 1
     ORDER BY e.Nombre, e.Apellido;
 END
-```
+GO
 
-### **6. Empleados por Empresa**
-```sql
 CREATE OR ALTER PROCEDURE SP_ListarEmpleadosPorEmpresa
     @IdEmpresa INT
 AS
@@ -108,10 +90,8 @@ BEGIN
     WHERE e.IdEmpresa = @IdEmpresa AND e.Estado = 1
     ORDER BY e.Nombre, e.Apellido;
 END
-```
+GO
 
-### **7. Empleados que NO han almorzado en un servicio**
-```sql
 CREATE OR ALTER PROCEDURE SP_EmpleadosSinAlmorzar
     @IdServicio INT
 AS
@@ -121,24 +101,63 @@ BEGIN
         e.Nombre, 
         e.Apellido, 
         e.IdCredencial,
-        emp.Nombre as Empresa, 
-        emp.IdEmpresa
-    FROM Empleados e
-    INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
-    WHERE e.Estado = 1
-      AND e.IdEmpleado NOT IN (
+        e.NombreEmpresa as Empresa, 
+        e.IdEmpresa,
+        e.NombreCompleto
+    FROM vw_EmpleadosSinAlmorzarBase e
+    WHERE e.IdEmpleado NOT IN (
         SELECT IdEmpleado 
         FROM Registros 
         WHERE IdServicio = @IdServicio
-      )
+    )
     ORDER BY e.Nombre, e.Apellido;
 END
-```
+GO
 
-## 🍽️ Gestión de Servicios
+CREATE OR ALTER PROCEDURE SP_FiltrarEmpleadosSinAlmorzar
+    @IdServicio INT,
+    @IdEmpresa INT = NULL,        
+    @Nombre NVARCHAR(100) = NULL  
+AS
+BEGIN
+    SELECT 
+        e.IdEmpleado, 
+        e.Nombre, 
+        e.Apellido, 
+        e.IdCredencial,
+        e.NombreEmpresa as Empresa, 
+        e.IdEmpresa,
+        e.NombreCompleto
+    FROM vw_EmpleadosSinAlmorzarBase e
+    WHERE e.IdEmpleado NOT IN (
+        SELECT IdEmpleado 
+        FROM Registros 
+        WHERE IdServicio = @IdServicio
+    )
+    AND (@IdEmpresa IS NULL OR e.IdEmpresa = @IdEmpresa)
+    AND (@Nombre IS NULL OR e.NombreCompleto LIKE '%' + @Nombre + '%')
+    ORDER BY e.Nombre, e.Apellido;
+END
+GO
 
-### **8. Obtener Servicio Activo por Lugar**
-```sql
+CREATE OR ALTER PROCEDURE SP_EmpleadosSinAlmorzarPorEmpresa
+    @IdServicio INT,
+    @IdEmpresa INT
+AS
+BEGIN
+    EXEC SP_FiltrarEmpleadosSinAlmorzar @IdServicio, @IdEmpresa, NULL;
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_EmpleadosSinAlmorzarPorNombre
+    @IdServicio INT,
+    @Nombre NVARCHAR(100)
+AS
+BEGIN
+    EXEC SP_FiltrarEmpleadosSinAlmorzar @IdServicio, NULL, @Nombre;
+END
+GO
+
 CREATE OR ALTER PROCEDURE SP_ObtenerServicioActivo
     @IdLugar INT
 AS
@@ -154,12 +173,29 @@ BEGIN
     FROM Servicios
     WHERE IdLugar = @IdLugar 
       AND Fecha = CAST(GETDATE() AS DATE)
-      AND DuracionMinutos IS NULL; -- Activo si aún no se estableció la duración final
+      AND DuracionMinutos IS NULL; 
 END
-```
+GO
 
-### **9. Alta de Servicio**
-```sql
+CREATE OR ALTER PROCEDURE SP_ObtenerUltimoServicio
+AS
+BEGIN
+    SELECT TOP 1
+        s.IdServicio, 
+        s.IdLugar, 
+        l.Nombre as NombreLugar,
+        s.Fecha,
+        s.Proyeccion,
+        s.DuracionMinutos,
+        s.TotalComensales, 
+        s.TotalInvitados
+    FROM Servicios s
+    INNER JOIN Lugares l ON s.IdLugar = l.IdLugar
+    WHERE s.DuracionMinutos IS NOT NULL 
+    ORDER BY s.Fecha DESC, s.IdServicio DESC;
+END
+GO
+
 CREATE OR ALTER PROCEDURE SP_AltaServicio
     @IdLugar INT,
     @Proyeccion INT = NULL
@@ -168,12 +204,10 @@ BEGIN
     INSERT INTO Servicios (IdLugar, Fecha, Proyeccion, DuracionMinutos, TotalComensales, TotalInvitados)
     VALUES (@IdLugar, CAST(GETDATE() AS DATE), @Proyeccion, NULL, 0, 0);
     
-    SELECT SCOPE_IDENTITY() as IdServicio;
+    SELECT CAST(SCOPE_IDENTITY() AS INT) as IdServicio;
 END
-```
+GO
 
-### **10. Finalizar Servicio**
-```sql
 CREATE OR ALTER PROCEDURE SP_FinalizarServicio
     @IdServicio INT,
     @TotalComensales INT,
@@ -187,10 +221,8 @@ BEGIN
         DuracionMinutos = @DuracionMinutos
     WHERE IdServicio = @IdServicio;
 END
-```
+GO
 
-### **11. Listar Servicios por Fecha**
-```sql
 CREATE OR ALTER PROCEDURE SP_ListarServiciosPorFecha
     @FechaDesde DATE,
     @FechaHasta DATE
@@ -210,10 +242,8 @@ BEGIN
     WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta
     ORDER BY s.Fecha DESC, l.Nombre;
 END
-```
+GO
 
-### **12. Servicios por Lugar**
-```sql
 CREATE OR ALTER PROCEDURE SP_ListarServiciosPorLugar
     @IdLugar INT,
     @FechaDesde DATE,
@@ -233,12 +263,8 @@ BEGIN
       AND s.Fecha BETWEEN @FechaDesde AND @FechaHasta
     ORDER BY s.Fecha DESC;
 END
-```
+GO
 
-## 📝 Gestión de Registros
-
-### **13. Registrar Empleado en Servicio**
-```sql
 CREATE OR ALTER PROCEDURE SP_RegistrarEmpleado
     @IdEmpleado INT,
     @IdEmpresa INT,
@@ -246,14 +272,19 @@ CREATE OR ALTER PROCEDURE SP_RegistrarEmpleado
     @IdLugar INT
 AS
 BEGIN
-    INSERT INTO Registros (IdEmpleado, IdEmpresa, IdServicio, IdLugar, Fecha, Hora)
-    VALUES (@IdEmpleado, @IdEmpresa, @IdServicio, @IdLugar, 
-            CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME));
+    IF NOT EXISTS (SELECT 1 FROM Registros WHERE IdEmpleado = @IdEmpleado AND IdServicio = @IdServicio)
+    BEGIN
+        INSERT INTO Registros (IdEmpleado, IdEmpresa, IdServicio, IdLugar, Fecha, Hora)
+        VALUES (@IdEmpleado, @IdEmpresa, @IdServicio, @IdLugar, 
+                CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME));
+    END
+    ELSE
+    BEGIN
+        RETURN;
+    END
 END
-```
+GO
 
-### **14. Listar Registros de un Servicio**
-```sql
 CREATE OR ALTER PROCEDURE SP_ListarRegistrosPorServicio
     @IdServicio INT
 AS
@@ -263,17 +294,17 @@ BEGIN
         r.Hora, 
         r.Fecha,
         e.Nombre + ' ' + e.Apellido as Empleado,
-        emp.Nombre as Empresa
+        emp.Nombre as Empresa,
+        l.Nombre as Lugar
     FROM Registros r
     INNER JOIN Empleados e ON r.IdEmpleado = e.IdEmpleado
     INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
+    INNER JOIN Lugares l ON r.IdLugar = l.IdLugar
     WHERE r.IdServicio = @IdServicio
     ORDER BY r.Hora;
 END
-```
+GO
 
-### **15. Verificar si Empleado ya está Registrado**
-```sql
 CREATE OR ALTER PROCEDURE SP_VerificarEmpleadoRegistrado
     @IdEmpleado INT,
     @IdServicio INT
@@ -283,10 +314,8 @@ BEGIN
     FROM Registros
     WHERE IdEmpleado = @IdEmpleado AND IdServicio = @IdServicio;
 END
-```
+GO
 
-### **16. Contar Registros por Servicio**
-```sql
 CREATE OR ALTER PROCEDURE SP_ContarRegistrosPorServicio
     @IdServicio INT
 AS
@@ -295,114 +324,107 @@ BEGIN
     FROM Registros
     WHERE IdServicio = @IdServicio;
 END
-```
+GO
 
-## 📊 Reportes y Estadísticas
-
-### **17. Estadísticas del Servicio Activo**
-```sql
-CREATE OR ALTER PROCEDURE SP_EstadisticasServicioActivo
-    @IdServicio INT
+CREATE OR ALTER PROCEDURE SP_ListarServiciosRango
+    @FechaDesde DATE,
+    @FechaHasta DATE,
+    @IdLugar INT = NULL
 AS
 BEGIN
     SELECT 
-        COUNT(*) as TotalEmpleados,
+        s.IdServicio, 
+        s.Fecha, 
+        s.Proyeccion,
+        s.DuracionMinutos,
+        s.TotalComensales, 
         s.TotalInvitados,
-        (COUNT(*) + s.TotalInvitados) as TotalGeneral
-    FROM Registros r
-    INNER JOIN Servicios s ON r.IdServicio = s.IdServicio
-    WHERE r.IdServicio = @IdServicio;
-END
-```
-
-### **18. Registros por Empresa en un Servicio**
-```sql
-CREATE OR ALTER PROCEDURE SP_RegistrosPorEmpresa
-    @IdServicio INT
-AS
-BEGIN
-    SELECT 
-        emp.Nombre as Empresa, 
-        COUNT(*) as Cantidad
-    FROM Registros r
-    INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
-    WHERE r.IdServicio = @IdServicio
-    GROUP BY emp.Nombre, emp.IdEmpresa
-    ORDER BY Cantidad DESC;
-END
-```
-
-### **19. Picos de Concurrencia por Hora**
-```sql
-CREATE OR ALTER PROCEDURE SP_PicosConcurrencia
-    @IdServicio INT
-AS
-BEGIN
-    SELECT 
-        DATEPART(HOUR, r.Hora) as Hora,
-        COUNT(*) as Cantidad
-    FROM Registros r
-    WHERE r.IdServicio = @IdServicio
-    GROUP BY DATEPART(HOUR, r.Hora)
-    ORDER BY Hora;
-END
-```
-
-### **20. Resumen Diario por Lugar**
-```sql
-CREATE OR ALTER PROCEDURE SP_ResumenDiarioPorLugar
-    @Fecha DATE
-AS
-BEGIN
-    SELECT 
-        s.Fecha,
         l.Nombre as Lugar,
-        s.TotalComensales,
-        s.TotalInvitados,
         (s.TotalComensales + s.TotalInvitados) as Total
     FROM Servicios s
     INNER JOIN Lugares l ON s.IdLugar = l.IdLugar
-    WHERE s.Fecha = @Fecha
-    ORDER BY l.Nombre;
+    WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta
+      AND (@IdLugar IS NULL OR s.IdLugar = @IdLugar)
+    ORDER BY s.Fecha DESC, s.IdServicio DESC;
 END
-```
+GO
 
-### **21. Top 5 Empresas con Más Asistencia**
-```sql
-CREATE OR ALTER PROCEDURE SP_TopEmpresasAsistencia
+CREATE OR ALTER PROCEDURE SP_AsistenciasPorEmpresas
     @FechaDesde DATE,
-    @FechaHasta DATE
+    @FechaHasta DATE,
+    @IdLugar INT = NULL
 AS
 BEGIN
-    SELECT TOP 5
+    SELECT 
         emp.Nombre as Empresa,
         COUNT(*) as TotalAsistencias
     FROM Registros r
     INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
     WHERE r.Fecha BETWEEN @FechaDesde AND @FechaHasta
+      AND (@IdLugar IS NULL OR r.IdLugar = @IdLugar)
     GROUP BY emp.Nombre, emp.IdEmpresa
     ORDER BY TotalAsistencias DESC;
 END
-```
+GO
 
-### **22. Promedio Diario de Asistencia**
-```sql
-CREATE OR ALTER PROCEDURE SP_PromedioDiarioAsistencia
+CREATE OR ALTER PROCEDURE SP_ReporteCoberturaVsProyeccion
     @FechaDesde DATE,
-    @FechaHasta DATE
+    @FechaHasta DATE,
+    @IdLugar INT = NULL
 AS
 BEGIN
     SELECT 
-        AVG(CAST(s.TotalComensales + s.TotalInvitados AS FLOAT)) as PromedioDiario
+        s.Fecha,
+        l.Nombre as Lugar,
+        ISNULL(s.Proyeccion, 0) as Proyeccion,
+        (s.TotalComensales + s.TotalInvitados) as Atendidos,
+        CASE WHEN ISNULL(s.Proyeccion, 0) > 0 
+             THEN CAST((s.TotalComensales + s.TotalInvitados) * 100.0 / s.Proyeccion AS DECIMAL(10,2))
+             ELSE NULL END as CoberturaPorcentaje,
+        (s.TotalComensales + s.TotalInvitados) - ISNULL(s.Proyeccion, 0) as Diferencia
     FROM Servicios s
-    WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta;
+    INNER JOIN Lugares l ON s.IdLugar = l.IdLugar
+    WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta
+      AND (@IdLugar IS NULL OR s.IdLugar = @IdLugar)
+    ORDER BY s.Fecha DESC, l.Nombre;
 END
-```
+GO
 
-## 🏢 Gestión de Empresas
+CREATE OR ALTER PROCEDURE SP_DistribucionPorDiaSemana
+    @FechaDesde DATE,
+    @FechaHasta DATE,
+    @IdLugar INT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET DATEFIRST 1;
+    WITH Datos AS (
+        SELECT 
+            DATEPART(WEEKDAY, s.Fecha) as DiaNumero,
+            (s.TotalComensales + s.TotalInvitados) as Total
+        FROM Servicios s
+        WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta
+          AND (@IdLugar IS NULL OR s.IdLugar = @IdLugar)
+    )
+    SELECT 
+        DiaNumero as Orden,
+        CASE DiaNumero
+            WHEN 1 THEN 'Lunes'
+            WHEN 2 THEN 'Martes'
+            WHEN 3 THEN 'Miércoles'
+            WHEN 4 THEN 'Jueves'
+            WHEN 5 THEN 'Viernes'
+            WHEN 6 THEN 'Sábado'
+            WHEN 7 THEN 'Domingo'
+            ELSE CAST(DiaNumero AS VARCHAR(10))
+        END as Dia,
+        SUM(Total) as Total
+    FROM Datos
+    GROUP BY DiaNumero
+    ORDER BY Orden;
+END
+GO
 
-### **23. Listar Todas las Empresas**
-```sql
 CREATE OR ALTER PROCEDURE SP_ListarEmpresas
 AS
 BEGIN
@@ -411,10 +433,8 @@ BEGIN
     WHERE Estado = 1
     ORDER BY Nombre;
 END
-```
+GO
 
-### **24. Empleados por Empresa**
-```sql
 CREATE OR ALTER PROCEDURE SP_EmpleadosPorEmpresa
     @IdEmpresa INT
 AS
@@ -428,116 +448,41 @@ BEGIN
     WHERE e.IdEmpresa = @IdEmpresa AND e.Estado = 1
     ORDER BY e.Nombre, e.Apellido;
 END
-```
+GO
 
-## 🔧 Consultas de Mantenimiento
-
-### **25. Verificar Integridad de Datos**
-```sql
 CREATE OR ALTER PROCEDURE SP_VerificarIntegridadDatos
 AS
 BEGIN
-    -- Empleados sin empresa
     SELECT IdEmpleado, Nombre, Apellido
     FROM Empleados
     WHERE IdEmpresa IS NULL OR IdEmpresa NOT IN (SELECT IdEmpresa FROM Empresas);
-    
-    -- Registros sin empleado válido
     SELECT r.IdRegistro, r.IdEmpleado
     FROM Registros r
     LEFT JOIN Empleados e ON r.IdEmpleado = e.IdEmpleado
     WHERE e.IdEmpleado IS NULL;
 END
-```
+GO
 
-### **26. Limpiar Datos Antiguos**
-```sql
 CREATE OR ALTER PROCEDURE SP_LimpiarDatosAntiguos
     @Anios INT = 1
 AS
 BEGIN
-    -- Eliminar registros de más de X años
     DELETE FROM Registros 
     WHERE Fecha < DATEADD(YEAR, -@Anios, GETDATE());
-    
-    -- Eliminar servicios de más de X años
     DELETE FROM Servicios 
     WHERE Fecha < DATEADD(YEAR, -@Anios, GETDATE());
 END
-```
+GO
 
-### **27. Backup de Datos Importantes**
-```sql
 CREATE OR ALTER PROCEDURE SP_BackupDatos
     @FechaBackup NVARCHAR(8)
 AS
 BEGIN
-    -- Crear tabla de backup de empleados
     EXEC('SELECT * INTO Empleados_Backup_' + @FechaBackup + ' FROM Empleados');
-    
-    -- Crear tabla de backup de registros
     EXEC('SELECT * INTO Registros_Backup_' + @FechaBackup + ' FROM Registros WHERE Fecha >= DATEADD(MONTH, -1, GETDATE())');
 END
-```
+GO
 
-## 📈 Consultas para Dashboard
-
-### **28. Estadísticas del Día Actual**
-```sql
-CREATE OR ALTER PROCEDURE SP_EstadisticasDiaActual
-AS
-BEGIN
-    SELECT 
-        l.Nombre as Lugar,
-        COUNT(s.IdServicio) as ServiciosHoy,
-        SUM(s.TotalComensales) as TotalEmpleados,
-        SUM(s.TotalInvitados) as TotalInvitados,
-        SUM(s.TotalComensales + s.TotalInvitados) as TotalGeneral
-    FROM Servicios s
-    INNER JOIN Lugares l ON s.IdLugar = l.IdLugar
-    WHERE s.Fecha = CAST(GETDATE() AS DATE)
-    GROUP BY l.Nombre, l.IdLugar;
-END
-```
-
-### **29. Tendencia Últimos 7 Días**
-```sql
-CREATE OR ALTER PROCEDURE SP_TendenciaUltimos7Dias
-AS
-BEGIN
-    SELECT 
-        s.Fecha,
-        SUM(s.TotalComensales + s.TotalInvitados) as TotalDiario
-    FROM Servicios s
-    WHERE s.Fecha >= DATEADD(DAY, -7, GETDATE())
-    GROUP BY s.Fecha
-    ORDER BY s.Fecha;
-END
-```
-
-### **30. Empleados Más Frecuentes**
-```sql
-CREATE OR ALTER PROCEDURE SP_EmpleadosMasFrecuentes
-    @Meses INT = 1
-AS
-BEGIN
-    SELECT TOP 10
-        e.Nombre + ' ' + e.Apellido as Empleado,
-        emp.Nombre as Empresa,
-        COUNT(*) as Asistencias
-    FROM Registros r
-    INNER JOIN Empleados e ON r.IdEmpleado = e.IdEmpleado
-    INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
-    WHERE r.Fecha >= DATEADD(MONTH, -@Meses, GETDATE())
-    GROUP BY e.IdEmpleado, e.Nombre, e.Apellido, emp.Nombre
-    ORDER BY Asistencias DESC;
-END
-```
-
-## 🎯 Vistas Útiles
-
-### **Vista: Empleados con Empresa**
-```sql
 CREATE OR ALTER VIEW vw_EmpleadosConEmpresa AS
 SELECT 
     e.IdEmpleado,
@@ -549,10 +494,22 @@ SELECT
 FROM Empleados e
 INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
 WHERE e.Estado = 1;
-```
+GO
 
-### **Vista: Servicios Completos**
-```sql
+CREATE OR ALTER VIEW vw_EmpleadosSinAlmorzarBase AS
+SELECT 
+    e.IdEmpleado,
+    e.Nombre,
+    e.Apellido,
+    e.IdCredencial,
+    e.IdEmpresa,
+    emp.Nombre as NombreEmpresa,
+    CONCAT(e.Nombre, ' ', e.Apellido) as NombreCompleto
+FROM Empleados e
+INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
+WHERE e.Estado = 1;
+GO
+
 CREATE OR ALTER VIEW vw_ServiciosCompletos AS
 SELECT 
     s.IdServicio,
@@ -563,10 +520,8 @@ SELECT
     (s.TotalComensales + s.TotalInvitados) as Total
 FROM Servicios s
 INNER JOIN Lugares l ON s.IdLugar = l.IdLugar;
-```
+GO
 
-### **Vista: Registros Detallados**
-```sql
 CREATE OR ALTER VIEW vw_RegistrosDetallados AS
 SELECT 
     r.IdRegistro,
@@ -579,25 +534,8 @@ FROM Registros r
 INNER JOIN Empleados e ON r.IdEmpleado = e.IdEmpleado
 INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
 INNER JOIN Lugares l ON r.IdLugar = l.IdLugar;
-```
+GO
 
-## 🔄 Triggers
-
-### **Trigger: Actualizar Estadísticas al Registrar**
-```sql
-CREATE OR ALTER TRIGGER TR_ActualizarEstadisticas
-ON Registros
-AFTER INSERT
-AS
-BEGIN
-    -- Aquí se pueden agregar lógicas adicionales
-    -- como actualizar contadores en tiempo real
-    SET NOCOUNT ON;
-END
-```
-
-### **Trigger: Validar Registro Único**
-```sql
 CREATE OR ALTER TRIGGER TR_ValidarRegistroUnico
 ON Registros
 INSTEAD OF INSERT
@@ -620,4 +558,4 @@ BEGIN
         RAISERROR('El empleado ya está registrado en este servicio', 16, 1);
     END
 END
-```
+GO
