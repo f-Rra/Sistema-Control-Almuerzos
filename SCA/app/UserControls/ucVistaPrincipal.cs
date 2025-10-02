@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -77,16 +77,14 @@ namespace app.UserControls
         {
             if (!servicioIdActual.HasValue)
             {
-                MessageBox.Show("No hay un servicio activo", "Servicio Inactivo", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ExceptionHelper.MostrarAdvertencia("No hay un servicio activo");
                 return;
             }
             
             string credencial = txtRegistro.Text.Trim();
             if (string.IsNullOrEmpty(credencial))
             {
-                MessageBox.Show("Ingrese una credencial válida", "Credencial Requerida", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ExceptionHelper.MostrarAdvertencia("Ingrese una credencial válida");
                 return;
             }
             
@@ -95,15 +93,13 @@ namespace app.UserControls
                 Empleado empleado = negE.buscarPorCredencial(credencial);
                 if (empleado == null)
                 {
-                    MessageBox.Show($"No se encontró un empleado con la credencial {credencial}", 
-                        "Empleado No Encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ExceptionHelper.MostrarAdvertencia($"No se encontró un empleado con la credencial {credencial}");
                     return;
                 }
                 
                 if (negR.empleadoYaRegistrado(empleado.IdEmpleado, servicioIdActual.Value))
                 {
-                    MessageBox.Show($"El empleado {empleado.NombreCompleto} ya está registrado en este servicio", 
-                        "Registro Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ExceptionHelper.MostrarInformacion($"El empleado {empleado.NombreCompleto} ya está registrado en este servicio");
                     return;
                 }
                 negR.registrarEmpleado(empleado.IdEmpleado, empleado.IdEmpresa, servicioIdActual.Value, idLugarActual);
@@ -114,8 +110,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al procesar el registro: {ex.Message}", 
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHelper.ManejarExcepcionBD(ex, "procesar el registro");
             }
         }
     }

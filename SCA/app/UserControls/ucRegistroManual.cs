@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -149,7 +149,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al filtrar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHelper.ManejarExcepcionBD(ex, "filtrar empleados");
             }
         }
 
@@ -157,12 +157,12 @@ namespace app.UserControls
         {
             if (!servicioIdActual.HasValue)
             {
-                MessageBox.Show("No hay un servicio activo.", "Servicio Inactivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ExceptionHelper.MostrarAdvertencia("No hay un servicio activo");
                 return;
             }
             if (dgvFaltantes.SelectedRows == null || dgvFaltantes.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Seleccione al menos un empleado de la lista.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ExceptionHelper.MostrarAdvertencia("Seleccione al menos un empleado de la lista");
                 return;
             }
 

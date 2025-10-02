@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,7 +22,7 @@ namespace app.UserControls
             {
                 if (dgvReporte.DataSource == null || dgvReporte.Rows.Count == 0)
                 {
-                    MessageBox.Show("No hay datos para exportar. Genere un reporte primero.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ExceptionHelper.MostrarAdvertencia("No hay datos para exportar. Genere un reporte primero.");
                     return;
                 }
 
@@ -40,7 +40,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al exportar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHelper.ManejarExcepcionBD(ex, "exportar el reporte");
             }
         }
 
@@ -100,12 +100,12 @@ namespace app.UserControls
                 doc.Close();
                 writer.Close();
 
-                MessageBox.Show($"Reporte guardado como PDF:\n{rutaArchivo}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ExceptionHelper.MostrarExito($"Reporte guardado como PDF:\n{rutaArchivo}");
                 System.Diagnostics.Process.Start(rutaArchivo);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al generar PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHelper.ManejarExcepcionBD(ex, "generar el PDF");
             }
         }
 
@@ -138,7 +138,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se pudieron cargar los filtros de reportes: " + ex.Message);
+                ExceptionHelper.ManejarExcepcionBD(ex, "cargar los filtros de reportes");
             }
         }
 
@@ -150,7 +150,7 @@ namespace app.UserControls
                 DateTime hasta = dtpHasta.Value.Date;
                 if (desde > hasta)
                 {
-                    MessageBox.Show("El rango de fechas es inválido (Desde > Hasta).");
+                    ExceptionHelper.MostrarAdvertencia("El rango de fechas es inválido (Desde > Hasta)");
                     return;
                 }
 
@@ -220,7 +220,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se pudo generar el reporte: " + ex.Message);
+                ExceptionHelper.ManejarExcepcionBD(ex, "generar el reporte");
             }
         }
     }

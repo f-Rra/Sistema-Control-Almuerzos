@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +36,6 @@ namespace Negocio
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.CommandText = sp;
         }
-
         public void setearTipoComando(System.Data.CommandType tipo)
         {
             comando.CommandType = tipo;
@@ -53,7 +52,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Error al ejecutar la consulta en la base de datos", ex);
             }
         }
 
@@ -67,7 +66,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Error al ejecutar la acci\u00f3n en la base de datos", ex);
             }
             finally
             {
@@ -89,7 +88,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Error al ejecutar la acción con retorno en la base de datos", ex);
             }
             finally
             {

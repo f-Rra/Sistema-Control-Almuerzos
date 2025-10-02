@@ -1,4 +1,4 @@
-﻿using Negocio;
+using Negocio;
 using Dominio;  
 using System;
 using System.ComponentModel;
@@ -157,7 +157,7 @@ namespace app
         {
             if (!idServicioActual.HasValue)
             {
-                MessageBox.Show("El servicio no está activo.");
+                ExceptionHelper.MostrarAdvertencia("El servicio no está activo");
                 return;
             }
 
@@ -174,7 +174,7 @@ namespace app
         {
             if (idServicioActual.HasValue)
             {
-                MessageBox.Show("Reportes está disponible sólo con el servicio inactivo.");
+                ExceptionHelper.MostrarAdvertencia("Reportes está disponible sólo con el servicio inactivo");
                 return;
             }
             CargarVistaReportes();
@@ -187,7 +187,7 @@ namespace app
         {
             if (idServicioActual.HasValue)
             {
-                MessageBox.Show("Admin está disponible sólo con el servicio inactivo.");
+                ExceptionHelper.MostrarAdvertencia("Admin está disponible sólo con el servicio inactivo");
                 return;
             }
 
@@ -240,20 +240,20 @@ namespace app
             {
                 if (cbLugar.SelectedValue == null)
                 {
-                    MessageBox.Show("Seleccioná un lugar");
+                    ExceptionHelper.MostrarAdvertencia("Seleccione un lugar");
                     return;
                 }
 
                 string proyText = mtxtProyeccion.Text.Trim();
                 if (string.IsNullOrEmpty(proyText))
                 {
-                    MessageBox.Show("Ingresá una proyección de comensales");
+                    ExceptionHelper.MostrarAdvertencia("Ingrese una proyección de comensales");
                     return;
                 }
 
                 if (!int.TryParse(proyText, out int proy))
                 {
-                    MessageBox.Show("Ingresá una proyección válida (solo números)");
+                    ExceptionHelper.MostrarAdvertencia("Ingrese una proyección válida (solo números)");
                     return;
                 }
 
@@ -281,12 +281,20 @@ namespace app
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se pudo iniciar el servicio: " + ex.Message);
+                ExceptionHelper.ManejarExcepcionBD(ex, "iniciar el servicio");
             }
         }
 
         private void FinalizarServicio()
         {
+            // Confirmar con el usuario
+            if (!ExceptionHelper.MostrarConfirmacion(
+                "¿Está seguro de finalizar el servicio?\n\n" +
+                "Esta acción guardará todos los registros y no se puede deshacer."))
+            {
+                return;
+            }
+
             tmrCrono.Stop();
             crono.Stop();
             ActualizarCronometroUI();
@@ -306,7 +314,7 @@ namespace app
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se pudo finalizar el servicio: " + ex.Message);
+                ExceptionHelper.ManejarExcepcionBD(ex, "finalizar el servicio");
             }
             finally
             {
