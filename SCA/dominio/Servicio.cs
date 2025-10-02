@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +31,6 @@ namespace Dominio
         [DisplayName("Total Invitados")]
         public int TotalInvitados { get; set; }
 
-        [DisplayName("Total General")]
         public int TotalGeneral
         {
             get { return TotalComensales + TotalInvitados; }
@@ -40,17 +39,17 @@ namespace Dominio
         [DisplayName("Estado")]
         public string Estado
         {
-            get { return TotalComensales == 0 ? "Activo" : "Finalizado"; }
+            get { return DuracionMinutos == null ? "Activo" : "Finalizado"; }
         }
 
         public bool EstaActivo()
         {
-            return TotalComensales == 0;
+            return DuracionMinutos == null;
         }
 
         public bool EstaFinalizado()
         {
-            return TotalComensales > 0;
+            return DuracionMinutos != null;
         }
     }
 }
