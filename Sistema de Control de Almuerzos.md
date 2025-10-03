@@ -78,7 +78,6 @@ El modelo de datos está compuesto por las siguientes tablas principales:
 - ✅ **Verificación de servicio activo**: No permite registros sin un servicio activo iniciado
 - ✅ **Validación de estado de empleados**: Solo empleados con estado "Activo" pueden ser registrados
 - ✅ **Confirmación antes de finalizar**: Solicita confirmación explícita antes de cerrar un servicio
-- ✅ **Rangos válidos para proyecciones**: Valida que las proyecciones estén entre 1 y 500 comensales
 - ✅ **Validación de fechas en reportes**: Impide seleccionar fechas futuras o rangos inválidos
 
 ### Integridad de Datos
@@ -126,8 +125,7 @@ El modelo de datos está compuesto por las siguientes tablas principales:
 ## Beneficios del Sistema
 
 ### Mejoras Operativas
-- ⚡ **80% más rápido** que QR: Registro en 2 segundos vs 10 segundos por persona con código QR
-- 📉 **Reducción significativa de filas**: Procesamiento instantáneo elimina cuellos de botella en horarios pico
+- 📉 **Reducción significativa de filas**: Procesamiento instantáneo elimina demoras en horarios pico
 - 🔌 **0% dependencia de conectividad individual**: Funciona sin internet en dispositivos de empleados
 - ✅ **100% precisión en conteo**: Eliminación de errores humanos y conteo manual
 - ⏱️ **Registro en tiempo real**: Actualización instantánea de estadísticas durante el servicio
@@ -143,20 +141,15 @@ El modelo de datos está compuesto por las siguientes tablas principales:
 
 ### Experiencia del Usuario
 - 👍 **Interfaz intuitiva**: Diseño simple sin necesidad de capacitación extensa
-- ⚡ **Registro ultrarrápido**: Menos de 2 segundos por empleado
 - 📱 **Sin app requerida**: No necesita instalar nada en el teléfono del empleado
 - 🆘 **Registro manual disponible**: Opción de respaldo para casos sin credencial
 - 🎨 **Interfaz moderna**: UI actualizada con componentes visuales atractivos
 - ✨ **Feedback visual inmediato**: Confirmación instantánea de cada registro
 
-### Beneficios Ambientales
-- 🌱 **Reducción de desperdicio**: Mejor proyección reduce comida descartada
-- 📄 **Menos papel**: Reportes digitales eliminan impresiones innecesarias
-- 💾 **Almacenamiento digital**: Historial completo sin archivos físicos
 
 ## Roadmap de Desarrollo
 
-### Versión 2.0 (Q1 2026)
+### Versión 2.0 
 **Mejoras de integración y análisis**
 
 - [ ] **Módulo web ASP.NET** para pre-reservas
@@ -179,19 +172,14 @@ El modelo de datos está compuesto por las siguientes tablas principales:
   - Notificaciones de proyecciones vs real
   - Reportes automáticos diarios
 
-### Versión 3.0 (Q2 2026)
+### Versión 3.0 
 **Expansión móvil y beneficios**
 
 - [ ] **App móvil** para consultas
   - Consulta de historial personal
   - Notificaciones push
   - Menú del día
-  
-- [ ] **Sistema de puntos y beneficios**
-  - Acumulación de puntos por asistencia
-  - Canje por beneficios
-  - Gamificación para incentivar asistencia
-  
+
 - [ ] **Encuestas de satisfacción**
   - Post-servicio automáticas
   - Calificación de comidas
@@ -199,7 +187,7 @@ El modelo de datos está compuesto por las siguientes tablas principales:
   
 - [ ] **Gestión de menú digital**
   - Publicación de menú del día
-  - Alérgenos e información nutricional
+  - información nutricional
   - Opciones vegetarianas/veganas destacadas
 
 

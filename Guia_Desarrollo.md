@@ -1,394 +1,501 @@
 # Sistema de Control de Almuerzos - Guía de Desarrollo
 
-## 🏗️ Arquitectura del Proyecto
+## 🏗️ Arquitectura del Sistema
 
-### **Estructura de Solución:**
+### **Patrón:** Arquitectura en 3 Capas
+
 ```
-SistemaControlAlmuerzos.sln
-├── 📁 app (Capa de Presentación)
-│   ├── Forms/
-│   │   └── FormPrincipal.cs
-│   ├── UserControls/
-│   │   ├── ucVistaPrincipal.cs
-│   │   ├── ucRegistroManual.cs
-│   │   ├── ucReportes.cs
-│   │   └── ucAdministrador.cs
-│   ├── Program.cs
-│   ├── App.config
-│   └── app.csproj
-├── 📁 Dominio (Capa de Entidades)
-│   ├── Models/
-│   │   ├── Empleado.cs
-│   │   ├── Empresa.cs
-│   │   ├── Lugar.cs
-│   │   ├── Servicio.cs
-│   │   └── Registro.cs
-│   └── Dominio.csproj
-└── 📁 Negocio (Capa de Lógica)
-    ├── Services/
-    │   ├── LugarNegocio.cs
-    │   ├── EmpleadoNegocio.cs
-    │   ├── ServicioNegocio.cs
-    │   ├── RegistroNegocio.cs
-    │   ├── EmpresaNegocio.cs
-    │   └── ReporteNegocio.cs
-    ├── AccesoDatos.cs
-    └── Negocio.csproj
+Sistema-Control-Almuerzos/
+├── SCA/
+│   ├── app/                    (Capa de Presentación)
+│   │   ├── frmPrincipal.cs         ✅ COMPLETO
+│   │   ├── UserControls/
+│   │   │   ├── ucVistaPrincipal.cs     ✅ COMPLETO
+│   │   │   ├── ucRegistroManual.cs     ✅ COMPLETO
+│   │   │   ├── ucReportes.cs           ✅ COMPLETO
+│   │   │   └── ucAdmin.cs              ❌ PENDIENTE
+│   │   ├── Program.cs
+│   │   └── app.csproj
+│   ├── dominio/               (Capa de Entidades)
+│   │   ├── Empleado.cs             ✅ COMPLETO
+│   │   ├── Empresa.cs              ✅ COMPLETO
+│   │   ├── Lugar.cs                ✅ COMPLETO
+│   │   ├── Servicio.cs             ✅ COMPLETO
+│   │   └── Registro.cs             ✅ COMPLETO
+│   └── negocio/               (Capa de Negocio)
+│       ├── AccesoDatos.cs          ✅ COMPLETO
+│       ├── EmpleadoNegocio.cs      ✅ COMPLETO
+│       ├── EmpresaNegocio.cs       ✅ COMPLETO
+│       ├── LugarNegocio.cs         ✅ COMPLETO
+│       ├── ServicioNegocio.cs      ✅ COMPLETO
+│       ├── RegistroNegocio.cs      ✅ COMPLETO
+│       ├── ReporteNegocio.cs       ✅ COMPLETO
+│       └── ExceptionHelper.cs      ✅ COMPLETO
+├── Script_Sistema_Control_Almuerzos.sql    ✅ COMPLETO
+└── Procedimientos_Vistas_Triggers.sql      ✅ COMPLETO
 ```
-### Interfaz de Usuario - Single Window Application
-
-#### FormPrincipal - Interfaz Unificada Completa (Estado actual)
-```
-┌─────────────────────────────────────────────────────────────┐
-│  [Comedor ▼] [Fecha: __/__/__] [Proyección: ___] [Invitados: ___] [Iniciar Servicio]
-│   │ Estado: Inactivo │ 🕐 00:00:00 │ Progreso: 50% │ Estadísticas: Reg: 150/Faltan: 210 │ ← Panel Superior
-├─────────────────────────────────────────────────────────────┤
-│ ┌─────────────┐ │                                           │
-│ │ ● Principal │ │           VISTA PRINCIPAL                 │
-│ │   Reg.Manual│ │                                           │
-│ │   Reportes  │ │  ┌─────────────────────────────────────┐  │
-│ │   Admin     │ │  │        REGISTROS EN TIEMPO REAL     │  │
-│ │             │ │  │ ┌─────────────────────────────────┐ │  │
-│ │             │ │  │ │ Hora  │ Nombre      │ Empresa   │ │  │
-│ │             │ │  │ │ (vacío - servicio inactivo)     │ │  │
-│ │             │ │  │ └─────────────────────────────────┘ │  │
-│ │             │ │  └─────────────────────────────────────┘  │
-│ │             │ │                                           │
-│ │             │ │  ┌─────────────────────────────────────┐  │
-│ │             │ │  │      ESTADÍSTICAS DEL SERVICIO     │  │
-│ │             │ │  │  Empleados: 0 │ Invitados: 0 │ Total: 0 │
-│ │             │ │  └─────────────────────────────────────┘  │
-│ └─────────────┘ │                                           │
-│   Panel Lateral │                ÁREA DINÁMICA             │
-└─────────────────────────────────────────────────────────────┘
-
-** Estado con Servicio Activo **
-┌─────────────────────────────────────────────────────────────┐
-│ [Comedor] [Finalizar Servicio] │ Estado: Activo │ 🕐 02:45:30 │ Progreso: 80% │ Reg: 220/Faltan: 40 │
-├─────────────────────────────────────────────────────────────┤
-│ ┌─────────────┐ │  ┌─────────────────────────────────────┐  │
-│ │ ● Principal │ │  │        REGISTROS EN TIEMPO REAL     │  │
-│ │   Reg.Manual│ │  │ ┌─────────────────────────────────┐ │  │
-│ │   Reportes  │ │  │ │12:30│Juan Pérez   │Empresa A  │ │  │
-│ │   Admin     │ │  │ │12:32│María García │Empresa B  │ │  │
-│ │             │ │  │ │12:35│Carlos López │Empresa C  │ │  │
-│ │             │ │  │ └─────────────────────────────────┘ │  │
-│ │             │ │  └─────────────────────────────────────┘  │
-│ │             │ │                                           │
-│ │             │ │  ┌─────────────────────────────────────┐  │
-│ │             │ │  │      ESTADÍSTICAS DEL SERVICIO     │  │
-│ │             │ │  │ Empleados: 15 │ Invitados: 2 │ Total: 17│
-│ │             │ │  └─────────────────────────────────────┘  │
-│ └─────────────┘ │                                           │
-└─────────────────────────────────────────────────────────────┘
-```
-
-#### Vista Registro Manual (Panel Lateral: Reg.Manual)
-```
-┌─────────────────────────────────────────────────────────────┐
-│ [Comedor] [Finalizar Servicio] │ Estado: Activo │ 🕐 02:45:30  │
-├─────────────────────────────────────────────────────────────┤
-│ ┌─────────────┐ │  ┌─────────────────────────────────────┐  │
-│ │   Principal │ │  │        REGISTRO MANUAL              │  │
-│ │ ● Reg.Manual│ │  │                                     │  │
-│ │   Reportes  │ │  │  ┌─────────────────────────────────┐ │  │
-│ │   Admin     │ │  │  │     FILTROS DE BÚSQUEDA        │ │  │
-│ │             │ │  │  │ Nombre: [________] Empresa:[▼] │ │  │
-│ │             │ │  │  └─────────────────────────────────┘ │  │
-│ │             │ │  │                                     │  │
-│ │             │ │  │  ┌─────────────────────────────────┐ │  │
-│ │             │ │  │  │   EMPLEADOS SIN ALMORZAR        │ │  │
-│ │             │ │  │  │ ┌─────────────────────────────┐ │ │  │
-│ │             │ │  │  │ │Juan Pérez    │ Empresa A   │ │ │  │
-│ │             │ │  │  │ │María García  │ Empresa B   │ │ │  │
-│ │             │ │  │  │ │Carlos López  │ Empresa C   │ │ │  │
-│ │             │ │  │  │ └─────────────────────────────┘ │ │  │
-│ │             │ │  │  │                                 │ │  │
-│ │             │ │  │  │      [REGISTRAR SELECCIONADO]   │ │  │
-│ │             │ │  │  └─────────────────────────────────┘ │  │
-│ └─────────────┘ │  └─────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-```
-
-#### Vista Reportes (Panel Lateral: Reportes)
-```
-┌─────────────────────────────────────────────────────────────┐
-│ [Comedor] [Finalizar Servicio] │ Estado: Activo │ 🕐 02:45:30  │
-├─────────────────────────────────────────────────────────────┤
-│ ┌─────────────┐ │  ┌─────────────────────────────────────┐  │
-│ │   Principal │ │  │           MÓDULO REPORTES           │  │
-│ │   Reg.Manual│ │  │                                     │  │
-│ │ ● Reportes  │ │  │  ┌─────────────────────────────────┐ │  │
-│ │   Admin     │ │  │  │      FILTROS DE REPORTE         │ │  │
-│ │             │ │  │  │ Desde:[__/__] Hasta:[__/__]     │ │  │
-│ │             │ │  │  │ Lugar:[Todos▼] [GENERAR]        │ │  │
-│ │             │ │  │  └─────────────────────────────────┘ │  │
-│ │             │ │  │                                     │  │
-│ │             │ │  │  ┌─────────────────────────────────┐ │  │
-│ │             │ │  │  │     SERVICIOS ANTERIORES        │ │  │
-│ │             │ │  │  │ ┌─────────────────────────────┐ │ │  │
-│ │             │ │  │  │ │15/01│Comedor│45│3│48        │ │ │  │
-│ │             │ │  │  │ │14/01│Quincho│32│1│33        │ │ │  │
-│ │             │ │  │  │ │13/01│Comedor│38│2│40        │ │ │  │
-│ │             │ │  │  │ └─────────────────────────────┘ │ │  │
-│ │             │ │  │  │                                 │ │  │
-│ │             │ │  │  │ [EXPORTAR PDF] [VER DETALLES]   │ │  │
-│ │             │ │  │  └─────────────────────────────────┘ │  │
-│ └─────────────┘ │  └─────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-```
-
-#### Vista Administrador (Panel Lateral: Admin)
-```
-┌─────────────────────────────────────────────────────────────┐
-│ [Administrador] [---] │ Estado: Admin │ 🔐 Modo Administrador │
-├─────────────────────────────────────────────────────────────┤
-│ ┌─────────────┐ │  ┌─────────────────────────────────────┐  │
-│ │   Principal │ │  │        MÓDULO ADMINISTRADOR         │  │
-│ │   Reg.Manual│ │  │                                     │  │
-│ │   Reportes  │ │  │  ┌─────────────────────────────────┐ │  │
-│ │ ● Admin     │ │  │  │ [EMPLEADOS] [EMPRESAS] [CONFIG] │ │  │
-│ │             │ │  │  └─────────────────────────────────┘ │  │
-│ │             │ │  │                                     │  │
-│ │             │ │  │  ┌─────────────────────────────────┐ │  │
-│ │             │ │  │  │      PANEL DE ESTADÍSTICAS      │ │  │
-│ │             │ │  │  │                                 │ │  │
-│ │             │ │  │  │ Empleados Activos: 150          │ │  │
-│ │             │ │  │  │ Empresas: 8                     │ │  │
-│ │             │ │  │  │ Credenciales RFID: 150          │ │  │
-│ │             │ │  │  │ Última Actualización: 15/01/24  │ │  │
-│ │             │ │  │  │                                 │ │  │
-│ │             │ │  │  │ [RESPALDO] [CONFIGURACIÓN]      │ │  │
-│ │             │ │  │  └─────────────────────────────────┘ │  │
-│ └─────────────┘ │  └─────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-
-
-### 🚀 Orden de Desarrollo
-```
-### **✅ Fase 1: Configuración Base - COMPLETADA**
-1. **✅ Crear solución** con estructura de 3 proyectos
-2. **✅ Configurar referencias** entre proyectos
-3. **✅ Instalar ReaLTaiizor** desde NuGet: `Install-Package ReaLTaiizor`
-4. **✅ Crear clases de modelo** en Dominio
-5. **✅ Configurar AccesoDatos** en Negocio
-
-### **✅ Fase 2: Interfaz Unificada (Single Window) - COMPLETADA**
-1. **✅ FormPrincipal único** con panel superior integrado (base visual)
-2. **✅ Panel superior**: Lugar, Fecha, Proyección, Invitados, Estado, Duración, Progreso, Estadísticas
-3. **✅ Panel lateral**: Botones de navegación (Principal, Registros, Reportes, Admin)
-4. **✅ Área dinámica**: UserControls que se cargan según selección (MostrarVista + métodos CargarVistaX)
-5. **✅ Estados dinámicos**: ComboBox habilitado/deshabilitado según servicio
-
-### **🔄 Fase 3: User Controls Integrados - EN PROGRESO**
-1. **✅ ucReportes** User Control para reportes (implementado y validado)
-    - Estado actual: estructura implementada y verificada. Se aplicaron mejoras de UI (panelTop aumentado, etiquetas sobre controles, DGV redimensionado), ComboBox `Lugar` carga `Todos` por defecto, cabeceras renombradas y columnas internas ocultas.
-    - Exportación: exportar a PDF implementado en `ucReportes` (método `ExportarPDF` usando iTextSharp). Dependencia instalada y verificada; Designer y compilación OK.
-    - Verificación: exportación a PDF probada y valida — la salida incluye título, timestamp y la línea de filtros justo debajo de "Generado:".
-    - Fecha verificación: 29/09/2025.
-    - Pendientes: ajustes menores de UX/columnas según feedback, pero funcionalidad principal lista.
-2. **✅ ucRegistroManual** User Control para registro manual (filtros automáticos y registro)
-3. **❌ ucAdministrador** User Control para administración
-4. **✅ ucVistaPrincipal** User Control para vista principal
-5. **✅ Sistema de navegación** con User Controls (MostrarVista/MostrarVistaX)
-6. **✅ Métodos CargarVistaX** para integración (Principal, Reg.Manual, Reportes, Admin)
-
-### **✅ Fase 4: Lógica de Servicios - COMPLETADA**
-1. **✅ ServicioNegocio** para gestión de servicios
-2. **✅ Cronómetro/Duración**: UI agregada (panel superior). La duración se gestiona por cronómetro en backend y se persiste solo en `DuracionMinutos`.
-3. **✅ Estados/Progreso**: UI y actualización en tiempo real (llamadas a `ActualizarEstadisticas()` en eventos clave)
-4. **✅ Validaciones** de servicio activo/inactivo
-
-### **🔄 Fase 5: Funcionalidades Específicas - PARCIALMENTE COMPLETADA**
-1. **✅ EmpleadoNegocio** para registro manual (búsqueda por credencial, filtros y listados)
-2. **🔄 ReporteNegocio**: consultas disponibles; la capa de presentación incluye exportación a PDF (implementada y verificada en `ucReportes`). Se recomienda añadir pruebas unitarias/integración para la generación de datos y, si se requiere, exponer una generación en negocio para exportaciones batch o en otros formatos (CSV/Excel).
-3. **❌ Integración RFID** simulada (futuro)
-4. **✅ Validaciones** y manejo de errores
-
-### **🔄 Fase 6: Módulo Administrativo - PARCIALMENTE COMPLETADA**
-1. **❌ Gestión de empleados** (CRUD completo - backend)
-2. **❌ Gestión de empresas** (CRUD completo - backend)
-3. **❌ Asignación de credenciales** RFID (lógica lista)
-4. **❌ Configuración del sistema** y respaldos (falta UI)
-
-### **❌ Fase 7: Integración RFID (Futuro) - NO INICIADA**
-1. **❌ RFIDReader** para lectura de credenciales
-2. **❌ Integración** con FormPrincipal
-3. **❌ Manejo de errores** de dispositivo
-4. **❌ Registro automático**
-
-
-
-## Prioridades
-
-1) Reportes y visualización (alta prioridad)
-    - Estado: ✅ Implementado y validado. `ucReportes` y la exportación a PDF funcionan correctamente en el entorno de desarrollo (iTextSharp instalado, Designer y build OK).
-    - Acciones inmediatas: recoger feedback de UX y ajustar anchos/orden de columnas si es necesario; planificar tests automáticos para la generación de datos del reporte.
-
-2) ucRegistroManual (media-alta)
-    - Estado: funcional y con filtros automáticos. Quedan mejoras UX menores (atajos, resaltado) y validaciones de concurrencia.
-
-3) Último servicio (media)
-    - Estado: implementado (resumen en `gbxUltimo` al iniciar y al finalizar). Evaluar desglose por empresa si se requiere.
-
-4) Estadísticas en tiempo real en la UI (media)
-    - Mantener `ActualizarEstadisticas()` desde `ucVistaPrincipal` y `ucRegistroManual`. Evaluar refresco periódico si se agregan fuentes externas.
-
-5) Configuración de conexión (baja-media)
-    - Mover cadena de conexión de `AccesoDatos.cs` a `App.config` para facilitar despliegues.
-
-6) Módulo Admin (iteración 1)
-    - Estado: pendiente. Priorizar pantalla de lectura para empresas y empleados y luego CRUD.
-
-7) RFID (futuro)
-    - No iniciado. Diseñar interfaz y simulador antes de integrar.
 
 ---
 
-## ✅ Cambios realizados recientemente
+## 🛠️ Stack Tecnológico
 
-### Backend/SQL
-- Agregado `SP_ObtenerUltimoServicio` (sin parámetros) que devuelve el último servicio finalizado incluyendo `NombreLugar` mediante JOIN con `Lugares`.
-- Unificación de filtros de empleados: `SP_FiltrarEmpleadosSinAlmorzar(@IdServicio, @IdEmpresa=NULL, @Nombre=NULL)` sobre la vista base `vw_EmpleadosSinAlmorzarBase`.
-- Mantenidos `SP_EmpleadosSinAlmorzarPorEmpresa` y `SP_EmpleadosSinAlmorzarPorNombre` como wrappers de compatibilidad.
-- Refuerzo de unicidad de registros en `SP_RegistrarEmpleado` (idempotente ante duplicados).
+### **Frontend:**
+- **Framework:** Windows Forms (.NET Framework 4.8.1)
+- **UI Library:** ReaLTaiizor (combinación de controles de distintos temas)
+- **Controles:** Cyberpunk, Metro, Poison, Material (mixtos según necesidad)
 
-### Negocio (C#)
-- `ServicioNegocio.obtenerUltimoServicio()` para consumir `SP_ObtenerUltimoServicio` y mapear `NombreLugar`.
-- `EmpleadoNegocio.filtrarEmpleadosSinAlmorzar(...)` con parámetros opcionales y manejo de `DBNull`.
+### **Backend:**
+- **Lenguaje:** C# (.NET Framework 4.8.1)
+- **Arquitectura:** 3 Capas (Presentación, Negocio, Dominio)
+- **Patrón:** Single Window Application con User Controls
 
-### Presentación (WinForms)
-- `frmPrincipal`:
-  - `CargarUltimoServicio()` muestra datos en `gbxUltimo` al iniciar la app y al finalizar un servicio.
-  - `OcultarTodasLasVistas()` para limpiar el área dinámica antes de mostrar `gbxUltimo`.
-  - Navegación por vistas consolidada: `MostrarVista`, `MostrarVistaPrincipal/RegistroManual/Reportes/Admin`.
-- `ucRegistroManual`:
-  - Filtros automáticos por nombre (TextChanged) y empresa (SelectionChangeCommitted) sin botón de búsqueda.
-  - Opción inicial de empresa en blanco (en lugar de “Todas las empresas”).
-  - Uso del SP unificado de filtros, columnas ordenadas y ocultamiento de internas.
-- `ucVistaPrincipal`:
-  - Registro por credencial con validaciones y actualización de estadísticas en `frmPrincipal`.
+### **Base de Datos:**
+- **Motor:** SQL Server
+- **Acceso:** ADO.NET
+- **Stored Procedures:** Implementados para operaciones críticas
 
-### ✅ Cambios recientes (resumen rápido)
-
-- Se movió el ORDER BY para la lista de servicios al procedimiento almacenado correspondiente (ahora ordena Fecha DESC, IdServicio DESC) para que los reportes muestren del último al primero.
-- Se agregó una función de exportación a PDF desde `ucReportes` (archivo generado con iTextSharp) que incluye los filtros aplicados en una línea bajo el campo "Generado:".
-
-### Reportes / ucReportes (avance reciente)
-
-- **Estado:** 🔄 En progreso — la estructura del `ucReportes` está implementada y se han aplicado varias mejoras de UI y funcionalidad; queda verificar y compilar tras añadir la dependencia PDF.
-- **Cambios principales realizados:**
-    - Ajustes de layout: `panelTop` se amplió verticalmente para igualar el alto del panel superior; las etiquetas de filtros (labels) se colocaron sobre los controles y alineadas a la izquierda para coherencia visual con los otros UCs.
-    - DataGridView (`dgvReporte`) redimensionado para aproximarse al tamaño de `dgvRegistros` y mejorar legibilidad.
-    - ComboBox de `Lugar` carga la opción inicial como `Todos` (en lugar de un ítem en blanco) y se usa como selección por defecto al generar el reporte.
-    - Columnas: se renombraron cabeceras que contenían palabras pegadas; algunas columnas internas/código (`IdServicio`, `IdLugar`, `Estado`) se ocultan en la lista principal por defecto.
-    - SQL: el ordenamiento de la lista de servicios se movió al procedimiento almacenado (ORDER BY Fecha DESC, IdServicio DESC) para devolver del último al primero.
-    - Exportación: se implementó exportación a PDF (`ExportarPDF`) usando iTextSharp; el PDF incluye título, fecha/hora de generación y, justo debajo de "Generado:", una línea con los filtros aplicados (Fechas, Lugar, Tipo de reporte).
-
-- **Notas técnicas y dependencias:**
-    - La implementación del export a PDF utiliza la librería `iTextSharp` y los namespaces `iTextSharp.text` y `iTextSharp.text.pdf` en `ucReportes.cs`.
-    - Es necesario instalar el paquete NuGet `iTextSharp` en el proyecto `app` antes de compilar.
-
-- **Pasos de verificación (recomendado):**
-    1. Abrir la solución en Visual Studio.
-    2. Instalar iTextSharp en el proyecto `app` (dos opciones):
-
-```powershell
-# Opción A: Package Manager Console (Visual Studio)
-Install-Package iTextSharp
-
-# Opción B: dotnet CLI (desde la raíz del repo en PowerShell)
-dotnet add .\SCA\app\app.csproj package iTextSharp
-```
-
-    3. Abrir `ucReportes` en el Designer de Visual Studio y confirmar que no hay errores de parsing (si Visual Studio marca líneas en el Designer, inspeccionar las líneas indicadas y eliminar referencias a controles obsoletos o handlers huérfanos).
-    4. Compilar la solución (Build -> Rebuild Solution) y ejecutar la UC: generar un reporte y usar el botón "Exportar" para crear un PDF. Verificar que el PDF contiene la tabla con las columnas visibles y la línea de filtros bajo "Generado:".
-
-- **Siguientes pasos recomendados:**
-    - Validar en máquina local que el Designer carga correctamente; si hay errores, revisar `ucReportes.Designer.cs` por declaraciones duplicadas o asignaciones a handlers inexistentes (esto se corrigió parcialmente en la última iteración pero conviene confirmar).
-    - Si se quiere exportar la grilla completa como imagen (no solo el área visible), considerar implementar una rutina que dibuje fila por fila en un lienzo o que temporalmente expanda la grilla para captura.
-    - (Opcional) Añadir pruebas unitarias básicas para la generación de datos del reporte en `ReporteNegocio` y una prueba de integración mínima que verifique el número de columnas/filas exportadas.
-
-### UX/Comportamiento
-- Al finalizar servicio se actualizan estadísticas y se muestra el panel `gbxUltimo` con el resumen del servicio.
-- Estado visual ACTIVO/INACTIVO con íconos y cronómetro funcional.
+### **Librerías Externas:**
+- **iTextSharp:** Exportación de reportes a PDF
+- **ReaLTaiizor:** Controles UI modernos
 
 ---
 
-## Estado actual resumido
-- Interfaz unificada y navegación: ✅
-- Registro manual con filtros unificados: ✅
-- Último servicio visible al iniciar y al finalizar: ✅ (detalle básico)
-- Reportes: 🔄 (estructura creada, funcionalidad pendiente)
-- Admin: ❌
-- RFID: ❌ (futuro)
+## 📊 Estado Actual del Proyecto
+
+### **Progreso Global: 85%**
+
+| Capa | Progreso | Estado |
+|------|----------|--------|
+| **Base de Datos** | 100% | ✅ Completa |
+| **Capa Dominio** | 100% | ✅ Completa |
+| **Capa Negocio** | 100% | ✅ Completa |
+| **Capa Presentación** | 75% | 🔄 En progreso |
+
+---
+
+## ✅ Componentes Implementados
+
+### **Base de Datos (100%)**
+
+#### **Tablas:**
+- ✅ `Empresas` - Empresas del predio
+- ✅ `Empleados` - Datos de empleados con credencial RFID
+- ✅ `Lugares` - Lugares de almuerzo (Comedor, Quincho, etc.)
+- ✅ `Servicios` - Registro de servicios por jornada
+- ✅ `Registros` - Asistencias de empleados a servicios
+
+#### **Stored Procedures:**
+- ✅ SP para gestión de empleados
+- ✅ SP para gestión de servicios
+- ✅ SP para registros de asistencia
+- ✅ SP para reportes (4 tipos)
+
+#### **Constraints:**
+- ✅ Foreign Keys configuradas
+- ✅ Unique constraints (IdCredencial)
+- ✅ Check constraints (fechas válidas)
+- ✅ Default values
 
 
+#### **frmPrincipal.cs** ✅ COMPLETO
+
+**Funcionalidades implementadas:**
+- ✅ Navegación entre vistas (Single Window)
+- ✅ Gestión de servicios (Iniciar/Finalizar)
+- ✅ Cronómetro en tiempo real
+- ✅ Panel superior con controles de servicio
+- ✅ Panel lateral con botones de navegación
+- ✅ Estadísticas en tiempo real
+- ✅ Barra de progreso visual
+- ✅ Estados ACTIVO/INACTIVO con íconos
+- ✅ Selector de lugar (ComboBox)
+- ✅ Entrada de proyección e invitados
+- ✅ Validaciones de estado
+- ✅ Control de acceso por módulo
+- ✅ Muestra último servicio al finalizar
 
 
+#### **ucVistaPrincipal.cs** ✅ COMPLETO
 
-## Mockup de ucReportes (seleccionado)
+**Funcionalidades implementadas:**
+- ✅ Registro por credencial RFID
+- ✅ DataGridView con registros en tiempo real
+- ✅ Validación de credencial existente
+- ✅ Validación de empleado activo
+- ✅ Validación de duplicados (mismo empleado, mismo servicio)
+- ✅ Actualización automática de estadísticas
+- ✅ Contador de registros
+- ✅ Integración con frmPrincipal
 
-Sugerencia: filtros y botones en el panel superior (frmPrincipal); el UC solo contiene grillas (DGVs).
+**Flujo de registro:**
+1. Usuario pasa credencial RFID → txtRegistro
+2. btnRegistro_Click valida empleado
+3. Verifica si ya está registrado
+4. Registra asistencia en BD
+5. Actualiza grid y estadísticas
+6. Limpia y enfoca para siguiente registro
 
-### Mockup C — Panel superior (original) + Tipo de reporte (4 opciones), y un único DGV
+#### **ucRegistroManual.cs** ✅ COMPLETO
 
-Panel superior (frmPrincipal) — filtros globales (como en la imagen base) + tipo de reporte
+**Funcionalidades implementadas:**
+- ✅ Lista de empleados sin almorzar (filtrada por servicio)
+- ✅ Filtro por nombre (búsqueda en tiempo real)
+- ✅ Filtro por empresa (ComboBox)
+- ✅ Selección múltiple de empleados
+- ✅ Registro masivo de seleccionados
+- ✅ Actualización automática después de registrar
+- ✅ Integración con frmPrincipal
+- ✅ Validaciones de servicio activo
+
+**Flujo de registro manual:**
+1. Usuario inicia servicio desde frmPrincipal
+2. Navega a Registro Manual
+3. Filtra empleados por nombre/empresa
+4. Selecciona uno o varios empleados
+5. btnAgregar registra todos los seleccionados
+6. Actualiza vista principal y estadísticas
+
+#### **ucReportes.cs** ✅ COMPLETO
+
+**Funcionalidades implementadas:**
+- ✅ 4 tipos de reportes:
+  - Lista de servicios
+  - Asistencias por empresas
+  - Cobertura vs proyección
+  - Distribución por día de semana
+- ✅ Filtros por fecha (desde/hasta)
+- ✅ Filtro por lugar (Todos/Comedor/Quincho)
+- ✅ Generación dinámica de reportes
+- ✅ Exportación a PDF con iTextSharp
+- ✅ Formato profesional de PDF
+- ✅ Apertura automática de PDF generado
+- ✅ Validaciones de rangos de fechas
+- ✅ Personalización de columnas por tipo de reporte
+
+**Tipos de reportes:**
+
+1. **Lista de servicios:**
+   - Fecha, Proyección, Duración, Total Comensales, Total Invitados, Total General
+
+2. **Asistencias por empresas:**
+   - Empresa, Total Asistencias
+
+3. **Cobertura vs proyección:**
+   - Lugar, Proyección, Atendidos, Diferencia, Cobertura %
+
+4. **Distribución por día de semana:**
+   - Día, Total Asistencias
++
+
+## ❌ Componentes Pendientes
+
+### **ucAdmin.cs** - PENDIENTE (0%)
+
+**Funcionalidades a implementar:**
+
+#### **1. ABM de Empleados**
+- [ ] DataGridView con lista completa de empleados
+- [ ] Búsqueda/filtrado por nombre, empresa, credencial
+- [ ] Agregar nuevo empleado
+- [ ] Modificar datos de empleado
+- [ ] Activar/Desactivar empleado (no eliminar físicamente)
+- [ ] Validación de credencial única
+
+**Campos del formulario:**
+```csharp
+- txtNombre: Nombre del empleado
+- txtApellido: Apellido del empleado
+- cbEmpresa: Selector de empresa
+- txtCredencial: Número de credencial RFID
+- chkEstado: Activo/Inactivo
+- btnGuardar, btnCancelar, btnNuevo
+```
+
+#### **2. ABM de Empresas**
+- [ ] DataGridView con lista de empresas
+- [ ] Agregar nueva empresa
+- [ ] Modificar nombre de empresa
+- [ ] Activar/Desactivar empresa
+- [ ] Validación de nombre único
+
+**Campos del formulario:**
+```csharp
+- txtNombreEmpresa: Nombre de la empresa
+- chkEstado: Activa/Inactiva
+- btnGuardar, btnCancelar, btnNuevo
+```
+
+#### **3. Panel de Estadísticas Generales**
+- [ ] Total de empleados activos
+- [ ] Total de empresas activas
+- [ ] Total de credenciales registradas
+- [ ] Última actualización
+- [ ] Servicios del mes actual
+- [ ] Promedio de asistencia diaria
+
+#### **4. Gestión de Configuración**
+- [ ] Cadena de conexión a BD
+- [ ] Configuración de lector RFID (futuro)
+- [ ] Parámetros del sistema
+
+#### **5. Respaldos**
+- [ ] Botón para generar backup de BD
+- [ ] Botón para restaurar backup
+
+**Controles principales sugeridos:**
+```csharp
+- TabControl tcAdmin (con pestañas: Empleados, Empresas, Estadísticas, Config)
+- DataGridView dgvEmpleados
+- DataGridView dgvEmpresas
+- Panel pnlEstadisticas (con labels de métricas)
+- GroupBox gbxFormEmpleado
+- GroupBox gbxFormEmpresa
+```
+
+
+## 🔄 Flujo de Trabajo Diario
+
+### **1. Inicio del Día**
+```
+1. Personal abre frmPrincipal
+2. Selecciona lugar (Comedor/Quincho)
+3. Ingresa fecha (automática)
+4. Ingresa proyección de comensales
+5. Ingresa cantidad de invitados
+6. Click en "Iniciar Servicio"
+   → Se crea registro en Servicios
+   → Inicia cronómetro
+   → Se habilita ucVistaPrincipal
+   → Se habilita ucRegistroManual
+   → Se deshabilitan ucReportes y ucAdmin
+```
+
+### **2. Durante el Servicio**
+```
+Vista Principal (ucVistaPrincipal):
+- Empleado pasa credencial RFID
+- Sistema busca empleado por credencial
+- Valida que esté activo
+- Valida que no esté ya registrado
+- Registra asistencia
+- Actualiza grid en tiempo real
+- Actualiza estadísticas y progreso
+
+Registro Manual (ucRegistroManual):
+- Personal busca empleado sin credencial
+- Filtra por nombre o empresa
+- Selecciona empleado(s)
+- Click en "Agregar"
+- Sistema registra asistencias
+- Actualiza vista principal
+```
+
+### **3. Fin del Día**
+```
+1. Personal click en "Finalizar Servicio"
+2. Sistema muestra confirmación
+3. Al confirmar:
+   → Detiene cronómetro
+   → Calcula duración total
+   → Cuenta total de comensales
+   → Actualiza registro de Servicio en BD
+   → Muestra resumen del servicio
+   → Resetea controles
+   → Habilita ucReportes y ucAdmin
+```
+
+### **4. Generación de Reportes** (Servicio Inactivo)
+```
+1. Personal navega a ucReportes
+2. Selecciona rango de fechas
+3. Selecciona lugar (o "Todos")
+4. Selecciona tipo de reporte
+5. Click en "Generar"
+   → Sistema consulta BD
+   → Muestra datos en grid
+6. Click en "Exportar PDF"
+   → Genera PDF formateado
+   → Abre PDF automáticamente
+```
+
+---
+
+## 📝 Próximos Pasos
+
+### **Fase 1: Completar ucAdmin (PRIORIDAD ALTA)**
+
+**Estimación:** 2-3 días
+
+**Tareas:**
+1. Diseñar interfaz de ucAdmin con TabControl
+2. Implementar ABM de Empleados
+   - Crear métodos en EmpleadoNegocio: agregar(), modificar(), cambiarEstado()
+   - Crear stored procedures en BD
+   - Diseñar formulario de edición
+   - Implementar validaciones
+3. Implementar ABM de Empresas
+   - Crear métodos en EmpresaNegocio: agregar(), modificar(), cambiarEstado()
+   - Crear stored procedures en BD
+   - Diseñar formulario de edición
+4. Implementar panel de estadísticas
+   - Consultas agregadas a BD
+   - Método en ReporteNegocio para métricas generales
+5. Implementar gestión de configuración
+   - App.config para parámetros
+   - Interfaz de edición
+
+---
+
+### **Fase 2: Integración con Lector RFID (FUTURO)**
+
+**Estimación:** 1-2 semanas
+
+**Tareas:**
+1. Investigar SDK del lector RFID a utilizar
+2. Implementar clase RFIDReader
+3. Configurar puerto/conexión del lector
+4. Integrar lectura automática con ucVistaPrincipal
+5. Manejar eventos de lectura de tarjeta
+6. Pruebas de campo con hardware real
+
+**Consideraciones:**
+- El lector debe enviar el ID de credencial como string
+- Configurar timeout de lectura
+- Manejar errores de comunicación
+- Feedback visual/sonoro de lectura exitosa
+
+---
+
+### **Fase 3: Mejoras y Optimizaciones (OPCIONAL)**
+
+**Tareas sugeridas:**
+1. **Rendimiento:**
+   - Implementar paginación en grids grandes
+   - Cache de consultas frecuentes
+   - Índices adicionales en BD
+
+2. **UX/UI:**
+   - Atajos de teclado (F5 refrescar, ESC cancelar, etc.)
+   - Tooltips en controles
+   - Animaciones de transición entre vistas
+
+3. **Reportes adicionales:**
+   - Top 10 empresas con más asistencias
+   - Tendencia de asistencia mensual
+   - Comparativa entre lugares
+
+4. **Seguridad:**
+   - Sistema de login (opcional)
+   - Permisos por rol (Operador/Admin)
+   - Log de auditoría de cambios
+
+5. **Mantenimiento:**
+   - Logs de errores en archivo
+   - Sistema de notificaciones
+   - Actualizaciones automáticas
+
+---
+
+## 🎨 Diseño de Interfaz (ReaLTaiizor)
+
+### **Controles Utilizados:**
+
+**Del tema Cyberpunk:**
+- Botones de navegación lateral
+- Títulos de secciones
+
+**Del tema Metro:**
+- ComboBox para selectores
+- TextBox para entradas de texto
+- ProgressBar
+
+**Del tema Poison:**
+- DataGridView estilizado
+- Labels de estadísticas
+
+**Del tema Material:**
+- Cards/Paneles contenedores
+- Botones de acción principales
+
+**Estándar de Windows Forms:**
+- DateTimePicker
+- MaskedTextBox
+- PictureBox
+
+### **Paleta de Colores Actual:**
+
+```csharp
+// Colores principales
+Color MenuHover = Color.FromArgb(243, 229, 201);  // Dorado claro
+Color Dorado = Color.FromArgb(255, 208, 36);      // Dorado oscuro
+Color Crema = Color.FromArgb(255, 248, 225);      // Crema
+Color Negro = Color.FromArgb(35, 34, 33);         // Negro
+```
+
+### **Dependencias NuGet:**
 
 ```
-┌───────────────────────────────────────────────────────────────────────────────────────────┐
-│                                    FILTROS DE REPORTE                                      │
-│  Desde: [__/__]   Hasta: [__/__]    Lugar: [Todos ▼]    Tipo de reporte: [ Lista de servicios ▼ ]  │
-│                                                                                   [GENERAR]│
-└───────────────────────────────────────────────────────────────────────────────────────────┘
+- ReaLTaiizor (última versión compatible con .NET Framework 4.8.1)
+- iTextSharp (5.5.13.3 o compatible)
+- System.Data.SqlClient (incluido en .NET Framework)
 ```
 
-Área de datos (UC) — un solo DGV (Servicios)
+## 📚 Documentación Adicional
 
-```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                         SERVICIOS ANTERIORES                                  │
-│ +--------------------------------------------------------------------------+ │
-│ |                                DGV ÚNICO                                  | │
-│ |   (Columnas según "Tipo de reporte" seleccionado)                         | │
-│ +--------------------------------------------------------------------------+ │
-└──────────────────────────────────────────────────────────────────────────────┘
-```
-
-Alcance de filtros:
-- Desde/Hasta/Lugar: se aplican a todos los tipos de reporte.
-- Tipo de reporte (Combo): define qué dataset se carga en el DGV (ver opciones abajo).
-
-Interacciones sugeridas:
-- Generar aplica filtros (Desde/Hasta/Lugar) y el tipo de reporte seleccionado, cargando el DGV.
-- (Opcional) Doble clic en una fila puede abrir un detalle del servicio en otra vista o diálogo.
-
-Notas generales
-- Los filtros y acciones viven en el panel superior; el UC contiene únicamente el DGV.
-- Usar WaitCursor durante cargas; evitar bloqueos en UI.
-- Recordar la última selección de "Tipo de reporte" para persistir tras recargas.
-
-Tipo de reporte (4 opciones)
-- Lista de servicios: Fecha, Lugar, IdServicio, Proyección, Empleados, Invitados, Total, Duración, Cumplimiento%.
-- Asistencias por empresas (ranking): Empresa, Total, % sobre el total del período. (Si Lugar=Todos, ranking global; si hay Lugar, ranking por comedor.)
-- Cobertura vs proyección: Fecha, Lugar, Proyección, Total, Diferencia (Total−Proy), Cumplimiento%.
-- Distribución por día de semana: DíaSemana (Lun..Dom), Total, OcurrenciasEnElRango, PromedioPorOcurrencia (=Total/Ocurrencias), % sobre el total. Si Lugar=Todos, global; si hay Lugar, específico.
-
-Nota: Si preferís otra cuarta opción (p. ej. Intensidad por franjas de 15 min o Estabilidad por lugar), decime y la reemplazo sin problema.
-
-Mapeo de detalle automático (DGV derecho) según la columna seleccionada en el DGV izquierdo:
-- Fecha (o click en la fila): mostrar Registros del servicio seleccionado (detalle completo). Empresa y Texto (si existiera) filtran aquí.
-- Lugar: mostrar Ranking “Por empresa” del servicio seleccionado.
-- Comensales (empleados): mostrar Registros del servicio filtrando tipo Empleado (excluye invitados).
-- Invitados: mostrar Registros del servicio filtrando tipo Invitado.
-- Total: mostrar Registros del servicio (todos).
-- Duración: mostrar Concurrencia por hora del servicio seleccionado.
-
-Notas del mapeo:
-- Si una columna no aplica a un tipo de detalle, usar el default: Registros del servicio.
-- Si no hay selección en el DGV izquierdo, mantener el derecho vacío con una indicación amigable.
+### **Archivos de referencia:**
+- `Script_Sistema_Control_Almuerzos.sql` - Script de creación de BD
+- `Procedimientos_Vistas_Triggers.sql` - Stored procedures
+- `Sistema de Control de Almuerzos.md` - Documentación funcional
+- `Guia_Desarrollo.md` - Guía original (deprecated)
 
 
 
+## ✅ Checklist de Tareas Pendientes
 
+### **ucAdmin:**
+- [ ] Crear TabControl con 4 pestañas
+- [ ] Implementar pestaña "Empleados"
+  - [ ] DataGridView con lista
+  - [ ] Formulario de edición
+  - [ ] Botones CRUD
+  - [ ] Métodos en EmpleadoNegocio
+  - [ ] Stored procedures
+- [ ] Implementar pestaña "Empresas"
+  - [ ] DataGridView con lista
+  - [ ] Formulario de edición
+  - [ ] Botones CRUD
+  - [ ] Métodos en EmpresaNegocio
+  - [ ] Stored procedures
+- [ ] Implementar pestaña "Estadísticas"
+  - [ ] Labels con métricas
+  - [ ] Método en ReporteNegocio
+  - [ ] Consultas agregadas
+- [ ] Implementar pestaña "Configuración"
+  - [ ] Editor de App.config
+  - [ ] Botones de respaldo
 
+### **Integración RFID (Futuro):**
+- [ ] Investigar SDK del lector
+- [ ] Implementar clase RFIDReader
+- [ ] Configurar comunicación
+- [ ] Integrar con ucVistaPrincipal
+- [ ] Pruebas con hardware
+
+### **Mejoras opcionales:**
+- [ ] Sistema de login
+- [ ] Logs de auditoría
+- [ ] Reportes adicionales
+- [ ] Optimizaciones de rendimiento
+
+---
+
+## 🎯 Objetivo Final
+
+**Sistema completo y funcional para:**
+1. ✅ Registrar asistencias por RFID o manualmente
+2. ✅ Gestionar servicios diarios (iniciar/finalizar)
+3. ✅ Visualizar estadísticas en tiempo real
+4. ✅ Generar reportes con múltiples filtros
+5. ✅ Exportar reportes a PDF
+6. ⏳ Administrar empleados y empresas (ucAdmin)
+7. 🔮 Integrar lector RFID físico (futuro)
