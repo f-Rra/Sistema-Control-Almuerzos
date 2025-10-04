@@ -25,6 +25,8 @@ namespace Dominio
         [DisplayName("Empresa")]
         public string NombreEmpresa { get; set; }
 
+        public Empresa Empresa { get; set; }
+
         [DisplayName("Estado")]
         public bool Estado { get; set; }
 

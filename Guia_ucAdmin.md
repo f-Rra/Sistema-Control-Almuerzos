@@ -223,162 +223,364 @@
 │                                [Guardar Todos los Cambios]                  │
 └─────────────────────────────────────────────────────────────────────────────┘
 
-*** Resumen de las 4 Pestañas ***
-Pestaña 1: Empleados ✅
-Lista de empleados (izquierda)
-Formulario de edición (derecha)
-Búsqueda y filtros
-CRUD completo
-Pestaña 2: Empresas ✅
-Lista de empresas (izquierda)
-Detalles + estadísticas de empresa (derecha)
-Formulario de edición
-Contador de empleados por empresa
-Pestaña 3: Estadísticas ✅
-Vista completa sin división
-Cards con métricas principales
-Gráfico de barras (top empresas)
-Información del sistema
-Solo lectura
-Pestaña 4: Configuración ✅
-Vista completa sin división
-Secciones colapsables/agrupadas:
-Base de datos
-Respaldos
-Lector RFID (futuro)
-Preferencias
-Info de la aplicación
 
-*** Ventajas de este Diseño ***
+## 🎨 ESTRUCTURA VISUAL
 
-✅ Consistencia visual - Todas las pestañas siguen el mismo patrón
-✅ Split View para CRUD - Empleados y Empresas usan panel dividido
-✅ Vista completa para info - Estadísticas y Config no necesitan división
-✅ Fácil navegación - TabControl arriba siempre visible
-✅ Escalable - Fácil agregar más pestañas si es necesario
+### **Vista General con Sistema de Navegación por Botones**
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ [Empleados] [Empresas] [Estadísticas] [Configuración]   ← Barra de botones │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│                         PANEL ACTIVO (Dinámico)                             │
+│                                                                             │
+│  - pnlEmpleados     (visible cuando se presiona btnEmpleados)               │
+│  - pnlEmpresas      (visible cuando se presiona btnEmpresas)                │
+│  - pnlEstadisticas  (visible cuando se presiona btnEstadisticas)            │
+│  - pnlConfiguracion (visible cuando se presiona btnConfiguracion)           │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### **Sistema de Colores**
+```csharp
+Color colorDorado = Color.FromArgb(255, 208, 36);   // Estado ACTIVO
+Color colorNegro = Color.FromArgb(35, 34, 33);      // Estado INACTIVO
+Color colorFondo = Color.FromArgb(255, 248, 225);   // Fondo general
+```
 
 ---
 
 ## 📝 PASO A PASO PARA EL DESARROLLO
 
-### **FASE 1: Preparación y Estructura Base**
+### **FASE 1: Preparación y Estructura Base** ✅ (Ya implementada)
 
-#### **Paso 1.1: Crear el UserControl ucAdmin**
 
-1. En Visual Studio, click derecho en carpeta `UserControls`
-2. **Agregar > UserControl**
-3. Nombre: `ucAdmin.cs`
-4. Se crearán automáticamente:
-   - `ucAdmin.cs` (código)
-   - `ucAdmin.Designer.cs` (diseño)
-   - `ucAdmin.resx` (recursos)
+#### **Paso 1.2: Estructura de Navegación**
 
-#### **Paso 1.2: Configurar propiedades del UserControl**
-
-```csharp
-// En ucAdmin.Designer.cs (vista Diseño)
-this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-this.BackColor = System.Drawing.Color.White;
-this.Size = new System.Drawing.Size(1050, 650);
+**Panel de Botones (pnlBotones):**
+```
+Dock: Top
+Height: 70px
+BackColor: Color.FromArgb(255, 248, 225)
+Padding: 15px
 ```
 
-#### **Paso 1.3: Agregar el TabControl principal**
+**Botones de Navegación (ReaLTaiizor.Controls.Button):**
+```
+btnEmpleados
+btnEmpresas
+btnEstadisticas
+btnConfiguracion
 
-1. Abrir **ucAdmin.cs** en modo Diseño
-2. Desde Toolbox, arrastrar un **TabControl**
-3. Configurar propiedades:
-   ```
-   Name: tcAdmin
-   Dock: Fill
-   Font: Segoe UI, 10pt
-   ```
-4. Agregar 4 TabPages:
-   - `tpEmpleados` - Text: "Empleados"
-   - `tpEmpresas` - Text: "Empresas"
-   - `tpEstadisticas` - Text: "Estadísticas"
-   - `tpConfiguracion` - Text: "Configuración"
+Propiedades comunes:
+- Size: 150x40
+- Font: Segoe UI, 11pt, Bold
+- BorderColor: Color.FromArgb(35, 34, 33)
+- Anchor: Top (centrados)
+- Spacing: 165px entre cada uno
+```
+
+**Paneles de Contenido:**
+```
+pnlEmpleados
+pnlEmpresas
+pnlEstadisticas
+pnlConfiguracion
+
+Propiedades comunes:
+- Dock: Fill (pero posicionados debajo de pnlBotones)
+- Location: (0, 70)
+- Padding: 15px
+- BackColor: Color.FromArgb(255, 248, 225)
+- Visible: false (excepto el activo)
+```
+
+#### **Paso 1.3: Sistema de Selección de Botones** ✅
+
+**Código ya implementado:**
+```csharp
+private ReaLTaiizor.Controls.Button botonActivo;
+
+private void SeleccionarBoton(ReaLTaiizor.Controls.Button boton)
+{
+    Color colorDorado = Color.FromArgb(255, 208, 36);
+    Color colorNegro = Color.FromArgb(35, 34, 33);
+
+    // Restaurar botón anterior
+    if (botonActivo != null)
+    {
+        botonActivo.InactiveColor = colorNegro;
+        botonActivo.PressedColor = colorDorado;
+    }
+
+    // Activar nuevo botón
+    botonActivo = boton;
+    boton.InactiveColor = colorDorado;
+    boton.PressedColor = colorDorado;
+}
+
+private void MostrarPanel(Panel panelAMostrar)
+{
+    // Ocultar todos
+    pnlEmpleados.Visible = false;
+    pnlEmpresas.Visible = false;
+    pnlEstadisticas.Visible = false;
+    pnlConfiguracion.Visible = false;
+
+    // Mostrar el seleccionado
+    panelAMostrar.Visible = true;
+    panelAMostrar.BringToFront();
+}
+```
 
 ---
 
-### **FASE 2: Pestaña EMPLEADOS**
+### **FASE 2: Panel EMPLEADOS**
 
-#### **Paso 2.1: Diseñar el layout de división (Split Container)**
+#### **Paso 2.1: Diseñar el layout de división (SplitContainer)**
 
-1. En `tpEmpleados`, agregar un **SplitContainer**:
-   ```
-   Name: splitEmpleados
-   Dock: Fill
-   Orientation: Vertical
-   SplitterDistance: 350
-   FixedPanel: Panel1
-   IsSplitterFixed: true
-   ```
+Agregar dentro de `pnlEmpleados`:
+
+```csharp
+// EN EL DESIGNER
+SplitContainer splitEmpleados = new SplitContainer();
+splitEmpleados.Dock = DockStyle.Fill;
+splitEmpleados.Orientation = Orientation.Vertical;
+splitEmpleados.SplitterDistance = 450;
+splitEmpleados.FixedPanel = FixedPanel.Panel1;
+splitEmpleados.IsSplitterFixed = true;
+splitEmpleados.SplitterWidth = 2;
+pnlEmpleados.Controls.Add(splitEmpleados);
+```
 
 #### **Paso 2.2: Panel Izquierdo - Lista de Empleados**
 
-**Agregar controles:**
+**Estructura del Panel1:**
+```
+┌─────────────────────────────────────┐
+│ Panel Superior (Búsqueda y Filtros) │
+├─────────────────────────────────────┤
+│                                     │
+│      DataGridView (dgvEmpleados)    │
+│                                     │
+├─────────────────────────────────────┤
+│ Panel Inferior (Totales + Agregar)  │
+└─────────────────────────────────────┘
+```
 
-1. **Panel superior con búsqueda:**
-   - TextBox `txtBuscarEmpleado` (Placeholder: "Buscar por nombre o credencial...")
-   - ComboBox `cbFiltroEmpresa` (con opción "Todas las empresas")
-   - ComboBox `cbFiltroEstado` (Todos/Activos/Inactivos)
+**Controles a agregar:**
+
+1. **Panel Superior:**
+```csharp
+Panel pnlBusquedaEmpleados = new Panel();
+pnlBusquedaEmpleados.Dock = DockStyle.Top;
+pnlBusquedaEmpleados.Height = 80;
+pnlBusquedaEmpleados.Padding = new Padding(10);
+
+// TextBox de búsqueda
+TextBox txtBuscarEmpleado = new TextBox();
+txtBuscarEmpleado.Location = new Point(10, 10);
+txtBuscarEmpleado.Width = 200;
+txtBuscarEmpleado.PlaceholderText = "Buscar empleado...";
+txtBuscarEmpleado.TextChanged += txtBuscarEmpleado_TextChanged;
+
+// ComboBox filtro empresa
+ComboBox cbFiltroEmpresa = new ComboBox();
+cbFiltroEmpresa.Location = new Point(220, 10);
+cbFiltroEmpresa.Width = 150;
+cbFiltroEmpresa.DropDownStyle = ComboBoxStyle.DropDownList;
+
+// ComboBox filtro estado
+ComboBox cbFiltroEstado = new ComboBox();
+cbFiltroEstado.Location = new Point(10, 45);
+cbFiltroEstado.Width = 120;
+cbFiltroEstado.Items.AddRange(new[] { "Todos", "Activos", "Inactivos" });
+cbFiltroEstado.SelectedIndex = 0;
+```
 
 2. **DataGridView:**
-   ```
-   Name: dgvEmpleados
-   Dock: Fill
-   SelectionMode: FullRowSelect
-   MultiSelect: false
-   ReadOnly: true
-   AllowUserToAddRows: false
-   AutoSizeColumnsMode: Fill
-   ```
-   
-   **Columnas:**
-   - `IdEmpleado` (Hidden)
-   - `Credencial` (Width: 100px)
-   - `NombreCompleto` (Width: 200px)
-   - `Empresa` (Width: 150px)
-   - `Estado` (Width: 80px)
+```csharp
+DataGridView dgvEmpleados = new DataGridView();
+dgvEmpleados.Dock = DockStyle.Fill;
+dgvEmpleados.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+dgvEmpleados.MultiSelect = false;
+dgvEmpleados.ReadOnly = true;
+dgvEmpleados.AllowUserToAddRows = false;
+dgvEmpleados.AllowUserToDeleteRows = false;
+dgvEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+dgvEmpleados.BackgroundColor = Color.White;
+dgvEmpleados.BorderStyle = BorderStyle.None;
+dgvEmpleados.SelectionChanged += dgvEmpleados_SelectionChanged;
 
-3. **Panel inferior:**
-   - Label `lblTotalEmpleados` ("Total: 0 empleados")
-   - Button `btnNuevoEmpleado` ("+ Nuevo Empleado")
+// Columnas
+dgvEmpleados.Columns.Add("IdEmpleado", "ID");
+dgvEmpleados.Columns["IdEmpleado"].Visible = false;
+dgvEmpleados.Columns.Add("Credencial", "Credencial");
+dgvEmpleados.Columns["Credencial"].Width = 100;
+dgvEmpleados.Columns.Add("NombreCompleto", "Nombre Completo");
+dgvEmpleados.Columns.Add("Empresa", "Empresa");
+dgvEmpleados.Columns.Add("Estado", "Estado");
+dgvEmpleados.Columns["Estado"].Width = 80;
+```
+
+3. **Panel Inferior:**
+```csharp
+Panel pnlInferiorEmpleados = new Panel();
+pnlInferiorEmpleados.Dock = DockStyle.Bottom;
+pnlInferiorEmpleados.Height = 60;
+pnlInferiorEmpleados.Padding = new Padding(10);
+
+Label lblTotalEmpleados = new Label();
+lblTotalEmpleados.Text = "Total: 0 empleados";
+lblTotalEmpleados.Location = new Point(10, 20);
+lblTotalEmpleados.AutoSize = true;
+
+ReaLTaiizor.Controls.Button btnNuevoEmpleado = new ReaLTaiizor.Controls.Button();
+btnNuevoEmpleado.Text = "+ Nuevo Empleado";
+btnNuevoEmpleado.Size = new Size(150, 35);
+btnNuevoEmpleado.Location = new Point(250, 12);
+btnNuevoEmpleado.Click += btnNuevoEmpleado_Click;
+```
 
 #### **Paso 2.3: Panel Derecho - Formulario de Edición**
 
-**Agregar controles:**
+**Estructura del Panel2:**
+```
+┌─────────────────────────────────────┐
+│   GroupBox: Detalles del Empleado   │
+│                                     │
+│   [Credencial]  [Verificar]         │
+│   [Nombre]      [Apellido]          │
+│   [Empresa ▼]                       │
+│   ● Activo  ○ Inactivo              │
+│                                     │
+│   [Guardar] [Cancelar] [Eliminar]   │
+└─────────────────────────────────────┘
+```
 
-1. **GroupBox:** `gbEmpleadoDetalle` - Text: "Detalles del Empleado"
+**Controles a agregar:**
 
-2. **Dentro del GroupBox:**
-   ```
-   Label: "Número de Credencial:"
-   TextBox: txtCredencial (MaxLength: 20)
-   Button: btnVerificarCredencial ("Verificar disponibilidad")
-   
-   Label: "Nombre:"
-   TextBox: txtNombre (MaxLength: 50)
-   
-   Label: "Apellido:"
-   TextBox: txtApellido (MaxLength: 50)
-   
-   Label: "Empresa Asignada:"
-   ComboBox: cbEmpresaEmpleado (DropDownStyle: DropDownList)
-   
-   Label: "Estado:"
-   RadioButton: rbActivoEmpleado ("Activo")
-   RadioButton: rbInactivoEmpleado ("Inactivo")
-   
-   Panel de botones:
-   Button: btnGuardarEmpleado ("Guardar")
-   Button: btnCancelarEmpleado ("Cancelar")
-   Button: btnEliminarEmpleado ("Eliminar")
-   ```
+```csharp
+GroupBox gbEmpleadoDetalle = new GroupBox();
+gbEmpleadoDetalle.Text = "Detalles del Empleado";
+gbEmpleadoDetalle.Dock = DockStyle.Fill;
+gbEmpleadoDetalle.Padding = new Padding(20);
+gbEmpleadoDetalle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+int yPos = 30;
+int labelWidth = 150;
+int controlWidth = 250;
+int spacing = 50;
+
+// Credencial
+Label lblCredencial = new Label();
+lblCredencial.Text = "Número de Credencial:";
+lblCredencial.Location = new Point(20, yPos);
+lblCredencial.AutoSize = true;
+
+TextBox txtCredencial = new TextBox();
+txtCredencial.Location = new Point(20, yPos + 25);
+txtCredencial.Width = 150;
+txtCredencial.MaxLength = 20;
+
+ReaLTaiizor.Controls.Button btnVerificarCredencial = new ReaLTaiizor.Controls.Button();
+btnVerificarCredencial.Text = "Verificar";
+btnVerificarCredencial.Location = new Point(180, yPos + 23);
+btnVerificarCredencial.Size = new Size(100, 25);
+btnVerificarCredencial.Click += btnVerificarCredencial_Click;
+
+yPos += spacing;
+
+// Nombre
+Label lblNombre = new Label();
+lblNombre.Text = "Nombre:";
+lblNombre.Location = new Point(20, yPos);
+lblNombre.AutoSize = true;
+
+TextBox txtNombre = new TextBox();
+txtNombre.Location = new Point(20, yPos + 25);
+txtNombre.Width = controlWidth;
+txtNombre.MaxLength = 50;
+
+yPos += spacing;
+
+// Apellido
+Label lblApellido = new Label();
+lblApellido.Text = "Apellido:";
+lblApellido.Location = new Point(20, yPos);
+lblApellido.AutoSize = true;
+
+TextBox txtApellido = new TextBox();
+txtApellido.Location = new Point(20, yPos + 25);
+txtApellido.Width = controlWidth;
+txtApellido.MaxLength = 50;
+
+yPos += spacing;
+
+// Empresa
+Label lblEmpresa = new Label();
+lblEmpresa.Text = "Empresa Asignada:";
+lblEmpresa.Location = new Point(20, yPos);
+lblEmpresa.AutoSize = true;
+
+ComboBox cbEmpresaEmpleado = new ComboBox();
+cbEmpresaEmpleado.Location = new Point(20, yPos + 25);
+cbEmpresaEmpleado.Width = controlWidth;
+cbEmpresaEmpleado.DropDownStyle = ComboBoxStyle.DropDownList;
+
+yPos += spacing;
+
+// Estado
+Label lblEstado = new Label();
+lblEstado.Text = "Estado:";
+lblEstado.Location = new Point(20, yPos);
+lblEstado.AutoSize = true;
+
+RadioButton rbActivoEmpleado = new RadioButton();
+rbActivoEmpleado.Text = "Activo";
+rbActivoEmpleado.Location = new Point(20, yPos + 25);
+rbActivoEmpleado.Checked = true;
+
+RadioButton rbInactivoEmpleado = new RadioButton();
+rbInactivoEmpleado.Text = "Inactivo";
+rbInactivoEmpleado.Location = new Point(120, yPos + 25);
+
+yPos += spacing + 20;
+
+// Botones de acción
+Panel pnlBotonesEmpleado = new Panel();
+pnlBotonesEmpleado.Location = new Point(20, yPos);
+pnlBotonesEmpleado.Size = new Size(400, 45);
+
+ReaLTaiizor.Controls.Button btnGuardarEmpleado = new ReaLTaiizor.Controls.Button();
+btnGuardarEmpleado.Text = "Guardar";
+btnGuardarEmpleado.Size = new Size(100, 35);
+btnGuardarEmpleado.Location = new Point(0, 0);
+btnGuardarEmpleado.Click += btnGuardarEmpleado_Click;
+
+ReaLTaiizor.Controls.Button btnCancelarEmpleado = new ReaLTaiizor.Controls.Button();
+btnCancelarEmpleado.Text = "Cancelar";
+btnCancelarEmpleado.Size = new Size(100, 35);
+btnCancelarEmpleado.Location = new Point(110, 0);
+btnCancelarEmpleado.Click += btnCancelarEmpleado_Click;
+
+ReaLTaiizor.Controls.Button btnEliminarEmpleado = new ReaLTaiizor.Controls.Button();
+btnEliminarEmpleado.Text = "Eliminar";
+btnEliminarEmpleado.Size = new Size(100, 35);
+btnEliminarEmpleado.Location = new Point(220, 0);
+btnEliminarEmpleado.Enabled = false;
+btnEliminarEmpleado.Click += btnEliminarEmpleado_Click;
+
+pnlBotonesEmpleado.Controls.AddRange(new Control[] { 
+    btnGuardarEmpleado, btnCancelarEmpleado, btnEliminarEmpleado 
+});
+```
 
 #### **Paso 2.4: Implementar código de Empleados**
 
-**En ucAdmin.cs:**
+**Agregar en ucAdmin.cs:**
 
 ```csharp
 using dominio;
@@ -388,6 +590,7 @@ using System.Windows.Forms;
 
 public partial class ucAdmin : UserControl
 {
+    // VARIABLES DE CLASE
     private EmpleadoNegocio empleadoNegocio = new EmpleadoNegocio();
     private EmpresaNegocio empresaNegocio = new EmpresaNegocio();
     private Empleado empleadoSeleccionado = null;
@@ -396,6 +599,7 @@ public partial class ucAdmin : UserControl
     public ucAdmin()
     {
         InitializeComponent();
+        SeleccionarBoton(btnEmpleados); // Botón activo por defecto
     }
 
     private void ucAdmin_Load(object sender, EventArgs e)
@@ -405,17 +609,57 @@ public partial class ucAdmin : UserControl
         LimpiarFormularioEmpleado();
     }
 
-    // MÉTODOS DE CARGA
+    // ══════════════════════════════════════════════════════════════
+    // MÉTODOS DE CARGA DE DATOS
+    // ══════════════════════════════════════════════════════════════
+
     private void CargarEmpleados(string filtro = "")
     {
         try
         {
-            dgvEmpleados.DataSource = empleadoNegocio.listar();
+            var empleados = empleadoNegocio.listar();
+            
+            // Aplicar filtros si existen
+            if (!string.IsNullOrWhiteSpace(filtro))
+            {
+                empleados = empleados.FindAll(e => 
+                    e.Nombre.ToUpper().Contains(filtro.ToUpper()) ||
+                    e.Apellido.ToUpper().Contains(filtro.ToUpper()) ||
+                    e.IdCredencial.Contains(filtro)
+                );
+            }
+
+            // Filtrar por empresa si está seleccionada
+            if (cbFiltroEmpresa.SelectedIndex > 0)
+            {
+                int idEmpresa = (int)cbFiltroEmpresa.SelectedValue;
+                empleados = empleados.FindAll(e => e.Empresa.IdEmpresa == idEmpresa);
+            }
+
+            // Filtrar por estado
+            if (cbFiltroEstado.SelectedIndex == 1) // Activos
+                empleados = empleados.FindAll(e => e.Estado);
+            else if (cbFiltroEstado.SelectedIndex == 2) // Inactivos
+                empleados = empleados.FindAll(e => !e.Estado);
+
+            dgvEmpleados.Rows.Clear();
+            foreach (var emp in empleados)
+            {
+                dgvEmpleados.Rows.Add(
+                    emp.IdEmpleado,
+                    emp.IdCredencial,
+                    $"{emp.Nombre} {emp.Apellido}",
+                    emp.Empresa.Nombre,
+                    emp.Estado ? "Activo" : "Inactivo"
+                );
+            }
+
             lblTotalEmpleados.Text = $"Total: {dgvEmpleados.RowCount} empleados";
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error al cargar empleados: {ex.Message}");
+            MessageBox.Show($"Error al cargar empleados: {ex.Message}", 
+                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -425,26 +669,36 @@ public partial class ucAdmin : UserControl
         {
             var empresas = empresaNegocio.listar();
             
-            cbFiltroEmpresa.DataSource = empresas;
+            // Para el filtro (con opción "Todas")
+            var empresasFiltro = new List<Empresa>();
+            empresasFiltro.Add(new Empresa { IdEmpresa = 0, Nombre = "Todas las empresas" });
+            empresasFiltro.AddRange(empresas);
+            
+            cbFiltroEmpresa.DataSource = empresasFiltro;
             cbFiltroEmpresa.DisplayMember = "Nombre";
             cbFiltroEmpresa.ValueMember = "IdEmpresa";
             
+            // Para el formulario de edición
             cbEmpresaEmpleado.DataSource = empresas;
             cbEmpresaEmpleado.DisplayMember = "Nombre";
             cbEmpresaEmpleado.ValueMember = "IdEmpresa";
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error al cargar empresas: {ex.Message}");
+            MessageBox.Show($"Error al cargar empresas: {ex.Message}", 
+                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
+    // ══════════════════════════════════════════════════════════════
     // EVENTOS DE EMPLEADOS
+    // ══════════════════════════════════════════════════════════════
+
     private void dgvEmpleados_SelectionChanged(object sender, EventArgs e)
     {
         if (dgvEmpleados.CurrentRow != null)
         {
-            int idEmpleado = (int)dgvEmpleados.CurrentRow.Cells["IdEmpleado"].Value;
+            int idEmpleado = Convert.ToInt32(dgvEmpleados.CurrentRow.Cells["IdEmpleado"].Value);
             CargarEmpleadoEnFormulario(idEmpleado);
         }
     }
@@ -470,7 +724,8 @@ public partial class ucAdmin : UserControl
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error al cargar empleado: {ex.Message}");
+            MessageBox.Show($"Error al cargar empleado: {ex.Message}", 
+                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -491,7 +746,7 @@ public partial class ucAdmin : UserControl
         {
             Empleado emp = new Empleado();
             
-            if (modoEdicion)
+            if (modoEdicion && empleadoSeleccionado != null)
                 emp.IdEmpleado = empleadoSeleccionado.IdEmpleado;
             
             emp.IdCredencial = txtCredencial.Text.Trim();
@@ -535,13 +790,15 @@ public partial class ucAdmin : UserControl
             try
             {
                 empleadoNegocio.eliminar(empleadoSeleccionado.IdEmpleado);
-                MessageBox.Show("Empleado desactivado", "Éxito");
+                MessageBox.Show("Empleado desactivado correctamente", "Éxito", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarEmpleados();
                 LimpiarFormularioEmpleado();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}", "Error");
+                MessageBox.Show($"Error: {ex.Message}", "Error", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
@@ -555,7 +812,8 @@ public partial class ucAdmin : UserControl
     {
         if (string.IsNullOrWhiteSpace(txtCredencial.Text))
         {
-            MessageBox.Show("Ingrese un número de credencial");
+            MessageBox.Show("Ingrese un número de credencial", "Advertencia",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
 
@@ -563,10 +821,21 @@ public partial class ucAdmin : UserControl
         {
             bool existe = empleadoNegocio.existeCredencial(txtCredencial.Text.Trim());
             
-            if (existe && !modoEdicion)
+            // Si existe y NO estamos en modo edición, es un problema
+            // Si existe y SÍ estamos en modo edición, verificar que sea la misma credencial
+            if (existe)
             {
-                MessageBox.Show("Esta credencial ya está en uso", "No disponible", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (!modoEdicion || 
+                    (modoEdicion && empleadoSeleccionado.IdCredencial != txtCredencial.Text.Trim()))
+                {
+                    MessageBox.Show("Esta credencial ya está en uso", "No disponible", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Credencial actual del empleado", "Información", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
@@ -576,43 +845,50 @@ public partial class ucAdmin : UserControl
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error: {ex.Message}");
+            MessageBox.Show($"Error: {ex.Message}", "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
     private void txtBuscarEmpleado_TextChanged(object sender, EventArgs e)
     {
-        // Implementar filtro en tiempo real
         CargarEmpleados(txtBuscarEmpleado.Text);
     }
 
+    // ══════════════════════════════════════════════════════════════
     // MÉTODOS AUXILIARES
+    // ══════════════════════════════════════════════════════════════
+
     private bool ValidarFormularioEmpleado()
     {
         if (string.IsNullOrWhiteSpace(txtCredencial.Text))
         {
-            MessageBox.Show("Ingrese el número de credencial");
+            MessageBox.Show("Ingrese el número de credencial", "Validación",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
             txtCredencial.Focus();
             return false;
         }
 
         if (string.IsNullOrWhiteSpace(txtNombre.Text))
         {
-            MessageBox.Show("Ingrese el nombre");
+            MessageBox.Show("Ingrese el nombre", "Validación",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
             txtNombre.Focus();
             return false;
         }
 
         if (string.IsNullOrWhiteSpace(txtApellido.Text))
         {
-            MessageBox.Show("Ingrese el apellido");
+            MessageBox.Show("Ingrese el apellido", "Validación",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
             txtApellido.Focus();
             return false;
         }
 
         if (cbEmpresaEmpleado.SelectedIndex == -1)
         {
-            MessageBox.Show("Seleccione una empresa");
+            MessageBox.Show("Seleccione una empresa", "Validación",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return false;
         }
 
@@ -635,323 +911,631 @@ public partial class ucAdmin : UserControl
 
 ---
 
-### **FASE 3: Pestaña EMPRESAS**
+### **FASE 3: Panel EMPRESAS**
 
-#### **Paso 3.1: Diseñar layout similar a Empleados**
+(Estructura similar a Empleados, pero con formulario más simple)
 
-Repetir estructura con **SplitContainer**:
-- Panel izquierdo: Lista de empresas
-- Panel derecho: Formulario + Estadísticas
+#### **Paso 3.1: Diseñar layout**
+
+Agregar SplitContainer en `pnlEmpresas` con la misma estructura que Empleados.
 
 #### **Paso 3.2: Panel Izquierdo - Lista de Empresas**
 
-**Controles:**
+Similar al de empleados pero con columnas:
+- IdEmpresa (hidden)
+- Nombre
+- CantidadEmpleados
+- Estado
+
+#### **Paso 3.3: Panel Derecho - Formulario + Estadísticas**
+
 ```
-TextBox: txtBuscarEmpresa
-ComboBox: cbFiltroEstadoEmpresa (Todas/Activas/Inactivas)
-DataGridView: dgvEmpresas
-  Columnas: IdEmpresa, Nombre, CantidadEmpleados, Estado
-Label: lblTotalEmpresas
-Button: btnNuevaEmpresa
-```
-
-#### **Paso 3.3: Panel Derecho - Formulario + Stats**
-
-**Controles:**
-```
-GroupBox: gbEmpresaDetalle
-  TextBox: txtNombreEmpresa
-  RadioButton: rbActivaEmpresa / rbInactivaEmpresa
-  Button: btnGuardarEmpresa, btnCancelarEmpresa, btnEliminarEmpresa
-
-GroupBox: gbEstadisticasEmpresa
-  Label: lblTotalEmpleadosEmpresa
-  Label: lblEmpleadosActivos
-  Label: lblEmpleadosInactivos
-  Label: lblAsistenciasMes
-  Label: lblPromedioAsistencias
-```
-
-#### **Paso 3.4: Implementar código de Empresas**
-
-```csharp
-// Variables de clase
-private Empresa empresaSeleccionada = null;
-private bool modoEdicionEmpresa = false;
-
-// Métodos principales
-private void CargarEmpresas()
-{
-    dgvEmpresas.DataSource = empresaNegocio.listar();
-    lblTotalEmpresas.Text = $"Total: {dgvEmpresas.RowCount} empresas";
-}
-
-private void dgvEmpresas_SelectionChanged(object sender, EventArgs e)
-{
-    if (dgvEmpresas.CurrentRow != null)
-    {
-        int idEmpresa = (int)dgvEmpresas.CurrentRow.Cells["IdEmpresa"].Value;
-        CargarEmpresaEnFormulario(idEmpresa);
-    }
-}
-
-private void CargarEmpresaEnFormulario(int idEmpresa)
-{
-    empresaSeleccionada = empresaNegocio.buscarPorId(idEmpresa);
-    txtNombreEmpresa.Text = empresaSeleccionada.Nombre;
-    rbActivaEmpresa.Checked = empresaSeleccionada.Estado;
-    
-    // Cargar estadísticas
-    CargarEstadisticasEmpresa(idEmpresa);
-    modoEdicionEmpresa = true;
-}
-
-private void CargarEstadisticasEmpresa(int idEmpresa)
-{
-    // Implementar consultas de estadísticas por empresa
-    var stats = empleadoNegocio.obtenerEstadisticasPorEmpresa(idEmpresa);
-    lblTotalEmpleadosEmpresa.Text = $"Total: {stats.Total}";
-    lblEmpleadosActivos.Text = $"Activos: {stats.Activos}";
-    // ... resto de estadísticas
-}
-
-private void btnGuardarEmpresa_Click(object sender, EventArgs e)
-{
-    // Similar a guardar empleado
-}
-
-// ... resto de métodos similares a Empleados
+┌─────────────────────────────────────┐
+│   GroupBox: Detalles de la Empresa  │
+│   [Nombre]                          │
+│   ● Activa  ○ Inactiva              │
+│   [Guardar] [Cancelar] [Eliminar]   │
+├─────────────────────────────────────┤
+│   GroupBox: Estadísticas            │
+│   Total empleados: XX               │
+│   Activos: XX                       │
+│   Inactivos: XX                     │
+│   Asistencias (mes): XXX            │
+└─────────────────────────────────────┘
 ```
 
 ---
 
-### **FASE 4: Pestaña ESTADÍSTICAS**
+### **FASE 4: Panel ESTADÍSTICAS**
 
-#### **Paso 4.1: Diseñar vista de métricas**
+Sin división, todo en un solo panel con scroll.
 
-**Layout sin división, todo en un Panel:**
+#### **Paso 4.1: Diseñar Cards de Métricas**
 
+```csharp
+// Configurar pnlEstadisticas
+pnlEstadisticas.AutoScroll = true;
+
+// Panel contenedor
+Panel pnlContenedorStats = new Panel();
+pnlContenedorStats.AutoSize = true;
+pnlContenedorStats.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+pnlContenedorStats.Padding = new Padding(20);
+pnlEstadisticas.Controls.Add(pnlContenedorStats);
+
+// GroupBox Estadísticas Generales
+GroupBox gbEstadisticasGenerales = new GroupBox();
+gbEstadisticasGenerales.Text = "ESTADÍSTICAS GENERALES DEL SISTEMA";
+gbEstadisticasGenerales.Size = new Size(pnlEstadisticas.Width - 80, 180);
+gbEstadisticasGenerales.Location = new Point(20, 20);
+gbEstadisticasGenerales.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+// Crear 3 cards lado a lado
+int cardWidth = 300;
+int cardHeight = 120;
+int cardSpacing = 20;
+
+// Card 1: EMPLEADOS
+Panel cardEmpleados = CrearCard("EMPLEADOS", 20, 40, cardWidth, cardHeight);
+Label lblTotalEmpleados = new Label();
+lblTotalEmpleados.Text = "Total Registrados: 0";
+lblTotalEmpleados.Location = new Point(10, 30);
+lblTotalEmpleados.AutoSize = true;
+
+Label lblActivosInactivos = new Label();
+lblActivosInactivos.Text = "Activos: 0 | Inactivos: 0";
+lblActivosInactivos.Location = new Point(10, 55);
+lblActivosInactivos.AutoSize = true;
+
+Label lblCredencialesUnicas = new Label();
+lblCredencialesUnicas.Text = "Credenciales únicas: 0";
+lblCredencialesUnicas.Location = new Point(10, 80);
+lblCredencialesUnicas.AutoSize = true;
+
+cardEmpleados.Controls.AddRange(new Control[] { 
+    lblTotalEmpleados, lblActivosInactivos, lblCredencialesUnicas 
+});
+gbEstadisticasGenerales.Controls.Add(cardEmpleados);
+
+// Card 2: EMPRESAS
+Panel cardEmpresas = CrearCard("EMPRESAS", 
+    20 + cardWidth + cardSpacing, 40, cardWidth, cardHeight);
+Label lblTotalEmpresas = new Label();
+lblTotalEmpresas.Text = "Total Activas: 0";
+lblTotalEmpresas.Location = new Point(10, 30);
+lblTotalEmpresas.AutoSize = true;
+
+Label lblPromedioEmpleados = new Label();
+lblPromedioEmpleados.Text = "Promedio emp/empresa: 0";
+lblPromedioEmpleados.Location = new Point(10, 55);
+lblPromedioEmpleados.AutoSize = true;
+
+cardEmpresas.Controls.AddRange(new Control[] { 
+    lblTotalEmpresas, lblPromedioEmpleados 
+});
+gbEstadisticasGenerales.Controls.Add(cardEmpresas);
+
+// Card 3: SERVICIOS
+Panel cardServicios = CrearCard("SERVICIOS", 
+    20 + (cardWidth + cardSpacing) * 2, 40, cardWidth, cardHeight);
+Label lblServiciosMes = new Label();
+lblServiciosMes.Text = "Este mes: 0";
+lblServiciosMes.Location = new Point(10, 30);
+lblServiciosMes.AutoSize = true;
+
+Label lblServiciosAnio = new Label();
+lblServiciosAnio.Text = "Total del año: 0";
+lblServiciosAnio.Location = new Point(10, 55);
+lblServiciosAnio.AutoSize = true;
+
+Label lblPromedioDia = new Label();
+lblPromedioDia.Text = "Promedio/día: 0";
+lblPromedioDia.Location = new Point(10, 80);
+lblPromedioDia.AutoSize = true;
+
+cardServicios.Controls.AddRange(new Control[] { 
+    lblServiciosMes, lblServiciosAnio, lblPromedioDia 
+});
+gbEstadisticasGenerales.Controls.Add(cardServicios);
+
+pnlContenedorStats.Controls.Add(gbEstadisticasGenerales);
 ```
-Panel: pnlEstadisticas (Dock: Fill)
-  AutoScroll: true
 
-GroupBox: gbEstadisticasGenerales - "Estadísticas Generales"
-  Panel: pnlCardsEmpleados
-    Label: "EMPLEADOS"
-    Label: lblTotalRegistrados ("Total: 0")
-    Label: lblActivosInactivos ("Activos: 0 | Inactivos: 0")
-  
-  Panel: pnlCardsEmpresas
-    Label: "EMPRESAS"
-    Label: lblTotalEmpresas ("Total: 0")
-    Label: lblPromedioEmpleados ("Promedio: 0")
-  
-  Panel: pnlCardsServicios
-    Label: "SERVICIOS"
-    Label: lblServiciosMes ("Este mes: 0")
-    Label: lblServiciosAnio ("Total año: 0")
+**Método auxiliar para crear cards:**
+```csharp
+private Panel CrearCard(string titulo, int x, int y, int width, int height)
+{
+    Panel card = new Panel();
+    card.Location = new Point(x, y);
+    card.Size = new Size(width, height);
+    card.BackColor = Color.White;
+    card.BorderStyle = BorderStyle.FixedSingle;
 
-GroupBox: gbAsistencias - "Asistencias y Tendencias"
-  Label: lblAsistenciasTotales
-  Label: lblPromedioDiario
-  Label: lblDiaMayorAsistencia
-  Label: lblCobertura
-  
-GroupBox: gbTopEmpresas - "Top 5 Empresas"
-  DataGridView: dgvTopEmpresas (Small, ReadOnly)
-  
-Button: btnActualizarEstadisticas
-Button: btnGenerarReporte
+    Label lblTitulo = new Label();
+    lblTitulo.Text = titulo;
+    lblTitulo.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+    lblTitulo.Location = new Point(10, 10);
+    lblTitulo.AutoSize = true;
+    lblTitulo.ForeColor = Color.FromArgb(35, 34, 33);
+    
+    card.Controls.Add(lblTitulo);
+    return card;
+}
 ```
 
-#### **Paso 4.2: Implementar código de Estadísticas**
+#### Paso 4.2: GroupBox de Asistencias y Tendencias
+
+```csharp
+GroupBox gbAsistencias = new GroupBox();
+gbAsistencias.Text = "ASISTENCIAS Y TENDENCIAS";
+gbAsistencias.Size = new Size(pnlEstadisticas.Width - 80, 200);
+gbAsistencias.Location = new Point(20, 220);
+gbAsistencias.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+int yPosLabel = 30;
+int lineSpacing = 25;
+
+Label lblAsistenciasTotales = new Label();
+lblAsistenciasTotales.Text = "Asistencias Totales (mes actual): 0";
+lblAsistenciasTotales.Location = new Point(20, yPosLabel);
+lblAsistenciasTotales.AutoSize = true;
+
+Label lblAsistenciasEmpleados = new Label();
+lblAsistenciasEmpleados.Text = "Asistencias de Empleados: 0";
+lblAsistenciasEmpleados.Location = new Point(20, yPosLabel + lineSpacing);
+lblAsistenciasEmpleados.AutoSize = true;
+
+Label lblAsistenciasInvitados = new Label();
+lblAsistenciasInvitados.Text = "Asistencias de Invitados: 0";
+lblAsistenciasInvitados.Location = new Point(20, yPosLabel + lineSpacing * 2);
+lblAsistenciasInvitados.AutoSize = true;
+
+Label lblPromedioDiario = new Label();
+lblPromedioDiario.Text = "Promedio diario de asistencias: 0";
+lblPromedioDiario.Location = new Point(20, yPosLabel + lineSpacing * 3);
+lblPromedioDiario.AutoSize = true;
+
+Label lblDiaMayor = new Label();
+lblDiaMayor.Text = "Día con mayor asistencia: -";
+lblDiaMayor.Location = new Point(20, yPosLabel + lineSpacing * 4);
+lblDiaMayor.AutoSize = true;
+
+Label lblDiaMenor = new Label();
+lblDiaMenor.Text = "Día con menor asistencia: -";
+lblDiaMenor.Location = new Point(20, yPosLabel + lineSpacing * 5);
+lblDiaMenor.AutoSize = true;
+
+gbAsistencias.Controls.AddRange(new Control[] {
+    lblAsistenciasTotales, lblAsistenciasEmpleados, lblAsistenciasInvitados,
+    lblPromedioDiario, lblDiaMayor, lblDiaMenor
+});
+
+pnlContenedorStats.Controls.Add(gbAsistencias);
+```
+
+#### Paso 4.3: Top 5 Empresas
+
+```csharp
+GroupBox gbTopEmpresas = new GroupBox();
+gbTopEmpresas.Text = "TOP 5 EMPRESAS POR ASISTENCIAS (MES ACTUAL)";
+gbTopEmpresas.Size = new Size(pnlEstadisticas.Width - 80, 250);
+gbTopEmpresas.Location = new Point(20, 440);
+gbTopEmpresas.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+DataGridView dgvTopEmpresas = new DataGridView();
+dgvTopEmpresas.Location = new Point(20, 35);
+dgvTopEmpresas.Size = new Size(gbTopEmpresas.Width - 50, 180);
+dgvTopEmpresas.ReadOnly = true;
+dgvTopEmpresas.AllowUserToAddRows = false;
+dgvTopEmpresas.AllowUserToDeleteRows = false;
+dgvTopEmpresas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+dgvTopEmpresas.BackgroundColor = Color.White;
+dgvTopEmpresas.BorderStyle = BorderStyle.None;
+
+dgvTopEmpresas.Columns.Add("Posicion", "#");
+dgvTopEmpresas.Columns["Posicion"].Width = 40;
+dgvTopEmpresas.Columns.Add("Empresa", "Empresa");
+dgvTopEmpresas.Columns.Add("Asistencias", "Asistencias");
+dgvTopEmpresas.Columns["Asistencias"].Width = 100;
+dgvTopEmpresas.Columns.Add("Porcentaje", "Porcentaje");
+dgvTopEmpresas.Columns["Porcentaje"].Width = 100;
+
+gbTopEmpresas.Controls.Add(dgvTopEmpresas);
+pnlContenedorStats.Controls.Add(gbTopEmpresas);
+```
+
+#### Paso 4.4: Información del Sistema
+
+```csharp
+GroupBox gbInfoSistema = new GroupBox();
+gbInfoSistema.Text = "INFORMACIÓN DEL SISTEMA";
+gbInfoSistema.Size = new Size(pnlEstadisticas.Width - 80, 150);
+gbInfoSistema.Location = new Point(20, 710);
+gbInfoSistema.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+Label lblBaseDatos = new Label();
+lblBaseDatos.Text = "Base de datos: BD_Control_Almuerzos";
+lblBaseDatos.Location = new Point(20, 35);
+lblBaseDatos.AutoSize = true;
+
+Label lblUltimaActualizacion = new Label();
+lblUltimaActualizacion.Text = "Última actualización: --/--/---- --:--:--";
+lblUltimaActualizacion.Location = new Point(20, 60);
+lblUltimaActualizacion.AutoSize = true;
+
+Label lblTamanioBD = new Label();
+lblTamanioBD.Text = "Tamaño de BD: 0 MB";
+lblTamanioBD.Location = new Point(20, 85);
+lblTamanioBD.AutoSize = true;
+
+Label lblUltimoRespaldo = new Label();
+lblUltimoRespaldo.Text = "Último respaldo: --/--/---- --:--:--";
+lblUltimoRespaldo.Location = new Point(20, 110);
+lblUltimoRespaldo.AutoSize = true;
+
+gbInfoSistema.Controls.AddRange(new Control[] {
+    lblBaseDatos, lblUltimaActualizacion, lblTamanioBD, lblUltimoRespaldo
+});
+
+pnlContenedorStats.Controls.Add(gbInfoSistema);
+```
+
+#### Paso 4.5: Botones de Acción
+
+```csharp
+Panel pnlBotonesStats = new Panel();
+pnlBotonesStats.Location = new Point(20, 880);
+pnlBotonesStats.Size = new Size(400, 50);
+
+ReaLTaiizor.Controls.Button btnActualizarEstadisticas = new ReaLTaiizor.Controls.Button();
+btnActualizarEstadisticas.Text = "Actualizar Estadísticas";
+btnActualizarEstadisticas.Size = new Size(180, 40);
+btnActualizarEstadisticas.Location = new Point(0, 0);
+btnActualizarEstadisticas.Click += btnActualizarEstadisticas_Click;
+
+ReaLTaiizor.Controls.Button btnGenerarReporte = new ReaLTaiizor.Controls.Button();
+btnGenerarReporte.Text = "Generar Reporte Completo";
+btnGenerarReporte.Size = new Size(200, 40);
+btnGenerarReporte.Location = new Point(195, 0);
+btnGenerarReporte.Click += btnGenerarReporte_Click;
+
+pnlBotonesStats.Controls.AddRange(new Control[] {
+    btnActualizarEstadisticas, btnGenerarReporte
+});
+
+pnlContenedorStats.Controls.Add(pnlBotonesStats);
+```
+
+#### Paso 4.6: Implementar método de carga
 
 ```csharp
 private void CargarEstadisticas()
 {
     try
     {
-        // Estadísticas de empleados
+        // CARD EMPLEADOS
         var statsEmpleados = empleadoNegocio.obtenerEstadisticasGenerales();
-        lblTotalRegistrados.Text = $"Total: {statsEmpleados.Total}";
+        lblTotalEmpleados.Text = $"Total Registrados: {statsEmpleados.Total}";
         lblActivosInactivos.Text = $"Activos: {statsEmpleados.Activos} | Inactivos: {statsEmpleados.Inactivos}";
+        lblCredencialesUnicas.Text = $"Credenciales únicas: {statsEmpleados.Total}";
 
-        // Estadísticas de empresas
+        // CARD EMPRESAS
         var statsEmpresas = empresaNegocio.obtenerEstadisticas();
-        lblTotalEmpresas.Text = $"Total: {statsEmpresas.Total}";
-        lblPromedioEmpleados.Text = $"Promedio: {statsEmpresas.PromedioEmpleados:F2}";
+        lblTotalEmpresas.Text = $"Total Activas: {statsEmpresas.TotalActivas}";
+        lblPromedioEmpleados.Text = $"Promedio emp/empresa: {statsEmpresas.PromedioEmpleados:F2}";
 
-        // Estadísticas de servicios
-        var statsServicios = servicioNegocio.obtenerEstadisticas();
+        // CARD SERVICIOS
+        var statsServicios = servicioNegocio.obtenerEstadisticasMes();
         lblServiciosMes.Text = $"Este mes: {statsServicios.ServiciosMes}";
-        lblServiciosAnio.Text = $"Total año: {statsServicios.ServiciosAnio}";
+        lblServiciosAnio.Text = $"Total del año: {statsServicios.ServiciosAnio}";
+        lblPromedioDia.Text = $"Promedio/día: {statsServicios.PromedioDiario}";
 
-        // Top empresas
-        dgvTopEmpresas.DataSource = reporteNegocio.obtenerTopEmpresas(5);
+        // ASISTENCIAS
+        lblAsistenciasTotales.Text = $"Asistencias Totales (mes actual): {statsServicios.AsistenciasTotales}";
+        lblAsistenciasEmpleados.Text = $"Asistencias de Empleados: {statsServicios.AsistenciasEmpleados}";
+        lblAsistenciasInvitados.Text = $"Asistencias de Invitados: {statsServicios.AsistenciasInvitados}";
+        lblPromedioDiario.Text = $"Promedio diario de asistencias: {statsServicios.PromedioDiario}";
+        lblDiaMayor.Text = $"Día con mayor asistencia: {statsServicios.DiaMayor}";
+        lblDiaMenor.Text = $"Día con menor asistencia: {statsServicios.DiaMenor}";
+
+        // TOP EMPRESAS
+        dgvTopEmpresas.Rows.Clear();
+        var topEmpresas = reporteNegocio.obtenerTopEmpresas(5);
+        int posicion = 1;
+        foreach (var empresa in topEmpresas)
+        {
+            dgvTopEmpresas.Rows.Add(
+                posicion++,
+                empresa.NombreEmpresa,
+                empresa.TotalAsistencias,
+                $"{empresa.Porcentaje:F1}%"
+            );
+        }
+
+        // INFO SISTEMA
+        lblUltimaActualizacion.Text = $"Última actualización: {DateTime.Now:dd/MM/yyyy HH:mm:ss}";
+        lblTamanioBD.Text = $"Tamaño de BD: {ObtenerTamanioBD()} MB";
+        lblUltimoRespaldo.Text = $"Último respaldo: {ObtenerUltimoRespaldo()}";
     }
     catch (Exception ex)
     {
-        MessageBox.Show($"Error al cargar estadísticas: {ex.Message}");
+        MessageBox.Show($"Error al cargar estadísticas: {ex.Message}", 
+            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }
 
 private void btnActualizarEstadisticas_Click(object sender, EventArgs e)
 {
     CargarEstadisticas();
-    MessageBox.Show("Estadísticas actualizadas", "Éxito");
+    MessageBox.Show("Estadísticas actualizadas correctamente", "Éxito",
+        MessageBoxButtons.OK, MessageBoxIcon.Information);
+}
+
+private void btnGenerarReporte_Click(object sender, EventArgs e)
+{
+    // TODO: Implementar generación de reporte en PDF o Excel
+    MessageBox.Show("Función de reporte en desarrollo", "Información",
+        MessageBoxButtons.OK, MessageBoxIcon.Information);
 }
 ```
 
 ---
 
-### **FASE 5: Pestaña CONFIGURACIÓN**
+### FASE 5: Panel CONFIGURACIÓN
 
-#### **Paso 5.1: Diseñar secciones de configuración**
-
-```
-Panel: pnlConfiguracion (Dock: Fill, AutoScroll: true)
-
-GroupBox: gbBaseDatos - "Base de Datos"
-  TextBox: txtCadenaConexion (Multiline, ReadOnly)
-  Button: btnProbarConexion
-  Button: btnGuardarConexion
-  Label: lblEstadoConexion
-
-GroupBox: gbRespaldos - "Respaldos y Restauración"
-  TextBox: txtRutaRespaldos
-  Button: btnExaminarRuta
-  RadioButton: rbRespaldoDiario / rbRespaldomManual
-  Label: lblUltimoRespaldo
-  Button: btnCrearRespaldo
-  Button: btnRestaurarRespaldo
-
-GroupBox: gbRFID - "Lector RFID (Futuro)"
-  ComboBox: cbPuertoCOM
-  Button: btnDetectarPuerto
-  ComboBox: cbBaudRate
-  Label: lblEstadoRFID
-  Button: btnConfigurarRFID
-
-GroupBox: gbPreferencias - "Preferencias"
-  RadioButton: rbFormatoFecha1, rbFormatoFecha2, rbFormatoFecha3
-  CheckBox: chkSonidoConfirmacion
-  CheckBox: chkActualizacionAuto
-
-GroupBox: gbInfoApp - "Información de la Aplicación"
-  Label: lblVersion
-  Label: lblFramework
-  Button: btnVerLogs
-```
-
-#### **Paso 5.2: Implementar código de Configuración**
+#### Paso 5.1: Estructura del Panel
 
 ```csharp
-private void btnProbarConexion_Click(object sender, EventArgs e)
-{
-    try
-    {
-        AccesoDatos datos = new AccesoDatos();
-        datos.abrirConexion();
-        datos.cerrarConexion();
-        
-        lblEstadoConexion.Text = "✅ Conectado correctamente";
-        lblEstadoConexion.ForeColor = Color.Green;
-    }
-    catch (Exception ex)
-    {
-        lblEstadoConexion.Text = "❌ Error de conexión";
-        lblEstadoConexion.ForeColor = Color.Red;
-        MessageBox.Show($"Error: {ex.Message}");
-    }
-}
+// Configurar pnlConfiguracion
+pnlConfiguracion.AutoScroll = true;
 
-private void btnCrearRespaldo_Click(object sender, EventArgs e)
-{
-    try
-    {
-        string rutaRespaldo = txtRutaRespaldos.Text;
-        string nombreArchivo = $"Respaldo_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
-        
-        // Ejecutar backup de SQL Server
-        AccesoDatos datos = new AccesoDatos();
-        datos.ejecutarConsulta($"BACKUP DATABASE BD_Control_Almuerzos TO DISK='{rutaRespaldo}\\{nombreArchivo}'");
-        
-        MessageBox.Show("Respaldo creado correctamente", "Éxito");
-        lblUltimoRespaldo.Text = $"Último respaldo: {DateTime.Now}";
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show($"Error al crear respaldo: {ex.Message}");
-    }
-}
+Panel pnlContenedorConfig = new Panel();
+pnlContenedorConfig.AutoSize = true;
+pnlContenedorConfig.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+pnlContenedorConfig.Padding = new Padding(20);
+pnlConfiguracion.Controls.Add(pnlContenedorConfig);
+```
 
-// Cargar configuración desde App.config
-private void CargarConfiguracion()
-{
-    txtCadenaConexion.Text = ConfigurationManager.ConnectionStrings["conexionDB"].ConnectionString;
-    txtRutaRespaldos.Text = ConfigurationManager.AppSettings["RutaRespaldos"] ?? @"C:\Respaldos";
-    lblVersion.Text = $"Versión: {Application.ProductVersion}";
-    lblFramework.Text = "Framework: .NET Framework 4.8.1";
-}
+#### Paso 5.2: Sección Base de Datos
+
+```csharp
+GroupBox gbBaseDatos = new GroupBox();
+gbBaseDatos.Text = "BASE DE DATOS";
+gbBaseDatos.Size = new Size(pnlConfiguracion.Width - 80, 180);
+gbBaseDatos.Location = new Point(20, 20);
+gbBaseDatos.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+Label lblCadenaConexion = new Label();
+lblCadenaConexion.Text = "Cadena de Conexión:";
+lblCadenaConexion.Location = new Point(20, 35);
+lblCadenaConexion.AutoSize = true;
+
+TextBox txtCadenaConexion = new TextBox();
+txtCadenaConexion.Location = new Point(20, 60);
+txtCadenaConexion.Size = new Size(gbBaseDatos.Width - 80, 50);
+txtCadenaConexion.Multiline = true;
+txtCadenaConexion.ReadOnly = true;
+txtCadenaConexion.BackColor = Color.WhiteSmoke;
+
+Panel pnlBotonesDB = new Panel();
+pnlBotonesDB.Location = new Point(20, 120);
+pnlBotonesDB.Size = new Size(400, 40);
+
+ReaLTaiizor.Controls.Button btnProbarConexion = new ReaLTaiizor.Controls.Button();
+btnProbarConexion.Text = "Probar Conexión";
+btnProbarConexion.Size = new Size(140, 35);
+btnProbarConexion.Location = new Point(0, 0);
+btnProbarConexion.Click += btnProbarConexion_Click;
+
+ReaLTaiizor.Controls.Button btnGuardarConexion = new ReaLTaiizor.Controls.Button();
+btnGuardarConexion.Text = "Guardar Cambios";
+btnGuardarConexion.Size = new Size(140, 35);
+btnGuardarConexion.Location = new Point(150, 0);
+btnGuardarConexion.Click += btnGuardarConexion_Click;
+
+Label lblEstadoConexion = new Label();
+lblEstadoConexion.Text = "Estado: No probado";
+lblEstadoConexion.Location = new Point(300, 10);
+lblEstadoConexion.AutoSize = true;
+
+pnlBotonesDB.Controls.AddRange(new Control[] {
+    btnProbarConexion, btnGuardarConexion, lblEstadoConexion
+});
+
+gbBaseDatos.Controls.AddRange(new Control[] {
+    lblCadenaConexion, txtCadenaConexion, pnlBotonesDB
+});
+
+pnlContenedorConfig.Controls.Add(gbBaseDatos);
+```
+
+#### Paso 5.3: Sección Respaldos
+
+```csharp
+GroupBox gbRespaldos = new GroupBox();
+gbRespaldos.Text = "RESPALDOS Y RESTAURACIÓN";
+gbRespaldos.Size = new Size(pnlConfiguracion.Width - 80, 250);
+gbRespaldos.Location = new Point(20, 220);
+gbRespaldos.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+Label lblRutaRespaldos = new Label();
+lblRutaRespaldos.Text = "Ruta de respaldos:";
+lblRutaRespaldos.Location = new Point(20, 35);
+lblRutaRespaldos.AutoSize = true;
+
+TextBox txtRutaRespaldos = new TextBox();
+txtRutaRespaldos.Location = new Point(20, 60);
+txtRutaRespaldos.Width = 400;
+
+ReaLTaiizor.Controls.Button btnExaminarRuta = new ReaLTaiizor.Controls.Button();
+btnExaminarRuta.Text = "Examinar";
+btnExaminarRuta.Size = new Size(100, 25);
+btnExaminarRuta.Location = new Point(430, 58);
+btnExaminarRuta.Click += btnExaminarRuta_Click;
+
+Label lblFrecuencia = new Label();
+lblFrecuencia.Text = "Frecuencia de respaldo automático:";
+lblFrecuencia.Location = new Point(20, 100);
+lblFrecuencia.AutoSize = true;
+
+RadioButton rbRespaldoDiario = new RadioButton();
+rbRespaldoDiario.Text = "Diario (23:00)";
+rbRespaldoDiario.Location = new Point(20, 125);
+rbRespaldoDiario.Checked = true;
+
+RadioButton rbRespaldomManual = new RadioButton();
+rbRespaldomManual.Text = "Manual";
+rbRespaldomManual.Location = new Point(150, 125);
+
+Label lblUltimoRespaldo = new Label();
+lblUltimoRespaldo.Text = "Último respaldo: --/--/---- --:--:--";
+lblUltimoRespaldo.Location = new Point(20, 160);
+lblUltimoRespaldo.AutoSize = true;
+
+Panel pnlBotonesRespaldo = new Panel();
+pnlBotonesRespaldo.Location = new Point(20, 190);
+pnlBotonesRespaldo.Size = new Size(400, 40);
+
+ReaLTaiizor.Controls.Button btnCrearRespaldo = new ReaLTaiizor.Controls.Button();
+btnCrearRespaldo.Text = "Crear Respaldo Ahora";
+btnCrearRespaldo.Size = new Size(180, 35);
+btnCrearRespaldo.Location = new Point(0, 0);
+btnCrearRespaldo.Click += btnCrearRespaldo_Click;
+
+ReaLTaiizor.Controls.Button btnRestaurarRespaldo = new ReaLTaiizor.Controls.Button();
+btnRestaurarRespaldo.Text = "Restaurar desde Respaldo";
+btnRestaurarRespaldo.Size = new Size(200, 35);
+btnRestaurarRespaldo.Location = new Point(190, 0);
+btnRestaurarRespaldo.Click += btnRestaurarRespaldo_Click;
+
+pnlBotonesRespaldo.Controls.AddRange(new Control[] {
+    btnCrearRespaldo, btnRestaurarRespaldo
+});
+
+gbRespaldos.Controls.AddRange(new Control[] {
+    lblRutaRespaldos, txtRutaRespaldos, btnExaminarRuta,
+    lblFrecuencia, rbRespaldoDiario, rbRespaldomManual,
+    lblUltimoRespaldo, pnlBotonesRespaldo
+});
+
+pnlContenedorConfig.Controls.Add(gbRespaldos);
+```
+
+#### Paso 5.4: Sección RFID (Futuro)
+
+```csharp
+GroupBox gbRFID = new GroupBox();
+gbRFID.Text = "LECTOR RFID (FUTURO)";
+gbRFID.Size = new Size(pnlConfiguracion.Width - 80, 200);
+gbRFID.Location = new Point(20, 490);
+gbRFID.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+gbRFID.Enabled = false; // Deshabilitado por ahora
+
+Label lblPuertoCOM = new Label();
+lblPuertoCOM.Text = "Puerto COM:";
+lblPuertoCOM.Location = new Point(20, 35);
+lblPuertoCOM.AutoSize = true;
+
+ComboBox cbPuertoCOM = new ComboBox();
+cbPuertoCOM.Location = new Point(20, 60);
+cbPuertoCOM.Width = 150;
+cbPuertoCOM.Items.AddRange(new[] { "COM1", "COM2", "COM3", "COM4" });
+
+Label lblBaudRate = new Label();
+lblBaudRate.Text = "Velocidad (Baud Rate):";
+lblBaudRate.Location = new Point(20, 100);
+lblBaudRate.AutoSize = true;
+
+ComboBox cbBaudRate = new ComboBox();
+cbBaudRate.Location = new Point(20, 125);
+cbBaudRate.Width = 150;
+cbBaudRate.Items.AddRange(new[] { "9600", "19200", "38400", "57600", "115200" });
+cbBaudRate.SelectedIndex = 0;
+
+Label lblEstadoRFID = new Label();
+lblEstadoRFID.Text = "Estado: No configurado";
+lblEstadoRFID.Location = new Point(20, 160);
+lblEstadoRFID.AutoSize = true;
+
+gbRFID.Controls.AddRange(new Control[] {
+    lblPuertoCOM, cbPuertoCOM, lblBaudRate, cbBaudRate, lblEstadoRFID
+});
+
+pnlContenedorConfig.Controls.Add(gbRFID);
+```
+
+#### Paso 5.5: Preferencias e Información
+
+```csharp
+GroupBox gbPreferencias = new GroupBox();
+gbPreferencias.Text = "PREFERENCIAS DE INTERFAZ";
+gbPreferencias.Size = new Size(pnlConfiguracion.Width - 80, 150);
+gbPreferencias.Location = new Point(20, 710);
+gbPreferencias.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+Label lblFormatoFecha = new Label();
+lblFormatoFecha.Text = "Formato de fecha:";
+lblFormatoFecha.Location = new Point(20, 35);
+lblFormatoFecha.AutoSize = true;
+
+RadioButton rbFormatoFecha1 = new RadioButton();
+rbFormatoFecha1.Text = "dd/MM/yyyy";
+rbFormatoFecha1.Location = new Point(20, 60);
+rbFormatoFecha1.Checked = true;
+
+CheckBox chkSonidoConfirmacion = new CheckBox();
+chkSonidoConfirmacion.Text = "Sonido de confirmación al registrar";
+chkSonidoConfirmacion.Location = new Point(20, 90);
+chkSonidoConfirmacion.AutoSize = true;
+
+CheckBox chkActualizacionAuto = new CheckBox();
+chkActualizacionAuto.Text = "Actualización automática de estadísticas";
+chkActualizacionAuto.Location = new Point(20, 115);
+chkActualizacionAuto.AutoSize = true;
+chkActualizacionAuto.Checked = true;
+
+gbPreferencias.Controls.AddRange(new Control[] {
+    lblFormatoFecha, rbFormatoFecha1, chkSonidoConfirmacion, chkActualizacionAuto
+});
+
+pnlContenedorConfig.Controls.Add(gbPreferencias);
+
+// INFO DE LA APLICACIÓN
+GroupBox gbInfoApp = new GroupBox();
+gbInfoApp.Text = "INFORMACIÓN DE LA APLICACIÓN";
+gbInfoApp.Size = new Size(pnlConfiguracion.Width - 80, 150);
+gbInfoApp.Location = new Point(20, 880);
+gbInfoApp.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+Label lblVersion = new Label();
+lblVersion.Text = "Versión: 2.0.0";
+lblVersion.Location = new Point(20, 35);
+lblVersion.AutoSize = true;
+
+Label lblFramework = new Label();
+lblFramework.Text = "Framework: .NET Framework 4.8.1";
+lblFramework.Location = new Point(20, 60);
+lblFramework.AutoSize = true;
+
+Label lblUILibrary = new Label();
+lblUILibrary.Text = "UI Library: ReaLTaiizor";
+lblUILibrary.Location = new Point(20, 85);
+lblUILibrary.AutoSize = true;
+
+gbInfoApp.Controls.AddRange(new Control[] {
+    lblVersion, lblFramework, lblUILibrary
+});
+
+pnlContenedorConfig.Controls.Add(gbInfoApp);
 ```
 
 ---
 
-### **FASE 6: Integración con frmPrincipal**
+### FASE 6: Métodos en Capa de Negocio
 
-#### **Paso 6.1: Agregar ucAdmin al formulario principal**
+Necesitas agregar estos métodos en tus clases de negocio:
 
-**En frmPrincipal.cs:**
-
-```csharp
-// Variable de instancia
-private ucAdmin vistaAdmin;
-
-// En el constructor o Load
-vistaAdmin = new ucAdmin();
-vistaAdmin.Dock = DockStyle.Fill;
-vistaAdmin.Visible = false;
-panelContenido.Controls.Add(vistaAdmin);
-
-// Método para mostrar ucAdmin
-private void MostrarAdmin()
-{
-    ocultarVistas();
-    vistaAdmin.Visible = true;
-    // Refresh de datos si es necesario
-}
-
-// En el evento del botón de administración
-private void btnAdmin_Click(object sender, EventArgs e)
-{
-    MostrarAdmin();
-}
-```
-
-#### **Paso 6.2: Controlar acceso según estado del servicio**
-
-```csharp
-// ucAdmin solo accesible cuando NO hay servicio activo
-private void ValidarAccesoAdmin()
-{
-    if (servicioActivo != null)
-    {
-        btnAdmin.Enabled = false;
-        btnAdmin.Cursor = Cursors.No;
-    }
-    else
-    {
-        btnAdmin.Enabled = true;
-        btnAdmin.Cursor = Cursors.Hand;
-    }
-}
-```
-
----
-
-### **FASE 7: Métodos en Capa de Negocio**
-
-#### **Paso 7.1: Agregar métodos en EmpleadoNegocio.cs**
+#### EmpleadoNegocio.cs
 
 ```csharp
 public void agregar(Empleado empleado)
@@ -959,17 +1543,17 @@ public void agregar(Empleado empleado)
     AccesoDatos datos = new AccesoDatos();
     try
     {
-        datos.setearConsulta("INSERT INTO Empleados (IdCredencial, Nombre, Apellido, IdEmpresa, Estado) VALUES (@credencial, @nombre, @apellido, @empresa, @estado)");
+        datos.setearConsulta(@"
+            INSERT INTO Empleados (IdCredencial, Nombre, Apellido, IdEmpresa, Estado) 
+            VALUES (@credencial, @nombre, @apellido, @empresa, @estado)");
+        
         datos.setearParametro("@credencial", empleado.IdCredencial);
         datos.setearParametro("@nombre", empleado.Nombre);
         datos.setearParametro("@apellido", empleado.Apellido);
         datos.setearParametro("@empresa", empleado.Empresa.IdEmpresa);
         datos.setearParametro("@estado", empleado.Estado);
+        
         datos.ejecutarAccion();
-    }
-    catch (Exception ex)
-    {
-        throw ex;
     }
     finally
     {
@@ -982,18 +1566,23 @@ public void modificar(Empleado empleado)
     AccesoDatos datos = new AccesoDatos();
     try
     {
-        datos.setearConsulta("UPDATE Empleados SET IdCredencial = @credencial, Nombre = @nombre, Apellido = @apellido, IdEmpresa = @empresa, Estado = @estado WHERE IdEmpleado = @id");
+        datos.setearConsulta(@"
+            UPDATE Empleados 
+            SET IdCredencial = @credencial, 
+                Nombre = @nombre, 
+                Apellido = @apellido, 
+                IdEmpresa = @empresa, 
+                Estado = @estado 
+            WHERE IdEmpleado = @id");
+        
         datos.setearParametro("@id", empleado.IdEmpleado);
         datos.setearParametro("@credencial", empleado.IdCredencial);
         datos.setearParametro("@nombre", empleado.Nombre);
         datos.setearParametro("@apellido", empleado.Apellido);
         datos.setearParametro("@empresa", empleado.Empresa.IdEmpresa);
         datos.setearParametro("@estado", empleado.Estado);
+        
         datos.ejecutarAccion();
-    }
-    catch (Exception ex)
-    {
-        throw ex;
     }
     finally
     {
@@ -1015,10 +1604,6 @@ public bool existeCredencial(string credencial)
             return (int)datos.Lector[0] > 0;
         }
         return false;
-    }
-    catch (Exception ex)
-    {
-        throw ex;
     }
     finally
     {
@@ -1058,9 +1643,36 @@ public Empleado buscarPorId(int id)
         
         return empleado;
     }
-    catch (Exception ex)
+    finally
     {
-        throw ex;
+        datos.cerrarConexion();
+    }
+}
+
+public EstadisticasEmpleados obtenerEstadisticasGenerales()
+{
+    AccesoDatos datos = new AccesoDatos();
+    EstadisticasEmpleados stats = new EstadisticasEmpleados();
+    
+    try
+    {
+        datos.setearConsulta(@"
+            SELECT 
+                COUNT(*) as Total,
+                SUM(CASE WHEN Estado = 1 THEN 1 ELSE 0 END) as Activos,
+                SUM(CASE WHEN Estado = 0 THEN 1 ELSE 0 END) as Inactivos
+            FROM Empleados");
+        
+        datos.ejecutarLectura();
+        
+        if (datos.Lector.Read())
+        {
+            stats.Total = (int)datos.Lector["Total"];
+            stats.Activos = (int)datos.Lector["Activos"];
+            stats.Inactivos = (int)datos.Lector["Inactivos"];
+        }
+        
+        return stats;
     }
     finally
     {
@@ -1069,7 +1681,7 @@ public Empleado buscarPorId(int id)
 }
 ```
 
-#### **Paso 7.2: Agregar métodos en EmpresaNegocio.cs**
+#### EmpresaNegocio.cs
 
 ```csharp
 public void agregar(Empresa empresa)
@@ -1081,10 +1693,6 @@ public void agregar(Empresa empresa)
         datos.setearParametro("@nombre", empresa.Nombre);
         datos.setearParametro("@estado", empresa.Estado);
         datos.ejecutarAccion();
-    }
-    catch (Exception ex)
-    {
-        throw ex;
     }
     finally
     {
@@ -1102,10 +1710,6 @@ public void modificar(Empresa empresa)
         datos.setearParametro("@nombre", empresa.Nombre);
         datos.setearParametro("@estado", empresa.Estado);
         datos.ejecutarAccion();
-    }
-    catch (Exception ex)
-    {
-        throw ex;
     }
     finally
     {
@@ -1133,9 +1737,44 @@ public Empresa buscarPorId(int id)
         
         return empresa;
     }
-    catch (Exception ex)
+    finally
     {
-        throw ex;
+        datos.cerrarConexion();
+    }
+}
+
+public EstadisticasEmpresas obtenerEstadisticas()
+{
+    AccesoDatos datos = new AccesoDatos();
+    EstadisticasEmpresas stats = new EstadisticasEmpresas();
+    
+    try
+    {
+        datos.setearConsulta(@"
+            SELECT 
+                COUNT(DISTINCT e.IdEmpresa) as TotalEmpresas,
+                COUNT(emp.IdEmpleado) as TotalEmpleados,
+                AVG(CAST(EmpleadosPorEmpresa as FLOAT)) as PromedioEmpleados
+            FROM Empresas e
+            LEFT JOIN Empleados emp ON e.IdEmpresa = emp.IdEmpresa
+            CROSS APPLY (
+                SELECT COUNT(*) as EmpleadosPorEmpresa 
+                FROM Empleados 
+                WHERE IdEmpresa = e.IdEmpresa
+            ) x
+            WHERE e.Estado = 1");
+        
+        datos.ejecutarLectura();
+        
+        if (datos.Lector.Read())
+        {
+            stats.TotalActivas = (int)datos.Lector["TotalEmpresas"];
+            stats.PromedioEmpleados = datos.Lector["PromedioEmpleados"] != DBNull.Value 
+                ? Convert.ToDouble(datos.Lector["PromedioEmpleados"]) 
+                : 0;
+        }
+        
+        return stats;
     }
     finally
     {
@@ -1146,123 +1785,341 @@ public Empresa buscarPorId(int id)
 
 ---
 
-### **FASE 8: Testing y Validación**
+### FASE 7: Integración con frmPrincipal
 
-#### **Paso 8.1: Pruebas de Empleados**
+#### Paso 7.1: Agregar ucAdmin al formulario principal
 
+En `frmPrincipal.cs`:
+
+```csharp
+public partial class frmPrincipal : Form
+{
+    private ucAdmin vistaAdmin;
+    private Servicio servicioActivo = null;
+    
+    public frmPrincipal()
+    {
+        InitializeComponent();
+        InicializarVistas();
+    }
+    
+    private void InicializarVistas()
+    {
+        // Crear instancia de ucAdmin
+        vistaAdmin = new ucAdmin();
+        vistaAdmin.Dock = DockStyle.Fill;
+        vistaAdmin.Visible = false;
+        
+        // Agregar al panel de contenido
+        panelContenido.Controls.Add(vistaAdmin);
+    }
+    
+    // Método para mostrar la vista de administración
+    private void MostrarAdmin()
+    {
+        // Validar que no haya servicio activo
+        if (servicioActivo != null)
+        {
+            MessageBox.Show("No se puede acceder al panel de administración mientras hay un servicio activo.",
+                "Acceso Restringido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+        
+        OcultarTodasLasVistas();
+        vistaAdmin.Visible = true;
+        vistaAdmin.BringToFront();
+        
+        // Opcional: Refrescar datos
+        // vistaAdmin.RefrescarDatos();
+    }
+    
+    private void OcultarTodasLasVistas()
+    {
+        foreach (Control control in panelContenido.Controls)
+        {
+            if (control is UserControl)
+            {
+                control.Visible = false;
+            }
+        }
+    }
+    
+    // Evento del botón de administración
+    private void btnAdmin_Click(object sender, EventArgs e)
+    {
+        MostrarAdmin();
+    }
+    
+    // Controlar habilitación del botón según estado del servicio
+    private void ActualizarEstadoBotones()
+    {
+        if (servicioActivo != null)
+        {
+            btnAdmin.Enabled = false;
+            btnAdmin.BackColor = Color.Gray;
+        }
+        else
+        {
+            btnAdmin.Enabled = true;
+            btnAdmin.BackColor = Color.FromArgb(255, 208, 36);
+        }
+    }
+}
+```
+
+---
+
+### FASE 8: Clases de Apoyo (DTOs para Estadísticas)
+
+Crear estas clases en la capa `dominio`:
+
+```csharp
+// EstadisticasEmpleados.cs
+public class EstadisticasEmpleados
+{
+    public int Total { get; set; }
+    public int Activos { get; set; }
+    public int Inactivos { get; set; }
+}
+
+// EstadisticasEmpresas.cs
+public class EstadisticasEmpresas
+{
+    public int TotalActivas { get; set; }
+    public double PromedioEmpleados { get; set; }
+}
+
+// EstadisticasServicios.cs
+public class EstadisticasServicios
+{
+    public int ServiciosMes { get; set; }
+    public int ServiciosAnio { get; set; }
+    public int PromedioDiario { get; set; }
+    public int AsistenciasTotales { get; set; }
+    public int AsistenciasEmpleados { get; set; }
+    public int AsistenciasInvitados { get; set; }
+    public string DiaMayor { get; set; }
+    public string DiaMenor { get; set; }
+}
+
+// TopEmpresa.cs
+public class TopEmpresa
+{
+    public string NombreEmpresa { get; set; }
+    public int TotalAsistencias { get; set; }
+    public double Porcentaje { get; set; }
+}
+```
+
+---
+
+### FASE 9: Testing y Validación
+
+#### Checklist de Pruebas
+
+**Panel Empleados:**
+- [ ] Cargar lista de empleados
+- [ ] Buscar empleado por nombre/credencial
+- [ ] Filtrar por empresa
+- [ ] Filtrar por estado (activo/inactivo)
 - [ ] Crear nuevo empleado
 - [ ] Verificar credencial única
-- [ ] Modificar datos de empleado
-- [ ] Cambiar estado (activar/desactivar)
-- [ ] Buscar empleado por nombre
-- [ ] Filtrar por empresa
-- [ ] Validaciones de campos vacíos
+- [ ] Modificar empleado existente
+- [ ] Desactivar empleado
+- [ ] Validar campos obligatorios
+- [ ] Seleccionar empleado en grid carga formulario
 
-#### **Paso 8.2: Pruebas de Empresas**
-
+**Panel Empresas:**
+- [ ] Cargar lista de empresas
 - [ ] Crear nueva empresa
-- [ ] Modificar nombre
-- [ ] Cambiar estado
-- [ ] Ver estadísticas de empresa
+- [ ] Modificar empresa existente
+- [ ] Desactivar empresa
+- [ ] Ver estadísticas de empresa seleccionada
 - [ ] Validar nombre único
 
-#### **Paso 8.3: Pruebas de Estadísticas**
+**Panel Estadísticas:**
+- [ ] Cargar todas las métricas correctamente
+- [ ] Actualizar estadísticas con botón
+- [ ] Top 5 empresas muestra datos correctos
+- [ ] Información del sistema se muestra
 
-- [ ] Verificar totales correctos
-- [ ] Actualizar datos en tiempo real
-- [ ] Generar reporte completo
-
-#### **Paso 8.4: Pruebas de Configuración**
-
+**Panel Configuración:**
+- [ ] Cargar cadena de conexión
 - [ ] Probar conexión a BD
-- [ ] Crear respaldo
-- [ ] Cambiar preferencias
+- [ ] Crear respaldo manual
+- [ ] Guardar preferencias
+- [ ] Mostrar información de la aplicación
+
+**Integración:**
+- [ ] Navegación entre paneles funciona correctamente
+- [ ] Botón activo se resalta
+- [ ] Solo un panel visible a la vez
+- [ ] Acceso bloqueado durante servicio activo
+- [ ] ucAdmin se integra correctamente en frmPrincipal
 
 ---
 
-### **FASE 9: Pulido Final**
+### FASE 10: Mejoras y Pulido Final
 
-#### **Paso 9.1: Mejorar UX**
+#### Paso 10.1: Agregar método de refresco público
 
-- Agregar tooltips a botones
-- Implementar atajos de teclado
-- Agregar confirmaciones
-- Mensajes de error amigables
+```csharp
+// En ucAdmin.cs
+public void RefrescarDatos()
+{
+    // Determinar qué panel está visible y refrescar sus datos
+    if (pnlEmpleados.Visible)
+    {
+        CargarEmpleados();
+        CargarEmpresas();
+    }
+    else if (pnlEmpresas.Visible)
+    {
+        CargarEmpresas();
+    }
+    else if (pnlEstadisticas.Visible)
+    {
+        CargarEstadisticas();
+    }
+    else if (pnlConfiguracion.Visible)
+    {
+        CargarConfiguracion();
+    }
+}
+```
 
-#### **Paso 9.2: Validaciones adicionales**
+#### Paso 10.2: Agregar tooltips
 
-- No permitir eliminar empresa con empleados activos
-- Validar formato de credencial
-- Confirmar antes de desactivar
+```csharp
+private void ConfigurarTooltips()
+{
+    ToolTip tooltip = new ToolTip();
+    tooltip.SetToolTip(btnNuevoEmpleado, "Limpiar formulario para crear un nuevo empleado");
+    tooltip.SetToolTip(btnVerificarCredencial, "Verificar si la credencial ya está en uso");
+    tooltip.SetToolTip(btnGuardarEmpleado, "Guardar cambios del empleado");
+    tooltip.SetToolTip(btnEliminarEmpleado, "Desactivar empleado seleccionado");
+    tooltip.SetToolTip(btnActualizarEstadisticas, "Refrescar todas las estadísticas");
+    tooltip.SetToolTip(btnProbarConexion, "Probar conexión a la base de datos");
+}
+```
 
-#### **Paso 9.3: Optimizaciones**
+#### Paso 10.3: Agregar atajos de teclado
 
-- Cache de listas de empresas
-- Paginación si hay muchos registros
-- Índices en BD para búsquedas
+```csharp
+protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+{
+    // Ctrl + N = Nuevo empleado
+    if (keyData == (Keys.Control | Keys.N) && pnlEmpleados.Visible)
+    {
+        btnNuevoEmpleado_Click(null, null);
+        return true;
+    }
+    
+    // Ctrl + S = Guardar
+    if (keyData == (Keys.Control | Keys.S) && pnlEmpleados.Visible)
+    {
+        btnGuardarEmpleado_Click(null, null);
+        return true;
+    }
+    
+    // F5 = Actualizar estadísticas
+    if (keyData == Keys.F5 && pnlEstadisticas.Visible)
+    {
+        btnActualizarEstadisticas_Click(null, null);
+        return true;
+    }
+    
+    return base.ProcessCmdKey(ref msg, keyData);
+}
+```
 
 ---
 
-## ✅ Checklist de Implementación
+## ✅ CHECKLIST FINAL DE IMPLEMENTACIÓN
 
-### **Estructura:**
-- [ ] Crear ucAdmin.cs
-- [ ] Agregar TabControl con 4 pestañas
-- [ ] Configurar SplitContainer en Empleados
-- [ ] Configurar SplitContainer en Empresas
+### Estructura Base
+- [x] ucAdmin creado con sistema de botones
+- [x] 4 paneles implementados
+- [x] Sistema de navegación funcionando
+- [x] Colores y estilos aplicados
 
-### **Pestaña Empleados:**
-- [ ] DataGridView con empleados
-- [ ] Formulario de edición
-- [ ] Botones CRUD
+### Panel Empleados
+- [ ] SplitContainer agregado
+- [ ] Lista de empleados con DataGridView
+- [ ] Formulario de edición completo
 - [ ] Búsqueda y filtros
-- [ ] Métodos agregar(), modificar(), eliminar()
-- [ ] Validaciones
+- [ ] CRUD implementado
+- [ ] Validaciones funcionando
 
-### **Pestaña Empresas:**
-- [ ] DataGridView con empresas
+### Panel Empresas
+- [ ] SplitContainer agregado
+- [ ] Lista de empresas
 - [ ] Formulario de edición
-- [ ] Panel de estadísticas por empresa
-- [ ] Métodos CRUD
-- [ ] Validaciones
+- [ ] Estadísticas por empresa
+- [ ] CRUD implementado
 
-### **Pestaña Estadísticas:**
-- [ ] Cards con métricas
+### Panel Estadísticas
+- [ ] Cards de métricas
+- [ ] Asistencias y tendencias
 - [ ] Top 5 empresas
+- [ ] Información del sistema
 - [ ] Botón actualizar
-- [ ] Método CargarEstadisticas()
 
-### **Pestaña Configuración:**
-- [ ] Sección Base de Datos
-- [ ] Sección Respaldos
-- [ ] Sección RFID
-- [ ] Sección Preferencias
-- [ ] Métodos de configuración
+### Panel Configuración
+- [ ] Configuración de BD
+- [ ] Sistema de respaldos
+- [ ] Sección RFID (deshabilitada)
+- [ ] Preferencias
+- [ ] Información de la app
 
-### **Integración:**
-- [ ] Agregar ucAdmin a frmPrincipal
-- [ ] Botón de navegación
-- [ ] Control de acceso por estado de servicio
+### Capa de Negocio
+- [ ] EmpleadoNegocio con todos los métodos
+- [ ] EmpresaNegocio con todos los métodos
+- [ ] Clases DTO creadas
+- [ ] Métodos de estadísticas
 
-### **Testing:**
-- [ ] Probar todos los CRUD
-- [ ] Validar restricciones
-- [ ] Verificar estadísticas
-- [ ] Pruebas de integración
+### Integración
+- [ ] ucAdmin agregado a frmPrincipal
+- [ ] Navegación desde menú principal
+- [ ] Control de acceso por servicio
+- [ ] Método RefrescarDatos()
+
+### Testing
+- [ ] Todas las funciones probadas
+- [ ] Validaciones verificadas
+- [ ] Manejo de errores correcto
 
 ---
 
-## 🎯 Tiempo Estimado
+## 🎯 Tiempo Estimado Total
 
-| Fase | Tiempo Estimado |
-|------|-----------------|
-| Fase 1: Estructura base | 30 min |
-| Fase 2: Pestaña Empleados | 3-4 horas |
-| Fase 3: Pestaña Empresas | 2-3 horas |
-| Fase 4: Pestaña Estadísticas | 2 horas |
-| Fase 5: Pestaña Configuración | 2 horas |
-| Fase 6: Integración | 1 hora |
-| Fase 7: Métodos de Negocio | 2 horas |
-| Fase 8: Testing | 2 horas |
-| Fase 9: Pulido | 1 hora |
-| **TOTAL** | **15-18 horas** |
+| Fase | Tiempo |
+|------|--------|
+| Panel Empleados | 4-5 horas |
+| Panel Empresas | 3-4 horas |
+| Panel Estadísticas | 2-3 horas |
+| Panel Configuración | 2-3 horas |
+| Métodos de Negocio | 2-3 horas |
+| Integración y Testing | 2-3 horas |
+| **TOTAL** | **15-21 horas** |
+
+---
+
+## 📌 VENTAJAS DEL SISTEMA DE BOTONES vs TabControl
+
+✅ **Mayor control de diseño**
+✅ **Colores personalizables al 100%**
+✅ **Animaciones y transiciones futuras**
+✅ **Responsive y adaptable**
+✅ **Más profesional y moderno**
+✅ **Fácil de mantener y extender**
+
+---
+
+## 🚀 Próximos Pasos Recomendados
+
+1. Implementar animaciones de transición entre paneles
+2. Agregar exportación a Excel/PDF
+3. Sistema de logs de auditoría
+4. Configuración de permisos por rol
+5. Integración con lector RFID real
