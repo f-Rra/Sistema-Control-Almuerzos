@@ -192,7 +192,7 @@ namespace app
             }
 
             CargarVistaAdmin();
-            pnlSuperior.Visible = true; // mantener barra superior visible
+            pnlSuperior.Visible = false; // Ocultar barra superior, ucAdmin ocupa toda la pantalla
             MostrarVista(vistaAdmin);
         }
 
