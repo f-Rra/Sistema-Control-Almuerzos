@@ -435,6 +435,96 @@ BEGIN
 END
 GO
 
+-- Procedimientos para CRUD de Empleados (Admin)
+CREATE OR ALTER PROCEDURE SP_AgregarEmpleado
+    @IdCredencial NVARCHAR(50),
+    @Nombre NVARCHAR(50),
+    @Apellido NVARCHAR(50),
+    @IdEmpresa INT,
+    @Estado BIT = 1
+AS
+BEGIN
+    INSERT INTO Empleados (IdCredencial, Nombre, Apellido, IdEmpresa, Estado)
+    VALUES (@IdCredencial, @Nombre, @Apellido, @IdEmpresa, @Estado);
+    
+    SELECT CAST(SCOPE_IDENTITY() AS INT) as IdEmpleado;
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_ModificarEmpleado
+    @IdEmpleado INT,
+    @IdCredencial NVARCHAR(50),
+    @Nombre NVARCHAR(50),
+    @Apellido NVARCHAR(50),
+    @IdEmpresa INT,
+    @Estado BIT
+AS
+BEGIN
+    UPDATE Empleados 
+    SET IdCredencial = @IdCredencial,
+        Nombre = @Nombre,
+        Apellido = @Apellido,
+        IdEmpresa = @IdEmpresa,
+        Estado = @Estado
+    WHERE IdEmpleado = @IdEmpleado;
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_DesactivarEmpleado
+    @IdEmpleado INT
+AS
+BEGIN
+    UPDATE Empleados 
+    SET Estado = 0 
+    WHERE IdEmpleado = @IdEmpleado;
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_VerificarCredencialExiste
+    @IdCredencial NVARCHAR(50)
+AS
+BEGIN
+    SELECT COUNT(*) as Existe
+    FROM Empleados
+    WHERE IdCredencial = @IdCredencial;
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_BuscarEmpleadoPorId
+    @IdEmpleado INT
+AS
+BEGIN
+    SELECT 
+        e.IdEmpleado, 
+        e.IdCredencial, 
+        e.Nombre, 
+        e.Apellido, 
+        e.Estado, 
+        emp.IdEmpresa, 
+        emp.Nombre as NombreEmpresa
+    FROM Empleados e
+    INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
+    WHERE e.IdEmpleado = @IdEmpleado;
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_ListarTodosLosEmpleados
+AS
+BEGIN
+    SELECT 
+        e.IdEmpleado, 
+        e.Nombre, 
+        e.Apellido, 
+        e.IdCredencial, 
+        emp.Nombre as Empresa, 
+        emp.IdEmpresa,
+        e.Estado
+    FROM Empleados e
+    INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
+    ORDER BY e.Estado DESC, e.Nombre, e.Apellido;
+END
+GO
+
 CREATE OR ALTER PROCEDURE SP_EmpleadosPorEmpresa
     @IdEmpresa INT
 AS
