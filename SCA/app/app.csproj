@@ -73,6 +73,30 @@
     <Compile Include="UserControls\ucAdmin.Designer.cs">
       <DependentUpon>ucAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucEmpleados.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucEmpleados.Designer.cs">
+      <DependentUpon>ucEmpleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucEmpresas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucEmpresas.Designer.cs">
+      <DependentUpon>ucEmpresas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucEstadisticas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucEstadisticas.Designer.cs">
+      <DependentUpon>ucEstadisticas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucConfiguracion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucConfiguracion.Designer.cs">
+      <DependentUpon>ucConfiguracion.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucRegistroManual.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -106,6 +130,18 @@
     </Compile>
     <EmbeddedResource Include="UserControls\ucAdmin.resx">
       <DependentUpon>ucAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucEmpleados.resx">
+      <DependentUpon>ucEmpleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucEmpresas.resx">
+      <DependentUpon>ucEmpresas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucEstadisticas.resx">
+      <DependentUpon>ucEstadisticas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucConfiguracion.resx">
+      <DependentUpon>ucConfiguracion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucRegistroManual.resx">
       <DependentUpon>ucRegistroManual.cs</DependentUpon>
