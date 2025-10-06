@@ -133,6 +133,8 @@ namespace app
             vista.Visible = true;
             vista.BringToFront();
 
+  
+
             pnlPrincipal.ResumeLayout();
         }
 
@@ -430,6 +432,15 @@ namespace app
         private void btnServicio_Click(object sender, EventArgs e)
         {
             ToggleServicio();
+        }
+
+        private void frmPrincipal_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                // spaceSeparatorVertical1 siempre al frente visual
+                this.Controls.SetChildIndex(this.ssPanel, 0);
+            }
         }
     }
 }

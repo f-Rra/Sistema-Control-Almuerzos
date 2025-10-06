@@ -28,27 +28,29 @@ namespace app.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlBotones = new System.Windows.Forms.Panel();
+            this.pnlSuperior = new System.Windows.Forms.Panel();
             this.btnConfiguracion = new ReaLTaiizor.Controls.Button();
             this.btnEstadisticas = new ReaLTaiizor.Controls.Button();
             this.btnEmpresas = new ReaLTaiizor.Controls.Button();
             this.btnEmpleados = new ReaLTaiizor.Controls.Button();
             this.pnlContenido = new System.Windows.Forms.Panel();
-            this.pnlBotones.SuspendLayout();
+            this.ssPanel = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
+            this.pnlSuperior.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlBotones
+            // pnlSuperior
             // 
-            this.pnlBotones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.pnlBotones.Controls.Add(this.btnConfiguracion);
-            this.pnlBotones.Controls.Add(this.btnEstadisticas);
-            this.pnlBotones.Controls.Add(this.btnEmpresas);
-            this.pnlBotones.Controls.Add(this.btnEmpleados);
-            this.pnlBotones.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlBotones.Location = new System.Drawing.Point(0, 0);
-            this.pnlBotones.Name = "pnlBotones";
-            this.pnlBotones.Size = new System.Drawing.Size(1155, 113);
-            this.pnlBotones.TabIndex = 0;
+            this.pnlSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.pnlSuperior.Controls.Add(this.ssPanel);
+            this.pnlSuperior.Controls.Add(this.btnConfiguracion);
+            this.pnlSuperior.Controls.Add(this.btnEstadisticas);
+            this.pnlSuperior.Controls.Add(this.btnEmpresas);
+            this.pnlSuperior.Controls.Add(this.btnEmpleados);
+            this.pnlSuperior.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSuperior.Location = new System.Drawing.Point(0, 0);
+            this.pnlSuperior.Name = "pnlSuperior";
+            this.pnlSuperior.Size = new System.Drawing.Size(1155, 179);
+            this.pnlSuperior.TabIndex = 0;
             // 
             // btnConfiguracion
             // 
@@ -62,7 +64,7 @@ namespace app.UserControls
             this.btnConfiguracion.Image = null;
             this.btnConfiguracion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConfiguracion.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnConfiguracion.Location = new System.Drawing.Point(732, 34);
+            this.btnConfiguracion.Location = new System.Drawing.Point(898, 69);
             this.btnConfiguracion.Name = "btnConfiguracion";
             this.btnConfiguracion.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnConfiguracion.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -84,7 +86,7 @@ namespace app.UserControls
             this.btnEstadisticas.Image = null;
             this.btnEstadisticas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEstadisticas.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnEstadisticas.Location = new System.Drawing.Point(567, 34);
+            this.btnEstadisticas.Location = new System.Drawing.Point(733, 69);
             this.btnEstadisticas.Name = "btnEstadisticas";
             this.btnEstadisticas.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnEstadisticas.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -106,7 +108,7 @@ namespace app.UserControls
             this.btnEmpresas.Image = null;
             this.btnEmpresas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEmpresas.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnEmpresas.Location = new System.Drawing.Point(402, 34);
+            this.btnEmpresas.Location = new System.Drawing.Point(568, 69);
             this.btnEmpresas.Name = "btnEmpresas";
             this.btnEmpresas.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnEmpresas.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -128,7 +130,7 @@ namespace app.UserControls
             this.btnEmpleados.Image = null;
             this.btnEmpleados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEmpleados.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnEmpleados.Location = new System.Drawing.Point(237, 34);
+            this.btnEmpleados.Location = new System.Drawing.Point(403, 69);
             this.btnEmpleados.Name = "btnEmpleados";
             this.btnEmpleados.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnEmpleados.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -142,10 +144,22 @@ namespace app.UserControls
             // 
             this.pnlContenido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.pnlContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContenido.Location = new System.Drawing.Point(0, 113);
+            this.pnlContenido.Location = new System.Drawing.Point(0, 179);
             this.pnlContenido.Name = "pnlContenido";
-            this.pnlContenido.Size = new System.Drawing.Size(1155, 582);
+            this.pnlContenido.Size = new System.Drawing.Size(1155, 516);
             this.pnlContenido.TabIndex = 1;
+            // 
+            // ssPanel
+            // 
+            this.ssPanel.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
+            this.ssPanel.Font = new System.Drawing.Font("Verdana", 8F);
+            this.ssPanel.Image = null;
+            this.ssPanel.Location = new System.Drawing.Point(287, 3);
+            this.ssPanel.Name = "ssPanel";
+            this.ssPanel.NoRounding = false;
+            this.ssPanel.Size = new System.Drawing.Size(4, 165);
+            this.ssPanel.TabIndex = 6;
+            this.ssPanel.Transparent = false;
             // 
             // ucAdmin
             // 
@@ -153,21 +167,22 @@ namespace app.UserControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.Controls.Add(this.pnlContenido);
-            this.Controls.Add(this.pnlBotones);
+            this.Controls.Add(this.pnlSuperior);
             this.Name = "ucAdmin";
             this.Size = new System.Drawing.Size(1155, 695);
-            this.pnlBotones.ResumeLayout(false);
+            this.pnlSuperior.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlBotones;
+        private System.Windows.Forms.Panel pnlSuperior;
         private ReaLTaiizor.Controls.Button btnEmpleados;
         private ReaLTaiizor.Controls.Button btnEmpresas;
         private ReaLTaiizor.Controls.Button btnEstadisticas;
         private ReaLTaiizor.Controls.Button btnConfiguracion;
         private System.Windows.Forms.Panel pnlContenido;
+        private ReaLTaiizor.Controls.SpaceSeparatorVertical ssPanel;
     }
 }
