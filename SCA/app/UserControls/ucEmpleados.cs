@@ -14,7 +14,6 @@ namespace app.UserControls
 {
     public partial class ucEmpleados : UserControl
     {
-        // VARIABLES DE CLASE
         private EmpleadoNegocio empleadoNegocio = new EmpleadoNegocio();
         private EmpresaNegocio empresaNegocio = new EmpresaNegocio();
         private Empleado empleadoSeleccionado = null;
@@ -32,53 +31,62 @@ namespace app.UserControls
             LimpiarFormularioEmpleado();
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // MÉTODOS DE CARGA DE DATOS
-        // ══════════════════════════════════════════════════════════════
-
         private void CargarEmpleados(string filtro = "")
         {
-            // Configurar columnas del DataGridView si no están configuradas
-            if (dgvEmpleados.Columns.Count == 0)
-            {
-                dgvEmpleados.Columns.Add("IdEmpleado", "ID");
-                dgvEmpleados.Columns["IdEmpleado"].Visible = false;
-                dgvEmpleados.Columns.Add("Credencial", "Credencial");
-                dgvEmpleados.Columns["Credencial"].FillWeight = 20;
-                dgvEmpleados.Columns.Add("NombreCompleto", "Nombre Completo");
-                dgvEmpleados.Columns["NombreCompleto"].FillWeight = 40;
-                dgvEmpleados.Columns.Add("Empresa", "Empresa");
-                dgvEmpleados.Columns["Empresa"].FillWeight = 30;
-                dgvEmpleados.Columns.Add("Estado", "Estado");
-                dgvEmpleados.Columns["Estado"].FillWeight = 10;
-            }
-
             var empleados = empleadoNegocio.listar();
             if (empleados == null) return;
-            
-            // Aplicar filtros si existen
+
             if (!string.IsNullOrWhiteSpace(filtro))
             {
-                empleados = empleados.FindAll(e => 
+                empleados = empleados.FindAll(e =>
                     e.Nombre.ToUpper().Contains(filtro.ToUpper()) ||
                     e.Apellido.ToUpper().Contains(filtro.ToUpper()) ||
                     e.IdCredencial.Contains(filtro)
                 );
             }
 
-            dgvEmpleados.Rows.Clear();
-            foreach (var emp in empleados)
+            dgvEmpleados.DataSource = null;
+            dgvEmpleados.AutoGenerateColumns = true;
+            dgvEmpleados.DataSource = empleados;
+            OcultarColumnas();
+
+            lblTotalEmpleados.Text = $"Total: {empleados.Count} empleados";
+        }
+
+        private void OcultarColumnas()
+        {
+            var cols = dgvEmpleados?.Columns;
+            if (cols == null) return;
+
+            string[] aMostrar = { "IdCredencial", "NombreCompleto", "Empresa", "Estado" };
+            foreach (DataGridViewColumn col in cols)
             {
-                dgvEmpleados.Rows.Add(
-                    emp.IdEmpleado,
-                    emp.IdCredencial,
-                    $"{emp.Nombre} {emp.Apellido}",
-                    emp.Empresa.Nombre,
-                    emp.Estado ? "Activo" : "Inactivo"
-                );
+                if (col.Name == "Empresa")
+                {
+                    col.Visible = false;
+                    if (cols.Contains("NombreEmpresa"))
+                    {
+                        cols["NombreEmpresa"].Visible = true;
+                        cols["NombreEmpresa"].HeaderText = "Empresa";
+                    }
+                }
+                else if (!aMostrar.Contains(col.Name))
+                {
+                    col.Visible = false;
+                }
+                else
+                {
+                    col.Visible = true;
+                }
             }
 
-            lblTotalEmpleados.Text = $"Total: {dgvEmpleados.RowCount} empleados";
+            string[] orden = { "IdCredencial", "NombreCompleto", "NombreEmpresa", "Estado" };
+            int idx = 0;
+            foreach (var nombre in orden)
+            {
+                if (cols.Contains(nombre))
+                    cols[nombre].DisplayIndex = idx++;
+            }
         }
 
         private void CargarEmpresas()
@@ -86,7 +94,6 @@ namespace app.UserControls
             var empresas = empresaNegocio.listar();
             if (empresas == null) return;
             
-            // Para el filtro (con opción "Todas")
             var empresasFiltro = new List<Empresa>();
             empresasFiltro.Add(new Empresa { IdEmpresa = 0, Nombre = "Todas las empresas" });
             empresasFiltro.AddRange(empresas);
@@ -94,16 +101,10 @@ namespace app.UserControls
             cbFiltroEmpresa.DataSource = empresasFiltro;
             cbFiltroEmpresa.DisplayMember = "Nombre";
             cbFiltroEmpresa.ValueMember = "IdEmpresa";
-            
-            // Para el formulario de edición
             cbEmpresaEmpleado.DataSource = empresas;
             cbEmpresaEmpleado.DisplayMember = "Nombre";
             cbEmpresaEmpleado.ValueMember = "IdEmpresa";
         }
-
-        // ══════════════════════════════════════════════════════════════
-        // EVENTOS DE EMPLEADOS
-        // ══════════════════════════════════════════════════════════════
 
         private void dgvEmpleados_SelectionChanged(object sender, EventArgs e)
         {
@@ -198,9 +199,7 @@ namespace app.UserControls
             }
 
             bool existe = empleadoNegocio.existeCredencial(txtCredencial.Text.Trim());
-            
-            // Si existe y NO estamos en modo edición, es un problema
-            // Si existe y SÍ estamos en modo edición, verificar que sea la misma credencial
+           
             if (existe)
             {
                 if (!modoEdicion || 
@@ -223,10 +222,6 @@ namespace app.UserControls
         {
             CargarEmpleados(txtBuscarEmpleado.Text);
         }
-
-        // ══════════════════════════════════════════════════════════════
-        // MÉTODOS AUXILIARES
-        // ══════════════════════════════════════════════════════════════
 
         private bool ValidarFormularioEmpleado()
         {
