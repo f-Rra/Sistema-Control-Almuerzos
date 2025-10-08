@@ -51,13 +51,13 @@ namespace app.UserControls
         private void CargarRegistros()
         {
             dgvRegistros.DataSource = null;
+            dgvRegistros.Columns.Clear(); // Evita columnas duplicadas
 
             if (servicioIdActual.HasValue)
             {
                 dgvRegistros.DataSource = negR.listarPorServicio(servicioIdActual.Value);
             }
             OcultarColumnas();
-
         }
 
         private void OcultarColumnas()

@@ -66,6 +66,7 @@ namespace app.UserControls
         private void CargarRegistros()
         {
             dgvFaltantes.DataSource = null;
+            dgvFaltantes.Columns.Clear(); // Evita columnas duplicadas
 
             if (servicioIdActual.HasValue)
             {
