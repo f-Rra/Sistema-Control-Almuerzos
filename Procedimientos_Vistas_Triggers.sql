@@ -11,6 +11,24 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE SP_ListarTodosLosServicios
+AS
+BEGIN
+    SELECT 
+        s.IdServicio,
+        s.Fecha,
+        s.Proyeccion,
+        s.DuracionMinutos,
+        s.TotalComensales,
+        s.TotalInvitados,
+        l.Nombre as Lugar,
+        (s.TotalComensales + s.TotalInvitados) as Total
+    FROM Servicios s
+    INNER JOIN Lugares l ON s.IdLugar = l.IdLugar
+    ORDER BY s.Fecha DESC, l.Nombre;
+END
+GO
+
 CREATE OR ALTER PROCEDURE SP_ObtenerLugarPorNombre
     @Nombre NVARCHAR(50)
 AS

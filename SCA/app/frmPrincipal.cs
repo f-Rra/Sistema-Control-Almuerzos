@@ -41,11 +41,43 @@ namespace app
         }
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
+            CargarServicios();
             CargarLugares();
             CargarFecha();
             IniciarCronometro();
             ActualizarEstadisticas();
-            gbxUltimo.Visible = false;
+        }
+
+        private void CargarServicios()
+        {
+            dgvServicios.DataSource = null;
+            dgvServicios.DataSource = negS.listarTodos();
+            OcultarColumnasServicios();
+            RenombrarColumnasServicios();
+        }
+
+        private void OcultarColumnasServicios()
+        {
+            var cols = dgvServicios?.Columns;
+            if (cols == null) return;
+            string[] aOcultar = { "IdServicio", "IdLugar", "Estado" , "Proyeccion" , "DuracionMinutos" };
+            foreach (var nombre in aOcultar)
+            {
+                var col = cols[nombre];
+                if (col != null) col.Visible = false;
+            }
+        }
+
+        private void RenombrarColumnasServicios()
+        {
+            var cols = dgvServicios?.Columns;
+            if (cols == null) return;
+            if (cols["TotalComensales"] != null)
+                cols["TotalComensales"].HeaderText = "Comensales";
+            if (cols["TotalInvitados"] != null)
+                cols["TotalInvitados"].HeaderText = "Invitados";
+            if (cols["TotalGeneral"] != null)
+                cols["TotalGeneral"].HeaderText = "Total";
         }
 
         private void CargarUltimoServicio()
@@ -60,10 +92,14 @@ namespace app
                     lblUproyeccion.Text = "Proyección: " + (ultimo.Proyeccion?.ToString() ?? "N/A");
                     lblUcomensales.Text = "Comensales: " + ultimo.TotalComensales.ToString();
                     lblUinvitados.Text = "Invitados: " + ultimo.TotalInvitados.ToString();
+                    lblTotal.Text = "Total: " + ultimo.TotalGeneral.ToString();
+                    lblDuracion.Text = "Duración: " + (ultimo.DuracionMinutos?.ToString() ?? "N/A") + " min";   
                 }
                 OcultarTodasLasVistas();
                 gbxUltimo.Visible = true;
+                gbxServicios.Visible = true;
                 gbxUltimo.BringToFront();
+                gbxServicios.BringToFront();
             }
             catch (Exception ex)
             {
@@ -73,13 +109,25 @@ namespace app
 
         private void CargarVistaPrincipal()
         {
-            if (vistaPrincipal == null)
-                vistaPrincipal = new ucVistaPrincipal(this);
-            if (vistaPrincipal.Parent != pnlPrincipal)
+            if (idServicioActual == null)
             {
-                vistaPrincipal.Dock = DockStyle.Fill;
-                vistaPrincipal.Visible = false;
-                pnlPrincipal.Controls.Add(vistaPrincipal);
+                CargarServicios();
+                CargarUltimoServicio();
+                gbxServicios.Visible = true;
+                gbxUltimo.Visible = true;
+            }
+            else
+            {
+                gbxServicios.Visible = false;
+                gbxUltimo.Visible = false;
+                if (vistaPrincipal == null)
+                    vistaPrincipal = new ucVistaPrincipal(this);
+                if (vistaPrincipal.Parent != pnlPrincipal)
+                {
+                    vistaPrincipal.Dock = DockStyle.Fill;
+                    vistaPrincipal.Visible = false;
+                    pnlPrincipal.Controls.Add(vistaPrincipal);
+                }
             }
         }
 
@@ -145,13 +193,16 @@ namespace app
             foreach (Control c in pnlPrincipal.Controls)
                 c.Visible = false;
 
+            gbxServicios.Visible = false;
+            gbxUltimo.Visible = false;
+
             pnlPrincipal.ResumeLayout();
         }
 
         private void MostrarVistaPrincipal()
         {
             CargarVistaPrincipal();
-            pnlSuperior.Visible = true; // mostrar barra superior para vistas comunes
+            pnlSuperior.Visible = true;
             MostrarVista(vistaPrincipal);
         }
 
@@ -168,7 +219,7 @@ namespace app
             {
                 vistaRegManual.SetServicio(idServicioActual.Value, idLugar);
             }
-            pnlSuperior.Visible = true; // esta vista usa la barra superior
+            pnlSuperior.Visible = true; 
             MostrarVista(vistaRegManual);
         }
 
@@ -180,7 +231,6 @@ namespace app
                 return;
             }
             CargarVistaReportes();
-            // Oculta la barra superior, ya que ucReportes incluye su propio panel de filtros
             pnlSuperior.Visible = false;
             MostrarVista(vistaReportes);
         }
@@ -194,7 +244,7 @@ namespace app
             }
 
             CargarVistaAdmin();
-            pnlSuperior.Visible = false; // Ocultar barra superior, ucAdmin ocupa toda la pantalla
+            pnlSuperior.Visible = false; 
             MostrarVista(vistaAdmin);
         }
 
@@ -289,7 +339,6 @@ namespace app
 
         private void FinalizarServicio()
         {
-            // Confirmar con el usuario
             if (!ExceptionHelper.MostrarConfirmacion(
                 "¿Está seguro de finalizar el servicio?\n\n" +
                 "Esta acción guardará todos los registros y no se puede deshacer."))
@@ -336,6 +385,7 @@ namespace app
                 btnRegistros.Enabled = true;
                 btnHome.Enabled = true;
                 CargarUltimoServicio(); 
+                CargarServicios();
             }
         }
         public void ActualizarEstadisticas()
@@ -434,13 +484,6 @@ namespace app
             ToggleServicio();
         }
 
-        private void frmPrincipal_VisibleChanged(object sender, EventArgs e)
-        {
-            if (this.Visible)
-            {
-                // spaceSeparatorVertical1 siempre al frente visual
-                this.Controls.SetChildIndex(this.ssPanel, 0);
-            }
-        }
+    
     }
 }

@@ -161,6 +161,42 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<Servicio> listarTodos()
+        {
+            List<Servicio> lista = new List<Servicio>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("SP_ListarTodosLosServicios");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Servicio servicio = new Servicio();
+                    servicio.IdServicio = (int)datos.Lector["IdServicio"];
+                    servicio.Fecha = (DateTime)datos.Lector["Fecha"];
+                    if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
+                    if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
+                    servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
+                    servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
+                    servicio.NombreLugar = (string)datos.Lector["Lugar"];
+                    lista.Add(servicio);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public List<Servicio> listarPorLugar(int idLugar, DateTime fechaDesde, DateTime fechaHasta)
         {
             List<Servicio> lista = new List<Servicio>();

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBarra = new System.Windows.Forms.Panel();
             this.btnSalir = new System.Windows.Forms.Label();
             this.pnlLateral = new System.Windows.Forms.Panel();
@@ -70,12 +72,22 @@
             this.pbxEmpresas = new System.Windows.Forms.PictureBox();
             this.ssSuperior = new ReaLTaiizor.Controls.SpaceSeparatorHorizontal();
             this.pnlPrincipal = new System.Windows.Forms.Panel();
-            this.gbxUltimo = new ReaLTaiizor.Controls.ThunderGroupBox();
+            this.gbxServicios = new System.Windows.Forms.GroupBox();
+            this.pnlServicios = new System.Windows.Forms.Panel();
+            this.bigLabel2 = new ReaLTaiizor.Controls.BigLabel();
+            this.pnlServiciosI = new System.Windows.Forms.Panel();
+            this.dgvServicios = new System.Windows.Forms.DataGridView();
+            this.gbxUltimo = new System.Windows.Forms.GroupBox();
+            this.pnlUltimo = new System.Windows.Forms.Panel();
+            this.bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
+            this.pnlUltimoI = new System.Windows.Forms.Panel();
+            this.lblDuracion = new ReaLTaiizor.Controls.BigLabel();
+            this.lblTotal = new ReaLTaiizor.Controls.BigLabel();
             this.lblUinvitados = new ReaLTaiizor.Controls.BigLabel();
-            this.lblUcomensales = new ReaLTaiizor.Controls.BigLabel();
-            this.lblUproyeccion = new ReaLTaiizor.Controls.BigLabel();
-            this.lblUfecha = new ReaLTaiizor.Controls.BigLabel();
             this.lblUlugar = new ReaLTaiizor.Controls.BigLabel();
+            this.lblUcomensales = new ReaLTaiizor.Controls.BigLabel();
+            this.lblUfecha = new ReaLTaiizor.Controls.BigLabel();
+            this.lblUproyeccion = new ReaLTaiizor.Controls.BigLabel();
             this.cHome = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.cRegistros = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.cReportes = new ReaLTaiizor.Controls.ParrotControlEllipse();
@@ -95,7 +107,13 @@
             this.gbxEstado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxEmpresas)).BeginInit();
             this.pnlPrincipal.SuspendLayout();
+            this.gbxServicios.SuspendLayout();
+            this.pnlServicios.SuspendLayout();
+            this.pnlServiciosI.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvServicios)).BeginInit();
             this.gbxUltimo.SuspendLayout();
+            this.pnlUltimo.SuspendLayout();
+            this.pnlUltimoI.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBarra
@@ -659,6 +677,7 @@
             // 
             // pnlPrincipal
             // 
+            this.pnlPrincipal.Controls.Add(this.gbxServicios);
             this.pnlPrincipal.Controls.Add(this.gbxUltimo);
             this.pnlPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPrincipal.Location = new System.Drawing.Point(125, 204);
@@ -666,24 +685,167 @@
             this.pnlPrincipal.Size = new System.Drawing.Size(1155, 516);
             this.pnlPrincipal.TabIndex = 4;
             // 
+            // gbxServicios
+            // 
+            this.gbxServicios.Controls.Add(this.pnlServicios);
+            this.gbxServicios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbxServicios.Location = new System.Drawing.Point(3, 6);
+            this.gbxServicios.Name = "gbxServicios";
+            this.gbxServicios.Size = new System.Drawing.Size(749, 499);
+            this.gbxServicios.TabIndex = 9;
+            this.gbxServicios.TabStop = false;
+            // 
+            // pnlServicios
+            // 
+            this.pnlServicios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.pnlServicios.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlServicios.Controls.Add(this.bigLabel2);
+            this.pnlServicios.Controls.Add(this.pnlServiciosI);
+            this.pnlServicios.Location = new System.Drawing.Point(6, 13);
+            this.pnlServicios.Name = "pnlServicios";
+            this.pnlServicios.Size = new System.Drawing.Size(737, 480);
+            this.pnlServicios.TabIndex = 7;
+            // 
+            // bigLabel2
+            // 
+            this.bigLabel2.AutoSize = true;
+            this.bigLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.bigLabel2.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bigLabel2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.bigLabel2.Location = new System.Drawing.Point(233, 7);
+            this.bigLabel2.Name = "bigLabel2";
+            this.bigLabel2.Size = new System.Drawing.Size(182, 17);
+            this.bigLabel2.TabIndex = 2;
+            this.bigLabel2.Text = "Listado de Ultimos Servicios";
+            this.bigLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlServiciosI
+            // 
+            this.pnlServiciosI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
+            this.pnlServiciosI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlServiciosI.Controls.Add(this.dgvServicios);
+            this.pnlServiciosI.Location = new System.Drawing.Point(3, 27);
+            this.pnlServiciosI.Name = "pnlServiciosI";
+            this.pnlServiciosI.Size = new System.Drawing.Size(729, 448);
+            this.pnlServiciosI.TabIndex = 6;
+            // 
+            // dgvServicios
+            // 
+            this.dgvServicios.AllowUserToAddRows = false;
+            this.dgvServicios.AllowUserToDeleteRows = false;
+            this.dgvServicios.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvServicios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvServicios.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.dgvServicios.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvServicios.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvServicios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvServicios.ColumnHeadersHeight = 40;
+            this.dgvServicios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvServicios.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvServicios.EnableHeadersVisualStyles = false;
+            this.dgvServicios.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.dgvServicios.Location = new System.Drawing.Point(3, 3);
+            this.dgvServicios.MultiSelect = false;
+            this.dgvServicios.Name = "dgvServicios";
+            this.dgvServicios.ReadOnly = true;
+            this.dgvServicios.RowHeadersVisible = false;
+            this.dgvServicios.RowHeadersWidth = 62;
+            this.dgvServicios.RowTemplate.Height = 40;
+            this.dgvServicios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvServicios.Size = new System.Drawing.Size(721, 440);
+            this.dgvServicios.TabIndex = 2;
+            // 
             // gbxUltimo
             // 
-            this.gbxUltimo.BackColor = System.Drawing.Color.Transparent;
-            this.gbxUltimo.BodyColorA = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.gbxUltimo.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.gbxUltimo.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.gbxUltimo.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
-            this.gbxUltimo.Controls.Add(this.lblUinvitados);
-            this.gbxUltimo.Controls.Add(this.lblUcomensales);
-            this.gbxUltimo.Controls.Add(this.lblUproyeccion);
-            this.gbxUltimo.Controls.Add(this.lblUfecha);
-            this.gbxUltimo.Controls.Add(this.lblUlugar);
-            this.gbxUltimo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxUltimo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.gbxUltimo.Location = new System.Drawing.Point(231, 45);
+            this.gbxUltimo.Controls.Add(this.pnlUltimo);
+            this.gbxUltimo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbxUltimo.Location = new System.Drawing.Point(762, 6);
             this.gbxUltimo.Name = "gbxUltimo";
-            this.gbxUltimo.Size = new System.Drawing.Size(701, 303);
-            this.gbxUltimo.TabIndex = 5;
+            this.gbxUltimo.Size = new System.Drawing.Size(387, 437);
+            this.gbxUltimo.TabIndex = 8;
+            this.gbxUltimo.TabStop = false;
+            // 
+            // pnlUltimo
+            // 
+            this.pnlUltimo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.pnlUltimo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlUltimo.Controls.Add(this.bigLabel1);
+            this.pnlUltimo.Controls.Add(this.pnlUltimoI);
+            this.pnlUltimo.Location = new System.Drawing.Point(6, 13);
+            this.pnlUltimo.Name = "pnlUltimo";
+            this.pnlUltimo.Size = new System.Drawing.Size(374, 418);
+            this.pnlUltimo.TabIndex = 7;
+            // 
+            // bigLabel1
+            // 
+            this.bigLabel1.AutoSize = true;
+            this.bigLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.bigLabel1.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bigLabel1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.bigLabel1.Location = new System.Drawing.Point(123, 6);
+            this.bigLabel1.Name = "bigLabel1";
+            this.bigLabel1.Size = new System.Drawing.Size(137, 17);
+            this.bigLabel1.TabIndex = 2;
+            this.bigLabel1.Text = "Detalles del Servicio ";
+            this.bigLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlUltimoI
+            // 
+            this.pnlUltimoI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
+            this.pnlUltimoI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlUltimoI.Controls.Add(this.lblDuracion);
+            this.pnlUltimoI.Controls.Add(this.lblTotal);
+            this.pnlUltimoI.Controls.Add(this.lblUinvitados);
+            this.pnlUltimoI.Controls.Add(this.lblUlugar);
+            this.pnlUltimoI.Controls.Add(this.lblUcomensales);
+            this.pnlUltimoI.Controls.Add(this.lblUfecha);
+            this.pnlUltimoI.Controls.Add(this.lblUproyeccion);
+            this.pnlUltimoI.Location = new System.Drawing.Point(3, 27);
+            this.pnlUltimoI.Name = "pnlUltimoI";
+            this.pnlUltimoI.Size = new System.Drawing.Size(366, 386);
+            this.pnlUltimoI.TabIndex = 6;
+            // 
+            // lblDuracion
+            // 
+            this.lblDuracion.AutoSize = true;
+            this.lblDuracion.BackColor = System.Drawing.Color.Transparent;
+            this.lblDuracion.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDuracion.ForeColor = System.Drawing.Color.White;
+            this.lblDuracion.Location = new System.Drawing.Point(17, 170);
+            this.lblDuracion.Name = "lblDuracion";
+            this.lblDuracion.Size = new System.Drawing.Size(147, 37);
+            this.lblDuracion.TabIndex = 2;
+            this.lblDuracion.Text = "Duracion: ";
+            this.lblDuracion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.BackColor = System.Drawing.Color.Transparent;
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.ForeColor = System.Drawing.Color.White;
+            this.lblTotal.Location = new System.Drawing.Point(17, 330);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(96, 37);
+            this.lblTotal.TabIndex = 2;
+            this.lblTotal.Text = "Total: ";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblUinvitados
             // 
@@ -691,51 +853,12 @@
             this.lblUinvitados.BackColor = System.Drawing.Color.Transparent;
             this.lblUinvitados.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUinvitados.ForeColor = System.Drawing.Color.White;
-            this.lblUinvitados.Location = new System.Drawing.Point(22, 241);
+            this.lblUinvitados.Location = new System.Drawing.Point(17, 277);
             this.lblUinvitados.Name = "lblUinvitados";
             this.lblUinvitados.Size = new System.Drawing.Size(151, 37);
             this.lblUinvitados.TabIndex = 2;
             this.lblUinvitados.Text = "Invitados: ";
             this.lblUinvitados.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblUcomensales
-            // 
-            this.lblUcomensales.AutoSize = true;
-            this.lblUcomensales.BackColor = System.Drawing.Color.Transparent;
-            this.lblUcomensales.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUcomensales.ForeColor = System.Drawing.Color.White;
-            this.lblUcomensales.Location = new System.Drawing.Point(22, 191);
-            this.lblUcomensales.Name = "lblUcomensales";
-            this.lblUcomensales.Size = new System.Drawing.Size(183, 37);
-            this.lblUcomensales.TabIndex = 2;
-            this.lblUcomensales.Text = "Comensales: ";
-            this.lblUcomensales.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblUproyeccion
-            // 
-            this.lblUproyeccion.AutoSize = true;
-            this.lblUproyeccion.BackColor = System.Drawing.Color.Transparent;
-            this.lblUproyeccion.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUproyeccion.ForeColor = System.Drawing.Color.White;
-            this.lblUproyeccion.Location = new System.Drawing.Point(22, 141);
-            this.lblUproyeccion.Name = "lblUproyeccion";
-            this.lblUproyeccion.Size = new System.Drawing.Size(173, 37);
-            this.lblUproyeccion.TabIndex = 2;
-            this.lblUproyeccion.Text = "Proyeccion: ";
-            this.lblUproyeccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblUfecha
-            // 
-            this.lblUfecha.AutoSize = true;
-            this.lblUfecha.BackColor = System.Drawing.Color.Transparent;
-            this.lblUfecha.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUfecha.ForeColor = System.Drawing.Color.White;
-            this.lblUfecha.Location = new System.Drawing.Point(22, 91);
-            this.lblUfecha.Name = "lblUfecha";
-            this.lblUfecha.Size = new System.Drawing.Size(104, 37);
-            this.lblUfecha.TabIndex = 2;
-            this.lblUfecha.Text = "Fecha: ";
-            this.lblUfecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblUlugar
             // 
@@ -743,12 +866,51 @@
             this.lblUlugar.BackColor = System.Drawing.Color.Transparent;
             this.lblUlugar.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUlugar.ForeColor = System.Drawing.Color.White;
-            this.lblUlugar.Location = new System.Drawing.Point(22, 41);
+            this.lblUlugar.Location = new System.Drawing.Point(17, 17);
             this.lblUlugar.Name = "lblUlugar";
             this.lblUlugar.Size = new System.Drawing.Size(105, 37);
             this.lblUlugar.TabIndex = 2;
             this.lblUlugar.Text = "Lugar: ";
             this.lblUlugar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblUcomensales
+            // 
+            this.lblUcomensales.AutoSize = true;
+            this.lblUcomensales.BackColor = System.Drawing.Color.Transparent;
+            this.lblUcomensales.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUcomensales.ForeColor = System.Drawing.Color.White;
+            this.lblUcomensales.Location = new System.Drawing.Point(17, 223);
+            this.lblUcomensales.Name = "lblUcomensales";
+            this.lblUcomensales.Size = new System.Drawing.Size(183, 37);
+            this.lblUcomensales.TabIndex = 2;
+            this.lblUcomensales.Text = "Comensales: ";
+            this.lblUcomensales.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblUfecha
+            // 
+            this.lblUfecha.AutoSize = true;
+            this.lblUfecha.BackColor = System.Drawing.Color.Transparent;
+            this.lblUfecha.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUfecha.ForeColor = System.Drawing.Color.White;
+            this.lblUfecha.Location = new System.Drawing.Point(17, 67);
+            this.lblUfecha.Name = "lblUfecha";
+            this.lblUfecha.Size = new System.Drawing.Size(104, 37);
+            this.lblUfecha.TabIndex = 2;
+            this.lblUfecha.Text = "Fecha: ";
+            this.lblUfecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblUproyeccion
+            // 
+            this.lblUproyeccion.AutoSize = true;
+            this.lblUproyeccion.BackColor = System.Drawing.Color.Transparent;
+            this.lblUproyeccion.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUproyeccion.ForeColor = System.Drawing.Color.White;
+            this.lblUproyeccion.Location = new System.Drawing.Point(17, 117);
+            this.lblUproyeccion.Name = "lblUproyeccion";
+            this.lblUproyeccion.Size = new System.Drawing.Size(173, 37);
+            this.lblUproyeccion.TabIndex = 2;
+            this.lblUproyeccion.Text = "Proyeccion: ";
+            this.lblUproyeccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cHome
             // 
@@ -805,8 +967,16 @@
             this.gbxEstado.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxEmpresas)).EndInit();
             this.pnlPrincipal.ResumeLayout(false);
+            this.gbxServicios.ResumeLayout(false);
+            this.pnlServicios.ResumeLayout(false);
+            this.pnlServicios.PerformLayout();
+            this.pnlServiciosI.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvServicios)).EndInit();
             this.gbxUltimo.ResumeLayout(false);
-            this.gbxUltimo.PerformLayout();
+            this.pnlUltimo.ResumeLayout(false);
+            this.pnlUltimo.PerformLayout();
+            this.pnlUltimoI.ResumeLayout(false);
+            this.pnlUltimoI.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -858,12 +1028,22 @@
         private System.Windows.Forms.MaskedTextBox mtxtProyeccion;
         private System.Windows.Forms.MaskedTextBox mtxtInvitados;
         private System.Windows.Forms.ComboBox cbLugar;
-        private ReaLTaiizor.Controls.ThunderGroupBox gbxUltimo;
         private ReaLTaiizor.Controls.BigLabel lblUlugar;
         private ReaLTaiizor.Controls.BigLabel lblUinvitados;
         private ReaLTaiizor.Controls.BigLabel lblUcomensales;
         private ReaLTaiizor.Controls.BigLabel lblUproyeccion;
         private ReaLTaiizor.Controls.BigLabel lblUfecha;
         private ReaLTaiizor.Controls.SpaceSeparatorVertical ssPanel;
+        private System.Windows.Forms.Panel pnlUltimoI;
+        private System.Windows.Forms.GroupBox gbxUltimo;
+        private System.Windows.Forms.Panel pnlUltimo;
+        private ReaLTaiizor.Controls.BigLabel bigLabel1;
+        private System.Windows.Forms.GroupBox gbxServicios;
+        private System.Windows.Forms.Panel pnlServicios;
+        private ReaLTaiizor.Controls.BigLabel bigLabel2;
+        private System.Windows.Forms.Panel pnlServiciosI;
+        private System.Windows.Forms.DataGridView dgvServicios;
+        private ReaLTaiizor.Controls.BigLabel lblDuracion;
+        private ReaLTaiizor.Controls.BigLabel lblTotal;
     }
 }
