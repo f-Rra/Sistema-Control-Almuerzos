@@ -51,13 +51,13 @@ namespace app.UserControls
         private void CargarRegistros()
         {
             dgvRegistros.DataSource = null;
-            dgvRegistros.Columns.Clear(); // Evita columnas duplicadas
 
             if (servicioIdActual.HasValue)
             {
                 dgvRegistros.DataSource = negR.listarPorServicio(servicioIdActual.Value);
             }
             OcultarColumnas();
+
         }
 
         private void OcultarColumnas()
@@ -65,7 +65,7 @@ namespace app.UserControls
             var cols = dgvRegistros?.Columns;
             if (cols == null) return;
 
-            string[] aOcultar = { "IdRegistro", "IdEmpleado", "IdEmpresa", "IdServicio", "IdLugar", "Hora" };
+            string[] aOcultar = { "IdRegistro", "IdEmpleado", "IdEmpresa", "IdServicio", "IdLugar", "Hora", "Empresa" };
             foreach (var nombre in aOcultar)
             {
                 var col = cols[nombre];

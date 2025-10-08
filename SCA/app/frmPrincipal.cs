@@ -50,10 +50,15 @@ namespace app
 
         private void CargarServicios()
         {
+            var lista = negS.listarTodos();
+            System.Windows.Forms.MessageBox.Show($"Servicios cargados: {lista.Count}", "Depuración", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
             dgvServicios.DataSource = null;
-            dgvServicios.DataSource = negS.listarTodos();
+            dgvServicios.Rows.Clear();
+            dgvServicios.Columns.Clear();
+            dgvServicios.DataSource = lista;
             OcultarColumnasServicios();
             RenombrarColumnasServicios();
+            dgvServicios.Refresh();
         }
 
         private void OcultarColumnasServicios()
@@ -384,8 +389,8 @@ namespace app
                 btnAdmin.Enabled = true;
                 btnRegistros.Enabled = true;
                 btnHome.Enabled = true;
-                CargarUltimoServicio(); 
                 CargarServicios();
+                CargarUltimoServicio();
             }
         }
         public void ActualizarEstadisticas()

@@ -66,7 +66,6 @@ namespace app.UserControls
         private void CargarRegistros()
         {
             dgvFaltantes.DataSource = null;
-            dgvFaltantes.Columns.Clear(); // Evita columnas duplicadas
 
             if (servicioIdActual.HasValue)
             {
@@ -81,7 +80,7 @@ namespace app.UserControls
         {
             var cols = dgvFaltantes?.Columns;
             if (cols == null) return;
-            string[] aOcultar = { "IdEmpleado", "IdEmpresa", "Estado", "Nombre", "Apellido" };
+            string[] aOcultar = { "IdEmpleado", "IdEmpresa", "Empresa", "Estado", "Nombre", "Apellido" };
             foreach (var nombre in aOcultar)
             {
                 var col = cols[nombre];
