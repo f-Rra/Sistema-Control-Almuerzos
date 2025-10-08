@@ -145,8 +145,8 @@ namespace Negocio
                     if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
                     servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
                     servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
-                    servicio.NombreLugar = (string)datos.Lector["Lugar"];
-
+                    servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
+                        servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
                     lista.Add(servicio);
                 }
 
@@ -166,7 +166,6 @@ namespace Negocio
         {
             List<Servicio> lista = new List<Servicio>();
             AccesoDatos datos = new AccesoDatos();
-
             try
             {
                 datos.setearProcedimiento("SP_ListarTodosLosServicios");
@@ -181,7 +180,7 @@ namespace Negocio
                     if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
                     servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
                     servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
-                    servicio.NombreLugar = (string)datos.Lector["Lugar"];
+                    servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
                     lista.Add(servicio);
                 }
 

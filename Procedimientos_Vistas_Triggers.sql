@@ -21,8 +21,7 @@ BEGIN
         s.DuracionMinutos,
         s.TotalComensales,
         s.TotalInvitados,
-        l.Nombre as Lugar,
-        (s.TotalComensales + s.TotalInvitados) as Total
+        l.Nombre as NombreLugar
     FROM Servicios s
     INNER JOIN Lugares l ON s.IdLugar = l.IdLugar
     ORDER BY s.Fecha DESC, l.Nombre;
@@ -212,7 +211,8 @@ BEGIN
     WHERE s.DuracionMinutos IS NOT NULL 
     ORDER BY s.Fecha DESC, s.IdServicio DESC;
 END
-GO
+                  (s.TotalComensales + s.TotalInvitados) as Total,
+                  l.Nombre as NombreLugar
 
 CREATE OR ALTER PROCEDURE SP_AltaServicio
     @IdLugar INT,
@@ -268,18 +268,18 @@ CREATE OR ALTER PROCEDURE SP_ListarServiciosPorLugar
     @FechaHasta DATE
 AS
 BEGIN
-    SELECT 
-        s.IdServicio, 
-        s.Fecha, 
-        s.Proyeccion,
-        s.DuracionMinutos,
-        s.TotalComensales, 
-        s.TotalInvitados,
-        (s.TotalComensales + s.TotalInvitados) as Total
-    FROM Servicios s
-    WHERE s.IdLugar = @IdLugar
-      AND s.Fecha BETWEEN @FechaDesde AND @FechaHasta
-    ORDER BY s.Fecha DESC;
+            SELECT 
+                    s.IdServicio, 
+                    s.Fecha, 
+                    s.Proyeccion,
+                    s.DuracionMinutos,
+                    s.TotalComensales, 
+                    s.TotalInvitados,
+                    (s.TotalComensales + s.TotalInvitados) as Total
+            FROM Servicios s
+            WHERE s.IdLugar = @IdLugar
+                AND s.Fecha BETWEEN @FechaDesde AND @FechaHasta
+            ORDER BY s.Fecha DESC;
 END
 GO
 
