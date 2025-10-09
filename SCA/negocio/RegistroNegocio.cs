@@ -51,7 +51,7 @@ namespace Negocio
                     registro.Fecha = (DateTime)datos.Lector["Fecha"];
                     registro.NombreEmpleado = (string)datos.Lector["Empleado"];
                     registro.NombreEmpresa = (string)datos.Lector["Empresa"];
-                    registro.NombreLugar = (string)datos.Lector["Lugar"];
+                    // NO cargar NombreLugar - la columna se oculta en la vista
 
                     lista.Add(registro);
                 }

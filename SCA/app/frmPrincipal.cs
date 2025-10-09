@@ -41,24 +41,38 @@ namespace app
         }
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            CargarServicios();
             CargarLugares();
             CargarFecha();
             IniciarCronometro();
             ActualizarEstadisticas();
+            
+            // Mostrar la vista principal al inicio
+            CargarVistaPrincipal();
+            gbxServicios.Visible = true;
+            gbxUltimo.Visible = true;
+            gbxServicios.BringToFront();
+            gbxUltimo.BringToFront();
         }
 
         private void CargarServicios()
         {
-            var lista = negS.listarTodos();
-            System.Windows.Forms.MessageBox.Show($"Servicios cargados: {lista.Count}", "Depuración", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
-            dgvServicios.DataSource = null;
-            dgvServicios.Rows.Clear();
-            dgvServicios.Columns.Clear();
-            dgvServicios.DataSource = lista;
-            OcultarColumnasServicios();
-            RenombrarColumnasServicios();
-            dgvServicios.Refresh();
+            try
+            {
+                var lista = negS.listarTodos();
+                dgvServicios.DataSource = null;
+                dgvServicios.DataSource = lista;
+                
+                if (dgvServicios.Columns.Count > 0)
+                {
+                    OcultarColumnasServicios();
+                    RenombrarColumnasServicios();
+                }
+                dgvServicios.Refresh();
+            }
+            catch (Exception ex)
+            {
+                ExceptionHelper.ManejarExcepcionBD(ex, "cargar los servicios");
+            }
         }
 
         private void OcultarColumnasServicios()
@@ -92,7 +106,7 @@ namespace app
                 Servicio ultimo = negS.obtenerUltimoServicio();
                 if (ultimo != null)
                 {
-                    lblUlugar.Text = "Lugar:" + ultimo.NombreLugar;
+                    lblUlugar.Text = "Lugar: " + ultimo.NombreLugar;
                     lblUfecha.Text = "Fecha: " + ultimo.Fecha.ToString("dd/MM/yyyy");
                     lblUproyeccion.Text = "Proyección: " + (ultimo.Proyeccion?.ToString() ?? "N/A");
                     lblUcomensales.Text = "Comensales: " + ultimo.TotalComensales.ToString();
@@ -100,11 +114,16 @@ namespace app
                     lblTotal.Text = "Total: " + ultimo.TotalGeneral.ToString();
                     lblDuracion.Text = "Duración: " + (ultimo.DuracionMinutos?.ToString() ?? "N/A") + " min";   
                 }
-                OcultarTodasLasVistas();
-                gbxUltimo.Visible = true;
-                gbxServicios.Visible = true;
-                gbxUltimo.BringToFront();
-                gbxServicios.BringToFront();
+                else
+                {
+                    lblUlugar.Text = "Lugar: -";
+                    lblUfecha.Text = "Fecha: -";
+                    lblUproyeccion.Text = "Proyección: -";
+                    lblUcomensales.Text = "Comensales: -";
+                    lblUinvitados.Text = "Invitados: -";
+                    lblTotal.Text = "Total: -";
+                    lblDuracion.Text = "Duración: -";
+                }
             }
             catch (Exception ex)
             {
@@ -116,10 +135,9 @@ namespace app
         {
             if (idServicioActual == null)
             {
+                OcultarTodasLasVistas();
                 CargarServicios();
                 CargarUltimoServicio();
-                gbxServicios.Visible = true;
-                gbxUltimo.Visible = true;
             }
             else
             {
@@ -208,7 +226,21 @@ namespace app
         {
             CargarVistaPrincipal();
             pnlSuperior.Visible = true;
-            MostrarVista(vistaPrincipal);
+            
+            if (idServicioActual.HasValue && vistaPrincipal != null)
+            {
+                // Servicio activo: mostrar la vista principal de registros
+                MostrarVista(vistaPrincipal);
+            }
+            else
+            {
+                // Servicio inactivo: mostrar paneles de servicios
+                OcultarTodasLasVistas();
+                gbxServicios.Visible = true;
+                gbxUltimo.Visible = true;
+                gbxServicios.BringToFront();
+                gbxUltimo.BringToFront();
+            }
         }
 
         private void MostrarVistaRegistroManual()
@@ -325,7 +357,12 @@ namespace app
                 btnServicio.Text = "Finalizar Servicio";
                 cbLugar.Enabled = false;
                 mtxtProyeccion.ReadOnly = true;
-                mtxtInvitados.ReadOnly = true; 
+                mtxtInvitados.ReadOnly = true;
+                
+                // Ocultar los paneles de servicios al iniciar
+                gbxServicios.Visible = false;
+                gbxUltimo.Visible = false;
+                
                 CargarVistaPrincipal();
                 MostrarVistaPrincipal();
                 vistaPrincipal.SetServicio(idServicioActual, idLugar);
@@ -389,8 +426,15 @@ namespace app
                 btnAdmin.Enabled = true;
                 btnRegistros.Enabled = true;
                 btnHome.Enabled = true;
+                
+                // Actualizar y mostrar los paneles de servicios
+                OcultarTodasLasVistas();
                 CargarServicios();
                 CargarUltimoServicio();
+                gbxServicios.Visible = true;
+                gbxUltimo.Visible = true;
+                gbxServicios.BringToFront();
+                gbxUltimo.BringToFront();
             }
         }
         public void ActualizarEstadisticas()
@@ -489,6 +533,29 @@ namespace app
             ToggleServicio();
         }
 
+        private void dgvServicios_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvServicios.CurrentRow != null && dgvServicios.CurrentRow.DataBoundItem != null)
+            {
+                try
+                {
+                    Servicio servicioSeleccionado = (Servicio)dgvServicios.CurrentRow.DataBoundItem;
+                    
+                    // Cargar los detalles del servicio en gbxUltimo
+                    lblUlugar.Text = "Lugar: " + servicioSeleccionado.NombreLugar;
+                    lblUfecha.Text = "Fecha: " + servicioSeleccionado.Fecha.ToString("dd/MM/yyyy");
+                    lblUproyeccion.Text = "Proyección: " + (servicioSeleccionado.Proyeccion?.ToString() ?? "N/A");
+                    lblUcomensales.Text = "Comensales: " + servicioSeleccionado.TotalComensales.ToString();
+                    lblUinvitados.Text = "Invitados: " + servicioSeleccionado.TotalInvitados.ToString();
+                    lblTotal.Text = "Total: " + servicioSeleccionado.TotalGeneral.ToString();
+                    lblDuracion.Text = "Duración: " + (servicioSeleccionado.DuracionMinutos?.ToString() ?? "N/A") + " min";
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error al cargar servicio seleccionado: " + ex.Message);
+                }
+            }
+        }
     
     }
 }

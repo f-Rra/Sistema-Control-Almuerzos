@@ -1,4 +1,4 @@
-﻿namespace app
+namespace app
 {
     partial class frmPrincipal
     {
@@ -440,7 +440,7 @@
             this.lblEstadisticas.Name = "lblEstadisticas";
             this.lblEstadisticas.Size = new System.Drawing.Size(191, 21);
             this.lblEstadisticas.TabIndex = 2;
-            this.lblEstadisticas.Text = "Registrados: - │ Faltan: -";
+            this.lblEstadisticas.Text = "Registrados: - � Faltan: -";
             // 
             // gbxProgreso
             // 
@@ -770,6 +770,7 @@
             this.dgvServicios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvServicios.Size = new System.Drawing.Size(721, 440);
             this.dgvServicios.TabIndex = 2;
+            this.dgvServicios.SelectionChanged += new System.EventHandler(this.dgvServicios_SelectionChanged);
             // 
             // gbxUltimo
             // 
