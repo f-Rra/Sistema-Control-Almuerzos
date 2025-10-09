@@ -65,7 +65,7 @@ namespace app.UserControls
             var cols = dgvRegistros?.Columns;
             if (cols == null) return;
 
-            string[] aOcultar = { "IdRegistro", "IdEmpleado", "IdEmpresa", "IdServicio", "IdLugar", "Hora", "Empresa" };
+            string[] aOcultar = { "IdRegistro", "IdEmpleado", "IdEmpresa", "IdServicio", "IdLugar", "Hora", "HoraF", "Empresa", "Lugar", "NombreLugar" };
             foreach (var nombre in aOcultar)
             {
                 var col = cols[nombre];
