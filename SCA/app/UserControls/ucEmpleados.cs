@@ -31,7 +31,7 @@ namespace app.UserControls
             LimpiarFormularioEmpleado();
         }
 
-        private void CargarEmpleados(string filtro = "")
+        private void CargarEmpleados(string filtro = "", int idEmpresa = 0)
         {
             var empleados = empleadoNegocio.listar();
             if (empleados == null) return;
@@ -45,12 +45,17 @@ namespace app.UserControls
                 );
             }
 
+            if (idEmpresa > 0)
+            {
+                empleados = empleados.FindAll(e => e.Empresa.IdEmpresa == idEmpresa);
+            }
+
             dgvEmpleados.DataSource = null;
             dgvEmpleados.AutoGenerateColumns = true;
             dgvEmpleados.DataSource = empleados;
             OcultarColumnas();
 
-            lblTotalEmpleados.Text = $"Total: {empleados.Count} empleados";
+            lblTotalEmpleados.Text = $"Total Empleados: {empleados.Count}";
         }
 
         private void OcultarColumnas()
@@ -58,7 +63,7 @@ namespace app.UserControls
             var cols = dgvEmpleados?.Columns;
             if (cols == null) return;
 
-            string[] aMostrar = { "IdCredencial", "NombreCompleto", "Empresa", "Estado" };
+            string[] aMostrar = { "NombreCompleto", "Empresa" };
             foreach (DataGridViewColumn col in cols)
             {
                 if (col.Name == "Empresa")
@@ -80,7 +85,7 @@ namespace app.UserControls
                 }
             }
 
-            string[] orden = { "IdCredencial", "NombreCompleto", "NombreEmpresa", "Estado" };
+            string[] orden = { "NombreCompleto", "NombreEmpresa" };
             int idx = 0;
             foreach (var nombre in orden)
             {
@@ -94,16 +99,14 @@ namespace app.UserControls
             var empresas = empresaNegocio.listar();
             if (empresas == null) return;
             
-            var empresasFiltro = new List<Empresa>();
-            empresasFiltro.Add(new Empresa { IdEmpresa = 0, Nombre = "Todas las empresas" });
-            empresasFiltro.AddRange(empresas);
-            
-            cbFiltroEmpresa.DataSource = empresasFiltro;
+            cbFiltroEmpresa.DataSource = new List<Empresa>(empresas);
             cbFiltroEmpresa.DisplayMember = "Nombre";
             cbFiltroEmpresa.ValueMember = "IdEmpresa";
             cbEmpresaEmpleado.DataSource = empresas;
             cbEmpresaEmpleado.DisplayMember = "Nombre";
             cbEmpresaEmpleado.ValueMember = "IdEmpresa";
+
+            lblTotalEmpresas.Text = $"Total Empresas: {empresas.Count}";
         }
 
         private void dgvEmpleados_SelectionChanged(object sender, EventArgs e)
@@ -220,7 +223,23 @@ namespace app.UserControls
 
         private void txtBuscarEmpleado_TextChanged(object sender, EventArgs e)
         {
-            CargarEmpleados(txtBuscarEmpleado.Text);
+            int idEmpresa = 0;
+            if (cbFiltroEmpresa.SelectedValue != null && int.TryParse(cbFiltroEmpresa.SelectedValue.ToString(), out int temp))
+            {
+                idEmpresa = temp;
+            }
+            CargarEmpleados(txtBuscarEmpleado.Text, idEmpresa);
+        }
+
+        private void cbFiltroEmpresa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbFiltroEmpresa.SelectedValue == null) return;
+            int idEmpresa = 0;
+            if (int.TryParse(cbFiltroEmpresa.SelectedValue.ToString(), out int temp))
+            {
+                idEmpresa = temp;
+            }
+            CargarEmpleados(txtBuscarEmpleado.Text, idEmpresa);
         }
 
         private bool ValidarFormularioEmpleado()

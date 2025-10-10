@@ -28,9 +28,11 @@ namespace app.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTotalEmpleados = new System.Windows.Forms.Label();
+            this.lblTotalEmpresas = new System.Windows.Forms.Label();
             this.txtBuscarEmpleado = new System.Windows.Forms.TextBox();
             this.cbFiltroEmpresa = new System.Windows.Forms.ComboBox();
             this.btnNuevoEmpleado = new ReaLTaiizor.Controls.Button();
@@ -78,7 +80,18 @@ namespace app.UserControls
             this.lblTotalEmpleados.Name = "lblTotalEmpleados";
             this.lblTotalEmpleados.Size = new System.Drawing.Size(177, 25);
             this.lblTotalEmpleados.TabIndex = 0;
-            this.lblTotalEmpleados.Text = "Total: 0 empleados";
+            this.lblTotalEmpleados.Text = "Total Empleados: 0";
+            // 
+            // lblTotalEmpresas
+            // 
+            this.lblTotalEmpresas.AutoSize = true;
+            this.lblTotalEmpresas.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalEmpresas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblTotalEmpresas.Location = new System.Drawing.Point(240, 392);
+            this.lblTotalEmpresas.Name = "lblTotalEmpresas";
+            this.lblTotalEmpresas.Size = new System.Drawing.Size(177, 25);
+            this.lblTotalEmpresas.TabIndex = 7;
+            this.lblTotalEmpresas.Text = "Total Empresas: 0";
             // 
             // txtBuscarEmpleado
             // 
@@ -102,6 +115,7 @@ namespace app.UserControls
             this.cbFiltroEmpresa.Name = "cbFiltroEmpresa";
             this.cbFiltroEmpresa.Size = new System.Drawing.Size(205, 33);
             this.cbFiltroEmpresa.TabIndex = 1;
+            this.cbFiltroEmpresa.SelectedIndexChanged += new System.EventHandler(this.cbFiltroEmpresa_SelectedIndexChanged);
             // 
             // btnNuevoEmpleado
             // 
@@ -132,30 +146,38 @@ namespace app.UserControls
             this.dgvEmpleados.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.dgvEmpleados.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvEmpleados.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEmpleados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEmpleados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvEmpleados.ColumnHeadersHeight = 40;
             this.dgvEmpleados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvEmpleados.EnableHeadersVisualStyles = false;
             this.dgvEmpleados.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.dgvEmpleados.Location = new System.Drawing.Point(20, 101);
             this.dgvEmpleados.MultiSelect = false;
             this.dgvEmpleados.Name = "dgvEmpleados";
             this.dgvEmpleados.ReadOnly = true;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEmpleados.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvEmpleados.RowHeadersVisible = false;
             this.dgvEmpleados.RowTemplate.Height = 40;
             this.dgvEmpleados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -447,7 +469,7 @@ namespace app.UserControls
             // gbEmpleadoDetalle
             // 
             this.gbEmpleadoDetalle.Controls.Add(this.pnlUltimo);
-            this.gbEmpleadoDetalle.Location = new System.Drawing.Point(742, 28);
+            this.gbEmpleadoDetalle.Location = new System.Drawing.Point(742, 20);
             this.gbEmpleadoDetalle.Name = "gbEmpleadoDetalle";
             this.gbEmpleadoDetalle.Size = new System.Drawing.Size(395, 458);
             this.gbEmpleadoDetalle.TabIndex = 9;
@@ -492,6 +514,7 @@ namespace app.UserControls
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.dgvEmpleados);
             this.panel2.Controls.Add(this.lblTotalEmpleados);
+            this.panel2.Controls.Add(this.lblTotalEmpresas);
             this.panel2.Controls.Add(this.btnNuevoEmpleado);
             this.panel2.Controls.Add(this.cbFiltroEmpresa);
             this.panel2.Controls.Add(this.txtBuscarEmpleado);
@@ -533,6 +556,7 @@ namespace app.UserControls
         private System.Windows.Forms.ComboBox cbFiltroEmpresa;
         private System.Windows.Forms.DataGridView dgvEmpleados;
         private System.Windows.Forms.Label lblTotalEmpleados;
+        private System.Windows.Forms.Label lblTotalEmpresas;
         private ReaLTaiizor.Controls.Button btnNuevoEmpleado;
         private System.Windows.Forms.Label lblCredencial;
         private System.Windows.Forms.TextBox txtCredencial;
