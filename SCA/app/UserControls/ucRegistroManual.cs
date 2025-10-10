@@ -189,6 +189,8 @@ namespace app.UserControls
             {
                 Cursor.Current = anterior;
             }
+            LimpiarFiltros();
+            cbLugar.SelectedIndex = 0;
             CargarRegistros();
             formularioPrincipal?.RefrescarRegistros();
             formularioPrincipal?.ActualizarEstadisticas();
