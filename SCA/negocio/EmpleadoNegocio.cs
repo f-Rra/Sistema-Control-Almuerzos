@@ -32,12 +32,9 @@ namespace Negocio
                         empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
                         empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
                         empleado.Estado = (bool)datos.Lector["Estado"];
-
-                        // Crear objeto Empresa
                         empleado.Empresa = new Empresa();
                         empleado.Empresa.IdEmpresa = empleado.IdEmpresa;
                         empleado.Empresa.Nombre = empleado.NombreEmpresa;
-
                         lista.Add(empleado);
                     }
 

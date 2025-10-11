@@ -16,6 +16,42 @@ namespace app.UserControls
 {
     public partial class ucReportes : UserControl
     {
+
+        public ucReportes()
+        {
+            InitializeComponent();
+        }
+
+        private void ucReportes_Load(object sender, EventArgs e)
+        {
+            dtpHasta.Value = DateTime.Today;
+            dtpDesde.Value = DateTime.Today.AddDays(-7);
+            CargarLugares();
+            CargarReportes();
+        }
+
+        private void CargarLugares()
+        {
+            var negL = new LugarNegocio();
+            var lugares = negL.listar() ?? new List<Lugar>();
+            lugares.Insert(0, new Lugar { IdLugar = 0, Nombre = "Todos" });
+            cbLugar.DataSource = lugares;
+            cbLugar.DisplayMember = "Nombre";
+            cbLugar.ValueMember = "IdLugar";
+            cbLugar.SelectedIndex = 0;
+        }
+
+
+        private void CargarReportes()
+        {
+            cbTipoReporte.Items.Clear();
+            cbTipoReporte.Items.Add("Lista de servicios");
+            cbTipoReporte.Items.Add("Asistencias por empresas");
+            cbTipoReporte.Items.Add("Cobertura vs proyección");
+            cbTipoReporte.Items.Add("Distribución por día de semana");
+            cbTipoReporte.SelectedIndex = 0;
+        }
+
         private void btnExportar_Click(object sender, EventArgs e)
         {
             try
@@ -109,119 +145,139 @@ namespace app.UserControls
             }
         }
 
-        public ucReportes()
-        {
-            InitializeComponent();
-        }
-
-        private void ucReportes_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                dtpHasta.Value = DateTime.Today;
-                dtpDesde.Value = DateTime.Today.AddDays(-7);
-
-                var negL = new LugarNegocio();
-                var lugares = negL.listar() ?? new List<Lugar>();
-                lugares.Insert(0, new Lugar { IdLugar = 0, Nombre = "Todos" });
-                cbLugar.DataSource = lugares;
-                cbLugar.DisplayMember = "Nombre";
-                cbLugar.ValueMember = "IdLugar";
-                cbLugar.SelectedIndex = 0;
-
-                cbTipoReporte.Items.Clear();
-                cbTipoReporte.Items.Add("Lista de servicios");
-                cbTipoReporte.Items.Add("Asistencias por empresas");
-                cbTipoReporte.Items.Add("Cobertura vs proyección");
-                cbTipoReporte.Items.Add("Distribución por día de semana");
-                cbTipoReporte.SelectedIndex = 0;
-            }
-            catch (Exception ex)
-            {
-                ExceptionHelper.ManejarExcepcionBD(ex, "cargar los filtros de reportes");
-            }
-        }
-
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             try
             {
-                DateTime desde = dtpDesde.Value.Date;
-                DateTime hasta = dtpHasta.Value.Date;
-                if (desde > hasta)
-                {
-                    ExceptionHelper.MostrarAdvertencia("El rango de fechas es inválido (Desde > Hasta)");
+                if (!ValidarFechas(out DateTime desde, out DateTime hasta))
                     return;
-                }
 
-                int? idLugar = null;
-                if (cbLugar.SelectedValue is int val && val > 0)
-                    idLugar = val;
-
+                int? idLugar = ObtenerLugarSeleccionado();
                 string tipo = cbTipoReporte.SelectedItem as string ?? string.Empty;
-                var rep = new ReporteNegocio();
 
-                dgvReporte.DataSource = null;
-
-                switch (tipo)
-                {
-                    case "Lista de servicios":
-                        dgvReporte.DataSource = rep.ListarServiciosRango(desde, hasta, idLugar);
-                        break;
-                    case "Asistencias por empresas":
-                        dgvReporte.DataSource = rep.AsistenciasPorEmpresas(desde, hasta, idLugar);
-                        break;
-                    case "Cobertura vs proyección":
-                        dgvReporte.DataSource = rep.CoberturaVsProyeccion(desde, hasta, idLugar);
-                        break;
-                    case "Distribución por día de semana":
-                        dgvReporte.DataSource = rep.DistribucionPorDiaSemana(desde, hasta, idLugar);
-                        break;
-                    default:
-                        break;
-                }
+                CargarReporte(tipo, desde, hasta, idLugar);
 
                 if (dgvReporte.DataSource != null)
                 {
-                    if (dgvReporte.Columns.Contains("Fecha"))
-                        dgvReporte.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
-
-                    if (dgvReporte.Columns.Contains("NombreLugar")) dgvReporte.Columns["NombreLugar"].HeaderText = "Lugar";
-                    if (dgvReporte.Columns.Contains("Proyeccion")) dgvReporte.Columns["Proyeccion"].HeaderText = "Proyección";
-                    if (dgvReporte.Columns.Contains("DuracionMinutos")) dgvReporte.Columns["DuracionMinutos"].HeaderText = "Duración (min)";
-                    if (dgvReporte.Columns.Contains("TotalComensales")) dgvReporte.Columns["TotalComensales"].HeaderText = "Total Comensales";
-                    if (dgvReporte.Columns.Contains("TotalInvitados")) dgvReporte.Columns["TotalInvitados"].HeaderText = "Total Invitados";
-                    if (dgvReporte.Columns.Contains("TotalGeneral")) dgvReporte.Columns["TotalGeneral"].HeaderText = "Total General";
-                    if (dgvReporte.Columns.Contains("CoberturaPorcentaje"))
-                    {
-                        dgvReporte.Columns["CoberturaPorcentaje"].HeaderText = "Cobertura %";
-                        dgvReporte.Columns["CoberturaPorcentaje"].DefaultCellStyle.Format = "N2";
-                    }
-                    if (dgvReporte.Columns.Contains("TotalAsistencias")) dgvReporte.Columns["TotalAsistencias"].HeaderText = "Total Asistencias";
-                    if (dgvReporte.Columns.Contains("Diferencia")) dgvReporte.Columns["Diferencia"].HeaderText = "Diferencia";
-                    if (dgvReporte.Columns.Contains("Atendidos")) dgvReporte.Columns["Atendidos"].HeaderText = "Atendidos";
-
-                    if (dgvReporte.Columns.Contains("IdServicio")) dgvReporte.Columns["IdServicio"].Visible = false;
-                    if (dgvReporte.Columns.Contains("IdLugar")) dgvReporte.Columns["IdLugar"].Visible = false;
-                    if (dgvReporte.Columns.Contains("Estado")) dgvReporte.Columns["Estado"].Visible = false;
-                    if (dgvReporte.Columns.Contains("Orden")) dgvReporte.Columns["Orden"].Visible = false;
-
-                    if (tipo == "Lista de servicios")
-                    {
-                        if (dgvReporte.Columns.Contains("NombreLugar")) dgvReporte.Columns["NombreLugar"].Visible = false;
-                        if (dgvReporte.Columns.Contains("Fecha")) dgvReporte.Columns["Fecha"].DisplayIndex = 0;
-                        if (dgvReporte.Columns.Contains("Proyeccion")) dgvReporte.Columns["Proyeccion"].DisplayIndex = 1;
-                        if (dgvReporte.Columns.Contains("DuracionMinutos")) dgvReporte.Columns["DuracionMinutos"].DisplayIndex = 2;
-                        if (dgvReporte.Columns.Contains("TotalComensales")) dgvReporte.Columns["TotalComensales"].DisplayIndex = 3;
-                        if (dgvReporte.Columns.Contains("TotalInvitados")) dgvReporte.Columns["TotalInvitados"].DisplayIndex = 4;
-                        if (dgvReporte.Columns.Contains("TotalGeneral")) dgvReporte.Columns["TotalGeneral"].DisplayIndex = 5;
-                    }
+                    ConfigurarColumnasReporte(tipo);
                 }
             }
             catch (Exception ex)
             {
                 ExceptionHelper.ManejarExcepcionBD(ex, "generar el reporte");
             }
+        }
+
+        private bool ValidarFechas(out DateTime desde, out DateTime hasta)
+        {
+            desde = dtpDesde.Value.Date;
+            hasta = dtpHasta.Value.Date;
+
+            if (desde > hasta)
+            {
+                ExceptionHelper.MostrarAdvertencia("El rango de fechas es inválido (Desde > Hasta)");
+                return false;
+            }
+            return true;
+        }
+
+        private int? ObtenerLugarSeleccionado()
+        {
+            if (cbLugar.SelectedValue is int val && val > 0)
+                return val;
+            return null;
+        }
+
+        private void CargarReporte(string tipo, DateTime desde, DateTime hasta, int? idLugar)
+        {
+            var rep = new ReporteNegocio();
+            dgvReporte.DataSource = null;
+
+            switch (tipo)
+            {
+                case "Lista de servicios":
+                    dgvReporte.DataSource = rep.ListarServiciosRango(desde, hasta, idLugar);
+                    break;
+                case "Asistencias por empresas":
+                    dgvReporte.DataSource = rep.AsistenciasPorEmpresas(desde, hasta, idLugar);
+                    break;
+                case "Cobertura vs proyección":
+                    dgvReporte.DataSource = rep.CoberturaVsProyeccion(desde, hasta, idLugar);
+                    break;
+                case "Distribución por día de semana":
+                    dgvReporte.DataSource = rep.DistribucionPorDiaSemana(desde, hasta, idLugar);
+                    break;
+            }
+        }
+
+        private void ConfigurarColumnasReporte(string tipoReporte)
+        {
+            ConfigurarFormatos();
+            ConfigurarEncabezados();
+            OcultarColumnasInternas();
+            ConfigurarColumnasEspecificas(tipoReporte);
+        }
+
+        private void ConfigurarFormatos()
+        {
+            ConfigurarColumna("Fecha", formato: "dd/MM/yyyy");
+            ConfigurarColumna("CoberturaPorcentaje", formato: "N2");
+        }
+
+        private void ConfigurarEncabezados()
+        {
+            ConfigurarColumna("NombreLugar", headerText: "Lugar");
+            ConfigurarColumna("Proyeccion", headerText: "Proyección");
+            ConfigurarColumna("DuracionMinutos", headerText: "Duración (min)");
+            ConfigurarColumna("TotalComensales", headerText: "Total Comensales");
+            ConfigurarColumna("TotalInvitados", headerText: "Total Invitados");
+            ConfigurarColumna("TotalGeneral", headerText: "Total General");
+            ConfigurarColumna("CoberturaPorcentaje", headerText: "Cobertura %");
+            ConfigurarColumna("TotalAsistencias", headerText: "Total Asistencias");
+            ConfigurarColumna("Diferencia", headerText: "Diferencia");
+            ConfigurarColumna("Atendidos", headerText: "Atendidos");
+        }
+
+        private void OcultarColumnasInternas()
+        {
+            ConfigurarColumna("IdServicio", visible: false);
+            ConfigurarColumna("IdLugar", visible: false);
+            ConfigurarColumna("Estado", visible: false);
+            ConfigurarColumna("Orden", visible: false);
+        }
+
+        private void ConfigurarColumnasEspecificas(string tipoReporte)
+        {
+            if (tipoReporte == "Lista de servicios")
+            {
+                ConfigurarColumna("NombreLugar", visible: false);
+                ConfigurarColumna("Fecha", displayIndex: 0);
+                ConfigurarColumna("Proyeccion", displayIndex: 1);
+                ConfigurarColumna("DuracionMinutos", displayIndex: 2);
+                ConfigurarColumna("TotalComensales", displayIndex: 3);
+                ConfigurarColumna("TotalInvitados", displayIndex: 4);
+                ConfigurarColumna("TotalGeneral", displayIndex: 5);
+            }
+        }
+
+        private void ConfigurarColumna(string nombreColumna, string headerText = null, string formato = null, bool? visible = null, int? displayIndex = null)
+        {
+            if (!dgvReporte.Columns.Contains(nombreColumna))
+                return;
+
+            var columna = dgvReporte.Columns[nombreColumna];
+
+            if (headerText != null)
+                columna.HeaderText = headerText;
+
+            if (formato != null)
+                columna.DefaultCellStyle.Format = formato;
+
+            if (visible.HasValue)
+                columna.Visible = visible.Value;
+
+            if (displayIndex.HasValue)
+                columna.DisplayIndex = displayIndex.Value;
         }
     }
 }

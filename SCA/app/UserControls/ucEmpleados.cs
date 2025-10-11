@@ -105,7 +105,6 @@ namespace app.UserControls
             cbEmpresaEmpleado.DataSource = empresas;
             cbEmpresaEmpleado.DisplayMember = "Nombre";
             cbEmpresaEmpleado.ValueMember = "IdEmpresa";
-
             lblTotalEmpresas.Text = $"Total Empresas: {empresas.Count}";
         }
 
@@ -122,17 +121,12 @@ namespace app.UserControls
         {
             empleadoSeleccionado = empleadoNegocio.buscarPorId(idEmpleado);
             if (empleadoSeleccionado == null) return;
-            
             txtCredencial.Text = empleadoSeleccionado.IdCredencial;
             txtNombre.Text = empleadoSeleccionado.Nombre;
             txtApellido.Text = empleadoSeleccionado.Apellido;
             cbEmpresaEmpleado.SelectedValue = empleadoSeleccionado.Empresa.IdEmpresa;
-            
-            if (empleadoSeleccionado.Estado)
-                rbActivoEmpleado.Checked = true;
-            else
-                rbInactivoEmpleado.Checked = true;
-            
+            if (empleadoSeleccionado.Estado) rbActivoEmpleado.Checked = true;
+            else rbInactivoEmpleado.Checked = true;
             modoEdicion = true;
             btnEliminarEmpleado.Enabled = true;
         }
@@ -147,39 +141,32 @@ namespace app.UserControls
 
         private void btnGuardarEmpleado_Click(object sender, EventArgs e)
         {
-            if (!ValidarFormularioEmpleado())
-                return;
-
+            if (!ValidarFormularioEmpleado()) return;
             Empleado emp = new Empleado();
-            
-            if (modoEdicion && empleadoSeleccionado != null)
-                emp.IdEmpleado = empleadoSeleccionado.IdEmpleado;
-            
-            emp.IdCredencial = txtCredencial.Text.Trim();
-            emp.Nombre = txtNombre.Text.Trim();
-            emp.Apellido = txtApellido.Text.Trim();
-            emp.Empresa = new Empresa();
-            emp.Empresa.IdEmpresa = (int)cbEmpresaEmpleado.SelectedValue;
-            emp.Estado = rbActivoEmpleado.Checked;
-
-            if (modoEdicion)
-                empleadoNegocio.modificar(emp);
-            else
-                empleadoNegocio.agregar(emp);
-
+            if (modoEdicion && empleadoSeleccionado != null) CargarEmpleado(emp);
+            if (modoEdicion) empleadoNegocio.modificar(emp);
+            else empleadoNegocio.agregar(emp);
             ExceptionHelper.MostrarExito("Empleado guardado correctamente");
-            
             CargarEmpleados();
             LimpiarFormularioEmpleado();
         }
 
+        private void CargarEmpleado(Empleado aux)
+        {
+            aux.IdEmpleado = empleadoSeleccionado.IdEmpleado;
+            aux.IdCredencial = txtCredencial.Text.Trim();
+            aux.Nombre = txtNombre.Text.Trim();
+            aux.Apellido = txtApellido.Text.Trim();
+            aux.Empresa = new Empresa();
+            aux.Empresa.IdEmpresa = (int)cbEmpresaEmpleado.SelectedValue;
+            aux.Estado = rbActivoEmpleado.Checked;
+        }
+
         private void btnEliminarEmpleado_Click(object sender, EventArgs e)
         {
-            if (empleadoSeleccionado == null)
-                return;
+            if (empleadoSeleccionado == null) return;
 
-            if (ExceptionHelper.MostrarConfirmacion(
-                $"¿Está seguro de desactivar al empleado {empleadoSeleccionado.Nombre} {empleadoSeleccionado.Apellido}?"))
+            if (ExceptionHelper.MostrarConfirmacion( $"¿Está seguro de desactivar al empleado?"))
             {
                 empleadoNegocio.eliminar(empleadoSeleccionado.IdEmpleado);
                 ExceptionHelper.MostrarExito("Empleado desactivado correctamente");
@@ -205,8 +192,7 @@ namespace app.UserControls
            
             if (existe)
             {
-                if (!modoEdicion || 
-                    (modoEdicion && empleadoSeleccionado.IdCredencial != txtCredencial.Text.Trim()))
+                if (!modoEdicion||(modoEdicion && empleadoSeleccionado.IdCredencial != txtCredencial.Text.Trim()))
                 {
                     ExceptionHelper.MostrarAdvertencia("Esta credencial ya está en uso");
                 }

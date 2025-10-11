@@ -6,7 +6,6 @@ namespace Negocio
 {
     public class ReporteNegocio
     {
-        // 1) Lista de servicios (rango + lugar opcional)
         public List<Servicio> ListarServiciosRango(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
             var lista = new List<Servicio>();
@@ -43,7 +42,6 @@ namespace Negocio
             }
         }
 
-        // 2) Asistencias por empresas (rango + lugar opcional)
         public List<dynamic> AsistenciasPorEmpresas(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
             var lista = new List<dynamic>();
@@ -77,7 +75,6 @@ namespace Negocio
             }
         }
 
-        // 3) Cobertura vs proyección (rango + lugar opcional)
         public List<dynamic> CoberturaVsProyeccion(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
             var lista = new List<dynamic>();
@@ -115,7 +112,6 @@ namespace Negocio
             }
         }
 
-        // 4) Distribución por día de semana (rango + lugar opcional)
         public List<dynamic> DistribucionPorDiaSemana(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
             var lista = new List<dynamic>();
