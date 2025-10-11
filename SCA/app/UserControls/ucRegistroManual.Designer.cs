@@ -33,7 +33,7 @@
             this.dgvFaltantes = new System.Windows.Forms.DataGridView();
             this.cbLugar = new System.Windows.Forms.ComboBox();
             this.lblEmpresa = new ReaLTaiizor.Controls.SmallLabel();
-            this.lblFecha = new ReaLTaiizor.Controls.SmallLabel();
+            this.lblNombre = new ReaLTaiizor.Controls.SmallLabel();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnAgregar = new ReaLTaiizor.Controls.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFaltantes)).BeginInit();
@@ -104,17 +104,17 @@
             this.lblEmpresa.TabIndex = 17;
             this.lblEmpresa.Text = "Empresa:";
             // 
-            // lblFecha
+            // lblNombre
             // 
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.BackColor = System.Drawing.Color.Transparent;
-            this.lblFecha.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblFecha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
-            this.lblFecha.Location = new System.Drawing.Point(278, 14);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(51, 13);
-            this.lblFecha.TabIndex = 19;
-            this.lblFecha.Text = "Nombre:";
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.BackColor = System.Drawing.Color.Transparent;
+            this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(2)))), ((int)(((byte)(50)))), ((int)(((byte)(34)))));
+            this.lblNombre.Location = new System.Drawing.Point(278, 14);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(51, 13);
+            this.lblNombre.TabIndex = 19;
+            this.lblNombre.Text = "Nombre:";
             // 
             // txtNombre
             // 
@@ -156,7 +156,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.lblFecha);
+            this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.cbLugar);
             this.Controls.Add(this.lblEmpresa);
@@ -175,7 +175,7 @@
         private System.Windows.Forms.DataGridView dgvFaltantes;
         private System.Windows.Forms.ComboBox cbLugar;
         private ReaLTaiizor.Controls.SmallLabel lblEmpresa;
-        private ReaLTaiizor.Controls.SmallLabel lblFecha;
+        private ReaLTaiizor.Controls.SmallLabel lblNombre;
         private System.Windows.Forms.TextBox txtNombre;
         private ReaLTaiizor.Controls.Button btnAgregar;
     }
