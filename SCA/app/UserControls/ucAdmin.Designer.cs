@@ -29,18 +29,21 @@ namespace app.UserControls
         private void InitializeComponent()
         {
             this.pnlSuperior = new System.Windows.Forms.Panel();
+            this.ssPanel = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
             this.btnConfiguracion = new ReaLTaiizor.Controls.Button();
             this.btnEstadisticas = new ReaLTaiizor.Controls.Button();
             this.btnEmpresas = new ReaLTaiizor.Controls.Button();
             this.btnEmpleados = new ReaLTaiizor.Controls.Button();
             this.pnlContenido = new System.Windows.Forms.Panel();
-            this.ssPanel = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
+            this.pbxTitulo = new System.Windows.Forms.PictureBox();
             this.pnlSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlSuperior
             // 
             this.pnlSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.pnlSuperior.Controls.Add(this.pbxTitulo);
             this.pnlSuperior.Controls.Add(this.ssPanel);
             this.pnlSuperior.Controls.Add(this.btnConfiguracion);
             this.pnlSuperior.Controls.Add(this.btnEstadisticas);
@@ -51,6 +54,18 @@ namespace app.UserControls
             this.pnlSuperior.Name = "pnlSuperior";
             this.pnlSuperior.Size = new System.Drawing.Size(1155, 179);
             this.pnlSuperior.TabIndex = 0;
+            // 
+            // ssPanel
+            // 
+            this.ssPanel.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
+            this.ssPanel.Font = new System.Drawing.Font("Verdana", 8F);
+            this.ssPanel.Image = null;
+            this.ssPanel.Location = new System.Drawing.Point(287, 3);
+            this.ssPanel.Name = "ssPanel";
+            this.ssPanel.NoRounding = false;
+            this.ssPanel.Size = new System.Drawing.Size(4, 165);
+            this.ssPanel.TabIndex = 6;
+            this.ssPanel.Transparent = false;
             // 
             // btnConfiguracion
             // 
@@ -149,17 +164,16 @@ namespace app.UserControls
             this.pnlContenido.Size = new System.Drawing.Size(1155, 516);
             this.pnlContenido.TabIndex = 1;
             // 
-            // ssPanel
+            // pbxTitulo
             // 
-            this.ssPanel.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
-            this.ssPanel.Font = new System.Drawing.Font("Verdana", 8F);
-            this.ssPanel.Image = null;
-            this.ssPanel.Location = new System.Drawing.Point(287, 3);
-            this.ssPanel.Name = "ssPanel";
-            this.ssPanel.NoRounding = false;
-            this.ssPanel.Size = new System.Drawing.Size(4, 165);
-            this.ssPanel.TabIndex = 6;
-            this.ssPanel.Transparent = false;
+            this.pbxTitulo.BackColor = System.Drawing.Color.Transparent;
+            this.pbxTitulo.BackgroundImage = global::app.Properties.Resources.cda;
+            this.pbxTitulo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbxTitulo.Location = new System.Drawing.Point(0, 46);
+            this.pbxTitulo.Name = "pbxTitulo";
+            this.pbxTitulo.Size = new System.Drawing.Size(281, 96);
+            this.pbxTitulo.TabIndex = 8;
+            this.pbxTitulo.TabStop = false;
             // 
             // ucAdmin
             // 
@@ -171,6 +185,7 @@ namespace app.UserControls
             this.Name = "ucAdmin";
             this.Size = new System.Drawing.Size(1155, 695);
             this.pnlSuperior.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -184,5 +199,6 @@ namespace app.UserControls
         private ReaLTaiizor.Controls.Button btnConfiguracion;
         private System.Windows.Forms.Panel pnlContenido;
         private ReaLTaiizor.Controls.SpaceSeparatorVertical ssPanel;
+        private System.Windows.Forms.PictureBox pbxTitulo;
     }
 }

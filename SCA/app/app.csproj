@@ -218,5 +218,8 @@
   <ItemGroup>
     <None Include="Iconos\activo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\panel.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
