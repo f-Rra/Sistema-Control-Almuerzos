@@ -11,21 +11,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using app.UserControls;
  
-
-
-/*("#fdf39d"),Dorado claro
-  ("#ffd024"),Dorado oscuro
-  ("#FFF8E1"),Crema
-  ("#232221"),Negro*/
-
-
 namespace app
 {
     public partial class frmPrincipal : Form
     {
         private readonly Color MenuHover = Color.FromArgb(243, 229, 201);
-        private readonly Stopwatch crono = new Stopwatch();
         private readonly Timer tmrCrono = new Timer { Interval = 1000 };
+        private readonly Stopwatch crono = new Stopwatch();
         private LugarNegocio negL = new LugarNegocio();
         private ServicioNegocio negS = new ServicioNegocio();
         private ucVistaPrincipal vistaPrincipal;
@@ -531,8 +523,6 @@ namespace app
                 try
                 {
                     Servicio servicioSeleccionado = (Servicio)dgvServicios.CurrentRow.DataBoundItem;
-                    
-                    // Cargar los detalles del servicio en gbxUltimo
                     lblUlugar.Text = "Lugar: " + servicioSeleccionado.NombreLugar;
                     lblUfecha.Text = "Fecha: " + servicioSeleccionado.Fecha.ToString("dd/MM/yyyy");
                     lblUproyeccion.Text = "Proyección: " + (servicioSeleccionado.Proyeccion?.ToString() ?? "N/A");
@@ -546,7 +536,6 @@ namespace app
                     System.Diagnostics.Debug.WriteLine("Error al cargar servicio seleccionado: " + ex.Message);
                 }
             }
-        }
-    
+        }  
     }
 }

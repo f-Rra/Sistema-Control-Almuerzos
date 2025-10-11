@@ -12,10 +12,7 @@ namespace app.UserControls
 {
     public partial class ucAdmin : UserControl
     {
-        // VARIABLES DE CLASE
         private ReaLTaiizor.Controls.Button botonActivo;
-        
-        // Instancias de los UserControls
         private ucEmpleados ucEmpleados;
         private ucEmpresas ucEmpresas;
         private ucEstadisticas ucEstadisticas;
@@ -25,32 +22,24 @@ namespace app.UserControls
         {
             InitializeComponent();
             InicializarUserControls();
-            // Seleccionar Empleados por defecto
             SeleccionarBoton(btnEmpleados);
             MostrarUserControl(ucEmpleados);
         }
 
         private void InicializarUserControls()
         {
-            // Crear instancias de los UserControls
             ucEmpleados = new ucEmpleados();
             ucEmpresas = new ucEmpresas();
             ucEstadisticas = new ucEstadisticas();
             ucConfiguracion = new ucConfiguracion();
-
-            // Configurar propiedades comunes
             ucEmpleados.Dock = DockStyle.Fill;
             ucEmpresas.Dock = DockStyle.Fill;
             ucEstadisticas.Dock = DockStyle.Fill;
             ucConfiguracion.Dock = DockStyle.Fill;
-
-            // Agregar al panel contenedor
             pnlContenido.Controls.Add(ucEmpleados);
             pnlContenido.Controls.Add(ucEmpresas);
             pnlContenido.Controls.Add(ucEstadisticas);
             pnlContenido.Controls.Add(ucConfiguracion);
-
-            // Ocultar todos excepto el primero
             ucEmpleados.Visible = true;
             ucEmpresas.Visible = false;
             ucEstadisticas.Visible = false;
@@ -83,18 +72,13 @@ namespace app.UserControls
 
         private void SeleccionarBoton(ReaLTaiizor.Controls.Button boton)
         {
-            // Colores
             Color colorDorado = Color.FromArgb(255, 208, 36);
             Color colorNegro = Color.FromArgb(35, 34, 33);
-
-            // Restaurar botón anterior
             if (botonActivo != null)
             {
                 botonActivo.InactiveColor = colorNegro;
                 botonActivo.PressedColor = colorDorado;
             }
-
-            // Activar nuevo botón
             botonActivo = boton;
             boton.InactiveColor = colorDorado;
             boton.PressedColor = colorDorado;
@@ -102,13 +86,10 @@ namespace app.UserControls
 
         private void MostrarUserControl(UserControl controlAMostrar)
         {
-            // Ocultar todos
             ucEmpleados.Visible = false;
             ucEmpresas.Visible = false;
             ucEstadisticas.Visible = false;
             ucConfiguracion.Visible = false;
-
-            // Mostrar el seleccionado
             controlAMostrar.Visible = true;
             controlAMostrar.BringToFront();
         }
