@@ -45,8 +45,6 @@ namespace app
             CargarFecha();
             IniciarCronometro();
             ActualizarEstadisticas();
-            
-            // Mostrar la vista principal al inicio
             CargarVistaPrincipal();
             gbxServicios.Visible = true;
             gbxUltimo.Visible = true;
@@ -229,12 +227,10 @@ namespace app
             
             if (idServicioActual.HasValue && vistaPrincipal != null)
             {
-                // Servicio activo: mostrar la vista principal de registros
                 MostrarVista(vistaPrincipal);
             }
             else
             {
-                // Servicio inactivo: mostrar paneles de servicios
                 OcultarTodasLasVistas();
                 gbxServicios.Visible = true;
                 gbxUltimo.Visible = true;
@@ -358,11 +354,8 @@ namespace app
                 cbLugar.Enabled = false;
                 mtxtProyeccion.ReadOnly = true;
                 mtxtInvitados.ReadOnly = true;
-                
-                // Ocultar los paneles de servicios al iniciar
                 gbxServicios.Visible = false;
                 gbxUltimo.Visible = false;
-                
                 CargarVistaPrincipal();
                 MostrarVistaPrincipal();
                 vistaPrincipal.SetServicio(idServicioActual, idLugar);
@@ -426,8 +419,6 @@ namespace app
                 btnAdmin.Enabled = true;
                 btnRegistros.Enabled = true;
                 btnHome.Enabled = true;
-                
-                // Actualizar y mostrar los paneles de servicios
                 OcultarTodasLasVistas();
                 CargarServicios();
                 CargarUltimoServicio();

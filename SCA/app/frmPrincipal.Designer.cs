@@ -74,12 +74,12 @@ namespace app
             this.pnlPrincipal = new System.Windows.Forms.Panel();
             this.gbxServicios = new System.Windows.Forms.GroupBox();
             this.pnlServicios = new System.Windows.Forms.Panel();
-            this.bigLabel2 = new ReaLTaiizor.Controls.BigLabel();
+            this.lblListado = new ReaLTaiizor.Controls.BigLabel();
             this.pnlServiciosI = new System.Windows.Forms.Panel();
             this.dgvServicios = new System.Windows.Forms.DataGridView();
             this.gbxUltimo = new System.Windows.Forms.GroupBox();
             this.pnlUltimo = new System.Windows.Forms.Panel();
-            this.bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
+            this.lblDetalles = new ReaLTaiizor.Controls.BigLabel();
             this.pnlUltimoI = new System.Windows.Forms.Panel();
             this.lblDuracion = new ReaLTaiizor.Controls.BigLabel();
             this.lblTotal = new ReaLTaiizor.Controls.BigLabel();
@@ -205,9 +205,9 @@ namespace app
             // 
             this.pHome.BackColor = System.Drawing.Color.Transparent;
             this.pHome.Controls.Add(this.btnHome);
-            this.pHome.Location = new System.Drawing.Point(16, 194);
+            this.pHome.Location = new System.Drawing.Point(18, 194);
             this.pHome.Name = "pHome";
-            this.pHome.Size = new System.Drawing.Size(78, 81);
+            this.pHome.Size = new System.Drawing.Size(75, 81);
             this.pHome.TabIndex = 10;
             this.pHome.Click += new System.EventHandler(this.btnHome_Click);
             this.pHome.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -222,7 +222,7 @@ namespace app
             this.btnHome.Image = global::app.Properties.Resources.home;
             this.btnHome.Location = new System.Drawing.Point(0, 0);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(78, 81);
+            this.btnHome.Size = new System.Drawing.Size(75, 81);
             this.btnHome.TabIndex = 1;
             this.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
@@ -438,9 +438,9 @@ namespace app
             this.lblEstadisticas.ForeColor = System.Drawing.Color.White;
             this.lblEstadisticas.Location = new System.Drawing.Point(6, 34);
             this.lblEstadisticas.Name = "lblEstadisticas";
-            this.lblEstadisticas.Size = new System.Drawing.Size(187, 21);
+            this.lblEstadisticas.Size = new System.Drawing.Size(189, 21);
             this.lblEstadisticas.TabIndex = 2;
-            this.lblEstadisticas.Text = "Registrados: - ¦ Faltan: -";
+            this.lblEstadisticas.Text = "Registrados: - / Faltan: -";
             // 
             // gbxProgreso
             // 
@@ -699,25 +699,25 @@ namespace app
             // 
             this.pnlServicios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.pnlServicios.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlServicios.Controls.Add(this.bigLabel2);
+            this.pnlServicios.Controls.Add(this.lblListado);
             this.pnlServicios.Controls.Add(this.pnlServiciosI);
             this.pnlServicios.Location = new System.Drawing.Point(6, 13);
             this.pnlServicios.Name = "pnlServicios";
             this.pnlServicios.Size = new System.Drawing.Size(737, 480);
             this.pnlServicios.TabIndex = 7;
             // 
-            // bigLabel2
+            // lblListado
             // 
-            this.bigLabel2.AutoSize = true;
-            this.bigLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.bigLabel2.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bigLabel2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.bigLabel2.Location = new System.Drawing.Point(265, 7);
-            this.bigLabel2.Name = "bigLabel2";
-            this.bigLabel2.Size = new System.Drawing.Size(182, 17);
-            this.bigLabel2.TabIndex = 2;
-            this.bigLabel2.Text = "Listado de Ultimos Servicios";
-            this.bigLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblListado.AutoSize = true;
+            this.lblListado.BackColor = System.Drawing.Color.Transparent;
+            this.lblListado.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblListado.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblListado.Location = new System.Drawing.Point(265, 7);
+            this.lblListado.Name = "lblListado";
+            this.lblListado.Size = new System.Drawing.Size(182, 17);
+            this.lblListado.TabIndex = 2;
+            this.lblListado.Text = "Listado de Ultimos Servicios";
+            this.lblListado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlServiciosI
             // 
@@ -786,25 +786,25 @@ namespace app
             // 
             this.pnlUltimo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.pnlUltimo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlUltimo.Controls.Add(this.bigLabel1);
+            this.pnlUltimo.Controls.Add(this.lblDetalles);
             this.pnlUltimo.Controls.Add(this.pnlUltimoI);
             this.pnlUltimo.Location = new System.Drawing.Point(6, 13);
             this.pnlUltimo.Name = "pnlUltimo";
             this.pnlUltimo.Size = new System.Drawing.Size(374, 418);
             this.pnlUltimo.TabIndex = 7;
             // 
-            // bigLabel1
+            // lblDetalles
             // 
-            this.bigLabel1.AutoSize = true;
-            this.bigLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.bigLabel1.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bigLabel1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.bigLabel1.Location = new System.Drawing.Point(123, 6);
-            this.bigLabel1.Name = "bigLabel1";
-            this.bigLabel1.Size = new System.Drawing.Size(137, 17);
-            this.bigLabel1.TabIndex = 2;
-            this.bigLabel1.Text = "Detalles del Servicio ";
-            this.bigLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDetalles.AutoSize = true;
+            this.lblDetalles.BackColor = System.Drawing.Color.Transparent;
+            this.lblDetalles.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetalles.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDetalles.Location = new System.Drawing.Point(123, 6);
+            this.lblDetalles.Name = "lblDetalles";
+            this.lblDetalles.Size = new System.Drawing.Size(137, 17);
+            this.lblDetalles.TabIndex = 2;
+            this.lblDetalles.Text = "Detalles del Servicio ";
+            this.lblDetalles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlUltimoI
             // 
@@ -1038,10 +1038,10 @@ namespace app
         private System.Windows.Forms.Panel pnlUltimoI;
         private System.Windows.Forms.GroupBox gbxUltimo;
         private System.Windows.Forms.Panel pnlUltimo;
-        private ReaLTaiizor.Controls.BigLabel bigLabel1;
+        private ReaLTaiizor.Controls.BigLabel lblDetalles;
         private System.Windows.Forms.GroupBox gbxServicios;
         private System.Windows.Forms.Panel pnlServicios;
-        private ReaLTaiizor.Controls.BigLabel bigLabel2;
+        private ReaLTaiizor.Controls.BigLabel lblListado;
         private System.Windows.Forms.Panel pnlServiciosI;
         private System.Windows.Forms.DataGridView dgvServicios;
         private ReaLTaiizor.Controls.BigLabel lblDuracion;
