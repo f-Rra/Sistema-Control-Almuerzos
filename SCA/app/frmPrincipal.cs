@@ -367,8 +367,7 @@ namespace app
         private void FinalizarServicio()
         {
             if (!ExceptionHelper.MostrarConfirmacion(
-                "¿Está seguro de finalizar el servicio?\n\n" +
-                "Esta acción guardará todos los registros y no se puede deshacer."))
+                "¿Está seguro de finalizar el servicio?"))
             {
                 return;
             }
@@ -536,6 +535,7 @@ namespace app
                     System.Diagnostics.Debug.WriteLine("Error al cargar servicio seleccionado: " + ex.Message);
                 }
             }
-        }  
+        }
+
     }
 }

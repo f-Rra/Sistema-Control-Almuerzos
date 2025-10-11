@@ -444,7 +444,9 @@ namespace app.UserControls
             // 
             // pnlB
             // 
-            this.pnlB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
+            this.pnlB.BackColor = System.Drawing.Color.Transparent;
+            this.pnlB.BackgroundImage = global::app.Properties.Resources.panel;
+            this.pnlB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlB.Controls.Add(this.btnEliminarEmpleado);
             this.pnlB.Controls.Add(this.lblCredencial);
@@ -510,7 +512,9 @@ namespace app.UserControls
             // 
             // pnlD
             // 
-            this.pnlD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
+            this.pnlD.BackColor = System.Drawing.Color.Transparent;
+            this.pnlD.BackgroundImage = global::app.Properties.Resources.panel;
+            this.pnlD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlD.Controls.Add(this.dgvEmpleados);
             this.pnlD.Controls.Add(this.lblTotalEmpleados);
