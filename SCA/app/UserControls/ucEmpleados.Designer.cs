@@ -57,16 +57,16 @@ namespace app.UserControls
             this.pnlA = new System.Windows.Forms.Panel();
             this.lblDetallesEmpleados = new ReaLTaiizor.Controls.BigLabel();
             this.pnlB = new System.Windows.Forms.Panel();
-            this.gbEmpleadoDetalle = new System.Windows.Forms.GroupBox();
-            this.gbListaEmpleados = new System.Windows.Forms.GroupBox();
+            this.gbxEmpleadoDetalle = new System.Windows.Forms.GroupBox();
+            this.gbxListaEmpleados = new System.Windows.Forms.GroupBox();
             this.pnlC = new System.Windows.Forms.Panel();
             this.lblListaEmpleados = new ReaLTaiizor.Controls.BigLabel();
             this.pnlD = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
             this.pnlA.SuspendLayout();
             this.pnlB.SuspendLayout();
-            this.gbEmpleadoDetalle.SuspendLayout();
-            this.gbListaEmpleados.SuspendLayout();
+            this.gbxEmpleadoDetalle.SuspendLayout();
+            this.gbxListaEmpleados.SuspendLayout();
             this.pnlC.SuspendLayout();
             this.pnlD.SuspendLayout();
             this.SuspendLayout();
@@ -468,23 +468,23 @@ namespace app.UserControls
             this.pnlB.Size = new System.Drawing.Size(368, 395);
             this.pnlB.TabIndex = 6;
             // 
-            // gbEmpleadoDetalle
+            // gbxEmpleadoDetalle
             // 
-            this.gbEmpleadoDetalle.Controls.Add(this.pnlA);
-            this.gbEmpleadoDetalle.Location = new System.Drawing.Point(742, 20);
-            this.gbEmpleadoDetalle.Name = "gbEmpleadoDetalle";
-            this.gbEmpleadoDetalle.Size = new System.Drawing.Size(395, 458);
-            this.gbEmpleadoDetalle.TabIndex = 9;
-            this.gbEmpleadoDetalle.TabStop = false;
+            this.gbxEmpleadoDetalle.Controls.Add(this.pnlA);
+            this.gbxEmpleadoDetalle.Location = new System.Drawing.Point(742, 20);
+            this.gbxEmpleadoDetalle.Name = "gbxEmpleadoDetalle";
+            this.gbxEmpleadoDetalle.Size = new System.Drawing.Size(395, 458);
+            this.gbxEmpleadoDetalle.TabIndex = 9;
+            this.gbxEmpleadoDetalle.TabStop = false;
             // 
-            // gbListaEmpleados
+            // gbxListaEmpleados
             // 
-            this.gbListaEmpleados.Controls.Add(this.pnlC);
-            this.gbListaEmpleados.Location = new System.Drawing.Point(9, 1);
-            this.gbListaEmpleados.Name = "gbListaEmpleados";
-            this.gbListaEmpleados.Size = new System.Drawing.Size(710, 499);
-            this.gbListaEmpleados.TabIndex = 10;
-            this.gbListaEmpleados.TabStop = false;
+            this.gbxListaEmpleados.Controls.Add(this.pnlC);
+            this.gbxListaEmpleados.Location = new System.Drawing.Point(9, 1);
+            this.gbxListaEmpleados.Name = "gbxListaEmpleados";
+            this.gbxListaEmpleados.Size = new System.Drawing.Size(710, 499);
+            this.gbxListaEmpleados.TabIndex = 10;
+            this.gbxListaEmpleados.TabStop = false;
             // 
             // pnlC
             // 
@@ -534,8 +534,8 @@ namespace app.UserControls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.Controls.Add(this.gbListaEmpleados);
-            this.Controls.Add(this.gbEmpleadoDetalle);
+            this.Controls.Add(this.gbxListaEmpleados);
+            this.Controls.Add(this.gbxEmpleadoDetalle);
             this.Name = "ucEmpleados";
             this.Padding = new System.Windows.Forms.Padding(15);
             this.Size = new System.Drawing.Size(1155, 510);
@@ -545,8 +545,8 @@ namespace app.UserControls
             this.pnlA.PerformLayout();
             this.pnlB.ResumeLayout(false);
             this.pnlB.PerformLayout();
-            this.gbEmpleadoDetalle.ResumeLayout(false);
-            this.gbListaEmpleados.ResumeLayout(false);
+            this.gbxEmpleadoDetalle.ResumeLayout(false);
+            this.gbxListaEmpleados.ResumeLayout(false);
             this.pnlC.ResumeLayout(false);
             this.pnlC.PerformLayout();
             this.pnlD.ResumeLayout(false);
@@ -582,8 +582,8 @@ namespace app.UserControls
         private System.Windows.Forms.Panel pnlA;
         private ReaLTaiizor.Controls.BigLabel lblDetallesEmpleados;
         private System.Windows.Forms.Panel pnlB;
-        private System.Windows.Forms.GroupBox gbEmpleadoDetalle;
-        private System.Windows.Forms.GroupBox gbListaEmpleados;
+        private System.Windows.Forms.GroupBox gbxEmpleadoDetalle;
+        private System.Windows.Forms.GroupBox gbxListaEmpleados;
         private System.Windows.Forms.Panel pnlC;
         private ReaLTaiizor.Controls.BigLabel lblListaEmpleados;
         private System.Windows.Forms.Panel pnlD;
