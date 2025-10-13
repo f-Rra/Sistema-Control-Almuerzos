@@ -75,7 +75,7 @@ namespace app.UserControls
             // 
             this.lblTotalEmpleados.AutoSize = true;
             this.lblTotalEmpleados.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalEmpleados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblTotalEmpleados.ForeColor = System.Drawing.Color.White;
             this.lblTotalEmpleados.Location = new System.Drawing.Point(17, 392);
             this.lblTotalEmpleados.Name = "lblTotalEmpleados";
             this.lblTotalEmpleados.Size = new System.Drawing.Size(177, 25);
@@ -86,7 +86,7 @@ namespace app.UserControls
             // 
             this.lblTotalEmpresas.AutoSize = true;
             this.lblTotalEmpresas.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalEmpresas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblTotalEmpresas.ForeColor = System.Drawing.Color.White;
             this.lblTotalEmpresas.Location = new System.Drawing.Point(240, 392);
             this.lblTotalEmpresas.Name = "lblTotalEmpresas";
             this.lblTotalEmpresas.Size = new System.Drawing.Size(164, 25);
@@ -120,7 +120,7 @@ namespace app.UserControls
             // btnNuevoEmpleado
             // 
             this.btnNuevoEmpleado.BackColor = System.Drawing.Color.Transparent;
-            this.btnNuevoEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.btnNuevoEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnNuevoEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNuevoEmpleado.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnNuevoEmpleado.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -188,7 +188,7 @@ namespace app.UserControls
             // btnEliminarEmpleado
             // 
             this.btnEliminarEmpleado.BackColor = System.Drawing.Color.Transparent;
-            this.btnEliminarEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.btnEliminarEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnEliminarEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminarEmpleado.Enabled = false;
             this.btnEliminarEmpleado.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -210,7 +210,7 @@ namespace app.UserControls
             // btnGuardarEmpleado
             // 
             this.btnGuardarEmpleado.BackColor = System.Drawing.Color.Transparent;
-            this.btnGuardarEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.btnGuardarEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnGuardarEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardarEmpleado.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnGuardarEmpleado.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -232,7 +232,7 @@ namespace app.UserControls
             // 
             this.lblCredencial.AutoSize = true;
             this.lblCredencial.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblCredencial.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblCredencial.ForeColor = System.Drawing.Color.White;
             this.lblCredencial.Location = new System.Drawing.Point(23, 15);
             this.lblCredencial.Name = "lblCredencial";
             this.lblCredencial.Size = new System.Drawing.Size(75, 19);
@@ -242,7 +242,7 @@ namespace app.UserControls
             // btnCancelarEmpleado
             // 
             this.btnCancelarEmpleado.BackColor = System.Drawing.Color.Transparent;
-            this.btnCancelarEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.btnCancelarEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnCancelarEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelarEmpleado.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnCancelarEmpleado.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -263,7 +263,7 @@ namespace app.UserControls
             // btnVerificarCredencial
             // 
             this.btnVerificarCredencial.BackColor = System.Drawing.Color.Transparent;
-            this.btnVerificarCredencial.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.btnVerificarCredencial.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnVerificarCredencial.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVerificarCredencial.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnVerificarCredencial.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -296,7 +296,7 @@ namespace app.UserControls
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblNombre.ForeColor = System.Drawing.Color.White;
             this.lblNombre.Location = new System.Drawing.Point(23, 83);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(62, 19);
@@ -318,7 +318,7 @@ namespace app.UserControls
             // 
             this.lblApellido.AutoSize = true;
             this.lblApellido.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblApellido.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblApellido.ForeColor = System.Drawing.Color.White;
             this.lblApellido.Location = new System.Drawing.Point(23, 156);
             this.lblApellido.Name = "lblApellido";
             this.lblApellido.Size = new System.Drawing.Size(61, 19);
@@ -340,7 +340,7 @@ namespace app.UserControls
             // 
             this.lblEmpresa.AutoSize = true;
             this.lblEmpresa.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblEmpresa.ForeColor = System.Drawing.Color.White;
             this.lblEmpresa.Location = new System.Drawing.Point(22, 235);
             this.lblEmpresa.Name = "lblEmpresa";
             this.lblEmpresa.Size = new System.Drawing.Size(64, 19);
@@ -363,7 +363,7 @@ namespace app.UserControls
             // 
             this.lblEstado.AutoSize = true;
             this.lblEstado.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblEstado.ForeColor = System.Drawing.Color.White;
             this.lblEstado.Location = new System.Drawing.Point(25, 306);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(53, 19);
@@ -375,7 +375,7 @@ namespace app.UserControls
             this.rbActivoEmpleado.AutoSize = true;
             this.rbActivoEmpleado.Checked = true;
             this.rbActivoEmpleado.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbActivoEmpleado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.rbActivoEmpleado.ForeColor = System.Drawing.Color.White;
             this.rbActivoEmpleado.Location = new System.Drawing.Point(88, 305);
             this.rbActivoEmpleado.Name = "rbActivoEmpleado";
             this.rbActivoEmpleado.Size = new System.Drawing.Size(61, 21);
@@ -388,7 +388,7 @@ namespace app.UserControls
             // 
             this.rbInactivoEmpleado.AutoSize = true;
             this.rbInactivoEmpleado.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbInactivoEmpleado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.rbInactivoEmpleado.ForeColor = System.Drawing.Color.White;
             this.rbInactivoEmpleado.Location = new System.Drawing.Point(149, 305);
             this.rbInactivoEmpleado.Name = "rbInactivoEmpleado";
             this.rbInactivoEmpleado.Size = new System.Drawing.Size(70, 21);
@@ -400,7 +400,7 @@ namespace app.UserControls
             // 
             this.llblFiltroEmpresa.AutoSize = true;
             this.llblFiltroEmpresa.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.llblFiltroEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.llblFiltroEmpresa.ForeColor = System.Drawing.Color.White;
             this.llblFiltroEmpresa.Location = new System.Drawing.Point(234, 20);
             this.llblFiltroEmpresa.Name = "llblFiltroEmpresa";
             this.llblFiltroEmpresa.Size = new System.Drawing.Size(128, 19);
@@ -411,7 +411,7 @@ namespace app.UserControls
             // 
             this.lblFiltroNombre.AutoSize = true;
             this.lblFiltroNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblFiltroNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblFiltroNombre.ForeColor = System.Drawing.Color.White;
             this.lblFiltroNombre.Location = new System.Drawing.Point(16, 21);
             this.lblFiltroNombre.Name = "lblFiltroNombre";
             this.lblFiltroNombre.Size = new System.Drawing.Size(124, 19);
@@ -434,7 +434,7 @@ namespace app.UserControls
             this.lblDetallesEmpleados.AutoSize = true;
             this.lblDetallesEmpleados.BackColor = System.Drawing.Color.Transparent;
             this.lblDetallesEmpleados.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetallesEmpleados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblDetallesEmpleados.ForeColor = System.Drawing.Color.White;
             this.lblDetallesEmpleados.Location = new System.Drawing.Point(126, 7);
             this.lblDetallesEmpleados.Name = "lblDetallesEmpleados";
             this.lblDetallesEmpleados.Size = new System.Drawing.Size(146, 17);
@@ -502,7 +502,7 @@ namespace app.UserControls
             this.lblListaEmpleados.AutoSize = true;
             this.lblListaEmpleados.BackColor = System.Drawing.Color.Transparent;
             this.lblListaEmpleados.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblListaEmpleados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblListaEmpleados.ForeColor = System.Drawing.Color.White;
             this.lblListaEmpleados.Location = new System.Drawing.Point(263, 7);
             this.lblListaEmpleados.Name = "lblListaEmpleados";
             this.lblListaEmpleados.Size = new System.Drawing.Size(127, 17);

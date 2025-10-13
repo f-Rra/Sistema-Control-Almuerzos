@@ -36,7 +36,6 @@
             this.lblReportes = new ReaLTaiizor.Controls.BigLabel();
             this.pnlReportesB = new System.Windows.Forms.Panel();
             this.cbTipoReporte = new System.Windows.Forms.ComboBox();
-            this.btnExportar = new ReaLTaiizor.Controls.Button();
             this.lblTipoReporte = new ReaLTaiizor.Controls.SmallLabel();
             this.btnGenerar = new ReaLTaiizor.Controls.Button();
             this.cbLugar = new System.Windows.Forms.ComboBox();
@@ -45,6 +44,7 @@
             this.lblDesde = new ReaLTaiizor.Controls.SmallLabel();
             this.dtpHasta = new System.Windows.Forms.DateTimePicker();
             this.lblHasta = new ReaLTaiizor.Controls.SmallLabel();
+            this.btnExportar = new ReaLTaiizor.Controls.Button();
             this.dgvReporte = new System.Windows.Forms.DataGridView();
             this.ssPanel = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
             this.pbxTitulo = new System.Windows.Forms.PictureBox();
@@ -98,7 +98,7 @@
             this.lblReportes.AutoSize = true;
             this.lblReportes.BackColor = System.Drawing.Color.Transparent;
             this.lblReportes.Font = new System.Drawing.Font("Microsoft New Tai Lue", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReportes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.lblReportes.ForeColor = System.Drawing.Color.White;
             this.lblReportes.Location = new System.Drawing.Point(361, 4);
             this.lblReportes.Name = "lblReportes";
             this.lblReportes.Size = new System.Drawing.Size(72, 20);
@@ -133,10 +133,113 @@
             this.cbTipoReporte.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.cbTipoReporte.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.cbTipoReporte.FormattingEnabled = true;
-            this.cbTipoReporte.Location = new System.Drawing.Point(458, 40);
+            this.cbTipoReporte.Location = new System.Drawing.Point(396, 40);
             this.cbTipoReporte.Name = "cbTipoReporte";
-            this.cbTipoReporte.Size = new System.Drawing.Size(170, 29);
+            this.cbTipoReporte.Size = new System.Drawing.Size(217, 29);
             this.cbTipoReporte.TabIndex = 7;
+            // 
+            // lblTipoReporte
+            // 
+            this.lblTipoReporte.AutoSize = true;
+            this.lblTipoReporte.BackColor = System.Drawing.Color.Transparent;
+            this.lblTipoReporte.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblTipoReporte.ForeColor = System.Drawing.Color.White;
+            this.lblTipoReporte.Location = new System.Drawing.Point(393, 24);
+            this.lblTipoReporte.Name = "lblTipoReporte";
+            this.lblTipoReporte.Size = new System.Drawing.Size(90, 13);
+            this.lblTipoReporte.TabIndex = 6;
+            this.lblTipoReporte.Text = "Tipo de reporte:";
+            // 
+            // btnGenerar
+            // 
+            this.btnGenerar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenerar.BackColor = System.Drawing.Color.Transparent;
+            this.btnGenerar.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.btnGenerar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGenerar.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.btnGenerar.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnGenerar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnGenerar.Image = null;
+            this.btnGenerar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGenerar.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnGenerar.Location = new System.Drawing.Point(634, 37);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.btnGenerar.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.btnGenerar.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.btnGenerar.Size = new System.Drawing.Size(159, 32);
+            this.btnGenerar.TabIndex = 8;
+            this.btnGenerar.Text = " Generar Reporte";
+            this.btnGenerar.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            // 
+            // cbLugar
+            // 
+            this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.cbLugar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.cbLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.cbLugar.FormattingEnabled = true;
+            this.cbLugar.Location = new System.Drawing.Point(270, 40);
+            this.cbLugar.Name = "cbLugar";
+            this.cbLugar.Size = new System.Drawing.Size(108, 29);
+            this.cbLugar.TabIndex = 5;
+            // 
+            // lblLugar
+            // 
+            this.lblLugar.AutoSize = true;
+            this.lblLugar.BackColor = System.Drawing.Color.Transparent;
+            this.lblLugar.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblLugar.ForeColor = System.Drawing.Color.White;
+            this.lblLugar.Location = new System.Drawing.Point(267, 24);
+            this.lblLugar.Name = "lblLugar";
+            this.lblLugar.Size = new System.Drawing.Size(39, 13);
+            this.lblLugar.TabIndex = 4;
+            this.lblLugar.Text = "Lugar:";
+            // 
+            // dtpDesde
+            // 
+            this.dtpDesde.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dtpDesde.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDesde.Location = new System.Drawing.Point(18, 40);
+            this.dtpDesde.Name = "dtpDesde";
+            this.dtpDesde.Size = new System.Drawing.Size(108, 29);
+            this.dtpDesde.TabIndex = 1;
+            // 
+            // lblDesde
+            // 
+            this.lblDesde.AutoSize = true;
+            this.lblDesde.BackColor = System.Drawing.Color.Transparent;
+            this.lblDesde.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblDesde.ForeColor = System.Drawing.Color.White;
+            this.lblDesde.Location = new System.Drawing.Point(15, 24);
+            this.lblDesde.Name = "lblDesde";
+            this.lblDesde.Size = new System.Drawing.Size(42, 13);
+            this.lblDesde.TabIndex = 0;
+            this.lblDesde.Text = "Desde:";
+            // 
+            // dtpHasta
+            // 
+            this.dtpHasta.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dtpHasta.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpHasta.Location = new System.Drawing.Point(144, 40);
+            this.dtpHasta.Name = "dtpHasta";
+            this.dtpHasta.Size = new System.Drawing.Size(108, 29);
+            this.dtpHasta.TabIndex = 3;
+            // 
+            // lblHasta
+            // 
+            this.lblHasta.AutoSize = true;
+            this.lblHasta.BackColor = System.Drawing.Color.Transparent;
+            this.lblHasta.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblHasta.ForeColor = System.Drawing.Color.White;
+            this.lblHasta.Location = new System.Drawing.Point(141, 24);
+            this.lblHasta.Name = "lblHasta";
+            this.lblHasta.Size = new System.Drawing.Size(39, 13);
+            this.lblHasta.TabIndex = 2;
+            this.lblHasta.Text = "Hasta:";
             // 
             // btnExportar
             // 
@@ -160,109 +263,6 @@
             this.btnExportar.Text = "Exportar PDF";
             this.btnExportar.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
-            // 
-            // lblTipoReporte
-            // 
-            this.lblTipoReporte.AutoSize = true;
-            this.lblTipoReporte.BackColor = System.Drawing.Color.Transparent;
-            this.lblTipoReporte.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblTipoReporte.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.lblTipoReporte.Location = new System.Drawing.Point(455, 24);
-            this.lblTipoReporte.Name = "lblTipoReporte";
-            this.lblTipoReporte.Size = new System.Drawing.Size(90, 13);
-            this.lblTipoReporte.TabIndex = 6;
-            this.lblTipoReporte.Text = "Tipo de reporte:";
-            // 
-            // btnGenerar
-            // 
-            this.btnGenerar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerar.BackColor = System.Drawing.Color.Transparent;
-            this.btnGenerar.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnGenerar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGenerar.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnGenerar.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnGenerar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnGenerar.Image = null;
-            this.btnGenerar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGenerar.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnGenerar.Location = new System.Drawing.Point(643, 37);
-            this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.btnGenerar.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnGenerar.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnGenerar.Size = new System.Drawing.Size(159, 32);
-            this.btnGenerar.TabIndex = 8;
-            this.btnGenerar.Text = " Generar Reporte";
-            this.btnGenerar.TextAlignment = System.Drawing.StringAlignment.Center;
-            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
-            // 
-            // cbLugar
-            // 
-            this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.cbLugar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.cbLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.cbLugar.FormattingEnabled = true;
-            this.cbLugar.Location = new System.Drawing.Point(270, 40);
-            this.cbLugar.Name = "cbLugar";
-            this.cbLugar.Size = new System.Drawing.Size(170, 29);
-            this.cbLugar.TabIndex = 5;
-            // 
-            // lblLugar
-            // 
-            this.lblLugar.AutoSize = true;
-            this.lblLugar.BackColor = System.Drawing.Color.Transparent;
-            this.lblLugar.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.lblLugar.Location = new System.Drawing.Point(267, 24);
-            this.lblLugar.Name = "lblLugar";
-            this.lblLugar.Size = new System.Drawing.Size(39, 13);
-            this.lblLugar.TabIndex = 4;
-            this.lblLugar.Text = "Lugar:";
-            // 
-            // dtpDesde
-            // 
-            this.dtpDesde.CalendarMonthBackground = System.Drawing.Color.White;
-            this.dtpDesde.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDesde.Location = new System.Drawing.Point(18, 40);
-            this.dtpDesde.Name = "dtpDesde";
-            this.dtpDesde.Size = new System.Drawing.Size(108, 29);
-            this.dtpDesde.TabIndex = 1;
-            // 
-            // lblDesde
-            // 
-            this.lblDesde.AutoSize = true;
-            this.lblDesde.BackColor = System.Drawing.Color.Transparent;
-            this.lblDesde.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblDesde.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.lblDesde.Location = new System.Drawing.Point(15, 24);
-            this.lblDesde.Name = "lblDesde";
-            this.lblDesde.Size = new System.Drawing.Size(42, 13);
-            this.lblDesde.TabIndex = 0;
-            this.lblDesde.Text = "Desde:";
-            // 
-            // dtpHasta
-            // 
-            this.dtpHasta.CalendarMonthBackground = System.Drawing.Color.White;
-            this.dtpHasta.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHasta.Location = new System.Drawing.Point(144, 40);
-            this.dtpHasta.Name = "dtpHasta";
-            this.dtpHasta.Size = new System.Drawing.Size(108, 29);
-            this.dtpHasta.TabIndex = 3;
-            // 
-            // lblHasta
-            // 
-            this.lblHasta.AutoSize = true;
-            this.lblHasta.BackColor = System.Drawing.Color.Transparent;
-            this.lblHasta.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblHasta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.lblHasta.Location = new System.Drawing.Point(141, 24);
-            this.lblHasta.Name = "lblHasta";
-            this.lblHasta.Size = new System.Drawing.Size(39, 13);
-            this.lblHasta.TabIndex = 2;
-            this.lblHasta.Text = "Hasta:";
             // 
             // dgvReporte
             // 

@@ -33,13 +33,19 @@
             this.txtRegistro = new System.Windows.Forms.TextBox();
             this.btnRegistro = new ReaLTaiizor.Controls.Button();
             this.dgvRegistros = new System.Windows.Forms.DataGridView();
+            this.gbxRegistros = new System.Windows.Forms.GroupBox();
+            this.pnlRegistrosC = new System.Windows.Forms.Panel();
+            this.pnlRegistrosD = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).BeginInit();
+            this.gbxRegistros.SuspendLayout();
+            this.pnlRegistrosC.SuspendLayout();
+            this.pnlRegistrosD.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtRegistro
             // 
             this.txtRegistro.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRegistro.Location = new System.Drawing.Point(385, 30);
+            this.txtRegistro.Location = new System.Drawing.Point(447, 21);
             this.txtRegistro.Name = "txtRegistro";
             this.txtRegistro.Size = new System.Drawing.Size(100, 33);
             this.txtRegistro.TabIndex = 1;
@@ -47,7 +53,7 @@
             // btnRegistro
             // 
             this.btnRegistro.BackColor = System.Drawing.Color.Transparent;
-            this.btnRegistro.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnRegistro.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnRegistro.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRegistro.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnRegistro.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
@@ -55,7 +61,7 @@
             this.btnRegistro.Image = null;
             this.btnRegistro.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRegistro.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnRegistro.Location = new System.Drawing.Point(510, 28);
+            this.btnRegistro.Location = new System.Drawing.Point(572, 19);
             this.btnRegistro.Name = "btnRegistro";
             this.btnRegistro.Padding = new System.Windows.Forms.Padding(14, 0, 12, 0);
             this.btnRegistro.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -98,26 +104,61 @@
             this.dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvRegistros.EnableHeadersVisualStyles = false;
             this.dgvRegistros.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.dgvRegistros.Location = new System.Drawing.Point(85, 92);
+            this.dgvRegistros.Location = new System.Drawing.Point(17, 14);
             this.dgvRegistros.Name = "dgvRegistros";
             this.dgvRegistros.ReadOnly = true;
             this.dgvRegistros.RowHeadersVisible = false;
             this.dgvRegistros.RowTemplate.Height = 40;
             this.dgvRegistros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRegistros.Size = new System.Drawing.Size(989, 383);
+            this.dgvRegistros.Size = new System.Drawing.Size(1080, 363);
             this.dgvRegistros.TabIndex = 0;
+            // 
+            // gbxRegistros
+            // 
+            this.gbxRegistros.Controls.Add(this.pnlRegistrosC);
+            this.gbxRegistros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbxRegistros.Location = new System.Drawing.Point(3, 69);
+            this.gbxRegistros.Name = "gbxRegistros";
+            this.gbxRegistros.Size = new System.Drawing.Size(1148, 440);
+            this.gbxRegistros.TabIndex = 11;
+            this.gbxRegistros.TabStop = false;
+            // 
+            // pnlRegistrosC
+            // 
+            this.pnlRegistrosC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.pnlRegistrosC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlRegistrosC.Controls.Add(this.pnlRegistrosD);
+            this.pnlRegistrosC.Location = new System.Drawing.Point(12, 19);
+            this.pnlRegistrosC.Name = "pnlRegistrosC";
+            this.pnlRegistrosC.Size = new System.Drawing.Size(1122, 403);
+            this.pnlRegistrosC.TabIndex = 7;
+            // 
+            // pnlRegistrosD
+            // 
+            this.pnlRegistrosD.BackColor = System.Drawing.Color.Transparent;
+            this.pnlRegistrosD.BackgroundImage = global::app.Properties.Resources.panel;
+            this.pnlRegistrosD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlRegistrosD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlRegistrosD.Controls.Add(this.dgvRegistros);
+            this.pnlRegistrosD.Location = new System.Drawing.Point(3, 3);
+            this.pnlRegistrosD.Name = "pnlRegistrosD";
+            this.pnlRegistrosD.Size = new System.Drawing.Size(1114, 395);
+            this.pnlRegistrosD.TabIndex = 6;
             // 
             // ucVistaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.Controls.Add(this.dgvRegistros);
+            this.Controls.Add(this.gbxRegistros);
             this.Controls.Add(this.btnRegistro);
             this.Controls.Add(this.txtRegistro);
             this.Name = "ucVistaPrincipal";
             this.Size = new System.Drawing.Size(1155, 510);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).EndInit();
+            this.gbxRegistros.ResumeLayout(false);
+            this.pnlRegistrosC.ResumeLayout(false);
+            this.pnlRegistrosD.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,5 +174,8 @@
         private System.Windows.Forms.TextBox txtRegistro;
         private ReaLTaiizor.Controls.Button btnRegistro;
         private System.Windows.Forms.DataGridView dgvRegistros;
+        private System.Windows.Forms.GroupBox gbxRegistros;
+        private System.Windows.Forms.Panel pnlRegistrosC;
+        private System.Windows.Forms.Panel pnlRegistrosD;
     }
 }
