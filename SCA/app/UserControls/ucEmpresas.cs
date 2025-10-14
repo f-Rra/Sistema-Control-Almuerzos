@@ -14,7 +14,9 @@ namespace app.UserControls
 {
     public partial class ucEmpresas : UserControl
     {
-        private EmpresaNegocio empresaNegocio = new EmpresaNegocio();
+        private EmpresaNegocio negE = new EmpresaNegocio();
+        private Empresa seleccionada = null;
+        private bool modoEdicion = false;
 
         public ucEmpresas()
         {
@@ -23,17 +25,78 @@ namespace app.UserControls
 
         private void ucEmpresas_Load(object sender, EventArgs e)
         {
-            // TODO: Implementar lógica de carga de empresas
             CargarEmpresas();
+            LimpiarFormulario();
         }
 
         private void CargarEmpresas()
         {
-            // TODO: Implementar carga de empresas en DataGridView
-            var empresas = empresaNegocio.listar();
-            if (empresas == null) return;
+     
+        }
 
-            // Aquí iría la lógica para mostrar las empresas
+        private void LimpiarFormulario()
+        {
+            txtNombre.Clear();
+            rbActivoEmpresa.Checked = true;
+            btnEliminarEmpresa.Enabled = false;
+            seleccionada = null;
+            modoEdicion = false;
+        }
+
+        private bool ValidarFormulario()
+        {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                ExceptionHelper.MostrarAdvertencia("Ingrese el nombre");
+                txtNombre.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        private void CargarEmpresa(Empresa aux)
+        {
+            aux.IdEmpresa = seleccionada.IdEmpresa;
+            aux.Nombre = txtNombre.Text.Trim();
+            aux.Estado = rbActivoEmpresa.Checked;
+        }
+
+        private void btnNuevaEmpresa_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+            modoEdicion = false;
+            seleccionada = null;
+            txtNombre.Focus();
+        }
+
+        private void btnEliminarEmpresa_Click(object sender, EventArgs e)
+        {
+            if (seleccionada == null) return;
+
+            if (ExceptionHelper.MostrarConfirmacion($"¿Está seguro de desactivar la empresa?"))
+            {
+                negE.eliminar(seleccionada.IdEmpresa);
+                ExceptionHelper.MostrarExito("Empresa desactivada correctamente");
+                CargarEmpresas();
+                LimpiarFormulario();
+            }
+        }
+
+        private void btnCancelarEmpresa_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+        }
+
+        private void btnGuardarEmpresa_Click(object sender, EventArgs e)
+        {
+            if (!ValidarFormulario()) return;
+            Empresa aux = new Empresa();
+            if (modoEdicion && seleccionada != null) CargarEmpresa(aux);
+            if (modoEdicion) negE.modificar(aux);
+            else negE.agregar(aux);
+            ExceptionHelper.MostrarExito("Empleado guardado correctamente");
+            CargarEmpresas();
+            LimpiarFormulario();
         }
     }
 }
