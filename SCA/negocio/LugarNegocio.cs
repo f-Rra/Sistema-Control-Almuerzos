@@ -16,8 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SP_ListarLugares");
-                datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                datos.setearProcedimiento("sp_ListarLugares");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -47,8 +46,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SP_ObtenerLugarPorNombre");
-                datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                datos.setearProcedimiento("sp_ObtenerLugarPorNombre");
                 datos.setearParametro("@Nombre", nombreLugar);
                 datos.ejecutarLectura();
 

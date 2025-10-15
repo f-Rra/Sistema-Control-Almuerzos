@@ -16,8 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SP_ListarEmpresas");
-                datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                datos.setearProcedimiento("sp_ListarEmpresas");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -30,10 +29,6 @@ namespace Negocio
                 }
 
                 return lista;
-            }
-            catch (Exception ex)
-            {
-                throw;
             }
             finally
             {
@@ -48,8 +43,7 @@ namespace Negocio
                 AccesoDatos datos = new AccesoDatos();
                 try
                 {
-                    datos.setearConsulta("SP_DesactivarEmpresa");
-                    datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                    datos.setearProcedimiento("sp_DesactivarEmpresa");
                     datos.setearParametro("@IdEmpresa", idEmpresa);
                     datos.ejecutarAccion();
                 }
@@ -67,9 +61,7 @@ namespace Negocio
                 AccesoDatos datos = new AccesoDatos();
                 try
                 {
-                    datos.setearConsulta("SP_AgregarEmpresa");
-                    datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
-                    datos.setearParametro("@IdCredencial", empresa.IdEmpresa);
+                    datos.setearProcedimiento("sp_AgregarEmpresa");
                     datos.setearParametro("@Nombre", empresa.Nombre);
                     datos.setearParametro("@Estado", empresa.Estado);
                     datos.ejecutarAccion();
@@ -88,9 +80,8 @@ namespace Negocio
                 AccesoDatos datos = new AccesoDatos();
                 try
                 {
-                    datos.setearConsulta("SP_ModificarEmpresa");
-                    datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
-                    datos.setearParametro("@IdCredencial", empresa.IdEmpresa);
+                    datos.setearProcedimiento("sp_ModificarEmpresa");
+                    datos.setearParametro("@IdEmpresa", empresa.IdEmpresa);
                     datos.setearParametro("@Nombre", empresa.Nombre);
                     datos.setearParametro("@Estado", empresa.Estado);
                     datos.ejecutarAccion();

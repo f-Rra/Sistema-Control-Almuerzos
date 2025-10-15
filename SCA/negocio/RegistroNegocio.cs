@@ -11,114 +11,110 @@ namespace Negocio
     {
         public void registrarEmpleado(int idEmpleado, int idEmpresa, int idServicio, int idLugar)
         {
-            AccesoDatos datos = new AccesoDatos();
+            ExceptionHelper.EjecutarConManejo(() =>
+            {
+                AccesoDatos datos = new AccesoDatos();
 
-            try
-            {
-                datos.setearProcedimiento("SP_RegistrarEmpleado");
-                datos.setearParametro("@IdEmpleado", idEmpleado);
-                datos.setearParametro("@IdEmpresa", idEmpresa);
-                datos.setearParametro("@IdServicio", idServicio);
-                datos.setearParametro("@IdLugar", idLugar);
-                datos.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
+                try
+                {
+                    datos.setearProcedimiento("sp_RegistrarEmpleado");
+                    datos.setearParametro("@IdEmpleado", idEmpleado);
+                    datos.setearParametro("@IdEmpresa", idEmpresa);
+                    datos.setearParametro("@IdServicio", idServicio);
+                    datos.setearParametro("@IdLugar", idLugar);
+                    datos.ejecutarAccion();
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+            }, "registrar empleado");
         }
 
         public List<Registro> listarPorServicio(int idServicio)
         {
-            List<Registro> lista = new List<Registro>();
-            AccesoDatos datos = new AccesoDatos();
-
-            try
+            return ExceptionHelper.EjecutarConManejo(() =>
             {
-                datos.setearProcedimiento("SP_ListarRegistrosPorServicio");
-                datos.setearParametro("@IdServicio", idServicio);
-                datos.ejecutarLectura();
+                List<Registro> lista = new List<Registro>();
+                AccesoDatos datos = new AccesoDatos();
 
-                while (datos.Lector.Read())
+                try
                 {
-                    Registro registro = new Registro();
-                    registro.IdRegistro = (int)datos.Lector["IdRegistro"];
-                    registro.Hora = (TimeSpan)datos.Lector["Hora"];
-                    registro.Fecha = (DateTime)datos.Lector["Fecha"];
-                    registro.NombreEmpleado = (string)datos.Lector["Empleado"];
-                    registro.NombreEmpresa = (string)datos.Lector["Empresa"];
-                    lista.Add(registro);
-                }
+                    datos.setearProcedimiento("sp_ListarRegistrosPorServicio");
+                    datos.setearParametro("@IdServicio", idServicio);
+                    datos.ejecutarLectura();
 
-                return lista;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
+                    while (datos.Lector.Read())
+                    {
+                        Registro registro = new Registro();
+                        registro.IdRegistro = (int)datos.Lector["IdRegistro"];
+                        registro.Hora = (TimeSpan)datos.Lector["Hora"];
+                        registro.Fecha = (DateTime)datos.Lector["Fecha"];
+                        registro.NombreEmpleado = (string)datos.Lector["Empleado"];
+                        registro.NombreEmpresa = (string)datos.Lector["Empresa"];
+                        lista.Add(registro);
+                    }
+
+                    return lista;
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+            }, "listar registros por servicio");
         }
 
         public bool empleadoYaRegistrado(int idEmpleado, int idServicio)
         {
-            AccesoDatos datos = new AccesoDatos();
-
-            try
+            return ExceptionHelper.EjecutarConManejo(() =>
             {
-                datos.setearProcedimiento("SP_VerificarEmpleadoRegistrado");
-                datos.setearParametro("@IdEmpleado", idEmpleado);
-                datos.setearParametro("@IdServicio", idServicio);
-                datos.ejecutarLectura();
+                AccesoDatos datos = new AccesoDatos();
 
-                if (datos.Lector.Read())
+                try
                 {
-                    return (int)datos.Lector["Existe"] > 0;
-                }
+                    datos.setearProcedimiento("sp_VerificarEmpleadoRegistrado");
+                    datos.setearParametro("@IdEmpleado", idEmpleado);
+                    datos.setearParametro("@IdServicio", idServicio);
+                    datos.ejecutarLectura();
 
-                return false;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
+                    if (datos.Lector.Read())
+                    {
+                        return (int)datos.Lector["Registrado"] > 0;
+                    }
+
+                    return false;
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+            }, "verificar empleado registrado");
         }
 
         public int contarRegistrosPorServicio(int idServicio)
         {
-            AccesoDatos datos = new AccesoDatos();
-
-            try
+            return ExceptionHelper.EjecutarConManejo(() =>
             {
-                datos.setearProcedimiento("SP_ContarRegistrosPorServicio");
-                datos.setearParametro("@IdServicio", idServicio);
-                datos.ejecutarLectura();
+                AccesoDatos datos = new AccesoDatos();
 
-                if (datos.Lector.Read())
+                try
                 {
-                    return (int)datos.Lector["TotalRegistros"];
-                }
+                    datos.setearProcedimiento("sp_ContarRegistrosPorServicio");
+                    datos.setearParametro("@IdServicio", idServicio);
+                    datos.ejecutarLectura();
 
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
+                    if (datos.Lector.Read())
+                    {
+                        return (int)datos.Lector["TotalRegistros"];
+                    }
+
+                    return 0;
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+            }, "contar registros por servicio");
         }
     }
 }

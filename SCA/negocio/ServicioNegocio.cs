@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearProcedimiento("SP_ObtenerServicioActivo");
+                datos.setearProcedimiento("sp_ObtenerServicioActivo");
                 datos.setearParametro("@IdLugar", idLugar);
                 datos.ejecutarLectura();
 
@@ -36,10 +36,6 @@ namespace Negocio
 
                 return null;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
             finally
             {
                 datos.cerrarConexion();
@@ -52,7 +48,7 @@ namespace Negocio
 
             try
             {
-                datos.setearProcedimiento("SP_ObtenerUltimoServicio");
+                datos.setearProcedimiento("sp_ObtenerUltimoServicio");
                 datos.ejecutarLectura();
 
                 if (datos.Lector.Read())
@@ -72,10 +68,6 @@ namespace Negocio
 
                 return null;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
             finally
             {
                 datos.cerrarConexion();
@@ -86,42 +78,28 @@ namespace Negocio
         {
             AccesoDatos datos = new AccesoDatos();
 
-            try
-            {
-                datos.setearProcedimiento("SP_AltaServicio");
-                datos.setearParametro("@IdLugar", idLugar);
-                if (proyeccion.HasValue)
-                    datos.setearParametro("@Proyeccion", proyeccion.Value);
-                else
-                    datos.setearParametro("@Proyeccion", System.DBNull.Value);
-                return datos.ejecutarAccionReturn();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            datos.setearProcedimiento("sp_IniciarServicio");
+            datos.setearParametro("@IdLugar", idLugar);
+            if (proyeccion.HasValue)
+                datos.setearParametro("@Proyeccion", proyeccion.Value);
+            else
+                datos.setearParametro("@Proyeccion", System.DBNull.Value);
+            return datos.ejecutarAccionReturn();
         }
 
         public void finalizarServicio(int idServicio, int totalComensales, int totalInvitados, int? duracionMinutos = null)
         {
             AccesoDatos datos = new AccesoDatos();
 
-            try
-            {
-                datos.setearProcedimiento("SP_FinalizarServicio");
-                datos.setearParametro("@IdServicio", idServicio);
-                datos.setearParametro("@TotalComensales", totalComensales);
-                datos.setearParametro("@TotalInvitados", totalInvitados);
-                if (duracionMinutos.HasValue)
-                    datos.setearParametro("@DuracionMinutos", duracionMinutos.Value);
-                else
-                    datos.setearParametro("@DuracionMinutos", System.DBNull.Value);
-                datos.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            datos.setearProcedimiento("sp_FinalizarServicio");
+            datos.setearParametro("@IdServicio", idServicio);
+            datos.setearParametro("@TotalComensales", totalComensales);
+            datos.setearParametro("@TotalInvitados", totalInvitados);
+            if (duracionMinutos.HasValue)
+                datos.setearParametro("@DuracionMinutos", duracionMinutos.Value);
+            else
+                datos.setearParametro("@DuracionMinutos", System.DBNull.Value);
+            datos.ejecutarAccion();
         }
 
         public List<Servicio> listarPorFecha(DateTime fechaDesde, DateTime fechaHasta)
@@ -131,7 +109,7 @@ namespace Negocio
 
             try
             {
-                datos.setearProcedimiento("SP_ListarServiciosPorFecha");
+                datos.setearProcedimiento("sp_ListarServiciosPorFecha");
                 datos.setearParametro("@FechaDesde", fechaDesde);
                 datos.setearParametro("@FechaHasta", fechaHasta);
                 datos.ejecutarLectura();
@@ -146,15 +124,10 @@ namespace Negocio
                     servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
                     servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
                     servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
-                        servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
                     lista.Add(servicio);
                 }
 
                 return lista;
-            }
-            catch (Exception ex)
-            {
-                throw;
             }
             finally
             {
@@ -168,7 +141,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearProcedimiento("SP_ListarTodosLosServicios");
+                datos.setearProcedimiento("sp_ListarServicios");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -185,10 +158,6 @@ namespace Negocio
                 }
 
                 return lista;
-            }
-            catch (Exception ex)
-            {
-                throw;
             }
             finally
             {
@@ -203,7 +172,7 @@ namespace Negocio
 
             try
             {
-                datos.setearProcedimiento("SP_ListarServiciosPorLugar");
+                datos.setearProcedimiento("sp_ListarServiciosPorLugar");
                 datos.setearParametro("@IdLugar", idLugar);
                 datos.setearParametro("@FechaDesde", fechaDesde);
                 datos.setearParametro("@FechaHasta", fechaHasta);
@@ -223,10 +192,6 @@ namespace Negocio
                 }
 
                 return lista;
-            }
-            catch (Exception ex)
-            {
-                throw;
             }
             finally
             {
