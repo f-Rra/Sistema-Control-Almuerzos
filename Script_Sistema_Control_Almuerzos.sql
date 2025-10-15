@@ -203,13 +203,5 @@ DESCRIPCIÓN DE TABLAS:
 - Lugares: Contiene los datos de los lugares disponibles para almorzar (Comedor, Quincho)
 - Servicios: representa cada jornada realizada en comedor o quincho. Incluye Proyección (estimación de comensales) y Duración total en minutos (gestionada por cronómetro en backend).
 - Registros: guarda cada asistencia vinculada a un servicio
-
-RESTRICCIONES IMPORTANTES:
-- Un empleado no puede registrarse dos veces en el mismo servicio
-- Las fechas de servicios no pueden ser futuras
-- La autenticación se realiza por selección de lugar (ComboBox)
-- Comedor y Quincho: acceso directo sin contraseña
-- Administrador: contraseña hardcodeada en código (admin123)
 */
 
--- Nota: Los procedimientos almacenados se mantienen en Consultas_SQL.md

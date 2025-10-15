@@ -18,8 +18,7 @@ namespace Negocio
 
                 try
                 {
-                    datos.setearConsulta("SP_ListarTodosLosEmpleados");
-                    datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                    datos.setearProcedimiento("sp_ListarEmpleados");
                     datos.ejecutarLectura();
 
                     while (datos.Lector.Read())
@@ -49,38 +48,36 @@ namespace Negocio
 
         public Empleado buscarPorCredencial(string credencial)
         {
-            AccesoDatos datos = new AccesoDatos();
-
-            try
+            return ExceptionHelper.EjecutarConManejo(() =>
             {
-                datos.setearConsulta("SP_BuscarEmpleadoPorCredencial");
-                datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
-                datos.setearParametro("@Credencial", credencial);
-                datos.ejecutarLectura();
+                AccesoDatos datos = new AccesoDatos();
 
-                if (datos.Lector.Read())
+                try
                 {
-                    Empleado empleado = new Empleado();
-                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                    empleado.Nombre = (string)datos.Lector["Nombre"];
-                    empleado.Apellido = (string)datos.Lector["Apellido"];
-                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
-                    empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
+                    datos.setearProcedimiento("sp_BuscarEmpleadoPorCredencial");
+                    datos.setearParametro("@Credencial", credencial);
+                    datos.ejecutarLectura();
 
-                    return empleado;
+                    if (datos.Lector.Read())
+                    {
+                        Empleado empleado = new Empleado();
+                        empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                        empleado.Nombre = (string)datos.Lector["Nombre"];
+                        empleado.Apellido = (string)datos.Lector["Apellido"];
+                        empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
+                        empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                        empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
+
+                        return empleado;
+                    }
+
+                    return null;
                 }
-
-                return null;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+            }, "buscar empleado por credencial");
         }
 
         public List<Empleado> listarPorEmpresa(int idEmpresa)
@@ -90,7 +87,7 @@ namespace Negocio
 
             try
             {
-                datos.setearProcedimiento("SP_ListarEmpleadosPorEmpresa");
+                datos.setearProcedimiento("sp_ListarEmpleadosPorEmpresa");
                 datos.setearParametro("@IdEmpresa", idEmpresa);
                 datos.ejecutarLectura();
 
@@ -107,10 +104,6 @@ namespace Negocio
 
                 return lista;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
             finally
             {
                 datos.cerrarConexion();
@@ -124,7 +117,7 @@ namespace Negocio
 
             try
             {
-                datos.setearProcedimiento("SP_EmpleadosSinAlmorzar");
+                datos.setearProcedimiento("sp_EmpleadosSinAlmorzar");
                 datos.setearParametro("@IdServicio", idServicio);
                 datos.ejecutarLectura();
 
@@ -143,10 +136,6 @@ namespace Negocio
 
                 return lista;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
             finally
             {
                 datos.cerrarConexion();
@@ -160,7 +149,7 @@ namespace Negocio
 
             try
             {
-                datos.setearProcedimiento("SP_FiltrarEmpleadosSinAlmorzar");
+                datos.setearProcedimiento("sp_FiltrarEmpleadosSinAlmorzar");
                 datos.setearParametro("@IdServicio", idServicio);
                 
                 if (idEmpresa.HasValue)
@@ -190,10 +179,6 @@ namespace Negocio
 
                 return lista;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
             finally
             {
                 datos.cerrarConexion();
@@ -207,8 +192,7 @@ namespace Negocio
                 AccesoDatos datos = new AccesoDatos();
                 try
                 {
-                    datos.setearConsulta("SP_AgregarEmpleado");
-                    datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                    datos.setearProcedimiento("sp_AgregarEmpleado");
                     datos.setearParametro("@IdCredencial", empleado.IdCredencial);
                     datos.setearParametro("@Nombre", empleado.Nombre);
                     datos.setearParametro("@Apellido", empleado.Apellido);
@@ -231,8 +215,7 @@ namespace Negocio
                 AccesoDatos datos = new AccesoDatos();
                 try
                 {
-                    datos.setearConsulta("SP_ModificarEmpleado");
-                    datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                    datos.setearProcedimiento("sp_ModificarEmpleado");
                     datos.setearParametro("@IdEmpleado", empleado.IdEmpleado);
                     datos.setearParametro("@IdCredencial", empleado.IdCredencial);
                     datos.setearParametro("@Nombre", empleado.Nombre);
@@ -256,8 +239,7 @@ namespace Negocio
                 AccesoDatos datos = new AccesoDatos();
                 try
                 {
-                    datos.setearConsulta("SP_DesactivarEmpleado");
-                    datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                    datos.setearProcedimiento("sp_DesactivarEmpleado");
                     datos.setearParametro("@IdEmpleado", idEmpleado);
                     datos.ejecutarAccion();
                 }
@@ -275,14 +257,13 @@ namespace Negocio
                 AccesoDatos datos = new AccesoDatos();
                 try
                 {
-                    datos.setearConsulta("SP_VerificarCredencialExiste");
-                    datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                    datos.setearProcedimiento("sp_VerificarCredencial");
                     datos.setearParametro("@IdCredencial", credencial);
                     datos.ejecutarLectura();
                     
                     if (datos.Lector.Read())
                     {
-                        return (int)datos.Lector["Existe"] > 0;
+                        return (int)datos.Lector["Registrado"] > 0;
                     }
                     return false;
                 }
@@ -302,8 +283,7 @@ namespace Negocio
                 
                 try
                 {
-                    datos.setearConsulta("SP_BuscarEmpleadoPorId");
-                    datos.setearTipoComando(System.Data.CommandType.StoredProcedure);
+                    datos.setearProcedimiento("sp_BuscarEmpleadoPorId");
                     datos.setearParametro("@IdEmpleado", id);
                     datos.ejecutarLectura();
                     
