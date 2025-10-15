@@ -36,6 +36,35 @@ namespace Negocio
             }
         }
 
+        public List<Empresa> listarConEmpleados()
+        {
+            List<Empresa> lista = new List<Empresa>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT IdEmpresa, Empresa as Nombre, Estado, CantidadEmpleados FROM vw_EmpresasConEmpleados");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Empresa empresa = new Empresa();
+                    empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                    empresa.Nombre = (string)datos.Lector["Nombre"];
+                    empresa.Estado = (bool)datos.Lector["Estado"];
+                    empresa.CantidadEmpleados = (int)datos.Lector["CantidadEmpleados"];
+
+                    lista.Add(empresa);
+                }
+
+                return lista;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void eliminar(int idEmpresa)
         {
             ExceptionHelper.EjecutarConManejo(() =>

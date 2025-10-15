@@ -29,9 +29,29 @@ namespace app.UserControls
             LimpiarFormulario();
         }
 
-        private void CargarEmpresas()
+        private void CargarEmpresas(string filtro = "")
         {
-     
+            var empresas = negE.listarConEmpleados();
+            if (empresas == null) return;
+
+            if (!string.IsNullOrWhiteSpace(filtro))
+            {
+                empresas = empresas.FindAll(e =>
+                    e.Nombre.ToUpper().Contains(filtro.ToUpper()) 
+                );
+            }
+
+            dgvEmpresas.DataSource = null;
+            dgvEmpresas.AutoGenerateColumns = true;
+            dgvEmpresas.DataSource = empresas;
+            OcultarColumnas();
+
+            lblTotalEmpresas.Text = $"Total Empleados: {empresas.Count}";
+        }
+
+        private void OcultarColumnas()
+        {
+            
         }
 
         private void LimpiarFormulario()
