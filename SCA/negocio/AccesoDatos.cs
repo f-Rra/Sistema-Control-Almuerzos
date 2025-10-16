@@ -66,7 +66,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al ejecutar la acci\u00f3n en la base de datos", ex);
+                throw new Exception("Error al ejecutar la accion en la base de datos", ex);
             }
             finally
             {

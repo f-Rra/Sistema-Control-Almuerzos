@@ -28,9 +28,9 @@ namespace app.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbxEmpresaDetalles = new System.Windows.Forms.GroupBox();
             this.pnlA = new System.Windows.Forms.Panel();
             this.lblDetallesEmpresa = new ReaLTaiizor.Controls.BigLabel();
@@ -75,9 +75,11 @@ namespace app.UserControls
             // gbxEmpresaDetalles
             // 
             this.gbxEmpresaDetalles.Controls.Add(this.pnlA);
-            this.gbxEmpresaDetalles.Location = new System.Drawing.Point(742, 9);
+            this.gbxEmpresaDetalles.Location = new System.Drawing.Point(1113, 14);
+            this.gbxEmpresaDetalles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbxEmpresaDetalles.Name = "gbxEmpresaDetalles";
-            this.gbxEmpresaDetalles.Size = new System.Drawing.Size(395, 243);
+            this.gbxEmpresaDetalles.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbxEmpresaDetalles.Size = new System.Drawing.Size(592, 374);
             this.gbxEmpresaDetalles.TabIndex = 10;
             this.gbxEmpresaDetalles.TabStop = false;
             // 
@@ -87,9 +89,10 @@ namespace app.UserControls
             this.pnlA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlA.Controls.Add(this.lblDetallesEmpresa);
             this.pnlA.Controls.Add(this.pnlB);
-            this.pnlA.Location = new System.Drawing.Point(10, 19);
+            this.pnlA.Location = new System.Drawing.Point(15, 29);
+            this.pnlA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlA.Name = "pnlA";
-            this.pnlA.Size = new System.Drawing.Size(377, 208);
+            this.pnlA.Size = new System.Drawing.Size(564, 319);
             this.pnlA.TabIndex = 8;
             // 
             // lblDetallesEmpresa
@@ -98,9 +101,10 @@ namespace app.UserControls
             this.lblDetallesEmpresa.BackColor = System.Drawing.Color.Transparent;
             this.lblDetallesEmpresa.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetallesEmpresa.ForeColor = System.Drawing.Color.White;
-            this.lblDetallesEmpresa.Location = new System.Drawing.Point(105, 7);
+            this.lblDetallesEmpresa.Location = new System.Drawing.Point(158, 11);
+            this.lblDetallesEmpresa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDetallesEmpresa.Name = "lblDetallesEmpresa";
-            this.lblDetallesEmpresa.Size = new System.Drawing.Size(148, 17);
+            this.lblDetallesEmpresa.Size = new System.Drawing.Size(227, 27);
             this.lblDetallesEmpresa.TabIndex = 2;
             this.lblDetallesEmpresa.Text = "Detalles de la Empresa";
             this.lblDetallesEmpresa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -119,9 +123,10 @@ namespace app.UserControls
             this.pnlB.Controls.Add(this.rbInactivoEmpresa);
             this.pnlB.Controls.Add(this.rbActivoEmpresa);
             this.pnlB.Controls.Add(this.lblEstado);
-            this.pnlB.Location = new System.Drawing.Point(3, 27);
+            this.pnlB.Location = new System.Drawing.Point(4, 42);
+            this.pnlB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlB.Name = "pnlB";
-            this.pnlB.Size = new System.Drawing.Size(368, 175);
+            this.pnlB.Size = new System.Drawing.Size(551, 268);
             this.pnlB.TabIndex = 6;
             // 
             // btnEliminarEmpresa
@@ -136,11 +141,12 @@ namespace app.UserControls
             this.btnEliminarEmpresa.Image = null;
             this.btnEliminarEmpresa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEliminarEmpresa.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnEliminarEmpresa.Location = new System.Drawing.Point(239, 120);
+            this.btnEliminarEmpresa.Location = new System.Drawing.Point(358, 185);
+            this.btnEliminarEmpresa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnEliminarEmpresa.Name = "btnEliminarEmpresa";
             this.btnEliminarEmpresa.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnEliminarEmpresa.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnEliminarEmpresa.Size = new System.Drawing.Size(100, 35);
+            this.btnEliminarEmpresa.Size = new System.Drawing.Size(150, 54);
             this.btnEliminarEmpresa.TabIndex = 2;
             this.btnEliminarEmpresa.Text = "Eliminar";
             this.btnEliminarEmpresa.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -151,10 +157,11 @@ namespace app.UserControls
             this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.txtNombre.Location = new System.Drawing.Point(24, 34);
+            this.txtNombre.Location = new System.Drawing.Point(36, 52);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(250, 33);
+            this.txtNombre.Size = new System.Drawing.Size(373, 45);
             this.txtNombre.TabIndex = 5;
             // 
             // btnCancelarEmpresa
@@ -168,11 +175,12 @@ namespace app.UserControls
             this.btnCancelarEmpresa.Image = null;
             this.btnCancelarEmpresa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancelarEmpresa.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnCancelarEmpresa.Location = new System.Drawing.Point(132, 120);
+            this.btnCancelarEmpresa.Location = new System.Drawing.Point(198, 185);
+            this.btnCancelarEmpresa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancelarEmpresa.Name = "btnCancelarEmpresa";
             this.btnCancelarEmpresa.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnCancelarEmpresa.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnCancelarEmpresa.Size = new System.Drawing.Size(100, 35);
+            this.btnCancelarEmpresa.Size = new System.Drawing.Size(150, 54);
             this.btnCancelarEmpresa.TabIndex = 1;
             this.btnCancelarEmpresa.Text = "Cancelar";
             this.btnCancelarEmpresa.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -183,9 +191,10 @@ namespace app.UserControls
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblNombre.ForeColor = System.Drawing.Color.White;
-            this.lblNombre.Location = new System.Drawing.Point(20, 12);
+            this.lblNombre.Location = new System.Drawing.Point(30, 18);
+            this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(62, 19);
+            this.lblNombre.Size = new System.Drawing.Size(89, 28);
             this.lblNombre.TabIndex = 6;
             this.lblNombre.Text = "Nombre:";
             // 
@@ -200,11 +209,12 @@ namespace app.UserControls
             this.btnGuardarEmpresa.Image = null;
             this.btnGuardarEmpresa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGuardarEmpresa.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnGuardarEmpresa.Location = new System.Drawing.Point(26, 120);
+            this.btnGuardarEmpresa.Location = new System.Drawing.Point(39, 185);
+            this.btnGuardarEmpresa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnGuardarEmpresa.Name = "btnGuardarEmpresa";
             this.btnGuardarEmpresa.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnGuardarEmpresa.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnGuardarEmpresa.Size = new System.Drawing.Size(100, 35);
+            this.btnGuardarEmpresa.Size = new System.Drawing.Size(150, 54);
             this.btnGuardarEmpresa.TabIndex = 0;
             this.btnGuardarEmpresa.Text = "Guardar";
             this.btnGuardarEmpresa.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -215,9 +225,10 @@ namespace app.UserControls
             this.rbInactivoEmpresa.AutoSize = true;
             this.rbInactivoEmpresa.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbInactivoEmpresa.ForeColor = System.Drawing.Color.White;
-            this.rbInactivoEmpresa.Location = new System.Drawing.Point(147, 82);
+            this.rbInactivoEmpresa.Location = new System.Drawing.Point(220, 126);
+            this.rbInactivoEmpresa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbInactivoEmpresa.Name = "rbInactivoEmpresa";
-            this.rbInactivoEmpresa.Size = new System.Drawing.Size(70, 21);
+            this.rbInactivoEmpresa.Size = new System.Drawing.Size(106, 32);
             this.rbInactivoEmpresa.TabIndex = 10;
             this.rbInactivoEmpresa.Text = "Inactivo";
             this.rbInactivoEmpresa.UseVisualStyleBackColor = true;
@@ -228,9 +239,10 @@ namespace app.UserControls
             this.rbActivoEmpresa.Checked = true;
             this.rbActivoEmpresa.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbActivoEmpresa.ForeColor = System.Drawing.Color.White;
-            this.rbActivoEmpresa.Location = new System.Drawing.Point(86, 82);
+            this.rbActivoEmpresa.Location = new System.Drawing.Point(129, 126);
+            this.rbActivoEmpresa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbActivoEmpresa.Name = "rbActivoEmpresa";
-            this.rbActivoEmpresa.Size = new System.Drawing.Size(61, 21);
+            this.rbActivoEmpresa.Size = new System.Drawing.Size(93, 32);
             this.rbActivoEmpresa.TabIndex = 9;
             this.rbActivoEmpresa.TabStop = true;
             this.rbActivoEmpresa.Text = "Activo";
@@ -241,18 +253,21 @@ namespace app.UserControls
             this.lblEstado.AutoSize = true;
             this.lblEstado.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblEstado.ForeColor = System.Drawing.Color.White;
-            this.lblEstado.Location = new System.Drawing.Point(23, 83);
+            this.lblEstado.Location = new System.Drawing.Point(34, 128);
+            this.lblEstado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(53, 19);
+            this.lblEstado.Size = new System.Drawing.Size(75, 28);
             this.lblEstado.TabIndex = 8;
             this.lblEstado.Text = "Estado:";
             // 
             // gbxEstadisticasEmpresa
             // 
             this.gbxEstadisticasEmpresa.Controls.Add(this.panel1);
-            this.gbxEstadisticasEmpresa.Location = new System.Drawing.Point(742, 253);
+            this.gbxEstadisticasEmpresa.Location = new System.Drawing.Point(1113, 389);
+            this.gbxEstadisticasEmpresa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbxEstadisticasEmpresa.Name = "gbxEstadisticasEmpresa";
-            this.gbxEstadisticasEmpresa.Size = new System.Drawing.Size(395, 243);
+            this.gbxEstadisticasEmpresa.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbxEstadisticasEmpresa.Size = new System.Drawing.Size(592, 374);
             this.gbxEstadisticasEmpresa.TabIndex = 11;
             this.gbxEstadisticasEmpresa.TabStop = false;
             // 
@@ -262,9 +277,10 @@ namespace app.UserControls
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.lblEstadisticasEmpresa);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(10, 19);
+            this.panel1.Location = new System.Drawing.Point(15, 29);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(377, 208);
+            this.panel1.Size = new System.Drawing.Size(564, 319);
             this.panel1.TabIndex = 8;
             // 
             // lblEstadisticasEmpresa
@@ -273,9 +289,10 @@ namespace app.UserControls
             this.lblEstadisticasEmpresa.BackColor = System.Drawing.Color.Transparent;
             this.lblEstadisticasEmpresa.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstadisticasEmpresa.ForeColor = System.Drawing.Color.White;
-            this.lblEstadisticasEmpresa.Location = new System.Drawing.Point(105, 7);
+            this.lblEstadisticasEmpresa.Location = new System.Drawing.Point(158, 11);
+            this.lblEstadisticasEmpresa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEstadisticasEmpresa.Name = "lblEstadisticasEmpresa";
-            this.lblEstadisticasEmpresa.Size = new System.Drawing.Size(169, 17);
+            this.lblEstadisticasEmpresa.Size = new System.Drawing.Size(260, 27);
             this.lblEstadisticasEmpresa.TabIndex = 2;
             this.lblEstadisticasEmpresa.Text = "Estadisticas de la Empresa";
             this.lblEstadisticasEmpresa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -290,9 +307,10 @@ namespace app.UserControls
             this.panel2.Controls.Add(this.lblAsistencias);
             this.panel2.Controls.Add(this.lblEmpleadosInactivos);
             this.panel2.Controls.Add(this.lblTotalEmpleados);
-            this.panel2.Location = new System.Drawing.Point(3, 27);
+            this.panel2.Location = new System.Drawing.Point(4, 42);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(368, 175);
+            this.panel2.Size = new System.Drawing.Size(551, 268);
             this.panel2.TabIndex = 6;
             // 
             // lblPromedio
@@ -301,9 +319,10 @@ namespace app.UserControls
             this.lblPromedio.BackColor = System.Drawing.Color.Transparent;
             this.lblPromedio.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPromedio.ForeColor = System.Drawing.Color.White;
-            this.lblPromedio.Location = new System.Drawing.Point(13, 129);
+            this.lblPromedio.Location = new System.Drawing.Point(20, 198);
+            this.lblPromedio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPromedio.Name = "lblPromedio";
-            this.lblPromedio.Size = new System.Drawing.Size(186, 30);
+            this.lblPromedio.Size = new System.Drawing.Size(287, 45);
             this.lblPromedio.TabIndex = 12;
             this.lblPromedio.Text = "Promedio Diario: ";
             this.lblPromedio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -314,9 +333,10 @@ namespace app.UserControls
             this.lblAsistencias.BackColor = System.Drawing.Color.Transparent;
             this.lblAsistencias.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAsistencias.ForeColor = System.Drawing.Color.White;
-            this.lblAsistencias.Location = new System.Drawing.Point(13, 89);
+            this.lblAsistencias.Location = new System.Drawing.Point(20, 137);
+            this.lblAsistencias.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAsistencias.Name = "lblAsistencias";
-            this.lblAsistencias.Size = new System.Drawing.Size(257, 30);
+            this.lblAsistencias.Size = new System.Drawing.Size(391, 45);
             this.lblAsistencias.TabIndex = 12;
             this.lblAsistencias.Text = "Asistencias (Mes Actual):";
             this.lblAsistencias.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -327,9 +347,10 @@ namespace app.UserControls
             this.lblEmpleadosInactivos.BackColor = System.Drawing.Color.Transparent;
             this.lblEmpleadosInactivos.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmpleadosInactivos.ForeColor = System.Drawing.Color.White;
-            this.lblEmpleadosInactivos.Location = new System.Drawing.Point(13, 49);
+            this.lblEmpleadosInactivos.Location = new System.Drawing.Point(20, 75);
+            this.lblEmpleadosInactivos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEmpleadosInactivos.Name = "lblEmpleadosInactivos";
-            this.lblEmpleadosInactivos.Size = new System.Drawing.Size(219, 30);
+            this.lblEmpleadosInactivos.Size = new System.Drawing.Size(334, 45);
             this.lblEmpleadosInactivos.TabIndex = 12;
             this.lblEmpleadosInactivos.Text = "Empleados Inactivos:";
             this.lblEmpleadosInactivos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -340,9 +361,10 @@ namespace app.UserControls
             this.lblTotalEmpleados.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalEmpleados.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalEmpleados.ForeColor = System.Drawing.Color.White;
-            this.lblTotalEmpleados.Location = new System.Drawing.Point(13, 9);
+            this.lblTotalEmpleados.Location = new System.Drawing.Point(20, 14);
+            this.lblTotalEmpleados.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalEmpleados.Name = "lblTotalEmpleados";
-            this.lblTotalEmpleados.Size = new System.Drawing.Size(215, 30);
+            this.lblTotalEmpleados.Size = new System.Drawing.Size(330, 45);
             this.lblTotalEmpleados.TabIndex = 12;
             this.lblTotalEmpleados.Text = "Total de Empleados: ";
             this.lblTotalEmpleados.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -350,9 +372,11 @@ namespace app.UserControls
             // gbxListaEmpresas
             // 
             this.gbxListaEmpresas.Controls.Add(this.pnlC);
-            this.gbxListaEmpresas.Location = new System.Drawing.Point(9, 1);
+            this.gbxListaEmpresas.Location = new System.Drawing.Point(14, 2);
+            this.gbxListaEmpresas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbxListaEmpresas.Name = "gbxListaEmpresas";
-            this.gbxListaEmpresas.Size = new System.Drawing.Size(710, 499);
+            this.gbxListaEmpresas.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbxListaEmpresas.Size = new System.Drawing.Size(1065, 768);
             this.gbxListaEmpresas.TabIndex = 12;
             this.gbxListaEmpresas.TabStop = false;
             // 
@@ -362,9 +386,10 @@ namespace app.UserControls
             this.pnlC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlC.Controls.Add(this.lblListaEmpresas);
             this.pnlC.Controls.Add(this.pnlD);
-            this.pnlC.Location = new System.Drawing.Point(10, 19);
+            this.pnlC.Location = new System.Drawing.Point(15, 29);
+            this.pnlC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlC.Name = "pnlC";
-            this.pnlC.Size = new System.Drawing.Size(687, 466);
+            this.pnlC.Size = new System.Drawing.Size(1030, 716);
             this.pnlC.TabIndex = 8;
             // 
             // lblListaEmpresas
@@ -373,9 +398,10 @@ namespace app.UserControls
             this.lblListaEmpresas.BackColor = System.Drawing.Color.Transparent;
             this.lblListaEmpresas.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaEmpresas.ForeColor = System.Drawing.Color.White;
-            this.lblListaEmpresas.Location = new System.Drawing.Point(263, 7);
+            this.lblListaEmpresas.Location = new System.Drawing.Point(394, 11);
+            this.lblListaEmpresas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblListaEmpresas.Name = "lblListaEmpresas";
-            this.lblListaEmpresas.Size = new System.Drawing.Size(118, 17);
+            this.lblListaEmpresas.Size = new System.Drawing.Size(180, 27);
             this.lblListaEmpresas.TabIndex = 2;
             this.lblListaEmpresas.Text = "Lista de Empresas";
             this.lblListaEmpresas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -391,9 +417,10 @@ namespace app.UserControls
             this.pnlD.Controls.Add(this.btnNuevaEmpresa);
             this.pnlD.Controls.Add(this.txtBuscarEmpresa);
             this.pnlD.Controls.Add(this.lblFiltroNombre);
-            this.pnlD.Location = new System.Drawing.Point(3, 27);
+            this.pnlD.Location = new System.Drawing.Point(4, 42);
+            this.pnlD.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlD.Name = "pnlD";
-            this.pnlD.Size = new System.Drawing.Size(679, 434);
+            this.pnlD.Size = new System.Drawing.Size(1018, 667);
             this.pnlD.TabIndex = 6;
             // 
             // dgvEmpresas
@@ -404,52 +431,56 @@ namespace app.UserControls
             this.dgvEmpresas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.dgvEmpresas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvEmpresas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEmpresas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEmpresas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEmpresas.ColumnHeadersHeight = 40;
             this.dgvEmpresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEmpresas.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEmpresas.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEmpresas.EnableHeadersVisualStyles = false;
             this.dgvEmpresas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.dgvEmpresas.Location = new System.Drawing.Point(20, 101);
+            this.dgvEmpresas.Location = new System.Drawing.Point(30, 155);
+            this.dgvEmpresas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvEmpresas.MultiSelect = false;
             this.dgvEmpresas.Name = "dgvEmpresas";
             this.dgvEmpresas.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEmpresas.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEmpresas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvEmpresas.RowHeadersVisible = false;
+            this.dgvEmpresas.RowHeadersWidth = 62;
             this.dgvEmpresas.RowTemplate.Height = 40;
             this.dgvEmpresas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEmpresas.Size = new System.Drawing.Size(643, 270);
+            this.dgvEmpresas.Size = new System.Drawing.Size(964, 415);
             this.dgvEmpresas.TabIndex = 1;
+            this.dgvEmpresas.SelectionChanged += new System.EventHandler(this.dgvEmpresas_SelectionChanged);
             // 
             // lblTotalEmpresas
             // 
             this.lblTotalEmpresas.AutoSize = true;
             this.lblTotalEmpresas.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalEmpresas.ForeColor = System.Drawing.Color.White;
-            this.lblTotalEmpresas.Location = new System.Drawing.Point(17, 392);
+            this.lblTotalEmpresas.Location = new System.Drawing.Point(26, 603);
+            this.lblTotalEmpresas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalEmpresas.Name = "lblTotalEmpresas";
-            this.lblTotalEmpresas.Size = new System.Drawing.Size(148, 25);
+            this.lblTotalEmpresas.Size = new System.Drawing.Size(230, 40);
             this.lblTotalEmpresas.TabIndex = 0;
             this.lblTotalEmpresas.Text = "Total Empresas:";
             // 
@@ -464,11 +495,12 @@ namespace app.UserControls
             this.btnNuevaEmpresa.Image = null;
             this.btnNuevaEmpresa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNuevaEmpresa.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnNuevaEmpresa.Location = new System.Drawing.Point(513, 386);
+            this.btnNuevaEmpresa.Location = new System.Drawing.Point(770, 594);
+            this.btnNuevaEmpresa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnNuevaEmpresa.Name = "btnNuevaEmpresa";
             this.btnNuevaEmpresa.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnNuevaEmpresa.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnNuevaEmpresa.Size = new System.Drawing.Size(150, 35);
+            this.btnNuevaEmpresa.Size = new System.Drawing.Size(225, 54);
             this.btnNuevaEmpresa.TabIndex = 1;
             this.btnNuevaEmpresa.Text = "+ Nueva Empresa";
             this.btnNuevaEmpresa.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -479,9 +511,10 @@ namespace app.UserControls
             this.txtBuscarEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.txtBuscarEmpresa.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBuscarEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.txtBuscarEmpresa.Location = new System.Drawing.Point(20, 46);
+            this.txtBuscarEmpresa.Location = new System.Drawing.Point(30, 71);
+            this.txtBuscarEmpresa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtBuscarEmpresa.Name = "txtBuscarEmpresa";
-            this.txtBuscarEmpresa.Size = new System.Drawing.Size(200, 33);
+            this.txtBuscarEmpresa.Size = new System.Drawing.Size(298, 45);
             this.txtBuscarEmpresa.TabIndex = 0;
             // 
             // lblFiltroNombre
@@ -489,23 +522,25 @@ namespace app.UserControls
             this.lblFiltroNombre.AutoSize = true;
             this.lblFiltroNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblFiltroNombre.ForeColor = System.Drawing.Color.White;
-            this.lblFiltroNombre.Location = new System.Drawing.Point(16, 21);
+            this.lblFiltroNombre.Location = new System.Drawing.Point(24, 32);
+            this.lblFiltroNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFiltroNombre.Name = "lblFiltroNombre";
-            this.lblFiltroNombre.Size = new System.Drawing.Size(124, 19);
+            this.lblFiltroNombre.Size = new System.Drawing.Size(177, 28);
             this.lblFiltroNombre.TabIndex = 8;
             this.lblFiltroNombre.Text = "Filtrar por nombre:";
             // 
             // ucEmpresas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.Controls.Add(this.gbxListaEmpresas);
             this.Controls.Add(this.gbxEstadisticasEmpresa);
             this.Controls.Add(this.gbxEmpresaDetalles);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ucEmpresas";
-            this.Padding = new System.Windows.Forms.Padding(15);
-            this.Size = new System.Drawing.Size(1155, 510);
+            this.Padding = new System.Windows.Forms.Padding(22, 23, 22, 23);
+            this.Size = new System.Drawing.Size(1732, 785);
             this.Load += new System.EventHandler(this.ucEmpresas_Load);
             this.gbxEmpresaDetalles.ResumeLayout(false);
             this.pnlA.ResumeLayout(false);
