@@ -65,6 +65,33 @@ namespace Negocio
             }
         }
 
+        public Empresa buscarPorId(int idEmpresa)
+        {
+            Empresa empresa = null;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("sp_BuscarEmpresaPorId");
+                datos.setearParametro("@IdEmpresa", idEmpresa);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    empresa = new Empresa();
+                    empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                    empresa.Nombre = (string)datos.Lector["Nombre"];
+                    empresa.Estado = (bool)datos.Lector["Estado"];
+                }
+
+                return empresa;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void eliminar(int idEmpresa)
         {
             ExceptionHelper.EjecutarConManejo(() =>

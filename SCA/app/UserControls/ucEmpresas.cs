@@ -25,33 +25,56 @@ namespace app.UserControls
 
         private void ucEmpresas_Load(object sender, EventArgs e)
         {
-            CargarEmpresas();
-            LimpiarFormulario();
+            try
+            {
+                CargarEmpresas();
+                LimpiarFormulario();
+            }
+            catch (Exception ex)
+            {
+                ExceptionHelper.MostrarError($"Error al cargar empresas: {ex.Message}");
+            }
         }
 
         private void CargarEmpresas(string filtro = "")
         {
-            var empresas = negE.listarConEmpleados();
-            if (empresas == null) return;
-
-            if (!string.IsNullOrWhiteSpace(filtro))
+            try
             {
-                empresas = empresas.FindAll(e =>
-                    e.Nombre.ToUpper().Contains(filtro.ToUpper()) 
-                );
+                var empresas = negE.listarConEmpleados();
+                if (empresas == null) return;
+
+                if (!string.IsNullOrWhiteSpace(filtro))
+                {
+                    empresas = empresas.FindAll(e =>
+                        e.Nombre.ToUpper().Contains(filtro.ToUpper()) 
+                    );
+                }
+
+                dgvEmpresas.DataSource = null;
+                dgvEmpresas.AutoGenerateColumns = true;
+                dgvEmpresas.DataSource = empresas;
+                OcultarColumnas();
+                lblTotalEmpresas.Text = $"Total Empresas: {empresas.Count}";
             }
-
-            dgvEmpresas.DataSource = null;
-            dgvEmpresas.AutoGenerateColumns = true;
-            dgvEmpresas.DataSource = empresas;
-            OcultarColumnas();
-
-            lblTotalEmpresas.Text = $"Total Empleados: {empresas.Count}";
+            catch (Exception ex)
+            {
+                ExceptionHelper.MostrarError($"Error al cargar empresas: {ex.Message}\n\nDetalles: {ex.StackTrace}");
+            }
         }
 
         private void OcultarColumnas()
         {
-            
+            var cols = dgvEmpresas?.Columns;
+            if (cols == null) return;
+
+            string[] aOcultar = { "IdEmpresa", "Estado" };
+            foreach (var nombre in aOcultar)
+            {
+                if (cols.Contains(nombre))
+                {
+                    cols[nombre].Visible = false;
+                }
+            }
         }
 
         private void LimpiarFormulario()
@@ -76,9 +99,23 @@ namespace app.UserControls
 
         private void CargarEmpresa(Empresa aux)
         {
-            aux.IdEmpresa = seleccionada.IdEmpresa;
+            if (modoEdicion && seleccionada != null)
+            {
+                aux.IdEmpresa = seleccionada.IdEmpresa;
+            }
             aux.Nombre = txtNombre.Text.Trim();
             aux.Estado = rbActivoEmpresa.Checked;
+        }
+
+        private void CargarEmpresaEnFormulario(int idEmpresa)
+        {
+            seleccionada = negE.buscarPorId(idEmpresa);
+            if (seleccionada == null) return;
+            txtNombre.Text = seleccionada.Nombre;
+            if (seleccionada.Estado) rbActivoEmpresa.Checked = true;
+            else rbInactivoEmpresa.Checked = true;
+            modoEdicion = true;
+            btnEliminarEmpresa.Enabled = true;
         }
 
         private void btnNuevaEmpresa_Click(object sender, EventArgs e)
@@ -110,13 +147,30 @@ namespace app.UserControls
         private void btnGuardarEmpresa_Click(object sender, EventArgs e)
         {
             if (!ValidarFormulario()) return;
-            Empresa aux = new Empresa();
-            if (modoEdicion && seleccionada != null) CargarEmpresa(aux);
-            if (modoEdicion) negE.modificar(aux);
-            else negE.agregar(aux);
-            ExceptionHelper.MostrarExito("Empleado guardado correctamente");
+            Empresa emp = new Empresa();
+            CargarEmpresa(emp);
+            if (modoEdicion) negE.modificar(emp);
+            else negE.agregar(emp);
+            ExceptionHelper.MostrarExito("Empresa guardada correctamente");
             CargarEmpresas();
             LimpiarFormulario();
+        }
+
+        private void dgvEmpresas_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvEmpresas.CurrentRow != null && dgvEmpresas.CurrentRow.Cells["IdEmpresa"].Value != null)
+                {
+                    int idEmpresa = Convert.ToInt32(dgvEmpresas.CurrentRow.Cells["IdEmpresa"].Value);
+                    CargarEmpresaEnFormulario(idEmpresa);
+                }
+            }
+            catch (Exception ex)
+            {
+                // No mostrar error aquí porque puede ser normal durante la carga
+                System.Diagnostics.Debug.WriteLine($"Error en SelectionChanged: {ex.Message}");
+            }
         }
     }
 }

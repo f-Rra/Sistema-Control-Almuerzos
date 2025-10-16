@@ -11,7 +11,7 @@ namespace Dominio
     {
         public int IdEmpresa { get; set; }
 
-        [DisplayName("Nombre")]
+        [DisplayName("Empresa")]
         public string Nombre { get; set; }
 
         [DisplayName("Estado")]

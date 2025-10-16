@@ -547,6 +547,16 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE sp_BuscarEmpresaPorId
+    @IdEmpresa INT
+AS
+BEGIN
+    SELECT IdEmpresa, Nombre, Estado
+    FROM Empresas
+    WHERE IdEmpresa = @IdEmpresa;
+END
+GO
+
 -- =============================================
 -- VISTAS
 -- =============================================
