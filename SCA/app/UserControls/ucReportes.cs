@@ -30,11 +30,23 @@ namespace app.UserControls
             CargarReportes();
         }
 
+        // Método público para refrescar los datos desde otros UserControls
+        public void RefrescarDatos()
+        {
+            CargarLugares();
+            // Limpiar reporte actual si existe
+            dgvReporte.DataSource = null;
+        }
+
         private void CargarLugares()
         {
             var negL = new LugarNegocio();
             var lugares = negL.listar() ?? new List<Lugar>();
             lugares.Insert(0, new Lugar { IdLugar = 0, Nombre = "Todos" });
+            
+            // Limpiar DataSource antes de asignar nuevos datos
+            cbLugar.DataSource = null;
+            
             cbLugar.DataSource = lugares;
             cbLugar.DisplayMember = "Nombre";
             cbLugar.ValueMember = "IdLugar";

@@ -614,6 +614,38 @@ BEGIN
 END
 GO
 
+-- =============================================
+-- PROCEDIMIENTO: sp_ObtenerRegistrosPorEmpresaYFecha
+-- Descripción: Obtiene registros de asistencia por empresa en un rango de fechas
+-- =============================================
+CREATE OR ALTER PROCEDURE sp_ObtenerRegistrosPorEmpresaYFecha
+    @IdEmpresa INT,
+    @FechaInicio DATE,
+    @FechaFin DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT 
+        r.IdRegistro,
+        r.IdEmpleado,
+        r.IdEmpresa,
+        r.IdServicio,
+        r.IdLugar,
+        r.Fecha,
+        r.Hora,
+        CONCAT(e.Nombre, ' ', e.Apellido) as NombreEmpleado,
+        emp.Nombre as NombreEmpresa
+    FROM Registros r
+    INNER JOIN Empleados e ON r.IdEmpleado = e.IdEmpleado
+    INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
+    WHERE r.IdEmpresa = @IdEmpresa
+      AND r.Fecha >= @FechaInicio
+      AND r.Fecha <= @FechaFin
+    ORDER BY r.Fecha DESC, r.Hora DESC;
+END
+GO
+
 
 
 

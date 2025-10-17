@@ -41,6 +41,16 @@ namespace app.UserControls
             CargarRegistros();
         }
 
+        // Método público para refrescar los datos desde otros UserControls
+        public void RefrescarDatos()
+        {
+            CargarEmpresas();
+            if (servicioIdActual.HasValue)
+            {
+                CargarRegistros();
+            }
+        }
+
         private void CargarEmpresas()
         {
             var empresas = negEmp.listar();
@@ -51,6 +61,9 @@ namespace app.UserControls
             {
                 empresaCompleta.Add(new { IdEmpresa = emp.IdEmpresa, Nombre = emp.Nombre });
             }
+            
+            // Limpiar DataSource antes de asignar nuevos datos
+            cbLugar.DataSource = null;
             
             cbLugar.DataSource = empresaCompleta;
             cbLugar.ValueMember = "IdEmpresa";

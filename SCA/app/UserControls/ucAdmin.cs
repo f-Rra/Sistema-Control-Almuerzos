@@ -49,24 +49,32 @@ namespace app.UserControls
         private void btnEmpleados_Click(object sender, EventArgs e)
         {
             SeleccionarBoton(btnEmpleados);
+            // Refrescar datos antes de mostrar
+            ucEmpleados.RefrescarDatos();
             MostrarUserControl(ucEmpleados);
         }
 
         private void btnEmpresas_Click(object sender, EventArgs e)
         {
             SeleccionarBoton(btnEmpresas);
+            // Refrescar datos antes de mostrar
+            ucEmpresas.RefrescarDatos();
             MostrarUserControl(ucEmpresas);
         }
 
         private void btnEstadisticas_Click(object sender, EventArgs e)
         {
             SeleccionarBoton(btnEstadisticas);
+            // Refrescar datos antes de mostrar
+            ucEstadisticas.RefrescarDatos();
             MostrarUserControl(ucEstadisticas);
         }
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
             SeleccionarBoton(btnConfiguracion);
+            // Refrescar datos antes de mostrar
+            ucConfiguracion.RefrescarDatos();
             MostrarUserControl(ucConfiguracion);
         }
 

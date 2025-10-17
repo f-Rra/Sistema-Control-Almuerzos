@@ -116,5 +116,44 @@ namespace Negocio
                 }
             }, "contar registros por servicio");
         }
+
+        public List<Registro> obtenerRegistrosPorEmpresaYFecha(int idEmpresa, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return ExceptionHelper.EjecutarConManejo(() =>
+            {
+                List<Registro> lista = new List<Registro>();
+                AccesoDatos datos = new AccesoDatos();
+
+                try
+                {
+                    datos.setearProcedimiento("sp_ObtenerRegistrosPorEmpresaYFecha");
+                    datos.setearParametro("@IdEmpresa", idEmpresa);
+                    datos.setearParametro("@FechaInicio", fechaInicio);
+                    datos.setearParametro("@FechaFin", fechaFin);
+                    datos.ejecutarLectura();
+
+                    while (datos.Lector.Read())
+                    {
+                        Registro registro = new Registro();
+                        registro.IdRegistro = (int)datos.Lector["IdRegistro"];
+                        registro.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                        registro.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                        registro.IdServicio = (int)datos.Lector["IdServicio"];
+                        registro.IdLugar = (int)datos.Lector["IdLugar"];
+                        registro.Fecha = (DateTime)datos.Lector["Fecha"];
+                        registro.Hora = (TimeSpan)datos.Lector["Hora"];
+                        registro.NombreEmpleado = (string)datos.Lector["NombreEmpleado"];
+                        registro.NombreEmpresa = (string)datos.Lector["NombreEmpresa"];
+                        lista.Add(registro);
+                    }
+
+                    return lista;
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+            }, "obtener registros por empresa y fecha");
+        }
     }
 }

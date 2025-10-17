@@ -23,5 +23,11 @@ namespace app.UserControls
         {
             // TODO: Implementar lógica de estadísticas
         }
+
+        // Método público para refrescar los datos desde otros UserControls
+        public void RefrescarDatos()
+        {
+            // TODO: Implementar cuando se agregue lógica de estadísticas
+        }
     }
 }
