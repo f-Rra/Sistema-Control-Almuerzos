@@ -29,6 +29,10 @@ namespace app.UserControls
             {
                 CargarEmpresas();
                 LimpiarFormulario();
+                LimpiarEstadisticas();
+                
+                // Conectar evento del TextBox de búsqueda
+                txtBuscarEmpresa.TextChanged += txtBuscarEmpresa_TextChanged;
             }
             catch (Exception ex)
             {
@@ -90,10 +94,35 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese el nombre");
+                ExceptionHelper.MostrarAdvertencia("Ingrese el nombre de la empresa");
                 txtNombre.Focus();
                 return false;
             }
+
+            if (txtNombre.Text.Trim().Length < 2)
+            {
+                ExceptionHelper.MostrarAdvertencia("El nombre debe tener al menos 2 caracteres");
+                txtNombre.Focus();
+                return false;
+            }
+
+            // Validar nombre duplicado
+            var empresas = negE.listar();
+            if (empresas != null)
+            {
+                bool existe = empresas.Exists(e =>
+                    e.Nombre.Trim().ToUpper() == txtNombre.Text.Trim().ToUpper() &&
+                    (!modoEdicion || e.IdEmpresa != seleccionada.IdEmpresa)
+                );
+
+                if (existe)
+                {
+                    ExceptionHelper.MostrarAdvertencia("Ya existe una empresa con ese nombre");
+                    txtNombre.Focus();
+                    return false;
+                }
+            }
+
             return true;
         }
 
@@ -130,7 +159,18 @@ namespace app.UserControls
         {
             if (seleccionada == null) return;
 
-            if (ExceptionHelper.MostrarConfirmacion($"¿Está seguro de desactivar la empresa?"))
+            // Validar si tiene empleados activos
+            if (seleccionada.CantidadEmpleados > 0)
+            {
+                ExceptionHelper.MostrarAdvertencia(
+                    $"No se puede desactivar la empresa '{seleccionada.Nombre}' " +
+                    $"porque tiene {seleccionada.CantidadEmpleados} empleado(s) activo(s).\n\n" +
+                    "Primero desactive o transfiera los empleados a otra empresa."
+                );
+                return;
+            }
+
+            if (ExceptionHelper.MostrarConfirmacion($"¿Está seguro de desactivar la empresa '{seleccionada.Nombre}'?"))
             {
                 negE.eliminar(seleccionada.IdEmpresa);
                 ExceptionHelper.MostrarExito("Empresa desactivada correctamente");
@@ -164,6 +204,7 @@ namespace app.UserControls
                 {
                     int idEmpresa = Convert.ToInt32(dgvEmpresas.CurrentRow.Cells["IdEmpresa"].Value);
                     CargarEmpresaEnFormulario(idEmpresa);
+                    CargarEstadisticasEmpresa(idEmpresa);
                 }
             }
             catch (Exception ex)
@@ -171,6 +212,76 @@ namespace app.UserControls
                 // No mostrar error aquí porque puede ser normal durante la carga
                 System.Diagnostics.Debug.WriteLine($"Error en SelectionChanged: {ex.Message}");
             }
+        }
+
+        private void txtBuscarEmpresa_TextChanged(object sender, EventArgs e)
+        {
+            CargarEmpresas(txtBuscarEmpresa.Text);
+        }
+
+        private void CargarEstadisticasEmpresa(int idEmpresa)
+        {
+            try
+            {
+                // Obtener la empresa seleccionada con su información completa
+                var empresa = negE.buscarPorId(idEmpresa);
+                if (empresa == null)
+                {
+                    LimpiarEstadisticas();
+                    return;
+                }
+
+                // Total de empleados activos (desde la vista que ya tiene este dato)
+                var empresas = negE.listarConEmpleados();
+                var empresaConEmpleados = empresas?.Find(e => e.IdEmpresa == idEmpresa);
+                int totalEmpleados = empresaConEmpleados?.CantidadEmpleados ?? 0;
+                lblTotalEmpleados.Text = $"Total de Empleados: {totalEmpleados}";
+
+                // Empleados inactivos de esta empresa
+                var empleadoNegocio = new EmpleadoNegocio();
+                var todosEmpleados = empleadoNegocio.listar();
+                int inactivos = 0;
+                if (todosEmpleados != null)
+                {
+                    inactivos = todosEmpleados.Count(emp => emp.IdEmpresa == idEmpresa && !emp.Estado);
+                }
+                lblEmpleadosInactivos.Text = $"Empleados Inactivos: {inactivos}";
+
+                // Asistencias del mes actual
+                var registroNegocio = new RegistroNegocio();
+                DateTime inicioMes = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                DateTime finMes = inicioMes.AddMonths(1).AddDays(-1);
+                
+                var registros = registroNegocio.obtenerRegistrosPorEmpresaYFecha(idEmpresa, inicioMes, finMes);
+                int asistenciasMes = registros?.Count ?? 0;
+                lblAsistencias.Text = $"Asistencias (Mes Actual): {asistenciasMes}";
+
+                // Promedio diario (basado en los días transcurridos del mes)
+                int diasTranscurridos = DateTime.Now.Day;
+                double promedioDiario = diasTranscurridos > 0 ? (double)asistenciasMes / diasTranscurridos : 0;
+                lblPromedio.Text = $"Promedio Diario: {promedioDiario:F1}";
+            }
+            catch (Exception ex)
+            {
+                LimpiarEstadisticas();
+                System.Diagnostics.Debug.WriteLine($"Error al cargar estadísticas: {ex.Message}");
+            }
+        }
+
+        private void LimpiarEstadisticas()
+        {
+            lblTotalEmpleados.Text = "Total de Empleados: -";
+            lblEmpleadosInactivos.Text = "Empleados Inactivos: -";
+            lblAsistencias.Text = "Asistencias (Mes Actual): -";
+            lblPromedio.Text = "Promedio Diario: -";
+        }
+
+        // Método público para refrescar los datos desde otros UserControls
+        public void RefrescarDatos()
+        {
+            CargarEmpresas();
+            LimpiarFormulario();
+            LimpiarEstadisticas();
         }
     }
 }

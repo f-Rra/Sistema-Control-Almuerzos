@@ -387,20 +387,3 @@ INSERT INTO Registros (IdEmpleado, IdEmpresa, IdServicio, IdLugar, Fecha, Hora) 
 (60, 12, 24, 2, DATEADD(day, -1, @FechaBase), '14:22:00');
 
 GO
-
--- =============================================
--- VERIFICACIÓN DE DATOS
--- =============================================
-PRINT '================================================';
-PRINT 'RESUMEN DE DATOS INSERTADOS:';
-PRINT '================================================';
-PRINT 'Lugares: ' + CAST((SELECT COUNT(*) FROM Lugares) AS VARCHAR(10));
-PRINT 'Empresas: ' + CAST((SELECT COUNT(*) FROM Empresas) AS VARCHAR(10));
-PRINT 'Empleados: ' + CAST((SELECT COUNT(*) FROM Empleados WHERE Estado = 1) AS VARCHAR(10));
-PRINT 'Servicios: ' + CAST((SELECT COUNT(*) FROM Servicios) AS VARCHAR(10));
-PRINT 'Registros: ' + CAST((SELECT COUNT(*) FROM Registros) AS VARCHAR(10));
-PRINT '================================================';
-PRINT '';
-PRINT 'Datos de prueba listos para usar en reportes!';
-PRINT '================================================';
-GO

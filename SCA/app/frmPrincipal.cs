@@ -240,6 +240,8 @@ namespace app
             }
 
             CargarVistaRegistroManual();
+            // Refrescar datos antes de mostrar
+            vistaRegManual.RefrescarDatos();
             if (cbLugar.SelectedValue is int idLugar)
             {
                 vistaRegManual.SetServicio(idServicioActual.Value, idLugar);
@@ -256,6 +258,8 @@ namespace app
                 return;
             }
             CargarVistaReportes();
+            // Refrescar datos antes de mostrar
+            vistaReportes.RefrescarDatos();
             pnlSuperior.Visible = false;
             MostrarVista(vistaReportes);
         }
@@ -275,6 +279,9 @@ namespace app
 
         private void CargarLugares()
         {
+            // Limpiar DataSource antes de asignar nuevos datos
+            cbLugar.DataSource = null;
+            
             cbLugar.DataSource = negL.listar();
             cbLugar.ValueMember = "IdLugar";
             cbLugar.DisplayMember = "Nombre";
