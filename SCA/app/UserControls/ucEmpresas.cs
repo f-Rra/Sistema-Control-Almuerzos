@@ -29,9 +29,7 @@ namespace app.UserControls
             {
                 CargarEmpresas();
                 LimpiarFormulario();
-                LimpiarEstadisticas();
-                
-                // Conectar evento del TextBox de búsqueda
+                LimpiarEstadisticas();         
                 txtBuscarEmpresa.TextChanged += txtBuscarEmpresa_TextChanged;
             }
             catch (Exception ex)
@@ -106,7 +104,6 @@ namespace app.UserControls
                 return false;
             }
 
-            // Validar nombre duplicado
             var empresas = negE.listar();
             if (empresas != null)
             {
@@ -159,7 +156,6 @@ namespace app.UserControls
         {
             if (seleccionada == null) return;
 
-            // Validar si tiene empleados activos
             if (seleccionada.CantidadEmpleados > 0)
             {
                 ExceptionHelper.MostrarAdvertencia(
@@ -209,7 +205,6 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                // No mostrar error aquí porque puede ser normal durante la carga
                 System.Diagnostics.Debug.WriteLine($"Error en SelectionChanged: {ex.Message}");
             }
         }
@@ -276,7 +271,6 @@ namespace app.UserControls
             lblPromedio.Text = "Promedio Diario: -";
         }
 
-        // Método público para refrescar los datos desde otros UserControls
         public void RefrescarDatos()
         {
             CargarEmpresas();

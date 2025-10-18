@@ -182,6 +182,19 @@ namespace app
             }
         }
 
+        public void RefrescarTodasLasVistas()
+        {
+            CargarLugares();
+            vistaRegManual?.RefrescarDatos();
+            vistaReportes?.RefrescarDatos();
+            if (gbxServicios.Visible || gbxUltimo.Visible)
+            {
+                ActualizarEstadisticas();
+                CargarServicios();
+                CargarUltimoServicio();
+            }
+        }
+
         private void MostrarVista(UserControl vista)
         {
             if (vista == null) return;
@@ -240,7 +253,6 @@ namespace app
             }
 
             CargarVistaRegistroManual();
-            // Refrescar datos antes de mostrar
             vistaRegManual.RefrescarDatos();
             if (cbLugar.SelectedValue is int idLugar)
             {
@@ -258,7 +270,6 @@ namespace app
                 return;
             }
             CargarVistaReportes();
-            // Refrescar datos antes de mostrar
             vistaReportes.RefrescarDatos();
             pnlSuperior.Visible = false;
             MostrarVista(vistaReportes);
@@ -279,9 +290,7 @@ namespace app
 
         private void CargarLugares()
         {
-            // Limpiar DataSource antes de asignar nuevos datos
             cbLugar.DataSource = null;
-            
             cbLugar.DataSource = negL.listar();
             cbLugar.ValueMember = "IdLugar";
             cbLugar.DisplayMember = "Nombre";

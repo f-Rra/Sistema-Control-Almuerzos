@@ -130,7 +130,6 @@ namespace app.UserControls
             lblTotalEmpresas.Text = $"Total Empresas: {empresas.Count}";
         }
 
-        // Método público para refrescar los datos desde otros UserControls
         public void RefrescarDatos()
         {
             CargarEmpleados();

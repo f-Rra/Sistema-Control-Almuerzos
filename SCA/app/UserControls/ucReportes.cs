@@ -216,7 +216,7 @@ namespace app.UserControls
                 case "Cobertura vs proyección":
                     dgvReporte.DataSource = rep.CoberturaVsProyeccion(desde, hasta, idLugar);
                     break;
-                case "Distribución por día":
+                case "Distribución por día de semana":
                     dgvReporte.DataSource = rep.DistribucionPorDiaSemana(desde, hasta, idLugar);
                     break;
             }
