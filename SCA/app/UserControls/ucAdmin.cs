@@ -49,23 +49,22 @@ namespace app.UserControls
         private void btnEmpleados_Click(object sender, EventArgs e)
         {
             SeleccionarBoton(btnEmpleados);
-            // Refrescar datos antes de mostrar
             ucEmpleados.RefrescarDatos();
             MostrarUserControl(ucEmpleados);
+            NotificarCambiosAlFormularioPrincipal();
         }
 
         private void btnEmpresas_Click(object sender, EventArgs e)
         {
             SeleccionarBoton(btnEmpresas);
-            // Refrescar datos antes de mostrar
             ucEmpresas.RefrescarDatos();
             MostrarUserControl(ucEmpresas);
+            NotificarCambiosAlFormularioPrincipal();
         }
 
         private void btnEstadisticas_Click(object sender, EventArgs e)
         {
             SeleccionarBoton(btnEstadisticas);
-            // Refrescar datos antes de mostrar
             ucEstadisticas.RefrescarDatos();
             MostrarUserControl(ucEstadisticas);
         }
@@ -76,6 +75,12 @@ namespace app.UserControls
             // Refrescar datos antes de mostrar
             ucConfiguracion.RefrescarDatos();
             MostrarUserControl(ucConfiguracion);
+        }
+        
+        private void NotificarCambiosAlFormularioPrincipal()
+        {
+            var formularioPrincipal = this.ParentForm as frmPrincipal;
+            formularioPrincipal?.RefrescarTodasLasVistas();
         }
 
         private void SeleccionarBoton(ReaLTaiizor.Controls.Button boton)
