@@ -614,10 +614,6 @@ BEGIN
 END
 GO
 
--- =============================================
--- PROCEDIMIENTO: sp_ObtenerRegistrosPorEmpresaYFecha
--- Descripción: Obtiene registros de asistencia por empresa en un rango de fechas
--- =============================================
 CREATE OR ALTER PROCEDURE sp_ObtenerRegistrosPorEmpresaYFecha
     @IdEmpresa INT,
     @FechaInicio DATE,
@@ -643,6 +639,204 @@ BEGIN
       AND r.Fecha >= @FechaInicio
       AND r.Fecha <= @FechaFin
     ORDER BY r.Fecha DESC, r.Hora DESC;
+END
+GO
+
+-- =============================================
+-- PROCEDIMIENTOS DE ESTADÍSTICAS
+-- =============================================
+
+CREATE OR ALTER PROCEDURE sp_ObtenerEstadisticasEmpleados
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT 
+        COUNT(*) as TotalRegistrados,
+        SUM(CASE WHEN Estado = 1 THEN 1 ELSE 0 END) as TotalActivos,
+        SUM(CASE WHEN Estado = 0 THEN 1 ELSE 0 END) as TotalInactivos
+    FROM Empleados;
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE sp_ObtenerEstadisticasEmpresas
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @TotalActivas INT;
+    DECLARE @TotalConEmpleados INT;
+    DECLARE @PromedioEmpleados DECIMAL(10,2);
+    
+    -- Total empresas activas
+    SELECT @TotalActivas = COUNT(*) 
+    FROM Empresas 
+    WHERE Estado = 1;
+    
+    -- Total empresas con al menos un empleado
+    SELECT @TotalConEmpleados = COUNT(DISTINCT IdEmpresa)
+    FROM Empleados
+    WHERE IdEmpresa IN (SELECT IdEmpresa FROM Empresas WHERE Estado = 1);
+    
+    -- Promedio de empleados por empresa activa
+    IF @TotalActivas > 0
+    BEGIN
+        SELECT @PromedioEmpleados = CAST(COUNT(*) AS DECIMAL(10,2)) / @TotalActivas
+        FROM Empleados
+        WHERE IdEmpresa IN (SELECT IdEmpresa FROM Empresas WHERE Estado = 1);
+    END
+    ELSE
+    BEGIN
+        SET @PromedioEmpleados = 0;
+    END
+    
+    SELECT 
+        @TotalActivas as TotalActivas,
+        @TotalConEmpleados as TotalConEmpleados,
+        @PromedioEmpleados as PromedioEmpleados;
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE sp_ObtenerEstadisticasServicios
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @ServiciosEsteMes INT;
+    DECLARE @ServiciosEsteAnio INT;
+    DECLARE @PromedioPorDia INT;
+    DECLARE @PrimerDiaMes DATE;
+    DECLARE @DiasTranscurridos INT;
+    
+    SET @PrimerDiaMes = DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1);
+    SET @DiasTranscurridos = DATEDIFF(DAY, @PrimerDiaMes, GETDATE()) + 1;
+    
+    -- Servicios del mes actual
+    SELECT @ServiciosEsteMes = COUNT(*)
+    FROM Servicios
+    WHERE YEAR(Fecha) = YEAR(GETDATE())
+      AND MONTH(Fecha) = MONTH(GETDATE());
+    
+    -- Servicios del año actual
+    SELECT @ServiciosEsteAnio = COUNT(*)
+    FROM Servicios
+    WHERE YEAR(Fecha) = YEAR(GETDATE());
+    
+    -- Promedio por día
+    IF @DiasTranscurridos > 0
+        SET @PromedioPorDia = ROUND(CAST(@ServiciosEsteMes AS FLOAT) / @DiasTranscurridos, 0);
+    ELSE
+        SET @PromedioPorDia = 0;
+    
+    SELECT 
+        @ServiciosEsteMes as ServiciosEsteMes,
+        @ServiciosEsteAnio as ServiciosEsteAnio,
+        @PromedioPorDia as PromedioPorDia;
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE sp_ObtenerAsistenciasTendencias
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @AsistenciasTotales INT;
+    DECLARE @AsistenciasEmpleados INT;
+    DECLARE @AsistenciasInvitados INT;
+    DECLARE @PromedioDiario INT;
+    DECLARE @CoberturaPromedio DECIMAL(5,2);
+    DECLARE @DuracionPromedio INT;
+    DECLARE @PrimerDiaMes DATE;
+    DECLARE @DiasTranscurridos INT;
+    
+    SET @PrimerDiaMes = DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1);
+    SET @DiasTranscurridos = DATEDIFF(DAY, @PrimerDiaMes, GETDATE()) + 1;
+    
+    -- Asistencias totales del mes
+    SELECT @AsistenciasTotales = COUNT(*)
+    FROM Registros
+    WHERE YEAR(Fecha) = YEAR(GETDATE())
+      AND MONTH(Fecha) = MONTH(GETDATE());
+    
+    -- Asistencias de empleados
+    SELECT @AsistenciasEmpleados = COUNT(*)
+    FROM Registros
+    WHERE IdEmpleado IS NOT NULL
+      AND YEAR(Fecha) = YEAR(GETDATE())
+      AND MONTH(Fecha) = MONTH(GETDATE());
+    
+    -- Asistencias de invitados
+    SET @AsistenciasInvitados = @AsistenciasTotales - @AsistenciasEmpleados;
+    
+    -- Promedio diario
+    IF @DiasTranscurridos > 0
+        SET @PromedioDiario = ROUND(CAST(@AsistenciasTotales AS FLOAT) / @DiasTranscurridos, 0);
+    ELSE
+        SET @PromedioDiario = 0;
+    
+    -- Cobertura promedio vs proyección
+    SELECT @CoberturaPromedio = AVG(CAST(s.TotalGeneral AS FLOAT) / NULLIF(s.Proyeccion, 0) * 100)
+    FROM Servicios s
+    WHERE YEAR(s.Fecha) = YEAR(GETDATE())
+      AND MONTH(s.Fecha) = MONTH(GETDATE())
+      AND s.Proyeccion IS NOT NULL
+      AND s.Proyeccion > 0;
+    
+    -- Duración promedio de servicio
+    SELECT @DuracionPromedio = AVG(DuracionMinutos)
+    FROM Servicios
+    WHERE YEAR(Fecha) = YEAR(GETDATE())
+      AND MONTH(Fecha) = MONTH(GETDATE())
+      AND DuracionMinutos IS NOT NULL;
+    
+    -- Valores por defecto si son NULL
+    SET @CoberturaPromedio = ISNULL(@CoberturaPromedio, 0);
+    SET @DuracionPromedio = ISNULL(@DuracionPromedio, 0);
+    
+    SELECT 
+        @AsistenciasTotales as AsistenciasTotales,
+        @AsistenciasEmpleados as AsistenciasEmpleados,
+        @AsistenciasInvitados as AsistenciasInvitados,
+        @PromedioDiario as PromedioDiario,
+        @CoberturaPromedio as CoberturaPromedio,
+        @DuracionPromedio as DuracionPromedio;
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE sp_ObtenerTop5EmpresasPorAsistencias
+    @FechaInicio DATE,
+    @FechaFin DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @TotalGeneral INT;
+    
+    -- Obtener total general de asistencias en el periodo
+    SELECT @TotalGeneral = COUNT(*)
+    FROM Registros
+    WHERE Fecha >= @FechaInicio
+      AND Fecha <= @FechaFin;
+    
+    -- Obtener top 5 con ranking
+    SELECT TOP 5
+        ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) as Ranking,
+        emp.Nombre as NombreEmpresa,
+        COUNT(*) as TotalAsistencias,
+        CASE 
+            WHEN @TotalGeneral > 0 THEN ROUND(CAST(COUNT(*) AS FLOAT) / @TotalGeneral * 100, 2)
+            ELSE 0 
+        END as Porcentaje
+    FROM Registros r
+    INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
+    WHERE r.Fecha >= @FechaInicio
+      AND r.Fecha <= @FechaFin
+    GROUP BY emp.IdEmpresa, emp.Nombre
+    ORDER BY TotalAsistencias DESC;
 END
 GO
 

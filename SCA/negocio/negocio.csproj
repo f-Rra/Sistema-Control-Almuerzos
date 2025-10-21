@@ -46,6 +46,7 @@
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="EmpleadoNegocio.cs" />
     <Compile Include="EmpresaNegocio.cs" />
+    <Compile Include="EstadisticasNegocio.cs" />
     <Compile Include="ExceptionHelper.cs" />
     <Compile Include="LugarNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
