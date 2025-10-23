@@ -831,14 +831,52 @@ BEGIN
             WHEN @TotalGeneral > 0 THEN ROUND(CAST(COUNT(*) AS FLOAT) / @TotalGeneral * 100, 2)
             ELSE 0 
         END as Porcentaje
-    FROM Registros r
-    INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
-    WHERE r.Fecha >= @FechaInicio
-      AND r.Fecha <= @FechaFin
     GROUP BY emp.IdEmpresa, emp.Nombre
     ORDER BY TotalAsistencias DESC;
 END
 GO
+
+
+-- =============================================
+-- PROCEDIMIENTOS DE CONFIGURACIÓN
+-- =============================================
+
+CREATE OR ALTER PROCEDURE sp_ObtenerInfoBaseDatos
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT 
+        DB_NAME() as NombreBaseDatos,
+        CAST(SUM(size) * 8.0 / 1024 AS DECIMAL(10,2)) as TamañoMB,
+        (SELECT create_date FROM sys.databases WHERE name = DB_NAME()) as FechaCreacion,
+        GETDATE() as UltimaActualizacion
+    FROM sys.master_files
+    WHERE database_id = DB_ID();
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE sp_ObtenerUltimoRespaldo
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT TOP 1
+        backup_start_date as FechaRespaldo,
+        physical_device_name as RutaArchivo,
+        CAST(backup_size / 1024.0 / 1024.0 AS DECIMAL(10,2)) as TamañoMB
+    FROM msdb.dbo.backupset bs
+    INNER JOIN msdb.dbo.backupmediafamily bmf ON bs.media_set_id = bmf.media_set_id
+    WHERE database_name = DB_NAME()
+      AND type = 'D' -- Full backup
+    ORDER BY backup_start_date DESC;
+END
+GO
+
+
+
+
 
 
 
