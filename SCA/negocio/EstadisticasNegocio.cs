@@ -6,7 +6,7 @@ namespace Negocio
 {
     public class EstadisticasNegocio
     {
-        public object ObtenerEstadisticasEmpleados()
+        public dynamic ObtenerEstadisticasEmpleados()
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
@@ -34,7 +34,7 @@ namespace Negocio
             }, "obtener estadísticas de empleados");
         }
 
-        public object ObtenerEstadisticasEmpresas()
+        public dynamic ObtenerEstadisticasEmpresas()
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
@@ -62,7 +62,7 @@ namespace Negocio
             }, "obtener estadísticas de empresas");
         }
 
-        public object ObtenerEstadisticasServicios()
+        public dynamic ObtenerEstadisticasServicios()
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
@@ -90,7 +90,7 @@ namespace Negocio
             }, "obtener estadísticas de servicios");
         }
 
-        public object ObtenerAsistenciasTendencias()
+        public dynamic ObtenerAsistenciasTendencias()
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
