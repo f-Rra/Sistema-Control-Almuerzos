@@ -28,14 +28,21 @@ namespace app.UserControls
 
         public void RefrescarDatos()
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 CargarEstadisticasEmpleados();
                 CargarEstadisticasEmpresas();
                 CargarEstadisticasServicios();
                 CargarAsistenciasTendencias();
                 CargarTop5Empresas();
-            }, "cargar las estad�sticas");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error detallado:\n\nMensaje: {ex.Message}\n\nStackTrace: {ex.StackTrace}\n\nInnerException: {ex.InnerException?.Message}", 
+                    "Error Debug", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void CargarEstadisticasEmpleados()
@@ -44,15 +51,15 @@ namespace app.UserControls
 
             if (empleados != null)
             {
-                lblTotalRegistrados.Text += empleados.TotalRegistrados.ToString();
-                lblEmpleadosActivos.Text += empleados.TotalActivos.ToString();
-                lblEmpleadosInactivos.Text += empleados.TotalInactivos.ToString();
+                lblTotalRegistrados.Text = "Total Registrados: " + empleados.TotalRegistrados;
+                lblEmpleadosActivos.Text = "Activos: " + empleados.TotalActivos;
+                lblEmpleadosInactivos.Text = "Inactivos: " + empleados.TotalInactivos;
             }
             else
             {
-                lblTotalRegistrados.Text += "N/A";
-                lblEmpleadosActivos.Text += "N/A";
-                lblEmpleadosInactivos.Text += "N/A";
+                lblTotalRegistrados.Text = "Total Registrados: N/A";
+                lblEmpleadosActivos.Text = "Activos: N/A";
+                lblEmpleadosInactivos.Text = "Inactivos: N/A";
             }
         }   
 
@@ -62,15 +69,15 @@ namespace app.UserControls
 
             if (empresas != null)
             {
-                lblEmpresasActivas.Text += empresas.TotalActivas.ToString();
-                lblEmpresasEmpleados.Text += empresas.TotalConEmpleados.ToString();
-                lblPromedioEmpleados.Text += empresas.PromedioEmpleados.ToString("F2");
+                lblEmpresasActivas.Text = "Total Activas: " + empresas.TotalActivas;
+                lblEmpresasEmpleados.Text = "Con Empleados: " + empresas.TotalConEmpleados;
+                lblPromedioEmpleados.Text = "Promedio (Empleados): " + empresas.PromedioEmpleados.ToString("F2");
             }
             else
             {
-                lblEmpresasActivas.Text += "N/A";
-                lblEmpresasEmpleados.Text += "N/A";
-                lblPromedioEmpleados.Text += "N/A";
+                lblEmpresasActivas.Text = "Total Activas: N/A";
+                lblEmpresasEmpleados.Text = "Con Empleados: N/A";
+                lblPromedioEmpleados.Text = "Promedio (Empleados): N/A";
             }
         }   
 
@@ -80,15 +87,15 @@ namespace app.UserControls
             
             if (servicios != null)
             {
-                lblServiciosMes.Text += servicios.ServiciosEsteMes.ToString();
-                lblServiciosTotal.Text += servicios.ServiciosEsteAnio.ToString();
-                lblPromedioDiario.Text += servicios.PromedioPorDia.ToString();
+                lblServiciosMes.Text = "Este Mes: " + servicios.ServiciosEsteMes;
+                lblServiciosTotal.Text = "Total del Año: " + servicios.ServiciosEsteAnio;
+                lblPromedioDiario.Text = "Promedio/Dia: " + servicios.PromedioPorDia;
             }
             else
             {
-                lblServiciosMes.Text += "N/A";
-                lblServiciosTotal.Text += "N/A";
-                lblPromedioDiario.Text += "N/A";
+                lblServiciosMes.Text = "Este Mes: N/A";
+                lblServiciosTotal.Text = "Total del Año: N/A";
+                lblPromedioDiario.Text = "Promedio/Dia: N/A";
             }
         }   
 
@@ -97,21 +104,21 @@ namespace app.UserControls
             var tendencias = negE.ObtenerAsistenciasTendencias();
             if (tendencias != null)
             {
-                lblAsistenciasTotales.Text += tendencias.AsistenciasTotales.ToString();
-                lblAsistenciasEmpleados.Text += tendencias.AsistenciasEmpleados.ToString();
-                lblAsistenciasInvitados.Text += tendencias.AsistenciasInvitados.ToString();
-                lblPromedioDiario.Text += tendencias.PromedioDiario.ToString();
-                lblCobertura.Text += tendencias.CoberturaPromedio.ToString("N2") + "%";
-                lblDuracionPromedio.Text += CalcularHora(tendencias.DuracionPromedio);
+                lblAsistenciasTotales.Text = "Asistencias Totales (Mes Actual): " + tendencias.AsistenciasTotales;
+                lblAsistenciasEmpleados.Text = "Asistencias de Empleados: " + tendencias.AsistenciasEmpleados;
+                lblAsistenciasInvitados.Text = "Asistencias de Invitados: " + tendencias.AsistenciasInvitados;
+                lblPromedioDiario.Text = "Promedio Diario de Asistencias: " + tendencias.PromedioDiario;
+                lblCobertura.Text = "Cobertura Proyeccion vs Promedio: " + tendencias.CoberturaPromedio.ToString("N2") + "%";
+                lblDuracionPromedio.Text = "Duracion Promedio de Servicio: " + CalcularHora(tendencias.DuracionPromedio);
             }
             else
             {
-                lblAsistenciasTotales.Text += "N/A";
-                lblAsistenciasEmpleados.Text += "N/A";
-                lblAsistenciasInvitados.Text += "N/A";
-                lblPromedioDiario.Text += "N/A";
-                lblCobertura.Text += "N/A";
-                lblDuracionPromedio.Text += "N/A";
+                lblAsistenciasTotales.Text = "Asistencias Totales (Mes Actual): N/A";
+                lblAsistenciasEmpleados.Text = "Asistencias de Empleados: N/A";
+                lblAsistenciasInvitados.Text = "Asistencias de Invitados: N/A";
+                lblPromedioDiario.Text = "Promedio Diario de Asistencias: N/A";
+                lblCobertura.Text = "Cobertura Proyeccion vs Promedio: N/A";
+                lblDuracionPromedio.Text = "Duracion Promedio de Servicio: N/A";
             }   
 
 
