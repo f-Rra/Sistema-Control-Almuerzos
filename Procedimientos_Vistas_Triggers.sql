@@ -778,7 +778,7 @@ BEGIN
         SET @PromedioDiario = 0;
     
     -- Cobertura promedio vs proyección
-    SELECT @CoberturaPromedio = AVG(CAST(s.TotalGeneral AS FLOAT) / NULLIF(s.Proyeccion, 0) * 100)
+    SELECT @CoberturaPromedio = AVG(CAST(s.TotalComensales AS FLOAT) / NULLIF(s.Proyeccion, 0) * 100)
     FROM Servicios s
     WHERE YEAR(s.Fecha) = YEAR(GETDATE())
       AND MONTH(s.Fecha) = MONTH(GETDATE())
@@ -831,6 +831,10 @@ BEGIN
             WHEN @TotalGeneral > 0 THEN ROUND(CAST(COUNT(*) AS FLOAT) / @TotalGeneral * 100, 2)
             ELSE 0 
         END as Porcentaje
+    FROM Registros r
+    INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
+    WHERE r.Fecha >= @FechaInicio
+      AND r.Fecha <= @FechaFin
     GROUP BY emp.IdEmpresa, emp.Nombre
     ORDER BY TotalAsistencias DESC;
 END
