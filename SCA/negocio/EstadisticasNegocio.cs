@@ -145,10 +145,10 @@ namespace Negocio
                 {
                     var item = new Estadisticas.TopEmpresa
                     {
-                        Ranking = (long)datos.Lector["Ranking"],
-                        NombreEmpresa = (string)datos.Lector["NombreEmpresa"],
-                        TotalAsistencias = (int)datos.Lector["TotalAsistencias"],
-                        Porcentaje = (decimal)datos.Lector["Porcentaje"]
+                        Ranking = Convert.ToInt64(datos.Lector["Ranking"]),
+                        NombreEmpresa = datos.Lector["NombreEmpresa"].ToString(),
+                        TotalAsistencias = Convert.ToInt32(datos.Lector["TotalAsistencias"]),
+                        Porcentaje = Convert.ToDecimal(datos.Lector["Porcentaje"])
                     };
                     lista.Add(item);
                 }

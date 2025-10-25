@@ -755,21 +755,20 @@ BEGIN
     SET @PrimerDiaMes = DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1);
     SET @DiasTranscurridos = DATEDIFF(DAY, @PrimerDiaMes, GETDATE()) + 1;
     
-    -- Asistencias totales del mes
-    SELECT @AsistenciasTotales = COUNT(*)
+    -- Asistencias de empleados (registros)
+    SELECT @AsistenciasEmpleados = COUNT(*)
     FROM Registros
     WHERE YEAR(Fecha) = YEAR(GETDATE())
       AND MONTH(Fecha) = MONTH(GETDATE());
     
-    -- Asistencias de empleados
-    SELECT @AsistenciasEmpleados = COUNT(*)
-    FROM Registros
-    WHERE IdEmpleado IS NOT NULL
-      AND YEAR(Fecha) = YEAR(GETDATE())
+    -- Asistencias de invitados (desde Servicios)
+    SELECT @AsistenciasInvitados = ISNULL(SUM(TotalInvitados), 0)
+    FROM Servicios
+    WHERE YEAR(Fecha) = YEAR(GETDATE())
       AND MONTH(Fecha) = MONTH(GETDATE());
     
-    -- Asistencias de invitados
-    SET @AsistenciasInvitados = @AsistenciasTotales - @AsistenciasEmpleados;
+    -- Asistencias totales
+    SET @AsistenciasTotales = @AsistenciasEmpleados + @AsistenciasInvitados;
     
     -- Promedio diario
     IF @DiasTranscurridos > 0

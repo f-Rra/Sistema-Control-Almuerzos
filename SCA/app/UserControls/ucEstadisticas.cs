@@ -71,7 +71,7 @@ namespace app.UserControls
             {
                 lblEmpresasActivas.Text = "Total Activas: " + empresas.TotalActivas;
                 lblEmpresasEmpleados.Text = "Con Empleados: " + empresas.TotalConEmpleados;
-                lblPromedioEmpleados.Text = "Promedio (Empleados): " + empresas.PromedioEmpleados.ToString("F2");
+                lblPromedioEmpleados.Text = "Promedio (Empleados): " + ((int)empresas.PromedioEmpleados).ToString();
             }
             else
             {
@@ -89,13 +89,13 @@ namespace app.UserControls
             {
                 lblServiciosMes.Text = "Este Mes: " + servicios.ServiciosEsteMes;
                 lblServiciosTotal.Text = "Total del Año: " + servicios.ServiciosEsteAnio;
-                lblPromedioDiario.Text = "Promedio/Dia: " + servicios.PromedioPorDia;
+                lblServiciosPromedio.Text = "Promedio/Dia: " + servicios.PromedioPorDia;
             }
             else
             {
                 lblServiciosMes.Text = "Este Mes: N/A";
                 lblServiciosTotal.Text = "Total del Año: N/A";
-                lblPromedioDiario.Text = "Promedio/Dia: N/A";
+                lblServiciosPromedio.Text = "Promedio/Dia: N/A";
             }
         }   
 
@@ -133,7 +133,52 @@ namespace app.UserControls
 
         private void CargarTop5Empresas()
         {
+            var lista = negE.ObtenerTop5Empresas(DateTime.Now);
 
-        }   
+            var lblTops = new[] { lblTop1, lblTop2, lblTop3, lblTop4, lblTop5 };
+            var lblPorcentajes = new[] { lblPorcentaje1, lblPorcentaje2, lblPorcentaje3, lblPorcentaje4, lblPorcentaje5 };
+            var pbProgresos = new[] { pbProgreso1, pbProgreso2, pbProgreso3, pbProgreso4, pbProgreso5 };
+
+            if (lista != null && lista.Count > 0)
+            {
+                int valorMaximo = lista[0].TotalAsistencias;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    if (i < lista.Count)
+                    {
+                        var empresa = lista[i];
+
+                        // Izquierda: número + nombre de empresa
+                        lblTops[i].Text = (i + 1) + ". " + empresa.NombreEmpresa;
+
+                        // Derecha: porcentaje
+                        lblPorcentajes[i].Text = empresa.Porcentaje.ToString("F1") + "%";
+
+                        // Barra proporcional
+                        int valorBarra = valorMaximo > 0 ? (int)((double)empresa.TotalAsistencias / valorMaximo * 100) : 0;
+                        pbProgresos[i].Value = valorBarra;
+                        pbProgresos[i].Visible = true;
+                    }
+                    else
+                    {
+                        lblTops[i].Text = (i + 1) + ".";
+                        lblPorcentajes[i].Text = "";
+                        pbProgresos[i].Value = 0;
+                        pbProgresos[i].Visible = false;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    lblTops[i].Text = (i + 1) + ".";
+                    lblPorcentajes[i].Text = "Sin datos";
+                    pbProgresos[i].Value = 0;
+                    pbProgresos[i].Visible = false;
+                }
+            }
+        }
     }
 }
