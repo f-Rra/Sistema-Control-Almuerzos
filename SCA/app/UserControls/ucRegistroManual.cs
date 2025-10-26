@@ -41,7 +41,6 @@ namespace app.UserControls
             CargarRegistros();
         }
 
-        // Método público para refrescar los datos desde otros UserControls
         public void RefrescarDatos()
         {
             CargarEmpresas();
@@ -54,18 +53,16 @@ namespace app.UserControls
         private void CargarEmpresas()
         {
             var empresas = negEmp.listar();
-            var empresaCompleta = new List<dynamic>();
-            empresaCompleta.Add(new { IdEmpresa = -1, Nombre = "" });
+            var empresasFiltro = new List<dynamic>();
+            empresasFiltro.Add(new { IdEmpresa = 0, Nombre = "Todas" });
             
             foreach (var emp in empresas)
             {
-                empresaCompleta.Add(new { IdEmpresa = emp.IdEmpresa, Nombre = emp.Nombre });
+                empresasFiltro.Add(new { IdEmpresa = emp.IdEmpresa, Nombre = emp.Nombre });
             }
             
-            // Limpiar DataSource antes de asignar nuevos datos
             cbLugar.DataSource = null;
-            
-            cbLugar.DataSource = empresaCompleta;
+            cbLugar.DataSource = empresasFiltro;
             cbLugar.ValueMember = "IdEmpresa";
             cbLugar.DisplayMember = "Nombre";
             cbLugar.SelectedIndex = 0; 
@@ -147,7 +144,7 @@ namespace app.UserControls
                     if (cbLugar.SelectedValue != null && cbLugar.SelectedValue != DBNull.Value)
                     {
                         int selectedValue = (int)cbLugar.SelectedValue;
-                        if (selectedValue != -1) 
+                        if (selectedValue != 0) 
                         {
                             empresaId = selectedValue;
                         }

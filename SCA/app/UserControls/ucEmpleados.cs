@@ -99,16 +99,17 @@ namespace app.UserControls
             var empresas = empresaNegocio.listar();
             if (empresas == null) return;
             
-            // Guardar valores seleccionados actuales
             object selectedValueFiltro = cbFiltroEmpresa.SelectedValue;
             object selectedValueEmpleado = cbEmpresaEmpleado.SelectedValue;
             
-            // Limpiar DataSource antes de asignar nuevos datos
             cbFiltroEmpresa.DataSource = null;
             cbEmpresaEmpleado.DataSource = null;
             
-            // Asignar nuevas listas independientes
-            cbFiltroEmpresa.DataSource = new List<Empresa>(empresas);
+            var empresasFiltro = new List<Empresa>();
+            empresasFiltro.Add(new Empresa { IdEmpresa = 0, Nombre = "Todas" });
+            empresasFiltro.AddRange(empresas);
+            
+            cbFiltroEmpresa.DataSource = empresasFiltro;
             cbFiltroEmpresa.DisplayMember = "Nombre";
             cbFiltroEmpresa.ValueMember = "IdEmpresa";
             
@@ -116,8 +117,7 @@ namespace app.UserControls
             cbEmpresaEmpleado.DisplayMember = "Nombre";
             cbEmpresaEmpleado.ValueMember = "IdEmpresa";
             
-            // Restaurar valores seleccionados si existen
-            if (selectedValueFiltro != null && empresas.Exists(e => e.IdEmpresa == (int)selectedValueFiltro))
+            if (selectedValueFiltro != null && empresasFiltro.Exists(e => e.IdEmpresa == (int)selectedValueFiltro))
             {
                 cbFiltroEmpresa.SelectedValue = selectedValueFiltro;
             }
