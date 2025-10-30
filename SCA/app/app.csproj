@@ -221,5 +221,29 @@
   <ItemGroup>
     <None Include="Iconos\panel.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\estadisticas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\progreso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\fecha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\proyeccion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\duracion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\invitados.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\comensales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Iconos\total.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
