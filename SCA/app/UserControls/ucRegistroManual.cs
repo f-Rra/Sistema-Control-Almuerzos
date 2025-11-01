@@ -177,6 +177,7 @@ namespace app.UserControls
             }
 
             Cursor anterior = Cursor.Current;
+            int cantidadAgregados = 0;
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -188,6 +189,7 @@ namespace app.UserControls
                         try
                         {
                             negR.registrarEmpleado(emp.IdEmpleado, emp.IdEmpresa, servicioIdActual.Value, idLugarActual);
+                            cantidadAgregados++;
                         }
                         catch (Exception)
                         {
@@ -199,11 +201,105 @@ namespace app.UserControls
             {
                 Cursor.Current = anterior;
             }
+            
             LimpiarFiltros();
             cbLugar.SelectedIndex = 0;
             CargarRegistros();
             formularioPrincipal?.RefrescarRegistros();
             formularioPrincipal?.ActualizarEstadisticas();
+            
+            // Mostrar mensaje de confirmación temporal
+            if (cantidadAgregados > 0)
+            {
+                MostrarMensajeRegistroExitoso(cantidadAgregados);
+            }
+        }
+
+        /// <summary>
+        /// Muestra un mensaje temporal con la cantidad de comensales agregados
+        /// </summary>
+        /// <param name="cantidad">Cantidad de comensales registrados</param>
+        private void MostrarMensajeRegistroExitoso(int cantidad)
+        {
+            try
+            {
+                // Crear formulario temporal (50% más grande: 380->570, 160->240)
+                var formTemporal = new Form
+                {
+                    StartPosition = FormStartPosition.CenterScreen,
+                    FormBorderStyle = FormBorderStyle.None,
+                    Size = new Size(572, 242), // +2 para el borde
+                    BackColor = Color.FromArgb(35, 34, 33), // Color negro del proyecto (borde)
+                    TopMost = true,
+                    ShowInTaskbar = false,
+                    Padding = new Padding(1) // Padding para simular borde de 1px
+                };
+
+                // Panel contenedor interno (crea el efecto de borde)
+                var panelContenedor = new Panel
+                {
+                    Size = new Size(570, 240),
+                    Location = new Point(1, 1),
+                    BackColor = Color.FromArgb(255, 248, 225) // Color de fondo del proyecto
+                };
+
+                // Panel superior con color principal del proyecto
+                var panelTitulo = new Panel
+                {
+                    Size = new Size(570, 75),
+                    Location = new Point(0, 0),
+                    BackColor = Color.FromArgb(255, 208, 36) // Color amarillo del proyecto
+                };
+
+                // Título
+                var lblTitulo = new Label
+                {
+                    Text = "✓ REGISTRO EXITOSO",
+                    Font = new Font("Segoe UI", 18, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(35, 34, 33), // Color texto oscuro del proyecto
+                    AutoSize = false,
+                    Size = new Size(570, 75),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+                panelTitulo.Controls.Add(lblTitulo);
+
+                // Mensaje con cantidad de comensales agregados
+                string mensaje = cantidad == 1 
+                    ? $"Comensal agregado correctamente\n\nTotal registrado: {cantidad}"
+                    : $"Comensales agregados correctamente\n\nTotal registrados: {cantidad}";
+
+                var lblMensaje = new Label
+                {
+                    Text = mensaje,
+                    Font = new Font("Segoe UI", 18, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(35, 34, 33),
+                    AutoSize = false,
+                    Size = new Size(550, 135),
+                    Location = new Point(10, 85),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+
+                panelContenedor.Controls.Add(panelTitulo);
+                panelContenedor.Controls.Add(lblMensaje);
+                formTemporal.Controls.Add(panelContenedor);
+
+                // Timer para cerrar después de 3 segundos
+                var timer = new Timer { Interval = 3000 };
+                timer.Tick += (s, ev) =>
+                {
+                    timer.Stop();
+                    timer.Dispose();
+                    formTemporal.Close();
+                    formTemporal.Dispose();
+                };
+
+                formTemporal.Shown += (s, ev) => timer.Start();
+                formTemporal.Show();
+            }
+            catch
+            {
+                // Si falla el mensaje temporal, no afecta el registro
+            }
         }
     }
 }
