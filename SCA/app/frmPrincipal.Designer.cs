@@ -31,27 +31,38 @@ namespace app
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBarra = new System.Windows.Forms.Panel();
+            this.btnSalir = new System.Windows.Forms.Label();
             this.pnlLateral = new System.Windows.Forms.Panel();
             this.ssVertical = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
+            this.btnInfo = new System.Windows.Forms.Label();
             this.ssSidebar = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
+            this.pbxLogo = new System.Windows.Forms.PictureBox();
             this.pHome = new System.Windows.Forms.Panel();
+            this.btnHome = new System.Windows.Forms.Label();
             this.pRegistros = new System.Windows.Forms.Panel();
+            this.btnRegistros = new System.Windows.Forms.Label();
             this.pReportes = new System.Windows.Forms.Panel();
+            this.btnReportes = new System.Windows.Forms.Label();
             this.pAdmin = new System.Windows.Forms.Panel();
+            this.btnAdmin = new System.Windows.Forms.Label();
             this.pnlSuperior = new System.Windows.Forms.Panel();
             this.ssPanel = new ReaLTaiizor.Controls.SpaceSeparatorVertical();
+            this.pbxTitulo = new System.Windows.Forms.PictureBox();
             this.cbLugar = new System.Windows.Forms.ComboBox();
             this.mtxtInvitados = new System.Windows.Forms.MaskedTextBox();
             this.mtxtProyeccion = new System.Windows.Forms.MaskedTextBox();
             this.gbxEstadisticas = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.lblEstadisticas = new ReaLTaiizor.Controls.BigLabel();
+            this.pbxEstadisticas = new System.Windows.Forms.Label();
             this.gbxProgreso = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.lblProgreso = new ReaLTaiizor.Controls.BigLabel();
             this.pbProgreso = new ReaLTaiizor.Controls.AloneProgressBar();
             this.gbxDuracion = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.lblCronometro = new ReaLTaiizor.Controls.BigLabel();
+            this.pbxDuracion = new System.Windows.Forms.Label();
             this.gbxEstado = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.lblEstado = new ReaLTaiizor.Controls.BigLabel();
+            this.pbxEstado = new System.Windows.Forms.Label();
             this.lblLugar = new ReaLTaiizor.Controls.SmallLabel();
             this.lblInvitados = new ReaLTaiizor.Controls.SmallLabel();
             this.lblProyeccion = new ReaLTaiizor.Controls.SmallLabel();
@@ -68,10 +79,6 @@ namespace app
             this.gbxUltimo = new System.Windows.Forms.GroupBox();
             this.pnlUltimo = new System.Windows.Forms.Panel();
             this.lblDetalles = new ReaLTaiizor.Controls.BigLabel();
-            this.cHome = new ReaLTaiizor.Controls.ParrotControlEllipse();
-            this.cRegistros = new ReaLTaiizor.Controls.ParrotControlEllipse();
-            this.cReportes = new ReaLTaiizor.Controls.ParrotControlEllipse();
-            this.cAdmin = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.pnlUltimoI = new System.Windows.Forms.Panel();
             this.lblDuracion = new ReaLTaiizor.Controls.BigLabel();
             this.pbxComensales = new System.Windows.Forms.Label();
@@ -87,24 +94,19 @@ namespace app
             this.lblUcomensales = new ReaLTaiizor.Controls.BigLabel();
             this.lblUfecha = new ReaLTaiizor.Controls.BigLabel();
             this.lblUproyeccion = new ReaLTaiizor.Controls.BigLabel();
-            this.pbxTitulo = new System.Windows.Forms.PictureBox();
-            this.pbxEstadisticas = new System.Windows.Forms.Label();
-            this.pbxDuracion = new System.Windows.Forms.Label();
-            this.pbxEstado = new System.Windows.Forms.Label();
-            this.btnInfo = new System.Windows.Forms.Label();
-            this.pbxLogo = new System.Windows.Forms.PictureBox();
-            this.btnHome = new System.Windows.Forms.Label();
-            this.btnRegistros = new System.Windows.Forms.Label();
-            this.btnReportes = new System.Windows.Forms.Label();
-            this.btnAdmin = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Label();
+            this.cHome = new ReaLTaiizor.Controls.ParrotControlEllipse();
+            this.cRegistros = new ReaLTaiizor.Controls.ParrotControlEllipse();
+            this.cReportes = new ReaLTaiizor.Controls.ParrotControlEllipse();
+            this.cAdmin = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.pnlBarra.SuspendLayout();
             this.pnlLateral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.pHome.SuspendLayout();
             this.pRegistros.SuspendLayout();
             this.pReportes.SuspendLayout();
             this.pAdmin.SuspendLayout();
             this.pnlSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).BeginInit();
             this.gbxEstadisticas.SuspendLayout();
             this.gbxProgreso.SuspendLayout();
             this.gbxDuracion.SuspendLayout();
@@ -117,8 +119,6 @@ namespace app
             this.gbxUltimo.SuspendLayout();
             this.pnlUltimo.SuspendLayout();
             this.pnlUltimoI.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBarra
@@ -130,6 +130,19 @@ namespace app
             this.pnlBarra.Name = "pnlBarra";
             this.pnlBarra.Size = new System.Drawing.Size(1280, 25);
             this.pnlBarra.TabIndex = 0;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.Transparent;
+            this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSalir.ForeColor = System.Drawing.Color.Transparent;
+            this.btnSalir.Image = global::app.Properties.Resources.salir;
+            this.btnSalir.Location = new System.Drawing.Point(1251, 0);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(29, 25);
+            this.btnSalir.TabIndex = 1;
+            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // pnlLateral
             // 
@@ -159,6 +172,18 @@ namespace app
             this.ssVertical.TabIndex = 3;
             this.ssVertical.Transparent = false;
             // 
+            // btnInfo
+            // 
+            this.btnInfo.BackColor = System.Drawing.Color.Transparent;
+            this.btnInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInfo.ForeColor = System.Drawing.Color.Transparent;
+            this.btnInfo.Image = global::app.Properties.Resources.info;
+            this.btnInfo.Location = new System.Drawing.Point(19, 605);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(75, 81);
+            this.btnInfo.TabIndex = 1;
+            this.btnInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ssSidebar
             // 
             this.ssSidebar.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
@@ -170,6 +195,16 @@ namespace app
             this.ssSidebar.Size = new System.Drawing.Size(4, 53);
             this.ssSidebar.TabIndex = 3;
             this.ssSidebar.Transparent = false;
+            // 
+            // pbxLogo
+            // 
+            this.pbxLogo.Image = global::app.Properties.Resources.logo;
+            this.pbxLogo.Location = new System.Drawing.Point(0, 12);
+            this.pbxLogo.Name = "pbxLogo";
+            this.pbxLogo.Size = new System.Drawing.Size(126, 152);
+            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxLogo.TabIndex = 2;
+            this.pbxLogo.TabStop = false;
             // 
             // pHome
             // 
@@ -183,6 +218,22 @@ namespace app
             this.pHome.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.pHome.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
+            // btnHome
+            // 
+            this.btnHome.BackColor = System.Drawing.Color.Transparent;
+            this.btnHome.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHome.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnHome.ForeColor = System.Drawing.Color.Transparent;
+            this.btnHome.Image = global::app.Properties.Resources.home;
+            this.btnHome.Location = new System.Drawing.Point(0, 0);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(75, 81);
+            this.btnHome.TabIndex = 1;
+            this.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            this.btnHome.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.btnHome.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
             // pRegistros
             // 
             this.pRegistros.BackColor = System.Drawing.Color.Transparent;
@@ -194,6 +245,22 @@ namespace app
             this.pRegistros.Click += new System.EventHandler(this.btnRegistros_Click);
             this.pRegistros.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.pRegistros.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // btnRegistros
+            // 
+            this.btnRegistros.BackColor = System.Drawing.Color.Transparent;
+            this.btnRegistros.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegistros.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRegistros.ForeColor = System.Drawing.Color.Transparent;
+            this.btnRegistros.Image = global::app.Properties.Resources.registro;
+            this.btnRegistros.Location = new System.Drawing.Point(0, 0);
+            this.btnRegistros.Name = "btnRegistros";
+            this.btnRegistros.Size = new System.Drawing.Size(75, 81);
+            this.btnRegistros.TabIndex = 1;
+            this.btnRegistros.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnRegistros.Click += new System.EventHandler(this.btnRegistros_Click);
+            this.btnRegistros.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.btnRegistros.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // pReportes
             // 
@@ -207,6 +274,22 @@ namespace app
             this.pReportes.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.pReportes.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
+            // btnReportes
+            // 
+            this.btnReportes.BackColor = System.Drawing.Color.Transparent;
+            this.btnReportes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReportes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReportes.ForeColor = System.Drawing.Color.Transparent;
+            this.btnReportes.Image = global::app.Properties.Resources.Reporte;
+            this.btnReportes.Location = new System.Drawing.Point(0, 0);
+            this.btnReportes.Name = "btnReportes";
+            this.btnReportes.Size = new System.Drawing.Size(75, 81);
+            this.btnReportes.TabIndex = 1;
+            this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
+            this.btnReportes.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.btnReportes.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
             // pAdmin
             // 
             this.pAdmin.BackColor = System.Drawing.Color.Transparent;
@@ -218,6 +301,22 @@ namespace app
             this.pAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             this.pAdmin.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.pAdmin.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // btnAdmin
+            // 
+            this.btnAdmin.BackColor = System.Drawing.Color.Transparent;
+            this.btnAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdmin.ForeColor = System.Drawing.Color.Transparent;
+            this.btnAdmin.Image = global::app.Properties.Resources.admin;
+            this.btnAdmin.Location = new System.Drawing.Point(0, 0);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(75, 81);
+            this.btnAdmin.TabIndex = 1;
+            this.btnAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
+            this.btnAdmin.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.btnAdmin.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // pnlSuperior
             // 
@@ -253,6 +352,17 @@ namespace app
             this.ssPanel.Size = new System.Drawing.Size(4, 165);
             this.ssPanel.TabIndex = 5;
             this.ssPanel.Transparent = false;
+            // 
+            // pbxTitulo
+            // 
+            this.pbxTitulo.BackColor = System.Drawing.Color.Transparent;
+            this.pbxTitulo.BackgroundImage = global::app.Properties.Resources.cda;
+            this.pbxTitulo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbxTitulo.Location = new System.Drawing.Point(0, 46);
+            this.pbxTitulo.Name = "pbxTitulo";
+            this.pbxTitulo.Size = new System.Drawing.Size(281, 96);
+            this.pbxTitulo.TabIndex = 7;
+            this.pbxTitulo.TabStop = false;
             // 
             // cbLugar
             // 
@@ -321,6 +431,18 @@ namespace app
             this.lblEstadisticas.Size = new System.Drawing.Size(189, 21);
             this.lblEstadisticas.TabIndex = 2;
             this.lblEstadisticas.Text = "Registrados: - / Faltan: -";
+            // 
+            // pbxEstadisticas
+            // 
+            this.pbxEstadisticas.BackColor = System.Drawing.Color.Transparent;
+            this.pbxEstadisticas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbxEstadisticas.ForeColor = System.Drawing.Color.Transparent;
+            this.pbxEstadisticas.Image = global::app.Properties.Resources.estadisticas;
+            this.pbxEstadisticas.Location = new System.Drawing.Point(12, 32);
+            this.pbxEstadisticas.Name = "pbxEstadisticas";
+            this.pbxEstadisticas.Size = new System.Drawing.Size(29, 25);
+            this.pbxEstadisticas.TabIndex = 1;
+            this.pbxEstadisticas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gbxProgreso
             // 
@@ -396,6 +518,18 @@ namespace app
             this.lblCronometro.TabIndex = 2;
             this.lblCronometro.Text = "00:00:00";
             // 
+            // pbxDuracion
+            // 
+            this.pbxDuracion.BackColor = System.Drawing.Color.Transparent;
+            this.pbxDuracion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbxDuracion.ForeColor = System.Drawing.Color.Transparent;
+            this.pbxDuracion.Image = global::app.Properties.Resources.reloj;
+            this.pbxDuracion.Location = new System.Drawing.Point(14, 32);
+            this.pbxDuracion.Name = "pbxDuracion";
+            this.pbxDuracion.Size = new System.Drawing.Size(29, 25);
+            this.pbxDuracion.TabIndex = 1;
+            this.pbxDuracion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // gbxEstado
             // 
             this.gbxEstado.BackColor = System.Drawing.Color.Transparent;
@@ -424,6 +558,19 @@ namespace app
             this.lblEstado.Size = new System.Drawing.Size(102, 25);
             this.lblEstado.TabIndex = 2;
             this.lblEstado.Text = "INACTIVO";
+            // 
+            // pbxEstado
+            // 
+            this.pbxEstado.BackColor = System.Drawing.Color.Transparent;
+            this.pbxEstado.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbxEstado.ForeColor = System.Drawing.Color.Transparent;
+            this.pbxEstado.Image = global::app.Properties.Resources.inactivo;
+            this.pbxEstado.Location = new System.Drawing.Point(14, 32);
+            this.pbxEstado.Name = "pbxEstado";
+            this.pbxEstado.Size = new System.Drawing.Size(29, 25);
+            this.pbxEstado.TabIndex = 1;
+            this.pbxEstado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pbxEstado.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // lblLugar
             // 
@@ -650,26 +797,6 @@ namespace app
             this.lblDetalles.Text = "Detalles del Servicio ";
             this.lblDetalles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cHome
-            // 
-            this.cHome.CornerRadius = 20;
-            this.cHome.EffectedControl = this.pHome;
-            // 
-            // cRegistros
-            // 
-            this.cRegistros.CornerRadius = 20;
-            this.cRegistros.EffectedControl = this.pRegistros;
-            // 
-            // cReportes
-            // 
-            this.cReportes.CornerRadius = 20;
-            this.cReportes.EffectedControl = this.pReportes;
-            // 
-            // cAdmin
-            // 
-            this.cAdmin.CornerRadius = 20;
-            this.cAdmin.EffectedControl = this.pAdmin;
-            // 
             // pnlUltimoI
             // 
             this.pnlUltimoI.BackColor = System.Drawing.Color.Transparent;
@@ -714,7 +841,7 @@ namespace app
             this.pbxComensales.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxComensales.ForeColor = System.Drawing.Color.Transparent;
             this.pbxComensales.Image = global::app.Properties.Resources.comensales;
-            this.pbxComensales.Location = new System.Drawing.Point(12, 222);
+            this.pbxComensales.Location = new System.Drawing.Point(16, 222);
             this.pbxComensales.Name = "pbxComensales";
             this.pbxComensales.Size = new System.Drawing.Size(36, 37);
             this.pbxComensales.TabIndex = 1;
@@ -726,7 +853,7 @@ namespace app
             this.pbxTootal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxTootal.ForeColor = System.Drawing.Color.Transparent;
             this.pbxTootal.Image = global::app.Properties.Resources.total;
-            this.pbxTootal.Location = new System.Drawing.Point(12, 329);
+            this.pbxTootal.Location = new System.Drawing.Point(16, 329);
             this.pbxTootal.Name = "pbxTootal";
             this.pbxTootal.Size = new System.Drawing.Size(36, 37);
             this.pbxTootal.TabIndex = 1;
@@ -738,7 +865,7 @@ namespace app
             this.pbxInvitados.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxInvitados.ForeColor = System.Drawing.Color.Transparent;
             this.pbxInvitados.Image = global::app.Properties.Resources.invitados;
-            this.pbxInvitados.Location = new System.Drawing.Point(12, 276);
+            this.pbxInvitados.Location = new System.Drawing.Point(16, 276);
             this.pbxInvitados.Name = "pbxInvitados";
             this.pbxInvitados.Size = new System.Drawing.Size(36, 37);
             this.pbxInvitados.TabIndex = 1;
@@ -750,7 +877,7 @@ namespace app
             this.pbxDuracion1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxDuracion1.ForeColor = System.Drawing.Color.Transparent;
             this.pbxDuracion1.Image = global::app.Properties.Resources.duracion;
-            this.pbxDuracion1.Location = new System.Drawing.Point(12, 172);
+            this.pbxDuracion1.Location = new System.Drawing.Point(16, 169);
             this.pbxDuracion1.Name = "pbxDuracion1";
             this.pbxDuracion1.Size = new System.Drawing.Size(36, 37);
             this.pbxDuracion1.TabIndex = 1;
@@ -762,7 +889,7 @@ namespace app
             this.pbxProyeccion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxProyeccion.ForeColor = System.Drawing.Color.Transparent;
             this.pbxProyeccion.Image = global::app.Properties.Resources.proyeccion;
-            this.pbxProyeccion.Location = new System.Drawing.Point(12, 121);
+            this.pbxProyeccion.Location = new System.Drawing.Point(16, 116);
             this.pbxProyeccion.Name = "pbxProyeccion";
             this.pbxProyeccion.Size = new System.Drawing.Size(36, 37);
             this.pbxProyeccion.TabIndex = 1;
@@ -774,7 +901,7 @@ namespace app
             this.pbxFecha.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxFecha.ForeColor = System.Drawing.Color.Transparent;
             this.pbxFecha.Image = global::app.Properties.Resources.fecha;
-            this.pbxFecha.Location = new System.Drawing.Point(12, 68);
+            this.pbxFecha.Location = new System.Drawing.Point(16, 66);
             this.pbxFecha.Name = "pbxFecha";
             this.pbxFecha.Size = new System.Drawing.Size(36, 37);
             this.pbxFecha.TabIndex = 1;
@@ -786,7 +913,7 @@ namespace app
             this.pbxLugar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxLugar.ForeColor = System.Drawing.Color.Transparent;
             this.pbxLugar.Image = global::app.Properties.Resources.lugar;
-            this.pbxLugar.Location = new System.Drawing.Point(12, 19);
+            this.pbxLugar.Location = new System.Drawing.Point(16, 19);
             this.pbxLugar.Name = "pbxLugar";
             this.pbxLugar.Size = new System.Drawing.Size(36, 34);
             this.pbxLugar.TabIndex = 1;
@@ -870,152 +997,25 @@ namespace app
             this.lblUproyeccion.Text = "Proyeccion: ";
             this.lblUproyeccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pbxTitulo
+            // cHome
             // 
-            this.pbxTitulo.BackColor = System.Drawing.Color.Transparent;
-            this.pbxTitulo.BackgroundImage = global::app.Properties.Resources.cda;
-            this.pbxTitulo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbxTitulo.Location = new System.Drawing.Point(0, 46);
-            this.pbxTitulo.Name = "pbxTitulo";
-            this.pbxTitulo.Size = new System.Drawing.Size(281, 96);
-            this.pbxTitulo.TabIndex = 7;
-            this.pbxTitulo.TabStop = false;
+            this.cHome.CornerRadius = 20;
+            this.cHome.EffectedControl = this.pHome;
             // 
-            // pbxEstadisticas
+            // cRegistros
             // 
-            this.pbxEstadisticas.BackColor = System.Drawing.Color.Transparent;
-            this.pbxEstadisticas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbxEstadisticas.ForeColor = System.Drawing.Color.Transparent;
-            this.pbxEstadisticas.Image = global::app.Properties.Resources.estadisticas;
-            this.pbxEstadisticas.Location = new System.Drawing.Point(12, 32);
-            this.pbxEstadisticas.Name = "pbxEstadisticas";
-            this.pbxEstadisticas.Size = new System.Drawing.Size(29, 25);
-            this.pbxEstadisticas.TabIndex = 1;
-            this.pbxEstadisticas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cRegistros.CornerRadius = 20;
+            this.cRegistros.EffectedControl = this.pRegistros;
             // 
-            // pbxDuracion
+            // cReportes
             // 
-            this.pbxDuracion.BackColor = System.Drawing.Color.Transparent;
-            this.pbxDuracion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbxDuracion.ForeColor = System.Drawing.Color.Transparent;
-            this.pbxDuracion.Image = global::app.Properties.Resources.reloj;
-            this.pbxDuracion.Location = new System.Drawing.Point(14, 32);
-            this.pbxDuracion.Name = "pbxDuracion";
-            this.pbxDuracion.Size = new System.Drawing.Size(29, 25);
-            this.pbxDuracion.TabIndex = 1;
-            this.pbxDuracion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cReportes.CornerRadius = 20;
+            this.cReportes.EffectedControl = this.pReportes;
             // 
-            // pbxEstado
+            // cAdmin
             // 
-            this.pbxEstado.BackColor = System.Drawing.Color.Transparent;
-            this.pbxEstado.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbxEstado.ForeColor = System.Drawing.Color.Transparent;
-            this.pbxEstado.Image = global::app.Properties.Resources.inactivo;
-            this.pbxEstado.Location = new System.Drawing.Point(14, 32);
-            this.pbxEstado.Name = "pbxEstado";
-            this.pbxEstado.Size = new System.Drawing.Size(29, 25);
-            this.pbxEstado.TabIndex = 1;
-            this.pbxEstado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.pbxEstado.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // btnInfo
-            // 
-            this.btnInfo.BackColor = System.Drawing.Color.Transparent;
-            this.btnInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInfo.ForeColor = System.Drawing.Color.Transparent;
-            this.btnInfo.Image = global::app.Properties.Resources.info;
-            this.btnInfo.Location = new System.Drawing.Point(19, 605);
-            this.btnInfo.Name = "btnInfo";
-            this.btnInfo.Size = new System.Drawing.Size(75, 81);
-            this.btnInfo.TabIndex = 1;
-            this.btnInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pbxLogo
-            // 
-            this.pbxLogo.Image = global::app.Properties.Resources.logo;
-            this.pbxLogo.Location = new System.Drawing.Point(0, 12);
-            this.pbxLogo.Name = "pbxLogo";
-            this.pbxLogo.Size = new System.Drawing.Size(126, 152);
-            this.pbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbxLogo.TabIndex = 2;
-            this.pbxLogo.TabStop = false;
-            // 
-            // btnHome
-            // 
-            this.btnHome.BackColor = System.Drawing.Color.Transparent;
-            this.btnHome.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHome.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnHome.ForeColor = System.Drawing.Color.Transparent;
-            this.btnHome.Image = global::app.Properties.Resources.home;
-            this.btnHome.Location = new System.Drawing.Point(0, 0);
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(75, 81);
-            this.btnHome.TabIndex = 1;
-            this.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-            this.btnHome.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.btnHome.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
-            // 
-            // btnRegistros
-            // 
-            this.btnRegistros.BackColor = System.Drawing.Color.Transparent;
-            this.btnRegistros.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRegistros.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRegistros.ForeColor = System.Drawing.Color.Transparent;
-            this.btnRegistros.Image = global::app.Properties.Resources.registro;
-            this.btnRegistros.Location = new System.Drawing.Point(0, 0);
-            this.btnRegistros.Name = "btnRegistros";
-            this.btnRegistros.Size = new System.Drawing.Size(75, 81);
-            this.btnRegistros.TabIndex = 1;
-            this.btnRegistros.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnRegistros.Click += new System.EventHandler(this.btnRegistros_Click);
-            this.btnRegistros.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.btnRegistros.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
-            // 
-            // btnReportes
-            // 
-            this.btnReportes.BackColor = System.Drawing.Color.Transparent;
-            this.btnReportes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReportes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReportes.ForeColor = System.Drawing.Color.Transparent;
-            this.btnReportes.Image = global::app.Properties.Resources.Reporte;
-            this.btnReportes.Location = new System.Drawing.Point(0, 0);
-            this.btnReportes.Name = "btnReportes";
-            this.btnReportes.Size = new System.Drawing.Size(75, 81);
-            this.btnReportes.TabIndex = 1;
-            this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
-            this.btnReportes.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.btnReportes.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
-            // 
-            // btnAdmin
-            // 
-            this.btnAdmin.BackColor = System.Drawing.Color.Transparent;
-            this.btnAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdmin.ForeColor = System.Drawing.Color.Transparent;
-            this.btnAdmin.Image = global::app.Properties.Resources.admin;
-            this.btnAdmin.Location = new System.Drawing.Point(0, 0);
-            this.btnAdmin.Name = "btnAdmin";
-            this.btnAdmin.Size = new System.Drawing.Size(75, 81);
-            this.btnAdmin.TabIndex = 1;
-            this.btnAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
-            this.btnAdmin.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.btnAdmin.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.BackColor = System.Drawing.Color.Transparent;
-            this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSalir.ForeColor = System.Drawing.Color.Transparent;
-            this.btnSalir.Image = global::app.Properties.Resources.salir;
-            this.btnSalir.Location = new System.Drawing.Point(1251, 0);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(29, 25);
-            this.btnSalir.TabIndex = 1;
-            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.cAdmin.CornerRadius = 20;
+            this.cAdmin.EffectedControl = this.pAdmin;
             // 
             // frmPrincipal
             // 
@@ -1034,12 +1034,14 @@ namespace app
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.pnlBarra.ResumeLayout(false);
             this.pnlLateral.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             this.pHome.ResumeLayout(false);
             this.pRegistros.ResumeLayout(false);
             this.pReportes.ResumeLayout(false);
             this.pAdmin.ResumeLayout(false);
             this.pnlSuperior.ResumeLayout(false);
             this.pnlSuperior.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).EndInit();
             this.gbxEstadisticas.ResumeLayout(false);
             this.gbxEstadisticas.PerformLayout();
             this.gbxProgreso.ResumeLayout(false);
@@ -1059,8 +1061,6 @@ namespace app
             this.pnlUltimo.PerformLayout();
             this.pnlUltimoI.ResumeLayout(false);
             this.pnlUltimoI.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
