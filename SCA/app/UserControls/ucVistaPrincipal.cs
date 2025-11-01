@@ -107,10 +107,100 @@ namespace app.UserControls
                 txtRegistro.Clear();
                 txtRegistro.Focus();
                 formularioPrincipal?.ActualizarEstadisticas();
+                
+                // Mostrar mensaje de confirmación temporal
+                MostrarMensajeRegistroExitoso(empleado);
             }
             catch (Exception ex)
             {
                 ExceptionHelper.ManejarExcepcionBD(ex, "procesar el registro");
+            }
+        }
+
+        /// <summary>
+        /// Muestra un mensaje temporal con la información del empleado registrado
+        /// </summary>
+        /// <param name="empleado">Empleado que fue registrado</param>
+        private void MostrarMensajeRegistroExitoso(Empleado empleado)
+        {
+            try
+            {
+                // Crear formulario temporal (50% más grande: 380->570, 160->240)
+                var formTemporal = new Form
+                {
+                    StartPosition = FormStartPosition.CenterScreen,
+                    FormBorderStyle = FormBorderStyle.None,
+                    Size = new Size(572, 242), // +2 para el borde
+                    BackColor = Color.FromArgb(35, 34, 33), // Color negro del proyecto (borde)
+                    TopMost = true,
+                    ShowInTaskbar = false,
+                    Padding = new Padding(1) // Padding para simular borde de 1px
+                };
+
+                // Panel contenedor interno (crea el efecto de borde)
+                var panelContenedor = new Panel
+                {
+                    Size = new Size(570, 240),
+                    Location = new Point(1, 1),
+                    BackColor = Color.FromArgb(255, 248, 225) // Color de fondo del proyecto
+                };
+
+                // Panel superior con color principal del proyecto
+                var panelTitulo = new Panel
+                {
+                    Size = new Size(570, 75),
+                    Location = new Point(0, 0),
+                    BackColor = Color.FromArgb(255, 208, 36) // Color amarillo del proyecto
+                };
+
+                // Título
+                var lblTitulo = new Label
+                {
+                    Text = "✓ REGISTRO EXITOSO",
+                    Font = new Font("Segoe UI", 18, FontStyle.Bold), // 14->18
+                    ForeColor = Color.FromArgb(35, 34, 33), // Color texto oscuro del proyecto
+                    AutoSize = false,
+                    Size = new Size(570, 75),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+                panelTitulo.Controls.Add(lblTitulo);
+
+                // Mensaje con datos del empleado
+                string mensaje = $"{empleado.Nombre} {empleado.Apellido}\n" +
+                                $"{empleado.NombreEmpresa}\n" +
+                                $"Hora: {DateTime.Now:HH:mm:ss}";
+
+                var lblMensaje = new Label
+                {
+                    Text = mensaje,
+                    Font = new Font("Segoe UI", 18, FontStyle.Bold), // 14->18 y agregado Bold
+                    ForeColor = Color.FromArgb(35, 34, 33),
+                    AutoSize = false,
+                    Size = new Size(550, 135),
+                    Location = new Point(10, 85),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+
+                panelContenedor.Controls.Add(panelTitulo);
+                panelContenedor.Controls.Add(lblMensaje);
+                formTemporal.Controls.Add(panelContenedor);
+
+                // Timer para cerrar después de 3 segundos
+                var timer = new Timer { Interval = 3000 };
+                timer.Tick += (s, e) =>
+                {
+                    timer.Stop();
+                    timer.Dispose();
+                    formTemporal.Close();
+                    formTemporal.Dispose();
+                };
+
+                formTemporal.Shown += (s, e) => timer.Start();
+                formTemporal.Show();
+            }
+            catch
+            {
+                // Si falla el mensaje temporal, no afecta el registro
             }
         }
     }
