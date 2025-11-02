@@ -1,6 +1,6 @@
 # 🍽️ Sistema de Control de Almuerzos
 
-Un sistema completo de gestión de comedores corporativos desarrollado en C# con Windows Forms, diseñado para el registro eficiente de comensales mediante credenciales RFID y generación de reportes automáticos.
+Sistema completo de gestión de comedores corporativos desarrollado en C# con Windows Forms, diseñado para el registro eficiente de comensales mediante credenciales RFID y generación de reportes automáticos.
 
 ![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.8-blue)
 ![C#](https://img.shields.io/badge/C%23-10.0-green)
@@ -9,31 +9,30 @@ Un sistema completo de gestión de comedores corporativos desarrollado en C# con
 
 ---
 
-## ✨ Características Principales
+##  Características Principales
 
-- ✅ **Arquitectura de 3 capas** (Dominio, Negocio, Presentación)
-- ✅ **Registro rápido de comensales** por ID de credencial (preparado para RFID)
-- ✅ **Gestión completa de empleados** con asignación de credenciales
-- ✅ **Sistema de servicios por jornada** (comedor y quincho)
-- ✅ **Visualización en tiempo real** para personal de cocina
-- ✅ **Reportes automáticos** con exportación a PDF
-- ✅ **Estadísticas avanzadas** por empresa, período y lugar
-- ✅ **Procedimientos almacenados** para todas las operaciones críticas
-- ✅ **Validaciones robustas** (duplicados, servicio activo, estado de empleado)
-- ✅ **Interfaz moderna** con diseño profesional (ReaLTaiizor)
-- ✅ **Manejo de invitados** sin datos personales
-- ✅ **Registro manual alternativo** para casos sin credencial
-- ✅ **Optimizado para alta concurrencia** en horarios pico
+-  **Arquitectura de 3 capas** (Dominio, Negocio, Presentación)
+-  **Registro rápido de comensales** por ID de credencial (preparado para RFID)
+-  **Gestión completa de empleados** con asignación de credenciales
+-  **Sistema de servicios por jornada** (comedor y quincho)
+-  **Visualización en tiempo real** para personal de cocina
+-  **Reportes automáticos** con exportación a PDF
+-  **Estadísticas avanzadas** por empresa, período y lugar
+-  **Procedimientos almacenados** para todas las operaciones críticas
+-  **Validaciones robustas** (duplicados, servicio activo, estado de empleado)
+-  **Interfaz moderna** con diseño profesional
+-  **Manejo de invitados** sin datos personales
+-  **Registro manual alternativo** para casos sin credencial
+-  **Optimizado para alta concurrencia** en horarios pico
 
-## 🚀 Funcionalidades del Sistema
+##  Funcionalidades del Sistema
 
-### 📝 Registro de Comensales
+###  Registro de Comensales
 
 **Método Actual: Ingreso por Teclado**
 - Registro mediante ID de credencial
 - Validación automática de duplicados
 - Confirmación visual inmediata
-- Tiempo promedio: 3-5 segundos por persona
 
 **Método Futuro: RFID Automático (Documentado)**
 - Lectura automática de credencial
@@ -42,15 +41,15 @@ Un sistema completo de gestión de comedores corporativos desarrollado en C# con
 - Guía completa de implementación incluida
 
 **Características:**
-- ✅ Validación de empleado activo
-- ✅ Detección de registros duplicados en servicio actual
-- ✅ Vinculación automática al servicio activo
-- ✅ Registro alternativo manual (sin credencial)
-- ✅ Gestión de invitados (solo cantidad, sin datos personales)
+-  Validación de empleado activo
+-  Detección de registros duplicados en servicio actual
+-  Vinculación automática al servicio activo
+-  Registro alternativo manual (sin credencial)
+-  Gestión de invitados (solo cantidad, sin datos personales)
 
-### 👥 Gestión de Empleados
+###  Gestión de Empleados
 
-**Operaciones CRUD Completas:**
+**Operaciones ABML Completas:**
 - **Alta**: Crear nuevos empleados con datos completos
 - **Modificación**: Actualizar información de empleados
 - **Baja lógica**: Desactivar empleados manteniendo historial
@@ -60,14 +59,13 @@ Un sistema completo de gestión de comedores corporativos desarrollado en C# con
 - Asignación de ID de credencial a empleados
 - Reasignación de credenciales (pérdida/daño)
 - Validación de unicidad de credenciales
-- Historial de asignaciones
 
 **Organización por Empresa:**
 - Agrupación de empleados por compañía
 - Estadísticas por empresa
 - Reportes segmentados
 
-### 🏢 Gestión de Servicios
+###  Gestión de Servicios
 
 **Control de Jornadas:**
 - Inicio de servicio por lugar (Comedor/Quincho)
@@ -76,12 +74,11 @@ Un sistema completo de gestión de comedores corporativos desarrollado en C# con
 - Cierre de servicio con estadísticas finales
 
 **Información Automática:**
-- ⏱️ Duración del servicio
-- 👥 Total de comensales reales vs proyectados
-- 📊 Desglose por empresa
-- 📈 Comparativa de eficiencia
+-  Duración del servicio
+-  Total de comensales reales vs proyectados
+-  Comparativa de eficiencia
 
-### 📊 Panel de Cocina (Tiempo Real)
+###  Panel Principal (Tiempo Real)
 
 **Visualización Instantánea:**
 - Listado de todos los registros del servicio actual
@@ -90,12 +87,7 @@ Un sistema completo de gestión de comedores corporativos desarrollado en C# con
 - Comparativa proyección vs real
 - Actualización automática sin recargas
 
-**Optimizado para Alta Concurrencia:**
-- Sin colapsos en horario pico
-- Diseñado para >30 registros simultáneos
-- Interfaz responsive y estable
-
-### 📈 Reportes y Estadísticas
+###  Reportes y Estadísticas
 
 **Tipos de Reportes Disponibles:**
 
@@ -124,14 +116,13 @@ Un sistema completo de gestión de comedores corporativos desarrollado en C# con
 - Cobertura histórica
 
 **Exportación:**
-- 📄 Formato PDF profesional
-- 📊 Gráficos y visualizaciones
-- 🏢 Encabezados corporativos
-- 📅 Marca temporal automática
+-  Formato PDF 
+-  Gráficos y visualizaciones
+-  Encabezados corporativos
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+##  Arquitectura del Sistema
 
 ### Estructura del Proyecto
 
@@ -179,7 +170,7 @@ Sistema-Control-Almuerzos/
 └── README.md                             # Este archivo
 ```
 
-## 🗄️ Base de Datos
+##  Base de Datos
 
 ### Modelo de Datos
 
@@ -278,7 +269,7 @@ Sistema-Control-Almuerzos/
 
 ---
 
-## 🛠️ Instalación y Configuración
+##  Instalación y Configuración
 
 ### Requisitos del Sistema
 
@@ -298,138 +289,12 @@ Sistema-Control-Almuerzos/
 - Conexión USB o Serial (RS232)
 - Credenciales RFID compatibles
 
-### Configuración Inicial del Sistema
-
-#### Primera Ejecución
-
-1. El sistema abrirá automáticamente
-2. Navegar a **ucConfiguracion** para:
-   - Crear lugares (Comedor, Quincho)
-   - Agregar empresas del predio
-   - Configurar parámetros generales
-
-3. Ir a **ucEmpleados** para:
-   - Cargar empleados
-   - Asignar credenciales (IDs únicos)
-
-4. Ir a **ucConfiguracion > Servicios** para:
-   - Iniciar el primer servicio de prueba
-
-#### Datos de Prueba (Opcional)
-
-Si ejecutaste `Datos_Iniciales.sql`, el sistema ya incluye:
-- ✅ 2 Lugares: Comedor y Quincho
-- ✅ 3 Empresas de ejemplo
-- ✅ 10 Empleados con credenciales asignadas
-- ✅ 1 Servicio de ejemplo con registros
-
-## 💻 Uso del Sistema
-
-### Flujos de Trabajo Principales
-
-#### 1. Inicio de Jornada
-
-```
-ucConfiguracion > Servicios
-  ↓
-[Iniciar Nuevo Servicio]
-  ↓
-• Seleccionar Lugar (Comedor/Quincho)
-• Ingresar Proyección de Comensales
-• Ingresar Total de Invitados Esperados
-  ↓
-[Confirmar]
-  ↓
-✅ Servicio activo (sistema listo para registrar)
-```
-
-#### 2. Registro de Comensales
-
-```
-ucRegistroManual
-  ↓
-Empleado dice su ID de credencial (ej: "4523")
-  ↓
-Operador ingresa ID → [Enter]
-  ↓
-Sistema valida automáticamente:
-  ✓ Credencial existe
-  ✓ Empleado activo
-  ✓ No registrado previamente en este servicio
-  ✓ Servicio activo
-  ↓
-✅ Confirmación visual + Registro guardado
-```
-
-**Método Alternativo (Sin Credencial):**
-```
-ucRegistroManual > [Registro Manual]
-  ↓
-Buscar empleado por nombre/apellido
-  ↓
-Seleccionar de lista → [Confirmar]
-  ↓
-✅ Registro guardado
-```
-
-#### 3. Monitoreo en Cocina
-
-```
-ucVistaPrincipal (Vista en tiempo real)
-  ↓
-Visualización automática:
-  • Total de comensales registrados
-  • Comparativa Proyección vs Real
-  • Listado completo con timestamps
-  • Desglose por empresa
-  ↓
-Actualización automática con cada nuevo registro
-```
-
-#### 4. Cierre de Jornada
-
-```
-ucConfiguracion > Servicios
-  ↓
-[Finalizar Servicio Activo]
-  ↓
-Sistema calcula automáticamente:
-  • Duración total del servicio
-  • Total real de comensales
-  • Cobertura (Real vs Proyección)
-  • Desglose por empresa
-  ↓
-✅ Servicio cerrado (disponible para reportes)
-```
-
-#### 5. Generación de Reportes
-
-```
-ucReportes
-  ↓
-Seleccionar tipo de reporte:
-  • Diario
-  • Por Período
-  • Por Empresa
-  • Estadísticas Generales
-  ↓
-Configurar parámetros (fechas, filtros)
-  ↓
-[Generar Reporte]
-  ↓
-Visualización en pantalla
-  ↓
-[Exportar PDF] (opcional)
-  ↓
-✅ Archivo PDF guardado
-```
-
 ### Módulos del Sistema
 
 | Módulo | Descripción | Usuario Típico |
 |--------|-------------|----------------|
 | **ucVistaPrincipal** | Pantalla de bienvenida y navegación | Todos |
-| **ucRegistroManual** | Registro de comensales | Personal de entrada |
+| **ucRegistroManual** | Registro de comensales | Personal de cocina |
 | **ucPaneles** | Visualización en tiempo real | Personal de cocina |
 | **ucEmpleados** | Gestión de empleados y credenciales | Administrador |
 | **ucEmpresas** | Gestión de empresas | Administrador |
@@ -440,7 +305,7 @@ Visualización en pantalla
 
 ---
 
-## 🔧 Características Técnicas
+##  Características Técnicas
 
 ### Seguridad
 
@@ -456,67 +321,65 @@ Visualización en pantalla
 - **Consultas parametrizadas**: Para mejor plan de ejecución
 - **Stored Procedures**: Lógica pre-compilada en servidor
 - **Actualización eficiente**: Solo datos necesarios en tiempo real
-- **Arquitectura local**: Sin latencia de red (preparado para centralizar)
 
 ### Validaciones Implementadas
 
 **A Nivel de Base de Datos:**
-- ✅ Unicidad de credenciales (Triggers)
-- ✅ Integridad referencial (FK Constraints)
-- ✅ Validación de servicio único activo (Triggers)
-- ✅ Actualización automática de contadores (Triggers)
+-  Unicidad de credenciales (Triggers)
+-  Integridad referencial (FK Constraints)
+-  Validación de servicio único activo (Triggers)
+-  Actualización automática de contadores (Triggers)
 
 **A Nivel de Negocio:**
-- ✅ Empleado debe estar activo
-- ✅ No puede registrarse dos veces en el mismo servicio
-- ✅ Debe existir un servicio activo para registrar
-- ✅ Credencial debe ser única al asignar
-- ✅ No se puede cerrar un servicio sin inicio
+-  Empleado debe estar activo
+-  No puede registrarse dos veces en el mismo servicio
+-  Debe existir un servicio activo para registrar
+-  Credencial debe ser única al asignar
+-  No se puede cerrar un servicio sin inicio
 
 **A Nivel de Presentación:**
-- ✅ Campos obligatorios marcados
-- ✅ Formato de datos validado
-- ✅ Confirmaciones antes de operaciones críticas
-- ✅ Feedback visual inmediato
+-  Campos obligatorios marcados
+-  Formato de datos validado
+- Confirmaciones antes de operaciones críticas
+-  Feedback visual inmediato
 
-## 🗺️ Roadmap
+##  Roadmap
 
-### ✅ Fase 1: Sistema Base (COMPLETADO)
+###  Fase 1: Sistema Base (COMPLETADA)
 
 **Estado**: Funcional y listo para producción
 
-- [x] Diseño y implementación de base de datos
-- [x] Arquitectura en 3 capas completa
-- [x] Módulo de gestión de empleados
-- [x] Módulo de gestión de empresas y lugares
-- [x] Sistema de servicios por jornada
-- [x] Registro por ingreso de ID (teclado)
-- [x] Panel de visualización para cocina
-- [x] Sistema de reportes y estadísticas
-- [x] Exportación a PDF
-- [x] Interfaz completa y funcional
-- [x] Validaciones robustas
-- [x] Documentación técnica
+-  Diseño y implementación de base de datos
+-  Arquitectura en 3 capas completa
+-  Módulo de gestión de empleados
+-  Módulo de gestión de empresas y lugares
+-  Sistema de servicios por jornada
+-  Registro por ingreso de ID (teclado)
+-  Panel de visualización para cocina
+-  Sistema de reportes y estadísticas
+-  Exportación a PDF
+-  Interfaz completa y funcional
+-  Validaciones robustas
+-  Documentación técnica
 
-### 📋 Fase 2: Integración RFID (PLANIFICADO)
+###  Fase 2: Integración RFID (PLANIFICADA)
 
 **Estado**: Documentado para implementación futura
 
 **Objetivos:**
-- [ ] Guía de selección de hardware RFID
-- [ ] Configuración de lectores (USB/Serial)
-- [ ] Modificación de capa de presentación (captura automática)
-- [ ] Testing con credenciales corporativas reales
-- [ ] Manual de implementación paso a paso
-- [ ] Procedimiento de migración sin downtime
+-  Guía de selección de hardware RFID
+-  Configuración de lectores (USB/Serial)
+-  Modificación de capa de presentación
+-  Testing con credenciales reales
+-  Manual de implementación
+-  Procedimiento de migración sin downtime
 
 **Prerequisitos:**
-- Adquisición de lectores RFID compatibles (ISO 14443)
-- Credenciales corporativas con chip RFID
+- Adquisición de lectores RFID compatibles
+- Credenciale con chip RFID
 - Configuración de puerto de comunicación
-- Ambiente de testing
 
-## 📚 Documentación
+##  Documentación
 
 ### Documentos Disponibles
 
@@ -524,7 +387,7 @@ Visualización en pantalla
 |-----------|-------------|-----------|
 | **README.md** | Documentación técnica completa (este archivo) | Raíz del proyecto |
 | **MANUAL_USUARIO.md** | Guía para usuarios finales | Raíz del proyecto |
-| **DER_SdCdA.drawio** | Diagrama Entidad-Relación (abrir con draw.io) | Raíz del proyecto |
+| **DER_SdCdA.drawio** | Diagrama Entidad-Relación | Raíz del proyecto |
 | **Script_Sistema_Control_Almuerzos.sql** | Script completo de creación de BD | Raíz del proyecto |
 | **Procedimientos_Vistas_Triggers.sql** | Objetos de BD detallados | Raíz del proyecto |
 | **Datos_Iniciales.sql** | Datos de prueba para testing | Raíz del proyecto |
@@ -534,27 +397,26 @@ Visualización en pantalla
 **Para Desarrolladores:**
 - Leer este README completo
 - Revisar arquitectura en sección correspondiente
-- Explorar código con comentarios inline
 - Consultar `ExceptionHelper.cs` para manejo de errores
 
-**Para Usuarios Finales:**
+**Para Usuarios:**
 - Leer `MANUAL_USUARIO.md`
 - Revisar flujos de trabajo comunes
 - Consultar sección de Preguntas Frecuentes
 
 ---
 
-## 📊 Estadísticas del Proyecto
+##  Estadísticas del Proyecto
 
 - **Líneas de código**: ~8,000+ (C# + SQL)
 - **Clases**: 25+
 - **Procedimientos almacenados**: 20+
-- **Tiempo de desarrollo**: 4 meses
+- **Tiempo de desarrollo**: 3 meses
 - **Tecnologías**: 5 (C#, SQL Server, Windows Forms, ReaLTaiizor, iTextSharp)
 
 ---
 
-## 🔗 Enlaces Útiles
+##  Enlaces Útiles
 
 - [Repositorio en GitHub](https://github.com/f-Rra/Sistema-Control-Almuerzos)
 - [Documentación de .NET Framework](https://docs.microsoft.com/en-us/dotnet/framework/)
