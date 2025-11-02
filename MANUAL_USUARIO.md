@@ -1,9 +1,5 @@
 # 📖 Manual de Usuario - Sistema de Control de Almuerzos
 
-**Guía completa para usuarios del sistema**
-
----
-
 ## 🎯 ¿Qué es el Sistema de Control de Almuerzos?
 
 El Sistema de Control de Almuerzos es una aplicación diseñada para gestionar de forma eficiente el registro de comensales en comedores corporativos. Con este sistema es posible:
@@ -34,7 +30,7 @@ El Sistema de Control de Almuerzos es una aplicación diseñada para gestionar d
 
 ## 👥 Tipos de Usuario
 
-### �‍🍳 Personal de Cocina
+###  Personal de Cocina
 **¿Qué puede hacer?**
 - ✅ **Registrar comensales** mediante ID de credencial
 - ✅ **Realizar registro manual** (sin credencial)
@@ -55,12 +51,11 @@ El Sistema de Control de Almuerzos es una aplicación diseñada para gestionar d
 
 ---
 
-### 👨‍💼 Administrador
+###  Administrador
 **¿Qué puede hacer?**
 - ✅ **Todo lo anterior, más:**
 - ✅ Gestionar empleados y credenciales
 - ✅ Gestionar empresas y lugares
-- ✅ Iniciar y finalizar servicios
 - ✅ Generar reportes y estadísticas
 - ✅ Configurar el sistema
 
@@ -69,19 +64,6 @@ El Sistema de Control de Almuerzos es una aplicación diseñada para gestionar d
 - Al final del día (cerrar servicio)
 - Para administración general
 - Para generar reportes
-
----
-
-## 🚀 Cómo Iniciar el Sistema
-
-### Paso 1: Abrir la Aplicación
-1. Buscar el ícono del **Sistema de Control de Almuerzos** en el escritorio
-2. Hacer doble clic para abrir la aplicación
-3. Aparecerá la pantalla principal del sistema
-
-### Paso 2: Pantalla de Bienvenida
-- La pantalla de inicio mostrará opciones de navegación
-- Seleccionar el módulo necesario según tu rol
 
 ---
 
@@ -95,25 +77,19 @@ El Sistema de Control de Almuerzos es una aplicación diseñada para gestionar d
 Este es el proceso más común y rápido:
 
 #### Paso 1: Acceder al Módulo
-1. Desde el menú principal, hacer clic en **"Registro de Comensales"** o **"Registro Manual"**
+1. Desde el menú principal, hacer clic en el boton 🏠 para acceder a la vista principal
 2. Asegurarse de que haya un **servicio activo** (aparecerá indicado en pantalla)
 
-#### Paso 2: Solicitar ID de Credencial
-1. **Preguntar al empleado**: *"¿Tu número de credencial?"*
-2. El empleado responde (ejemplo: "4523")
-
-#### Paso 3: Ingresar en el Sistema
+#### Paso 2: Ingresar ID de la credencial en el Sistema
 1. Escribir el ID en el campo de texto
-2. Presionar **Enter** o hacer clic en **"Registrar"**
+2. Presionar **Enter** o hacer clic en **"Ingresar Registro"**
 
-#### Paso 4: Confirmación
+#### Paso 3: Confirmación
 El sistema mostrará:
 - ✅ **Nombre completo** del empleado
 - ✅ **Empresa** a la que pertenece
 - ✅ **Hora de registro**
-- ✅ Mensaje de confirmación verde
-
-**Tiempo estimado: 3-5 segundos** ⚡
+- ✅ Mensaje de confirmación
 
 ---
 
@@ -122,7 +98,7 @@ El sistema mostrará:
 **Situación**: El empleado olvidó su credencial en el escritorio.
 
 #### Paso 1: Seleccionar Registro Manual
-1. En la pantalla de registro, hacer clic en **"Registro Manual"** o **"Sin Credencial"**
+1. En el menu principal, hacer clic en **"Registro Manual"**
 
 #### Paso 2: Buscar al Empleado
 1. Escribir el **nombre** o **apellido** del empleado
@@ -142,10 +118,10 @@ El sistema mostrará:
 
 ### ¿Cómo Registrar Invitados?
 
-**Situación**: Hay invitados externos sin credencial corporativa.
+**Situación**: Hay invitados externos sin credencial.
 
 #### Método Simple
-1. Hacer clic en **"Registrar Invitados"** o botón similar
+1. Hacer clic en el campo **Invitados**
 2. Ingresar la **cantidad** de invitados (ejemplo: 3)
 3. Hacer clic en **"Confirmar"**
 
@@ -221,12 +197,11 @@ Administrar toda la información de empleados del predio:
 
 ### ¿Cómo Ver Todos los Empleados?
 
-1. Desde el menú principal, hacer clic en **"Empleados"**
+1. Desde el panel **Administrador**, hacer clic en **Empleados**
 2. Se mostrará una lista con todos los empleados que incluye:
    - Nombre y apellido
    - Empresa
    - ID de credencial asignada
-   - Estado (Activo/Inactivo)
 
 ### ¿Cómo Buscar un Empleado Específico?
 
@@ -254,7 +229,7 @@ Administrar toda la información de empleados del predio:
 - Si no se tiene aún, se puede dejar en blanco y asignar después
 
 #### Paso 4: Guardar
-1. Hacer clic en **"Aceptar"** o **"Guardar"**
+1. Hacer clic en **"Guardar"**
 2. El sistema validará que no exista una credencial duplicada
 3. El empleado quedará registrado como **Activo**
 
@@ -348,7 +323,7 @@ Completar los siguientes datos:
 - Puede dejarse en 0 si no se esperan invitados
 
 #### Paso 2: Iniciar
-1. Hacer clic en **"Iniciar Servicio"** o **"Aceptar"**
+1. Hacer clic en **"Iniciar Servicio"**
 2. El sistema creará el servicio con estado **Activo**
 3. **Ahora el personal puede comenzar a registrar comensales** ✅
 
@@ -585,7 +560,7 @@ Paso 4: Generar "Asistencias por empresas"
 ### **P: ¿Qué hago si un empleado dice que no se pudo registrar?**
 **R:** 
 1. Verificar que haya un servicio activo
-2. Intentar registrar su credencial manualmente
+2. Intentar ingresar su credencial
 3. Si no funciona, usar el método de registro manual
 4. Verificar con el administrador el estado de su credencial
 
@@ -631,11 +606,6 @@ Paso 4: Generar "Asistencias por empresas"
 - Con credencial (teclado): 3-5 segundos
 - Sin credencial (manual): 10-15 segundos
 - Con RFID (futuro): <1 segundo
-
----
-
-### **P: ¿Se puede saber quién registró a cada comensal?**
-**R:** Actualmente el sistema no registra qué operador hizo cada registro, solo registra al comensal, fecha y hora.
 
 ---
 
@@ -758,29 +728,16 @@ Paso 4: Generar "Asistencias por empresas"
 ### 👨‍� Para Personal de Cocina
 
 **Registro de Comensales:**
-- 📝 Pedir el ID claramente: *"¿Tu número de credencial?"*
 - ⚡ Aprender los atajos de teclado (Enter para confirmar)
-- 👀 Verificar visualmente la confirmación verde antes de atender al siguiente
-
-**Horario Pico (12:30 - 13:00):**
-- 🚀 Mantener ritmo constante (3-5 segundos por persona)
-- 😊 Ser amable pero eficiente
-- 📢 Si hay fila, avisar a los que vienen: "Tengan listo su número de credencial"
+- 👀 Verificar visualmente la confirmación antes de atender al siguiente
 
 **Manejo de Casos Especiales:**
 - 🆔 Sin credencial: Usar registro manual sin dudar
 - ❓ Empleado nuevo: Derivar al administrador
-- ⚠️ Error en el sistema: Anotar temporalmente en papel y registrar después
 
 **Uso del Panel en Tiempo Real:**
 - 📊 Mantener el panel visible durante todo el servicio
 - 🔄 No es necesario actualizar manualmente (se actualiza solo)
-- 📈 Revisar la cobertura a las 12:00, 12:30 y 13:00 para ajustar
-
-**Planificación de Porciones:**
-- 🟢 Si estamos al 50% de cobertura a las 12:30 → Prepárate para menos demanda
-- 🟡 Si estamos al 80% de cobertura → Vamos bien, seguir lo planificado
-- 🔴 Si estamos al 110% de cobertura → Alerta, puede faltar comida
 
 **Comunicación:**
 - 📞 Si la demanda supera mucho la proyección, avisar inmediatamente
@@ -789,7 +746,6 @@ Paso 4: Generar "Asistencias por empresas"
 ---
 
 ### 👨‍💼 Para Administradores
-
 
 **Gestión de Empleados:**
 - 🆕 Dar de alta empleados nuevos **antes** de su primer día
@@ -871,5 +827,5 @@ Paso 4: Generar "Asistencias por empresas"
 ---
 
 *Manual de Usuario v1.0 - Sistema de Control de Almuerzos*  
-*Desarrollado por Franco Ratti - Tecnicatura Universitaria en Programación (UTN)*  
-*Última actualización: Octubre 2025*
+*Desarrollado por Facundo Herrera - Tecnicatura Universitaria en Programación (UTN)*  
+*Última actualización: Noviembre 2025*
