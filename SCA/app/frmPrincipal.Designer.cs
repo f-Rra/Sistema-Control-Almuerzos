@@ -853,9 +853,9 @@ namespace app
             this.pbxTootal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxTootal.ForeColor = System.Drawing.Color.Transparent;
             this.pbxTootal.Image = global::app.Properties.Resources.total;
-            this.pbxTootal.Location = new System.Drawing.Point(16, 329);
+            this.pbxTootal.Location = new System.Drawing.Point(16, 332);
             this.pbxTootal.Name = "pbxTootal";
-            this.pbxTootal.Size = new System.Drawing.Size(36, 37);
+            this.pbxTootal.Size = new System.Drawing.Size(36, 34);
             this.pbxTootal.TabIndex = 1;
             this.pbxTootal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 

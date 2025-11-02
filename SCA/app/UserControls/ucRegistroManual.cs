@@ -208,74 +208,65 @@ namespace app.UserControls
             formularioPrincipal?.RefrescarRegistros();
             formularioPrincipal?.ActualizarEstadisticas();
             
-            // Mostrar mensaje de confirmación temporal
             if (cantidadAgregados > 0)
             {
-                MostrarMensajeRegistroExitoso(cantidadAgregados);
+                MostrarRegistrosAgregados(cantidadAgregados);
             }
         }
 
-        /// <summary>
-        /// Muestra un mensaje temporal con la cantidad de comensales agregados
-        /// </summary>
-        /// <param name="cantidad">Cantidad de comensales registrados</param>
-        private void MostrarMensajeRegistroExitoso(int cantidad)
+        private void MostrarRegistrosAgregados(int cantidad)
         {
             try
             {
-                // Crear formulario temporal (50% más grande: 380->570, 160->240)
                 var formTemporal = new Form
                 {
                     StartPosition = FormStartPosition.CenterScreen,
                     FormBorderStyle = FormBorderStyle.None,
-                    Size = new Size(572, 242), // +2 para el borde
-                    BackColor = Color.FromArgb(35, 34, 33), // Color negro del proyecto (borde)
+                    Size = new Size(401, 170), 
+                    BackColor = Color.FromArgb(35, 34, 33), 
                     TopMost = true,
                     ShowInTaskbar = false,
-                    Padding = new Padding(1) // Padding para simular borde de 1px
+                    Padding = new Padding(1) 
                 };
 
-                // Panel contenedor interno (crea el efecto de borde)
                 var panelContenedor = new Panel
                 {
-                    Size = new Size(570, 240),
+                    Size = new Size(399, 168),
                     Location = new Point(1, 1),
-                    BackColor = Color.FromArgb(255, 248, 225) // Color de fondo del proyecto
+                    BackColor = Color.FromArgb(255, 248, 225)
                 };
 
-                // Panel superior con color principal del proyecto
                 var panelTitulo = new Panel
                 {
-                    Size = new Size(570, 75),
+                    Size = new Size(399, 52), 
                     Location = new Point(0, 0),
-                    BackColor = Color.FromArgb(255, 208, 36) // Color amarillo del proyecto
+                    BackColor = Color.FromArgb(255, 208, 36) 
                 };
 
-                // Título
                 var lblTitulo = new Label
                 {
-                    Text = "✓ REGISTRO EXITOSO",
-                    Font = new Font("Segoe UI", 18, FontStyle.Bold),
-                    ForeColor = Color.FromArgb(35, 34, 33), // Color texto oscuro del proyecto
+                    Text = "Registro Manual",
+                    Font = new Font("Segoe UI", 14, FontStyle.Bold), 
+                    ForeColor = Color.FromArgb(35, 34, 33), 
                     AutoSize = false,
-                    Size = new Size(570, 75),
+                    Size = new Size(399, 52),
                     TextAlign = ContentAlignment.MiddleCenter
                 };
+
                 panelTitulo.Controls.Add(lblTitulo);
 
-                // Mensaje con cantidad de comensales agregados
                 string mensaje = cantidad == 1 
-                    ? $"Comensal agregado correctamente\n\nTotal registrado: {cantidad}"
-                    : $"Comensales agregados correctamente\n\nTotal registrados: {cantidad}";
+                    ? $"Comensal Agregado Correctamente"
+                    : $"Comensales Agregados Correctamente\n\nTotal registrados: {cantidad}";
 
                 var lblMensaje = new Label
                 {
                     Text = mensaje,
-                    Font = new Font("Segoe UI", 18, FontStyle.Bold),
+                    Font = new Font("Segoe UI", 14, FontStyle.Bold),
                     ForeColor = Color.FromArgb(35, 34, 33),
                     AutoSize = false,
-                    Size = new Size(550, 135),
-                    Location = new Point(10, 85),
+                    Size = new Size(385, 95), 
+                    Location = new Point(7, 60), 
                     TextAlign = ContentAlignment.MiddleCenter
                 };
 
@@ -283,8 +274,7 @@ namespace app.UserControls
                 panelContenedor.Controls.Add(lblMensaje);
                 formTemporal.Controls.Add(panelContenedor);
 
-                // Timer para cerrar después de 3 segundos
-                var timer = new Timer { Interval = 3000 };
+                var timer = new Timer { Interval = 4000 };
                 timer.Tick += (s, ev) =>
                 {
                     timer.Stop();
@@ -296,10 +286,7 @@ namespace app.UserControls
                 formTemporal.Shown += (s, ev) => timer.Start();
                 formTemporal.Show();
             }
-            catch
-            {
-                // Si falla el mensaje temporal, no afecta el registro
-            }
+            catch {}
         }
     }
 }
