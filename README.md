@@ -34,7 +34,7 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Validación automática de duplicados
 - Confirmación visual inmediata
 
-**Método Futuro: RFID Automático (Documentado)**
+**Método Futuro: RFID Automático**
 - Lectura automática de credencial
 - Registro instantáneo (<1 segundo)
 - Cero intervención del operador
@@ -53,7 +53,7 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - **Alta**: Crear nuevos empleados con datos completos
 - **Modificación**: Actualizar información de empleados
 - **Baja lógica**: Desactivar empleados manteniendo historial
-- **Búsqueda**: Filtros por nombre, apellido, empresa
+- **Listado y Búsqueda**: Filtros por nombre, apellido, empresa
 
 **Gestión de Credenciales:**
 - Asignación de ID de credencial a empleados
@@ -78,7 +78,7 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 -  Total de comensales reales vs proyectados
 -  Comparativa de eficiencia
 
-###  Panel Principal (Tiempo Real)
+###  Panel Principal
 
 **Visualización Instantánea:**
 - Listado de todos los registros del servicio actual
@@ -124,12 +124,10 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 ##  Arquitectura del Sistema
 
-### Estructura del Proyecto
-
 ```
 Sistema-Control-Almuerzos/
 ├── SCA/
-│   ├── dominio/                    # Capa de Entidades
+│   ├── dominio/                   # Capa de Entidades
 │   │   ├── Empleado.cs            # Modelo de empleados
 │   │   ├── Empresa.cs             # Modelo de empresas
 │   │   ├── Lugar.cs               # Modelo de lugares (comedor/quincho)
@@ -154,7 +152,6 @@ Sistema-Control-Almuerzos/
 │       ├── UserControls/          # Controles de usuario modulares
 │       │   ├── ucVistaPrincipal.cs       # Pantalla de bienvenida
 │       │   ├── ucRegistroManual.cs       # Registro de comensales
-│       │   ├── ucPaneles.cs              # Vista para cocina
 │       │   ├── ucEmpleados.cs            # Gestión de empleados
 │       │   ├── ucEmpresas.cs             # Gestión de empresas
 │       │   ├── ucConfiguracion.cs        # Configuración de servicios
@@ -167,14 +164,13 @@ Sistema-Control-Almuerzos/
 ├── Procedimientos_Vistas_Triggers.sql    # Objetos de BD
 ├── Datos_Iniciales.sql                   # Datos de prueba
 ├── DER_SdCdA.drawio                      # Diagrama ER
+├── MANUAL_USUARIO.md                     # Manual para el usuario
 └── README.md                             # Este archivo
 ```
 
 ##  Base de Datos
 
 ### Modelo de Datos
-
-#### Tablas Principales
 
 **EMPLEADOS**
 ```sql
@@ -227,32 +223,32 @@ Sistema-Control-Almuerzos/
 ### Procedimientos Almacenados
 
 #### Gestión de Empleados
-- `SP_ListarEmpleados`: Listado completo con empresa y credencial
-- `SP_BuscarEmpleadoPorId`: Búsqueda específica por ID
-- `SP_BuscarEmpleadoPorCredencial`: Búsqueda por ID de credencial
-- `SP_AltaEmpleado`: Inserción con validaciones
-- `SP_ModificarEmpleado`: Actualización completa
-- `SP_BajaEmpleado`: Baja lógica
-- `SP_AsignarCredencial`: Asignar ID de credencial único
+- `sp_ListarEmpleados`: Listado completo con empresa y credencial
+- `sp_BuscarEmpleadoPorId`: Búsqueda específica por ID
+- `sp_BuscarEmpleadoPorCredencial`: Búsqueda por ID de credencial
+- `sp_AltaEmpleado`: Inserción con validaciones
+- `sp_ModificarEmpleado`: Actualización completa
+- `sp_BajaEmpleado`: Baja lógica
+- `sp_AsignarCredencial`: Asignar ID de credencial único
 
 #### Gestión de Servicios
-- `SP_IniciarServicio`: Crear nuevo servicio activo
-- `SP_FinalizarServicio`: Cerrar servicio con cálculos
-- `SP_ObtenerServicioActivo`: Obtener servicio en curso
-- `SP_ListarServicios`: Historial de servicios
+- `sp_IniciarServicio`: Crear nuevo servicio activo
+- `sp_FinalizarServicio`: Cerrar servicio con cálculos
+- `sp_ObtenerServicioActivo`: Obtener servicio en curso
+- `sp_ListarServicios`: Historial de servicios
 
 #### Gestión de Registros
-- `SP_RegistrarAlmuerzo`: Registro principal con validaciones
-- `SP_RegistrarInvitados`: Registro de invitados sin datos
-- `SP_VerificarRegistroDuplicado`: Validar si ya se registró
-- `SP_ListarRegistrosPorServicio`: Registros del servicio actual
-- `SP_ContarRegistrosPorServicio`: Total de comensales
+- `sp_RegistrarAlmuerzo`: Registro principal con validaciones
+- `sp_RegistrarInvitados`: Registro de invitados sin datos
+- `sp_VerificarRegistroDuplicado`: Validar si ya se registró
+- `sp_ListarRegistrosPorServicio`: Registros del servicio actual
+- `sp_ContarRegistrosPorServicio`: Total de comensales
 
 #### Reportes y Estadísticas
-- `SP_ReporteDiario`: Estadísticas de un día específico
-- `SP_ReportePorPeriodo`: Análisis de rango de fechas
-- `SP_ReportePorEmpresa`: Datos específicos de empresa
-- `SP_EstadisticasGenerales`: Resumen general del sistema
+- `sp_ReporteDiario`: Estadísticas de un día específico
+- `sp_ReportePorPeriodo`: Análisis de rango de fechas
+- `sp_ReportePorEmpresa`: Datos específicos de empresa
+- `sp_EstadisticasGenerales`: Resumen general del sistema
 
 ### Vistas
 
@@ -284,24 +280,23 @@ Sistema-Control-Almuerzos/
 - RAM: 4 GB (recomendado 8 GB)
 - Espacio en disco: 500 MB
 
-**Hardware Futuro (RFID - Opcional):**
-- Lector RFID 13.56 MHz (ISO 14443)
-- Conexión USB o Serial (RS232)
+**Hardware Futuro (RFID):**
+- Lector RFID 
+- Conexión USB
 - Credenciales RFID compatibles
 
 ### Módulos del Sistema
 
-| Módulo | Descripción | Usuario Típico |
-|--------|-------------|----------------|
-| **ucVistaPrincipal** | Pantalla de bienvenida y navegación | Todos |
-| **ucRegistroManual** | Registro de comensales | Personal de cocina |
-| **ucPaneles** | Visualización en tiempo real | Personal de cocina |
-| **ucEmpleados** | Gestión de empleados y credenciales | Administrador |
-| **ucEmpresas** | Gestión de empresas | Administrador |
-| **ucConfiguracion** | Configuración de servicios y lugares | Administrador |
-| **ucReportes** | Generación de reportes | Administrador |
-| **ucEstadisticas** | Análisis estadístico | Administrador |
-| **ucAdmin** | Panel administrativo general | Administrador |
+| Módulo | Descripción |
+|--------|-------------|
+| **ucVistaPrincipal** | Pantalla de bienvenida y navegación | 
+| **ucRegistroManual** | Registro de comensales | 
+| **ucEmpleados** | Gestión de empleados y credenciales | 
+| **ucEmpresas** | Gestión de empresas | 
+| **ucConfiguracion** | Configuración del sistema | 
+| **ucReportes** | Generación de reportes | 
+| **ucEstadisticas** | Análisis estadístico |
+| **ucAdmin** | Panel administrativo general | 
 
 ---
 
@@ -349,7 +344,7 @@ Sistema-Control-Almuerzos/
 
 **Estado**: Funcional y listo para producción
 
--  Diseño y implementación de base de datos
+-  Diseño e implementación de base de datos
 -  Arquitectura en 3 capas completa
 -  Módulo de gestión de empleados
 -  Módulo de gestión de empresas y lugares

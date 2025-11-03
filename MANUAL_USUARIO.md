@@ -59,12 +59,6 @@ El Sistema de Control de Almuerzos es una aplicación diseñada para gestionar d
 - ✅ Generar reportes y estadísticas
 - ✅ Configurar el sistema
 
-**¿Cuándo lo usa?**
-- Al inicio del día (abrir servicio)
-- Al final del día (cerrar servicio)
-- Para administración general
-- Para generar reportes
-
 ---
 
 ## 📝 Registro de Comensales
@@ -95,8 +89,6 @@ El sistema mostrará:
 
 ### ¿Cómo Registrar sin Credencial? (Método Alternativo)
 
-**Situación**: El empleado olvidó su credencial en el escritorio.
-
 #### Paso 1: Seleccionar Registro Manual
 1. En el menu principal, hacer clic en **"Registro Manual"**
 
@@ -109,21 +101,16 @@ El sistema mostrará:
 2. Verificar que sea la persona correcta (nombre + empresa)
 
 #### Paso 4: Confirmar Registro
-1. Hacer clic en **"Confirmar Registro"**
+1. Hacer clic en **"Agregar"**
 2. El sistema registrará al empleado
-
-**Tiempo estimado: 10-15 segundos**
 
 ---
 
 ### ¿Cómo Registrar Invitados?
 
-**Situación**: Hay invitados externos sin credencial.
-
 #### Método Simple
 1. Hacer clic en el campo **Invitados**
-2. Ingresar la **cantidad** de invitados (ejemplo: 3)
-3. Hacer clic en **"Confirmar"**
+2. Ingresar la **cantidad** de invitados previo al inicio del servicio
 
 **Nota**: No se requieren datos personales de invitados, solo la cantidad total.
 
@@ -817,12 +804,6 @@ Paso 4: Generar "Asistencias por empresas"
 
 **¿Necesitaré capacitación nueva?**
 - No, el sistema será aún más simple de usar
-
----
-
-**¡Felicidades! Ya tenés todo lo necesario para usar eficientemente el Sistema de Control de Almuerzos.**
-
-**Si tenés dudas, consultá este manual o contactá al soporte técnico.**
 
 ---
 
