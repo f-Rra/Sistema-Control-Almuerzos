@@ -41,15 +41,5 @@ namespace Dominio
         {
             get { return DuracionMinutos == null ? "Activo" : "Finalizado"; }
         }
-
-        public bool EstaActivo()
-        {
-            return DuracionMinutos == null;
-        }
-
-        public bool EstaFinalizado()
-        {
-            return DuracionMinutos != null;
-        }
     }
 }

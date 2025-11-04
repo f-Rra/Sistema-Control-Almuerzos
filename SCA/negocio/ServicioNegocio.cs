@@ -10,38 +10,6 @@ namespace Negocio
 {
     public class ServicioNegocio
     {
-        public Servicio obtenerServicioActivo(int idLugar)
-        {
-            AccesoDatos datos = new AccesoDatos();
-
-            try
-            {
-                datos.setearProcedimiento("sp_ObtenerServicioActivo");
-                datos.setearParametro("@IdLugar", idLugar);
-                datos.ejecutarLectura();
-
-                if (datos.Lector.Read())
-                {
-                    Servicio servicio = new Servicio();
-                    servicio.IdServicio = (int)datos.Lector["IdServicio"];
-                    servicio.IdLugar = (int)datos.Lector["IdLugar"];
-                    servicio.Fecha = (DateTime)datos.Lector["Fecha"];
-                    if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
-                    if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
-                    servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
-                    servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
-
-                    return servicio;
-                }
-
-                return null;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
         public Servicio obtenerUltimoServicio()
         {
             AccesoDatos datos = new AccesoDatos();
@@ -154,40 +122,6 @@ namespace Negocio
                     servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
                     servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
                     servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
-                    lista.Add(servicio);
-                }
-
-                return lista;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
-        public List<Servicio> listarPorLugar(int idLugar, DateTime fechaDesde, DateTime fechaHasta)
-        {
-            List<Servicio> lista = new List<Servicio>();
-            AccesoDatos datos = new AccesoDatos();
-
-            try
-            {
-                datos.setearProcedimiento("sp_ListarServiciosPorLugar");
-                datos.setearParametro("@IdLugar", idLugar);
-                datos.setearParametro("@FechaDesde", fechaDesde);
-                datos.setearParametro("@FechaHasta", fechaHasta);
-                datos.ejecutarLectura();
-
-                while (datos.Lector.Read())
-                {
-                    Servicio servicio = new Servicio();
-                    servicio.IdServicio = (int)datos.Lector["IdServicio"];
-                    servicio.Fecha = (DateTime)datos.Lector["Fecha"];
-                    if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
-                    if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
-                    servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
-                    servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
-
                     lista.Add(servicio);
                 }
 

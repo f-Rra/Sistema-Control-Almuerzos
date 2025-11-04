@@ -39,10 +39,5 @@ namespace Dominio
         {
             get { return Hora.ToString(@"hh\:mm"); }
         }
-
-        public bool EsDelDiaActual()
-        {
-            return Fecha.Date == DateTime.Now.Date;
-        }
     }
 }

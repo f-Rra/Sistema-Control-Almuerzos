@@ -68,11 +68,6 @@ namespace app.UserControls
             cbLugar.SelectedIndex = 0; 
         }
 
-        public int CountRegistros()
-        {
-            return dgvFaltantes?.Rows?.Count ?? 0;
-        }
-
         private void CargarRegistros()
         {
             dgvFaltantes.DataSource = null;

@@ -35,9 +35,5 @@ namespace Dominio
         {
             get { return $"{Nombre} {Apellido}"; }
         }
-        public bool EstaActivo()
-        {
-            return Estado;
-        }
     }
 }

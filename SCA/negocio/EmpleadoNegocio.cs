@@ -80,36 +80,6 @@ namespace Negocio
             }, "buscar empleado por credencial");
         }
 
-        public List<Empleado> listarPorEmpresa(int idEmpresa)
-        {
-            List<Empleado> lista = new List<Empleado>();
-            AccesoDatos datos = new AccesoDatos();
-
-            try
-            {
-                datos.setearProcedimiento("sp_ListarEmpleadosPorEmpresa");
-                datos.setearParametro("@IdEmpresa", idEmpresa);
-                datos.ejecutarLectura();
-
-                while (datos.Lector.Read())
-                {
-                    Empleado empleado = new Empleado();
-                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                    empleado.Nombre = (string)datos.Lector["Nombre"];
-                    empleado.Apellido = (string)datos.Lector["Apellido"];
-                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
-
-                    lista.Add(empleado);
-                }
-
-                return lista;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
         public List<Empleado> empleadosSinAlmorzar(int idServicio)
         {
             List<Empleado> lista = new List<Empleado>();

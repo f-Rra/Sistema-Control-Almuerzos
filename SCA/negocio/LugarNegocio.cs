@@ -30,33 +30,7 @@ namespace Negocio
 
                 return lista;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
-        public int obtenerIdPorNombre(string nombreLugar)
-        {
-            AccesoDatos datos = new AccesoDatos();
-
-            try
-            {
-                datos.setearProcedimiento("sp_ObtenerLugarPorNombre");
-                datos.setearParametro("@Nombre", nombreLugar);
-                datos.ejecutarLectura();
-
-                if (datos.Lector.Read())
-                {
-                    return (int)datos.Lector["IdLugar"];
-                }
-                return 0; 
-            }
-            catch (Exception ex)
+            catch
             {
                 throw;
             }

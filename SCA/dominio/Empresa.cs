@@ -19,10 +19,5 @@ namespace Dominio
 
         [DisplayName("Empleados")]
         public int CantidadEmpleados { get; set; }
-
-        public bool EstaActiva()
-        {
-            return Estado;
-        }
     }
 }
