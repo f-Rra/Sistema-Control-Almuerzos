@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlSuperior = new System.Windows.Forms.Panel();
             this.gbxPanelReportes = new System.Windows.Forms.GroupBox();
             this.pnlReportesA = new System.Windows.Forms.Panel();
@@ -69,14 +69,14 @@
             this.pnlSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSuperior.Location = new System.Drawing.Point(0, 0);
             this.pnlSuperior.Name = "pnlSuperior";
-            this.pnlSuperior.Size = new System.Drawing.Size(1155, 179);
+            this.pnlSuperior.Size = new System.Drawing.Size(1155, 200);
             this.pnlSuperior.TabIndex = 0;
             // 
             // gbxPanelReportes
             // 
             this.gbxPanelReportes.Controls.Add(this.pnlReportesA);
             this.gbxPanelReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbxPanelReportes.Location = new System.Drawing.Point(299, 7);
+            this.gbxPanelReportes.Location = new System.Drawing.Point(304, 18);
             this.gbxPanelReportes.Name = "gbxPanelReportes";
             this.gbxPanelReportes.Size = new System.Drawing.Size(839, 151);
             this.gbxPanelReportes.TabIndex = 9;
@@ -255,7 +255,7 @@
             this.btnExportar.Image = null;
             this.btnExportar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExportar.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnExportar.Location = new System.Drawing.Point(953, 410);
+            this.btnExportar.Location = new System.Drawing.Point(952, 378);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.btnExportar.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -277,27 +277,27 @@
             this.dgvReporte.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.dgvReporte.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvReporte.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvReporte.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvReporte.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvReporte.ColumnHeadersHeight = 40;
             this.dgvReporte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReporte.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReporte.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvReporte.EnableHeadersVisualStyles = false;
             this.dgvReporte.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.dgvReporte.Location = new System.Drawing.Point(30, 243);
+            this.dgvReporte.Location = new System.Drawing.Point(14, 18);
             this.dgvReporte.MultiSelect = false;
             this.dgvReporte.Name = "dgvReporte";
             this.dgvReporte.ReadOnly = true;
@@ -305,7 +305,7 @@
             this.dgvReporte.RowHeadersWidth = 62;
             this.dgvReporte.RowTemplate.Height = 40;
             this.dgvReporte.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReporte.Size = new System.Drawing.Size(1097, 383);
+            this.dgvReporte.Size = new System.Drawing.Size(1097, 342);
             this.dgvReporte.TabIndex = 1;
             // 
             // ssPanel
@@ -313,10 +313,10 @@
             this.ssPanel.Customization = "Kioq/yoqKv8jIyP/Kioq/w==";
             this.ssPanel.Font = new System.Drawing.Font("Verdana", 8F);
             this.ssPanel.Image = null;
-            this.ssPanel.Location = new System.Drawing.Point(287, 3);
+            this.ssPanel.Location = new System.Drawing.Point(287, 6);
             this.ssPanel.Name = "ssPanel";
             this.ssPanel.NoRounding = false;
-            this.ssPanel.Size = new System.Drawing.Size(4, 165);
+            this.ssPanel.Size = new System.Drawing.Size(4, 180);
             this.ssPanel.TabIndex = 6;
             this.ssPanel.Transparent = false;
             // 
@@ -335,9 +335,9 @@
             // 
             this.gbxReportes.Controls.Add(this.pnlReportesC);
             this.gbxReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbxReportes.Location = new System.Drawing.Point(4, 185);
+            this.gbxReportes.Location = new System.Drawing.Point(4, 206);
             this.gbxReportes.Name = "gbxReportes";
-            this.gbxReportes.Size = new System.Drawing.Size(1148, 507);
+            this.gbxReportes.Size = new System.Drawing.Size(1148, 476);
             this.gbxReportes.TabIndex = 10;
             this.gbxReportes.TabStop = false;
             // 
@@ -346,9 +346,9 @@
             this.pnlReportesC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.pnlReportesC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlReportesC.Controls.Add(this.pnlReportesD);
-            this.pnlReportesC.Location = new System.Drawing.Point(6, 14);
+            this.pnlReportesC.Location = new System.Drawing.Point(6, 13);
             this.pnlReportesC.Name = "pnlReportesC";
-            this.pnlReportesC.Size = new System.Drawing.Size(1136, 487);
+            this.pnlReportesC.Size = new System.Drawing.Size(1136, 455);
             this.pnlReportesC.TabIndex = 7;
             // 
             // pnlReportesD
@@ -357,10 +357,11 @@
             this.pnlReportesD.BackgroundImage = global::app.Properties.Resources.panel;
             this.pnlReportesD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlReportesD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlReportesD.Controls.Add(this.dgvReporte);
             this.pnlReportesD.Controls.Add(this.btnExportar);
-            this.pnlReportesD.Location = new System.Drawing.Point(3, 27);
+            this.pnlReportesD.Location = new System.Drawing.Point(3, 21);
             this.pnlReportesD.Name = "pnlReportesD";
-            this.pnlReportesD.Size = new System.Drawing.Size(1128, 455);
+            this.pnlReportesD.Size = new System.Drawing.Size(1128, 429);
             this.pnlReportesD.TabIndex = 6;
             // 
             // ucReportes
@@ -368,7 +369,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.Controls.Add(this.dgvReporte);
             this.Controls.Add(this.gbxReportes);
             this.Controls.Add(this.pbxTitulo);
             this.Controls.Add(this.ssPanel);

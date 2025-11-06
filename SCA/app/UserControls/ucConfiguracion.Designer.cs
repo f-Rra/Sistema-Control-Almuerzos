@@ -49,7 +49,7 @@ namespace app.UserControls
             this.Controls.Add(this.lblTitulo);
             this.Name = "ucConfiguracion";
             this.Padding = new System.Windows.Forms.Padding(15);
-            this.Size = new System.Drawing.Size(1155, 510);
+            this.Size = new System.Drawing.Size(1155, 495);
             this.Load += new System.EventHandler(this.ucConfiguracion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

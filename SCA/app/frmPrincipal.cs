@@ -499,25 +499,25 @@ namespace app
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 205);
+            ssSidebar.Location = new System.Drawing.Point(9, 210);
             MostrarVistaPrincipal();
         }
 
         private void btnRegistros_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 286);
+            ssSidebar.Location = new System.Drawing.Point(9, 291);
             MostrarVistaRegistroManual();
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 368);
+            ssSidebar.Location = new System.Drawing.Point(9, 373);
             MostrarVistaReportes();
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 538);
+            ssSidebar.Location = new System.Drawing.Point(9, 616);
             MostrarVistaAdmin();
         }
 

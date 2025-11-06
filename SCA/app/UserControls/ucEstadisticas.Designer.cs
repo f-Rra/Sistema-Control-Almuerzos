@@ -49,30 +49,30 @@ namespace app.UserControls
             this.pnlAsistencias = new System.Windows.Forms.Panel();
             this.bigLabel9 = new ReaLTaiizor.Controls.BigLabel();
             this.pnlAsistenciasB = new System.Windows.Forms.Panel();
+            this.lblDuracionPromedio = new ReaLTaiizor.Controls.BigLabel();
+            this.lblCobertura = new ReaLTaiizor.Controls.BigLabel();
             this.lblAsistenciasInvitados = new ReaLTaiizor.Controls.BigLabel();
+            this.lblPromedioDiario = new ReaLTaiizor.Controls.BigLabel();
             this.lblAsistenciasEmpleados = new ReaLTaiizor.Controls.BigLabel();
             this.lblAsistenciasTotales = new ReaLTaiizor.Controls.BigLabel();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.bigLabel13 = new ReaLTaiizor.Controls.BigLabel();
             this.pnlTopB = new System.Windows.Forms.Panel();
-            this.lblPromedioDiario = new ReaLTaiizor.Controls.BigLabel();
-            this.lblCobertura = new ReaLTaiizor.Controls.BigLabel();
-            this.lblDuracionPromedio = new ReaLTaiizor.Controls.BigLabel();
-            this.lblTop5 = new ReaLTaiizor.Controls.BigLabel();
-            this.lblTop3 = new ReaLTaiizor.Controls.BigLabel();
-            this.lblTop4 = new ReaLTaiizor.Controls.BigLabel();
-            this.lblTop2 = new ReaLTaiizor.Controls.BigLabel();
-            this.lblTop1 = new ReaLTaiizor.Controls.BigLabel();
-            this.pbProgreso1 = new ReaLTaiizor.Controls.AloneProgressBar();
-            this.lblPorcentaje1 = new ReaLTaiizor.Controls.BigLabel();
-            this.lblPorcentaje2 = new ReaLTaiizor.Controls.BigLabel();
-            this.pbProgreso2 = new ReaLTaiizor.Controls.AloneProgressBar();
-            this.lblPorcentaje3 = new ReaLTaiizor.Controls.BigLabel();
-            this.pbProgreso3 = new ReaLTaiizor.Controls.AloneProgressBar();
-            this.lblPorcentaje4 = new ReaLTaiizor.Controls.BigLabel();
-            this.pbProgreso4 = new ReaLTaiizor.Controls.AloneProgressBar();
             this.lblPorcentaje5 = new ReaLTaiizor.Controls.BigLabel();
             this.pbProgreso5 = new ReaLTaiizor.Controls.AloneProgressBar();
+            this.lblPorcentaje4 = new ReaLTaiizor.Controls.BigLabel();
+            this.pbProgreso4 = new ReaLTaiizor.Controls.AloneProgressBar();
+            this.lblPorcentaje3 = new ReaLTaiizor.Controls.BigLabel();
+            this.pbProgreso3 = new ReaLTaiizor.Controls.AloneProgressBar();
+            this.lblPorcentaje2 = new ReaLTaiizor.Controls.BigLabel();
+            this.pbProgreso2 = new ReaLTaiizor.Controls.AloneProgressBar();
+            this.lblPorcentaje1 = new ReaLTaiizor.Controls.BigLabel();
+            this.pbProgreso1 = new ReaLTaiizor.Controls.AloneProgressBar();
+            this.lblTop3 = new ReaLTaiizor.Controls.BigLabel();
+            this.lblTop5 = new ReaLTaiizor.Controls.BigLabel();
+            this.lblTop1 = new ReaLTaiizor.Controls.BigLabel();
+            this.lblTop2 = new ReaLTaiizor.Controls.BigLabel();
+            this.lblTop4 = new ReaLTaiizor.Controls.BigLabel();
             this.pnlEmpleados.SuspendLayout();
             this.pnlEmpleadosB.SuspendLayout();
             this.pnlEmpresas.SuspendLayout();
@@ -91,7 +91,7 @@ namespace app.UserControls
             this.pnlEmpleados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlEmpleados.Controls.Add(this.lblEstadisticasEmpresa);
             this.pnlEmpleados.Controls.Add(this.pnlEmpleadosB);
-            this.pnlEmpleados.Location = new System.Drawing.Point(18, 18);
+            this.pnlEmpleados.Location = new System.Drawing.Point(18, 9);
             this.pnlEmpleados.Name = "pnlEmpleados";
             this.pnlEmpleados.Size = new System.Drawing.Size(347, 169);
             this.pnlEmpleados.TabIndex = 9;
@@ -104,9 +104,9 @@ namespace app.UserControls
             this.lblEstadisticasEmpresa.ForeColor = System.Drawing.Color.White;
             this.lblEstadisticasEmpresa.Location = new System.Drawing.Point(132, 7);
             this.lblEstadisticasEmpresa.Name = "lblEstadisticasEmpresa";
-            this.lblEstadisticasEmpresa.Size = new System.Drawing.Size(75, 17);
+            this.lblEstadisticasEmpresa.Size = new System.Drawing.Size(85, 17);
             this.lblEstadisticasEmpresa.TabIndex = 2;
-            this.lblEstadisticasEmpresa.Text = "Empleados";
+            this.lblEstadisticasEmpresa.Text = "EMPLEADOS";
             this.lblEstadisticasEmpresa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlEmpleadosB
@@ -168,7 +168,7 @@ namespace app.UserControls
             this.pnlEmpresas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlEmpresas.Controls.Add(this.bigLabel1);
             this.pnlEmpresas.Controls.Add(this.pnlEmpresasB);
-            this.pnlEmpresas.Location = new System.Drawing.Point(406, 18);
+            this.pnlEmpresas.Location = new System.Drawing.Point(406, 9);
             this.pnlEmpresas.Name = "pnlEmpresas";
             this.pnlEmpresas.Size = new System.Drawing.Size(347, 169);
             this.pnlEmpresas.TabIndex = 10;
@@ -181,9 +181,9 @@ namespace app.UserControls
             this.bigLabel1.ForeColor = System.Drawing.Color.White;
             this.bigLabel1.Location = new System.Drawing.Point(142, 7);
             this.bigLabel1.Name = "bigLabel1";
-            this.bigLabel1.Size = new System.Drawing.Size(66, 17);
+            this.bigLabel1.Size = new System.Drawing.Size(73, 17);
             this.bigLabel1.TabIndex = 2;
-            this.bigLabel1.Text = "Empresas";
+            this.bigLabel1.Text = "EMPRESAS";
             this.bigLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlEmpresasB
@@ -245,7 +245,7 @@ namespace app.UserControls
             this.pnlServicios.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlServicios.Controls.Add(this.bigLabel5);
             this.pnlServicios.Controls.Add(this.pnlServiciosB);
-            this.pnlServicios.Location = new System.Drawing.Point(790, 18);
+            this.pnlServicios.Location = new System.Drawing.Point(790, 9);
             this.pnlServicios.Name = "pnlServicios";
             this.pnlServicios.Size = new System.Drawing.Size(347, 169);
             this.pnlServicios.TabIndex = 10;
@@ -258,9 +258,9 @@ namespace app.UserControls
             this.bigLabel5.ForeColor = System.Drawing.Color.White;
             this.bigLabel5.Location = new System.Drawing.Point(146, 7);
             this.bigLabel5.Name = "bigLabel5";
-            this.bigLabel5.Size = new System.Drawing.Size(62, 17);
+            this.bigLabel5.Size = new System.Drawing.Size(72, 17);
             this.bigLabel5.TabIndex = 2;
-            this.bigLabel5.Text = "Servicios";
+            this.bigLabel5.Text = "SERVICIOS";
             this.bigLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlServiciosB
@@ -322,7 +322,7 @@ namespace app.UserControls
             this.pnlAsistencias.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAsistencias.Controls.Add(this.bigLabel9);
             this.pnlAsistencias.Controls.Add(this.pnlAsistenciasB);
-            this.pnlAsistencias.Location = new System.Drawing.Point(18, 206);
+            this.pnlAsistencias.Location = new System.Drawing.Point(18, 193);
             this.pnlAsistencias.Name = "pnlAsistencias";
             this.pnlAsistencias.Size = new System.Drawing.Size(547, 286);
             this.pnlAsistencias.TabIndex = 10;
@@ -335,9 +335,9 @@ namespace app.UserControls
             this.bigLabel9.ForeColor = System.Drawing.Color.White;
             this.bigLabel9.Location = new System.Drawing.Point(186, 7);
             this.bigLabel9.Name = "bigLabel9";
-            this.bigLabel9.Size = new System.Drawing.Size(160, 17);
+            this.bigLabel9.Size = new System.Drawing.Size(184, 17);
             this.bigLabel9.TabIndex = 2;
-            this.bigLabel9.Text = "Asistencias y Tendencias";
+            this.bigLabel9.Text = "ASISTENCIAS Y TENDENCIAS";
             this.bigLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlAsistenciasB
@@ -357,6 +357,32 @@ namespace app.UserControls
             this.pnlAsistenciasB.Size = new System.Drawing.Size(539, 254);
             this.pnlAsistenciasB.TabIndex = 6;
             // 
+            // lblDuracionPromedio
+            // 
+            this.lblDuracionPromedio.AutoSize = true;
+            this.lblDuracionPromedio.BackColor = System.Drawing.Color.Transparent;
+            this.lblDuracionPromedio.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDuracionPromedio.ForeColor = System.Drawing.Color.White;
+            this.lblDuracionPromedio.Location = new System.Drawing.Point(13, 212);
+            this.lblDuracionPromedio.Name = "lblDuracionPromedio";
+            this.lblDuracionPromedio.Size = new System.Drawing.Size(324, 30);
+            this.lblDuracionPromedio.TabIndex = 12;
+            this.lblDuracionPromedio.Text = "Duracion Promedio de Servicio:";
+            this.lblDuracionPromedio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCobertura
+            // 
+            this.lblCobertura.AutoSize = true;
+            this.lblCobertura.BackColor = System.Drawing.Color.Transparent;
+            this.lblCobertura.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCobertura.ForeColor = System.Drawing.Color.White;
+            this.lblCobertura.Location = new System.Drawing.Point(13, 172);
+            this.lblCobertura.Name = "lblCobertura";
+            this.lblCobertura.Size = new System.Drawing.Size(360, 30);
+            this.lblCobertura.TabIndex = 12;
+            this.lblCobertura.Text = "Cobertura Proyeccion vs Promedio:";
+            this.lblCobertura.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lblAsistenciasInvitados
             // 
             this.lblAsistenciasInvitados.AutoSize = true;
@@ -369,6 +395,19 @@ namespace app.UserControls
             this.lblAsistenciasInvitados.TabIndex = 12;
             this.lblAsistenciasInvitados.Text = "Asistencias de Invitados:";
             this.lblAsistenciasInvitados.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPromedioDiario
+            // 
+            this.lblPromedioDiario.AutoSize = true;
+            this.lblPromedioDiario.BackColor = System.Drawing.Color.Transparent;
+            this.lblPromedioDiario.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPromedioDiario.ForeColor = System.Drawing.Color.White;
+            this.lblPromedioDiario.Location = new System.Drawing.Point(13, 132);
+            this.lblPromedioDiario.Name = "lblPromedioDiario";
+            this.lblPromedioDiario.Size = new System.Drawing.Size(329, 30);
+            this.lblPromedioDiario.TabIndex = 12;
+            this.lblPromedioDiario.Text = "Promedio Diario de Asistencias: ";
+            this.lblPromedioDiario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblAsistenciasEmpleados
             // 
@@ -402,7 +441,7 @@ namespace app.UserControls
             this.pnlTop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTop.Controls.Add(this.bigLabel13);
             this.pnlTop.Controls.Add(this.pnlTopB);
-            this.pnlTop.Location = new System.Drawing.Point(590, 206);
+            this.pnlTop.Location = new System.Drawing.Point(590, 193);
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(547, 286);
             this.pnlTop.TabIndex = 11;
@@ -415,9 +454,9 @@ namespace app.UserControls
             this.bigLabel13.ForeColor = System.Drawing.Color.White;
             this.bigLabel13.Location = new System.Drawing.Point(133, 7);
             this.bigLabel13.Name = "bigLabel13";
-            this.bigLabel13.Size = new System.Drawing.Size(275, 17);
+            this.bigLabel13.Size = new System.Drawing.Size(299, 17);
             this.bigLabel13.TabIndex = 2;
-            this.bigLabel13.Text = "TOP Empresas por Asistencias (Mes Actual)";
+            this.bigLabel13.Text = "TOP EMPRESAS POR ASISTENCIAS (Mes Actual)";
             this.bigLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlTopB
@@ -445,226 +484,6 @@ namespace app.UserControls
             this.pnlTopB.Name = "pnlTopB";
             this.pnlTopB.Size = new System.Drawing.Size(539, 254);
             this.pnlTopB.TabIndex = 6;
-            // 
-            // lblPromedioDiario
-            // 
-            this.lblPromedioDiario.AutoSize = true;
-            this.lblPromedioDiario.BackColor = System.Drawing.Color.Transparent;
-            this.lblPromedioDiario.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPromedioDiario.ForeColor = System.Drawing.Color.White;
-            this.lblPromedioDiario.Location = new System.Drawing.Point(13, 132);
-            this.lblPromedioDiario.Name = "lblPromedioDiario";
-            this.lblPromedioDiario.Size = new System.Drawing.Size(329, 30);
-            this.lblPromedioDiario.TabIndex = 12;
-            this.lblPromedioDiario.Text = "Promedio Diario de Asistencias: ";
-            this.lblPromedioDiario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblCobertura
-            // 
-            this.lblCobertura.AutoSize = true;
-            this.lblCobertura.BackColor = System.Drawing.Color.Transparent;
-            this.lblCobertura.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCobertura.ForeColor = System.Drawing.Color.White;
-            this.lblCobertura.Location = new System.Drawing.Point(13, 172);
-            this.lblCobertura.Name = "lblCobertura";
-            this.lblCobertura.Size = new System.Drawing.Size(360, 30);
-            this.lblCobertura.TabIndex = 12;
-            this.lblCobertura.Text = "Cobertura Proyeccion vs Promedio:";
-            this.lblCobertura.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblDuracionPromedio
-            // 
-            this.lblDuracionPromedio.AutoSize = true;
-            this.lblDuracionPromedio.BackColor = System.Drawing.Color.Transparent;
-            this.lblDuracionPromedio.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDuracionPromedio.ForeColor = System.Drawing.Color.White;
-            this.lblDuracionPromedio.Location = new System.Drawing.Point(13, 212);
-            this.lblDuracionPromedio.Name = "lblDuracionPromedio";
-            this.lblDuracionPromedio.Size = new System.Drawing.Size(324, 30);
-            this.lblDuracionPromedio.TabIndex = 12;
-            this.lblDuracionPromedio.Text = "Duracion Promedio de Servicio:";
-            this.lblDuracionPromedio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTop5
-            // 
-            this.lblTop5.AutoSize = true;
-            this.lblTop5.BackColor = System.Drawing.Color.Transparent;
-            this.lblTop5.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTop5.ForeColor = System.Drawing.Color.White;
-            this.lblTop5.Location = new System.Drawing.Point(18, 192);
-            this.lblTop5.Name = "lblTop5";
-            this.lblTop5.Size = new System.Drawing.Size(136, 30);
-            this.lblTop5.TabIndex = 14;
-            this.lblTop5.Text = "5. Empresa E";
-            this.lblTop5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTop3
-            // 
-            this.lblTop3.AutoSize = true;
-            this.lblTop3.BackColor = System.Drawing.Color.Transparent;
-            this.lblTop3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTop3.ForeColor = System.Drawing.Color.White;
-            this.lblTop3.Location = new System.Drawing.Point(18, 107);
-            this.lblTop3.Name = "lblTop3";
-            this.lblTop3.Size = new System.Drawing.Size(138, 30);
-            this.lblTop3.TabIndex = 15;
-            this.lblTop3.Text = "3. Empresa C";
-            this.lblTop3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTop4
-            // 
-            this.lblTop4.AutoSize = true;
-            this.lblTop4.BackColor = System.Drawing.Color.Transparent;
-            this.lblTop4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTop4.ForeColor = System.Drawing.Color.White;
-            this.lblTop4.Location = new System.Drawing.Point(18, 150);
-            this.lblTop4.Name = "lblTop4";
-            this.lblTop4.Size = new System.Drawing.Size(140, 30);
-            this.lblTop4.TabIndex = 16;
-            this.lblTop4.Text = "4. Empresa D";
-            this.lblTop4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTop2
-            // 
-            this.lblTop2.AutoSize = true;
-            this.lblTop2.BackColor = System.Drawing.Color.Transparent;
-            this.lblTop2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTop2.ForeColor = System.Drawing.Color.White;
-            this.lblTop2.Location = new System.Drawing.Point(18, 64);
-            this.lblTop2.Name = "lblTop2";
-            this.lblTop2.Size = new System.Drawing.Size(138, 30);
-            this.lblTop2.TabIndex = 17;
-            this.lblTop2.Text = "2. Empresa B";
-            this.lblTop2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTop1
-            // 
-            this.lblTop1.AutoSize = true;
-            this.lblTop1.BackColor = System.Drawing.Color.Transparent;
-            this.lblTop1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTop1.ForeColor = System.Drawing.Color.White;
-            this.lblTop1.Location = new System.Drawing.Point(18, 22);
-            this.lblTop1.Name = "lblTop1";
-            this.lblTop1.Size = new System.Drawing.Size(140, 30);
-            this.lblTop1.TabIndex = 18;
-            this.lblTop1.Text = "1. Empresa A";
-            this.lblTop1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pbProgreso1
-            // 
-            this.pbProgreso1.BackColor = System.Drawing.Color.Transparent;
-            this.pbProgreso1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.pbProgreso1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.pbProgreso1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
-            this.pbProgreso1.Location = new System.Drawing.Point(220, 31);
-            this.pbProgreso1.Maximum = 100;
-            this.pbProgreso1.Minimum = 0;
-            this.pbProgreso1.Name = "pbProgreso1";
-            this.pbProgreso1.Size = new System.Drawing.Size(194, 17);
-            this.pbProgreso1.Stripes = System.Drawing.Color.DarkGreen;
-            this.pbProgreso1.TabIndex = 19;
-            this.pbProgreso1.Text = "aloneProgressBar1";
-            this.pbProgreso1.Value = 50;
-            // 
-            // lblPorcentaje1
-            // 
-            this.lblPorcentaje1.AutoSize = true;
-            this.lblPorcentaje1.BackColor = System.Drawing.Color.Transparent;
-            this.lblPorcentaje1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentaje1.ForeColor = System.Drawing.Color.White;
-            this.lblPorcentaje1.Location = new System.Drawing.Point(438, 22);
-            this.lblPorcentaje1.Name = "lblPorcentaje1";
-            this.lblPorcentaje1.Size = new System.Drawing.Size(67, 30);
-            this.lblPorcentaje1.TabIndex = 20;
-            this.lblPorcentaje1.Text = "100%";
-            this.lblPorcentaje1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblPorcentaje2
-            // 
-            this.lblPorcentaje2.AutoSize = true;
-            this.lblPorcentaje2.BackColor = System.Drawing.Color.Transparent;
-            this.lblPorcentaje2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentaje2.ForeColor = System.Drawing.Color.White;
-            this.lblPorcentaje2.Location = new System.Drawing.Point(438, 64);
-            this.lblPorcentaje2.Name = "lblPorcentaje2";
-            this.lblPorcentaje2.Size = new System.Drawing.Size(67, 30);
-            this.lblPorcentaje2.TabIndex = 22;
-            this.lblPorcentaje2.Text = "100%";
-            this.lblPorcentaje2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pbProgreso2
-            // 
-            this.pbProgreso2.BackColor = System.Drawing.Color.Transparent;
-            this.pbProgreso2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.pbProgreso2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.pbProgreso2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
-            this.pbProgreso2.Location = new System.Drawing.Point(220, 73);
-            this.pbProgreso2.Maximum = 100;
-            this.pbProgreso2.Minimum = 0;
-            this.pbProgreso2.Name = "pbProgreso2";
-            this.pbProgreso2.Size = new System.Drawing.Size(194, 17);
-            this.pbProgreso2.Stripes = System.Drawing.Color.DarkGreen;
-            this.pbProgreso2.TabIndex = 21;
-            this.pbProgreso2.Text = "aloneProgressBar1";
-            this.pbProgreso2.Value = 50;
-            // 
-            // lblPorcentaje3
-            // 
-            this.lblPorcentaje3.AutoSize = true;
-            this.lblPorcentaje3.BackColor = System.Drawing.Color.Transparent;
-            this.lblPorcentaje3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentaje3.ForeColor = System.Drawing.Color.White;
-            this.lblPorcentaje3.Location = new System.Drawing.Point(438, 107);
-            this.lblPorcentaje3.Name = "lblPorcentaje3";
-            this.lblPorcentaje3.Size = new System.Drawing.Size(67, 30);
-            this.lblPorcentaje3.TabIndex = 24;
-            this.lblPorcentaje3.Text = "100%";
-            this.lblPorcentaje3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pbProgreso3
-            // 
-            this.pbProgreso3.BackColor = System.Drawing.Color.Transparent;
-            this.pbProgreso3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.pbProgreso3.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.pbProgreso3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
-            this.pbProgreso3.Location = new System.Drawing.Point(220, 117);
-            this.pbProgreso3.Maximum = 100;
-            this.pbProgreso3.Minimum = 0;
-            this.pbProgreso3.Name = "pbProgreso3";
-            this.pbProgreso3.Size = new System.Drawing.Size(194, 17);
-            this.pbProgreso3.Stripes = System.Drawing.Color.DarkGreen;
-            this.pbProgreso3.TabIndex = 23;
-            this.pbProgreso3.Text = "aloneProgressBar1";
-            this.pbProgreso3.Value = 50;
-            // 
-            // lblPorcentaje4
-            // 
-            this.lblPorcentaje4.AutoSize = true;
-            this.lblPorcentaje4.BackColor = System.Drawing.Color.Transparent;
-            this.lblPorcentaje4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentaje4.ForeColor = System.Drawing.Color.White;
-            this.lblPorcentaje4.Location = new System.Drawing.Point(438, 150);
-            this.lblPorcentaje4.Name = "lblPorcentaje4";
-            this.lblPorcentaje4.Size = new System.Drawing.Size(67, 30);
-            this.lblPorcentaje4.TabIndex = 26;
-            this.lblPorcentaje4.Text = "100%";
-            this.lblPorcentaje4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pbProgreso4
-            // 
-            this.pbProgreso4.BackColor = System.Drawing.Color.Transparent;
-            this.pbProgreso4.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.pbProgreso4.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.pbProgreso4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
-            this.pbProgreso4.Location = new System.Drawing.Point(220, 159);
-            this.pbProgreso4.Maximum = 100;
-            this.pbProgreso4.Minimum = 0;
-            this.pbProgreso4.Name = "pbProgreso4";
-            this.pbProgreso4.Size = new System.Drawing.Size(194, 17);
-            this.pbProgreso4.Stripes = System.Drawing.Color.DarkGreen;
-            this.pbProgreso4.TabIndex = 25;
-            this.pbProgreso4.Text = "aloneProgressBar1";
-            this.pbProgreso4.Value = 50;
             // 
             // lblPorcentaje5
             // 
@@ -695,6 +514,187 @@ namespace app.UserControls
             this.pbProgreso5.Text = "aloneProgressBar1";
             this.pbProgreso5.Value = 50;
             // 
+            // lblPorcentaje4
+            // 
+            this.lblPorcentaje4.AutoSize = true;
+            this.lblPorcentaje4.BackColor = System.Drawing.Color.Transparent;
+            this.lblPorcentaje4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPorcentaje4.ForeColor = System.Drawing.Color.White;
+            this.lblPorcentaje4.Location = new System.Drawing.Point(438, 150);
+            this.lblPorcentaje4.Name = "lblPorcentaje4";
+            this.lblPorcentaje4.Size = new System.Drawing.Size(67, 30);
+            this.lblPorcentaje4.TabIndex = 26;
+            this.lblPorcentaje4.Text = "100%";
+            this.lblPorcentaje4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pbProgreso4
+            // 
+            this.pbProgreso4.BackColor = System.Drawing.Color.Transparent;
+            this.pbProgreso4.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.pbProgreso4.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.pbProgreso4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
+            this.pbProgreso4.Location = new System.Drawing.Point(220, 159);
+            this.pbProgreso4.Maximum = 100;
+            this.pbProgreso4.Minimum = 0;
+            this.pbProgreso4.Name = "pbProgreso4";
+            this.pbProgreso4.Size = new System.Drawing.Size(194, 17);
+            this.pbProgreso4.Stripes = System.Drawing.Color.DarkGreen;
+            this.pbProgreso4.TabIndex = 25;
+            this.pbProgreso4.Text = "aloneProgressBar1";
+            this.pbProgreso4.Value = 50;
+            // 
+            // lblPorcentaje3
+            // 
+            this.lblPorcentaje3.AutoSize = true;
+            this.lblPorcentaje3.BackColor = System.Drawing.Color.Transparent;
+            this.lblPorcentaje3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPorcentaje3.ForeColor = System.Drawing.Color.White;
+            this.lblPorcentaje3.Location = new System.Drawing.Point(438, 107);
+            this.lblPorcentaje3.Name = "lblPorcentaje3";
+            this.lblPorcentaje3.Size = new System.Drawing.Size(67, 30);
+            this.lblPorcentaje3.TabIndex = 24;
+            this.lblPorcentaje3.Text = "100%";
+            this.lblPorcentaje3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pbProgreso3
+            // 
+            this.pbProgreso3.BackColor = System.Drawing.Color.Transparent;
+            this.pbProgreso3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.pbProgreso3.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.pbProgreso3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
+            this.pbProgreso3.Location = new System.Drawing.Point(220, 117);
+            this.pbProgreso3.Maximum = 100;
+            this.pbProgreso3.Minimum = 0;
+            this.pbProgreso3.Name = "pbProgreso3";
+            this.pbProgreso3.Size = new System.Drawing.Size(194, 17);
+            this.pbProgreso3.Stripes = System.Drawing.Color.DarkGreen;
+            this.pbProgreso3.TabIndex = 23;
+            this.pbProgreso3.Text = "aloneProgressBar1";
+            this.pbProgreso3.Value = 50;
+            // 
+            // lblPorcentaje2
+            // 
+            this.lblPorcentaje2.AutoSize = true;
+            this.lblPorcentaje2.BackColor = System.Drawing.Color.Transparent;
+            this.lblPorcentaje2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPorcentaje2.ForeColor = System.Drawing.Color.White;
+            this.lblPorcentaje2.Location = new System.Drawing.Point(438, 64);
+            this.lblPorcentaje2.Name = "lblPorcentaje2";
+            this.lblPorcentaje2.Size = new System.Drawing.Size(67, 30);
+            this.lblPorcentaje2.TabIndex = 22;
+            this.lblPorcentaje2.Text = "100%";
+            this.lblPorcentaje2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pbProgreso2
+            // 
+            this.pbProgreso2.BackColor = System.Drawing.Color.Transparent;
+            this.pbProgreso2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.pbProgreso2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.pbProgreso2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
+            this.pbProgreso2.Location = new System.Drawing.Point(220, 73);
+            this.pbProgreso2.Maximum = 100;
+            this.pbProgreso2.Minimum = 0;
+            this.pbProgreso2.Name = "pbProgreso2";
+            this.pbProgreso2.Size = new System.Drawing.Size(194, 17);
+            this.pbProgreso2.Stripes = System.Drawing.Color.DarkGreen;
+            this.pbProgreso2.TabIndex = 21;
+            this.pbProgreso2.Text = "aloneProgressBar1";
+            this.pbProgreso2.Value = 50;
+            // 
+            // lblPorcentaje1
+            // 
+            this.lblPorcentaje1.AutoSize = true;
+            this.lblPorcentaje1.BackColor = System.Drawing.Color.Transparent;
+            this.lblPorcentaje1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPorcentaje1.ForeColor = System.Drawing.Color.White;
+            this.lblPorcentaje1.Location = new System.Drawing.Point(438, 22);
+            this.lblPorcentaje1.Name = "lblPorcentaje1";
+            this.lblPorcentaje1.Size = new System.Drawing.Size(67, 30);
+            this.lblPorcentaje1.TabIndex = 20;
+            this.lblPorcentaje1.Text = "100%";
+            this.lblPorcentaje1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pbProgreso1
+            // 
+            this.pbProgreso1.BackColor = System.Drawing.Color.Transparent;
+            this.pbProgreso1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            this.pbProgreso1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.pbProgreso1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
+            this.pbProgreso1.Location = new System.Drawing.Point(220, 31);
+            this.pbProgreso1.Maximum = 100;
+            this.pbProgreso1.Minimum = 0;
+            this.pbProgreso1.Name = "pbProgreso1";
+            this.pbProgreso1.Size = new System.Drawing.Size(194, 17);
+            this.pbProgreso1.Stripes = System.Drawing.Color.DarkGreen;
+            this.pbProgreso1.TabIndex = 19;
+            this.pbProgreso1.Text = "aloneProgressBar1";
+            this.pbProgreso1.Value = 50;
+            // 
+            // lblTop3
+            // 
+            this.lblTop3.AutoSize = true;
+            this.lblTop3.BackColor = System.Drawing.Color.Transparent;
+            this.lblTop3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTop3.ForeColor = System.Drawing.Color.White;
+            this.lblTop3.Location = new System.Drawing.Point(18, 107);
+            this.lblTop3.Name = "lblTop3";
+            this.lblTop3.Size = new System.Drawing.Size(138, 30);
+            this.lblTop3.TabIndex = 15;
+            this.lblTop3.Text = "3. Empresa C";
+            this.lblTop3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTop5
+            // 
+            this.lblTop5.AutoSize = true;
+            this.lblTop5.BackColor = System.Drawing.Color.Transparent;
+            this.lblTop5.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTop5.ForeColor = System.Drawing.Color.White;
+            this.lblTop5.Location = new System.Drawing.Point(18, 192);
+            this.lblTop5.Name = "lblTop5";
+            this.lblTop5.Size = new System.Drawing.Size(136, 30);
+            this.lblTop5.TabIndex = 14;
+            this.lblTop5.Text = "5. Empresa E";
+            this.lblTop5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTop1
+            // 
+            this.lblTop1.AutoSize = true;
+            this.lblTop1.BackColor = System.Drawing.Color.Transparent;
+            this.lblTop1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTop1.ForeColor = System.Drawing.Color.White;
+            this.lblTop1.Location = new System.Drawing.Point(18, 22);
+            this.lblTop1.Name = "lblTop1";
+            this.lblTop1.Size = new System.Drawing.Size(140, 30);
+            this.lblTop1.TabIndex = 18;
+            this.lblTop1.Text = "1. Empresa A";
+            this.lblTop1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblTop2
+            // 
+            this.lblTop2.AutoSize = true;
+            this.lblTop2.BackColor = System.Drawing.Color.Transparent;
+            this.lblTop2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTop2.ForeColor = System.Drawing.Color.White;
+            this.lblTop2.Location = new System.Drawing.Point(18, 64);
+            this.lblTop2.Name = "lblTop2";
+            this.lblTop2.Size = new System.Drawing.Size(138, 30);
+            this.lblTop2.TabIndex = 17;
+            this.lblTop2.Text = "2. Empresa B";
+            this.lblTop2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTop4
+            // 
+            this.lblTop4.AutoSize = true;
+            this.lblTop4.BackColor = System.Drawing.Color.Transparent;
+            this.lblTop4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTop4.ForeColor = System.Drawing.Color.White;
+            this.lblTop4.Location = new System.Drawing.Point(18, 150);
+            this.lblTop4.Name = "lblTop4";
+            this.lblTop4.Size = new System.Drawing.Size(140, 30);
+            this.lblTop4.TabIndex = 16;
+            this.lblTop4.Text = "4. Empresa D";
+            this.lblTop4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ucEstadisticas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -707,7 +707,7 @@ namespace app.UserControls
             this.Controls.Add(this.pnlEmpleados);
             this.Name = "ucEstadisticas";
             this.Padding = new System.Windows.Forms.Padding(15);
-            this.Size = new System.Drawing.Size(1155, 510);
+            this.Size = new System.Drawing.Size(1155, 495);
             this.Load += new System.EventHandler(this.ucEstadisticas_Load);
             this.pnlEmpleados.ResumeLayout(false);
             this.pnlEmpleados.PerformLayout();

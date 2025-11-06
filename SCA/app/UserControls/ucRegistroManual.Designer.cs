@@ -124,7 +124,7 @@
             this.pnlRegistros.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRegistros.Controls.Add(this.lblRegistroManual);
             this.pnlRegistros.Controls.Add(this.pnlRegistrosB);
-            this.pnlRegistros.Location = new System.Drawing.Point(314, 10);
+            this.pnlRegistros.Location = new System.Drawing.Point(314, 8);
             this.pnlRegistros.Name = "pnlRegistros";
             this.pnlRegistros.Size = new System.Drawing.Size(501, 101);
             this.pnlRegistros.TabIndex = 21;
@@ -137,9 +137,9 @@
             this.lblRegistroManual.ForeColor = System.Drawing.Color.White;
             this.lblRegistroManual.Location = new System.Drawing.Point(192, 7);
             this.lblRegistroManual.Name = "lblRegistroManual";
-            this.lblRegistroManual.Size = new System.Drawing.Size(109, 17);
+            this.lblRegistroManual.Size = new System.Drawing.Size(129, 17);
             this.lblRegistroManual.TabIndex = 2;
-            this.lblRegistroManual.Text = "Registro Manual";
+            this.lblRegistroManual.Text = "REGISTRO MANUAL";
             this.lblRegistroManual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlRegistrosB
@@ -165,7 +165,7 @@
             this.pnlFaltantes.Controls.Add(this.pnlFaltantesB);
             this.pnlFaltantes.Location = new System.Drawing.Point(13, 117);
             this.pnlFaltantes.Name = "pnlFaltantes";
-            this.pnlFaltantes.Size = new System.Drawing.Size(1122, 390);
+            this.pnlFaltantes.Size = new System.Drawing.Size(1122, 364);
             this.pnlFaltantes.TabIndex = 22;
             // 
             // pnlFaltantesB
@@ -177,7 +177,7 @@
             this.pnlFaltantesB.Controls.Add(this.dgvFaltantes);
             this.pnlFaltantesB.Location = new System.Drawing.Point(3, 3);
             this.pnlFaltantesB.Name = "pnlFaltantesB";
-            this.pnlFaltantesB.Size = new System.Drawing.Size(1114, 382);
+            this.pnlFaltantesB.Size = new System.Drawing.Size(1114, 356);
             this.pnlFaltantesB.TabIndex = 6;
             // 
             // dgvFaltantes
@@ -218,7 +218,7 @@
             this.dgvFaltantes.RowHeadersVisible = false;
             this.dgvFaltantes.RowTemplate.Height = 40;
             this.dgvFaltantes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFaltantes.Size = new System.Drawing.Size(1080, 352);
+            this.dgvFaltantes.Size = new System.Drawing.Size(1080, 324);
             this.dgvFaltantes.TabIndex = 0;
             // 
             // ucRegistroManual
@@ -229,7 +229,7 @@
             this.Controls.Add(this.pnlFaltantes);
             this.Controls.Add(this.pnlRegistros);
             this.Name = "ucRegistroManual";
-            this.Size = new System.Drawing.Size(1155, 510);
+            this.Size = new System.Drawing.Size(1155, 495);
             this.Load += new System.EventHandler(this.ucRegistroManual_Load);
             this.pnlRegistros.ResumeLayout(false);
             this.pnlRegistros.PerformLayout();

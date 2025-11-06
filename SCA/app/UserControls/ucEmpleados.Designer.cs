@@ -76,7 +76,7 @@ namespace app.UserControls
             this.lblTotalEmpleados.AutoSize = true;
             this.lblTotalEmpleados.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalEmpleados.ForeColor = System.Drawing.Color.White;
-            this.lblTotalEmpleados.Location = new System.Drawing.Point(17, 392);
+            this.lblTotalEmpleados.Location = new System.Drawing.Point(15, 381);
             this.lblTotalEmpleados.Name = "lblTotalEmpleados";
             this.lblTotalEmpleados.Size = new System.Drawing.Size(177, 25);
             this.lblTotalEmpleados.TabIndex = 0;
@@ -87,7 +87,7 @@ namespace app.UserControls
             this.lblTotalEmpresas.AutoSize = true;
             this.lblTotalEmpresas.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalEmpresas.ForeColor = System.Drawing.Color.White;
-            this.lblTotalEmpresas.Location = new System.Drawing.Point(240, 392);
+            this.lblTotalEmpresas.Location = new System.Drawing.Point(238, 381);
             this.lblTotalEmpresas.Name = "lblTotalEmpresas";
             this.lblTotalEmpresas.Size = new System.Drawing.Size(164, 25);
             this.lblTotalEmpresas.TabIndex = 7;
@@ -98,7 +98,7 @@ namespace app.UserControls
             this.txtBuscarEmpleado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.txtBuscarEmpleado.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBuscarEmpleado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.txtBuscarEmpleado.Location = new System.Drawing.Point(20, 46);
+            this.txtBuscarEmpleado.Location = new System.Drawing.Point(18, 35);
             this.txtBuscarEmpleado.Name = "txtBuscarEmpleado";
             this.txtBuscarEmpleado.Size = new System.Drawing.Size(200, 33);
             this.txtBuscarEmpleado.TabIndex = 0;
@@ -111,7 +111,7 @@ namespace app.UserControls
             this.cbFiltroEmpresa.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFiltroEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.cbFiltroEmpresa.FormattingEnabled = true;
-            this.cbFiltroEmpresa.Location = new System.Drawing.Point(238, 45);
+            this.cbFiltroEmpresa.Location = new System.Drawing.Point(236, 34);
             this.cbFiltroEmpresa.Name = "cbFiltroEmpresa";
             this.cbFiltroEmpresa.Size = new System.Drawing.Size(205, 33);
             this.cbFiltroEmpresa.TabIndex = 1;
@@ -128,7 +128,7 @@ namespace app.UserControls
             this.btnNuevoEmpleado.Image = null;
             this.btnNuevoEmpleado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNuevoEmpleado.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnNuevoEmpleado.Location = new System.Drawing.Point(513, 386);
+            this.btnNuevoEmpleado.Location = new System.Drawing.Point(511, 375);
             this.btnNuevoEmpleado.Name = "btnNuevoEmpleado";
             this.btnNuevoEmpleado.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnNuevoEmpleado.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -166,7 +166,7 @@ namespace app.UserControls
             this.dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEmpleados.EnableHeadersVisualStyles = false;
             this.dgvEmpleados.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.dgvEmpleados.Location = new System.Drawing.Point(20, 101);
+            this.dgvEmpleados.Location = new System.Drawing.Point(18, 90);
             this.dgvEmpleados.MultiSelect = false;
             this.dgvEmpleados.Name = "dgvEmpleados";
             this.dgvEmpleados.ReadOnly = true;
@@ -401,7 +401,7 @@ namespace app.UserControls
             this.llblFiltroEmpresa.AutoSize = true;
             this.llblFiltroEmpresa.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.llblFiltroEmpresa.ForeColor = System.Drawing.Color.White;
-            this.llblFiltroEmpresa.Location = new System.Drawing.Point(234, 20);
+            this.llblFiltroEmpresa.Location = new System.Drawing.Point(232, 9);
             this.llblFiltroEmpresa.Name = "llblFiltroEmpresa";
             this.llblFiltroEmpresa.Size = new System.Drawing.Size(128, 19);
             this.llblFiltroEmpresa.TabIndex = 8;
@@ -412,7 +412,7 @@ namespace app.UserControls
             this.lblFiltroNombre.AutoSize = true;
             this.lblFiltroNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblFiltroNombre.ForeColor = System.Drawing.Color.White;
-            this.lblFiltroNombre.Location = new System.Drawing.Point(16, 21);
+            this.lblFiltroNombre.Location = new System.Drawing.Point(14, 10);
             this.lblFiltroNombre.Name = "lblFiltroNombre";
             this.lblFiltroNombre.Size = new System.Drawing.Size(124, 19);
             this.lblFiltroNombre.TabIndex = 8;
@@ -482,7 +482,7 @@ namespace app.UserControls
             this.gbxListaEmpleados.Controls.Add(this.pnlC);
             this.gbxListaEmpleados.Location = new System.Drawing.Point(9, 1);
             this.gbxListaEmpleados.Name = "gbxListaEmpleados";
-            this.gbxListaEmpleados.Size = new System.Drawing.Size(710, 499);
+            this.gbxListaEmpleados.Size = new System.Drawing.Size(710, 490);
             this.gbxListaEmpleados.TabIndex = 10;
             this.gbxListaEmpleados.TabStop = false;
             // 
@@ -494,7 +494,7 @@ namespace app.UserControls
             this.pnlC.Controls.Add(this.pnlD);
             this.pnlC.Location = new System.Drawing.Point(10, 19);
             this.pnlC.Name = "pnlC";
-            this.pnlC.Size = new System.Drawing.Size(687, 466);
+            this.pnlC.Size = new System.Drawing.Size(687, 460);
             this.pnlC.TabIndex = 8;
             // 
             // lblListaEmpleados
@@ -526,7 +526,7 @@ namespace app.UserControls
             this.pnlD.Controls.Add(this.llblFiltroEmpresa);
             this.pnlD.Location = new System.Drawing.Point(3, 27);
             this.pnlD.Name = "pnlD";
-            this.pnlD.Size = new System.Drawing.Size(679, 434);
+            this.pnlD.Size = new System.Drawing.Size(679, 429);
             this.pnlD.TabIndex = 6;
             // 
             // ucEmpleados
@@ -538,7 +538,7 @@ namespace app.UserControls
             this.Controls.Add(this.gbxEmpleadoDetalle);
             this.Name = "ucEmpleados";
             this.Padding = new System.Windows.Forms.Padding(15);
-            this.Size = new System.Drawing.Size(1155, 510);
+            this.Size = new System.Drawing.Size(1155, 495);
             this.Load += new System.EventHandler(this.ucEmpleados_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).EndInit();
             this.pnlA.ResumeLayout(false);

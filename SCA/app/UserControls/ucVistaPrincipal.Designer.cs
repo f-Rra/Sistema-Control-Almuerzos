@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtRegistro = new System.Windows.Forms.TextBox();
             this.btnRegistro = new ReaLTaiizor.Controls.Button();
             this.pnlRegistros = new System.Windows.Forms.Panel();
@@ -82,7 +82,7 @@
             this.pnlRegistros.Controls.Add(this.pnlRegistrosB);
             this.pnlRegistros.Location = new System.Drawing.Point(13, 117);
             this.pnlRegistros.Name = "pnlRegistros";
-            this.pnlRegistros.Size = new System.Drawing.Size(1122, 390);
+            this.pnlRegistros.Size = new System.Drawing.Size(1122, 364);
             this.pnlRegistros.TabIndex = 23;
             // 
             // pnlRegistrosB
@@ -94,7 +94,7 @@
             this.pnlRegistrosB.Controls.Add(this.dgvRegistros);
             this.pnlRegistrosB.Location = new System.Drawing.Point(3, 3);
             this.pnlRegistrosB.Name = "pnlRegistrosB";
-            this.pnlRegistrosB.Size = new System.Drawing.Size(1114, 382);
+            this.pnlRegistrosB.Size = new System.Drawing.Size(1114, 356);
             this.pnlRegistrosB.TabIndex = 6;
             // 
             // dgvRegistros
@@ -108,25 +108,25 @@
             this.dgvRegistros.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.dgvRegistros.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvRegistros.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRegistros.ColumnHeadersHeight = 40;
             this.dgvRegistros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRegistros.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRegistros.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvRegistros.EnableHeadersVisualStyles = false;
             this.dgvRegistros.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.dgvRegistros.Location = new System.Drawing.Point(17, 14);
@@ -135,7 +135,7 @@
             this.dgvRegistros.RowHeadersVisible = false;
             this.dgvRegistros.RowTemplate.Height = 40;
             this.dgvRegistros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRegistros.Size = new System.Drawing.Size(1080, 352);
+            this.dgvRegistros.Size = new System.Drawing.Size(1080, 324);
             this.dgvRegistros.TabIndex = 0;
             // 
             // pnlComensales
@@ -144,7 +144,7 @@
             this.pnlComensales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlComensales.Controls.Add(this.lblRegistros);
             this.pnlComensales.Controls.Add(this.pnlComensalesB);
-            this.pnlComensales.Location = new System.Drawing.Point(314, 10);
+            this.pnlComensales.Location = new System.Drawing.Point(314, 8);
             this.pnlComensales.Name = "pnlComensales";
             this.pnlComensales.Size = new System.Drawing.Size(501, 101);
             this.pnlComensales.TabIndex = 24;
@@ -157,9 +157,9 @@
             this.lblRegistros.ForeColor = System.Drawing.Color.White;
             this.lblRegistros.Location = new System.Drawing.Point(175, 7);
             this.lblRegistros.Name = "lblRegistros";
-            this.lblRegistros.Size = new System.Drawing.Size(155, 17);
+            this.lblRegistros.Size = new System.Drawing.Size(178, 17);
             this.lblRegistros.TabIndex = 2;
-            this.lblRegistros.Text = "Registro de Comensales";
+            this.lblRegistros.Text = "REGISTRO DE COMENSALES";
             this.lblRegistros.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlComensalesB
@@ -183,7 +183,7 @@
             this.Controls.Add(this.pnlComensales);
             this.Controls.Add(this.pnlRegistros);
             this.Name = "ucVistaPrincipal";
-            this.Size = new System.Drawing.Size(1155, 510);
+            this.Size = new System.Drawing.Size(1155, 495);
             this.pnlRegistros.ResumeLayout(false);
             this.pnlRegistrosB.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).EndInit();
