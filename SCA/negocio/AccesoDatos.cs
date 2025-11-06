@@ -27,18 +27,42 @@ namespace Negocio
 
         public void setearConsulta(string consulta)
         {
-            comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = consulta;
+            try
+            {
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = consulta;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHelper.ManejarExcepcionBD(ex, "configurar consulta SQL");
+                throw;
+            }
         }
 
         public void setearProcedimiento(string sp)
         {
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.CommandText = sp;
+            try
+            {
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.CommandText = sp;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHelper.ManejarExcepcionBD(ex, "configurar procedimiento almacenado");
+                throw;
+            }
         }
         public void setearTipoComando(System.Data.CommandType tipo)
         {
-            comando.CommandType = tipo;
+            try
+            {
+                comando.CommandType = tipo;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHelper.ManejarExcepcionBD(ex, "configurar tipo de comando");
+                throw;
+            }
         }
 
         public void ejecutarLectura()
@@ -52,7 +76,8 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al ejecutar la consulta en la base de datos", ex);
+                ExceptionHelper.ManejarExcepcionBD(ex, "ejecutar lectura en base de datos");
+                throw;
             }
         }
 
@@ -66,7 +91,8 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al ejecutar la accion en la base de datos", ex);
+                ExceptionHelper.ManejarExcepcionBD(ex, "ejecutar acción en base de datos");
+                throw;
             }
             finally
             {
@@ -88,7 +114,8 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al ejecutar la acción con retorno en la base de datos", ex);
+                ExceptionHelper.ManejarExcepcionBD(ex, "ejecutar acción con retorno en base de datos");
+                throw;
             }
             finally
             {
@@ -99,14 +126,30 @@ namespace Negocio
 
         public void setearParametro(string nombre, object valor)
         {
-            comando.Parameters.AddWithValue(nombre, valor);
+            try
+            {
+                comando.Parameters.AddWithValue(nombre, valor);
+            }
+            catch (Exception ex)
+            {
+                ExceptionHelper.ManejarExcepcionBD(ex, "configurar parámetro");
+                throw;
+            }
         }
 
         public void cerrarConexion()
         {
-            if (lector != null)
-                lector.Close();
-            conexion.Close();
+            try
+            {
+                if (lector != null)
+                    lector.Close();
+                conexion.Close();
+            }
+            catch (Exception ex)
+            {
+                ExceptionHelper.ManejarExcepcionBD(ex, "cerrar conexión");
+                throw;
+            }
         }
     }
 }
