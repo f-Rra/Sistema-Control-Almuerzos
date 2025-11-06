@@ -84,11 +84,11 @@ namespace app.UserControls
             // 
             this.lblAdmin.AutoSize = true;
             this.lblAdmin.BackColor = System.Drawing.Color.Transparent;
-            this.lblAdmin.Font = new System.Drawing.Font("Microsoft New Tai Lue", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdmin.Font = new System.Drawing.Font("Microsoft New Tai Lue", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdmin.ForeColor = System.Drawing.Color.White;
             this.lblAdmin.Location = new System.Drawing.Point(313, 4);
             this.lblAdmin.Name = "lblAdmin";
-            this.lblAdmin.Size = new System.Drawing.Size(174, 20);
+            this.lblAdmin.Size = new System.Drawing.Size(190, 21);
             this.lblAdmin.TabIndex = 9;
             this.lblAdmin.Text = "Panel de Administrador";
             this.lblAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

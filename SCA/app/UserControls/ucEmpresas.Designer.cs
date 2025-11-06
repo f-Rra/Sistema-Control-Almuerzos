@@ -28,9 +28,9 @@ namespace app.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbxEmpresaDetalles = new System.Windows.Forms.GroupBox();
             this.pnlA = new System.Windows.Forms.Panel();
             this.lblDetallesEmpresa = new ReaLTaiizor.Controls.BigLabel();
@@ -96,11 +96,11 @@ namespace app.UserControls
             // 
             this.lblDetallesEmpresa.AutoSize = true;
             this.lblDetallesEmpresa.BackColor = System.Drawing.Color.Transparent;
-            this.lblDetallesEmpresa.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetallesEmpresa.Font = new System.Drawing.Font("Microsoft New Tai Lue", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetallesEmpresa.ForeColor = System.Drawing.Color.White;
-            this.lblDetallesEmpresa.Location = new System.Drawing.Point(105, 7);
+            this.lblDetallesEmpresa.Location = new System.Drawing.Point(96, 3);
             this.lblDetallesEmpresa.Name = "lblDetallesEmpresa";
-            this.lblDetallesEmpresa.Size = new System.Drawing.Size(148, 17);
+            this.lblDetallesEmpresa.Size = new System.Drawing.Size(182, 21);
             this.lblDetallesEmpresa.TabIndex = 2;
             this.lblDetallesEmpresa.Text = "Detalles de la Empresa";
             this.lblDetallesEmpresa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,9 +148,9 @@ namespace app.UserControls
             // 
             // txtNombre
             // 
-            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.txtNombre.Location = new System.Drawing.Point(24, 34);
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
@@ -271,11 +271,11 @@ namespace app.UserControls
             // 
             this.lblEstadisticasEmpresa.AutoSize = true;
             this.lblEstadisticasEmpresa.BackColor = System.Drawing.Color.Transparent;
-            this.lblEstadisticasEmpresa.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstadisticasEmpresa.Font = new System.Drawing.Font("Microsoft New Tai Lue", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEstadisticasEmpresa.ForeColor = System.Drawing.Color.White;
-            this.lblEstadisticasEmpresa.Location = new System.Drawing.Point(105, 7);
+            this.lblEstadisticasEmpresa.Location = new System.Drawing.Point(86, 3);
             this.lblEstadisticasEmpresa.Name = "lblEstadisticasEmpresa";
-            this.lblEstadisticasEmpresa.Size = new System.Drawing.Size(169, 17);
+            this.lblEstadisticasEmpresa.Size = new System.Drawing.Size(208, 21);
             this.lblEstadisticasEmpresa.TabIndex = 2;
             this.lblEstadisticasEmpresa.Text = "Estadisticas de la Empresa";
             this.lblEstadisticasEmpresa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -371,11 +371,11 @@ namespace app.UserControls
             // 
             this.lblListaEmpresas.AutoSize = true;
             this.lblListaEmpresas.BackColor = System.Drawing.Color.Transparent;
-            this.lblListaEmpresas.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblListaEmpresas.Font = new System.Drawing.Font("Microsoft New Tai Lue", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaEmpresas.ForeColor = System.Drawing.Color.White;
-            this.lblListaEmpresas.Location = new System.Drawing.Point(263, 7);
+            this.lblListaEmpresas.Location = new System.Drawing.Point(246, 3);
             this.lblListaEmpresas.Name = "lblListaEmpresas";
-            this.lblListaEmpresas.Size = new System.Drawing.Size(118, 17);
+            this.lblListaEmpresas.Size = new System.Drawing.Size(144, 21);
             this.lblListaEmpresas.TabIndex = 2;
             this.lblListaEmpresas.Text = "Lista de Empresas";
             this.lblListaEmpresas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -404,38 +404,38 @@ namespace app.UserControls
             this.dgvEmpresas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.dgvEmpresas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvEmpresas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEmpresas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEmpresas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvEmpresas.ColumnHeadersHeight = 40;
             this.dgvEmpresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEmpresas.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEmpresas.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvEmpresas.EnableHeadersVisualStyles = false;
             this.dgvEmpresas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.dgvEmpresas.Location = new System.Drawing.Point(17, 90);
             this.dgvEmpresas.MultiSelect = false;
             this.dgvEmpresas.Name = "dgvEmpresas";
             this.dgvEmpresas.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEmpresas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEmpresas.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvEmpresas.RowHeadersVisible = false;
             this.dgvEmpresas.RowHeadersWidth = 62;
             this.dgvEmpresas.RowTemplate.Height = 40;
@@ -478,9 +478,9 @@ namespace app.UserControls
             // 
             // txtBuscarEmpresa
             // 
-            this.txtBuscarEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.txtBuscarEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.txtBuscarEmpresa.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.txtBuscarEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.txtBuscarEmpresa.Location = new System.Drawing.Point(17, 35);
             this.txtBuscarEmpresa.Name = "txtBuscarEmpresa";
             this.txtBuscarEmpresa.Size = new System.Drawing.Size(200, 33);

@@ -133,13 +133,13 @@
             // 
             this.lblRegistroManual.AutoSize = true;
             this.lblRegistroManual.BackColor = System.Drawing.Color.Transparent;
-            this.lblRegistroManual.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegistroManual.Font = new System.Drawing.Font("Microsoft New Tai Lue", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRegistroManual.ForeColor = System.Drawing.Color.White;
-            this.lblRegistroManual.Location = new System.Drawing.Point(192, 7);
+            this.lblRegistroManual.Location = new System.Drawing.Point(180, 3);
             this.lblRegistroManual.Name = "lblRegistroManual";
-            this.lblRegistroManual.Size = new System.Drawing.Size(129, 17);
+            this.lblRegistroManual.Size = new System.Drawing.Size(135, 21);
             this.lblRegistroManual.TabIndex = 2;
-            this.lblRegistroManual.Text = "REGISTRO MANUAL";
+            this.lblRegistroManual.Text = "Registro Manual";
             this.lblRegistroManual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlRegistrosB

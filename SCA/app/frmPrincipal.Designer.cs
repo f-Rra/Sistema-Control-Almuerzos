@@ -383,11 +383,11 @@ namespace app
             // 
             this.lblFecha.AutoSize = true;
             this.lblFecha.BackColor = System.Drawing.Color.Transparent;
-            this.lblFecha.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblFecha.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFecha.ForeColor = System.Drawing.Color.White;
             this.lblFecha.Location = new System.Drawing.Point(174, 33);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(40, 13);
+            this.lblFecha.Size = new System.Drawing.Size(41, 15);
             this.lblFecha.TabIndex = 15;
             this.lblFecha.Text = "Fecha:";
             // 
@@ -406,11 +406,11 @@ namespace app
             // 
             this.lblProyeccion.AutoSize = true;
             this.lblProyeccion.BackColor = System.Drawing.Color.Transparent;
-            this.lblProyeccion.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblProyeccion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProyeccion.ForeColor = System.Drawing.Color.White;
             this.lblProyeccion.Location = new System.Drawing.Point(330, 33);
             this.lblProyeccion.Name = "lblProyeccion";
-            this.lblProyeccion.Size = new System.Drawing.Size(65, 13);
+            this.lblProyeccion.Size = new System.Drawing.Size(69, 15);
             this.lblProyeccion.TabIndex = 15;
             this.lblProyeccion.Text = "Proyeccion:";
             // 
@@ -432,11 +432,11 @@ namespace app
             // 
             this.lblInvitados.AutoSize = true;
             this.lblInvitados.BackColor = System.Drawing.Color.Transparent;
-            this.lblInvitados.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblInvitados.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInvitados.ForeColor = System.Drawing.Color.White;
             this.lblInvitados.Location = new System.Drawing.Point(484, 33);
             this.lblInvitados.Name = "lblInvitados";
-            this.lblInvitados.Size = new System.Drawing.Size(57, 13);
+            this.lblInvitados.Size = new System.Drawing.Size(58, 15);
             this.lblInvitados.TabIndex = 15;
             this.lblInvitados.Text = "Invitados:";
             // 
@@ -458,11 +458,11 @@ namespace app
             // 
             this.lblLugar.AutoSize = true;
             this.lblLugar.BackColor = System.Drawing.Color.Transparent;
-            this.lblLugar.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblLugar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLugar.ForeColor = System.Drawing.Color.White;
             this.lblLugar.Location = new System.Drawing.Point(14, 33);
             this.lblLugar.Name = "lblLugar";
-            this.lblLugar.Size = new System.Drawing.Size(39, 13);
+            this.lblLugar.Size = new System.Drawing.Size(40, 15);
             this.lblLugar.TabIndex = 15;
             this.lblLugar.Text = "Lugar:";
             // 
@@ -706,13 +706,13 @@ namespace app
             // 
             this.lblListado.AutoSize = true;
             this.lblListado.BackColor = System.Drawing.Color.Transparent;
-            this.lblListado.Font = new System.Drawing.Font("Microsoft New Tai Lue", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblListado.Font = new System.Drawing.Font("Microsoft New Tai Lue", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListado.ForeColor = System.Drawing.Color.White;
             this.lblListado.Location = new System.Drawing.Point(289, 4);
             this.lblListado.Name = "lblListado";
-            this.lblListado.Size = new System.Drawing.Size(153, 20);
+            this.lblListado.Size = new System.Drawing.Size(142, 21);
             this.lblListado.TabIndex = 2;
-            this.lblListado.Text = "ULTIMOS SERVICIOS";
+            this.lblListado.Text = "Ultimos Servicios";
             this.lblListado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlServiciosI
@@ -793,13 +793,13 @@ namespace app
             // 
             this.lblDetalles.AutoSize = true;
             this.lblDetalles.BackColor = System.Drawing.Color.Transparent;
-            this.lblDetalles.Font = new System.Drawing.Font("Microsoft New Tai Lue", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetalles.Font = new System.Drawing.Font("Microsoft New Tai Lue", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetalles.ForeColor = System.Drawing.Color.White;
             this.lblDetalles.Location = new System.Drawing.Point(95, 4);
             this.lblDetalles.Name = "lblDetalles";
-            this.lblDetalles.Size = new System.Drawing.Size(181, 20);
+            this.lblDetalles.Size = new System.Drawing.Size(165, 21);
             this.lblDetalles.TabIndex = 2;
-            this.lblDetalles.Text = "DETALLES DEL SERVICIO";
+            this.lblDetalles.Text = "Detalles del Servicio";
             this.lblDetalles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlUltimoI
