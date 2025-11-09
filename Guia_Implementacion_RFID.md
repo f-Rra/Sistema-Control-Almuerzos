@@ -10,9 +10,27 @@
 
 ## Introducción
 
-Esta guía detalla el proceso para integrar un lector RFID al Sistema de Control de Almuerzos, permitiendo el registro automático de comensales mediante credenciales.
+Esta guía detalla el proceso para integrar un lector RFID al Sistema de Control de Almuerzos, permitiendo el registro automático de comensales mediante credenciales RFID.
 
---
+### Beneficios de la Integración RFID
+
+- **Registro instantáneo**: Los empleados solo acercan su tarjeta/credencial y quedan registrados automáticamente
+- **Reducción de errores**: Elimina errores de escritura manual del número de credencial
+- **Mayor velocidad**: Proceso de registro más rápido, especialmente en horas pico
+- **Trazabilidad**: Cada lectura RFID genera un registro preciso con timestamp
+- **Modo híbrido**: El sistema mantiene el modo manual como respaldo en caso de fallo del lector
+
+### Alcance de la Guía
+
+Esta guía cubre exclusivamente:
+- Configuración física del hardware RFID
+- Implementación de la clase `RFIDReader.cs` para comunicación serial
+- Integración con el módulo de registro de comensales (`ucRegistroManual`)
+- Configuración de parámetros en `App.config`
+
+**Nota:** Para la configuración del panel de administración del lector en `ucConfiguracion`, consultar `Guia_ucConfiguracion.md` - Sección "Lector RFID (FUTURO)".
+
+---
 
 ## Configuración del Hardware
 
@@ -88,38 +106,15 @@ RFIDReader
 
 ---
 
-### Paso 2: Agregar Panel de Configuración RFID
+### Paso 2: Configurar Panel en ucConfiguracion
 
-**Ubicación:** `ucConfiguracion.cs`
+**Ver:** `Guia_ucConfiguracion.md` - Sección "Lector RFID (FUTURO)"
 
-**Controles a agregar en el Designer:**
-
-1. **GroupBox** `gbxLectorRFID` - "Configuración Lector RFID"
-2. **Label** `lblPuertoRFID` - "Puerto COM:"
-3. **TextBox** `txtPuertoRFID` - Para mostrar/editar puerto
-4. **Button** `btnDetectarLector` - "Detectar Automáticamente"
-5. **Button** `btnConectar` - "Conectar"
-6. **Button** `btnDesconectar` - "Desconectar"
-7. **Label** `lblEstadoLector` - Para mostrar estado
-8. **Label** `lblUltimaLectura` - Para mostrar última tarjeta leída
-
-**Código a agregar:**
-
-1. Implementar 4 métodos:
-   - `InicializarRFID()` - Crea instancia y suscribe eventos
-   - `RfidReader_OnCardRead()` - Maneja lectura de tarjeta
-   - `RfidReader_OnError()` - Maneja errores
-   - `RfidReader_OnConnectionChanged()` - Actualiza estado UI
-
-2. Implementar 3 event handlers de botones:
-   - `btnDetectarLector_Click()` - Detecta puerto automáticamente
-   - `btnConectar_Click()` - Conecta con el lector
-   - `btnDesconectar_Click()` - Desconecta el lector
-
-**Notas importantes:**
-- Usar `InvokeRequired` para actualizar UI desde otro thread
-- Mostrar mensajes con `ExceptionHelper`
-- Actualizar estado visual del lector
+Esta guía contiene toda la información sobre:
+- Controles del panel de configuración RFID
+- Métodos auxiliares (`CargarConfiguracionRFID`)
+- Eventos de botones (`btnDetectarPuertos_Click`, `btnConfigurarRFID_Click`, `btnProbarLector_Click`)
+- Procedimientos almacenados necesarios
 
 ---
 
@@ -226,24 +221,22 @@ private string ObtenerPuertoConfigurado()
 1. `SCA/negocio/RFIDReader.cs` - Clase principal del lector
 
 ### Archivos a Modificar
-1. `SCA/app/UserControls/ucConfiguracion.cs` - Panel de configuración
-2. `SCA/app/UserControls/ucConfiguracion.Designer.cs` - Controles visuales
+1. `SCA/app/UserControls/ucConfiguracion.cs` - Panel de configuración (ver `Guia_ucConfiguracion.md`)
+2. `SCA/app/UserControls/ucConfiguracion.Designer.cs` - Controles visuales (ver `Guia_ucConfiguracion.md`)
 3. `SCA/app/UserControls/ucRegistroManual.cs` - Integración con registro
 4. `SCA/app/App.config` - Configuración del puerto
 
-### Controles a Agregar (Designer)
-- GroupBox para agrupar configuración RFID
-- Labels para etiquetas y estado
-- TextBox para puerto COM
-- 3 Buttons (Detectar, Conectar, Desconectar)
-
 ### Flujo de Trabajo
 1. Usuario conecta lector USB
-2. Sistema detecta puerto automáticamente
+2. Sistema detecta puerto automáticamente (ver `Guia_ucConfiguracion.md` para detalles del panel)
 3. Administrador configura en ucConfiguracion
 4. Al iniciar servicio, RFID se activa automáticamente
 5. Usuario acerca tarjeta → Registro instantáneo
 6. Modo manual sigue disponible como backup
+
+---
+
+**Nota:** Para los detalles completos del panel de configuración RFID en `ucConfiguracion`, consultar `Guia_ucConfiguracion.md`.
 
 ---
 
