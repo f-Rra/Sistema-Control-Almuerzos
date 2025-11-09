@@ -25,10 +25,7 @@ Esta guía detalla el proceso para integrar un lector RFID al Sistema de Control
 Esta guía cubre exclusivamente:
 - Configuración física del hardware RFID
 - Implementación de la clase `RFIDReader.cs` para comunicación serial
-- Integración con el módulo de registro de comensales (`ucRegistroManual`)
 - Configuración de parámetros en `App.config`
-
-**Nota:** Para la configuración del panel de administración del lector en `ucConfiguracion`, consultar `Guia_ucConfiguracion.md` - Sección "Lector RFID (FUTURO)".
 
 ---
 
@@ -236,8 +233,5 @@ private string ObtenerPuertoConfigurado()
 
 ---
 
-**Nota:** Para los detalles completos del panel de configuración RFID en `ucConfiguracion`, consultar `Guia_ucConfiguracion.md`.
-
----
 
 

@@ -1,19 +1,19 @@
-# 📖 Manual de Usuario - Sistema de Control de Almuerzos
+#  Manual de Usuario - Sistema de Control de Almuerzos
 
-## 🎯 ¿Qué es el Sistema de Control de Almuerzos?
+## ¿Qué es el Sistema de Control de Almuerzos?
 
 El Sistema de Control de Almuerzos es una aplicación diseñada para gestionar de forma eficiente el registro de comensales en comedores corporativos. Con este sistema es posible:
 
-- 📝 **Registrar comensales** de forma rápida mediante credenciales
-- 👥 **Gestionar empleados** y sus credenciales
-- 🏢 **Organizar por empresas** del predio
-- 📊 **Ver estadísticas en tiempo real** del servicio
-- 📈 **Generar reportes automáticos** para análisis
-- 💼 **Administrar servicios** por jornada (comedor y quincho)
+-  **Registrar comensales** de forma rápida mediante credenciales
+-  **Gestionar empleados** y sus credenciales
+-  **Organizar por empresas** del predio
+-  **Ver estadísticas en tiempo real** del servicio
+-  **Generar reportes automáticos** para análisis
+-  **Administrar servicios** por jornada (comedor y quincho)
 
 ---
 
-## 📋 Índice
+## Índice
 
 1. [Tipos de Usuario](#-tipos-de-usuario)
 2. [Inicio del Sistema](#-cómo-iniciar-el-sistema)
@@ -28,18 +28,19 @@ El Sistema de Control de Almuerzos es una aplicación diseñada para gestionar d
 
 ---
 
-## 👥 Tipos de Usuario
+##  Tipos de Usuario
 
 ###  Personal de Cocina
+
 **¿Qué puede hacer?**
-- ✅ **Registrar comensales** mediante ID de credencial
-- ✅ **Realizar registro manual** (sin credencial)
-- ✅ **Registrar invitados**
-- ✅ Ver confirmaciones de registro
-- ✅ Ver en tiempo real quién se registró
-- ✅ Conocer el total de comensales actual
-- ✅ Ver comparativa con la proyección
-- ✅ Consultar desglose por empresa
+-  **Registrar comensales** mediante ID de credencial
+-  **Realizar registro manual** (sin credencial)
+-  **Registrar invitados**
+-  Ver confirmaciones de registro
+-  Ver en tiempo real quién se registró
+-  Conocer el total de comensales actual
+-  Ver comparativa con la proyección
+-  Consultar desglose por empresa
 
 **¿Cuándo lo usa?**
 - Durante todo el horario de servicio del comedor
@@ -53,15 +54,15 @@ El Sistema de Control de Almuerzos es una aplicación diseñada para gestionar d
 
 ###  Administrador
 **¿Qué puede hacer?**
-- ✅ **Todo lo anterior, más:**
-- ✅ Gestionar empleados y credenciales
-- ✅ Gestionar empresas y lugares
-- ✅ Generar reportes y estadísticas
-- ✅ Configurar el sistema
+-  **Todo lo anterior, más:**
+-  Gestionar empleados y credenciales
+-  Gestionar empresas y lugares
+-  Generar reportes y estadísticas
+-  Configurar el sistema
 
 ---
 
-## 📝 Registro de Comensales
+##  Registro de Comensales
 
 **Módulo**: `Registro de Comensales`  
 **Usuario**: Personal de Cocina
@@ -80,10 +81,10 @@ Este es el proceso más común y rápido:
 
 #### Paso 3: Confirmación
 El sistema mostrará:
-- ✅ **Nombre completo** del empleado
-- ✅ **Empresa** a la que pertenece
-- ✅ **Hora de registro**
-- ✅ Mensaje de confirmación
+-  **Nombre completo** del empleado
+-  **Empresa** a la que pertenece
+-  **Hora de registro**
+-  Mensaje de confirmación
 
 ---
 
@@ -120,26 +121,26 @@ El sistema mostrará:
 
 El sistema mostrará mensajes claros en caso de problema:
 
-#### ❌ "Credencial no encontrada"
+####  "Credencial no encontrada"
 **Causa**: El ID ingresado no existe en el sistema  
 **Solución**: 
 - Verificar que el número sea correcto
 - Usar el método de registro manual
 - Contactar al administrador si el empleado es nuevo
 
-#### ❌ "El empleado ya se registró en este servicio"
+####  "El empleado ya se registró en este servicio"
 **Causa**: El empleado ya almorzó hoy  
 **Solución**: 
 - Explicar al empleado que ya está registrado
 - Verificar en el panel de cocina si es necesario
 
-#### ❌ "No hay servicio activo"
+####  "No hay servicio activo"
 **Causa**: No se ha iniciado el servicio del día  
 **Solución**: 
 - Contactar al administrador
 - El administrador debe iniciar el servicio del día
 
-#### ❌ "Empleado inactivo"
+####  "Empleado inactivo"
 **Causa**: El empleado fue dado de baja en el sistema  
 **Solución**: 
 - Contactar al administrador
@@ -147,7 +148,7 @@ El sistema mostrará mensajes claros en caso de problema:
 
 ---
 
-## 👨‍🍳 Panel de Cocina (Visualización en Tiempo Real)
+##  Panel de Cocina (Visualización en Tiempo Real)
 
 **Módulo**: `Vista Principal` 
 **Usuario**: Personal de Cocina
@@ -155,19 +156,19 @@ El sistema mostrará mensajes claros en caso de problema:
 ### ¿Para Qué Sirve?
 
 Este panel muestra en tiempo real:
-- 📊 Cuántos comensales se registraron hasta el momento
-- 👥 Quiénes son (listado completo)
-- 📈 Comparativa con la proyección del día
-- 👫 Total de invitados
+- Cuántos comensales se registraron hasta el momento
+-  Quiénes son (listado completo)
+-  Comparativa con la proyección del día
+-  Total de invitados
 
 #### Actualización Automática
-- ✅ Cada vez que alguien se registra, aparece **inmediatamente** en la lista
-- ✅ Los contadores se actualizan **en tiempo real**
-- ✅ No es necesario recargar o actualizar manualmente
+-  Cada vez que alguien se registra, aparece **inmediatamente** en la lista
+-  Los contadores se actualizan **en tiempo real**
+-  No es necesario recargar o actualizar manualmente
 
 ---
 
-## 👥 Gestión de Empleados
+## Gestión de Empleados
 
 **Módulo**: `Gestión de Empleados`
 **Usuario**: Administrador
@@ -252,8 +253,8 @@ Administrar toda la información de empleados del predio:
 3. Guardar
 
 **El sistema validará**:
-- ✅ Que el nuevo ID no esté en uso por otro empleado
-- ✅ Que el formato sea correcto
+-  Que el nuevo ID no esté en uso por otro empleado
+-  Que el formato sea correcto
 
 ---
 
@@ -267,25 +268,25 @@ Administrar toda la información de empleados del predio:
 3. Confirmar la baja
 
 **¿Qué pasa al dar de baja?**
-- ❌ El empleado no podrá registrarse más en el comedor
-- ✅ **Se mantiene su historial** (no se borra del sistema)
-- ✅ Su credencial queda liberada para reasignar a otro empleado
-- ✅ Aparece en reportes históricos
+-  El empleado no podrá registrarse más en el comedor
+-  **Se mantiene su historial** (no se borra del sistema)
+-  Su credencial queda liberada para reasignar a otro empleado
+-  Aparece en reportes históricos
 
 **Nota**: La baja es **lógica**, no se elimina físicamente de la base de datos.
 
 ---
 
-## ⚙️ Gestión de Servicios
+##  Gestión de Servicios
 
 ### ¿Qué es un Servicio?
 
 Un **servicio** representa una jornada de comedor (un día de atención). Cada servicio tiene:
-- 📍 **Lugar**: Comedor o Quincho
-- 📅 **Fecha**: Día del servicio
-- 📊 **Proyección**: Cantidad estimada de comensales
-- 👥 **Invitados esperados**: Cantidad estimada de invitados
-- ⏱️ **Estado**: Activo (en curso) o Finalizado (cerrado)
+-  **Lugar**: Comedor o Quincho
+-  **Fecha**: Día del servicio
+-  **Proyección**: Cantidad estimada de comensales
+-  **Invitados esperados**: Cantidad estimada de invitados
+-  **Estado**: Activo (en curso) o Finalizado (cerrado)
 
 ---
 
@@ -312,7 +313,7 @@ Completar los siguientes datos:
 #### Paso 2: Iniciar
 1. Hacer clic en **"Iniciar Servicio"**
 2. El sistema creará el servicio con estado **Activo**
-3. **Ahora el personal puede comenzar a registrar comensales** ✅
+3. **Ahora el personal puede comenzar a registrar comensales** 
 
 ---
 
@@ -326,16 +327,16 @@ Completar los siguientes datos:
 
 #### Resumen Automático
 El sistema generará automáticamente:
-- ⏱️ **Duración total**: Tiempo desde inicio hasta cierre
-- 👥 **Total de comensales**: Cantidad real registrada
-- 📊 **Cobertura**: Porcentaje de proyección alcanzada
-- 🏢 **Desglose por empresa**: Cantidad de cada compañía
-- 👫 **Total de invitados**: Cantidad real de invitados
+-  **Duración total**: Tiempo desde inicio hasta cierre
+-  **Total de comensales**: Cantidad real registrada
+-  **Cobertura**: Porcentaje de proyección alcanzada
+-  **Desglose por empresa**: Cantidad de cada compañía
+-  **Total de invitados**: Cantidad real de invitados
 
 **Una vez cerrado**:
-- ❌ No se pueden registrar más comensales en ese servicio
-- ✅ El servicio queda disponible para reportes históricos
-- ✅ Se puede iniciar un nuevo servicio (del día siguiente o siguiente turno)
+-  No se pueden registrar más comensales en ese servicio
+-  El servicio queda disponible para reportes históricos
+-  Se puede iniciar un nuevo servicio (del día siguiente o siguiente turno)
 
 ---
 
@@ -347,7 +348,7 @@ El sistema generará automáticamente:
 
 **Si se necesita abrir quincho mientras hay comedor activo**:
 - Se puede tener un servicio activo en cada lugar simultáneamente
-- Ejemplo: Comedor activo + Quincho activo al mismo tiempo ✅
+- Ejemplo: Comedor activo + Quincho activo al mismo tiempo 
 
 ---
 
@@ -359,11 +360,11 @@ El sistema generará automáticamente:
 ### ¿Para Qué Sirven los Reportes?
 
 Los reportes permiten:
-- 📈 Analizar asistencia histórica
-- 💰 Planificar compras de insumos
-- 📊 Identificar tendencias
-- 🏢 Comparar asistencia por empresa
-- 📋 Generar documentos oficiales
+-  Analizar asistencia histórica
+-  Planificar compras de insumos
+-  Identificar tendencias
+-  Comparar asistencia por empresa
+-  Generar documentos oficiales
 
 ---
 
@@ -373,7 +374,7 @@ El sistema incluye 4 tipos de reportes que se generan seleccionando un rango de 
 
 ---
 
-#### 1. 📋 Lista de Servicios
+#### 1.  Lista de Servicios
 
 **¿Qué muestra?**
 - Listado de todos los servicios realizados en el período seleccionado
@@ -401,7 +402,7 @@ El sistema incluye 4 tipos de reportes que se generan seleccionando un rango de 
 
 ---
 
-#### 2. 🏢 Asistencias por Empresas
+#### 2.  Asistencias por Empresas
 
 **¿Qué muestra?**
 - Total de asistencias por cada empresa del predio
@@ -425,7 +426,7 @@ El sistema incluye 4 tipos de reportes que se generan seleccionando un rango de 
 
 ---
 
-#### 3. 📊 Cobertura vs Proyección
+#### 3. Cobertura vs Proyección
 
 **¿Qué muestra?**
 - Fecha del servicio
@@ -457,7 +458,7 @@ El sistema incluye 4 tipos de reportes que se generan seleccionando un rango de 
 
 ---
 
-#### 4. 📅 Distribución por Día de Semana
+#### 4.  Distribución por Día de Semana
 
 **¿Qué muestra?**
 - Total de asistencias agrupadas por día de la semana (Lunes, Martes, Miércoles, etc.)
@@ -499,17 +500,17 @@ Todos los reportes se pueden exportar a formato PDF profesional.
 5. Hacer clic en **"Guardar"**
 
 #### El PDF incluirá:
-- 📋 Encabezado con logo (si está configurado)
-- 📅 Fecha y hora de generación
-- 📊 Todas las estadísticas y datos
-- 📈 Gráficos (si aplica)
-- 🔢 Tablas formateadas profesionalmente
+-  Encabezado con logo (si está configurado)
+-  Fecha y hora de generación
+-  Todas las estadísticas y datos
+-  Gráficos (si aplica)
+-  Tablas formateadas profesionalmente
 
 **Uso del PDF**:
-- 📧 Enviar por email
-- 🖨️ Imprimir para archivo físico
-- 💼 Presentaciones gerenciales
-- 📑 Respaldo documental
+-  Enviar por email
+-  Imprimir para archivo físico
+-  Presentaciones gerenciales
+-  Respaldo documental
 
 ---
 
@@ -542,7 +543,7 @@ Paso 4: Generar "Asistencias por empresas"
 
 ---
 
-## ❓ Preguntas Frecuentes
+## Preguntas Frecuentes
 
 ### **P: ¿Qué hago si un empleado dice que no se pudo registrar?**
 **R:** 
@@ -601,7 +602,7 @@ Paso 4: Generar "Asistencias por empresas"
 
 ---
 
-## 🆘 Solución de Problemas Comunes
+## Solución de Problemas Comunes
 
 ### **Problema: El sistema no abre o se cierra solo**
 
@@ -710,103 +711,101 @@ Paso 4: Generar "Asistencias por empresas"
 
 ---
 
-## 💡 Consejos para Usar Mejor el Sistema
+##  Consejos para Usar Mejor el Sistema
 
-### 👨‍� Para Personal de Cocina
+###  Para Personal de Cocina
 
 **Registro de Comensales:**
-- ⚡ Aprender los atajos de teclado (Enter para confirmar)
-- 👀 Verificar visualmente la confirmación antes de atender al siguiente
+-  Aprender los atajos de teclado (Enter para confirmar)
+-  Verificar visualmente la confirmación antes de atender al siguiente
 
 **Manejo de Casos Especiales:**
-- 🆔 Sin credencial: Usar registro manual sin dudar
-- ❓ Empleado nuevo: Derivar al administrador
+-  Sin credencial: Usar registro manual sin dudar
+-  Empleado nuevo: Derivar al administrador
 
 **Uso del Panel en Tiempo Real:**
-- 📊 Mantener el panel visible durante todo el servicio
-- 🔄 No es necesario actualizar manualmente (se actualiza solo)
+-  Mantener el panel visible durante todo el servicio
+-  No es necesario actualizar manualmente (se actualiza solo)
 
 **Comunicación:**
-- 📞 Si la demanda supera mucho la proyección, avisar inmediatamente
-- 💬 Compartir datos con el equipo de cocina
+-  Si la demanda supera mucho la proyección, avisar inmediatamente
+-  Compartir datos con el equipo de cocina
 
 ---
 
-### 👨‍💼 Para Administradores
+### Para Administradores
 
 **Gestión de Empleados:**
-- 🆕 Dar de alta empleados nuevos **antes** de su primer día
-- 🔄 Actualizar credenciales perdidas el mismo día
-- 📋 Revisar empleados inactivos mensualmente
+-  Dar de alta empleados nuevos **antes** de su primer día
+-  Actualizar credenciales perdidas el mismo día
+-  Revisar empleados inactivos mensualmente
 
 **Análisis de Datos:**
-- 📊 Generar reporte mensual para gerencia
-- 📈 Identificar días de pico para ajustar compras
-- 💰 Calcular costo por comensal con datos precisos
+-  Generar reporte mensual para gerencia
+-  Identificar días de pico para ajustar compras
+-  Calcular costo por comensal con datos precisos
 
 **Backups:**
-- 💾 Asegurarse de que el técnico configure backups automáticos
-- 📁 Solicitar backup manual antes de actualizaciones importantes
+-  Asegurarse de que el técnico configure backups automáticos
+-  Solicitar backup manual antes de actualizaciones importantes
 
 ---
 
-### 🔒 Seguridad y Buenas Prácticas
+###  Seguridad y Buenas Prácticas
 
 **Protección de Datos:**
-- 🔐 No compartir acceso al módulo de administración
-- 👀 No dejar la computadora sin atender con sesión abierta
-- 📝 Registrar solo comensales reales (no registros ficticios)
+-  No compartir acceso al módulo de administración
+-  No dejar la computadora sin atender con sesión abierta
+-  Registrar solo comensales reales (no registros ficticios)
 
 **Integridad de Información:**
-- ✅ Verificar datos antes de guardar
-- 🚫 No editar manualmente la base de datos (puede romper el sistema)
-- 📋 Documentar cualquier situación irregular
+-  Verificar datos antes de guardar
+-  No editar manualmente la base de datos (puede romper el sistema)
+-  Documentar cualquier situación irregular
 
 **Respaldos:**
-- 💾 Coordinar con IT backups automáticos diarios
-- 📁 Mantener respaldos de reportes importantes
-- 🔄 Probar la restauración periódicamente
+-  Coordinar con IT backups automáticos diarios
+-  Mantener respaldos de reportes importantes
+-  Probar la restauración periódicamente
 
 ---
 
-## 📞 Soporte Técnico
+##  Soporte Técnico
 
 ### ¿Cuándo Contactar al Soporte?
 
 **Situaciones que requieren soporte:**
-- ❌ El sistema no abre o se cierra inesperadamente
-- ❌ Errores de base de datos
-- ❌ Problemas de instalación o configuración
-- ❌ Se necesita capacitación adicional
-- ❌ Solicitud de nuevas funcionalidades
-- ❌ Migración de datos
+-  El sistema no abre o se cierra inesperadamente
+-  Errores de base de datos
+-  Problemas de instalación o configuración
+-  Se necesita capacitación adicional
+-  Solicitud de nuevas funcionalidades
+-  Migración de datos
 
 **Situaciones que NO requieren soporte:**
-- ✅ Empleado olvidó credencial → Usar registro manual
-- ✅ Credencial no existe → Verificar con administrador
-- ✅ Duda sobre cómo usar un módulo → Consultar este manual
+-  Empleado olvidó credencial → Usar registro manual
+-  Credencial no existe → Verificar con administrador
+-  Duda sobre cómo usar un módulo → Consultar este manual
 
 ---
 
-## 🚀 Mejoras Futuras del Sistema
+##  Mejoras Futuras del Sistema
 
 ### Fase 2: Integración RFID (Próximamente)
 
 **¿Qué cambiará?**
-- 🔄 En lugar de ingresar el ID por teclado, el empleado solo pasará su credencial por un lector
-- ⚡ El registro será **automático e instantáneo** (<1 segundo)
-- 🙌 No se necesitará que el empleado diga nada
+-  En lugar de ingresar el ID por teclado, el empleado solo pasará su credencial por un lector
+-  El registro será **automático e instantáneo** (<1 segundo)
+-  No se necesitará que el empleado diga nada
 
 **¿Qué se mantiene igual?**
-- ✅ Todas las funcionalidades actuales
-- ✅ Los mismos reportes y estadísticas
-- ✅ La misma interfaz
+-  Todas las funcionalidades actuales
+-  Los mismos reportes y estadísticas
+-  La misma interfaz
 
 **¿Necesitaré capacitación nueva?**
 - No, el sistema será aún más simple de usar
 
 ---
 
-*Manual de Usuario v1.0 - Sistema de Control de Almuerzos*  
-*Desarrollado por Facundo Herrera - Tecnicatura Universitaria en Programación (UTN)*  
-*Última actualización: Noviembre 2025*
+
