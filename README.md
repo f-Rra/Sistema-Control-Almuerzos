@@ -1,4 +1,4 @@
-# 🍽️ Sistema de Control de Almuerzos
+# Sistema de Control de Almuerzos
 
 Sistema completo de gestión de comedores corporativos desarrollado en C# con Windows Forms, diseñado para el registro eficiente de comensales mediante credenciales RFID y generación de reportes automáticos.
 
@@ -382,7 +382,8 @@ Sistema-Control-Almuerzos/
 |-----------|-------------|-----------|
 | **README.md** | Documentación técnica completa (este archivo) | Raíz del proyecto |
 | **MANUAL_USUARIO.md** | Guía para usuarios finales | Raíz del proyecto |
-| **DER_SdCdA.drawio** | Diagrama Entidad-Relación | Raíz del proyecto |
+| **MANUAL_USUARIO.md** | Guía para usuarios finales | Raíz del proyecto |
+| **Guia_Implementacion_RFID.drawio** | Guia para implementar uso de lector RFID | Raíz del proyecto |
 | **Script_Sistema_Control_Almuerzos.sql** | Script completo de creación de BD | Raíz del proyecto |
 | **Procedimientos_Vistas_Triggers.sql** | Objetos de BD detallados | Raíz del proyecto |
 | **Datos_Iniciales.sql** | Datos de prueba para testing | Raíz del proyecto |
@@ -398,16 +399,6 @@ Sistema-Control-Almuerzos/
 - Leer `MANUAL_USUARIO.md`
 - Revisar flujos de trabajo comunes
 - Consultar sección de Preguntas Frecuentes
-
----
-
-##  Estadísticas del Proyecto
-
-- **Líneas de código**: ~8,000+ (C# + SQL)
-- **Clases**: 25+
-- **Procedimientos almacenados**: 20+
-- **Tiempo de desarrollo**: 3 meses
-- **Tecnologías**: 5 (C#, SQL Server, Windows Forms, ReaLTaiizor, iTextSharp)
 
 ---
 
