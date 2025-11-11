@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Negocio
 {
@@ -12,7 +13,7 @@ namespace Negocio
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
-        private string ruta = "server=.\\SQLEXPRESS; database=BD_Control_Almuerzos; integrated security=true";
+        private string ruta;
 
         public SqlDataReader Lector
         {
@@ -21,6 +22,13 @@ namespace Negocio
 
         public AccesoDatos()
         {
+            ruta = ConfigurationManager.ConnectionStrings["BD_Control_Almuerzos"]?.ConnectionString;
+            
+            if (string.IsNullOrEmpty(ruta))
+            {
+                throw new Exception("No se encontró la cadena de conexión 'BD_Control_Almuerzos' en App.config");
+            }
+            
             conexion = new SqlConnection(ruta);
             comando = new SqlCommand();
         }
