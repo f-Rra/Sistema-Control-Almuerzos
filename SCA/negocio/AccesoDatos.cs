@@ -8,12 +8,13 @@ using System.Configuration;
 
 namespace Negocio
 {
-    class AccesoDatos
+    class AccesoDatos : IDisposable
     {
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
         private string ruta;
+        private bool disposed = false;
 
         public SqlDataReader Lector
         {
@@ -31,6 +32,7 @@ namespace Negocio
             
             conexion = new SqlConnection(ruta);
             comando = new SqlCommand();
+            comando.CommandTimeout = 120; 
         }
 
         public void setearConsulta(string consulta)
@@ -159,5 +161,47 @@ namespace Negocio
                 throw;
             }
         }
+
+        #region IDisposable Implementation
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    if (lector != null && !lector.IsClosed)
+                    {
+                        lector.Close();
+                        lector.Dispose();
+                    }
+                    
+                    if (comando != null)
+                    {
+                        comando.Dispose();
+                    }
+                    
+                    if (conexion != null && conexion.State != System.Data.ConnectionState.Closed)
+                    {
+                        conexion.Close();
+                        conexion.Dispose();
+                    }
+                }
+                disposed = true;
+            }
+        }
+
+        ~AccesoDatos()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 }
