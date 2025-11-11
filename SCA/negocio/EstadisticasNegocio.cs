@@ -8,159 +8,149 @@ namespace Negocio
     {
         public Estadisticas.Empleados ObtenerEstadisticasEmpleados()
         {
-            var datos = new AccesoDatos();
-            try
+            using (var datos = new AccesoDatos())
             {
-                datos.setearProcedimiento("sp_ObtenerEstadisticasEmpleados");
-                datos.ejecutarLectura();
-
-                if (datos.Lector.Read())
+                try
                 {
-                    return new Estadisticas.Empleados
+                    datos.setearProcedimiento("sp_ObtenerEstadisticasEmpleados");
+                    datos.ejecutarLectura();
+
+                    if (datos.Lector.Read())
                     {
-                        TotalRegistrados = (int)datos.Lector["TotalRegistrados"],
-                        TotalActivos = (int)datos.Lector["TotalActivos"],
-                        TotalInactivos = (int)datos.Lector["TotalInactivos"]
-                    };
+                        return new Estadisticas.Empleados
+                        {
+                            TotalRegistrados = (int)datos.Lector["TotalRegistrados"],
+                            TotalActivos = (int)datos.Lector["TotalActivos"],
+                            TotalInactivos = (int)datos.Lector["TotalInactivos"]
+                        };
+                    }
+                    return null;
                 }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener estadísticas de empleados: " + ex.Message, ex);
-            }
-            finally
-            {
-                datos.cerrarConexion();
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al obtener estadísticas de empleados: " + ex.Message, ex);
+                }
             }
         }
 
         public Estadisticas.Empresas ObtenerEstadisticasEmpresas()
         {
-            var datos = new AccesoDatos();
-            try
+            using (var datos = new AccesoDatos())
             {
-                datos.setearProcedimiento("sp_ObtenerEstadisticasEmpresas");
-                datos.ejecutarLectura();
-
-                if (datos.Lector.Read())
+                try
                 {
-                    return new Estadisticas.Empresas
+                    datos.setearProcedimiento("sp_ObtenerEstadisticasEmpresas");
+                    datos.ejecutarLectura();
+
+                    if (datos.Lector.Read())
                     {
-                        TotalActivas = (int)datos.Lector["TotalActivas"],
-                        TotalConEmpleados = (int)datos.Lector["TotalConEmpleados"],
-                        PromedioEmpleados = (decimal)datos.Lector["PromedioEmpleados"]
-                    };
+                        return new Estadisticas.Empresas
+                        {
+                            TotalActivas = (int)datos.Lector["TotalActivas"],
+                            TotalConEmpleados = (int)datos.Lector["TotalConEmpleados"],
+                            PromedioEmpleados = (decimal)datos.Lector["PromedioEmpleados"]
+                        };
+                    }
+                    return null;
                 }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener estadísticas de empresas: " + ex.Message, ex);
-            }
-            finally
-            {
-                datos.cerrarConexion();
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al obtener estadísticas de empresas: " + ex.Message, ex);
+                }
             }
         }
 
         public Estadisticas.Servicios ObtenerEstadisticasServicios()
         {
-            var datos = new AccesoDatos();
-            try
+            using (var datos = new AccesoDatos())
             {
-                datos.setearProcedimiento("sp_ObtenerEstadisticasServicios");
-                datos.ejecutarLectura();
-
-                if (datos.Lector.Read())
+                try
                 {
-                    return new Estadisticas.Servicios
+                    datos.setearProcedimiento("sp_ObtenerEstadisticasServicios");
+                    datos.ejecutarLectura();
+
+                    if (datos.Lector.Read())
                     {
-                        ServiciosEsteMes = (int)datos.Lector["ServiciosEsteMes"],
-                        ServiciosEsteAnio = (int)datos.Lector["ServiciosEsteAnio"],
-                        PromedioPorDia = (int)datos.Lector["PromedioPorDia"]
-                    };
+                        return new Estadisticas.Servicios
+                        {
+                            ServiciosEsteMes = (int)datos.Lector["ServiciosEsteMes"],
+                            ServiciosEsteAnio = (int)datos.Lector["ServiciosEsteAnio"],
+                            PromedioPorDia = (int)datos.Lector["PromedioPorDia"]
+                        };
+                    }
+                    return null;
                 }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener estadísticas de servicios: " + ex.Message, ex);
-            }
-            finally
-            {
-                datos.cerrarConexion();
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al obtener estadísticas de servicios: " + ex.Message, ex);
+                }
             }
         }
 
         public Estadisticas.Asistencias ObtenerAsistenciasTendencias()
         {
-            var datos = new AccesoDatos();
-            try
+            using (var datos = new AccesoDatos())
             {
-                datos.setearProcedimiento("sp_ObtenerAsistenciasTendencias");
-                datos.ejecutarLectura();
-
-                if (datos.Lector.Read())
+                try
                 {
-                    return new Estadisticas.Asistencias
+                    datos.setearProcedimiento("sp_ObtenerAsistenciasTendencias");
+                    datos.ejecutarLectura();
+
+                    if (datos.Lector.Read())
                     {
-                        AsistenciasTotales = (int)datos.Lector["AsistenciasTotales"],
-                        AsistenciasEmpleados = (int)datos.Lector["AsistenciasEmpleados"],
-                        AsistenciasInvitados = (int)datos.Lector["AsistenciasInvitados"],
-                        PromedioDiario = (int)datos.Lector["PromedioDiario"],
-                        CoberturaPromedio = datos.Lector["CoberturaPromedio"] is DBNull ? 0m : (decimal)datos.Lector["CoberturaPromedio"],
-                        DuracionPromedio = datos.Lector["DuracionPromedio"] is DBNull ? 0 : (int)datos.Lector["DuracionPromedio"]
-                    };
+                        return new Estadisticas.Asistencias
+                        {
+                            AsistenciasTotales = (int)datos.Lector["AsistenciasTotales"],
+                            AsistenciasEmpleados = (int)datos.Lector["AsistenciasEmpleados"],
+                            AsistenciasInvitados = (int)datos.Lector["AsistenciasInvitados"],
+                            PromedioDiario = (int)datos.Lector["PromedioDiario"],
+                            CoberturaPromedio = datos.Lector["CoberturaPromedio"] is DBNull ? 0m : (decimal)datos.Lector["CoberturaPromedio"],
+                            DuracionPromedio = datos.Lector["DuracionPromedio"] is DBNull ? 0 : (int)datos.Lector["DuracionPromedio"]
+                        };
+                    }
+                    return null;
                 }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener asistencias y tendencias: " + ex.Message, ex);
-            }
-            finally
-            {
-                datos.cerrarConexion();
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al obtener asistencias y tendencias: " + ex.Message, ex);
+                }
             }
         }
 
         public List<Estadisticas.TopEmpresa> ObtenerTop5Empresas(DateTime fecha)
         {
             var lista = new List<Estadisticas.TopEmpresa>();
-            var datos = new AccesoDatos();
             
             // Calcular primer y último día del mes
             var primerDia = new DateTime(fecha.Year, fecha.Month, 1);
             var ultimoDia = primerDia.AddMonths(1).AddDays(-1);
             
-            try
+            using (var datos = new AccesoDatos())
             {
-                datos.setearProcedimiento("sp_ObtenerTop5EmpresasPorAsistencias");
-                datos.setearParametro("@FechaInicio", primerDia);
-                datos.setearParametro("@FechaFin", ultimoDia);
-                datos.ejecutarLectura();
-
-                while (datos.Lector.Read())
+                try
                 {
-                    var item = new Estadisticas.TopEmpresa
+                    datos.setearProcedimiento("sp_ObtenerTop5EmpresasPorAsistencias");
+                    datos.setearParametro("@FechaInicio", primerDia);
+                    datos.setearParametro("@FechaFin", ultimoDia);
+                    datos.ejecutarLectura();
+
+                    while (datos.Lector.Read())
                     {
-                        Ranking = Convert.ToInt64(datos.Lector["Ranking"]),
-                        NombreEmpresa = datos.Lector["NombreEmpresa"].ToString(),
-                        TotalAsistencias = Convert.ToInt32(datos.Lector["TotalAsistencias"]),
-                        Porcentaje = Convert.ToDecimal(datos.Lector["Porcentaje"])
-                    };
-                    lista.Add(item);
+                        var item = new Estadisticas.TopEmpresa
+                        {
+                            Ranking = Convert.ToInt64(datos.Lector["Ranking"]),
+                            NombreEmpresa = datos.Lector["NombreEmpresa"].ToString(),
+                            TotalAsistencias = Convert.ToInt32(datos.Lector["TotalAsistencias"]),
+                            Porcentaje = Convert.ToDecimal(datos.Lector["Porcentaje"])
+                        };
+                        lista.Add(item);
+                    }
+                    return lista;
                 }
-                return lista;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener top 5 empresas por asistencias: " + ex.Message, ex);
-            }
-            finally
-            {
-                datos.cerrarConexion();
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al obtener top 5 empresas por asistencias: " + ex.Message, ex);
+                }
             }
         }
     }

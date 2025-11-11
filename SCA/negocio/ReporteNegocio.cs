@@ -11,8 +11,8 @@ namespace Negocio
             return ExceptionHelper.EjecutarConManejo(() =>
             {
                 var lista = new List<Servicio>();
-                var datos = new AccesoDatos();
-                try
+
+                using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ListarServiciosRango");
                     datos.setearParametro("@FechaDesde", fechaDesde);
@@ -34,10 +34,6 @@ namespace Negocio
                     }
                     return lista;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "listar servicios por rango");
         }
 
@@ -46,8 +42,8 @@ namespace Negocio
             return ExceptionHelper.EjecutarConManejo(() =>
             {
                 var lista = new List<dynamic>();
-                var datos = new AccesoDatos();
-                try
+
+                using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_AsistenciasPorEmpresas");
                     datos.setearParametro("@FechaDesde", fechaDesde);
@@ -66,10 +62,6 @@ namespace Negocio
                     }
                     return lista;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "listar asistencias por empresas");
         }
 
@@ -78,8 +70,8 @@ namespace Negocio
             return ExceptionHelper.EjecutarConManejo(() =>
             {
                 var lista = new List<dynamic>();
-                var datos = new AccesoDatos();
-                try
+
+                using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ReporteCoberturaVsProyeccion");
                     datos.setearParametro("@FechaDesde", fechaDesde);
@@ -102,10 +94,6 @@ namespace Negocio
                     }
                     return lista;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "obtener cobertura vs proyeccion");
         }
 
@@ -114,8 +102,8 @@ namespace Negocio
             return ExceptionHelper.EjecutarConManejo(() =>
             {
                 var lista = new List<dynamic>();
-                var datos = new AccesoDatos();
-                try
+
+                using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_DistribucionPorDiaSemana");
                     datos.setearParametro("@FechaDesde", fechaDesde);
@@ -134,10 +122,6 @@ namespace Negocio
                         lista.Add(row);
                     }
                     return lista;
-                }
-                finally
-                {
-                    datos.cerrarConexion();
                 }
             }, "obtener distribucion por dia de semana");
         }

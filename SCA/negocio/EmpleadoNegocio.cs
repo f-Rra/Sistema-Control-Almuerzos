@@ -14,9 +14,8 @@ namespace Negocio
             return ExceptionHelper.EjecutarConManejo(() =>
             {
                 List<Empleado> lista = new List<Empleado>();
-                AccesoDatos datos = new AccesoDatos();
 
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ListarEmpleados");
                     datos.ejecutarLectura();
@@ -39,10 +38,6 @@ namespace Negocio
 
                     return lista;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "cargar empleados");
         }
 
@@ -50,9 +45,7 @@ namespace Negocio
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
-                AccesoDatos datos = new AccesoDatos();
-
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_BuscarEmpleadoPorCredencial");
                     datos.setearParametro("@Credencial", credencial);
@@ -73,19 +66,14 @@ namespace Negocio
 
                     return null;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "buscar empleado por credencial");
         }
 
         public List<Empleado> empleadosSinAlmorzar(int idServicio)
         {
             List<Empleado> lista = new List<Empleado>();
-            AccesoDatos datos = new AccesoDatos();
 
-            try
+            using (AccesoDatos datos = new AccesoDatos())
             {
                 datos.setearProcedimiento("sp_EmpleadosSinAlmorzar");
                 datos.setearParametro("@IdServicio", idServicio);
@@ -106,18 +94,13 @@ namespace Negocio
 
                 return lista;
             }
-            finally
-            {
-                datos.cerrarConexion();
-            }
         }
 
         public List<Empleado> filtrarEmpleadosSinAlmorzar(int idServicio, int? idEmpresa = null, string nombre = null)
         {
             List<Empleado> lista = new List<Empleado>();
-            AccesoDatos datos = new AccesoDatos();
 
-            try
+            using (AccesoDatos datos = new AccesoDatos())
             {
                 datos.setearProcedimiento("sp_FiltrarEmpleadosSinAlmorzar");
                 datos.setearParametro("@IdServicio", idServicio);
@@ -149,18 +132,13 @@ namespace Negocio
 
                 return lista;
             }
-            finally
-            {
-                datos.cerrarConexion();
-            }
         }
 
         public void agregar(Empleado empleado)
         {
             ExceptionHelper.EjecutarConManejo(() =>
             {
-                AccesoDatos datos = new AccesoDatos();
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_AgregarEmpleado");
                     datos.setearParametro("@IdCredencial", empleado.IdCredencial);
@@ -171,10 +149,6 @@ namespace Negocio
                     
                     datos.ejecutarAccion();
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "agregar empleado");
         }
 
@@ -182,8 +156,7 @@ namespace Negocio
         {
             ExceptionHelper.EjecutarConManejo(() =>
             {
-                AccesoDatos datos = new AccesoDatos();
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ModificarEmpleado");
                     datos.setearParametro("@IdEmpleado", empleado.IdEmpleado);
@@ -195,10 +168,6 @@ namespace Negocio
                     
                     datos.ejecutarAccion();
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "modificar empleado");
         }
 
@@ -206,16 +175,11 @@ namespace Negocio
         {
             ExceptionHelper.EjecutarConManejo(() =>
             {
-                AccesoDatos datos = new AccesoDatos();
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_DesactivarEmpleado");
                     datos.setearParametro("@IdEmpleado", idEmpleado);
                     datos.ejecutarAccion();
-                }
-                finally
-                {
-                    datos.cerrarConexion();
                 }
             }, "desactivar empleado");
         }
@@ -224,8 +188,7 @@ namespace Negocio
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
-                AccesoDatos datos = new AccesoDatos();
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_VerificarCredencial");
                     datos.setearParametro("@IdCredencial", credencial);
@@ -237,10 +200,6 @@ namespace Negocio
                     }
                     return false;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "verificar credencial");
         }
 
@@ -248,10 +207,9 @@ namespace Negocio
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
-                AccesoDatos datos = new AccesoDatos();
                 Empleado empleado = new Empleado();
                 
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_BuscarEmpleadoPorId");
                     datos.setearParametro("@IdEmpleado", id);
@@ -271,10 +229,6 @@ namespace Negocio
                     }
                     
                     return empleado;
-                }
-                finally
-                {
-                    datos.cerrarConexion();
                 }
             }, "buscar empleado por ID");
         }

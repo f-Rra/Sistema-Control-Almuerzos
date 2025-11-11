@@ -13,9 +13,7 @@ namespace Negocio
         {
             ExceptionHelper.EjecutarConManejo(() =>
             {
-                AccesoDatos datos = new AccesoDatos();
-
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_RegistrarEmpleado");
                     datos.setearParametro("@IdEmpleado", idEmpleado);
@@ -23,10 +21,6 @@ namespace Negocio
                     datos.setearParametro("@IdServicio", idServicio);
                     datos.setearParametro("@IdLugar", idLugar);
                     datos.ejecutarAccion();
-                }
-                finally
-                {
-                    datos.cerrarConexion();
                 }
             }, "registrar empleado");
         }
@@ -36,9 +30,8 @@ namespace Negocio
             return ExceptionHelper.EjecutarConManejo(() =>
             {
                 List<Registro> lista = new List<Registro>();
-                AccesoDatos datos = new AccesoDatos();
 
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ListarRegistrosPorServicio");
                     datos.setearParametro("@IdServicio", idServicio);
@@ -57,10 +50,6 @@ namespace Negocio
 
                     return lista;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "listar registros por servicio");
         }
 
@@ -68,9 +57,7 @@ namespace Negocio
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
-                AccesoDatos datos = new AccesoDatos();
-
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_VerificarEmpleadoRegistrado");
                     datos.setearParametro("@IdEmpleado", idEmpleado);
@@ -84,10 +71,6 @@ namespace Negocio
 
                     return false;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "verificar empleado registrado");
         }
 
@@ -95,9 +78,7 @@ namespace Negocio
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
-                AccesoDatos datos = new AccesoDatos();
-
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ContarRegistrosPorServicio");
                     datos.setearParametro("@IdServicio", idServicio);
@@ -110,10 +91,6 @@ namespace Negocio
 
                     return 0;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
             }, "contar registros por servicio");
         }
 
@@ -122,9 +99,8 @@ namespace Negocio
             return ExceptionHelper.EjecutarConManejo(() =>
             {
                 List<Registro> lista = new List<Registro>();
-                AccesoDatos datos = new AccesoDatos();
 
-                try
+                using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ObtenerRegistrosPorEmpresaYFecha");
                     datos.setearParametro("@IdEmpresa", idEmpresa);
@@ -148,10 +124,6 @@ namespace Negocio
                     }
 
                     return lista;
-                }
-                finally
-                {
-                    datos.cerrarConexion();
                 }
             }, "obtener registros por empresa y fecha");
         }

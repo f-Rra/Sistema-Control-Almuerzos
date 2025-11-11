@@ -12,9 +12,8 @@ namespace Negocio
         public List<Lugar> listar()
         {
             List<Lugar> lista = new List<Lugar>();
-            AccesoDatos datos = new AccesoDatos();
 
-            try
+            using (AccesoDatos datos = new AccesoDatos())
             {
                 datos.setearProcedimiento("sp_ListarLugares");
                 datos.ejecutarLectura();
@@ -29,14 +28,6 @@ namespace Negocio
                 }
 
                 return lista;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                datos.cerrarConexion();
             }
         }
     }

@@ -12,9 +12,7 @@ namespace Negocio
     {
         public Servicio obtenerUltimoServicio()
         {
-            AccesoDatos datos = new AccesoDatos();
-
-            try
+            using (AccesoDatos datos = new AccesoDatos())
             {
                 datos.setearProcedimiento("sp_ObtenerUltimoServicio");
                 datos.ejecutarLectura();
@@ -36,46 +34,43 @@ namespace Negocio
 
                 return null;
             }
-            finally
-            {
-                datos.cerrarConexion();
-            }
         }
 
         public int crearServicio(int idLugar, int? proyeccion = null)
         {
-            AccesoDatos datos = new AccesoDatos();
-
-            datos.setearProcedimiento("sp_IniciarServicio");
-            datos.setearParametro("@IdLugar", idLugar);
-            if (proyeccion.HasValue)
-                datos.setearParametro("@Proyeccion", proyeccion.Value);
-            else
-                datos.setearParametro("@Proyeccion", System.DBNull.Value);
-            return datos.ejecutarAccionReturn();
+            using (AccesoDatos datos = new AccesoDatos())
+            {
+                datos.setearProcedimiento("sp_IniciarServicio");
+                datos.setearParametro("@IdLugar", idLugar);
+                if (proyeccion.HasValue)
+                    datos.setearParametro("@Proyeccion", proyeccion.Value);
+                else
+                    datos.setearParametro("@Proyeccion", System.DBNull.Value);
+                return datos.ejecutarAccionReturn();
+            }
         }
 
         public void finalizarServicio(int idServicio, int totalComensales, int totalInvitados, int? duracionMinutos = null)
         {
-            AccesoDatos datos = new AccesoDatos();
-
-            datos.setearProcedimiento("sp_FinalizarServicio");
-            datos.setearParametro("@IdServicio", idServicio);
-            datos.setearParametro("@TotalComensales", totalComensales);
-            datos.setearParametro("@TotalInvitados", totalInvitados);
-            if (duracionMinutos.HasValue)
-                datos.setearParametro("@DuracionMinutos", duracionMinutos.Value);
-            else
-                datos.setearParametro("@DuracionMinutos", System.DBNull.Value);
-            datos.ejecutarAccion();
+            using (AccesoDatos datos = new AccesoDatos())
+            {
+                datos.setearProcedimiento("sp_FinalizarServicio");
+                datos.setearParametro("@IdServicio", idServicio);
+                datos.setearParametro("@TotalComensales", totalComensales);
+                datos.setearParametro("@TotalInvitados", totalInvitados);
+                if (duracionMinutos.HasValue)
+                    datos.setearParametro("@DuracionMinutos", duracionMinutos.Value);
+                else
+                    datos.setearParametro("@DuracionMinutos", System.DBNull.Value);
+                datos.ejecutarAccion();
+            }
         }
 
         public List<Servicio> listarPorFecha(DateTime fechaDesde, DateTime fechaHasta)
         {
             List<Servicio> lista = new List<Servicio>();
-            AccesoDatos datos = new AccesoDatos();
 
-            try
+            using (AccesoDatos datos = new AccesoDatos())
             {
                 datos.setearProcedimiento("sp_ListarServiciosPorFecha");
                 datos.setearParametro("@FechaDesde", fechaDesde);
@@ -97,17 +92,13 @@ namespace Negocio
 
                 return lista;
             }
-            finally
-            {
-                datos.cerrarConexion();
-            }
         }
 
         public List<Servicio> listarTodos()
         {
             List<Servicio> lista = new List<Servicio>();
-            AccesoDatos datos = new AccesoDatos();
-            try
+
+            using (AccesoDatos datos = new AccesoDatos())
             {
                 datos.setearProcedimiento("sp_ListarServicios");
                 datos.ejecutarLectura();
@@ -126,10 +117,6 @@ namespace Negocio
                 }
 
                 return lista;
-            }
-            finally
-            {
-                datos.cerrarConexion();
             }
         }
     }
