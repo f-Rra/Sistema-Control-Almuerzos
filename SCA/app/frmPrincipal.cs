@@ -652,7 +652,7 @@ namespace app
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Error al cargar servicio seleccionado: " + ex.Message);
+                    ExceptionHelper.ManejarExcepcionBD(ex, "cargar servicio seleccionado");
                 }
             }
         }

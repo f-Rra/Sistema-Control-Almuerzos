@@ -118,14 +118,17 @@ namespace app.UserControls
        
         private void MostrarComensalRegistrado(Empleado empleado)
         {
+            Form formTemporal = null;
+            Timer timer = null;
+
             try
             {
-                var formTemporal = new Form
+                formTemporal = new Form
                 {
                     StartPosition = FormStartPosition.CenterScreen,
                     FormBorderStyle = FormBorderStyle.None,
-                    Size = new Size(401, 170), 
-                    BackColor = Color.FromArgb(35, 34, 33), 
+                    Size = new Size(401, 170),
+                    BackColor = Color.FromArgb(35, 34, 33),
                     TopMost = true,
                     ShowInTaskbar = false,
                     Padding = new Padding(1)
@@ -135,21 +138,21 @@ namespace app.UserControls
                 {
                     Size = new Size(399, 168),
                     Location = new Point(1, 1),
-                    BackColor = Color.FromArgb(255, 248, 225) 
+                    BackColor = Color.FromArgb(255, 248, 225)
                 };
 
                 var panelTitulo = new Panel
                 {
-                    Size = new Size(399, 52), 
+                    Size = new Size(399, 52),
                     Location = new Point(0, 0),
-                    BackColor = Color.FromArgb(255, 208, 36) 
+                    BackColor = Color.FromArgb(255, 208, 36)
                 };
 
                 var lblTitulo = new Label
                 {
                     Text = "Comensal Registrado",
-                    Font = new Font("Segoe UI", 14, FontStyle.Bold), 
-                    ForeColor = Color.FromArgb(35, 34, 33), 
+                    Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(35, 34, 33),
                     AutoSize = false,
                     Size = new Size(399, 52),
                     TextAlign = ContentAlignment.MiddleCenter
@@ -164,11 +167,11 @@ namespace app.UserControls
                 var lblMensaje = new Label
                 {
                     Text = mensaje,
-                    Font = new Font("Segoe UI", 14, FontStyle.Bold), 
+                    Font = new Font("Segoe UI", 14, FontStyle.Bold),
                     ForeColor = Color.FromArgb(35, 34, 33),
                     AutoSize = false,
-                    Size = new Size(385, 95), 
-                    Location = new Point(7, 60), 
+                    Size = new Size(385, 95),
+                    Location = new Point(7, 60),
                     TextAlign = ContentAlignment.MiddleCenter
                 };
 
@@ -176,19 +179,54 @@ namespace app.UserControls
                 panelContenedor.Controls.Add(lblMensaje);
                 formTemporal.Controls.Add(panelContenedor);
 
-                var timer = new Timer { Interval = 4000 };
+                timer = new Timer { Interval = 4000 };
                 timer.Tick += (s, e) =>
                 {
-                    timer.Stop();
-                    timer.Dispose();
-                    formTemporal.Close();
-                    formTemporal.Dispose();
+                    try
+                    {
+                        timer.Stop();
+                        timer.Dispose();
+                        if (formTemporal != null && !formTemporal.IsDisposed)
+                        {
+                            formTemporal.Close();
+                            formTemporal.Dispose();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[ERROR] Error al cerrar ventana temporal en Tick: {ex.Message}");
+                    }
+                };
+
+                formTemporal.FormClosed += (s, e) =>
+                {
+                    if (timer != null)
+                    {
+                        try { timer.Stop(); timer.Dispose(); }
+                        catch { }
+                    }
                 };
 
                 formTemporal.Shown += (s, e) => timer.Start();
                 formTemporal.Show();
             }
-            catch {}
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ERROR] Error al mostrar ventana temporal: {ex.Message}");
+                try
+                {
+                    timer?.Stop();
+                    timer?.Dispose();
+                }
+                catch { }
+
+                try
+                {
+                    if (formTemporal != null && !formTemporal.IsDisposed)
+                        formTemporal.Dispose();
+                }
+                catch { }
+            }
         }
     }
 }

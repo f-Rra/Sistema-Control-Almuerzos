@@ -96,57 +96,58 @@ namespace app.UserControls
         {
             try
             {
-                var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 20, 20, 20, 20);
-                iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new System.IO.FileStream(rutaArchivo, System.IO.FileMode.Create));
-                doc.Open();
-
-                // Título
-                var fontTitulo = iTextSharp.text.FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD);
-                var fontNormal = iTextSharp.text.FontFactory.GetFont("Arial", 10, iTextSharp.text.Font.NORMAL);
-                doc.Add(new iTextSharp.text.Paragraph("SISTEMA DE CONTROL DE ALMUERZOS", fontTitulo));
-                doc.Add(new iTextSharp.text.Paragraph("Reporte de servicios", fontNormal));
-                doc.Add(new iTextSharp.text.Paragraph($"Generado: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal));
-
-                // Información de filtros
-                string infoFiltros = $"Fechas: {dtpDesde.Value:dd/MM/yyyy} - {dtpHasta.Value:dd/MM/yyyy}    Lugar: {cbLugar.Text}    Tipo de reporte: {cbTipoReporte.Text}";
-                doc.Add(new iTextSharp.text.Paragraph(infoFiltros, fontNormal));
-                doc.Add(new iTextSharp.text.Paragraph(" "));
-
-                // Tabla
-                int colCount = dgvReporte.Columns.GetColumnCount(DataGridViewElementStates.Visible);
-                var table = new iTextSharp.text.pdf.PdfPTable(colCount);
-                table.WidthPercentage = 100;
-
-                // Encabezados
-                foreach (DataGridViewColumn col in dgvReporte.Columns)
+                using (var fileStream = new System.IO.FileStream(rutaArchivo, System.IO.FileMode.Create))
+                using (var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 20, 20, 20, 20))
+                using (var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(doc, fileStream))
                 {
-                    if (col.Visible)
-                    {
-                        var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(col.HeaderText, fontNormal));
-                        cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
-                        table.AddCell(cell);
-                    }
-                }
+                    doc.Open();
 
-                // Filas
-                foreach (DataGridViewRow row in dgvReporte.Rows)
-                {
-                    if (!row.IsNewRow)
+                    // Título
+                    var fontTitulo = iTextSharp.text.FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD);
+                    var fontNormal = iTextSharp.text.FontFactory.GetFont("Arial", 10, iTextSharp.text.Font.NORMAL);
+                    doc.Add(new iTextSharp.text.Paragraph("SISTEMA DE CONTROL DE ALMUERZOS", fontTitulo));
+                    doc.Add(new iTextSharp.text.Paragraph("Reporte de servicios", fontNormal));
+                    doc.Add(new iTextSharp.text.Paragraph($"Generado: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal));
+
+                    // Información de filtros
+                    string infoFiltros = $"Fechas: {dtpDesde.Value:dd/MM/yyyy} - {dtpHasta.Value:dd/MM/yyyy}    Lugar: {cbLugar.Text}    Tipo de reporte: {cbTipoReporte.Text}";
+                    doc.Add(new iTextSharp.text.Paragraph(infoFiltros, fontNormal));
+                    doc.Add(new iTextSharp.text.Paragraph(" "));
+
+                    // Tabla
+                    int colCount = dgvReporte.Columns.GetColumnCount(DataGridViewElementStates.Visible);
+                    var table = new iTextSharp.text.pdf.PdfPTable(colCount);
+                    table.WidthPercentage = 100;
+
+                    // Encabezados
+                    foreach (DataGridViewColumn col in dgvReporte.Columns)
                     {
-                        foreach (DataGridViewColumn col in dgvReporte.Columns)
+                        if (col.Visible)
                         {
-                            if (col.Visible)
+                            var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(col.HeaderText, fontNormal));
+                            cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
+                            table.AddCell(cell);
+                        }
+                    }
+
+                    // Filas
+                    foreach (DataGridViewRow row in dgvReporte.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            foreach (DataGridViewColumn col in dgvReporte.Columns)
                             {
-                                var value = row.Cells[col.Index].Value?.ToString() ?? "";
-                                table.AddCell(new iTextSharp.text.Phrase(value, fontNormal));
+                                if (col.Visible)
+                                {
+                                    var value = row.Cells[col.Index].Value?.ToString() ?? "";
+                                    table.AddCell(new iTextSharp.text.Phrase(value, fontNormal));
+                                }
                             }
                         }
                     }
-                }
 
-                doc.Add(table);
-                doc.Close();
-                writer.Close();
+                    doc.Add(table);
+                }
 
                 ExceptionHelper.MostrarExito($"Reporte guardado como PDF:\n{rutaArchivo}");
                 System.Diagnostics.Process.Start(rutaArchivo);

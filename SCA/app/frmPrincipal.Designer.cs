@@ -13,9 +13,21 @@ namespace app
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                if (tmrCrono != null)
+                {
+                    tmrCrono.Stop();
+                    tmrCrono.Dispose();
+                }
+                if (crono != null)
+                {
+                    crono.Stop();
+                }
+                if (components != null)
+                {
+                    components.Dispose();
+                }
             }
             base.Dispose(disposing);
         }

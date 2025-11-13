@@ -211,17 +211,20 @@ namespace app.UserControls
 
         private void MostrarRegistrosAgregados(int cantidad)
         {
+            Form formTemporal = null;
+            Timer timer = null;
+
             try
             {
-                var formTemporal = new Form
+                formTemporal = new Form
                 {
                     StartPosition = FormStartPosition.CenterScreen,
                     FormBorderStyle = FormBorderStyle.None,
-                    Size = new Size(401, 170), 
-                    BackColor = Color.FromArgb(35, 34, 33), 
+                    Size = new Size(401, 170),
+                    BackColor = Color.FromArgb(35, 34, 33),
                     TopMost = true,
                     ShowInTaskbar = false,
-                    Padding = new Padding(1) 
+                    Padding = new Padding(1)
                 };
 
                 var panelContenedor = new Panel
@@ -233,16 +236,16 @@ namespace app.UserControls
 
                 var panelTitulo = new Panel
                 {
-                    Size = new Size(399, 52), 
+                    Size = new Size(399, 52),
                     Location = new Point(0, 0),
-                    BackColor = Color.FromArgb(255, 208, 36) 
+                    BackColor = Color.FromArgb(255, 208, 36)
                 };
 
                 var lblTitulo = new Label
                 {
                     Text = "Registro Manual",
-                    Font = new Font("Segoe UI", 14, FontStyle.Bold), 
-                    ForeColor = Color.FromArgb(35, 34, 33), 
+                    Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(35, 34, 33),
                     AutoSize = false,
                     Size = new Size(399, 52),
                     TextAlign = ContentAlignment.MiddleCenter
@@ -250,7 +253,7 @@ namespace app.UserControls
 
                 panelTitulo.Controls.Add(lblTitulo);
 
-                string mensaje = cantidad == 1 
+                string mensaje = cantidad == 1
                     ? $"Comensal Agregado Correctamente"
                     : $"Comensales Agregados Correctamente\n\nTotal registrados: {cantidad}";
 
@@ -260,8 +263,8 @@ namespace app.UserControls
                     Font = new Font("Segoe UI", 14, FontStyle.Bold),
                     ForeColor = Color.FromArgb(35, 34, 33),
                     AutoSize = false,
-                    Size = new Size(385, 95), 
-                    Location = new Point(7, 60), 
+                    Size = new Size(385, 95),
+                    Location = new Point(7, 60),
                     TextAlign = ContentAlignment.MiddleCenter
                 };
 
@@ -269,19 +272,54 @@ namespace app.UserControls
                 panelContenedor.Controls.Add(lblMensaje);
                 formTemporal.Controls.Add(panelContenedor);
 
-                var timer = new Timer { Interval = 4000 };
+                timer = new Timer { Interval = 4000 };
                 timer.Tick += (s, ev) =>
                 {
-                    timer.Stop();
-                    timer.Dispose();
-                    formTemporal.Close();
-                    formTemporal.Dispose();
+                    try
+                    {
+                        timer.Stop();
+                        timer.Dispose();
+                        if (formTemporal != null && !formTemporal.IsDisposed)
+                        {
+                            formTemporal.Close();
+                            formTemporal.Dispose();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[ERROR] Error al cerrar ventana temporal en Tick: {ex.Message}");
+                    }
+                };
+
+                formTemporal.FormClosed += (s, ev) =>
+                {
+                    if (timer != null)
+                    {
+                        try { timer.Stop(); timer.Dispose(); }
+                        catch { }
+                    }
                 };
 
                 formTemporal.Shown += (s, ev) => timer.Start();
                 formTemporal.Show();
             }
-            catch {}
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ERROR] Error al mostrar ventana temporal: {ex.Message}");
+                try
+                {
+                    timer?.Stop();
+                    timer?.Dispose();
+                }
+                catch { }
+
+                try
+                {
+                    if (formTemporal != null && !formTemporal.IsDisposed)
+                        formTemporal.Dispose();
+                }
+                catch { }
+            }
         }
     }
 }
