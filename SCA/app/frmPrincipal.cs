@@ -90,7 +90,7 @@ namespace app
 
         private void FinalizarServicio()
         {
-            if (!ExceptionHelper.MostrarConfirmacion("¿Está seguro de finalizar el servicio?"))
+            if (!ExceptionHelper.MostrarConfirmacion("¿Está seguro de finalizar el servicio? Esta acción guardará todas las estadísticas."))
             {
                 return;
             }
@@ -649,7 +649,16 @@ namespace app
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (idServicioActual.HasValue)
+            {
+                ExceptionHelper.MostrarAdvertencia("Debe finalizar el servicio activo antes de salir de la aplicación.");
+                return;
+            }
+
+            if (ExceptionHelper.MostrarConfirmacion("¿Está seguro de salir de la aplicación?"))
+            {
+                Application.Exit();
+            }
         }
 
         #endregion
