@@ -37,11 +37,11 @@ namespace Negocio
             }, "listar servicios por rango");
         }
 
-        public List<dynamic> AsistenciasPorEmpresas(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
+        public List<AsistenciaPorEmpresa> AsistenciasPorEmpresas(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
-                var lista = new List<dynamic>();
+                var lista = new List<AsistenciaPorEmpresa>();
 
                 using (var datos = new AccesoDatos())
                 {
@@ -53,23 +53,23 @@ namespace Negocio
 
                     while (datos.Lector.Read())
                     {
-                        var row = new
+                        var item = new AsistenciaPorEmpresa
                         {
                             Empresa = (string)datos.Lector["Empresa"],
                             TotalAsistencias = (int)datos.Lector["TotalAsistencias"]
                         };
-                        lista.Add(row);
+                        lista.Add(item);
                     }
                     return lista;
                 }
             }, "listar asistencias por empresas");
         }
 
-        public List<dynamic> CoberturaVsProyeccion(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
+        public List<CoberturaVsProyeccion> CoberturaVsProyeccion(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
-                var lista = new List<dynamic>();
+                var lista = new List<CoberturaVsProyeccion>();
 
                 using (var datos = new AccesoDatos())
                 {
@@ -81,7 +81,7 @@ namespace Negocio
 
                     while (datos.Lector.Read())
                     {
-                        var row = new
+                        var item = new CoberturaVsProyeccion
                         {
                             Fecha = (DateTime)datos.Lector["Fecha"],
                             Lugar = (string)datos.Lector["Lugar"],
@@ -90,18 +90,18 @@ namespace Negocio
                             CoberturaPorcentaje = datos.Lector["CoberturaPorcentaje"] is DBNull ? (decimal?)null : (decimal)datos.Lector["CoberturaPorcentaje"],
                             Diferencia = (int)datos.Lector["Diferencia"]
                         };
-                        lista.Add(row);
+                        lista.Add(item);
                     }
                     return lista;
                 }
             }, "obtener cobertura vs proyeccion");
         }
 
-        public List<dynamic> DistribucionPorDiaSemana(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
+        public List<DistribucionDiaSemana> DistribucionPorDiaSemana(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
-                var lista = new List<dynamic>();
+                var lista = new List<DistribucionDiaSemana>();
 
                 using (var datos = new AccesoDatos())
                 {
@@ -113,13 +113,13 @@ namespace Negocio
 
                     while (datos.Lector.Read())
                     {
-                        var row = new
+                        var item = new DistribucionDiaSemana
                         {
                             Orden = (int)datos.Lector["Orden"],
                             Dia = (string)datos.Lector["Dia"],
                             Total = (int)datos.Lector["Total"]
                         };
-                        lista.Add(row);
+                        lista.Add(item);
                     }
                     return lista;
                 }
