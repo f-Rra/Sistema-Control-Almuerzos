@@ -272,9 +272,23 @@ namespace app.UserControls
                 return false;
             }
 
+            if (!ValidarNombre(txtNombre.Text))
+            {
+                ExceptionHelper.MostrarAdvertencia("El nombre solo puede contener letras, espacios, tildes y guiones");
+                txtNombre.Focus();
+                return false;
+            }
+
             if (string.IsNullOrWhiteSpace(txtApellido.Text))
             {
                 ExceptionHelper.MostrarAdvertencia("Ingrese el apellido");
+                txtApellido.Focus();
+                return false;
+            }
+
+            if (!ValidarNombre(txtApellido.Text))
+            {
+                ExceptionHelper.MostrarAdvertencia("El apellido solo puede contener letras, espacios, tildes y guiones");
                 txtApellido.Focus();
                 return false;
             }
@@ -286,6 +300,18 @@ namespace app.UserControls
             }
 
             return true;
+        }
+
+        private bool ValidarNombre(string nombre)
+        {
+            if (string.IsNullOrWhiteSpace(nombre))
+                return false;
+            
+            // Solo letras, espacios, tildes y guiones
+            System.Text.RegularExpressions.Regex regex = 
+                new System.Text.RegularExpressions.Regex(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\-]+$");
+            
+            return regex.IsMatch(nombre);
         }
 
         private void LimpiarFormularioEmpleado()

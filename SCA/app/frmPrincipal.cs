@@ -69,7 +69,7 @@ namespace app
         {
             try
             {
-                if (!ValidarLugar() || !ValidarProyeccion(out int proyeccion))
+                if (!ValidarLugar() || !ValidarProyeccion(out int proyeccion) || !ValidarInvitados())
                     return;
 
                 int idLugar = (int)cbLugar.SelectedValue;
@@ -143,6 +143,32 @@ namespace app
             if (!int.TryParse(proyText, out proyeccion))
             {
                 ExceptionHelper.MostrarAdvertencia("Ingrese una proyección válida (solo números)");
+                return false;
+            }
+            
+            if (proyeccion < 0 || proyeccion > 1000)
+            {
+                ExceptionHelper.MostrarAdvertencia("La proyección debe estar entre 0 y 1000 comensales");
+                return false;
+            }
+            
+            return true;
+        }
+
+        private bool ValidarInvitados()
+        {
+            if (string.IsNullOrWhiteSpace(mtxtInvitados.Text))
+                return true; // Invitados es opcional
+                
+            if (!int.TryParse(mtxtInvitados.Text, out int invitados))
+            {
+                ExceptionHelper.MostrarAdvertencia("Ingrese un número válido de invitados");
+                return false;
+            }
+            
+            if (invitados < 0 || invitados > 500)
+            {
+                ExceptionHelper.MostrarAdvertencia("Los invitados deben estar entre 0 y 500");
                 return false;
             }
             

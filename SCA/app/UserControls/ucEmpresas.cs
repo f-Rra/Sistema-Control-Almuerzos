@@ -104,6 +104,13 @@ namespace app.UserControls
                 return false;
             }
 
+            if (!ValidarNombre(txtNombre.Text))
+            {
+                ExceptionHelper.MostrarAdvertencia("El nombre de la empresa solo puede contener letras, números, espacios y guiones");
+                txtNombre.Focus();
+                return false;
+            }
+
             var empresas = negE.listar();
             if (empresas != null)
             {
@@ -276,6 +283,18 @@ namespace app.UserControls
             CargarEmpresas();
             LimpiarFormulario();
             LimpiarEstadisticas();
+        }
+
+        private bool ValidarNombre(string nombre)
+        {
+            if (string.IsNullOrWhiteSpace(nombre))
+                return false;
+            
+            // Para empresas: letras, números, espacios, tildes y guiones
+            System.Text.RegularExpressions.Regex regex = 
+                new System.Text.RegularExpressions.Regex(@"^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s\-]+$");
+            
+            return regex.IsMatch(nombre);
         }
     }
 }
