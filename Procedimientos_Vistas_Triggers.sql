@@ -180,6 +180,21 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE sp_VerificarServicioActivo
+    @IdLugar INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT COUNT(*) AS Existe
+    FROM SERVICIOS
+    WHERE IdLugar = @IdLugar 
+      AND Estado = 'Activo'
+      AND CAST(Fecha AS DATE) = CAST(GETDATE() AS DATE);
+END
+GO
+
+
 -- =============================================
 -- PROCEDIMIENTOS DE REGISTROS
 -- =============================================
