@@ -40,6 +40,23 @@ namespace Negocio
         {
             using (AccesoDatos datos = new AccesoDatos())
             {
+                // Validación adicional para prevenir race condition
+                datos.setearProcedimiento("sp_VerificarServicioActivo");
+                datos.setearParametro("@IdLugar", idLugar);
+                datos.ejecutarLectura();
+                
+                if (datos.Lector.Read())
+                {
+                    int existe = (int)datos.Lector["Existe"];
+                    if (existe > 0)
+                    {
+                        datos.cerrarConexion();
+                        throw new Exception("Ya existe un servicio activo para este lugar. Finalice el servicio actual antes de iniciar uno nuevo.");
+                    }
+                }
+                datos.cerrarConexion();
+                
+                // Proceder con la inserción
                 datos.setearProcedimiento("sp_IniciarServicio");
                 datos.setearParametro("@IdLugar", idLugar);
                 if (proyeccion.HasValue)
