@@ -197,11 +197,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpleado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpresa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLugar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHora;
         
         private System.Windows.Forms.TextBox txtRegistro;
         private ReaLTaiizor.Controls.Button btnRegistro;

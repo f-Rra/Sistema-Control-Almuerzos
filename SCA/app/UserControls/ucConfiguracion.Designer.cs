@@ -148,6 +148,7 @@ namespace app.UserControls
             this.btnGuardarConexion.TabIndex = 13;
             this.btnGuardarConexion.Text = "Guardar Cambios";
             this.btnGuardarConexion.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnGuardarConexion.Click += new System.EventHandler(this.btnGuardarConexion_Click);
             // 
             // btnProbarConexion
             // 
@@ -168,6 +169,7 @@ namespace app.UserControls
             this.btnProbarConexion.TabIndex = 13;
             this.btnProbarConexion.Text = "Probar Conexión";
             this.btnProbarConexion.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnProbarConexion.Click += new System.EventHandler(this.btnProbarConexion_Click);
             // 
             // txtCadenaConexion
             // 

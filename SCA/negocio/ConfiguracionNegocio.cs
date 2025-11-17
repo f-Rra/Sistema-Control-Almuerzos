@@ -7,21 +7,15 @@ using Dominio;
 namespace Negocio
 {
     public class ConfiguracionNegocio
-    {
-        /// <summary>
-        /// Obtiene la cadena de conexión actual desde App.config
-        /// </summary>
+    { 
         public string ObtenerCadenaConexion()
         {
             return ExceptionHelper.EjecutarConManejo(() =>
             {
-                return ConfigurationManager.ConnectionStrings["cadenaConexion"]?.ConnectionString;
+                return ConfigurationManager.ConnectionStrings["BD_Control_Almuerzos"]?.ConnectionString;
             }, "obtener cadena de conexión");
         }
 
-        /// <summary>
-        /// Guarda una nueva cadena de conexión en App.config
-        /// </summary>
         public bool GuardarCadenaConexion(string nuevaCadena)
         {
             return ExceptionHelper.EjecutarConManejo(() =>
@@ -29,13 +23,13 @@ namespace Negocio
                 var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
 
-                if (connectionStringsSection.ConnectionStrings["cadenaConexion"] != null)
+                if (connectionStringsSection.ConnectionStrings["BD_Control_Almuerzos"] != null)
                 {
-                    connectionStringsSection.ConnectionStrings["cadenaConexion"].ConnectionString = nuevaCadena;
+                    connectionStringsSection.ConnectionStrings["BD_Control_Almuerzos"].ConnectionString = nuevaCadena;
                 }
                 else
                 {
-                    connectionStringsSection.ConnectionStrings.Add(new ConnectionStringSettings("cadenaConexion", nuevaCadena));
+                    connectionStringsSection.ConnectionStrings.Add(new ConnectionStringSettings("BD_Control_Almuerzos", nuevaCadena));
                 }
 
                 config.Save(ConfigurationSaveMode.Modified);
@@ -45,9 +39,6 @@ namespace Negocio
             }, "guardar cadena de conexión");
         }
 
-        /// <summary>
-        /// Prueba una cadena de conexión
-        /// </summary>
         public bool ProbarConexion(string cadenaConexion)
         {
             return ExceptionHelper.EjecutarConManejo(() =>
@@ -60,9 +51,6 @@ namespace Negocio
             }, "probar conexión");
         }
 
-        /// <summary>
-        /// Obtiene información de la base de datos actual
-        /// </summary>
         public InfoBaseDatos ObtenerInfoBaseDatos()
         {
             return ExceptionHelper.EjecutarConManejo(() =>
@@ -88,9 +76,6 @@ namespace Negocio
             }, "obtener información de base de datos");
         }
 
-        /// <summary>
-        /// Obtiene información del último respaldo realizado
-        /// </summary>
         public InfoRespaldo ObtenerUltimoRespaldo()
         {
             return ExceptionHelper.EjecutarConManejo(() =>
@@ -115,9 +100,6 @@ namespace Negocio
             }, "obtener último respaldo");
         }
 
-        /// <summary>
-        /// Crea un respaldo de la base de datos
-        /// </summary>
         public bool CrearRespaldo(string rutaDestino)
         {
             return ExceptionHelper.EjecutarConManejo(() =>
@@ -132,9 +114,6 @@ namespace Negocio
             }, "crear respaldo");
         }
 
-        /// <summary>
-        /// Restaura una base de datos desde un archivo de respaldo
-        /// </summary>
         public bool RestaurarRespaldo(string rutaArchivo)
         {
             return ExceptionHelper.EjecutarConManejo(() =>
@@ -149,9 +128,6 @@ namespace Negocio
             }, "restaurar respaldo");
         }
 
-        /// <summary>
-        /// Obtiene información completa de la aplicación
-        /// </summary>
         public InfoAplicacion ObtenerInfoAplicacion()
         {
             return ExceptionHelper.EjecutarConManejo(() =>
@@ -165,7 +141,7 @@ namespace Negocio
                     Version = version.ToString(),
                     FechaCompilacion = fechaCompilacion,
                     Framework = ".NET Framework 4.8",
-                    UILibrary = "ReaLTaiizor"
+                    UILibrary = "ReaLTaiizor & Winforms"
                 };
             }, "obtener información de aplicación");
         }

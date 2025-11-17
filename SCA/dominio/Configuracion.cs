@@ -2,7 +2,6 @@ using System;
 
 namespace Dominio
 {
-    // Información de Base de Datos
     public class InfoBaseDatos
     {
         public string NombreBaseDatos { get; set; }
@@ -11,7 +10,6 @@ namespace Dominio
         public DateTime UltimaActualizacion { get; set; }
     }
 
-    // Información de Respaldo
     public class InfoRespaldo
     {
         public DateTime FechaRespaldo { get; set; }
@@ -19,7 +17,6 @@ namespace Dominio
         public decimal TamañoMB { get; set; }
     }
 
-    // Información de la Aplicación
     public class InfoAplicacion
     {
         public string Version { get; set; }
