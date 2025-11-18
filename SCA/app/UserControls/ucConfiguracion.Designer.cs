@@ -257,6 +257,7 @@ namespace app.UserControls
             this.btnRestaurarRespaldo.TabIndex = 22;
             this.btnRestaurarRespaldo.Text = "Restaurar desde Respaldo";
             this.btnRestaurarRespaldo.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnRestaurarRespaldo.Click += new System.EventHandler(this.btnRestaurarRespaldo_Click);
             // 
             // btnCrearRespaldo
             // 
@@ -277,6 +278,7 @@ namespace app.UserControls
             this.btnCrearRespaldo.TabIndex = 21;
             this.btnCrearRespaldo.Text = "Crear Respaldo Ahora";
             this.btnCrearRespaldo.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnCrearRespaldo.Click += new System.EventHandler(this.btnCrearRespaldo_Click);
             // 
             // lblTamañoRespaldo
             // 
@@ -313,6 +315,7 @@ namespace app.UserControls
             this.rbManual.TabIndex = 17;
             this.rbManual.Text = "Manual";
             this.rbManual.UseVisualStyleBackColor = true;
+            this.rbManual.CheckedChanged += new System.EventHandler(this.rbManual_CheckedChanged);
             // 
             // rbMensual
             // 
@@ -327,6 +330,7 @@ namespace app.UserControls
             this.rbMensual.TabStop = true;
             this.rbMensual.Text = "Mensual ";
             this.rbMensual.UseVisualStyleBackColor = true;
+            this.rbMensual.CheckedChanged += new System.EventHandler(this.rbMensual_CheckedChanged);
             // 
             // lblFrecuencia
             // 
@@ -359,6 +363,7 @@ namespace app.UserControls
             this.btnExaminarRuta.TabIndex = 14;
             this.btnExaminarRuta.Text = "Examinar";
             this.btnExaminarRuta.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnExaminarRuta.Click += new System.EventHandler(this.btnExaminarRuta_Click);
             // 
             // txtRutaRespaldos
             // 
