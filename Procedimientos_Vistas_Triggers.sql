@@ -180,16 +180,16 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE sp_VerificarServicioActivo
+CREATE OR ALTER PROCEDURE sp_VerificarServicioActivo
     @IdLugar INT
 AS
 BEGIN
     SET NOCOUNT ON;
     
     SELECT COUNT(*) AS Existe
-    FROM SERVICIOS
+    FROM Servicios
     WHERE IdLugar = @IdLugar 
-      AND Estado = 'Activo'
+      AND DuracionMinutos IS NULL
       AND CAST(Fecha AS DATE) = CAST(GETDATE() AS DATE);
 END
 GO
@@ -889,6 +889,76 @@ BEGIN
     WHERE database_name = DB_NAME()
       AND type = 'D' -- Full backup
     ORDER BY backup_start_date DESC;
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE sp_CrearRespaldo
+    @RutaDestino NVARCHAR(500)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @NombreDB NVARCHAR(128) = DB_NAME();
+    DECLARE @SQL NVARCHAR(MAX);
+    
+    -- Verificar que la ruta tenga extensión .bak
+    IF RIGHT(@RutaDestino, 4) != '.bak'
+        SET @RutaDestino = @RutaDestino + '.bak';
+    
+    -- Construir comando BACKUP
+    SET @SQL = 'BACKUP DATABASE [' + @NombreDB + '] ' +
+               'TO DISK = ''' + @RutaDestino + ''' ' +
+               'WITH FORMAT, ' +
+               'MEDIANAME = ''SQLServerBackups'', ' +
+               'NAME = ''Full Backup of ' + @NombreDB + ''';';
+    
+    -- Ejecutar backup
+    EXEC sp_executesql @SQL;
+    
+    -- Retornar información del backup creado
+    SELECT 
+        @RutaDestino as RutaArchivo,
+        GETDATE() as FechaRespaldo,
+        'Respaldo creado exitosamente' as Mensaje;
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE sp_RestaurarRespaldo
+    @RutaArchivo NVARCHAR(500)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @NombreDB NVARCHAR(128) = DB_NAME();
+    DECLARE @SQL NVARCHAR(MAX);
+    
+    -- Usar contexto dinámico desde master
+    -- Primero cambiar a master y luego restaurar
+    SET @SQL = '
+        USE master;
+        
+        -- Cerrar todas las conexiones activas
+        ALTER DATABASE [' + @NombreDB + '] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+        
+        -- Restaurar base de datos
+        RESTORE DATABASE [' + @NombreDB + '] 
+        FROM DISK = ''' + @RutaArchivo + ''' 
+        WITH REPLACE;
+        
+        -- Volver a multi usuario
+        ALTER DATABASE [' + @NombreDB + '] SET MULTI_USER;
+    ';
+    
+    -- Ejecutar restore
+    EXEC sp_executesql @SQL;
+    
+    -- Retornar información
+    SELECT 
+        @RutaArchivo as RutaArchivo,
+        GETDATE() as FechaRestauracion,
+        'Respaldo restaurado exitosamente' as Mensaje;
 END
 GO
 
