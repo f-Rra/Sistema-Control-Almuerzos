@@ -64,11 +64,11 @@
             // 
             this.lblEmpresa.AutoSize = true;
             this.lblEmpresa.BackColor = System.Drawing.Color.Transparent;
-            this.lblEmpresa.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblEmpresa.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmpresa.ForeColor = System.Drawing.Color.White;
             this.lblEmpresa.Location = new System.Drawing.Point(10, 6);
             this.lblEmpresa.Name = "lblEmpresa";
-            this.lblEmpresa.Size = new System.Drawing.Size(53, 13);
+            this.lblEmpresa.Size = new System.Drawing.Size(55, 15);
             this.lblEmpresa.TabIndex = 17;
             this.lblEmpresa.Text = "Empresa:";
             // 
@@ -76,11 +76,11 @@
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.BackColor = System.Drawing.Color.Transparent;
-            this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombre.ForeColor = System.Drawing.Color.White;
             this.lblNombre.Location = new System.Drawing.Point(177, 6);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(51, 13);
+            this.lblNombre.Size = new System.Drawing.Size(54, 15);
             this.lblNombre.TabIndex = 19;
             this.lblNombre.Text = "Nombre:";
             // 

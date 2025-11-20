@@ -367,7 +367,7 @@ namespace app.UserControls
             this.lblDuracionPromedio.Name = "lblDuracionPromedio";
             this.lblDuracionPromedio.Size = new System.Drawing.Size(324, 30);
             this.lblDuracionPromedio.TabIndex = 12;
-            this.lblDuracionPromedio.Text = "Duracion Promedio de Servicio:";
+            this.lblDuracionPromedio.Text = "Duración Promedio de Servicio:";
             this.lblDuracionPromedio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblCobertura
@@ -380,7 +380,7 @@ namespace app.UserControls
             this.lblCobertura.Name = "lblCobertura";
             this.lblCobertura.Size = new System.Drawing.Size(360, 30);
             this.lblCobertura.TabIndex = 12;
-            this.lblCobertura.Text = "Cobertura Proyeccion vs Promedio:";
+            this.lblCobertura.Text = "Cobertura Proyección vs Promedio:";
             this.lblCobertura.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblAsistenciasInvitados

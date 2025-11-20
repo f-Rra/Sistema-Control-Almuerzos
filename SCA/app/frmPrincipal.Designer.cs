@@ -58,7 +58,7 @@ namespace app
             this.pAdmin = new System.Windows.Forms.Panel();
             this.btnAdmin = new System.Windows.Forms.Label();
             this.pnlSuperior = new System.Windows.Forms.Panel();
-            this.thunderGroupBox1 = new ReaLTaiizor.Controls.ThunderGroupBox();
+            this.gbxConfiguracion = new ReaLTaiizor.Controls.ThunderGroupBox();
             this.btnServicio = new ReaLTaiizor.Controls.Button();
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.lblFecha = new ReaLTaiizor.Controls.SmallLabel();
@@ -119,7 +119,7 @@ namespace app
             this.pReportes.SuspendLayout();
             this.pAdmin.SuspendLayout();
             this.pnlSuperior.SuspendLayout();
-            this.thunderGroupBox1.SuspendLayout();
+            this.gbxConfiguracion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).BeginInit();
             this.gbxEstadisticas.SuspendLayout();
             this.gbxProgreso.SuspendLayout();
@@ -321,7 +321,7 @@ namespace app
             // 
             // pnlSuperior
             // 
-            this.pnlSuperior.Controls.Add(this.thunderGroupBox1);
+            this.pnlSuperior.Controls.Add(this.gbxConfiguracion);
             this.pnlSuperior.Controls.Add(this.ssPanel);
             this.pnlSuperior.Controls.Add(this.pbxTitulo);
             this.pnlSuperior.Controls.Add(this.gbxEstadisticas);
@@ -334,29 +334,29 @@ namespace app
             this.pnlSuperior.Size = new System.Drawing.Size(1155, 200);
             this.pnlSuperior.TabIndex = 3;
             // 
-            // thunderGroupBox1
+            // gbxConfiguracion
             // 
-            this.thunderGroupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.thunderGroupBox1.BodyColorA = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.thunderGroupBox1.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.thunderGroupBox1.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.thunderGroupBox1.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
-            this.thunderGroupBox1.Controls.Add(this.btnServicio);
-            this.thunderGroupBox1.Controls.Add(this.txtFecha);
-            this.thunderGroupBox1.Controls.Add(this.lblFecha);
-            this.thunderGroupBox1.Controls.Add(this.cbLugar);
-            this.thunderGroupBox1.Controls.Add(this.lblProyeccion);
-            this.thunderGroupBox1.Controls.Add(this.mtxtInvitados);
-            this.thunderGroupBox1.Controls.Add(this.lblInvitados);
-            this.thunderGroupBox1.Controls.Add(this.mtxtProyeccion);
-            this.thunderGroupBox1.Controls.Add(this.lblLugar);
-            this.thunderGroupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.thunderGroupBox1.ForeColor = System.Drawing.Color.White;
-            this.thunderGroupBox1.Location = new System.Drawing.Point(314, 9);
-            this.thunderGroupBox1.Name = "thunderGroupBox1";
-            this.thunderGroupBox1.Size = new System.Drawing.Size(823, 99);
-            this.thunderGroupBox1.TabIndex = 5;
-            this.thunderGroupBox1.Text = resources.GetString("thunderGroupBox1.Text");
+            this.gbxConfiguracion.BackColor = System.Drawing.Color.Transparent;
+            this.gbxConfiguracion.BodyColorA = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.gbxConfiguracion.BodyColorB = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.gbxConfiguracion.BodyColorC = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.gbxConfiguracion.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
+            this.gbxConfiguracion.Controls.Add(this.btnServicio);
+            this.gbxConfiguracion.Controls.Add(this.txtFecha);
+            this.gbxConfiguracion.Controls.Add(this.lblFecha);
+            this.gbxConfiguracion.Controls.Add(this.cbLugar);
+            this.gbxConfiguracion.Controls.Add(this.lblProyeccion);
+            this.gbxConfiguracion.Controls.Add(this.mtxtInvitados);
+            this.gbxConfiguracion.Controls.Add(this.lblInvitados);
+            this.gbxConfiguracion.Controls.Add(this.mtxtProyeccion);
+            this.gbxConfiguracion.Controls.Add(this.lblLugar);
+            this.gbxConfiguracion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbxConfiguracion.ForeColor = System.Drawing.Color.White;
+            this.gbxConfiguracion.Location = new System.Drawing.Point(314, 9);
+            this.gbxConfiguracion.Name = "gbxConfiguracion";
+            this.gbxConfiguracion.Size = new System.Drawing.Size(823, 99);
+            this.gbxConfiguracion.TabIndex = 5;
+            this.gbxConfiguracion.Text = resources.GetString("gbxConfiguracion.Text");
             // 
             // btnServicio
             // 
@@ -424,7 +424,7 @@ namespace app
             this.lblProyeccion.Name = "lblProyeccion";
             this.lblProyeccion.Size = new System.Drawing.Size(69, 15);
             this.lblProyeccion.TabIndex = 15;
-            this.lblProyeccion.Text = "Proyeccion:";
+            this.lblProyeccion.Text = "Proyección:";
             // 
             // mtxtInvitados
             // 
@@ -516,7 +516,7 @@ namespace app
             this.gbxEstadisticas.Name = "gbxEstadisticas";
             this.gbxEstadisticas.Size = new System.Drawing.Size(269, 64);
             this.gbxEstadisticas.TabIndex = 4;
-            this.gbxEstadisticas.Text = "                              Estadisticas del Servicio";
+            this.gbxEstadisticas.Text = "                                  Estadísticas";
             // 
             // lblEstadisticas
             // 
@@ -557,7 +557,7 @@ namespace app
             this.gbxProgreso.Name = "gbxProgreso";
             this.gbxProgreso.Size = new System.Drawing.Size(160, 64);
             this.gbxProgreso.TabIndex = 4;
-            this.gbxProgreso.Text = "       Progreso del Servicio";
+            this.gbxProgreso.Text = "       Progreso";
             // 
             // lblProgreso
             // 
@@ -596,13 +596,13 @@ namespace app
             this.gbxDuracion.BodyColorD = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(58)))));
             this.gbxDuracion.Controls.Add(this.lblCronometro);
             this.gbxDuracion.Controls.Add(this.pbxDuracion);
-            this.gbxDuracion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbxDuracion.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxDuracion.ForeColor = System.Drawing.Color.White;
             this.gbxDuracion.Location = new System.Drawing.Point(501, 118);
             this.gbxDuracion.Name = "gbxDuracion";
             this.gbxDuracion.Size = new System.Drawing.Size(160, 64);
             this.gbxDuracion.TabIndex = 4;
-            this.gbxDuracion.Text = "        Duracion del Servicio";
+            this.gbxDuracion.Text = "       Duración";
             // 
             // lblCronometro
             // 
@@ -643,7 +643,7 @@ namespace app
             this.gbxEstado.Name = "gbxEstado";
             this.gbxEstado.Size = new System.Drawing.Size(160, 64);
             this.gbxEstado.TabIndex = 3;
-            this.gbxEstado.Text = "        Estado del Servicio";
+            this.gbxEstado.Text = "       Estado";
             // 
             // lblEstado
             // 
@@ -849,7 +849,7 @@ namespace app
             this.lblDuracion.Name = "lblDuracion";
             this.lblDuracion.Size = new System.Drawing.Size(147, 37);
             this.lblDuracion.TabIndex = 2;
-            this.lblDuracion.Text = "Duracion: ";
+            this.lblDuracion.Text = "Duración: ";
             this.lblDuracion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbxComensales
@@ -1011,7 +1011,7 @@ namespace app
             this.lblUproyeccion.Name = "lblUproyeccion";
             this.lblUproyeccion.Size = new System.Drawing.Size(173, 37);
             this.lblUproyeccion.TabIndex = 2;
-            this.lblUproyeccion.Text = "Proyeccion: ";
+            this.lblUproyeccion.Text = "Proyección: ";
             this.lblUproyeccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cHome
@@ -1057,8 +1057,8 @@ namespace app
             this.pReportes.ResumeLayout(false);
             this.pAdmin.ResumeLayout(false);
             this.pnlSuperior.ResumeLayout(false);
-            this.thunderGroupBox1.ResumeLayout(false);
-            this.thunderGroupBox1.PerformLayout();
+            this.gbxConfiguracion.ResumeLayout(false);
+            this.gbxConfiguracion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxTitulo)).EndInit();
             this.gbxEstadisticas.ResumeLayout(false);
             this.gbxEstadisticas.PerformLayout();
@@ -1152,6 +1152,6 @@ namespace app
         private System.Windows.Forms.Label pbxInvitados;
         private System.Windows.Forms.Label pbxComensales;
         private System.Windows.Forms.Label pbxTootal;
-        private ReaLTaiizor.Controls.ThunderGroupBox thunderGroupBox1;
+        private ReaLTaiizor.Controls.ThunderGroupBox gbxConfiguracion;
     }
 }

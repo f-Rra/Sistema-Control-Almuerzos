@@ -123,7 +123,7 @@ namespace app.UserControls
             this.lblEstadoConexion.BackColor = System.Drawing.Color.Transparent;
             this.lblEstadoConexion.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblEstadoConexion.ForeColor = System.Drawing.Color.White;
-            this.lblEstadoConexion.Location = new System.Drawing.Point(14, 162);
+            this.lblEstadoConexion.Location = new System.Drawing.Point(355, 22);
             this.lblEstadoConexion.Name = "lblEstadoConexion";
             this.lblEstadoConexion.Size = new System.Drawing.Size(167, 19);
             this.lblEstadoConexion.TabIndex = 14;
@@ -140,7 +140,7 @@ namespace app.UserControls
             this.btnGuardarConexion.Image = null;
             this.btnGuardarConexion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGuardarConexion.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnGuardarConexion.Location = new System.Drawing.Point(274, 117);
+            this.btnGuardarConexion.Location = new System.Drawing.Point(274, 139);
             this.btnGuardarConexion.Name = "btnGuardarConexion";
             this.btnGuardarConexion.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnGuardarConexion.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -161,7 +161,7 @@ namespace app.UserControls
             this.btnProbarConexion.Image = null;
             this.btnProbarConexion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProbarConexion.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnProbarConexion.Location = new System.Drawing.Point(18, 117);
+            this.btnProbarConexion.Location = new System.Drawing.Point(18, 139);
             this.btnProbarConexion.Name = "btnProbarConexion";
             this.btnProbarConexion.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnProbarConexion.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -178,7 +178,7 @@ namespace app.UserControls
             this.txtCadenaConexion.Location = new System.Drawing.Point(18, 44);
             this.txtCadenaConexion.Multiline = true;
             this.txtCadenaConexion.Name = "txtCadenaConexion";
-            this.txtCadenaConexion.Size = new System.Drawing.Size(504, 56);
+            this.txtCadenaConexion.Size = new System.Drawing.Size(504, 68);
             this.txtCadenaConexion.TabIndex = 12;
             // 
             // lblCadenaConexion
