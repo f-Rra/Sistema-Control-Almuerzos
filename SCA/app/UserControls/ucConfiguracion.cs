@@ -305,24 +305,6 @@ namespace app.UserControls
                     return;
                 }
 
-                // Advertencia sobre permisos de SQL Server
-                if (!txtRutaRespaldos.Text.StartsWith(@"C:\Program Files\Microsoft SQL Server\") &&
-                    !txtRutaRespaldos.Text.StartsWith(@"C:\SQLBackups"))
-                {
-                    DialogResult advertencia = MessageBox.Show(
-                        "ADVERTENCIA: La ruta seleccionada puede no tener permisos para SQL Server.\n\n" +
-                        "Se recomienda usar rutas como:\n" +
-                        "• C:\\SQLBackups\n" +
-                        "• C:\\Program Files\\Microsoft SQL Server\\MSSQL[version]\\MSSQL\\Backup\\\n\n" +
-                        "¿Desea continuar de todas formas?",
-                        "Advertencia de Permisos",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning);
-
-                    if (advertencia != DialogResult.Yes)
-                        return;
-                }
-
                 DialogResult resultado = MessageBox.Show(
                     "¿Está seguro que desea crear un respaldo de la base de datos?\n\n" +
                     "Esta operación puede tardar varios minutos dependiendo del tamaño de la base de datos.",

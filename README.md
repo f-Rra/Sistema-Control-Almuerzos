@@ -6,6 +6,9 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 ![C#](https://img.shields.io/badge/C%23-10.0-green)
 ![SQL Server](https://img.shields.io/badge/SQL%20Server-2019+-red)
 ![Windows Forms](https://img.shields.io/badge/UI-Windows%20Forms-lightblue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
+![Maintained](https://img.shields.io/badge/Maintained-Yes-green)
 
 ---
 
@@ -24,10 +27,14 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 -  **Manejo de invitados** sin datos personales
 -  **Registro manual alternativo** para casos sin credencial
 -  **Optimizado para alta concurrencia** en horarios pico
+-  **Sistema de respaldos automáticos y manuales**
+-  **Panel de configuración avanzada**
 
 ##  Funcionalidades del Sistema
 
 ###  Registro de Comensales
+
+![Registro de Comensales](./docs/screenshots/registro_comensales.png)
 
 **Método Actual: Ingreso por Teclado**
 - Registro mediante ID de credencial
@@ -49,6 +56,8 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 ###  Gestión de Empleados
 
+![Gestión de Empleados](./docs/screenshots/gestion_empleados.png)
+
 **Operaciones ABML Completas:**
 - **Alta**: Crear nuevos empleados con datos completos
 - **Modificación**: Actualizar información de empleados
@@ -67,6 +76,8 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 ###  Gestión de Servicios
 
+![Gestión de Servicios](./docs/screenshots/gestion_servicios.png)
+
 **Control de Jornadas:**
 - Inicio de servicio por lugar (Comedor/Quincho)
 - Registro de proyección de comensales
@@ -78,7 +89,49 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 -  Total de comensales reales vs proyectados
 -  Comparativa de eficiencia
 
+###  Configuración del Sistema
+
+![Configuración del Sistema](./docs/screenshots/configuracion.png)
+
+**Panel de Administración Completo:**
+
+**1. Configuración de Base de Datos**
+-  Modificar cadena de conexión en tiempo real
+-  Probar conectividad antes de guardar
+-  Ver información de la BD:
+  - Nombre de la base de datos
+  - Tamaño en MB
+  - Fecha de creación
+  - Última actualización
+-  Estadísticas de uso del servidor
+
+**2. Sistema de Respaldos**
+
+**Respaldo Manual:**
+- Crear backup inmediato a ubicación específica
+- Selección de carpeta destino
+- Útil antes de actualizaciones o cambios importantes
+
+**Respaldo Automático Programado:**
+-  **Mensual**: Backup cada mes
+- Configuración de ruta de destino
+- Historial de último respaldo (fecha, ubicación, tamaño)
+
+**Restauración:**
+- Restaurar desde archivo de backup (.bak)
+- Selección de archivo de respaldo
+- Proceso guiado con confirmaciones
+- Sobrescribe completamente la BD actual
+
+**3. Información de la Aplicación**
+- Versión del sistema
+- Fecha de compilación
+- Framework utilizado (.NET Framework 4.8)
+- Librerías UI (ReaLTaiizor & WinForms)
+
 ###  Panel Principal
+
+![Panel Principal](./docs/screenshots/panel_principal.png)
 
 **Visualización Instantánea:**
 - Listado de todos los registros del servicio actual
@@ -89,36 +142,45 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 ###  Reportes y Estadísticas
 
-**Tipos de Reportes Disponibles:**
+![Módulo de Reportes](./docs/screenshots/reportes.png)
 
-**1. Reporte Diario**
-- Total de comensales por día
-- Desglose por empresa
+**Sistema de Reportes Avanzados:**
+
+**1. Lista de Servicios**
+- Todos los servicios del período seleccionado
+- Fecha, lugar, proyección, duración del servicio
+- Total de comensales reales vs proyección
 - Total de invitados
-- Comparativa con proyección
+- Total general (comensales + invitados)
+- Útil para revisión histórica y análisis día por día
 
-**2. Reporte por Período**
-- Rango de fechas personalizable
-- Totales acumulados y promedios
-- Tendencias semanales/mensuales
-- Identificación de picos de asistencia
+**2. Asistencias por Empresas**
+- Total de asistencias por cada compañía del predio
+- Comparativa y ranking entre empresas
+- Útil para facturación segmentada por empresa
+- Análisis de participación corporativa
+- Identificar empresas con mayor/menor uso del comedor
 
-**3. Reporte por Empresa**
-- Estadísticas específicas por compañía
-- Evolución temporal
-- Porcentaje de participación
-- Análisis de regularidad
+**3. Cobertura vs Proyección**
+- Comparación entre proyección inicial y asistencia real
+- Porcentaje de cobertura por servicio
+- Diferencia absoluta (positiva/negativa)
+- Mejora de planificación y compras futuras
 
-**4. Estadísticas Generales**
-- Distribución por día de la semana
-- Comparativa comedor vs quincho
-- Análisis de proyecciones vs realidad
-- Cobertura histórica
+**4. Distribución por Día de Semana**
+- Patrones de asistencia semanal
+- Total acumulado por cada día de la semana
+- Identificación de días pico y días bajos
+- Optimización de compras según día
+- Ajuste de proyecciones por patrón semanal
 
-**Exportación:**
--  Formato PDF 
--  Gráficos y visualizaciones
--  Encabezados corporativos
+**Características Comunes de Todos los Reportes:**
+-  Filtros por rango de fechas (desde - hasta)
+-  Filtros por lugar (Comedor/Quincho/Todos)
+-  Visualización en grilla interactiva
+-  Exportación a PDF profesional
+-  Metadatos incluidos (fecha de generación, filtros aplicados)
+-  Encabezados corporativos personalizables
 
 ---
 
@@ -133,7 +195,9 @@ Sistema-Control-Almuerzos/
 │   │   ├── Lugar.cs               # Modelo de lugares (comedor/quincho)
 │   │   ├── Servicio.cs            # Modelo de servicios por jornada
 │   │   ├── Registro.cs            # Modelo de registros de almuerzos
-│   │   └── Estadisticas.cs        # Modelo de datos estadísticos
+│   │   ├── Estadisticas.cs        # Modelos estadísticos (Empleados, Empresas, Servicios, Asistencias, TopEmpresa)
+│   │   ├── Reportes.cs            # Modelos de reportes (AsistenciaPorEmpresa, CoberturaVsProyeccion, DistribucionDiaSemana)
+│   │   └── Configuracion.cs       # Modelos de configuración (InfoBaseDatos, InfoRespaldo, InfoAplicacion)
 │   │
 │   ├── negocio/                   # Capa de Lógica de Negocio
 │   │   ├── AccesoDatos.cs         # Clase centralizada para BD
@@ -143,7 +207,8 @@ Sistema-Control-Almuerzos/
 │   │   ├── ServicioNegocio.cs     # Lógica de servicios
 │   │   ├── RegistroNegocio.cs     # Lógica de registros
 │   │   ├── EstadisticasNegocio.cs # Lógica de estadísticas
-│   │   ├── ReporteNegocio.cs      # Generación de reportes PDF
+│   │   ├── ReporteNegocio.cs      # Generación de 4 reportes avanzados
+│   │   ├── ConfiguracionNegocio.cs # Lógica de configuración y respaldos
 │   │   └── ExceptionHelper.cs     # Manejo centralizado de errores
 │   │
 │   └── app/                       # Capa de Presentación
@@ -249,6 +314,16 @@ Sistema-Control-Almuerzos/
 - `sp_ReportePorPeriodo`: Análisis de rango de fechas
 - `sp_ReportePorEmpresa`: Datos específicos de empresa
 - `sp_EstadisticasGenerales`: Resumen general del sistema
+- `sp_ListarServiciosRango`: Servicios en período con filtros de lugar
+- `sp_AsistenciasPorEmpresas`: Totales de asistencia por compañía
+- `sp_ReporteCoberturaVsProyeccion`: Análisis de precisión de proyecciones
+- `sp_DistribucionPorDiaSemana`: Patrones de asistencia semanal
+
+#### Configuración y Administración
+- `sp_ObtenerInfoBaseDatos`: Información del servidor SQL (nombre, tamaño, fechas)
+- `sp_ObtenerUltimoRespaldo`: Datos del último backup realizado
+- `sp_CrearRespaldo`: Crear backup manual de la base de datos
+- `sp_RestaurarRespaldo`: Restaurar base de datos desde archivo de backup
 
 ### Vistas
 
@@ -264,6 +339,66 @@ Sistema-Control-Almuerzos/
 - `tr_ValidarServicioActivo`: Previene múltiples servicios activos simultáneos
 
 ---
+
+---
+
+##  Sistema de Respaldos y Recuperación
+
+### Importancia de los Backups
+
+El sistema incluye un módulo completo de respaldos para proteger la información crítica del comedor.
+
+### Tipos de Respaldo Disponibles
+
+**1. Respaldo Manual**
+- Se ejecuta bajo demanda desde el módulo de Configuración
+- Requiere selección de carpeta destino
+- Ideal antes de:
+  - Actualizaciones importantes del sistema
+  - Cambios masivos de datos
+  - Migraciones de servidor
+  - Modificaciones en la estructura de BD
+
+**2. Respaldo Mensual Automático Programado**
+
+**Configuración:**
+1. Abrir módulo **Configuración**
+2. Ir a pestaña **Respaldos**
+3. Seleccionar frecuencia deseada
+4. Establecer ruta de destino para archivos
+5. Guardar configuración
+6. El sistema ejecutará backups automáticamente
+
+### Información de Respaldos
+
+El sistema muestra:
+- **Fecha del último respaldo**: Cuándo se realizó
+- **Ruta del archivo**: Ubicación del backup
+- **Tamaño del archivo**: Espacio ocupado en MB
+
+### Restauración desde Backup
+
+**¿Cuándo restaurar?**
+- Pérdida de datos por error humano
+- Corrupción de base de datos
+- Reversión a estado anterior (rollback)
+- Migración o clonación de sistema
+- Recuperación ante desastres
+
+**Pasos para Restaurar:**
+1. Ir al módulo **Configuración**
+2. Pestaña **Respaldos**
+3. Hacer clic en **"Restaurar Respaldo"**
+4. Seleccionar archivo de backup (.bak)
+5. Confirmar operación
+6. El sistema restaurará la BD automáticamente
+
+**ADVERTENCIA IMPORTANTE**: 
+- La restauración sobrescribe **completamente** la base de datos actual
+- Todos los datos posteriores al backup se perderán
+- Se recomienda crear un backup manual antes de restaurar
+- La aplicación debe cerrarse durante la restauración
+
 
 ##  Instalación y Configuración
 
@@ -344,35 +479,36 @@ Sistema-Control-Almuerzos/
 
 **Estado**: Funcional y listo para producción
 
+**Módulos:**
 -  Diseño e implementación de base de datos
 -  Arquitectura en 3 capas completa
--  Módulo de gestión de empleados
+-  Módulo de gestión de empleados (ABML completo)
 -  Módulo de gestión de empresas y lugares
 -  Sistema de servicios por jornada
--  Registro por ingreso de ID (teclado)
--  Panel de visualización para cocina
--  Sistema de reportes y estadísticas
+-  Registro de comensales por ingreso de ID (teclado)
+-  Panel de visualización en tiempo real para cocina
+
+**Sistema de Reportes:**
+-  4 tipos de reportes avanzados:
+  - Lista de servicios
+  - Asistencias por empresas
+  - Cobertura vs proyección
+  - Distribución por día de semana
 -  Exportación a PDF
--  Interfaz completa y funcional
--  Validaciones robustas
--  Documentación técnica
+-  Filtros por fecha y lugar
 
-###  Fase 2: Integración RFID (PLANIFICADA)
+**Administración:**
+-  Módulo de configuración completo
+-  Sistema de respaldos automáticos y manuales
+-  Gestión de cadena de conexión
+-  Información de base de datos y aplicación
 
-**Estado**: Documentado para implementación futura
-
-**Objetivos:**
--  Guía de selección de hardware RFID
--  Configuración de lectores (USB/Serial)
--  Modificación de capa de presentación
--  Testing con credenciales reales
--  Manual de implementación
--  Procedimiento de migración sin downtime
-
-**Prerequisitos:**
-- Adquisición de lectores RFID compatibles
-- Credenciale con chip RFID
-- Configuración de puerto de comunicación
+**Calidad:**
+-  Validaciones robustas en todas las capas
+-  Manejo centralizado de excepciones
+-  Interfaz moderna y profesional
+-  Documentación técnica completa
+-  Manual de usuario detallado
 
 ##  Documentación
 
@@ -381,9 +517,9 @@ Sistema-Control-Almuerzos/
 | Documento | Descripción | Ubicación |
 |-----------|-------------|-----------|
 | **README.md** | Documentación técnica completa (este archivo) | Raíz del proyecto |
-| **MANUAL_USUARIO.md** | Guía para usuarios finales | Raíz del proyecto |
-| **MANUAL_USUARIO.md** | Guía para usuarios finales | Raíz del proyecto |
-| **Guia_Implementacion_RFID.drawio** | Guia para implementar uso de lector RFID | Raíz del proyecto |
+| **MANUAL_USUARIO.md** | Guía para usuarios finales del sistema | Raíz del proyecto |
+| **Guia_Implementacion_RFID.md** | Guía para implementar lector RFID | Raíz del proyecto |
+| **DER_SdCdA.drawio** | Diagrama Entidad-Relación editable | Raíz del proyecto |
 | **Script_Sistema_Control_Almuerzos.sql** | Script completo de creación de BD | Raíz del proyecto |
 | **Procedimientos_Vistas_Triggers.sql** | Objetos de BD detallados | Raíz del proyecto |
 | **Datos_Iniciales.sql** | Datos de prueba para testing | Raíz del proyecto |
@@ -413,8 +549,10 @@ Sistema-Control-Almuerzos/
 ---
 
 **Facundo Herrera**
-- 🎓 Estudiante de Tecnicatura Universitaria en Programación - UTN
+- 🎓 Estudiante de Tecnicatura Universitaria en Programación
+- 🏫 Universidad Tecnológica Nacional - Facultad Regional General Pacheco (UTN-FRGP)
 - 🐙 GitHub: [@f-Rra](https://github.com/f-Rra)
-- 📧 Email: [Facundo.Herrera@alumnos.frgp.utn.edu.ar]
+- 📧 Email: Facundo.Herrera@alumnos.frgp.utn.edu.ar
 
 ---
+
