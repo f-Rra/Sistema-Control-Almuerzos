@@ -16,80 +16,128 @@ namespace app.UserControls
 {
     public partial class ucReportes : UserControl
     {
+        #region Variables y Constantes
+
+        // Lógica de negocio
+        private ReporteNegocio reporteNegocio;
+        private LugarNegocio lugarNegocio;
+
+        #endregion
+
+        #region Constructor e Inicialización
 
         public ucReportes()
         {
             InitializeComponent();
+            reporteNegocio = new ReporteNegocio();
+            lugarNegocio = new LugarNegocio();
         }
 
         private void ucReportes_Load(object sender, EventArgs e)
         {
+            ConfigurarFechasIniciales();
+            CargarDatosIniciales();
+        }
+
+        private void ConfigurarFechasIniciales()
+        {
             dtpHasta.Value = DateTime.Today;
             dtpDesde.Value = DateTime.Today.AddDays(-7);
+        }
+
+        private void CargarDatosIniciales()
+        {
             CargarLugares();
             CargarReportes();
         }
 
-        // Método público para refrescar los datos desde otros UserControls
         public void RefrescarDatos()
         {
             CargarLugares();
-            // Limpiar reporte actual si existe
+            LimpiarReporteActual();
+        }
+
+        private void LimpiarReporteActual()
+        {
             dgvReporte.DataSource = null;
         }
 
+        #endregion
+
+        #region Carga de Datos
+
         private void CargarLugares()
         {
-            var negL = new LugarNegocio();
-            var lugares = negL.listar() ?? new List<Lugar>();
+            var lugares = ObtenerLugaresConOpcionTodos();
+            ConfigurarComboBoxLugares(lugares);
+        }
+
+        private List<Lugar> ObtenerLugaresConOpcionTodos()
+        {
+            var lugares = lugarNegocio.listar() ?? new List<Lugar>();
             lugares.Insert(0, new Lugar { IdLugar = 0, Nombre = "Todos" });
-            
-            // Limpiar DataSource antes de asignar nuevos datos
+            return lugares;
+        }
+
+        private void ConfigurarComboBoxLugares(List<Lugar> lugares)
+        {
             cbLugar.DataSource = null;
-            
             cbLugar.DataSource = lugares;
             cbLugar.DisplayMember = "Nombre";
             cbLugar.ValueMember = "IdLugar";
             cbLugar.SelectedIndex = 0;
         }
 
-
         private void CargarReportes()
         {
             cbTipoReporte.Items.Clear();
+            AgregarTiposDeReporte();
+            cbTipoReporte.SelectedIndex = 0;
+        }
+
+        private void AgregarTiposDeReporte()
+        {
             cbTipoReporte.Items.Add("Lista de servicios");
             cbTipoReporte.Items.Add("Asistencias por empresas");
             cbTipoReporte.Items.Add("Cobertura vs proyección");
             cbTipoReporte.Items.Add("Distribución por día de semana");
-            cbTipoReporte.SelectedIndex = 0;
         }
 
-        private void btnExportar_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Exportación PDF
+
+        private void ExportarReporte()
         {
-            try
+            if (!ValidarDatosParaExportar())
+                return;
+
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
             {
-                if (dgvReporte.DataSource == null || dgvReporte.Rows.Count == 0)
-                {
-                    ExceptionHelper.MostrarAdvertencia("No hay datos para exportar. Genere un reporte primero.");
-                    return;
-                }
+                ConfigurarDialogoGuardar(saveDialog);
 
-                using (SaveFileDialog saveDialog = new SaveFileDialog())
+                if (saveDialog.ShowDialog() == DialogResult.OK)
                 {
-                    saveDialog.Filter = "Archivos PDF|*.pdf";
-                    saveDialog.Title = "Guardar Reporte como PDF";
-                    saveDialog.FileName = $"Reporte_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
-
-                    if (saveDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        ExportarPDF(saveDialog.FileName);
-                    }
+                    ExportarPDF(saveDialog.FileName);
                 }
             }
-            catch (Exception ex)
+        }
+
+        private bool ValidarDatosParaExportar()
+        {
+            if (dgvReporte.DataSource == null || dgvReporte.Rows.Count == 0)
             {
-                ExceptionHelper.ManejarExcepcionBD(ex, "exportar el reporte");
+                ExceptionHelper.MostrarAdvertencia("No hay datos para exportar. Genere un reporte primero.");
+                return false;
             }
+            return true;
+        }
+
+        private void ConfigurarDialogoGuardar(SaveFileDialog saveDialog)
+        {
+            saveDialog.Filter = "Archivos PDF|*.pdf";
+            saveDialog.Title = "Guardar Reporte como PDF";
+            saveDialog.FileName = $"Reporte_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
         }
 
         private void ExportarPDF(string rutaArchivo)
@@ -102,55 +150,15 @@ namespace app.UserControls
                 {
                     doc.Open();
 
-                    // Título
                     var fontTitulo = iTextSharp.text.FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD);
                     var fontNormal = iTextSharp.text.FontFactory.GetFont("Arial", 10, iTextSharp.text.Font.NORMAL);
-                    doc.Add(new iTextSharp.text.Paragraph("SISTEMA DE CONTROL DE ALMUERZOS", fontTitulo));
-                    doc.Add(new iTextSharp.text.Paragraph("Reporte de servicios", fontNormal));
-                    doc.Add(new iTextSharp.text.Paragraph($"Generado: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal));
 
-                    // Información de filtros
-                    string infoFiltros = $"Fechas: {dtpDesde.Value:dd/MM/yyyy} - {dtpHasta.Value:dd/MM/yyyy}    Lugar: {cbLugar.Text}    Tipo de reporte: {cbTipoReporte.Text}";
-                    doc.Add(new iTextSharp.text.Paragraph(infoFiltros, fontNormal));
-                    doc.Add(new iTextSharp.text.Paragraph(" "));
-
-                    // Tabla
-                    int colCount = dgvReporte.Columns.GetColumnCount(DataGridViewElementStates.Visible);
-                    var table = new iTextSharp.text.pdf.PdfPTable(colCount);
-                    table.WidthPercentage = 100;
-
-                    // Encabezados
-                    foreach (DataGridViewColumn col in dgvReporte.Columns)
-                    {
-                        if (col.Visible)
-                        {
-                            var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(col.HeaderText, fontNormal));
-                            cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
-                            table.AddCell(cell);
-                        }
-                    }
-
-                    // Filas
-                    foreach (DataGridViewRow row in dgvReporte.Rows)
-                    {
-                        if (!row.IsNewRow)
-                        {
-                            foreach (DataGridViewColumn col in dgvReporte.Columns)
-                            {
-                                if (col.Visible)
-                                {
-                                    var value = row.Cells[col.Index].Value?.ToString() ?? "";
-                                    table.AddCell(new iTextSharp.text.Phrase(value, fontNormal));
-                                }
-                            }
-                        }
-                    }
-
-                    doc.Add(table);
+                    AgregarEncabezadoPDF(doc, fontTitulo, fontNormal);
+                    AgregarInformacionFiltrosPDF(doc, fontNormal);
+                    AgregarTablaDatosPDF(doc, fontNormal);
                 }
 
-                ExceptionHelper.MostrarExito($"Reporte guardado como PDF:\n{rutaArchivo}");
-                System.Diagnostics.Process.Start(rutaArchivo);
+                MostrarMensajeExitoYAbrirPDF(rutaArchivo);
             }
             catch (Exception ex)
             {
@@ -158,26 +166,114 @@ namespace app.UserControls
             }
         }
 
+        private void AgregarEncabezadoPDF(iTextSharp.text.Document doc, iTextSharp.text.Font fontTitulo, iTextSharp.text.Font fontNormal)
+        {
+            doc.Add(new iTextSharp.text.Paragraph("SISTEMA DE CONTROL DE ALMUERZOS", fontTitulo));
+            doc.Add(new iTextSharp.text.Paragraph("Reporte de servicios", fontNormal));
+            doc.Add(new iTextSharp.text.Paragraph($"Generado: {DateTime.Now:dd/MM/yyyy HH:mm}", fontNormal));
+        }
+
+        private void AgregarInformacionFiltrosPDF(iTextSharp.text.Document doc, iTextSharp.text.Font fontNormal)
+        {
+            string infoFiltros = $"Fechas: {dtpDesde.Value:dd/MM/yyyy} - {dtpHasta.Value:dd/MM/yyyy}    Lugar: {cbLugar.Text}    Tipo de reporte: {cbTipoReporte.Text}";
+            doc.Add(new iTextSharp.text.Paragraph(infoFiltros, fontNormal));
+            doc.Add(new iTextSharp.text.Paragraph(" "));
+        }
+
+        private void AgregarTablaDatosPDF(iTextSharp.text.Document doc, iTextSharp.text.Font fontNormal)
+        {
+            int colCount = dgvReporte.Columns.GetColumnCount(DataGridViewElementStates.Visible);
+            var table = new iTextSharp.text.pdf.PdfPTable(colCount);
+            table.WidthPercentage = 100;
+
+            AgregarEncabezadosTabla(table, fontNormal);
+            AgregarFilasTabla(table, fontNormal);
+
+            doc.Add(table);
+        }
+
+        private void AgregarEncabezadosTabla(iTextSharp.text.pdf.PdfPTable table, iTextSharp.text.Font fontNormal)
+        {
+            foreach (DataGridViewColumn col in dgvReporte.Columns)
+            {
+                if (col.Visible)
+                {
+                    var cell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase(col.HeaderText, fontNormal));
+                    cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY;
+                    table.AddCell(cell);
+                }
+            }
+        }
+
+        private void AgregarFilasTabla(iTextSharp.text.pdf.PdfPTable table, iTextSharp.text.Font fontNormal)
+        {
+            foreach (DataGridViewRow row in dgvReporte.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    foreach (DataGridViewColumn col in dgvReporte.Columns)
+                    {
+                        if (col.Visible)
+                        {
+                            var value = row.Cells[col.Index].Value?.ToString() ?? "";
+                            table.AddCell(new iTextSharp.text.Phrase(value, fontNormal));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void MostrarMensajeExitoYAbrirPDF(string rutaArchivo)
+        {
+            ExceptionHelper.MostrarExito($"Reporte guardado como PDF:\n{rutaArchivo}");
+            System.Diagnostics.Process.Start(rutaArchivo);
+        }
+
+        #endregion
+
+        #region Eventos
+
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!ValidarFechas(out DateTime desde, out DateTime hasta))
-                    return;
-
-                int? idLugar = ObtenerLugarSeleccionado();
-                string tipo = cbTipoReporte.SelectedItem as string ?? string.Empty;
-
-                CargarReporte(tipo, desde, hasta, idLugar);
-
-                if (dgvReporte.DataSource != null)
-                {
-                    ConfigurarColumnasReporte(tipo);
-                }
+                GenerarReporte();
             }
             catch (Exception ex)
             {
                 ExceptionHelper.ManejarExcepcionBD(ex, "generar el reporte");
+            }
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportarReporte();
+            }
+            catch (Exception ex)
+            {
+                ExceptionHelper.ManejarExcepcionBD(ex, "exportar el reporte");
+            }
+        }
+
+        #endregion
+
+        #region Generación de Reportes
+
+        private void GenerarReporte()
+        {
+            if (!ValidarFechas(out DateTime desde, out DateTime hasta))
+                return;
+
+            int? idLugar = ObtenerLugarSeleccionado();
+            string tipo = cbTipoReporte.SelectedItem as string ?? string.Empty;
+
+            CargarReporte(tipo, desde, hasta, idLugar);
+
+            if (dgvReporte.DataSource != null)
+            {
+                ConfigurarColumnasReporte(tipo);
             }
         }
 
@@ -203,25 +299,28 @@ namespace app.UserControls
 
         private void CargarReporte(string tipo, DateTime desde, DateTime hasta, int? idLugar)
         {
-            var rep = new ReporteNegocio();
             dgvReporte.DataSource = null;
 
             switch (tipo)
             {
                 case "Lista de servicios":
-                    dgvReporte.DataSource = rep.ListarServiciosRango(desde, hasta, idLugar);
+                    dgvReporte.DataSource = reporteNegocio.ListarServiciosRango(desde, hasta, idLugar);
                     break;
                 case "Asistencias por empresas":
-                    dgvReporte.DataSource = rep.AsistenciasPorEmpresas(desde, hasta, idLugar);
+                    dgvReporte.DataSource = reporteNegocio.AsistenciasPorEmpresas(desde, hasta, idLugar);
                     break;
                 case "Cobertura vs proyección":
-                    dgvReporte.DataSource = rep.CoberturaVsProyeccion(desde, hasta, idLugar);
+                    dgvReporte.DataSource = reporteNegocio.CoberturaVsProyeccion(desde, hasta, idLugar);
                     break;
                 case "Distribución por día de semana":
-                    dgvReporte.DataSource = rep.DistribucionPorDiaSemana(desde, hasta, idLugar);
+                    dgvReporte.DataSource = reporteNegocio.DistribucionPorDiaSemana(desde, hasta, idLugar);
                     break;
             }
         }
+
+        #endregion
+
+        #region Configuración de Columnas
 
         private void ConfigurarColumnasReporte(string tipoReporte)
         {
@@ -263,14 +362,19 @@ namespace app.UserControls
         {
             if (tipoReporte == "Lista de servicios")
             {
-                ConfigurarColumna("NombreLugar", visible: false);
-                ConfigurarColumna("Fecha", displayIndex: 0);
-                ConfigurarColumna("Proyeccion", displayIndex: 1);
-                ConfigurarColumna("DuracionMinutos", displayIndex: 2);
-                ConfigurarColumna("TotalComensales", displayIndex: 3);
-                ConfigurarColumna("TotalInvitados", displayIndex: 4);
-                ConfigurarColumna("TotalGeneral", displayIndex: 5);
+                ConfigurarColumnasListaServicios();
             }
+        }
+
+        private void ConfigurarColumnasListaServicios()
+        {
+            ConfigurarColumna("NombreLugar", visible: false);
+            ConfigurarColumna("Fecha", displayIndex: 0);
+            ConfigurarColumna("Proyeccion", displayIndex: 1);
+            ConfigurarColumna("DuracionMinutos", displayIndex: 2);
+            ConfigurarColumna("TotalComensales", displayIndex: 3);
+            ConfigurarColumna("TotalInvitados", displayIndex: 4);
+            ConfigurarColumna("TotalGeneral", displayIndex: 5);
         }
 
         private void ConfigurarColumna(string nombreColumna, string headerText = null, string formato = null, bool? visible = null, int? displayIndex = null)
@@ -292,5 +396,7 @@ namespace app.UserControls
             if (displayIndex.HasValue)
                 columna.DisplayIndex = displayIndex.Value;
         }
+
+        #endregion
     }
 }

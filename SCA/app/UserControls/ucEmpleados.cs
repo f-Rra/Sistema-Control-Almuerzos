@@ -253,7 +253,7 @@ namespace app.UserControls
             if (!ValidarFormularioEmpleado()) return;
 
             Empleado emp = new Empleado();
-            CargarDatosEmpleado(emp);
+            CargarEmpleado(emp);
 
             if (modoEdicion)
                 empleadoNegocio.modificar(emp);
@@ -265,7 +265,7 @@ namespace app.UserControls
             LimpiarFormularioEmpleado();
         }
 
-        private void CargarDatosEmpleado(Empleado emp)
+        private void CargarEmpleado(Empleado emp)
         {
             if (modoEdicion && empleadoSeleccionado != null)
             {

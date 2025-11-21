@@ -72,7 +72,7 @@ namespace app.UserControls
                 if (empresas == null) return;
 
                 empresas = AplicarFiltro(empresas, filtro);
-                ActualizarGridEmpresas(empresas);
+                ActualizarDgvEmpresas(empresas);
                 ActualizarContadorEmpresas(empresas.Count);
             }
             catch (Exception ex)
