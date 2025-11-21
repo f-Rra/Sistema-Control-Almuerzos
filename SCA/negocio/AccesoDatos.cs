@@ -39,6 +39,7 @@ namespace Negocio
         {
             try
             {
+                comando.Parameters.Clear(); // Limpiar parámetros previos
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = consulta;
             }
@@ -53,6 +54,7 @@ namespace Negocio
         {
             try
             {
+                comando.Parameters.Clear(); // Limpiar parámetros previos
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.CommandText = sp;
             }

@@ -18,7 +18,6 @@ namespace app.UserControls
     {
         #region Variables y Constantes
 
-        // Lógica de negocio
         private ReporteNegocio reporteNegocio;
         private LugarNegocio lugarNegocio;
 
@@ -145,20 +144,30 @@ namespace app.UserControls
             try
             {
                 using (var fileStream = new System.IO.FileStream(rutaArchivo, System.IO.FileMode.Create))
-                using (var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 20, 20, 20, 20))
-                using (var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(doc, fileStream))
                 {
-                    doc.Open();
+                    using (var doc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 20, 20, 20, 20))
+                    {
+                        using (var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(doc, fileStream))
+                        {
+                            doc.Open();
 
-                    var fontTitulo = iTextSharp.text.FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD);
-                    var fontNormal = iTextSharp.text.FontFactory.GetFont("Arial", 10, iTextSharp.text.Font.NORMAL);
+                            var fontTitulo = iTextSharp.text.FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD);
+                            var fontNormal = iTextSharp.text.FontFactory.GetFont("Arial", 10, iTextSharp.text.Font.NORMAL);
 
-                    AgregarEncabezadoPDF(doc, fontTitulo, fontNormal);
-                    AgregarInformacionFiltrosPDF(doc, fontNormal);
-                    AgregarTablaDatosPDF(doc, fontNormal);
+                            AgregarEncabezadoPDF(doc, fontTitulo, fontNormal);
+                            AgregarInformacionFiltrosPDF(doc, fontNormal);
+                            AgregarTablaDatosPDF(doc, fontNormal);
+
+                            doc.Close();
+                        }
+                    }
                 }
 
                 MostrarMensajeExitoYAbrirPDF(rutaArchivo);
+            }
+            catch (System.IO.IOException ioEx)
+            {
+                ExceptionHelper.MostrarError($"No se pudo acceder al archivo. Asegúrese de que el archivo no esté abierto en otra aplicación.\n\nDetalle: {ioEx.Message}");
             }
             catch (Exception ex)
             {
