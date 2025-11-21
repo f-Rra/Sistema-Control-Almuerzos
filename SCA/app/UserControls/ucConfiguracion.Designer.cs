@@ -83,9 +83,10 @@ namespace app.UserControls
             this.pnl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl1.Controls.Add(this.lblTitulo1);
             this.pnl1.Controls.Add(this.pnl1B);
-            this.pnl1.Location = new System.Drawing.Point(18, 9);
+            this.pnl1.Location = new System.Drawing.Point(27, 14);
+            this.pnl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnl1.Name = "pnl1";
-            this.pnl1.Size = new System.Drawing.Size(547, 230);
+            this.pnl1.Size = new System.Drawing.Size(820, 353);
             this.pnl1.TabIndex = 0;
             // 
             // lblTitulo1
@@ -94,9 +95,10 @@ namespace app.UserControls
             this.lblTitulo1.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo1.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo1.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo1.Location = new System.Drawing.Point(208, 7);
+            this.lblTitulo1.Location = new System.Drawing.Point(312, 11);
+            this.lblTitulo1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo1.Name = "lblTitulo1";
-            this.lblTitulo1.Size = new System.Drawing.Size(108, 17);
+            this.lblTitulo1.Size = new System.Drawing.Size(166, 27);
             this.lblTitulo1.TabIndex = 2;
             this.lblTitulo1.Text = "BASE DE DATOS";
             this.lblTitulo1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -112,9 +114,10 @@ namespace app.UserControls
             this.pnl1B.Controls.Add(this.btnProbarConexion);
             this.pnl1B.Controls.Add(this.txtCadenaConexion);
             this.pnl1B.Controls.Add(this.lblCadenaConexion);
-            this.pnl1B.Location = new System.Drawing.Point(3, 27);
+            this.pnl1B.Location = new System.Drawing.Point(4, 42);
+            this.pnl1B.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnl1B.Name = "pnl1B";
-            this.pnl1B.Size = new System.Drawing.Size(539, 198);
+            this.pnl1B.Size = new System.Drawing.Size(808, 304);
             this.pnl1B.TabIndex = 6;
             // 
             // lblEstadoConexion
@@ -123,9 +126,10 @@ namespace app.UserControls
             this.lblEstadoConexion.BackColor = System.Drawing.Color.Transparent;
             this.lblEstadoConexion.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblEstadoConexion.ForeColor = System.Drawing.Color.White;
-            this.lblEstadoConexion.Location = new System.Drawing.Point(355, 22);
+            this.lblEstadoConexion.Location = new System.Drawing.Point(437, 37);
+            this.lblEstadoConexion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEstadoConexion.Name = "lblEstadoConexion";
-            this.lblEstadoConexion.Size = new System.Drawing.Size(167, 19);
+            this.lblEstadoConexion.Size = new System.Drawing.Size(235, 28);
             this.lblEstadoConexion.TabIndex = 14;
             this.lblEstadoConexion.Text = "Estado: No configurado";
             // 
@@ -140,11 +144,12 @@ namespace app.UserControls
             this.btnGuardarConexion.Image = null;
             this.btnGuardarConexion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGuardarConexion.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnGuardarConexion.Location = new System.Drawing.Point(274, 139);
+            this.btnGuardarConexion.Location = new System.Drawing.Point(411, 214);
+            this.btnGuardarConexion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnGuardarConexion.Name = "btnGuardarConexion";
             this.btnGuardarConexion.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnGuardarConexion.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnGuardarConexion.Size = new System.Drawing.Size(248, 33);
+            this.btnGuardarConexion.Size = new System.Drawing.Size(372, 51);
             this.btnGuardarConexion.TabIndex = 13;
             this.btnGuardarConexion.Text = "Guardar Cambios";
             this.btnGuardarConexion.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -161,11 +166,12 @@ namespace app.UserControls
             this.btnProbarConexion.Image = null;
             this.btnProbarConexion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProbarConexion.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnProbarConexion.Location = new System.Drawing.Point(18, 139);
+            this.btnProbarConexion.Location = new System.Drawing.Point(27, 214);
+            this.btnProbarConexion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnProbarConexion.Name = "btnProbarConexion";
             this.btnProbarConexion.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnProbarConexion.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnProbarConexion.Size = new System.Drawing.Size(248, 33);
+            this.btnProbarConexion.Size = new System.Drawing.Size(372, 51);
             this.btnProbarConexion.TabIndex = 13;
             this.btnProbarConexion.Text = "Probar Conexión";
             this.btnProbarConexion.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -175,10 +181,11 @@ namespace app.UserControls
             // 
             this.txtCadenaConexion.BackColor = System.Drawing.Color.White;
             this.txtCadenaConexion.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtCadenaConexion.Location = new System.Drawing.Point(18, 44);
+            this.txtCadenaConexion.Location = new System.Drawing.Point(27, 68);
+            this.txtCadenaConexion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCadenaConexion.Multiline = true;
             this.txtCadenaConexion.Name = "txtCadenaConexion";
-            this.txtCadenaConexion.Size = new System.Drawing.Size(504, 68);
+            this.txtCadenaConexion.Size = new System.Drawing.Size(754, 102);
             this.txtCadenaConexion.TabIndex = 12;
             // 
             // lblCadenaConexion
@@ -187,9 +194,10 @@ namespace app.UserControls
             this.lblCadenaConexion.BackColor = System.Drawing.Color.Transparent;
             this.lblCadenaConexion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCadenaConexion.ForeColor = System.Drawing.Color.White;
-            this.lblCadenaConexion.Location = new System.Drawing.Point(15, 24);
+            this.lblCadenaConexion.Location = new System.Drawing.Point(22, 37);
+            this.lblCadenaConexion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCadenaConexion.Name = "lblCadenaConexion";
-            this.lblCadenaConexion.Size = new System.Drawing.Size(138, 17);
+            this.lblCadenaConexion.Size = new System.Drawing.Size(209, 28);
             this.lblCadenaConexion.TabIndex = 12;
             this.lblCadenaConexion.Text = "Cadena de Conexión:";
             // 
@@ -199,9 +207,10 @@ namespace app.UserControls
             this.pnl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl2.Controls.Add(this.lblTitulo2);
             this.pnl2.Controls.Add(this.pnl2B);
-            this.pnl2.Location = new System.Drawing.Point(590, 9);
+            this.pnl2.Location = new System.Drawing.Point(885, 14);
+            this.pnl2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnl2.Name = "pnl2";
-            this.pnl2.Size = new System.Drawing.Size(547, 230);
+            this.pnl2.Size = new System.Drawing.Size(820, 353);
             this.pnl2.TabIndex = 1;
             // 
             // lblTitulo2
@@ -210,9 +219,10 @@ namespace app.UserControls
             this.lblTitulo2.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo2.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo2.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo2.Location = new System.Drawing.Point(178, 7);
+            this.lblTitulo2.Location = new System.Drawing.Point(267, 11);
+            this.lblTitulo2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo2.Name = "lblTitulo2";
-            this.lblTitulo2.Size = new System.Drawing.Size(194, 17);
+            this.lblTitulo2.Size = new System.Drawing.Size(299, 27);
             this.lblTitulo2.TabIndex = 2;
             this.lblTitulo2.Text = "RESPALDOS Y RESTAURACIÓN";
             this.lblTitulo2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -233,9 +243,10 @@ namespace app.UserControls
             this.pnl2B.Controls.Add(this.btnExaminarRuta);
             this.pnl2B.Controls.Add(this.txtRutaRespaldos);
             this.pnl2B.Controls.Add(this.lblRutaRespaldos);
-            this.pnl2B.Location = new System.Drawing.Point(3, 27);
+            this.pnl2B.Location = new System.Drawing.Point(4, 42);
+            this.pnl2B.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnl2B.Name = "pnl2B";
-            this.pnl2B.Size = new System.Drawing.Size(539, 198);
+            this.pnl2B.Size = new System.Drawing.Size(808, 304);
             this.pnl2B.TabIndex = 6;
             // 
             // btnRestaurarRespaldo
@@ -249,11 +260,12 @@ namespace app.UserControls
             this.btnRestaurarRespaldo.Image = null;
             this.btnRestaurarRespaldo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRestaurarRespaldo.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnRestaurarRespaldo.Location = new System.Drawing.Point(275, 139);
+            this.btnRestaurarRespaldo.Location = new System.Drawing.Point(412, 214);
+            this.btnRestaurarRespaldo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRestaurarRespaldo.Name = "btnRestaurarRespaldo";
             this.btnRestaurarRespaldo.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnRestaurarRespaldo.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnRestaurarRespaldo.Size = new System.Drawing.Size(247, 33);
+            this.btnRestaurarRespaldo.Size = new System.Drawing.Size(370, 51);
             this.btnRestaurarRespaldo.TabIndex = 22;
             this.btnRestaurarRespaldo.Text = "Restaurar desde Respaldo";
             this.btnRestaurarRespaldo.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -270,11 +282,12 @@ namespace app.UserControls
             this.btnCrearRespaldo.Image = null;
             this.btnCrearRespaldo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCrearRespaldo.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnCrearRespaldo.Location = new System.Drawing.Point(18, 139);
+            this.btnCrearRespaldo.Location = new System.Drawing.Point(27, 214);
+            this.btnCrearRespaldo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCrearRespaldo.Name = "btnCrearRespaldo";
             this.btnCrearRespaldo.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnCrearRespaldo.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnCrearRespaldo.Size = new System.Drawing.Size(248, 33);
+            this.btnCrearRespaldo.Size = new System.Drawing.Size(372, 51);
             this.btnCrearRespaldo.TabIndex = 21;
             this.btnCrearRespaldo.Text = "Crear Respaldo Ahora";
             this.btnCrearRespaldo.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -286,9 +299,10 @@ namespace app.UserControls
             this.lblTamañoRespaldo.BackColor = System.Drawing.Color.Transparent;
             this.lblTamañoRespaldo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTamañoRespaldo.ForeColor = System.Drawing.Color.White;
-            this.lblTamañoRespaldo.Location = new System.Drawing.Point(245, 103);
+            this.lblTamañoRespaldo.Location = new System.Drawing.Point(368, 158);
+            this.lblTamañoRespaldo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTamañoRespaldo.Name = "lblTamañoRespaldo";
-            this.lblTamañoRespaldo.Size = new System.Drawing.Size(66, 17);
+            this.lblTamañoRespaldo.Size = new System.Drawing.Size(97, 28);
             this.lblTamañoRespaldo.TabIndex = 20;
             this.lblTamañoRespaldo.Text = "Tamaño: -";
             // 
@@ -298,9 +312,10 @@ namespace app.UserControls
             this.lblUltimoRespaldo.BackColor = System.Drawing.Color.Transparent;
             this.lblUltimoRespaldo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUltimoRespaldo.ForeColor = System.Drawing.Color.White;
-            this.lblUltimoRespaldo.Location = new System.Drawing.Point(15, 103);
+            this.lblUltimoRespaldo.Location = new System.Drawing.Point(22, 158);
+            this.lblUltimoRespaldo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUltimoRespaldo.Name = "lblUltimoRespaldo";
-            this.lblUltimoRespaldo.Size = new System.Drawing.Size(162, 17);
+            this.lblUltimoRespaldo.Size = new System.Drawing.Size(243, 28);
             this.lblUltimoRespaldo.TabIndex = 19;
             this.lblUltimoRespaldo.Text = "Último Respaldo: Ninguno";
             // 
@@ -309,9 +324,10 @@ namespace app.UserControls
             this.rbManual.AutoSize = true;
             this.rbManual.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbManual.ForeColor = System.Drawing.Color.White;
-            this.rbManual.Location = new System.Drawing.Point(333, 72);
+            this.rbManual.Location = new System.Drawing.Point(500, 111);
+            this.rbManual.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbManual.Name = "rbManual";
-            this.rbManual.Size = new System.Drawing.Size(69, 21);
+            this.rbManual.Size = new System.Drawing.Size(102, 32);
             this.rbManual.TabIndex = 17;
             this.rbManual.Text = "Manual";
             this.rbManual.UseVisualStyleBackColor = true;
@@ -323,9 +339,10 @@ namespace app.UserControls
             this.rbMensual.Checked = true;
             this.rbMensual.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbMensual.ForeColor = System.Drawing.Color.White;
-            this.rbMensual.Location = new System.Drawing.Point(248, 72);
+            this.rbMensual.Location = new System.Drawing.Point(372, 111);
+            this.rbMensual.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbMensual.Name = "rbMensual";
-            this.rbMensual.Size = new System.Drawing.Size(79, 21);
+            this.rbMensual.Size = new System.Drawing.Size(115, 32);
             this.rbMensual.TabIndex = 16;
             this.rbMensual.TabStop = true;
             this.rbMensual.Text = "Mensual ";
@@ -338,9 +355,10 @@ namespace app.UserControls
             this.lblFrecuencia.BackColor = System.Drawing.Color.Transparent;
             this.lblFrecuencia.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFrecuencia.ForeColor = System.Drawing.Color.White;
-            this.lblFrecuencia.Location = new System.Drawing.Point(15, 74);
+            this.lblFrecuencia.Location = new System.Drawing.Point(22, 114);
+            this.lblFrecuencia.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFrecuencia.Name = "lblFrecuencia";
-            this.lblFrecuencia.Size = new System.Drawing.Size(227, 17);
+            this.lblFrecuencia.Size = new System.Drawing.Size(348, 28);
             this.lblFrecuencia.TabIndex = 15;
             this.lblFrecuencia.Text = "Frecuencia de respaldo automático:";
             // 
@@ -355,11 +373,12 @@ namespace app.UserControls
             this.btnExaminarRuta.Image = null;
             this.btnExaminarRuta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExaminarRuta.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnExaminarRuta.Location = new System.Drawing.Point(410, 33);
+            this.btnExaminarRuta.Location = new System.Drawing.Point(615, 51);
+            this.btnExaminarRuta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnExaminarRuta.Name = "btnExaminarRuta";
             this.btnExaminarRuta.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnExaminarRuta.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnExaminarRuta.Size = new System.Drawing.Size(112, 33);
+            this.btnExaminarRuta.Size = new System.Drawing.Size(168, 51);
             this.btnExaminarRuta.TabIndex = 14;
             this.btnExaminarRuta.Text = "Examinar";
             this.btnExaminarRuta.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -369,9 +388,10 @@ namespace app.UserControls
             // 
             this.txtRutaRespaldos.BackColor = System.Drawing.Color.White;
             this.txtRutaRespaldos.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRutaRespaldos.Location = new System.Drawing.Point(18, 38);
+            this.txtRutaRespaldos.Location = new System.Drawing.Point(27, 58);
+            this.txtRutaRespaldos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtRutaRespaldos.Name = "txtRutaRespaldos";
-            this.txtRutaRespaldos.Size = new System.Drawing.Size(377, 25);
+            this.txtRutaRespaldos.Size = new System.Drawing.Size(564, 33);
             this.txtRutaRespaldos.TabIndex = 13;
             // 
             // lblRutaRespaldos
@@ -380,9 +400,10 @@ namespace app.UserControls
             this.lblRutaRespaldos.BackColor = System.Drawing.Color.Transparent;
             this.lblRutaRespaldos.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblRutaRespaldos.ForeColor = System.Drawing.Color.White;
-            this.lblRutaRespaldos.Location = new System.Drawing.Point(14, 16);
+            this.lblRutaRespaldos.Location = new System.Drawing.Point(21, 25);
+            this.lblRutaRespaldos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRutaRespaldos.Name = "lblRutaRespaldos";
-            this.lblRutaRespaldos.Size = new System.Drawing.Size(133, 19);
+            this.lblRutaRespaldos.Size = new System.Drawing.Size(186, 28);
             this.lblRutaRespaldos.TabIndex = 12;
             this.lblRutaRespaldos.Text = "Ruta de respaldos:";
             // 
@@ -392,9 +413,10 @@ namespace app.UserControls
             this.pnl3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl3.Controls.Add(this.lblTitulo3);
             this.pnl3.Controls.Add(this.pnl3B);
-            this.pnl3.Location = new System.Drawing.Point(18, 254);
+            this.pnl3.Location = new System.Drawing.Point(27, 391);
+            this.pnl3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnl3.Name = "pnl3";
-            this.pnl3.Size = new System.Drawing.Size(547, 225);
+            this.pnl3.Size = new System.Drawing.Size(820, 345);
             this.pnl3.TabIndex = 2;
             // 
             // lblTitulo3
@@ -403,9 +425,10 @@ namespace app.UserControls
             this.lblTitulo3.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo3.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo3.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo3.Location = new System.Drawing.Point(223, 7);
+            this.lblTitulo3.Location = new System.Drawing.Point(334, 11);
+            this.lblTitulo3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo3.Name = "lblTitulo3";
-            this.lblTitulo3.Size = new System.Drawing.Size(93, 17);
+            this.lblTitulo3.Size = new System.Drawing.Size(141, 27);
             this.lblTitulo3.TabIndex = 2;
             this.lblTitulo3.Text = "LECTOR RFID ";
             this.lblTitulo3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -424,9 +447,10 @@ namespace app.UserControls
             this.pnl3B.Controls.Add(this.btnDetectarPuertos);
             this.pnl3B.Controls.Add(this.cboPuertoRFID);
             this.pnl3B.Controls.Add(this.lblPuertoCOM);
-            this.pnl3B.Location = new System.Drawing.Point(3, 27);
+            this.pnl3B.Location = new System.Drawing.Point(4, 42);
+            this.pnl3B.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnl3B.Name = "pnl3B";
-            this.pnl3B.Size = new System.Drawing.Size(539, 193);
+            this.pnl3B.Size = new System.Drawing.Size(808, 296);
             this.pnl3B.TabIndex = 6;
             // 
             // btnProbarLector
@@ -441,11 +465,12 @@ namespace app.UserControls
             this.btnProbarLector.Image = null;
             this.btnProbarLector.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProbarLector.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnProbarLector.Location = new System.Drawing.Point(274, 141);
+            this.btnProbarLector.Location = new System.Drawing.Point(411, 217);
+            this.btnProbarLector.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnProbarLector.Name = "btnProbarLector";
             this.btnProbarLector.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnProbarLector.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnProbarLector.Size = new System.Drawing.Size(248, 28);
+            this.btnProbarLector.Size = new System.Drawing.Size(372, 43);
             this.btnProbarLector.TabIndex = 21;
             this.btnProbarLector.Text = "Probar Lector";
             this.btnProbarLector.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -462,11 +487,12 @@ namespace app.UserControls
             this.btnConfigurarRFID.Image = null;
             this.btnConfigurarRFID.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConfigurarRFID.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnConfigurarRFID.Location = new System.Drawing.Point(18, 141);
+            this.btnConfigurarRFID.Location = new System.Drawing.Point(27, 217);
+            this.btnConfigurarRFID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnConfigurarRFID.Name = "btnConfigurarRFID";
             this.btnConfigurarRFID.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnConfigurarRFID.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnConfigurarRFID.Size = new System.Drawing.Size(248, 28);
+            this.btnConfigurarRFID.Size = new System.Drawing.Size(372, 43);
             this.btnConfigurarRFID.TabIndex = 20;
             this.btnConfigurarRFID.Text = "Configurar";
             this.btnConfigurarRFID.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -477,9 +503,10 @@ namespace app.UserControls
             this.lblEstadoRFID.BackColor = System.Drawing.Color.Transparent;
             this.lblEstadoRFID.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblEstadoRFID.ForeColor = System.Drawing.Color.White;
-            this.lblEstadoRFID.Location = new System.Drawing.Point(184, 99);
+            this.lblEstadoRFID.Location = new System.Drawing.Point(276, 152);
+            this.lblEstadoRFID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEstadoRFID.Name = "lblEstadoRFID";
-            this.lblEstadoRFID.Size = new System.Drawing.Size(167, 19);
+            this.lblEstadoRFID.Size = new System.Drawing.Size(235, 28);
             this.lblEstadoRFID.TabIndex = 19;
             this.lblEstadoRFID.Text = "Estado: No configurado";
             // 
@@ -495,9 +522,10 @@ namespace app.UserControls
             "38400",
             "57600",
             "115200"});
-            this.cboBaudRate.Location = new System.Drawing.Point(18, 96);
+            this.cboBaudRate.Location = new System.Drawing.Point(27, 148);
+            this.cboBaudRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cboBaudRate.Name = "cboBaudRate";
-            this.cboBaudRate.Size = new System.Drawing.Size(150, 25);
+            this.cboBaudRate.Size = new System.Drawing.Size(223, 36);
             this.cboBaudRate.TabIndex = 18;
             // 
             // lblBaudRate
@@ -506,9 +534,10 @@ namespace app.UserControls
             this.lblBaudRate.BackColor = System.Drawing.Color.Transparent;
             this.lblBaudRate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblBaudRate.ForeColor = System.Drawing.Color.White;
-            this.lblBaudRate.Location = new System.Drawing.Point(14, 75);
+            this.lblBaudRate.Location = new System.Drawing.Point(21, 115);
+            this.lblBaudRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBaudRate.Name = "lblBaudRate";
-            this.lblBaudRate.Size = new System.Drawing.Size(161, 19);
+            this.lblBaudRate.Size = new System.Drawing.Size(226, 28);
             this.lblBaudRate.TabIndex = 17;
             this.lblBaudRate.Text = "Velocidad (Baud Rate):";
             // 
@@ -523,11 +552,12 @@ namespace app.UserControls
             this.btnDetectarPuertos.Image = null;
             this.btnDetectarPuertos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDetectarPuertos.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.btnDetectarPuertos.Location = new System.Drawing.Point(188, 30);
+            this.btnDetectarPuertos.Location = new System.Drawing.Point(282, 46);
+            this.btnDetectarPuertos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDetectarPuertos.Name = "btnDetectarPuertos";
             this.btnDetectarPuertos.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnDetectarPuertos.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.btnDetectarPuertos.Size = new System.Drawing.Size(174, 33);
+            this.btnDetectarPuertos.Size = new System.Drawing.Size(261, 51);
             this.btnDetectarPuertos.TabIndex = 16;
             this.btnDetectarPuertos.Text = "Detectar Automáticamente";
             this.btnDetectarPuertos.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -538,9 +568,10 @@ namespace app.UserControls
             this.cboPuertoRFID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPuertoRFID.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboPuertoRFID.FormattingEnabled = true;
-            this.cboPuertoRFID.Location = new System.Drawing.Point(18, 36);
+            this.cboPuertoRFID.Location = new System.Drawing.Point(27, 55);
+            this.cboPuertoRFID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cboPuertoRFID.Name = "cboPuertoRFID";
-            this.cboPuertoRFID.Size = new System.Drawing.Size(150, 25);
+            this.cboPuertoRFID.Size = new System.Drawing.Size(223, 36);
             this.cboPuertoRFID.TabIndex = 15;
             // 
             // lblPuertoCOM
@@ -549,9 +580,10 @@ namespace app.UserControls
             this.lblPuertoCOM.BackColor = System.Drawing.Color.Transparent;
             this.lblPuertoCOM.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblPuertoCOM.ForeColor = System.Drawing.Color.White;
-            this.lblPuertoCOM.Location = new System.Drawing.Point(14, 14);
+            this.lblPuertoCOM.Location = new System.Drawing.Point(21, 22);
+            this.lblPuertoCOM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPuertoCOM.Name = "lblPuertoCOM";
-            this.lblPuertoCOM.Size = new System.Drawing.Size(95, 19);
+            this.lblPuertoCOM.Size = new System.Drawing.Size(133, 28);
             this.lblPuertoCOM.TabIndex = 14;
             this.lblPuertoCOM.Text = "Puerto COM:";
             // 
@@ -561,9 +593,10 @@ namespace app.UserControls
             this.pnl4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl4.Controls.Add(this.lblTitulo4);
             this.pnl4.Controls.Add(this.pnl4B);
-            this.pnl4.Location = new System.Drawing.Point(590, 254);
+            this.pnl4.Location = new System.Drawing.Point(885, 391);
+            this.pnl4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnl4.Name = "pnl4";
-            this.pnl4.Size = new System.Drawing.Size(547, 225);
+            this.pnl4.Size = new System.Drawing.Size(820, 345);
             this.pnl4.TabIndex = 3;
             // 
             // lblTitulo4
@@ -572,9 +605,10 @@ namespace app.UserControls
             this.lblTitulo4.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo4.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo4.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo4.Location = new System.Drawing.Point(150, 7);
+            this.lblTitulo4.Location = new System.Drawing.Point(225, 11);
+            this.lblTitulo4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo4.Name = "lblTitulo4";
-            this.lblTitulo4.Size = new System.Drawing.Size(222, 17);
+            this.lblTitulo4.Size = new System.Drawing.Size(339, 27);
             this.lblTitulo4.TabIndex = 2;
             this.lblTitulo4.Text = "INFORMACIÓN DE LA APLICACIÓN";
             this.lblTitulo4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -589,9 +623,10 @@ namespace app.UserControls
             this.pnl4B.Controls.Add(this.lblFramework);
             this.pnl4B.Controls.Add(this.lblFechaCompilacion);
             this.pnl4B.Controls.Add(this.lblVersion);
-            this.pnl4B.Location = new System.Drawing.Point(3, 27);
+            this.pnl4B.Location = new System.Drawing.Point(4, 42);
+            this.pnl4B.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnl4B.Name = "pnl4B";
-            this.pnl4B.Size = new System.Drawing.Size(539, 193);
+            this.pnl4B.Size = new System.Drawing.Size(808, 296);
             this.pnl4B.TabIndex = 6;
             // 
             // lblUILibrary
@@ -600,9 +635,10 @@ namespace app.UserControls
             this.lblUILibrary.BackColor = System.Drawing.Color.Transparent;
             this.lblUILibrary.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblUILibrary.ForeColor = System.Drawing.Color.White;
-            this.lblUILibrary.Location = new System.Drawing.Point(154, 130);
+            this.lblUILibrary.Location = new System.Drawing.Point(231, 200);
+            this.lblUILibrary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUILibrary.Name = "lblUILibrary";
-            this.lblUILibrary.Size = new System.Drawing.Size(203, 20);
+            this.lblUILibrary.Size = new System.Drawing.Size(297, 30);
             this.lblUILibrary.TabIndex = 16;
             this.lblUILibrary.Text = "UI Library:              RealTaiizor";
             // 
@@ -612,9 +648,10 @@ namespace app.UserControls
             this.lblFramework.BackColor = System.Drawing.Color.Transparent;
             this.lblFramework.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblFramework.ForeColor = System.Drawing.Color.White;
-            this.lblFramework.Location = new System.Drawing.Point(154, 97);
+            this.lblFramework.Location = new System.Drawing.Point(231, 149);
+            this.lblFramework.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFramework.Name = "lblFramework";
-            this.lblFramework.Size = new System.Drawing.Size(263, 20);
+            this.lblFramework.Size = new System.Drawing.Size(393, 30);
             this.lblFramework.TabIndex = 15;
             this.lblFramework.Text = "Framework:            .NET Framework 4.8";
             // 
@@ -624,9 +661,10 @@ namespace app.UserControls
             this.lblFechaCompilacion.BackColor = System.Drawing.Color.Transparent;
             this.lblFechaCompilacion.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblFechaCompilacion.ForeColor = System.Drawing.Color.White;
-            this.lblFechaCompilacion.Location = new System.Drawing.Point(154, 64);
+            this.lblFechaCompilacion.Location = new System.Drawing.Point(231, 98);
+            this.lblFechaCompilacion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFechaCompilacion.Name = "lblFechaCompilacion";
-            this.lblFechaCompilacion.Size = new System.Drawing.Size(241, 20);
+            this.lblFechaCompilacion.Size = new System.Drawing.Size(353, 30);
             this.lblFechaCompilacion.TabIndex = 14;
             this.lblFechaCompilacion.Text = "Fecha de compilación:  16/11/2025";
             // 
@@ -636,24 +674,26 @@ namespace app.UserControls
             this.lblVersion.BackColor = System.Drawing.Color.Transparent;
             this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblVersion.ForeColor = System.Drawing.Color.White;
-            this.lblVersion.Location = new System.Drawing.Point(154, 34);
+            this.lblVersion.Location = new System.Drawing.Point(231, 52);
+            this.lblVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(188, 20);
+            this.lblVersion.Size = new System.Drawing.Size(279, 30);
             this.lblVersion.TabIndex = 13;
             this.lblVersion.Text = "Versión:                      2.0.0";
             // 
             // ucConfiguracion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.Controls.Add(this.pnl4);
             this.Controls.Add(this.pnl3);
             this.Controls.Add(this.pnl2);
             this.Controls.Add(this.pnl1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ucConfiguracion";
-            this.Padding = new System.Windows.Forms.Padding(15);
-            this.Size = new System.Drawing.Size(1155, 495);
+            this.Padding = new System.Windows.Forms.Padding(22, 23, 22, 23);
+            this.Size = new System.Drawing.Size(1732, 762);
             this.Load += new System.EventHandler(this.ucConfiguracion_Load);
             this.pnl1.ResumeLayout(false);
             this.pnl1.PerformLayout();

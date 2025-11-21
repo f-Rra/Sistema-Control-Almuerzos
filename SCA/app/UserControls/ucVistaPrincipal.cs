@@ -14,18 +14,27 @@ namespace app.UserControls
 {
     public partial class ucVistaPrincipal : UserControl
     {
+        #region Propiedades y Variables
+
         private readonly RegistroNegocio negR = new RegistroNegocio();
         private readonly EmpleadoNegocio negE = new EmpleadoNegocio();  
         private frmPrincipal formularioPrincipal;
         private int? servicioIdActual = null;
         private int idLugarActual = 1;
 
+        #endregion
+
+        #region Constructor
 
         public ucVistaPrincipal(frmPrincipal formPrincipal = null)
         {
             InitializeComponent();
             this.formularioPrincipal = formPrincipal;
         }
+
+        #endregion
+
+        #region Métodos Públicos
 
         public void SetServicio(int? servicioId, int idLugar)
         {
@@ -48,6 +57,10 @@ namespace app.UserControls
             CargarRegistros();
         }
 
+        #endregion
+
+        #region Carga de Datos
+
         private void CargarRegistros()
         {
             dgvRegistros.DataSource = null;
@@ -57,7 +70,6 @@ namespace app.UserControls
                 dgvRegistros.DataSource = negR.listarPorServicio(servicioIdActual.Value);
             }
             OcultarColumnas();
-
         }
 
         private void OcultarColumnas()
@@ -73,41 +85,18 @@ namespace app.UserControls
             }
         }
 
+        #endregion
+
+        #region Eventos
+
         private void btnRegistro_Click(object sender, EventArgs e)
         {
-            if (!servicioIdActual.HasValue)
-            {
-                ExceptionHelper.MostrarAdvertencia("No hay un servicio activo");
-                return;
-            }
-            
-            string credencial = txtRegistro.Text.Trim();
-            if (string.IsNullOrEmpty(credencial))
-            {
-                ExceptionHelper.MostrarAdvertencia("Ingrese una credencial válida");
-                return;
-            }
-            
+            if (!ValidarServicioActivo()) return;
+            if (!ValidarCredencial(out string credencial)) return;
+
             try
             {
-                Empleado empleado = negE.buscarPorCredencial(credencial);
-                if (empleado == null)
-                {
-                    ExceptionHelper.MostrarAdvertencia($"No se encontró un empleado con la credencial {credencial}");
-                    return;
-                }
-                
-                if (negR.empleadoYaRegistrado(empleado.IdEmpleado, servicioIdActual.Value))
-                {
-                    ExceptionHelper.MostrarInformacion($"El empleado {empleado.NombreCompleto} ya está registrado en este servicio");
-                    return;
-                }
-                negR.registrarEmpleado(empleado.IdEmpleado, empleado.IdEmpresa, servicioIdActual.Value, idLugarActual);
-                CargarRegistros();
-                txtRegistro.Clear();
-                txtRegistro.Focus();
-                formularioPrincipal?.ActualizarEstadisticas();
-                MostrarComensalRegistrado(empleado);
+                ProcesarRegistroEmpleado(credencial);
             }
             catch (Exception ex)
             {
@@ -115,7 +104,85 @@ namespace app.UserControls
             }
         }
 
-       
+        #endregion
+
+        #region Validaciones
+
+        private bool ValidarServicioActivo()
+        {
+            if (!servicioIdActual.HasValue)
+            {
+                ExceptionHelper.MostrarAdvertencia("No hay un servicio activo");
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidarCredencial(out string credencial)
+        {
+            credencial = txtRegistro.Text.Trim();
+            if (string.IsNullOrEmpty(credencial))
+            {
+                ExceptionHelper.MostrarAdvertencia("Ingrese una credencial válida");
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region Procesamiento de Registro
+
+        private void ProcesarRegistroEmpleado(string credencial)
+        {
+            Empleado empleado = BuscarEmpleadoPorCredencial(credencial);
+            if (empleado == null) return;
+
+            if (VerificarEmpleadoYaRegistrado(empleado)) return;
+
+            RegistrarEmpleadoEnServicio(empleado);
+        }
+
+        private Empleado BuscarEmpleadoPorCredencial(string credencial)
+        {
+            Empleado empleado = negE.buscarPorCredencial(credencial);
+            if (empleado == null)
+            {
+                ExceptionHelper.MostrarAdvertencia($"No se encontró un empleado con la credencial {credencial}");
+                return null;
+            }
+            return empleado;
+        }
+
+        private bool VerificarEmpleadoYaRegistrado(Empleado empleado)
+        {
+            if (negR.empleadoYaRegistrado(empleado.IdEmpleado, servicioIdActual.Value))
+            {
+                ExceptionHelper.MostrarInformacion($"El empleado {empleado.NombreCompleto} ya está registrado en este servicio");
+                return true;
+            }
+            return false;
+        }
+
+        private void RegistrarEmpleadoEnServicio(Empleado empleado)
+        {
+            negR.registrarEmpleado(empleado.IdEmpleado, empleado.IdEmpresa, servicioIdActual.Value, idLugarActual);
+            CargarRegistros();
+            LimpiarInput();
+            formularioPrincipal?.ActualizarEstadisticas();
+            MostrarComensalRegistrado(empleado);
+        }
+
+        private void LimpiarInput()
+        {
+            txtRegistro.Clear();
+            txtRegistro.Focus();
+        }
+
+        #endregion
+
+        #region Notificación Visual
+
         private void MostrarComensalRegistrado(Empleado empleado)
         {
             Form formTemporal = null;
@@ -123,110 +190,146 @@ namespace app.UserControls
 
             try
             {
-                formTemporal = new Form
-                {
-                    StartPosition = FormStartPosition.CenterScreen,
-                    FormBorderStyle = FormBorderStyle.None,
-                    Size = new Size(401, 170),
-                    BackColor = Color.FromArgb(35, 34, 33),
-                    TopMost = true,
-                    ShowInTaskbar = false,
-                    Padding = new Padding(1)
-                };
-
-                var panelContenedor = new Panel
-                {
-                    Size = new Size(399, 168),
-                    Location = new Point(1, 1),
-                    BackColor = Color.FromArgb(255, 248, 225)
-                };
-
-                var panelTitulo = new Panel
-                {
-                    Size = new Size(399, 52),
-                    Location = new Point(0, 0),
-                    BackColor = Color.FromArgb(255, 208, 36)
-                };
-
-                var lblTitulo = new Label
-                {
-                    Text = "Comensal Registrado",
-                    Font = new Font("Segoe UI", 14, FontStyle.Bold),
-                    ForeColor = Color.FromArgb(35, 34, 33),
-                    AutoSize = false,
-                    Size = new Size(399, 52),
-                    TextAlign = ContentAlignment.MiddleCenter
-                };
-
-                panelTitulo.Controls.Add(lblTitulo);
-
-                string mensaje = $"{empleado.Nombre} {empleado.Apellido}\n" +
-                                $"{empleado.NombreEmpresa}\n" +
-                                $"Hora: {DateTime.Now:HH:mm:ss}";
-
-                var lblMensaje = new Label
-                {
-                    Text = mensaje,
-                    Font = new Font("Segoe UI", 14, FontStyle.Bold),
-                    ForeColor = Color.FromArgb(35, 34, 33),
-                    AutoSize = false,
-                    Size = new Size(385, 95),
-                    Location = new Point(7, 60),
-                    TextAlign = ContentAlignment.MiddleCenter
-                };
+                formTemporal = CrearFormularioNotificacion();
+                var panelContenedor = CrearPanelContenedor();
+                var panelTitulo = CrearPanelTitulo();
+                var lblMensaje = CrearEtiquetaMensaje(empleado);
 
                 panelContenedor.Controls.Add(panelTitulo);
                 panelContenedor.Controls.Add(lblMensaje);
                 formTemporal.Controls.Add(panelContenedor);
 
-                timer = new Timer { Interval = 4000 };
-                timer.Tick += (s, e) =>
-                {
-                    try
-                    {
-                        timer.Stop();
-                        timer.Dispose();
-                        if (formTemporal != null && !formTemporal.IsDisposed)
-                        {
-                            formTemporal.Close();
-                            formTemporal.Dispose();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine($"[ERROR] Error al cerrar ventana temporal en Tick: {ex.Message}");
-                    }
-                };
+                timer = ConfigurarTimerCierre(formTemporal);
+                ConfigurarEventosFormulario(formTemporal, timer);
 
-                formTemporal.FormClosed += (s, e) =>
-                {
-                    if (timer != null)
-                    {
-                        try { timer.Stop(); timer.Dispose(); }
-                        catch { }
-                    }
-                };
-
-                formTemporal.Shown += (s, e) => timer.Start();
                 formTemporal.Show();
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[ERROR] Error al mostrar ventana temporal: {ex.Message}");
-                try
-                {
-                    timer?.Stop();
-                    timer?.Dispose();
-                }
-                catch { }
-
-                try
-                {
-                    if (formTemporal != null && !formTemporal.IsDisposed)
-                        formTemporal.Dispose();
-                }
-                catch { }
+                LimpiarRecursosNotificacion(timer, formTemporal);
             }
         }
+
+        private Form CrearFormularioNotificacion()
+        {
+            return new Form
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                FormBorderStyle = FormBorderStyle.None,
+                Size = new Size(401, 170),
+                BackColor = Color.FromArgb(35, 34, 33),
+                TopMost = true,
+                ShowInTaskbar = false,
+                Padding = new Padding(1)
+            };
+        }
+
+        private Panel CrearPanelContenedor()
+        {
+            return new Panel
+            {
+                Size = new Size(399, 168),
+                Location = new Point(1, 1),
+                BackColor = Color.FromArgb(255, 248, 225)
+            };
+        }
+
+        private Panel CrearPanelTitulo()
+        {
+            var panel = new Panel
+            {
+                Size = new Size(399, 52),
+                Location = new Point(0, 0),
+                BackColor = Color.FromArgb(255, 208, 36)
+            };
+
+            var lblTitulo = new Label
+            {
+                Text = "Comensal Registrado",
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                ForeColor = Color.FromArgb(35, 34, 33),
+                AutoSize = false,
+                Size = new Size(399, 52),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+
+            panel.Controls.Add(lblTitulo);
+            return panel;
+        }
+
+        private Label CrearEtiquetaMensaje(Empleado empleado)
+        {
+            string mensaje = $"{empleado.Nombre} {empleado.Apellido}\n" +
+                            $"{empleado.NombreEmpresa}\n" +
+                            $"Hora: {DateTime.Now:HH:mm:ss}";
+
+            return new Label
+            {
+                Text = mensaje,
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                ForeColor = Color.FromArgb(35, 34, 33),
+                AutoSize = false,
+                Size = new Size(385, 95),
+                Location = new Point(7, 60),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+        }
+
+        private Timer ConfigurarTimerCierre(Form formulario)
+        {
+            var timer = new Timer { Interval = 4000 };
+            timer.Tick += (s, e) =>
+            {
+                try
+                {
+                    timer.Stop();
+                    timer.Dispose();
+                    if (formulario != null && !formulario.IsDisposed)
+                    {
+                        formulario.Close();
+                        formulario.Dispose();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[ERROR] Error al cerrar ventana temporal en Tick: {ex.Message}");
+                }
+            };
+            return timer;
+        }
+
+        private void ConfigurarEventosFormulario(Form formulario, Timer timer)
+        {
+            formulario.FormClosed += (s, e) =>
+            {
+                if (timer != null)
+                {
+                    try { timer.Stop(); timer.Dispose(); }
+                    catch { }
+                }
+            };
+
+            formulario.Shown += (s, e) => timer.Start();
+        }
+
+        private void LimpiarRecursosNotificacion(Timer timer, Form formulario)
+        {
+            try
+            {
+                timer?.Stop();
+                timer?.Dispose();
+            }
+            catch { }
+
+            try
+            {
+                if (formulario != null && !formulario.IsDisposed)
+                    formulario.Dispose();
+            }
+            catch { }
+        }
+
+        #endregion
     }
 }
