@@ -14,28 +14,58 @@ namespace app.UserControls
 {
     public partial class ucEmpleados : UserControl
     {
-        private EmpleadoNegocio empleadoNegocio = new EmpleadoNegocio();
-        private EmpresaNegocio empresaNegocio = new EmpresaNegocio();
+        #region Variables y Constantes
+
+        private EmpleadoNegocio empleadoNegocio;
+        private EmpresaNegocio empresaNegocio;
+
         private Empleado empleadoSeleccionado = null;
         private bool modoEdicion = false;
+
+        #endregion
+
+        #region Constructor e Inicialización
 
         public ucEmpleados()
         {
             InitializeComponent();
+            empleadoNegocio = new EmpleadoNegocio();
+            empresaNegocio = new EmpresaNegocio();
         }
 
         private void ucEmpleados_Load(object sender, EventArgs e)
+        {
+            CargarDatosIniciales();
+        }
+
+        private void CargarDatosIniciales()
         {
             CargarEmpleados();
             CargarEmpresas();
             LimpiarFormularioEmpleado();
         }
 
+        public void RefrescarDatos()
+        {
+            CargarDatosIniciales();
+        }
+
+        #endregion
+
+        #region Carga de Datos
+
         private void CargarEmpleados(string filtro = "", int idEmpresa = 0)
         {
             var empleados = empleadoNegocio.listar();
             if (empleados == null) return;
 
+            empleados = AplicarFiltros(empleados, filtro, idEmpresa);
+            ActualizarDgvEmpleados(empleados);
+            ActualizarContadorEmpleados(empleados.Count);
+        }
+
+        private List<Empleado> AplicarFiltros(List<Empleado> empleados, string filtro, int idEmpresa)
+        {
             if (!string.IsNullOrWhiteSpace(filtro))
             {
                 empleados = empleados.FindAll(e =>
@@ -50,12 +80,20 @@ namespace app.UserControls
                 empleados = empleados.FindAll(e => e.Empresa.IdEmpresa == idEmpresa);
             }
 
+            return empleados;
+        }
+
+        private void ActualizarDgvEmpleados(List<Empleado> empleados)
+        {
             dgvEmpleados.DataSource = null;
             dgvEmpleados.AutoGenerateColumns = true;
             dgvEmpleados.DataSource = empleados;
             OcultarColumnas();
+        }
 
-            lblTotalEmpleados.Text = $"Total Empleados: {empleados.Count}";
+        private void ActualizarContadorEmpleados(int total)
+        {
+            lblTotalEmpleados.Text = $"Total Empleados: {total}";
         }
 
         private void OcultarColumnas()
@@ -63,7 +101,14 @@ namespace app.UserControls
             var cols = dgvEmpleados?.Columns;
             if (cols == null) return;
 
+            ConfigurarVisibilidadColumnas(cols);
+            ConfigurarOrdenColumnas(cols);
+        }
+
+        private void ConfigurarVisibilidadColumnas(DataGridViewColumnCollection cols)
+        {
             string[] aMostrar = { "NombreCompleto", "Empresa" };
+            
             foreach (DataGridViewColumn col in cols)
             {
                 if (col.Name == "Empresa")
@@ -84,9 +129,13 @@ namespace app.UserControls
                     col.Visible = true;
                 }
             }
+        }
 
+        private void ConfigurarOrdenColumnas(DataGridViewColumnCollection cols)
+        {
             string[] orden = { "NombreCompleto", "NombreEmpresa" };
             int idx = 0;
+            
             foreach (var nombre in orden)
             {
                 if (cols.Contains(nombre))
@@ -102,6 +151,13 @@ namespace app.UserControls
             object selectedValueFiltro = cbFiltroEmpresa.SelectedValue;
             object selectedValueEmpleado = cbEmpresaEmpleado.SelectedValue;
             
+            ConfigurarCbEmpresas(empresas);
+            RestaurarSelecciones(empresas, selectedValueFiltro, selectedValueEmpleado);
+            ActualizarContadorEmpresas(empresas.Count);
+        }
+
+        private void ConfigurarCbEmpresas(List<Empresa> empresas)
+        {
             cbFiltroEmpresa.DataSource = null;
             cbEmpresaEmpleado.DataSource = null;
             
@@ -116,6 +172,11 @@ namespace app.UserControls
             cbEmpresaEmpleado.DataSource = new List<Empresa>(empresas);
             cbEmpresaEmpleado.DisplayMember = "Nombre";
             cbEmpresaEmpleado.ValueMember = "IdEmpresa";
+        }
+
+        private void RestaurarSelecciones(List<Empresa> empresas, object selectedValueFiltro, object selectedValueEmpleado)
+        {
+            var empresasFiltro = (List<Empresa>)cbFiltroEmpresa.DataSource;
             
             if (selectedValueFiltro != null && empresasFiltro.Exists(e => e.IdEmpresa == (int)selectedValueFiltro))
             {
@@ -126,40 +187,60 @@ namespace app.UserControls
             {
                 cbEmpresaEmpleado.SelectedValue = selectedValueEmpleado;
             }
-            
-            lblTotalEmpresas.Text = $"Total Empresas: {empresas.Count}";
         }
 
-        public void RefrescarDatos()
+        private void ActualizarContadorEmpresas(int total)
         {
-            CargarEmpleados();
-            CargarEmpresas();
+            lblTotalEmpresas.Text = $"Total Empresas: {total}";
         }
 
-        private void dgvEmpleados_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvEmpleados.CurrentRow != null)
-            {
-                int idEmpleado = Convert.ToInt32(dgvEmpleados.CurrentRow.Cells["IdEmpleado"].Value);
-                CargarEmpleadoEnFormulario(idEmpleado);
-            }
-        }
+        #endregion
+
+        #region Gestión de Formulario
 
         private void CargarEmpleadoEnFormulario(int idEmpleado)
         {
             empleadoSeleccionado = empleadoNegocio.buscarPorId(idEmpleado);
             if (empleadoSeleccionado == null) return;
+
+            MostrarDatosEmpleado();
+            ConfigurarModoEdicion();
+        }
+
+        private void MostrarDatosEmpleado()
+        {
             txtCredencial.Text = empleadoSeleccionado.IdCredencial;
             txtNombre.Text = empleadoSeleccionado.Nombre;
             txtApellido.Text = empleadoSeleccionado.Apellido;
             cbEmpresaEmpleado.SelectedValue = empleadoSeleccionado.Empresa.IdEmpresa;
-            if (empleadoSeleccionado.Estado) rbActivoEmpleado.Checked = true;
-            else rbInactivoEmpleado.Checked = true;
+            
+            if (empleadoSeleccionado.Estado)
+                rbActivoEmpleado.Checked = true;
+            else
+                rbInactivoEmpleado.Checked = true;
+        }
+
+        private void ConfigurarModoEdicion()
+        {
             modoEdicion = true;
             btnEliminarEmpleado.Enabled = true;
         }
 
-        private void btnNuevoEmpleado_Click(object sender, EventArgs e)
+        private void LimpiarFormularioEmpleado()
+        {
+            txtCredencial.Clear();
+            txtNombre.Clear();
+            txtApellido.Clear();
+            cbEmpresaEmpleado.SelectedIndex = -1;
+            rbActivoEmpleado.Checked = true;
+            btnEliminarEmpleado.Enabled = false;
+            empleadoSeleccionado = null;
+            modoEdicion = false;
+        }
+
+        #region Operaciones ABML
+
+        private void NuevoEmpleado()
         {
             LimpiarFormularioEmpleado();
             modoEdicion = false;
@@ -167,34 +248,42 @@ namespace app.UserControls
             txtCredencial.Focus();
         }
 
-        private void btnGuardarEmpleado_Click(object sender, EventArgs e)
+        private void GuardarEmpleado()
         {
             if (!ValidarFormularioEmpleado()) return;
+
             Empleado emp = new Empleado();
-            if (modoEdicion && empleadoSeleccionado != null) CargarEmpleado(emp);
-            if (modoEdicion) empleadoNegocio.modificar(emp);
-            else empleadoNegocio.agregar(emp);
+            CargarDatosEmpleado(emp);
+
+            if (modoEdicion)
+                empleadoNegocio.modificar(emp);
+            else
+                empleadoNegocio.agregar(emp);
+
             ExceptionHelper.MostrarExito("Empleado guardado correctamente");
             CargarEmpleados();
             LimpiarFormularioEmpleado();
         }
 
-        private void CargarEmpleado(Empleado aux)
+        private void CargarDatosEmpleado(Empleado emp)
         {
-            aux.IdEmpleado = empleadoSeleccionado.IdEmpleado;
-            aux.IdCredencial = txtCredencial.Text.Trim();
-            aux.Nombre = txtNombre.Text.Trim();
-            aux.Apellido = txtApellido.Text.Trim();
-            aux.Empresa = new Empresa();
-            aux.Empresa.IdEmpresa = (int)cbEmpresaEmpleado.SelectedValue;
-            aux.Estado = rbActivoEmpleado.Checked;
+            if (modoEdicion && empleadoSeleccionado != null)
+            {
+                emp.IdEmpleado = empleadoSeleccionado.IdEmpleado;
+            }
+
+            emp.IdCredencial = txtCredencial.Text.Trim();
+            emp.Nombre = txtNombre.Text.Trim();
+            emp.Apellido = txtApellido.Text.Trim();
+            emp.Empresa = new Empresa { IdEmpresa = (int)cbEmpresaEmpleado.SelectedValue };
+            emp.Estado = rbActivoEmpleado.Checked;
         }
 
-        private void btnEliminarEmpleado_Click(object sender, EventArgs e)
+        private void EliminarEmpleado()
         {
             if (empleadoSeleccionado == null) return;
 
-            if (ExceptionHelper.MostrarConfirmacion( $"¿Está seguro de desactivar al empleado?"))
+            if (ExceptionHelper.MostrarConfirmacion("¿Está seguro de desactivar al empleado?"))
             {
                 empleadoNegocio.eliminar(empleadoSeleccionado.IdEmpleado);
                 ExceptionHelper.MostrarExito("Empleado desactivado correctamente");
@@ -203,12 +292,11 @@ namespace app.UserControls
             }
         }
 
-        private void btnCancelarEmpleado_Click(object sender, EventArgs e)
-        {
-            LimpiarFormularioEmpleado();
-        }
+        #endregion
 
-        private void btnVerificarCredencial_Click(object sender, EventArgs e)
+        #region Verificación de Credencial
+
+        private void VerificarCredencial()
         {
             if (string.IsNullOrWhiteSpace(txtCredencial.Text))
             {
@@ -217,10 +305,14 @@ namespace app.UserControls
             }
 
             bool existe = empleadoNegocio.existeCredencial(txtCredencial.Text.Trim());
-           
+            MostrarResultadoVerificacion(existe);
+        }
+
+        private void MostrarResultadoVerificacion(bool existe)
+        {
             if (existe)
             {
-                if (!modoEdicion||(modoEdicion && empleadoSeleccionado.IdCredencial != txtCredencial.Text.Trim()))
+                if (!modoEdicion || (modoEdicion && empleadoSeleccionado.IdCredencial != txtCredencial.Text.Trim()))
                 {
                     ExceptionHelper.MostrarAdvertencia("Esta credencial ya está en uso");
                 }
@@ -235,28 +327,88 @@ namespace app.UserControls
             }
         }
 
-        private void txtBuscarEmpleado_TextChanged(object sender, EventArgs e)
+        #endregion
+
+        #region Filtrado
+
+        private int ObtenerIdEmpresaFiltro()
         {
             int idEmpresa = 0;
             if (cbFiltroEmpresa.SelectedValue != null && int.TryParse(cbFiltroEmpresa.SelectedValue.ToString(), out int temp))
             {
                 idEmpresa = temp;
             }
+            return idEmpresa;
+        }
+
+        #endregion
+
+        #region Eventos
+
+        private void dgvEmpleados_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvEmpleados.CurrentRow != null)
+            {
+                int idEmpleado = Convert.ToInt32(dgvEmpleados.CurrentRow.Cells["IdEmpleado"].Value);
+                CargarEmpleadoEnFormulario(idEmpleado);
+            }
+        }
+
+        private void btnNuevoEmpleado_Click(object sender, EventArgs e)
+        {
+            NuevoEmpleado();
+        }
+
+        private void btnGuardarEmpleado_Click(object sender, EventArgs e)
+        {
+            GuardarEmpleado();
+        }
+
+        private void btnEliminarEmpleado_Click(object sender, EventArgs e)
+        {
+            EliminarEmpleado();
+        }
+
+        private void btnCancelarEmpleado_Click(object sender, EventArgs e)
+        {
+            LimpiarFormularioEmpleado();
+        }
+
+        private void btnVerificarCredencial_Click(object sender, EventArgs e)
+        {
+            VerificarCredencial();
+        }
+
+        private void txtBuscarEmpleado_TextChanged(object sender, EventArgs e)
+        {
+            int idEmpresa = ObtenerIdEmpresaFiltro();
             CargarEmpleados(txtBuscarEmpleado.Text, idEmpresa);
         }
 
         private void cbFiltroEmpresa_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbFiltroEmpresa.SelectedValue == null) return;
-            int idEmpresa = 0;
-            if (int.TryParse(cbFiltroEmpresa.SelectedValue.ToString(), out int temp))
-            {
-                idEmpresa = temp;
-            }
+            int idEmpresa = ObtenerIdEmpresaFiltro();
             CargarEmpleados(txtBuscarEmpleado.Text, idEmpresa);
         }
 
+        #endregion
+
+        #endregion
+
+        #region Validación
+
         private bool ValidarFormularioEmpleado()
+        {
+            if (!ValidarCredencial()) return false;
+            if (!ValidarNombreEmpleado()) return false;
+            if (!ValidarApellidoEmpleado()) return false;
+            if (!ValidarEmpresaSeleccionada()) return false;
+
+            return true;
+        }
+
+        private bool ValidarCredencial()
         {
             if (string.IsNullOrWhiteSpace(txtCredencial.Text))
             {
@@ -264,7 +416,11 @@ namespace app.UserControls
                 txtCredencial.Focus();
                 return false;
             }
+            return true;
+        }
 
+        private bool ValidarNombreEmpleado()
+        {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
                 ExceptionHelper.MostrarAdvertencia("Ingrese el nombre");
@@ -278,7 +434,11 @@ namespace app.UserControls
                 txtNombre.Focus();
                 return false;
             }
+            return true;
+        }
 
+        private bool ValidarApellidoEmpleado()
+        {
             if (string.IsNullOrWhiteSpace(txtApellido.Text))
             {
                 ExceptionHelper.MostrarAdvertencia("Ingrese el apellido");
@@ -292,13 +452,16 @@ namespace app.UserControls
                 txtApellido.Focus();
                 return false;
             }
+            return true;
+        }
 
+        private bool ValidarEmpresaSeleccionada()
+        {
             if (cbEmpresaEmpleado.SelectedIndex == -1)
             {
                 ExceptionHelper.MostrarAdvertencia("Seleccione una empresa");
                 return false;
             }
-
             return true;
         }
 
@@ -307,23 +470,12 @@ namespace app.UserControls
             if (string.IsNullOrWhiteSpace(nombre))
                 return false;
             
-            // Solo letras, espacios, tildes y guiones
             System.Text.RegularExpressions.Regex regex = 
                 new System.Text.RegularExpressions.Regex(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\-]+$");
             
             return regex.IsMatch(nombre);
         }
 
-        private void LimpiarFormularioEmpleado()
-        {
-            txtCredencial.Clear();
-            txtNombre.Clear();
-            txtApellido.Clear();
-            cbEmpresaEmpleado.SelectedIndex = -1;
-            rbActivoEmpleado.Checked = true;
-            btnEliminarEmpleado.Enabled = false;
-            empleadoSeleccionado = null;
-            modoEdicion = false;
-        }
+        #endregion
     }
 }

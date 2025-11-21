@@ -14,23 +14,28 @@ namespace app.UserControls
 {
     public partial class ucEmpresas : UserControl
     {
-        private EmpresaNegocio negE = new EmpresaNegocio();
+        #region Variables y Constantes
+
+        private EmpresaNegocio empresaNegocio;
         private Empresa seleccionada = null;
         private bool modoEdicion = false;
+
+        #endregion
+
+        #region Constructor e Inicialización
 
         public ucEmpresas()
         {
             InitializeComponent();
+            empresaNegocio = new EmpresaNegocio();
         }
 
         private void ucEmpresas_Load(object sender, EventArgs e)
         {
             try
             {
-                CargarEmpresas();
-                LimpiarFormulario();
-                LimpiarEstadisticas();         
-                txtBuscarEmpresa.TextChanged += txtBuscarEmpresa_TextChanged;
+                CargarDatosIniciales();
+                ConfigurarEventos();
             }
             catch (Exception ex)
             {
@@ -38,25 +43,37 @@ namespace app.UserControls
             }
         }
 
+        private void CargarDatosIniciales()
+        {
+            CargarEmpresas();
+            LimpiarFormulario();
+            LimpiarEstadisticas();
+        }
+
+        private void ConfigurarEventos()
+        {
+            txtBuscarEmpresa.TextChanged += txtBuscarEmpresa_TextChanged;
+        }
+
+        public void RefrescarDatos()
+        {
+            CargarDatosIniciales();
+        }
+
+        #endregion
+
+        #region Carga de Datos
+
         private void CargarEmpresas(string filtro = "")
         {
             try
             {
-                var empresas = negE.listarConEmpleados();
+                var empresas = empresaNegocio.listarConEmpleados();
                 if (empresas == null) return;
 
-                if (!string.IsNullOrWhiteSpace(filtro))
-                {
-                    empresas = empresas.FindAll(e =>
-                        e.Nombre.ToUpper().Contains(filtro.ToUpper()) 
-                    );
-                }
-
-                dgvEmpresas.DataSource = null;
-                dgvEmpresas.AutoGenerateColumns = true;
-                dgvEmpresas.DataSource = empresas;
-                OcultarColumnas();
-                lblTotalEmpresas.Text = $"Total Empresas: {empresas.Count}";
+                empresas = AplicarFiltro(empresas, filtro);
+                ActualizarGridEmpresas(empresas);
+                ActualizarContadorEmpresas(empresas.Count);
             }
             catch (Exception ex)
             {
@@ -64,11 +81,40 @@ namespace app.UserControls
             }
         }
 
+        private List<Empresa> AplicarFiltro(List<Empresa> empresas, string filtro)
+        {
+            if (!string.IsNullOrWhiteSpace(filtro))
+            {
+                empresas = empresas.FindAll(e =>
+                    e.Nombre.ToUpper().Contains(filtro.ToUpper())
+                );
+            }
+            return empresas;
+        }
+
+        private void ActualizarDgvEmpresas(List<Empresa> empresas)
+        {
+            dgvEmpresas.DataSource = null;
+            dgvEmpresas.AutoGenerateColumns = true;
+            dgvEmpresas.DataSource = empresas;
+            OcultarColumnas();
+        }
+
+        private void ActualizarContadorEmpresas(int total)
+        {
+            lblTotalEmpresas.Text = $"Total Empresas: {total}";
+        }
+
         private void OcultarColumnas()
         {
             var cols = dgvEmpresas?.Columns;
             if (cols == null) return;
 
+            ConfigurarVisibilidadColumnas(cols);
+        }
+
+        private void ConfigurarVisibilidadColumnas(DataGridViewColumnCollection cols)
+        {
             string[] aOcultar = { "IdEmpresa", "Estado" };
             foreach (var nombre in aOcultar)
             {
@@ -79,6 +125,10 @@ namespace app.UserControls
             }
         }
 
+        #endregion
+
+        #region Gestión de Formulario
+
         private void LimpiarFormulario()
         {
             txtNombre.Clear();
@@ -88,7 +138,46 @@ namespace app.UserControls
             modoEdicion = false;
         }
 
+        private void CargarEmpresaEnFormulario(int idEmpresa)
+        {
+            seleccionada = empresaNegocio.buscarPorId(idEmpresa);
+            if (seleccionada == null) return;
+
+            MostrarDatosEmpresa();
+            ConfigurarModoEdicion();
+        }
+
+        private void MostrarDatosEmpresa()
+        {
+            txtNombre.Text = seleccionada.Nombre;
+            
+            if (seleccionada.Estado)
+                rbActivoEmpresa.Checked = true;
+            else
+                rbInactivoEmpresa.Checked = true;
+        }
+
+        private void ConfigurarModoEdicion()
+        {
+            modoEdicion = true;
+            btnEliminarEmpresa.Enabled = true;
+        }
+
+        #endregion
+
+        #region Validación
+
         private bool ValidarFormulario()
+        {
+            if (!ValidarNombreEmpresa()) return false;
+            if (!ValidarLongitudNombre()) return false;
+            if (!ValidarFormatoNombre()) return false;
+            if (!ValidarNombreDuplicado()) return false;
+
+            return true;
+        }
+
+        private bool ValidarNombreEmpresa()
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
@@ -96,22 +185,34 @@ namespace app.UserControls
                 txtNombre.Focus();
                 return false;
             }
+            return true;
+        }
 
+        private bool ValidarLongitudNombre()
+        {
             if (txtNombre.Text.Trim().Length < 2)
             {
                 ExceptionHelper.MostrarAdvertencia("El nombre debe tener al menos 2 caracteres");
                 txtNombre.Focus();
                 return false;
             }
+            return true;
+        }
 
+        private bool ValidarFormatoNombre()
+        {
             if (!ValidarNombre(txtNombre.Text))
             {
                 ExceptionHelper.MostrarAdvertencia("El nombre de la empresa solo puede contener letras, números, espacios y guiones");
                 txtNombre.Focus();
                 return false;
             }
+            return true;
+        }
 
-            var empresas = negE.listar();
+        private bool ValidarNombreDuplicado()
+        {
+            var empresas = empresaNegocio.listar();
             if (empresas != null)
             {
                 bool existe = empresas.Exists(e =>
@@ -126,32 +227,25 @@ namespace app.UserControls
                     return false;
                 }
             }
-
             return true;
         }
 
-        private void CargarEmpresa(Empresa aux)
+        private bool ValidarNombre(string nombre)
         {
-            if (modoEdicion && seleccionada != null)
-            {
-                aux.IdEmpresa = seleccionada.IdEmpresa;
-            }
-            aux.Nombre = txtNombre.Text.Trim();
-            aux.Estado = rbActivoEmpresa.Checked;
+            if (string.IsNullOrWhiteSpace(nombre))
+                return false;
+            
+            System.Text.RegularExpressions.Regex regex = 
+                new System.Text.RegularExpressions.Regex(@"^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s\-]+$");
+            
+            return regex.IsMatch(nombre);
         }
 
-        private void CargarEmpresaEnFormulario(int idEmpresa)
-        {
-            seleccionada = negE.buscarPorId(idEmpresa);
-            if (seleccionada == null) return;
-            txtNombre.Text = seleccionada.Nombre;
-            if (seleccionada.Estado) rbActivoEmpresa.Checked = true;
-            else rbInactivoEmpresa.Checked = true;
-            modoEdicion = true;
-            btnEliminarEmpresa.Enabled = true;
-        }
+        #endregion
 
-        private void btnNuevaEmpresa_Click(object sender, EventArgs e)
+        #region Operaciones ABML
+
+        private void NuevaEmpresa()
         {
             LimpiarFormulario();
             modoEdicion = false;
@@ -159,10 +253,50 @@ namespace app.UserControls
             txtNombre.Focus();
         }
 
-        private void btnEliminarEmpresa_Click(object sender, EventArgs e)
+        private void GuardarEmpresa()
+        {
+            if (!ValidarFormulario()) return;
+
+            Empresa emp = new Empresa();
+            CargarEmpresa(emp);
+
+            if (modoEdicion)
+                empresaNegocio.modificar(emp);
+            else
+                empresaNegocio.agregar(emp);
+
+            ExceptionHelper.MostrarExito("Empresa guardada correctamente");
+            CargarEmpresas();
+            LimpiarFormulario();
+        }
+
+        private void CargarEmpresa(Empresa emp)
+        {
+            if (modoEdicion && seleccionada != null)
+            {
+                emp.IdEmpresa = seleccionada.IdEmpresa;
+            }
+            emp.Nombre = txtNombre.Text.Trim();
+            emp.Estado = rbActivoEmpresa.Checked;
+        }
+
+        private void EliminarEmpresa()
         {
             if (seleccionada == null) return;
 
+            if (!ValidarEliminacionEmpresa()) return;
+
+            if (ExceptionHelper.MostrarConfirmacion($"¿Está seguro de desactivar la empresa '{seleccionada.Nombre}'?"))
+            {
+                empresaNegocio.eliminar(seleccionada.IdEmpresa);
+                ExceptionHelper.MostrarExito("Empresa desactivada correctamente");
+                CargarEmpresas();
+                LimpiarFormulario();
+            }
+        }
+
+        private bool ValidarEliminacionEmpresa()
+        {
             if (seleccionada.CantidadEmpleados > 0)
             {
                 ExceptionHelper.MostrarAdvertencia(
@@ -170,34 +304,14 @@ namespace app.UserControls
                     $"porque tiene {seleccionada.CantidadEmpleados} empleado(s) activo(s).\n\n" +
                     "Primero desactive o transfiera los empleados a otra empresa."
                 );
-                return;
+                return false;
             }
-
-            if (ExceptionHelper.MostrarConfirmacion($"¿Está seguro de desactivar la empresa '{seleccionada.Nombre}'?"))
-            {
-                negE.eliminar(seleccionada.IdEmpresa);
-                ExceptionHelper.MostrarExito("Empresa desactivada correctamente");
-                CargarEmpresas();
-                LimpiarFormulario();
-            }
+            return true;
         }
 
-        private void btnCancelarEmpresa_Click(object sender, EventArgs e)
-        {
-            LimpiarFormulario();
-        }
+        #endregion
 
-        private void btnGuardarEmpresa_Click(object sender, EventArgs e)
-        {
-            if (!ValidarFormulario()) return;
-            Empresa emp = new Empresa();
-            CargarEmpresa(emp);
-            if (modoEdicion) negE.modificar(emp);
-            else negE.agregar(emp);
-            ExceptionHelper.MostrarExito("Empresa guardada correctamente");
-            CargarEmpresas();
-            LimpiarFormulario();
-        }
+        #region Eventos
 
         private void dgvEmpresas_SelectionChanged(object sender, EventArgs e)
         {
@@ -221,53 +335,96 @@ namespace app.UserControls
             CargarEmpresas(txtBuscarEmpresa.Text);
         }
 
+        private void btnNuevaEmpresa_Click(object sender, EventArgs e)
+        {
+            NuevaEmpresa();
+        }
+
+        private void btnGuardarEmpresa_Click(object sender, EventArgs e)
+        {
+            GuardarEmpresa();
+        }
+
+        private void btnEliminarEmpresa_Click(object sender, EventArgs e)
+        {
+            EliminarEmpresa();
+        }
+
+        private void btnCancelarEmpresa_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+        }
+
+        #endregion
+
+        #region Estadísticas
+
         private void CargarEstadisticasEmpresa(int idEmpresa)
         {
             try
             {
-                // Obtener la empresa seleccionada con su información completa
-                var empresa = negE.buscarPorId(idEmpresa);
+                var empresa = empresaNegocio.buscarPorId(idEmpresa);
                 if (empresa == null)
                 {
                     LimpiarEstadisticas();
                     return;
                 }
 
-                // Total de empleados activos (desde la vista que ya tiene este dato)
-                var empresas = negE.listarConEmpleados();
-                var empresaConEmpleados = empresas?.Find(e => e.IdEmpresa == idEmpresa);
-                int totalEmpleados = empresaConEmpleados?.CantidadEmpleados ?? 0;
-                lblTotalEmpleados.Text = $"Total de Empleados: {totalEmpleados}";
+                int totalEmpleados = ObtenerTotalEmpleados(idEmpresa);
+                int inactivos = ObtenerEmpleadosInactivos(idEmpresa);
+                int asistenciasMes = ObtenerAsistenciasMes(idEmpresa);
+                double promedioDiario = CalcularPromedioDiario(asistenciasMes);
 
-                // Empleados inactivos de esta empresa
-                var empleadoNegocio = new EmpleadoNegocio();
-                var todosEmpleados = empleadoNegocio.listar();
-                int inactivos = 0;
-                if (todosEmpleados != null)
-                {
-                    inactivos = todosEmpleados.Count(emp => emp.IdEmpresa == idEmpresa && !emp.Estado);
-                }
-                lblEmpleadosInactivos.Text = $"Empleados Inactivos: {inactivos}";
-
-                // Asistencias del mes actual
-                var registroNegocio = new RegistroNegocio();
-                DateTime inicioMes = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                DateTime finMes = inicioMes.AddMonths(1).AddDays(-1);
-                
-                var registros = registroNegocio.obtenerRegistrosPorEmpresaYFecha(idEmpresa, inicioMes, finMes);
-                int asistenciasMes = registros?.Count ?? 0;
-                lblAsistencias.Text = $"Asistencias (Mes Actual): {asistenciasMes}";
-
-                // Promedio diario (basado en los días transcurridos del mes)
-                int diasTranscurridos = DateTime.Now.Day;
-                double promedioDiario = diasTranscurridos > 0 ? (double)asistenciasMes / diasTranscurridos : 0;
-                lblPromedio.Text = $"Promedio Diario: {promedioDiario:F1}";
+                ActualizarEstadisticas(totalEmpleados, inactivos, asistenciasMes, promedioDiario);
             }
             catch (Exception ex)
             {
                 LimpiarEstadisticas();
                 System.Diagnostics.Debug.WriteLine($"Error al cargar estadísticas: {ex.Message}");
             }
+        }
+
+        private int ObtenerTotalEmpleados(int idEmpresa)
+        {
+            var empresas = empresaNegocio.listarConEmpleados();
+            var empresaConEmpleados = empresas?.Find(e => e.IdEmpresa == idEmpresa);
+            return empresaConEmpleados?.CantidadEmpleados ?? 0;
+        }
+
+        private int ObtenerEmpleadosInactivos(int idEmpresa)
+        {
+            var empleadoNegocio = new EmpleadoNegocio();
+            var todosEmpleados = empleadoNegocio.listar();
+            
+            if (todosEmpleados != null)
+            {
+                return todosEmpleados.Count(emp => emp.IdEmpresa == idEmpresa && !emp.Estado);
+            }
+            return 0;
+        }
+
+        private int ObtenerAsistenciasMes(int idEmpresa)
+        {
+            var registroNegocio = new RegistroNegocio();
+            DateTime inicioMes = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime finMes = inicioMes.AddMonths(1).AddDays(-1);
+            
+            var registros = registroNegocio.obtenerRegistrosPorEmpresaYFecha(idEmpresa, inicioMes, finMes);
+            return registros?.Count ?? 0;
+        }
+
+        private double CalcularPromedioDiario(int asistenciasMes)
+        {
+            int diasTranscurridos = DateTime.Now.Day;
+            return diasTranscurridos > 0 ? (double)asistenciasMes / diasTranscurridos : 0;
+        }
+
+        private void ActualizarEstadisticas(int totalEmpleados, int inactivos, int asistenciasMes, double promedioDiario)
+        {
+            lblTotalEmpleados.Text = $"Total de Empleados: {totalEmpleados}";
+            lblEmpleadosInactivos.Text = $"Empleados Inactivos: {inactivos}";
+            lblAsistencias.Text = $"Asistencias (Mes Actual): {asistenciasMes}";
+            lblPromedio.Text = $"Promedio Diario: {promedioDiario:F1}";
         }
 
         private void LimpiarEstadisticas()
@@ -278,23 +435,6 @@ namespace app.UserControls
             lblPromedio.Text = "Promedio Diario: -";
         }
 
-        public void RefrescarDatos()
-        {
-            CargarEmpresas();
-            LimpiarFormulario();
-            LimpiarEstadisticas();
-        }
-
-        private bool ValidarNombre(string nombre)
-        {
-            if (string.IsNullOrWhiteSpace(nombre))
-                return false;
-            
-            // Para empresas: letras, números, espacios, tildes y guiones
-            System.Text.RegularExpressions.Regex regex = 
-                new System.Text.RegularExpressions.Regex(@"^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s\-]+$");
-            
-            return regex.IsMatch(nombre);
-        }
+        #endregion
     }
 }
