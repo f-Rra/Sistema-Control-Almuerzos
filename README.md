@@ -6,7 +6,6 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 ![C#](https://img.shields.io/badge/C%23-10.0-green)
 ![SQL Server](https://img.shields.io/badge/SQL%20Server-2019+-red)
 ![Windows Forms](https://img.shields.io/badge/UI-Windows%20Forms-lightblue)
-![License](https://img.shields.io/badge/License-MIT-yellow)
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![Maintained](https://img.shields.io/badge/Maintained-Yes-green)
 
@@ -16,14 +15,14 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 -  **Arquitectura de 3 capas** (Dominio, Negocio, Presentación)
 -  **Registro rápido de comensales** por ID de credencial (preparado para RFID)
--  **Gestión completa de empleados** con asignación de credenciales
+-  **Gestión completa de empleados y empresas** con asignación de credenciales
 -  **Sistema de servicios por jornada** (comedor y quincho)
 -  **Visualización en tiempo real** para personal de cocina
 -  **Reportes automáticos** con exportación a PDF
 -  **Estadísticas avanzadas** por empresa, período y lugar
 -  **Procedimientos almacenados** para todas las operaciones críticas
 -  **Validaciones robustas** (duplicados, servicio activo, estado de empleado)
--  **Interfaz moderna** con diseño profesional
+-  **Interfaz moderna** con diseño personalizado
 -  **Manejo de invitados** sin datos personales
 -  **Registro manual alternativo** para casos sin credencial
 -  **Optimizado para alta concurrencia** en horarios pico
@@ -32,14 +31,61 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 ##  Funcionalidades del Sistema
 
+
+###  Panel Principal
+
+![Panel Principal](./docs/screenshots/panel_principal.png)
+
+**Contenedor Principal del Sistema:**
+
+El formulario principal (`frmPrincipal`) contiene dos secciones clave:
+
+**1. Lista de Últimos Servicios:**
+- Visualización de los servicios más recientes
+- Ordenados cronológicamente (más recientes primero)
+- Información resumida: fecha, lugar, proyección
+- Selección rápida de servicio para consulta
+
+**2. Detalles del Servicio Seleccionado:**
+- Información completa del servicio activo o seleccionado
+- Fecha y hora de inicio
+- Lugar (Comedor/Quincho)
+- Proyección inicial de comensales
+- Total de invitados esperados
+- Duración del servicio (cronómetro en tiempo real)
+- Estadísticas actuales:
+  - Contador principal de comensales registrados
+  - Total de invitados
+  - Comparativa proyección vs real
+  - Actualización automática sin recargas
+
 ###  Registro de Comensales
 
 ![Registro de Comensales](./docs/screenshots/registro_comensales.png)
 
+**Vista Principal de Registro (`ucVistaPrincipal`):**
+
+**Visualización en Tiempo Real:**
+- Listado completo de todos los registros del servicio actual
+- Información por columnas:
+  - Nombre y apellido del comensal
+  - Empresa de pertenencia
+  - Hora de registro (formato HH:mm:ss)
+  - Credencial utilizada
+- Actualización automática al registrar nuevo comensal
+- Tabla optimizada para lectura rápida por personal de cocina
+
+**Registro de Comensales:**
+
 **Método Actual: Ingreso por Teclado**
-- Registro mediante ID de credencial
+- Campo de entrada para ID de credencial
 - Validación automática de duplicados
-- Confirmación visual inmediata
+- Confirmación visual inmediata con ventana temporal
+- Información mostrada:
+  - Nombre completo del empleado
+  - Empresa
+  - Hora exacta de registro
+- Ventana de confirmación desaparece automáticamente (4 segundos)
 
 **Método Futuro: RFID Automático**
 - Lectura automática de credencial
@@ -47,12 +93,14 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Cero intervención del operador
 - Guía completa de implementación incluida
 
-**Características:**
+**Características del Sistema de Registro:**
 -  Validación de empleado activo
 -  Detección de registros duplicados en servicio actual
 -  Vinculación automática al servicio activo
 -  Registro alternativo manual (sin credencial)
 -  Gestión de invitados (solo cantidad, sin datos personales)
+-  Contador automático de comensales
+-  Sincronización con estadísticas del panel principal
 
 ###  Gestión de Empleados
 
@@ -73,6 +121,34 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Agrupación de empleados por compañía
 - Estadísticas por empresa
 - Reportes segmentados
+
+###  Gestión de Empresas
+
+![Gestión de Empresas](./docs/screenshots/gestion_empresas.png)
+
+**Operaciones ABML Completas:**
+- **Alta**: Crear nuevas empresas con nombre y descripción
+- **Modificación**: Actualizar información de empresas existentes
+- **Baja lógica**: Desactivar empresas manteniendo historial
+- **Listado y Búsqueda**: Filtros por nombre, estado activo/inactivo
+
+**Visualización de Estadísticas:**
+- Total de empleados por empresa
+- Total de asistencias del mes actual
+- Indicadores visuales de actividad
+- Identificación rápida de empresas sin empleados activos
+
+**Validaciones Implementadas:**
+-  No se puede eliminar empresa con empleados activos
+-  Nombre de empresa único (no duplicados)
+-  Al desactivar empresa, se sugiere desactivar empleados asociados
+-  Advertencias antes de operaciones críticas
+
+**Integración con el Sistema:**
+- Vinculación automática con módulo de empleados
+- Datos utilizados en reportes de asistencia por empresa
+- Estadísticas mensuales actualizadas en tiempo real
+- Filtrado de registros por compañía
 
 ###  Gestión de Servicios
 
@@ -96,6 +172,9 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 **Panel de Administración Completo:**
 
 **1. Configuración de Base de Datos**
+
+![Configuración de Base de Datos](./docs/screenshots/config_basedatos.png)
+
 -  Modificar cadena de conexión en tiempo real
 -  Probar conectividad antes de guardar
 -  Ver información de la BD:
@@ -106,6 +185,8 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 -  Estadísticas de uso del servidor
 
 **2. Sistema de Respaldos**
+
+![Sistema de Respaldos](./docs/screenshots/config_respaldos.png)
 
 **Respaldo Manual:**
 - Crear backup inmediato a ubicación específica
@@ -124,21 +205,13 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Sobrescribe completamente la BD actual
 
 **3. Información de la Aplicación**
+
+![Información de la Aplicación](./docs/screenshots/config_info.png)
+
 - Versión del sistema
 - Fecha de compilación
 - Framework utilizado (.NET Framework 4.8)
 - Librerías UI (ReaLTaiizor & WinForms)
-
-###  Panel Principal
-
-![Panel Principal](./docs/screenshots/panel_principal.png)
-
-**Visualización Instantánea:**
-- Listado de todos los registros del servicio actual
-- Contador principal de comensales
-- Total de invitados
-- Comparativa proyección vs real
-- Actualización automática sin recargas
 
 ###  Reportes y Estadísticas
 
@@ -147,6 +220,9 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 **Sistema de Reportes Avanzados:**
 
 **1. Lista de Servicios**
+
+![Reporte de Lista de Servicios](./docs/screenshots/reporte_servicios.png)
+
 - Todos los servicios del período seleccionado
 - Fecha, lugar, proyección, duración del servicio
 - Total de comensales reales vs proyección
@@ -155,6 +231,9 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Útil para revisión histórica y análisis día por día
 
 **2. Asistencias por Empresas**
+
+![Reporte de Asistencias por Empresas](./docs/screenshots/reporte_empresas.png)
+
 - Total de asistencias por cada compañía del predio
 - Comparativa y ranking entre empresas
 - Útil para facturación segmentada por empresa
@@ -162,12 +241,18 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Identificar empresas con mayor/menor uso del comedor
 
 **3. Cobertura vs Proyección**
+
+![Reporte de Cobertura vs Proyección](./docs/screenshots/reporte_cobertura.png)
+
 - Comparación entre proyección inicial y asistencia real
 - Porcentaje de cobertura por servicio
 - Diferencia absoluta (positiva/negativa)
 - Mejora de planificación y compras futuras
 
 **4. Distribución por Día de Semana**
+
+![Reporte de Distribución por Día](./docs/screenshots/reporte_diasemana.png)
+
 - Patrones de asistencia semanal
 - Total acumulado por cada día de la semana
 - Identificación de días pico y días bajos
@@ -475,7 +560,7 @@ El sistema muestra:
 
 ##  Roadmap
 
-###  Fase 1: Sistema Base (COMPLETADA)
+###  Fase 1: Sistema Base 
 
 **Estado**: Funcional y listo para producción
 
@@ -535,6 +620,67 @@ El sistema muestra:
 - Leer `MANUAL_USUARIO.md`
 - Revisar flujos de trabajo comunes
 - Consultar sección de Preguntas Frecuentes
+
+---
+
+##  Herramientas y Tecnologías Utilizadas
+
+### Desarrollo del Sistema
+
+**IDE y Entorno de Desarrollo:**
+- **Visual Studio 2022 Community Edition** - Desarrollo de aplicación Windows Forms
+- **SQL Server Management Studio (SSMS) 19** - Gestión de base de datos
+- **Draw.io Desktop** - Diseño del Diagrama Entidad-Relación
+
+**Frameworks y Librerías:**
+- **.NET Framework 4.8** - Framework principal de la aplicación
+- **System.Data.SqlClient** - Conectividad con SQL Server
+- **ReaLTaiizor 3.8.1.3** - Componentes de interfaz modernos y personalizados
+- **iTextSharp 5.5.13.4** - Generación de reportes PDF
+- **BouncyCastle.Cryptography 2.4.0** - Dependencia de iTextSharp
+
+**Base de Datos:**
+- **SQL Server 2019 Express Edition** - Motor de base de datos
+- **Transact-SQL (T-SQL)** - Lenguaje de consultas y procedimientos almacenados
+
+### Documentación y Guías
+
+**Herramientas de IA Generativa:**
+
+Las siguientes herramientas fueron utilizadas para la elaboración de documentación técnica, guías de usuario, y asistencia en la estructuración del código:
+
+- **GitHub Copilot** (Claude Sonnet 4.5)
+  - Generación de documentación técnica (README.md)
+  - Elaboración de manual de usuario (MANUAL_USUARIO.md)
+  - Creación de guía de implementación RFID
+  - Asistencia en refactorización de código
+  - Sugerencias de mejores prácticas
+  - Organización de código con regiones
+  - Optimización de procedimientos almacenados
+
+- **ChatGPT** (GPT-4o)
+  - Revisión de consultas SQL complejas
+  - Validación de lógica de negocio
+  - Generación de casos de prueba
+  - Sugerencias de arquitectura
+
+**Control de Versiones:**
+- **Git** - Control de versiones local
+- **GitHub** - Repositorio remoto y colaboración
+- **GitHub Desktop** - Interfaz gráfica para Git
+
+**Edición de Documentos:**
+- **Visual Studio Code** - Edición de archivos Markdown
+- **Markdown Preview Enhanced** - Vista previa de documentación
+
+### Nota sobre el Uso de IA
+
+El uso de herramientas de IA generativa fue exclusivamente para:
+- **Documentación**: Redacción clara y profesional de guías
+- **Refactorización**: Mejora de estructura y legibilidad del código existente
+- **Consultoría**: Validación de soluciones técnicas y mejores prácticas
+
+**Toda la lógica de negocio, arquitectura del sistema, diseño de base de datos y funcionalidades fueron desarrolladas completamente por el autor del proyecto.**
 
 ---
 
