@@ -1,4 +1,4 @@
-# Sistema de Control de Almuerzos
+# Sistema Control de Almuerzos
 
 Sistema completo de gestión de comedores corporativos desarrollado en C# con Windows Forms, diseñado para el registro eficiente de comensales mediante credenciales RFID y generación de reportes automáticos.
 
@@ -38,16 +38,14 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 **Contenedor Principal del Sistema:**
 
-El formulario principal (`frmPrincipal`) contiene dos secciones clave:
-
-**1. Lista de Últimos Servicios:**
+**Lista de Últimos Servicios:**
 - Visualización de los servicios más recientes
 - Ordenados cronológicamente (más recientes primero)
 - Información resumida: fecha, lugar, proyección
 - Selección rápida de servicio para consulta
 
-**2. Detalles del Servicio Seleccionado:**
-- Información completa del servicio activo o seleccionado
+**Detalles del Servicio Seleccionado:**
+- Información completa del servicio seleccionado
 - Fecha y hora de inicio
 - Lugar (Comedor/Quincho)
 - Proyección inicial de comensales
@@ -62,20 +60,6 @@ El formulario principal (`frmPrincipal`) contiene dos secciones clave:
 ###  Registro de Comensales
 
 ![Registro de Comensales](./docs/screenshots/registro_comensales.png)
-
-**Vista Principal de Registro (`ucVistaPrincipal`):**
-
-**Visualización en Tiempo Real:**
-- Listado completo de todos los registros del servicio actual
-- Información por columnas:
-  - Nombre y apellido del comensal
-  - Empresa de pertenencia
-  - Hora de registro (formato HH:mm:ss)
-  - Credencial utilizada
-- Actualización automática al registrar nuevo comensal
-- Tabla optimizada para lectura rápida por personal de cocina
-
-**Registro de Comensales:**
 
 **Método Actual: Ingreso por Teclado**
 - Campo de entrada para ID de credencial
@@ -93,6 +77,15 @@ El formulario principal (`frmPrincipal`) contiene dos secciones clave:
 - Cero intervención del operador
 - Guía completa de implementación incluida
 
+**Visualización en Tiempo Real:**
+- Listado completo de todos los registros del servicio actual
+- Información por columnas:
+  - Nombre y apellido del comensal
+  - Empresa de pertenencia
+  - Hora de registro (formato HH:mm:ss)
+- Actualización automática al registrar nuevo comensal
+- Tabla optimizada para lectura rápida por personal de cocina
+
 **Características del Sistema de Registro:**
 -  Validación de empleado activo
 -  Detección de registros duplicados en servicio actual
@@ -108,8 +101,8 @@ El formulario principal (`frmPrincipal`) contiene dos secciones clave:
 
 **Operaciones ABML Completas:**
 - **Alta**: Crear nuevos empleados con datos completos
-- **Modificación**: Actualizar información de empleados
 - **Baja lógica**: Desactivar empleados manteniendo historial
+- **Modificación**: Actualizar información de empleados
 - **Listado y Búsqueda**: Filtros por nombre, apellido, empresa
 
 **Gestión de Credenciales:**
@@ -117,10 +110,6 @@ El formulario principal (`frmPrincipal`) contiene dos secciones clave:
 - Reasignación de credenciales (pérdida/daño)
 - Validación de unicidad de credenciales
 
-**Organización por Empresa:**
-- Agrupación de empleados por compañía
-- Estadísticas por empresa
-- Reportes segmentados
 
 ###  Gestión de Empresas
 
@@ -128,14 +117,13 @@ El formulario principal (`frmPrincipal`) contiene dos secciones clave:
 
 **Operaciones ABML Completas:**
 - **Alta**: Crear nuevas empresas con nombre y descripción
-- **Modificación**: Actualizar información de empresas existentes
 - **Baja lógica**: Desactivar empresas manteniendo historial
+- **Modificación**: Actualizar información de empresas existentes
 - **Listado y Búsqueda**: Filtros por nombre, estado activo/inactivo
 
 **Visualización de Estadísticas:**
 - Total de empleados por empresa
 - Total de asistencias del mes actual
-- Indicadores visuales de actividad
 - Identificación rápida de empresas sin empleados activos
 
 **Validaciones Implementadas:**
@@ -161,7 +149,7 @@ El formulario principal (`frmPrincipal`) contiene dos secciones clave:
 - Cierre de servicio con estadísticas finales
 
 **Información Automática:**
--  Duración del servicio
+-  Estado, duración y progreso del servicio
 -  Total de comensales reales vs proyectados
 -  Comparativa de eficiencia
 
@@ -263,7 +251,7 @@ El formulario principal (`frmPrincipal`) contiene dos secciones clave:
 -  Filtros por rango de fechas (desde - hasta)
 -  Filtros por lugar (Comedor/Quincho/Todos)
 -  Visualización en grilla interactiva
--  Exportación a PDF profesional
+-  Exportación a PDF
 -  Metadatos incluidos (fecha de generación, filtros aplicados)
 -  Encabezados corporativos personalizables
 
@@ -274,32 +262,32 @@ El formulario principal (`frmPrincipal`) contiene dos secciones clave:
 ```
 Sistema-Control-Almuerzos/
 ├── SCA/
-│   ├── dominio/                   # Capa de Entidades
-│   │   ├── Empleado.cs            # Modelo de empleados
-│   │   ├── Empresa.cs             # Modelo de empresas
-│   │   ├── Lugar.cs               # Modelo de lugares (comedor/quincho)
-│   │   ├── Servicio.cs            # Modelo de servicios por jornada
-│   │   ├── Registro.cs            # Modelo de registros de almuerzos
-│   │   ├── Estadisticas.cs        # Modelos estadísticos (Empleados, Empresas, Servicios, Asistencias, TopEmpresa)
-│   │   ├── Reportes.cs            # Modelos de reportes (AsistenciaPorEmpresa, CoberturaVsProyeccion, DistribucionDiaSemana)
-│   │   └── Configuracion.cs       # Modelos de configuración (InfoBaseDatos, InfoRespaldo, InfoAplicacion)
+│   ├── dominio/                    # Capa de Entidades
+│   │   ├── Empleado.cs             # Modelo de empleados
+│   │   ├── Empresa.cs              # Modelo de empresas
+│   │   ├── Lugar.cs                # Modelo de lugares (comedor/quincho)
+│   │   ├── Servicio.cs             # Modelo de servicios por jornada
+│   │   ├── Registro.cs             # Modelo de registros de almuerzos
+│   │   ├── Estadisticas.cs         # Modelos estadísticos (Empleados, Empresas, Servicios, Asistencias, TopEmpresa)
+│   │   ├── Reportes.cs             # Modelos de reportes (AsistenciaPorEmpresa, CoberturaVsProyeccion, DistribucionDiaSemana)
+│   │   └── Configuracion.cs        # Modelos de configuración (InfoBaseDatos, InfoRespaldo, InfoAplicacion)
 │   │
-│   ├── negocio/                   # Capa de Lógica de Negocio
-│   │   ├── AccesoDatos.cs         # Clase centralizada para BD
-│   │   ├── EmpleadoNegocio.cs     # Lógica de empleados
-│   │   ├── EmpresaNegocio.cs      # Lógica de empresas
-│   │   ├── LugarNegocio.cs        # Lógica de lugares
-│   │   ├── ServicioNegocio.cs     # Lógica de servicios
-│   │   ├── RegistroNegocio.cs     # Lógica de registros
-│   │   ├── EstadisticasNegocio.cs # Lógica de estadísticas
-│   │   ├── ReporteNegocio.cs      # Generación de 4 reportes avanzados
+│   ├── negocio/                    # Capa de Lógica de Negocio
+│   │   ├── AccesoDatos.cs          # Clase centralizada para BD
+│   │   ├── EmpleadoNegocio.cs      # Lógica de empleados
+│   │   ├── EmpresaNegocio.cs       # Lógica de empresas
+│   │   ├── LugarNegocio.cs         # Lógica de lugares
+│   │   ├── ServicioNegocio.cs      # Lógica de servicios
+│   │   ├── RegistroNegocio.cs      # Lógica de registros
+│   │   ├── EstadisticasNegocio.cs  # Lógica de estadísticas
+│   │   ├── ReporteNegocio.cs       # Generación de 4 reportes avanzados
 │   │   ├── ConfiguracionNegocio.cs # Lógica de configuración y respaldos
-│   │   └── ExceptionHelper.cs     # Manejo centralizado de errores
+│   │   └── ExceptionHelper.cs      # Manejo centralizado de errores
 │   │
-│   └── app/                       # Capa de Presentación
-│       ├── Program.cs             # Punto de entrada
-│       ├── frmPrincipal.cs        # Ventana principal
-│       ├── UserControls/          # Controles de usuario modulares
+│   └── app/                        # Capa de Presentación
+│       ├── Program.cs              # Punto de entrada
+│       ├── frmPrincipal.cs         # Ventana principal
+│       ├── UserControls/           # Controles de usuario modulares
 │       │   ├── ucVistaPrincipal.cs       # Pantalla de bienvenida
 │       │   ├── ucRegistroManual.cs       # Registro de comensales
 │       │   ├── ucEmpleados.cs            # Gestión de empleados
@@ -308,7 +296,7 @@ Sistema-Control-Almuerzos/
 │       │   ├── ucReportes.cs             # Sistema de reportes
 │       │   ├── ucEstadisticas.cs         # Análisis estadístico
 │       │   └── ucAdmin.cs                # Panel administrativo
-│       └── Iconos/                # Recursos gráficos
+│       └── Iconos/                 # Recursos gráficos
 │
 ├── Script_Sistema_Control_Almuerzos.sql  # Script completo de BD
 ├── Procedimientos_Vistas_Triggers.sql    # Objetos de BD
@@ -425,7 +413,6 @@ Sistema-Control-Almuerzos/
 
 ---
 
----
 
 ##  Sistema de Respaldos y Recuperación
 
@@ -560,8 +547,6 @@ El sistema muestra:
 
 ##  Roadmap
 
-###  Fase 1: Sistema Base 
-
 **Estado**: Funcional y listo para producción
 
 **Módulos:**
@@ -645,8 +630,6 @@ El sistema muestra:
 
 ### Documentación y Guías
 
-**Herramientas de IA Generativa:**
-
 Las siguientes herramientas fueron utilizadas para la elaboración de documentación técnica, guías de usuario, y asistencia en la estructuración del código:
 
 - **GitHub Copilot** (Claude Sonnet 4.5)
@@ -655,19 +638,13 @@ Las siguientes herramientas fueron utilizadas para la elaboración de documentac
   - Creación de guía de implementación RFID
   - Asistencia en refactorización de código
   - Sugerencias de mejores prácticas
-  - Organización de código con regiones
   - Optimización de procedimientos almacenados
-
-- **ChatGPT** (GPT-4o)
   - Revisión de consultas SQL complejas
-  - Validación de lógica de negocio
   - Generación de casos de prueba
-  - Sugerencias de arquitectura
 
 **Control de Versiones:**
 - **Git** - Control de versiones local
 - **GitHub** - Repositorio remoto y colaboración
-- **GitHub Desktop** - Interfaz gráfica para Git
 
 **Edición de Documentos:**
 - **Visual Studio Code** - Edición de archivos Markdown
@@ -680,7 +657,7 @@ El uso de herramientas de IA generativa fue exclusivamente para:
 - **Refactorización**: Mejora de estructura y legibilidad del código existente
 - **Consultoría**: Validación de soluciones técnicas y mejores prácticas
 
-**Toda la lógica de negocio, arquitectura del sistema, diseño de base de datos y funcionalidades fueron desarrolladas completamente por el autor del proyecto.**
+**Toda la lógica de negocio, arquitectura del sistema, diseño de base de datos y funcionalidades fueron desarrolladas por el autor del proyecto.**
 
 ---
 
