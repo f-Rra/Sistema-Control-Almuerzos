@@ -22,6 +22,7 @@ namespace app.UserControls
         private frmPrincipal formularioPrincipal;
         private int? servicioIdActual;
         private int idLugarActual;
+        private Empleado ultimoEmpleadoRegistrado;
 
         #endregion
 
@@ -244,6 +245,7 @@ namespace app.UserControls
         {
             Cursor anterior = Cursor.Current;
             int cantidadAgregados = 0;
+            Empleado primerEmpleado = null;
             
             try
             {
@@ -255,6 +257,10 @@ namespace app.UserControls
                     {
                         if (RegistrarEmpleado(emp))
                         {
+                            if (cantidadAgregados == 0)
+                            {
+                                primerEmpleado = emp;
+                            }
                             cantidadAgregados++;
                         }
                     }
@@ -263,6 +269,12 @@ namespace app.UserControls
             finally
             {
                 Cursor.Current = anterior;
+            }
+            
+            // Guardar el primer empleado para la notificación
+            if (cantidadAgregados == 1 && primerEmpleado != null)
+            {
+                ultimoEmpleadoRegistrado = primerEmpleado;
             }
             
             return cantidadAgregados;
@@ -306,146 +318,46 @@ namespace app.UserControls
 
         private void MostrarRegistrosAgregados(int cantidad)
         {
-            Form formTemporal = null;
-            Timer timer = null;
-
             try
             {
-                formTemporal = CrearFormularioNotificacion();
-                var (panelContenedor, panelTitulo, lblMensaje) = CrearControlesNotificacion(cantidad);
+                // Crear instancia del UserControl de notificación
+                var notificacion = new ucNotificacion();
                 
-                EnsamblarNotificacion(formTemporal, panelContenedor, panelTitulo, lblMensaje);
-                timer = ConfigurarTemporizador(formTemporal);
+                string nombreEmpleado, empresa;
+                string horaActual = DateTime.Now.ToString("HH:mm:ss");
+                bool ocultarTitulo = false;
                 
-                ConfigurarEventosFormulario(formTemporal, timer);
-                formTemporal.Show();
+                // Si es 1 solo comensal, mostrar sus datos completos
+                if (cantidad == 1 && ultimoEmpleadoRegistrado != null)
+                {
+                    nombreEmpleado = ultimoEmpleadoRegistrado.NombreCompleto;
+                    empresa = ultimoEmpleadoRegistrado.NombreEmpresa;
+                    ocultarTitulo = false; // Mostrar título
+                }
+                else
+                {
+                    // Si son varios, solo mostrar mensaje genérico
+                    nombreEmpleado = "Comensales Agregados";
+                    empresa = $"{cantidad} registros";
+                    ocultarTitulo = true; // Ocultar título cuando son múltiples
+                }
+                
+                // Mostrar notificación con animación usando el UserControl como contenedor
+                notificacion.MostrarNotificacion(
+                    nombreEmpleado,
+                    empresa,
+                    horaActual,
+                    this, // Usar el UserControl como contenedor
+                    ocultarTitulo
+                );
+                
+                // Limpiar variable
+                ultimoEmpleadoRegistrado = null;
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[ERROR] Error al mostrar ventana temporal: {ex.Message}");
-                LimpiarRecursosNotificacion(formTemporal, timer);
+                System.Diagnostics.Debug.WriteLine($"[ERROR] Error al mostrar notificación: {ex.Message}");
             }
-        }
-
-        private Form CrearFormularioNotificacion()
-        {
-            return new Form
-            {
-                StartPosition = FormStartPosition.CenterScreen,
-                FormBorderStyle = FormBorderStyle.None,
-                Size = new Size(401, 170),
-                BackColor = Color.FromArgb(35, 34, 33),
-                TopMost = true,
-                ShowInTaskbar = false,
-                Padding = new Padding(1)
-            };
-        }
-
-        private (Panel panelContenedor, Panel panelTitulo, Label lblMensaje) CrearControlesNotificacion(int cantidad)
-        {
-            var panelContenedor = new Panel
-            {
-                Size = new Size(399, 168),
-                Location = new Point(1, 1),
-                BackColor = Color.FromArgb(255, 248, 225)
-            };
-
-            var panelTitulo = new Panel
-            {
-                Size = new Size(399, 52),
-                Location = new Point(0, 0),
-                BackColor = Color.FromArgb(255, 208, 36)
-            };
-
-            var lblTitulo = new Label
-            {
-                Text = "Registro Manual",
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
-                ForeColor = Color.FromArgb(35, 34, 33),
-                AutoSize = false,
-                Size = new Size(399, 52),
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-
-            panelTitulo.Controls.Add(lblTitulo);
-
-            string mensaje = cantidad == 1
-                ? $"Comensal Agregado Correctamente"
-                : $"Comensales Agregados Correctamente\n\nTotal registrados: {cantidad}";
-
-            var lblMensaje = new Label
-            {
-                Text = mensaje,
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
-                ForeColor = Color.FromArgb(35, 34, 33),
-                AutoSize = false,
-                Size = new Size(385, 95),
-                Location = new Point(7, 60),
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-
-            return (panelContenedor, panelTitulo, lblMensaje);
-        }
-
-        private void EnsamblarNotificacion(Form formTemporal, Panel panelContenedor, Panel panelTitulo, Label lblMensaje)
-        {
-            panelContenedor.Controls.Add(panelTitulo);
-            panelContenedor.Controls.Add(lblMensaje);
-            formTemporal.Controls.Add(panelContenedor);
-        }
-
-        private Timer ConfigurarTemporizador(Form formTemporal)
-        {
-            var timer = new Timer { Interval = 4000 };
-            timer.Tick += (s, ev) =>
-            {
-                try
-                {
-                    timer.Stop();
-                    timer.Dispose();
-                    if (formTemporal != null && !formTemporal.IsDisposed)
-                    {
-                        formTemporal.Close();
-                        formTemporal.Dispose();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"[ERROR] Error al cerrar ventana temporal en Tick: {ex.Message}");
-                }
-            };
-            return timer;
-        }
-
-        private void ConfigurarEventosFormulario(Form formTemporal, Timer timer)
-        {
-            formTemporal.FormClosed += (s, ev) =>
-            {
-                if (timer != null)
-                {
-                    try { timer.Stop(); timer.Dispose(); }
-                    catch { }
-                }
-            };
-
-            formTemporal.Shown += (s, ev) => timer.Start();
-        }
-
-        private void LimpiarRecursosNotificacion(Form formTemporal, Timer timer)
-        {
-            try
-            {
-                timer?.Stop();
-                timer?.Dispose();
-            }
-            catch { }
-
-            try
-            {
-                if (formTemporal != null && !formTemporal.IsDisposed)
-                    formTemporal.Dispose();
-            }
-            catch { }
         }
 
         #endregion

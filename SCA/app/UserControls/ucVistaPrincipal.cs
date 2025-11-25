@@ -185,149 +185,30 @@ namespace app.UserControls
 
         private void MostrarComensalRegistrado(Empleado empleado)
         {
-            Form formTemporal = null;
-            Timer timer = null;
-
             try
             {
-                formTemporal = CrearFormularioNotificacion();
-                var panelContenedor = CrearPanelContenedor();
-                var panelTitulo = CrearPanelTitulo();
-                var lblMensaje = CrearEtiquetaMensaje(empleado);
-
-                panelContenedor.Controls.Add(panelTitulo);
-                panelContenedor.Controls.Add(lblMensaje);
-                formTemporal.Controls.Add(panelContenedor);
-
-                timer = ConfigurarTimerCierre(formTemporal);
-                ConfigurarEventosFormulario(formTemporal, timer);
-
-                formTemporal.Show();
+                // Crear instancia del UserControl de notificación
+                var notificacion = new ucNotificacion();
+                
+                // Obtener este UserControl como contenedor
+                Control contenedorPadre = this;
+                
+                // Formatear hora
+                string horaActual = DateTime.Now.ToString("HH:mm:ss");
+                
+                // Mostrar notificación con animación (mostrar título)
+                notificacion.MostrarNotificacion(
+                    empleado.NombreCompleto,
+                    empleado.NombreEmpresa,
+                    horaActual,
+                    contenedorPadre,
+                    false // Mostrar título
+                );
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[ERROR] Error al mostrar ventana temporal: {ex.Message}");
-                LimpiarRecursosNotificacion(timer, formTemporal);
+                System.Diagnostics.Debug.WriteLine($"[ERROR] Error al mostrar notificación: {ex.Message}");
             }
-        }
-
-        private Form CrearFormularioNotificacion()
-        {
-            return new Form
-            {
-                StartPosition = FormStartPosition.CenterScreen,
-                FormBorderStyle = FormBorderStyle.None,
-                Size = new Size(401, 170),
-                BackColor = Color.FromArgb(35, 34, 33),
-                TopMost = true,
-                ShowInTaskbar = false,
-                Padding = new Padding(1)
-            };
-        }
-
-        private Panel CrearPanelContenedor()
-        {
-            return new Panel
-            {
-                Size = new Size(399, 168),
-                Location = new Point(1, 1),
-                BackColor = Color.FromArgb(255, 248, 225)
-            };
-        }
-
-        private Panel CrearPanelTitulo()
-        {
-            var panel = new Panel
-            {
-                Size = new Size(399, 52),
-                Location = new Point(0, 0),
-                BackColor = Color.FromArgb(255, 208, 36)
-            };
-
-            var lblTitulo = new Label
-            {
-                Text = "Comensal Registrado",
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
-                ForeColor = Color.FromArgb(35, 34, 33),
-                AutoSize = false,
-                Size = new Size(399, 52),
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-
-            panel.Controls.Add(lblTitulo);
-            return panel;
-        }
-
-        private Label CrearEtiquetaMensaje(Empleado empleado)
-        {
-            string mensaje = $"{empleado.Nombre} {empleado.Apellido}\n" +
-                            $"{empleado.NombreEmpresa}\n" +
-                            $"Hora: {DateTime.Now:HH:mm:ss}";
-
-            return new Label
-            {
-                Text = mensaje,
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
-                ForeColor = Color.FromArgb(35, 34, 33),
-                AutoSize = false,
-                Size = new Size(385, 95),
-                Location = new Point(7, 60),
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-        }
-
-        private Timer ConfigurarTimerCierre(Form formulario)
-        {
-            var timer = new Timer { Interval = 4000 };
-            timer.Tick += (s, e) =>
-            {
-                try
-                {
-                    timer.Stop();
-                    timer.Dispose();
-                    if (formulario != null && !formulario.IsDisposed)
-                    {
-                        formulario.Close();
-                        formulario.Dispose();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"[ERROR] Error al cerrar ventana temporal en Tick: {ex.Message}");
-                }
-            };
-            return timer;
-        }
-
-        private void ConfigurarEventosFormulario(Form formulario, Timer timer)
-        {
-            formulario.FormClosed += (s, e) =>
-            {
-                if (timer != null)
-                {
-                    try { timer.Stop(); timer.Dispose(); }
-                    catch { }
-                }
-            };
-
-            formulario.Shown += (s, e) => timer.Start();
-        }
-
-        private void LimpiarRecursosNotificacion(Timer timer, Form formulario)
-        {
-            try
-            {
-                timer?.Stop();
-                timer?.Dispose();
-            }
-            catch { }
-
-            try
-            {
-                if (formulario != null && !formulario.IsDisposed)
-                    formulario.Dispose();
-            }
-            catch { }
         }
 
         #endregion

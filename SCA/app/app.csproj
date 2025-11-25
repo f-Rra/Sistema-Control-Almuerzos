@@ -131,6 +131,12 @@
     <Compile Include="UserControls\ucVistaPrincipal.Designer.cs">
       <DependentUpon>ucVistaPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucNotificacion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucNotificacion.Designer.cs">
+      <DependentUpon>ucNotificacion.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucVistaPrincipal.resx">
       <DependentUpon>ucVistaPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucNotificacion.resx">
+      <DependentUpon>ucNotificacion.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
