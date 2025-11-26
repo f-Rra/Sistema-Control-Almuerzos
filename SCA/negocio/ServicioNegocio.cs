@@ -136,5 +136,17 @@ namespace Negocio
                 return lista;
             }
         }
+
+        public int finalizarServiciosPendientes()
+        {
+            using (AccesoDatos datos = new AccesoDatos())
+            {
+                datos.setearProcedimiento("sp_FinalizarServiciosPendientes");
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                    return (int)datos.Lector["ServiciosFinalizados"];
+                return 0;
+            }
+        }
     }
 }

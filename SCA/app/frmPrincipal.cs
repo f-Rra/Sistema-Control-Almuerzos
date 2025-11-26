@@ -17,25 +17,16 @@ namespace app
     {
         #region Variables y Constantes
 
-        // Constantes de configuración
         private readonly Color MenuHover = Color.FromArgb(243, 229, 201);
-
-        // Componentes para el cronómetro
         private readonly Timer tmrCrono = new Timer { Interval = 1000 };
         private readonly Stopwatch crono = new Stopwatch();
         private int duracionMinutos = 0;
-
-        // Lógica de negocio
         private LugarNegocio negL = new LugarNegocio();
         private ServicioNegocio negS = new ServicioNegocio();
-
-        // UserControls 
         private ucVistaPrincipal vistaPrincipal;
         private ucRegistroManual vistaRegManual;
         private ucReportes vistaReportes;
         private ucAdmin vistaAdmin;
-
-        // Estado del servicio actual
         private int? idServicioActual = null;
 
         #endregion
@@ -49,6 +40,7 @@ namespace app
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
+            negS.finalizarServiciosPendientes();
             CargarLugares();
             CargarFecha();
             IniciarCronometro();
@@ -158,7 +150,7 @@ namespace app
         private bool ValidarInvitados()
         {
             if (string.IsNullOrWhiteSpace(mtxtInvitados.Text))
-                return true; // Invitados es opcional
+                return true; 
                 
             if (!int.TryParse(mtxtInvitados.Text, out int invitados))
             {
@@ -375,14 +367,12 @@ namespace app
         {
             if (idServicioActual == null)
             {
-                // Servicio inactivo
                 OcultarTodasLasVistas();
                 CargarServicios();
                 CargarUltimoServicio();
             }
             else
             {
-                // Servicio activo
                 gbxServicios.Visible = false;
                 gbxUltimo.Visible = false;
 
