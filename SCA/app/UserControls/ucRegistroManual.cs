@@ -336,9 +336,9 @@ namespace app.UserControls
                 }
                 else
                 {
-                    // Si son varios, solo mostrar mensaje genérico
-                    nombreEmpleado = "Comensales Agregados";
-                    empresa = $"{cantidad} registros";
+                    // Si son varios, mostrar cantidad arriba y mensaje abajo
+                    nombreEmpleado = $"{cantidad} Comensales Registrados";
+                    empresa = "Registro Manual";
                     ocultarTitulo = true; // Ocultar título cuando son múltiples
                 }
                 

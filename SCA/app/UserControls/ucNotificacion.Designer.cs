@@ -15,10 +15,8 @@ namespace app.UserControls
         {
             if (disposing)
             {
-                timerOcultar?.Stop();
-                timerOcultar?.Dispose();
-                timerAnimacion?.Stop();
-                timerAnimacion?.Dispose();
+                timer?.Stop();
+                timer?.Dispose();
                 
                 if (components != null)
                 {
@@ -37,67 +35,104 @@ namespace app.UserControls
         private void InitializeComponent()
         {
             this.panelContenedor = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ssSuperior = new ReaLTaiizor.Controls.SpaceSeparatorHorizontal();
+            this.pbxEstado = new System.Windows.Forms.Label();
             this.lblEmpresa = new System.Windows.Forms.Label();
             this.lblNombreEmpleado = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.panelIcono = new System.Windows.Forms.Panel();
             this.panelContenedor.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelContenedor
             // 
             this.panelContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.panelContenedor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelContenedor.Controls.Add(this.label1);
+            this.panelContenedor.Controls.Add(this.ssSuperior);
+            this.panelContenedor.Controls.Add(this.pbxEstado);
             this.panelContenedor.Controls.Add(this.lblEmpresa);
             this.panelContenedor.Controls.Add(this.lblNombreEmpleado);
             this.panelContenedor.Controls.Add(this.lblTitulo);
-            this.panelContenedor.Controls.Add(this.panelIcono);
             this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContenedor.Location = new System.Drawing.Point(0, 0);
             this.panelContenedor.Name = "panelContenedor";
             this.panelContenedor.Padding = new System.Windows.Forms.Padding(2);
-            this.panelContenedor.Size = new System.Drawing.Size(450, 120);
+            this.panelContenedor.Size = new System.Drawing.Size(454, 142);
             this.panelContenedor.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label1.ForeColor = System.Drawing.Color.Transparent;
+            this.label1.Image = global::app.Properties.Resources.notificacion;
+            this.label1.Location = new System.Drawing.Point(19, 47);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 78);
+            this.label1.TabIndex = 6;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ssSuperior
+            // 
+            this.ssSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(157)))));
+            this.ssSuperior.Customization = "ISIj/yEiI/8hIiP/ISIj/w==";
+            this.ssSuperior.Font = new System.Drawing.Font("Verdana", 8F);
+            this.ssSuperior.Image = null;
+            this.ssSuperior.Location = new System.Drawing.Point(8, 35);
+            this.ssSuperior.Name = "ssSuperior";
+            this.ssSuperior.NoRounding = false;
+            this.ssSuperior.Size = new System.Drawing.Size(438, 4);
+            this.ssSuperior.TabIndex = 5;
+            this.ssSuperior.Transparent = false;
+            // 
+            // pbxEstado
+            // 
+            this.pbxEstado.BackColor = System.Drawing.Color.Transparent;
+            this.pbxEstado.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbxEstado.ForeColor = System.Drawing.Color.Transparent;
+            this.pbxEstado.Image = global::app.Properties.Resources.activo;
+            this.pbxEstado.Location = new System.Drawing.Point(106, 7);
+            this.pbxEstado.Name = "pbxEstado";
+            this.pbxEstado.Size = new System.Drawing.Size(29, 25);
+            this.pbxEstado.TabIndex = 4;
+            this.pbxEstado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblEmpresa
             // 
             this.lblEmpresa.AutoSize = true;
-            this.lblEmpresa.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmpresa.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lblEmpresa.Location = new System.Drawing.Point(95, 75);
+            this.lblEmpresa.Location = new System.Drawing.Point(103, 88);
             this.lblEmpresa.Name = "lblEmpresa";
-            this.lblEmpresa.Size = new System.Drawing.Size(180, 20);
+            this.lblEmpresa.Size = new System.Drawing.Size(205, 25);
             this.lblEmpresa.TabIndex = 3;
             this.lblEmpresa.Text = "Empresa S.A. • 12:45:32";
+            this.lblEmpresa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblNombreEmpleado
             // 
             this.lblNombreEmpleado.AutoSize = true;
-            this.lblNombreEmpleado.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreEmpleado.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombreEmpleado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.lblNombreEmpleado.Location = new System.Drawing.Point(95, 45);
+            this.lblNombreEmpleado.Location = new System.Drawing.Point(103, 56);
             this.lblNombreEmpleado.Name = "lblNombreEmpleado";
-            this.lblNombreEmpleado.Size = new System.Drawing.Size(280, 25);
+            this.lblNombreEmpleado.Size = new System.Drawing.Size(257, 32);
             this.lblNombreEmpleado.TabIndex = 2;
-            this.lblNombreEmpleado.Text = "Juan Carlos Pérez González";
+            this.lblNombreEmpleado.Text = "Juan Carlos González";
+            this.lblNombreEmpleado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.lblTitulo.Location = new System.Drawing.Point(95, 20);
+            this.lblTitulo.Location = new System.Drawing.Point(133, 2);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(165, 19);
+            this.lblTitulo.Size = new System.Drawing.Size(219, 30);
             this.lblTitulo.TabIndex = 1;
-            this.lblTitulo.Text = "✓ Comensal registrado";
-            // 
-            // panelIcono
-            // 
-            this.panelIcono.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
-            this.panelIcono.Location = new System.Drawing.Point(15, 20);
-            this.panelIcono.Name = "panelIcono";
-            this.panelIcono.Size = new System.Drawing.Size(70, 80);
-            this.panelIcono.TabIndex = 0;
+            this.lblTitulo.Text = "Comensal Registrado";
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ucNotificacion
             // 
@@ -106,7 +141,7 @@ namespace app.UserControls
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.Controls.Add(this.panelContenedor);
             this.Name = "ucNotificacion";
-            this.Size = new System.Drawing.Size(450, 120);
+            this.Size = new System.Drawing.Size(454, 142);
             this.panelContenedor.ResumeLayout(false);
             this.panelContenedor.PerformLayout();
             this.ResumeLayout(false);
@@ -116,9 +151,11 @@ namespace app.UserControls
         #endregion
 
         private System.Windows.Forms.Panel panelContenedor;
-        private System.Windows.Forms.Panel panelIcono;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label lblNombreEmpleado;
         private System.Windows.Forms.Label lblEmpresa;
+        private System.Windows.Forms.Label pbxEstado;
+        private ReaLTaiizor.Controls.SpaceSeparatorHorizontal ssSuperior;
+        private System.Windows.Forms.Label label1;
     }
 }

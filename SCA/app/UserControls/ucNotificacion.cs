@@ -6,176 +6,114 @@ namespace app.UserControls
 {
     public partial class ucNotificacion : UserControl
     {
-        private Timer timerOcultar;
-        private Timer timerAnimacion;
-        private int posicionFinalY;
-        private int posicionInicialY;
-        private const int DURACION_VISIBLE = 4000; // 4 segundos
-        private const int VELOCIDAD_ANIMACION = 20; // ms entre frames
+        private Timer timer;
+        private int yInicial, yFinal, paso;
+        private bool animandoSalida;
 
         public ucNotificacion()
         {
             InitializeComponent();
-            ConfigurarEstilo();
         }
 
-        private void ConfigurarEstilo()
+        public void MostrarNotificacion(string nombre, string empresa, string hora, Control padre, bool ocultarTitulo = false)
         {
-            this.Size = new Size(450, 120);
-            this.BackColor = Color.FromArgb(35, 34, 33); // Borde oscuro
-            this.Padding = new Padding(0);
-        }
-
-        public void MostrarNotificacion(string nombreEmpleado, string empresa, string hora, Control contenedorPadre, bool ocultarTitulo = false)
-        {
-            // Establecer textos
-            lblNombreEmpleado.Text = nombreEmpleado;
-            lblEmpresa.Text = empresa + " • " + hora;
-            
-            // Ocultar título si son múltiples registros
+            lblNombreEmpleado.Text = nombre;
+            lblEmpresa.Text = $"{empresa} • {hora}";
             lblTitulo.Visible = !ocultarTitulo;
+            pbxEstado.Visible = !ocultarTitulo;
 
-            // Agregar al contenedor padre
-            if (contenedorPadre != null)
-            {
-                contenedorPadre.Controls.Add(this);
-                
-                // Buscar los paneles para posicionamiento
-                Control panelComensales = BuscarControl(contenedorPadre, "pnlComensales");
-                Control panelRegistros = BuscarControl(contenedorPadre, "pnlRegistros");
-                Control panelFaltantes = BuscarControl(contenedorPadre, "pnlFaltantes");
-                
-                // Calcular posición X centrada
-                int x = (contenedorPadre.Width - this.Width) / 2;
-                
-                // Determinar posiciones Y según los paneles disponibles
-                if (panelComensales != null && panelRegistros != null)
-                {
-                    // ucVistaPrincipal: entre pnlComensales y pnlRegistros
-                    posicionInicialY = panelComensales.Bottom;
-                    posicionFinalY = panelRegistros.Top + 10;
-                }
-                else if (panelRegistros != null && panelFaltantes != null)
-                {
-                    // ucRegistroManual: centrada verticalmente entre ambos paneles, 20px más arriba
-                    int espacioEntre = panelFaltantes.Top - panelRegistros.Bottom;
-                    int centroY = panelRegistros.Bottom + (espacioEntre / 2) - (this.Height / 2) - 20;
-                    posicionInicialY = centroY - 50;
-                    posicionFinalY = centroY;
-                }
-                else
-                {
-                    // Fallback: centro de la pantalla
-                    posicionFinalY = (contenedorPadre.Height - this.Height) / 2;
-                    posicionInicialY = posicionFinalY - 100;
-                }
+            if (padre == null) return;
 
-                this.Location = new Point(x, posicionInicialY);
-                this.Visible = true;
-                
-                this.BringToFront();
-            }
-
-            // Iniciar animación de entrada
-            AnimarEntrada();
+            padre.Controls.Add(this);
+            CalcularPosicion(padre);
+            Location = new Point((padre.Width - Width) / 2, yInicial);
+            Visible = true;
+            BringToFront();
+            IniciarAnimacion(false);
         }
-        
-        private Control BuscarControl(Control contenedor, string nombre)
+
+        private void CalcularPosicion(Control padre)
         {
-            foreach (Control ctrl in contenedor.Controls)
+            var pnlComensales = Buscar(padre, "pnlComensales");
+            var pnlRegistros = Buscar(padre, "pnlRegistros");
+            var pnlFaltantes = Buscar(padre, "pnlFaltantes");
+
+            if (pnlComensales != null && pnlRegistros != null)
             {
-                if (ctrl.Name == nombre)
-                    return ctrl;
-                
-                // Búsqueda recursiva
-                Control encontrado = BuscarControl(ctrl, nombre);
-                if (encontrado != null)
-                    return encontrado;
+                // ucVistaPrincipal
+                yInicial = pnlComensales.Bottom;
+                yFinal = pnlRegistros.Top + 10;
+            }
+            else if (pnlRegistros != null && pnlFaltantes != null)
+            {
+                // ucRegistroManual 
+                yInicial = pnlRegistros.Bottom;
+                yFinal = pnlFaltantes.Top + 10;
+            }
+            else
+            {
+                yFinal = (padre.Height - Height) / 2;
+                yInicial = yFinal - 100;
+            }
+        }
+
+        private Control Buscar(Control c, string nombre)
+        {
+            foreach (Control ctrl in c.Controls)
+            {
+                if (ctrl.Name == nombre) return ctrl;
+                var found = Buscar(ctrl, nombre);
+                if (found != null) return found;
             }
             return null;
         }
 
-        private void AnimarEntrada()
+        private void IniciarAnimacion(bool salida)
         {
-            timerAnimacion = new Timer();
-            timerAnimacion.Interval = VELOCIDAD_ANIMACION;
-            
-            int pasoActual = 0;
-            int totalPasos = 20; // 20 pasos para la animación (400ms total)
-            
-            timerAnimacion.Tick += (s, e) =>
-            {
-                pasoActual++;
-                double progreso = (double)pasoActual / totalPasos;
-                
-                // Ease-out para movimiento más suave
-                double ease = 1 - Math.Pow(1 - progreso, 3);
-                
-                // Actualizar posición Y (slide down)
-                int nuevaY = (int)(posicionInicialY + (posicionFinalY - posicionInicialY) * ease);
-                this.Location = new Point(this.Location.X, nuevaY);
-                
-                if (pasoActual >= totalPasos)
-                {
-                    timerAnimacion.Stop();
-                    timerAnimacion.Dispose();
-                    timerAnimacion = null;
-                    
-                    // Iniciar timer para ocultar después de X segundos
-                    IniciarTimerOcultar();
-                }
-            };
-            
-            timerAnimacion.Start();
+            animandoSalida = salida;
+            paso = 0;
+            timer?.Dispose();
+            timer = new Timer { Interval = 20 };
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
 
-        private void IniciarTimerOcultar()
+        private void Timer_Tick(object s, EventArgs e)
         {
-            timerOcultar = new Timer();
-            timerOcultar.Interval = DURACION_VISIBLE;
-            timerOcultar.Tick += (s, e) =>
-            {
-                timerOcultar.Stop();
-                AnimarSalida();
-            };
-            timerOcultar.Start();
-        }
+            paso++;
+            int totalPasos = animandoSalida ? 15 : 20;
+            double t = (double)paso / totalPasos;
 
-        private void AnimarSalida()
-        {
-            timerAnimacion = new Timer();
-            timerAnimacion.Interval = VELOCIDAD_ANIMACION;
-            
-            int pasoActual = 0;
-            int totalPasos = 15; // Animación de salida más rápida (300ms)
-            int posicionInicioSalida = this.Location.Y;
-            int posicionFinalSalida = posicionInicioSalida - 50; // Sube 50px
-            
-            timerAnimacion.Tick += (s, e) =>
+            if (animandoSalida)
             {
-                pasoActual++;
-                double progreso = (double)pasoActual / totalPasos;
-                
-                // Ease-in para salida
-                double ease = Math.Pow(progreso, 2);
-                
-                // Actualizar posición Y (slide up)
-                int nuevaY = (int)(posicionInicioSalida + (posicionFinalSalida - posicionInicioSalida) * ease);
-                this.Location = new Point(this.Location.X, nuevaY);
-                
-                if (pasoActual >= totalPasos)
+                int y = (int)(yFinal - 50 * t * t);
+                Location = new Point(Location.X, y);
+            }
+            else
+            {
+                double ease = 1 - Math.Pow(1 - t, 3);
+                int y = (int)(yInicial + (yFinal - yInicial) * ease);
+                Location = new Point(Location.X, y);
+            }
+
+            if (paso >= totalPasos)
+            {
+                timer.Stop();
+                timer.Dispose();
+                timer = null;
+
+                if (animandoSalida)
                 {
-                    timerAnimacion.Stop();
-                    timerAnimacion.Dispose();
-                    timerAnimacion = null;
-                    
-                    // Remover del contenedor padre
-                    this.Parent?.Controls.Remove(this);
-                    this.Dispose();
+                    Parent?.Controls.Remove(this);
+                    Dispose();
                 }
-            };
-            
-            timerAnimacion.Start();
+                else
+                {
+                    timer = new Timer { Interval = 4000 };
+                    timer.Tick += (_, __) => { timer.Stop(); IniciarAnimacion(true); };
+                    timer.Start();
+                }
+            }
         }
     }
 }
