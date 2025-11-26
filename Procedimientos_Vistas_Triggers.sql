@@ -194,6 +194,18 @@ BEGIN
 END
 GO
 
+-- Finalizar todos los servicios pendientes (sin importar la fecha)
+CREATE OR ALTER PROCEDURE sp_FinalizarServiciosPendientes
+AS
+BEGIN
+    UPDATE Servicios 
+    SET DuracionMinutos = 60
+    WHERE DuracionMinutos IS NULL;
+    
+    SELECT @@ROWCOUNT AS ServiciosFinalizados;
+END
+GO
+
 
 -- =============================================
 -- PROCEDIMIENTOS DE REGISTROS
