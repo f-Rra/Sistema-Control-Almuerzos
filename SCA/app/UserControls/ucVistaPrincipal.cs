@@ -91,6 +91,20 @@ namespace app.UserControls
 
         private void btnRegistro_Click(object sender, EventArgs e)
         {
+            ProcesarRegistro();
+        }
+
+        private void txtRegistro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                ProcesarRegistro();
+            }
+        }
+
+        private void ProcesarRegistro()
+        {
             if (!ValidarServicioActivo()) return;
             if (!ValidarCredencial(out string credencial)) return;
 

@@ -660,6 +660,15 @@ namespace app
             ToggleServicio();
         }
 
+        private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (idServicioActual.HasValue)
+            {
+                ExceptionHelper.MostrarAdvertencia("Debe finalizar el servicio activo antes de cerrar la aplicación.");
+                e.Cancel = true;
+            }
+        }
+
         private void dgvServicios_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvServicios.CurrentRow != null && dgvServicios.CurrentRow.DataBoundItem != null)

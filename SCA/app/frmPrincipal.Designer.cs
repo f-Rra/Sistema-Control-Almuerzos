@@ -424,7 +424,7 @@ namespace app
             this.lblProyeccion.Name = "lblProyeccion";
             this.lblProyeccion.Size = new System.Drawing.Size(69, 15);
             this.lblProyeccion.TabIndex = 15;
-            this.lblProyeccion.Text = "Proyección:";
+            this.lblProyeccion.Text = "Proyecciï¿½n:";
             // 
             // mtxtInvitados
             // 
@@ -516,7 +516,7 @@ namespace app
             this.gbxEstadisticas.Name = "gbxEstadisticas";
             this.gbxEstadisticas.Size = new System.Drawing.Size(269, 64);
             this.gbxEstadisticas.TabIndex = 4;
-            this.gbxEstadisticas.Text = "                                  Estadísticas";
+            this.gbxEstadisticas.Text = "                                  Estadï¿½sticas";
             // 
             // lblEstadisticas
             // 
@@ -602,7 +602,7 @@ namespace app
             this.gbxDuracion.Name = "gbxDuracion";
             this.gbxDuracion.Size = new System.Drawing.Size(160, 64);
             this.gbxDuracion.TabIndex = 4;
-            this.gbxDuracion.Text = "       Duración";
+            this.gbxDuracion.Text = "       Duraciï¿½n";
             // 
             // lblCronometro
             // 
@@ -849,7 +849,7 @@ namespace app
             this.lblDuracion.Name = "lblDuracion";
             this.lblDuracion.Size = new System.Drawing.Size(147, 37);
             this.lblDuracion.TabIndex = 2;
-            this.lblDuracion.Text = "Duración: ";
+            this.lblDuracion.Text = "Duraciï¿½n: ";
             this.lblDuracion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbxComensales
@@ -1011,7 +1011,7 @@ namespace app
             this.lblUproyeccion.Name = "lblUproyeccion";
             this.lblUproyeccion.Size = new System.Drawing.Size(173, 37);
             this.lblUproyeccion.TabIndex = 2;
-            this.lblUproyeccion.Text = "Proyección: ";
+            this.lblUproyeccion.Text = "Proyecciï¿½n: ";
             this.lblUproyeccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cHome
@@ -1048,6 +1048,7 @@ namespace app
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPrincipal_FormClosing);
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.pnlBarra.ResumeLayout(false);
             this.pnlLateral.ResumeLayout(false);

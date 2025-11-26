@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.cbLugar = new System.Windows.Forms.ComboBox();
+            this.cbEmpresa = new System.Windows.Forms.ComboBox();
             this.lblEmpresa = new ReaLTaiizor.Controls.SmallLabel();
             this.lblNombre = new ReaLTaiizor.Controls.SmallLabel();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -48,17 +48,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvFaltantes)).BeginInit();
             this.SuspendLayout();
             // 
-            // cbLugar
+            // cbEmpresa
             // 
-            this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
-            this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
-            this.cbLugar.FormattingEnabled = true;
-            this.cbLugar.Location = new System.Drawing.Point(13, 22);
-            this.cbLugar.Name = "cbLugar";
-            this.cbLugar.Size = new System.Drawing.Size(155, 33);
-            this.cbLugar.TabIndex = 16;
-            this.cbLugar.SelectionChangeCommitted += new System.EventHandler(this.cbLugar_SelectionChangeCommitted);
+            this.cbEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
+            this.cbEmpresa.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
+            this.cbEmpresa.FormattingEnabled = true;
+            this.cbEmpresa.Location = new System.Drawing.Point(13, 22);
+            this.cbEmpresa.Name = "cbEmpresa";
+            this.cbEmpresa.Size = new System.Drawing.Size(155, 33);
+            this.cbEmpresa.TabIndex = 16;
+            this.cbEmpresa.SelectionChangeCommitted += new System.EventHandler(this.cbEmpresa_SelectionChangeCommitted);
             // 
             // lblEmpresa
             // 
@@ -243,7 +243,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox cbLugar;
+        private System.Windows.Forms.ComboBox cbEmpresa;
         private ReaLTaiizor.Controls.SmallLabel lblEmpresa;
         private ReaLTaiizor.Controls.SmallLabel lblNombre;
         private System.Windows.Forms.TextBox txtNombre;

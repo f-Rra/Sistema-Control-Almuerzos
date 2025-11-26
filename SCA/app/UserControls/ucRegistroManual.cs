@@ -75,7 +75,7 @@ namespace app.UserControls
         {
             var empresas = empresaNegocio.listar();
             var empresasFiltro = CrearListaEmpresasConOpcionTodas(empresas);
-            ConfigurarComboBoxEmpresas(empresasFiltro);
+            ConfigurarEmpresas(empresasFiltro);
         }
 
         private List<dynamic> CrearListaEmpresasConOpcionTodas(List<Empresa> empresas)
@@ -91,13 +91,13 @@ namespace app.UserControls
             return empresasFiltro;
         }
 
-        private void ConfigurarComboBoxEmpresas(List<dynamic> empresasFiltro)
+        private void ConfigurarEmpresas(List<dynamic> empresasFiltro)
         {
-            cbLugar.DataSource = null;
-            cbLugar.DataSource = empresasFiltro;
-            cbLugar.ValueMember = "IdEmpresa";
-            cbLugar.DisplayMember = "Nombre";
-            cbLugar.SelectedIndex = 0;
+            cbEmpresa.DataSource = null;
+            cbEmpresa.DataSource = empresasFiltro;
+            cbEmpresa.ValueMember = "IdEmpresa";
+            cbEmpresa.DisplayMember = "Nombre";
+            cbEmpresa.SelectedIndex = 0;
         }
 
         private void CargarRegistros()
@@ -196,9 +196,9 @@ namespace app.UserControls
 
         private int? ObtenerEmpresaIdFiltro()
         {
-            if (cbLugar.SelectedValue != null && cbLugar.SelectedValue != DBNull.Value)
+            if (cbEmpresa.SelectedValue != null && cbEmpresa.SelectedValue != DBNull.Value)
             {
-                int selectedValue = (int)cbLugar.SelectedValue;
+                int selectedValue = (int)cbEmpresa.SelectedValue;
                 if (selectedValue != 0)
                 {
                     return selectedValue;
@@ -271,7 +271,6 @@ namespace app.UserControls
                 Cursor.Current = anterior;
             }
             
-            // Guardar el primer empleado para la notificación
             if (cantidadAgregados == 1 && primerEmpleado != null)
             {
                 ultimoEmpleadoRegistrado = primerEmpleado;
@@ -296,7 +295,7 @@ namespace app.UserControls
         private void ActualizarDespuesDeAgregar(int cantidadAgregados)
         {
             LimpiarFiltros();
-            cbLugar.SelectedIndex = 0;
+            cbEmpresa.SelectedIndex = 0;
             CargarRegistros();
             NotificarFormularioPrincipal();
             
@@ -320,38 +319,31 @@ namespace app.UserControls
         {
             try
             {
-                // Crear instancia del UserControl de notificación
                 var notificacion = new ucNotificacion();
-                
                 string nombreEmpleado, empresa;
                 string horaActual = DateTime.Now.ToString("HH:mm:ss");
                 bool ocultarTitulo = false;
-                
-                // Si es 1 solo comensal, mostrar sus datos completos
                 if (cantidad == 1 && ultimoEmpleadoRegistrado != null)
                 {
                     nombreEmpleado = ultimoEmpleadoRegistrado.NombreCompleto;
                     empresa = ultimoEmpleadoRegistrado.NombreEmpresa;
-                    ocultarTitulo = false; // Mostrar título
+                    ocultarTitulo = false; 
                 }
                 else
                 {
-                    // Si son varios, mostrar cantidad arriba y mensaje abajo
                     nombreEmpleado = $"{cantidad} Comensales Registrados";
                     empresa = "Registro Manual";
-                    ocultarTitulo = true; // Ocultar título cuando son múltiples
+                    ocultarTitulo = true; 
                 }
                 
-                // Mostrar notificación con animación usando el UserControl como contenedor
                 notificacion.MostrarNotificacion(
                     nombreEmpleado,
                     empresa,
                     horaActual,
-                    this, // Usar el UserControl como contenedor
+                    this, 
                     ocultarTitulo
                 );
                 
-                // Limpiar variable
                 ultimoEmpleadoRegistrado = null;
             }
             catch (Exception ex)
@@ -369,7 +361,7 @@ namespace app.UserControls
             FiltrarEmpleados();
         }
 
-        private void cbLugar_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cbEmpresa_SelectionChangeCommitted(object sender, EventArgs e)
         {
             FiltrarEmpleados();
         }

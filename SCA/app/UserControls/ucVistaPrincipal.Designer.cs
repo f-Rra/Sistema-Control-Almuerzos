@@ -53,6 +53,7 @@
             this.txtRegistro.Name = "txtRegistro";
             this.txtRegistro.Size = new System.Drawing.Size(100, 33);
             this.txtRegistro.TabIndex = 1;
+            this.txtRegistro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRegistro_KeyDown);
             // 
             // btnRegistro
             // 
