@@ -37,60 +37,28 @@ namespace Negocio
 
         public void setearConsulta(string consulta)
         {
-            try
-            {
-                comando.Parameters.Clear(); // Limpiar parámetros previos
-                comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = consulta;
-            }
-            catch (Exception ex)
-            {
-                ExceptionHelper.ManejarExcepcionBD(ex, "configurar consulta SQL");
-                throw;
-            }
+            comando.Parameters.Clear();
+            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandText = consulta;
         }
 
         public void setearProcedimiento(string sp)
         {
-            try
-            {
-                comando.Parameters.Clear(); // Limpiar parámetros previos
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.CommandText = sp;
-            }
-            catch (Exception ex)
-            {
-                ExceptionHelper.ManejarExcepcionBD(ex, "configurar procedimiento almacenado");
-                throw;
-            }
+            comando.Parameters.Clear();
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.CommandText = sp;
         }
+
         public void setearTipoComando(System.Data.CommandType tipo)
         {
-            try
-            {
-                comando.CommandType = tipo;
-            }
-            catch (Exception ex)
-            {
-                ExceptionHelper.ManejarExcepcionBD(ex, "configurar tipo de comando");
-                throw;
-            }
+            comando.CommandType = tipo;
         }
 
         public void ejecutarLectura()
         {
             comando.Connection = conexion;
-
-            try
-            {
-                conexion.Open();
-                lector = comando.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                ExceptionHelper.ManejarExcepcionBD(ex, "ejecutar lectura en base de datos");
-                throw;
-            }
+            conexion.Open();
+            lector = comando.ExecuteReader();
         }
 
         public void ejecutarAccion()
@@ -100,11 +68,6 @@ namespace Negocio
             {
                 conexion.Open();
                 comando.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                ExceptionHelper.ManejarExcepcionBD(ex, "ejecutar acción en base de datos");
-                throw;
             }
             finally
             {
@@ -124,11 +87,6 @@ namespace Negocio
                     return 0;
                 return Convert.ToInt32(result);
             }
-            catch (Exception ex)
-            {
-                ExceptionHelper.ManejarExcepcionBD(ex, "ejecutar acción con retorno en base de datos");
-                throw;
-            }
             finally
             {
                 conexion.Close();
@@ -138,30 +96,14 @@ namespace Negocio
 
         public void setearParametro(string nombre, object valor)
         {
-            try
-            {
-                comando.Parameters.AddWithValue(nombre, valor);
-            }
-            catch (Exception ex)
-            {
-                ExceptionHelper.ManejarExcepcionBD(ex, "configurar parámetro");
-                throw;
-            }
+            comando.Parameters.AddWithValue(nombre, valor);
         }
 
         public void cerrarConexion()
         {
-            try
-            {
-                if (lector != null)
-                    lector.Close();
-                conexion.Close();
-            }
-            catch (Exception ex)
-            {
-                ExceptionHelper.ManejarExcepcionBD(ex, "cerrar conexión");
-                throw;
-            }
+            if (lector != null)
+                lector.Close();
+            conexion.Close();
         }
 
         #region IDisposable Implementation
