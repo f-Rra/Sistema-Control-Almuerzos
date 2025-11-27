@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using Negocio;
 using Dominio;
+using app.Helpers;
 
 namespace app.UserControls
 {
@@ -47,14 +48,18 @@ namespace app.UserControls
 
         private void CargarConfiguracionBaseDatos()
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 string cadenaConexion = negocio.ObtenerCadenaConexion();
                 txtCadenaConexion.Text = cadenaConexion ?? string.Empty;
 
                 InfoBaseDatos info = negocio.ObtenerInfoBaseDatos();
                 ActualizarEstadoConexion(info != null);
-            }, "cargar configuración de base de datos");
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void ActualizarEstadoConexion(bool conectado)
@@ -67,10 +72,6 @@ namespace app.UserControls
             else
             {
                 lblEstadoConexion.Text = "Estado: No conectado";
-                lblEstadoConexion.ForeColor = Color.Red;
-            }
-        }
-
         private void ProbarConexion()
         {
             string cadenaConexion = txtCadenaConexion.Text.Trim();
@@ -78,39 +79,43 @@ namespace app.UserControls
             if (!ValidarCadenaConexion(cadenaConexion))
                 return;
 
-            this.Cursor = Cursors.WaitCursor;
-
-            bool exitoso = negocio.ProbarConexion(cadenaConexion);
-
-            if (exitoso)
+            try
             {
-                MessageBox.Show("Conexión exitosa a la base de datos", 
-                    "Prueba de Conexión", 
-                    MessageBoxButtons.OK, 
-                    MessageBoxIcon.Information);
-                
-                ActualizarEstadoConexion(true);
+                this.Cursor = Cursors.WaitCursor;
+
+                bool exitoso = negocio.ProbarConexion(cadenaConexion);
+
+                if (exitoso)
+                {
+                    MessageBox.Show("Conexión exitosa a la base de datos", 
+                        "Prueba de Conexión", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Information);
+                    
+                    ActualizarEstadoConexion(true);
+                }
+                else
+                {
+                    MensajesUI.MostrarError("No se pudo conectar a la base de datos");
+                    lblEstadoConexion.Text = "Estado: Error de conexión";
+                    lblEstadoConexion.ForeColor = Color.Red;
+                }
             }
-            else
+            catch (NegocioException ex)
             {
-                ExceptionHelper.MostrarError("No se pudo conectar a la base de datos");
+                MensajesUI.ManejarExcepcion(ex);
                 lblEstadoConexion.Text = "Estado: Error de conexión";
                 lblEstadoConexion.ForeColor = Color.Red;
             }
-
-            this.Cursor = Cursors.Default;
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
         }
 
         private bool ValidarCadenaConexion(string cadenaConexion)
         {
             if (string.IsNullOrEmpty(cadenaConexion))
-            {
-                ExceptionHelper.MostrarAdvertencia("La cadena de conexión no puede estar vacía");
-                return false;
-            }
-            return true;
-        }
-
         private void GuardarConexion()
         {
             string nuevaCadena = txtCadenaConexion.Text.Trim();
@@ -141,9 +146,17 @@ namespace app.UserControls
 
             if (resultado == DialogResult.Yes)
             {
-                if (!negocio.ProbarConexion(nuevaCadena))
+                try
                 {
-                    ExceptionHelper.MostrarError("No se pudo conectar con la nueva cadena de conexión");
+                    if (!negocio.ProbarConexion(nuevaCadena))
+                    {
+                        MensajesUI.MostrarError("No se pudo conectar con la nueva cadena de conexión");
+                        return false;
+                    }
+                }
+                catch (NegocioException ex)
+                {
+                    MensajesUI.ManejarExcepcion(ex);
                     return false;
                 }
             }
@@ -153,31 +166,51 @@ namespace app.UserControls
 
         private bool ConfirmarGuardado()
         {
-            return ExceptionHelper.MostrarConfirmacion(
+            return MensajesUI.MostrarConfirmacion(
                 "¿Está seguro de guardar la nueva cadena de conexión?\n\nLa aplicación se reiniciará.");
         }
 
         private void EjecutarGuardadoConexion(string nuevaCadena)
         {
-            this.Cursor = Cursors.WaitCursor;
-
-            bool guardado = negocio.GuardarCadenaConexion(nuevaCadena);
-
-            if (guardado)
+            try
             {
-                MessageBox.Show(
-                    "Cadena de conexión guardada correctamente.\n\nLa aplicación se reiniciará.",
-                    "Configuración Guardada",
-                    MessageBoxButtons.OK,
+                this.Cursor = Cursors.WaitCursor;
+
+                bool guardado = negocio.GuardarCadenaConexion(nuevaCadena);
+
+                if (guardado)
+                {
+                    MessageBox.Show(
+                        "Cadena de conexión guardada correctamente.\n\nLa aplicación se reiniciará.",
+                        "Configuración Guardada",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    Application.Restart();
+                }
+                else
+                {
+                    MensajesUI.MostrarError("No se pudo guardar la cadena de conexión");
+                }
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }           MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
                 Application.Restart();
             }
             else
             {
-                ExceptionHelper.MostrarError("No se pudo guardar la cadena de conexión");
+                MensajesUI.MostrarError("No se pudo guardar la cadena de conexión");
             }
-
+            
             this.Cursor = Cursors.Default;
         }
 
@@ -187,7 +220,7 @@ namespace app.UserControls
 
         private void CargarInformacionAplicacion()
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 InfoAplicacion info = negocio.ObtenerInfoAplicacion();
 
@@ -195,7 +228,11 @@ namespace app.UserControls
                 {
                     ActualizarInfoAplicacion(info);
                 }
-            }, "cargar información de aplicación");
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void ActualizarInfoAplicacion(InfoAplicacion info)
@@ -212,12 +249,16 @@ namespace app.UserControls
 
         private void CargarInformacionRespaldos()
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 CargarRutaRespaldos();
                 CargarFrecuenciaRespaldo();
                 CargarUltimoRespaldo();
-            }, "cargar información de respaldos");
+            }
+            catch (Exception ex)
+            {
+                MensajesUI.MostrarError($"Error al cargar información de respaldos: {ex.Message}");
+            }
         }
 
         private void CargarRutaRespaldos()
@@ -285,7 +326,7 @@ namespace app.UserControls
 
         private void GuardarConfiguracionRespaldos()
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
@@ -310,7 +351,11 @@ namespace app.UserControls
 
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
-            }, "guardar configuración de respaldos");
+            }
+            catch (Exception ex)
+            {
+                MensajesUI.MostrarError($"Error al guardar configuración: {ex.Message}");
+            }
         }
 
         private void CrearRespaldo()
@@ -361,18 +406,25 @@ namespace app.UserControls
 
         private void EjecutarCreacionRespaldo()
         {
-            string nombreArchivo = $"BD_Control_Almuerzos_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
-            string rutaCompleta = Path.Combine(txtRutaRespaldos.Text, nombreArchivo);
+            try
+            {
+                string nombreArchivo = $"BD_Control_Almuerzos_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
+                string rutaCompleta = Path.Combine(txtRutaRespaldos.Text, nombreArchivo);
 
-            negocio.CrearRespaldo(rutaCompleta);
+                negocio.CrearRespaldo(rutaCompleta);
 
-            MessageBox.Show(
-                $"Respaldo creado exitosamente.\n\nArchivo: {nombreArchivo}",
-                "Éxito",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+                MessageBox.Show(
+                    $"Respaldo creado exitosamente.\n\nArchivo: {nombreArchivo}",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-            CargarInformacionRespaldos();
+                CargarInformacionRespaldos();
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void RestaurarRespaldo()
@@ -436,17 +488,24 @@ namespace app.UserControls
 
         private void EjecutarRestauracion(string archivo)
         {
-            negocio.RestaurarRespaldo(archivo);
+            try
+            {
+                negocio.RestaurarRespaldo(archivo);
 
-            MessageBox.Show(
-                "Respaldo restaurado exitosamente.\n\n" +
-                "La aplicación se reiniciará para aplicar los cambios.",
-                "Éxito",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Respaldo restaurado exitosamente.\n\n" +
+                    "La aplicación se reiniciará para aplicar los cambios.",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-            Application.Restart();
-            Environment.Exit(0);
+                Application.Restart();
+                Environment.Exit(0);
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         #endregion
@@ -455,18 +514,12 @@ namespace app.UserControls
 
         private void btnProbarConexion_Click(object sender, EventArgs e)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
-            {
-                ProbarConexion();
-            }, "probar conexión");
+            ProbarConexion();
         }
 
         private void btnGuardarConexion_Click(object sender, EventArgs e)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
-            {
-                GuardarConexion();
-            }, "guardar cadena de conexión");
+            GuardarConexion();
         }
 
         private void btnExaminarRuta_Click(object sender, EventArgs e)
@@ -492,18 +545,12 @@ namespace app.UserControls
 
         private void btnCrearRespaldo_Click(object sender, EventArgs e)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
-            {
-                CrearRespaldo();
-            }, "crear respaldo");
+            CrearRespaldo();
         }
 
         private void btnRestaurarRespaldo_Click(object sender, EventArgs e)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
-            {
-                RestaurarRespaldo();
-            }, "restaurar respaldo");
+            RestaurarRespaldo();
         }
 
         #endregion

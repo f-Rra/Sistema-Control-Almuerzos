@@ -11,6 +11,7 @@ using Negocio;
 using Dominio;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using app.Helpers;
 
 namespace app.UserControls
 {
@@ -67,13 +68,20 @@ namespace app.UserControls
 
         private void CargarLugares()
         {
-            var lugares = ObtenerLugaresConOpcionTodos();
-            ConfigurarComboBoxLugares(lugares);
+            try
+            {
+                var lugares = ObtenerLugaresConOpcionTodos();
+                ConfigurarComboBoxLugares(lugares);
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private List<Lugar> ObtenerLugaresConOpcionTodos()
         {
-            var lugares = lugarNegocio.listar() ?? new List<Lugar>();
+            var lugares = lugarNegocio.Listar() ?? new List<Lugar>();
             lugares.Insert(0, new Lugar { IdLugar = 0, Nombre = "Todos" });
             return lugares;
         }
@@ -126,7 +134,7 @@ namespace app.UserControls
         {
             if (dgvReporte.DataSource == null || dgvReporte.Rows.Count == 0)
             {
-                ExceptionHelper.MostrarAdvertencia("No hay datos para exportar. Genere un reporte primero.");
+                MensajesUI.MostrarAdvertencia("No hay datos para exportar. Genere un reporte primero.");
                 return false;
             }
             return true;
@@ -167,11 +175,11 @@ namespace app.UserControls
             }
             catch (System.IO.IOException ioEx)
             {
-                ExceptionHelper.MostrarError($"No se pudo acceder al archivo. Asegúrese de que el archivo no esté abierto en otra aplicación.\n\nDetalle: {ioEx.Message}");
+                MensajesUI.MostrarError($"No se pudo acceder al archivo. Asegúrese de que el archivo no esté abierto en otra aplicación.\n\nDetalle: {ioEx.Message}");
             }
             catch (Exception ex)
             {
-                ExceptionHelper.ManejarExcepcionBD(ex, "generar el PDF");
+                MensajesUI.MostrarError($"Error al generar el PDF: {ex.Message}");
             }
         }
 
@@ -234,7 +242,7 @@ namespace app.UserControls
 
         private void MostrarMensajeExitoYAbrirPDF(string rutaArchivo)
         {
-            ExceptionHelper.MostrarExito($"Reporte guardado como PDF:\n{rutaArchivo}");
+            MensajesUI.MostrarExito($"Reporte guardado como PDF:\n{rutaArchivo}");
             System.Diagnostics.Process.Start(rutaArchivo);
         }
 
@@ -248,9 +256,9 @@ namespace app.UserControls
             {
                 GenerarReporte();
             }
-            catch (Exception ex)
+            catch (NegocioException ex)
             {
-                ExceptionHelper.ManejarExcepcionBD(ex, "generar el reporte");
+                MensajesUI.ManejarExcepcion(ex);
             }
         }
 
@@ -262,7 +270,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                ExceptionHelper.ManejarExcepcionBD(ex, "exportar el reporte");
+                MensajesUI.MostrarError($"Error al exportar el reporte: {ex.Message}");
             }
         }
 
@@ -293,7 +301,7 @@ namespace app.UserControls
 
             if (desde > hasta)
             {
-                ExceptionHelper.MostrarAdvertencia("El rango de fechas es inválido (Desde > Hasta)");
+                MensajesUI.MostrarAdvertencia("El rango de fechas es inválido (Desde > Hasta)");
                 return false;
             }
             return true;
@@ -319,7 +327,7 @@ namespace app.UserControls
                     dgvReporte.DataSource = reporteNegocio.AsistenciasPorEmpresas(desde, hasta, idLugar);
                     break;
                 case "Cobertura vs proyección":
-                    dgvReporte.DataSource = reporteNegocio.CoberturaVsProyeccion(desde, hasta, idLugar);
+                    dgvReporte.DataSource = reporteNegocio.ObtenerCoberturaVsProyeccion(desde, hasta, idLugar);
                     break;
                 case "Distribución por día de semana":
                     dgvReporte.DataSource = reporteNegocio.DistribucionPorDiaSemana(desde, hasta, idLugar);

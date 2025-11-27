@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Negocio;
+using app.Helpers;
 
 namespace app.UserControls
 {
@@ -39,12 +40,9 @@ namespace app.UserControls
             {
                 CargarTodasLasEstadisticas();
             }
-            catch (Exception ex)
+            catch (NegocioException ex)
             {
-                MessageBox.Show($"Error detallado:\n\nMensaje: {ex.Message}\n\nStackTrace: {ex.StackTrace}\n\nInnerException: {ex.InnerException?.Message}", 
-                    "Error Debug", 
-                    MessageBoxButtons.OK, 
-                    MessageBoxIcon.Error);
+                MensajesUI.ManejarExcepcion(ex);
             }
         }
 

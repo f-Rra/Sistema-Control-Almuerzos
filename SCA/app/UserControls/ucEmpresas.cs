@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Negocio;
+using app.Helpers;
 
 namespace app.UserControls
 {
@@ -39,7 +40,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                ExceptionHelper.MostrarError($"Error al cargar empresas: {ex.Message}");
+                MensajesUI.MostrarError($"Error al cargar empresas: {ex.Message}");
             }
         }
 
@@ -68,16 +69,16 @@ namespace app.UserControls
         {
             try
             {
-                var empresas = empresaNegocio.listarConEmpleados();
+                var empresas = empresaNegocio.ListarConEmpleados();
                 if (empresas == null) return;
 
                 empresas = AplicarFiltro(empresas, filtro);
                 ActualizarDgvEmpresas(empresas);
                 ActualizarContadorEmpresas(empresas.Count);
             }
-            catch (Exception ex)
+            catch (NegocioException ex)
             {
-                ExceptionHelper.MostrarError($"Error al cargar empresas: {ex.Message}\n\nDetalles: {ex.StackTrace}");
+                MensajesUI.ManejarExcepcion(ex);
             }
         }
 
@@ -140,11 +141,18 @@ namespace app.UserControls
 
         private void CargarEmpresaEnFormulario(int idEmpresa)
         {
-            seleccionada = empresaNegocio.buscarPorId(idEmpresa);
-            if (seleccionada == null) return;
+            try
+            {
+                seleccionada = empresaNegocio.BuscarPorId(idEmpresa);
+                if (seleccionada == null) return;
 
-            MostrarDatosEmpresa();
-            ConfigurarModoEdicion();
+                MostrarDatosEmpresa();
+                ConfigurarModoEdicion();
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void MostrarDatosEmpresa()
@@ -181,7 +189,7 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese el nombre de la empresa");
+                MensajesUI.MostrarAdvertencia("Ingrese el nombre de la empresa");
                 txtNombre.Focus();
                 return false;
             }
@@ -192,7 +200,7 @@ namespace app.UserControls
         {
             if (txtNombre.Text.Trim().Length < 2)
             {
-                ExceptionHelper.MostrarAdvertencia("El nombre debe tener al menos 2 caracteres");
+                MensajesUI.MostrarAdvertencia("El nombre debe tener al menos 2 caracteres");
                 txtNombre.Focus();
                 return false;
             }
@@ -203,7 +211,7 @@ namespace app.UserControls
         {
             if (!ValidarNombre(txtNombre.Text))
             {
-                ExceptionHelper.MostrarAdvertencia("El nombre de la empresa solo puede contener letras, números, espacios y guiones");
+                MensajesUI.MostrarAdvertencia("El nombre de la empresa solo puede contener letras, números, espacios y guiones");
                 txtNombre.Focus();
                 return false;
             }
@@ -212,22 +220,30 @@ namespace app.UserControls
 
         private bool ValidarNombreDuplicado()
         {
-            var empresas = empresaNegocio.listar();
-            if (empresas != null)
+            try
             {
-                bool existe = empresas.Exists(e =>
-                    e.Nombre.Trim().ToUpper() == txtNombre.Text.Trim().ToUpper() &&
-                    (!modoEdicion || e.IdEmpresa != seleccionada.IdEmpresa)
-                );
-
-                if (existe)
+                var empresas = empresaNegocio.Listar();
+                if (empresas != null)
                 {
-                    ExceptionHelper.MostrarAdvertencia("Ya existe una empresa con ese nombre");
-                    txtNombre.Focus();
-                    return false;
+                    bool existe = empresas.Exists(e =>
+                        e.Nombre.Trim().ToUpper() == txtNombre.Text.Trim().ToUpper() &&
+                        (!modoEdicion || e.IdEmpresa != seleccionada.IdEmpresa)
+                    );
+
+                    if (existe)
+                    {
+                        MensajesUI.MostrarAdvertencia("Ya existe una empresa con ese nombre");
+                        txtNombre.Focus();
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+                return false;
+            }
         }
 
         private bool ValidarNombre(string nombre)
@@ -257,17 +273,24 @@ namespace app.UserControls
         {
             if (!ValidarFormulario()) return;
 
-            Empresa emp = new Empresa();
-            CargarEmpresa(emp);
+            try
+            {
+                Empresa emp = new Empresa();
+                CargarEmpresa(emp);
 
-            if (modoEdicion)
-                empresaNegocio.modificar(emp);
-            else
-                empresaNegocio.agregar(emp);
+                if (modoEdicion)
+                    empresaNegocio.Modificar(emp);
+                else
+                    empresaNegocio.Agregar(emp);
 
-            ExceptionHelper.MostrarExito("Empresa guardada correctamente");
-            CargarEmpresas();
-            LimpiarFormulario();
+                MensajesUI.MostrarExito("Empresa guardada correctamente");
+                CargarEmpresas();
+                LimpiarFormulario();
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void CargarEmpresa(Empresa emp)
@@ -286,12 +309,19 @@ namespace app.UserControls
 
             if (!ValidarEliminacionEmpresa()) return;
 
-            if (ExceptionHelper.MostrarConfirmacion($"¿Está seguro de desactivar la empresa '{seleccionada.Nombre}'?"))
+            if (MensajesUI.MostrarConfirmacion($"¿Está seguro de desactivar la empresa '{seleccionada.Nombre}'?"))
             {
-                empresaNegocio.eliminar(seleccionada.IdEmpresa);
-                ExceptionHelper.MostrarExito("Empresa desactivada correctamente");
-                CargarEmpresas();
-                LimpiarFormulario();
+                try
+                {
+                    empresaNegocio.Eliminar(seleccionada.IdEmpresa);
+                    MensajesUI.MostrarExito("Empresa desactivada correctamente");
+                    CargarEmpresas();
+                    LimpiarFormulario();
+                }
+                catch (NegocioException ex)
+                {
+                    MensajesUI.ManejarExcepcion(ex);
+                }
             }
         }
 
@@ -299,7 +329,7 @@ namespace app.UserControls
         {
             if (seleccionada.CantidadEmpleados > 0)
             {
-                ExceptionHelper.MostrarAdvertencia(
+                MensajesUI.MostrarAdvertencia(
                     $"No se puede desactivar la empresa '{seleccionada.Nombre}' " +
                     $"porque tiene {seleccionada.CantidadEmpleados} empleado(s) activo(s).\n\n" +
                     "Primero desactive o transfiera los empleados a otra empresa."
@@ -386,7 +416,7 @@ namespace app.UserControls
 
         private int ObtenerTotalEmpleados(int idEmpresa)
         {
-            var empresas = empresaNegocio.listarConEmpleados();
+            var empresas = empresaNegocio.ListarConEmpleados();
             var empresaConEmpleados = empresas?.Find(e => e.IdEmpresa == idEmpresa);
             return empresaConEmpleados?.CantidadEmpleados ?? 0;
         }
@@ -394,7 +424,7 @@ namespace app.UserControls
         private int ObtenerEmpleadosInactivos(int idEmpresa)
         {
             var empleadoNegocio = new EmpleadoNegocio();
-            var todosEmpleados = empleadoNegocio.listar();
+            var todosEmpleados = empleadoNegocio.Listar();
             
             if (todosEmpleados != null)
             {
@@ -409,7 +439,7 @@ namespace app.UserControls
             DateTime inicioMes = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime finMes = inicioMes.AddMonths(1).AddDays(-1);
             
-            var registros = registroNegocio.obtenerRegistrosPorEmpresaYFecha(idEmpresa, inicioMes, finMes);
+            var registros = registroNegocio.ObtenerRegistrosPorEmpresaYFecha(idEmpresa, inicioMes, finMes);
             return registros?.Count ?? 0;
         }
 

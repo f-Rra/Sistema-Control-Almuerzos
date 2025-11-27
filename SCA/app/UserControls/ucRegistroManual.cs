@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Negocio;
+using app.Helpers;
 
 namespace app.UserControls
 {
@@ -73,9 +74,16 @@ namespace app.UserControls
 
         private void CargarEmpresas()
         {
-            var empresas = empresaNegocio.listar();
-            var empresasFiltro = CrearListaEmpresasConOpcionTodas(empresas);
-            ConfigurarEmpresas(empresasFiltro);
+            try
+            {
+                var empresas = empresaNegocio.Listar();
+                var empresasFiltro = CrearListaEmpresasConOpcionTodas(empresas);
+                ConfigurarEmpresas(empresasFiltro);
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private List<dynamic> CrearListaEmpresasConOpcionTodas(List<Empresa> empresas)
@@ -102,14 +110,21 @@ namespace app.UserControls
 
         private void CargarRegistros()
         {
-            dgvFaltantes.DataSource = null;
-
-            if (servicioIdActual.HasValue)
+            try
             {
-                dgvFaltantes.DataSource = empleadoNegocio.empleadosSinAlmorzar(servicioIdActual.Value);
+                dgvFaltantes.DataSource = null;
+
+                if (servicioIdActual.HasValue)
+                {
+                    dgvFaltantes.DataSource = empleadoNegocio.EmpleadosSinAlmorzar(servicioIdActual.Value);
+                }
+                OcultarColumnas();
+                LimpiarSeleccion();
             }
-            OcultarColumnas();
-            LimpiarSeleccion();
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void LimpiarSeleccion()
@@ -179,13 +194,13 @@ namespace app.UserControls
                 string nombre = ObtenerNombreFiltro();
                 int? empresaId = ObtenerEmpresaIdFiltro();
                 
-                var empleadosFiltrados = empleadoNegocio.filtrarEmpleadosSinAlmorzar(servicioIdActual.Value, empresaId, nombre);
+                var empleadosFiltrados = empleadoNegocio.FiltrarEmpleadosSinAlmorzar(servicioIdActual.Value, empresaId, nombre);
                 
                 ActualizarGridFiltrado(empleadosFiltrados);
             }
-            catch (Exception ex)
+            catch (NegocioException ex)
             {
-                ExceptionHelper.ManejarExcepcionBD(ex, "filtrar empleados");
+                MensajesUI.ManejarExcepcion(ex);
             }
         }
 
@@ -230,12 +245,12 @@ namespace app.UserControls
         {
             if (!servicioIdActual.HasValue)
             {
-                ExceptionHelper.MostrarAdvertencia("No hay un servicio activo");
+                MensajesUI.MostrarAdvertencia("No hay un servicio activo");
                 return false;
             }
             if (dgvFaltantes.SelectedRows == null || dgvFaltantes.SelectedRows.Count == 0)
             {
-                ExceptionHelper.MostrarAdvertencia("Seleccione al menos un empleado de la lista");
+                MensajesUI.MostrarAdvertencia("Seleccione al menos un empleado de la lista");
                 return false;
             }
             return true;
@@ -283,10 +298,10 @@ namespace app.UserControls
         {
             try
             {
-                registroNegocio.registrarEmpleado(emp.IdEmpleado, emp.IdEmpresa, servicioIdActual.Value, idLugarActual);
+                registroNegocio.RegistrarEmpleado(emp.IdEmpleado, emp.IdEmpresa, servicioIdActual.Value, idLugarActual);
                 return true;
             }
-            catch (Exception)
+            catch (NegocioException)
             {
                 return false;
             }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Negocio;
+using app.Helpers;
 
 namespace app.UserControls
 {
@@ -56,12 +57,19 @@ namespace app.UserControls
 
         private void CargarEmpleados(string filtro = "", int idEmpresa = 0)
         {
-            var empleados = empleadoNegocio.listar();
-            if (empleados == null) return;
+            try
+            {
+                var empleados = empleadoNegocio.Listar();
+                if (empleados == null) return;
 
-            empleados = AplicarFiltros(empleados, filtro, idEmpresa);
-            ActualizarDgvEmpleados(empleados);
-            ActualizarContadorEmpleados(empleados.Count);
+                empleados = AplicarFiltros(empleados, filtro, idEmpresa);
+                ActualizarDgvEmpleados(empleados);
+                ActualizarContadorEmpleados(empleados.Count);
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private List<Empleado> AplicarFiltros(List<Empleado> empleados, string filtro, int idEmpresa)
@@ -145,15 +153,22 @@ namespace app.UserControls
 
         private void CargarEmpresas()
         {
-            var empresas = empresaNegocio.listar();
-            if (empresas == null) return;
+            try
+            {
+                var empresas = empresaNegocio.Listar();
+                if (empresas == null) return;
             
             object selectedValueFiltro = cbFiltroEmpresa.SelectedValue;
             object selectedValueEmpleado = cbEmpresaEmpleado.SelectedValue;
             
             ConfigurarCbEmpresas(empresas);
-            RestaurarSelecciones(empresas, selectedValueFiltro, selectedValueEmpleado);
-            ActualizarContadorEmpresas(empresas.Count);
+                RestaurarSelecciones(empresas, selectedValueFiltro, selectedValueEmpleado);
+                ActualizarContadorEmpresas(empresas.Count);
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void ConfigurarCbEmpresas(List<Empresa> empresas)
@@ -200,11 +215,18 @@ namespace app.UserControls
 
         private void CargarEmpleadoEnFormulario(int idEmpleado)
         {
-            empleadoSeleccionado = empleadoNegocio.buscarPorId(idEmpleado);
-            if (empleadoSeleccionado == null) return;
+            try
+            {
+                empleadoSeleccionado = empleadoNegocio.BuscarPorId(idEmpleado);
+                if (empleadoSeleccionado == null) return;
 
-            MostrarDatosEmpleado();
-            ConfigurarModoEdicion();
+                MostrarDatosEmpleado();
+                ConfigurarModoEdicion();
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void MostrarDatosEmpleado()
@@ -252,17 +274,24 @@ namespace app.UserControls
         {
             if (!ValidarFormularioEmpleado()) return;
 
-            Empleado emp = new Empleado();
-            CargarEmpleado(emp);
+            try
+            {
+                Empleado emp = new Empleado();
+                CargarEmpleado(emp);
 
-            if (modoEdicion)
-                empleadoNegocio.modificar(emp);
-            else
-                empleadoNegocio.agregar(emp);
+                if (modoEdicion)
+                    empleadoNegocio.Modificar(emp);
+                else
+                    empleadoNegocio.Agregar(emp);
 
-            ExceptionHelper.MostrarExito("Empleado guardado correctamente");
-            CargarEmpleados();
-            LimpiarFormularioEmpleado();
+                MensajesUI.MostrarExito("Empleado guardado correctamente");
+                CargarEmpleados();
+                LimpiarFormularioEmpleado();
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void CargarEmpleado(Empleado emp)
@@ -283,12 +312,19 @@ namespace app.UserControls
         {
             if (empleadoSeleccionado == null) return;
 
-            if (ExceptionHelper.MostrarConfirmacion("¿Está seguro de desactivar al empleado?"))
+            if (MensajesUI.MostrarConfirmacion("¿Está seguro de desactivar al empleado?"))
             {
-                empleadoNegocio.eliminar(empleadoSeleccionado.IdEmpleado);
-                ExceptionHelper.MostrarExito("Empleado desactivado correctamente");
-                CargarEmpleados();
-                LimpiarFormularioEmpleado();
+                try
+                {
+                    empleadoNegocio.Eliminar(empleadoSeleccionado.IdEmpleado);
+                    MensajesUI.MostrarExito("Empleado desactivado correctamente");
+                    CargarEmpleados();
+                    LimpiarFormularioEmpleado();
+                }
+                catch (NegocioException ex)
+                {
+                    MensajesUI.ManejarExcepcion(ex);
+                }
             }
         }
 
@@ -300,12 +336,19 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtCredencial.Text))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese un número de credencial");
+                MensajesUI.MostrarAdvertencia("Ingrese un número de credencial");
                 return;
             }
 
-            bool existe = empleadoNegocio.existeCredencial(txtCredencial.Text.Trim());
-            MostrarResultadoVerificacion(existe);
+            try
+            {
+                bool existe = empleadoNegocio.ExisteCredencial(txtCredencial.Text.Trim());
+                MostrarResultadoVerificacion(existe);
+            }
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void MostrarResultadoVerificacion(bool existe)
@@ -314,16 +357,16 @@ namespace app.UserControls
             {
                 if (!modoEdicion || (modoEdicion && empleadoSeleccionado.IdCredencial != txtCredencial.Text.Trim()))
                 {
-                    ExceptionHelper.MostrarAdvertencia("Esta credencial ya está en uso");
+                    MensajesUI.MostrarAdvertencia("Esta credencial ya está en uso");
                 }
                 else
                 {
-                    ExceptionHelper.MostrarInformacion("Credencial actual del empleado");
+                    MensajesUI.MostrarInformacion("Credencial actual del empleado");
                 }
             }
             else
             {
-                ExceptionHelper.MostrarInformacion("Credencial disponible");
+                MensajesUI.MostrarInformacion("Credencial disponible");
             }
         }
 
@@ -412,7 +455,7 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtCredencial.Text))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese el número de credencial");
+                MensajesUI.MostrarAdvertencia("Ingrese el número de credencial");
                 txtCredencial.Focus();
                 return false;
             }
@@ -423,14 +466,14 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese el nombre");
+                MensajesUI.MostrarAdvertencia("Ingrese el nombre");
                 txtNombre.Focus();
                 return false;
             }
 
             if (!ValidarNombre(txtNombre.Text))
             {
-                ExceptionHelper.MostrarAdvertencia("El nombre solo puede contener letras, espacios, tildes y guiones");
+                MensajesUI.MostrarAdvertencia("El nombre solo puede contener letras, espacios, tildes y guiones");
                 txtNombre.Focus();
                 return false;
             }
@@ -441,14 +484,14 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtApellido.Text))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese el apellido");
+                MensajesUI.MostrarAdvertencia("Ingrese el apellido");
                 txtApellido.Focus();
                 return false;
             }
 
             if (!ValidarNombre(txtApellido.Text))
             {
-                ExceptionHelper.MostrarAdvertencia("El apellido solo puede contener letras, espacios, tildes y guiones");
+                MensajesUI.MostrarAdvertencia("El apellido solo puede contener letras, espacios, tildes y guiones");
                 txtApellido.Focus();
                 return false;
             }
@@ -459,7 +502,7 @@ namespace app.UserControls
         {
             if (cbEmpresaEmpleado.SelectedIndex == -1)
             {
-                ExceptionHelper.MostrarAdvertencia("Seleccione una empresa");
+                MensajesUI.MostrarAdvertencia("Seleccione una empresa");
                 return false;
             }
             return true;

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Negocio;
+using app.Helpers;
 
 namespace app.UserControls
 {
@@ -45,11 +46,19 @@ namespace app.UserControls
 
         public int CountRegistros()
         {
-            if (servicioIdActual.HasValue)
+            try
             {
-                return negR.contarRegistrosPorServicio(servicioIdActual.Value);
+                if (servicioIdActual.HasValue)
+                {
+                    return negR.ContarRegistrosPorServicio(servicioIdActual.Value);
+                }
+                return 0;
             }
-            return 0;
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+                return 0;
+            }
         }
 
         public void RefrescarRegistros()
@@ -63,13 +72,20 @@ namespace app.UserControls
 
         private void CargarRegistros()
         {
-            dgvRegistros.DataSource = null;
-
-            if (servicioIdActual.HasValue)
+            try
             {
-                dgvRegistros.DataSource = negR.listarPorServicio(servicioIdActual.Value);
+                dgvRegistros.DataSource = null;
+
+                if (servicioIdActual.HasValue)
+                {
+                    dgvRegistros.DataSource = negR.ListarPorServicio(servicioIdActual.Value);
+                }
+                OcultarColumnas();
             }
-            OcultarColumnas();
+            catch (NegocioException ex)
+            {
+                MensajesUI.ManejarExcepcion(ex);
+            }
         }
 
         private void OcultarColumnas()
@@ -112,9 +128,9 @@ namespace app.UserControls
             {
                 ProcesarRegistroEmpleado(credencial);
             }
-            catch (Exception ex)
+            catch (NegocioException ex)
             {
-                ExceptionHelper.ManejarExcepcionBD(ex, "procesar el registro");
+                MensajesUI.ManejarExcepcion(ex);
             }
         }
 
@@ -126,7 +142,7 @@ namespace app.UserControls
         {
             if (!servicioIdActual.HasValue)
             {
-                ExceptionHelper.MostrarAdvertencia("No hay un servicio activo");
+                MensajesUI.MostrarAdvertencia("No hay un servicio activo");
                 return false;
             }
             return true;
@@ -137,7 +153,7 @@ namespace app.UserControls
             credencial = txtRegistro.Text.Trim();
             if (string.IsNullOrEmpty(credencial))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese una credencial válida");
+                MensajesUI.MostrarAdvertencia("Ingrese una credencial válida");
                 return false;
             }
             return true;
@@ -159,10 +175,10 @@ namespace app.UserControls
 
         private Empleado BuscarEmpleadoPorCredencial(string credencial)
         {
-            Empleado empleado = negE.buscarPorCredencial(credencial);
+            Empleado empleado = negE.BuscarPorCredencial(credencial);
             if (empleado == null)
             {
-                ExceptionHelper.MostrarAdvertencia($"No se encontró un empleado con la credencial {credencial}");
+                MensajesUI.MostrarAdvertencia($"No se encontró un empleado con la credencial {credencial}");
                 return null;
             }
             return empleado;
@@ -170,9 +186,9 @@ namespace app.UserControls
 
         private bool VerificarEmpleadoYaRegistrado(Empleado empleado)
         {
-            if (negR.empleadoYaRegistrado(empleado.IdEmpleado, servicioIdActual.Value))
+            if (negR.EmpleadoYaRegistrado(empleado.IdEmpleado, servicioIdActual.Value))
             {
-                ExceptionHelper.MostrarInformacion($"El empleado {empleado.NombreCompleto} ya está registrado en este servicio");
+                MensajesUI.MostrarInformacion($"El empleado {empleado.NombreCompleto} ya está registrado en este servicio");
                 return true;
             }
             return false;
@@ -180,7 +196,7 @@ namespace app.UserControls
 
         private void RegistrarEmpleadoEnServicio(Empleado empleado)
         {
-            negR.registrarEmpleado(empleado.IdEmpleado, empleado.IdEmpresa, servicioIdActual.Value, idLugarActual);
+            negR.RegistrarEmpleado(empleado.IdEmpleado, empleado.IdEmpresa, servicioIdActual.Value, idLugarActual);
             CargarRegistros();
             LimpiarInput();
             formularioPrincipal?.ActualizarEstadisticas();
