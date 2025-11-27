@@ -40,7 +40,7 @@ namespace app
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            negS.finalizarServiciosPendientes();
+            negS.FinalizarServiciosPendientes();
             CargarLugares();
             CargarFecha();
             IniciarCronometro();
@@ -74,15 +74,15 @@ namespace app
                 vistaPrincipal.SetServicio(idServicioActual, idLugar);
                 ActualizarEstadisticas();
             }
-            catch (Exception ex)
+            catch (NegocioException ex)
             {
-                ExceptionHelper.ManejarExcepcionBD(ex, "iniciar el servicio");
+                MensajesUI.ManejarExcepcion(ex);
             }
         }
 
         private void FinalizarServicio()
         {
-            if (!ExceptionHelper.MostrarConfirmacion("¿Está seguro de finalizar el servicio? Esta acción guardará todas las estadísticas."))
+            if (!MensajesUI.MostrarConfirmacion("¿Está seguro de finalizar el servicio? Esta acción guardará todas las estadísticas."))
             {
                 return;
             }
@@ -93,9 +93,9 @@ namespace app
             {
                 GuardarEstadisticasEnBD();
             }
-            catch (Exception ex)
+            catch (NegocioException ex)
             {
-                ExceptionHelper.ManejarExcepcionBD(ex, "finalizar el servicio");
+                MensajesUI.ManejarExcepcion(ex);
             }
             finally
             {
@@ -115,7 +115,7 @@ namespace app
         {
             if (cbLugar.SelectedValue == null)
             {
-                ExceptionHelper.MostrarAdvertencia("Seleccione un lugar");
+                MensajesUI.MostrarAdvertencia("Seleccione un lugar");
                 return false;
             }
             return true;
@@ -128,19 +128,19 @@ namespace app
             
             if (string.IsNullOrEmpty(proyText))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese una proyección de comensales");
+                MensajesUI.MostrarAdvertencia("Ingrese una proyección de comensales");
                 return false;
             }
 
             if (!int.TryParse(proyText, out proyeccion))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese una proyección válida (solo números)");
+                MensajesUI.MostrarAdvertencia("Ingrese una proyección válida (solo números)");
                 return false;
             }
             
             if (proyeccion < 0 || proyeccion > 1000)
             {
-                ExceptionHelper.MostrarAdvertencia("La proyección debe estar entre 0 y 1000 comensales");
+                MensajesUI.MostrarAdvertencia("La proyección debe estar entre 0 y 1000 comensales");
                 return false;
             }
             
@@ -154,13 +154,13 @@ namespace app
                 
             if (!int.TryParse(mtxtInvitados.Text, out int invitados))
             {
-                ExceptionHelper.MostrarAdvertencia("Ingrese un número válido de invitados");
+                MensajesUI.MostrarAdvertencia("Ingrese un número válido de invitados");
                 return false;
             }
             
             if (invitados < 0 || invitados > 500)
             {
-                ExceptionHelper.MostrarAdvertencia("Los invitados deben estar entre 0 y 500");
+                MensajesUI.MostrarAdvertencia("Los invitados deben estar entre 0 y 500");
                 return false;
             }
             
@@ -169,7 +169,7 @@ namespace app
 
         private void CrearServicioEnBD(int idLugar, int proy)
         {
-            int nuevoId = negS.crearServicio(idLugar, proy);
+            int nuevoId = negS.CrearServicio(idLugar, proy);
             idServicioActual = nuevoId;
         }
 
@@ -215,7 +215,7 @@ namespace app
                 int totalInvitados = 0;
                 int.TryParse(mtxtInvitados.Text, out totalInvitados);
 
-                negS.finalizarServicio(idServicioActual.Value, totalComensales, totalInvitados, duracionMinutos);
+                negS.FinalizarServicio(idServicioActual.Value, totalComensales, totalInvitados, duracionMinutos);
                 ActualizarEstadisticas();
             }
         }
@@ -268,7 +268,7 @@ namespace app
         {
             try
             {
-                var lista = negS.listarTodos();
+                var lista = negS.ListarTodos();
                 dgvServicios.DataSource = null;
                 dgvServicios.DataSource = lista;
 
@@ -279,9 +279,9 @@ namespace app
                 }
                 dgvServicios.Refresh();
             }
-            catch (Exception ex)
+            catch (NegocioException ex)
             {
-                ExceptionHelper.ManejarExcepcionBD(ex, "cargar los servicios");
+                MensajesUI.ManejarExcepcion(ex);
             }
         }
 
@@ -315,7 +315,7 @@ namespace app
         {
             try
             {
-                Servicio ultimo = negS.obtenerUltimoServicio();
+                Servicio ultimo = negS.ObtenerUltimoServicio();
                 if (ultimo != null)
                 {
                     lblUlugar.Text = "Lugar: " + ultimo.NombreLugar;
@@ -346,7 +346,7 @@ namespace app
         private void CargarLugares()
         {
             cbLugar.DataSource = null;
-            cbLugar.DataSource = negL.listar();
+            cbLugar.DataSource = negL.Listar();
             cbLugar.ValueMember = "IdLugar";
             cbLugar.DisplayMember = "Nombre";
         }
@@ -478,7 +478,7 @@ namespace app
         {
             if (!idServicioActual.HasValue)
             {
-                ExceptionHelper.MostrarAdvertencia("El servicio no está activo");
+                MensajesUI.MostrarAdvertencia("El servicio no está activo");
                 return;
             }
 
@@ -498,7 +498,7 @@ namespace app
         {
             if (idServicioActual.HasValue)
             {
-                ExceptionHelper.MostrarAdvertencia("Reportes está disponible sólo con el servicio inactivo");
+                MensajesUI.MostrarAdvertencia("Reportes está disponible sólo con el servicio inactivo");
                 return;
             }
 
@@ -512,7 +512,7 @@ namespace app
         {
             if (idServicioActual.HasValue)
             {
-                ExceptionHelper.MostrarAdvertencia("Admin está disponible sólo con el servicio inactivo");
+                MensajesUI.MostrarAdvertencia("Admin está disponible sólo con el servicio inactivo");
                 return;
             }
 
@@ -641,11 +641,11 @@ namespace app
         {
             if (idServicioActual.HasValue)
             {
-                ExceptionHelper.MostrarAdvertencia("Debe finalizar el servicio activo antes de salir de la aplicación.");
+                MensajesUI.MostrarAdvertencia("Debe finalizar el servicio activo antes de salir de la aplicación.");
                 return;
             }
 
-            if (ExceptionHelper.MostrarConfirmacion("¿Está seguro de salir de la aplicación?"))
+            if (MensajesUI.MostrarConfirmacion("¿Está seguro de salir de la aplicación?"))
             {
                 Application.Exit();
             }
@@ -664,7 +664,7 @@ namespace app
         {
             if (idServicioActual.HasValue)
             {
-                ExceptionHelper.MostrarAdvertencia("Debe finalizar el servicio activo antes de cerrar la aplicación.");
+                MensajesUI.MostrarAdvertencia("Debe finalizar el servicio activo antes de cerrar la aplicación.");
                 e.Cancel = true;
             }
         }
@@ -686,7 +686,7 @@ namespace app
                 }
                 catch (Exception ex)
                 {
-                    ExceptionHelper.ManejarExcepcionBD(ex, "cargar servicio seleccionado");
+                    MensajesUI.MostrarError($"Error al cargar servicio seleccionado: {ex.Message}");
                 }
             }
         }
