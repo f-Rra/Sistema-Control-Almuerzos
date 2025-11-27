@@ -8,9 +8,9 @@ namespace Negocio
     {
         public Estadisticas.Empleados ObtenerEstadisticasEmpleados()
         {
-            using (var datos = new AccesoDatos())
+            try
             {
-                try
+                using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ObtenerEstadisticasEmpleados");
                     datos.ejecutarLectura();
@@ -26,18 +26,18 @@ namespace Negocio
                     }
                     return null;
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al obtener estadísticas de empleados: " + ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener estadísticas de empleados");
             }
         }
 
         public Estadisticas.Empresas ObtenerEstadisticasEmpresas()
         {
-            using (var datos = new AccesoDatos())
+            try
             {
-                try
+                using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ObtenerEstadisticasEmpresas");
                     datos.ejecutarLectura();
@@ -53,18 +53,18 @@ namespace Negocio
                     }
                     return null;
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al obtener estadísticas de empresas: " + ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener estadísticas de empresas");
             }
         }
 
         public Estadisticas.Servicios ObtenerEstadisticasServicios()
         {
-            using (var datos = new AccesoDatos())
+            try
             {
-                try
+                using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ObtenerEstadisticasServicios");
                     datos.ejecutarLectura();
@@ -80,18 +80,18 @@ namespace Negocio
                     }
                     return null;
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al obtener estadísticas de servicios: " + ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener estadísticas de servicios");
             }
         }
 
         public Estadisticas.Asistencias ObtenerAsistenciasTendencias()
         {
-            using (var datos = new AccesoDatos())
+            try
             {
-                try
+                using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ObtenerAsistenciasTendencias");
                     datos.ejecutarLectura();
@@ -110,24 +110,24 @@ namespace Negocio
                     }
                     return null;
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al obtener asistencias y tendencias: " + ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener asistencias y tendencias");
             }
         }
 
         public List<Estadisticas.TopEmpresa> ObtenerTop5Empresas(DateTime fecha)
         {
-            var lista = new List<Estadisticas.TopEmpresa>();
-            
-            // Calcular primer y último día del mes
-            var primerDia = new DateTime(fecha.Year, fecha.Month, 1);
-            var ultimoDia = primerDia.AddMonths(1).AddDays(-1);
-            
-            using (var datos = new AccesoDatos())
+            try
             {
-                try
+                var lista = new List<Estadisticas.TopEmpresa>();
+
+                // Calcular primer y último día del mes
+                var primerDia = new DateTime(fecha.Year, fecha.Month, 1);
+                var ultimoDia = primerDia.AddMonths(1).AddDays(-1);
+
+                using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ObtenerTop5EmpresasPorAsistencias");
                     datos.setearParametro("@FechaInicio", primerDia);
@@ -147,10 +147,10 @@ namespace Negocio
                     }
                     return lista;
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al obtener top 5 empresas por asistencias: " + ex.Message, ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener top 5 empresas por asistencias");
             }
         }
     }

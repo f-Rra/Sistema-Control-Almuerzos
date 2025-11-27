@@ -1,85 +1,103 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dominio;
 
 namespace Negocio
 {
     public class EmpresaNegocio
     {
-        public List<Empresa> listar()
+        public List<Empresa> Listar()
         {
-            List<Empresa> lista = new List<Empresa>();
-
-            using (AccesoDatos datos = new AccesoDatos())
+            try
             {
-                datos.setearProcedimiento("sp_ListarEmpresas");
-                datos.ejecutarLectura();
+                List<Empresa> lista = new List<Empresa>();
 
-                while (datos.Lector.Read())
+                using (AccesoDatos datos = new AccesoDatos())
                 {
-                    Empresa empresa = new Empresa();
-                    empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empresa.Nombre = (string)datos.Lector["Nombre"];
+                    datos.setearProcedimiento("sp_ListarEmpresas");
+                    datos.ejecutarLectura();
 
-                    lista.Add(empresa);
+                    while (datos.Lector.Read())
+                    {
+                        Empresa empresa = new Empresa();
+                        empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                        empresa.Nombre = (string)datos.Lector["Nombre"];
+
+                        lista.Add(empresa);
+                    }
+
+                    return lista;
                 }
-
-                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "listar empresas");
             }
         }
 
-        public List<Empresa> listarConEmpleados()
+        public List<Empresa> ListarConEmpleados()
         {
-            List<Empresa> lista = new List<Empresa>();
-
-            using (AccesoDatos datos = new AccesoDatos())
+            try
             {
-                datos.setearConsulta("SELECT IdEmpresa, Empresa as Nombre, Estado, CantidadEmpleados FROM vw_EmpresasConEmpleados");
-                datos.ejecutarLectura();
+                List<Empresa> lista = new List<Empresa>();
 
-                while (datos.Lector.Read())
+                using (AccesoDatos datos = new AccesoDatos())
                 {
-                    Empresa empresa = new Empresa();
-                    empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empresa.Nombre = (string)datos.Lector["Nombre"];
-                    empresa.Estado = (bool)datos.Lector["Estado"];
-                    empresa.CantidadEmpleados = (int)datos.Lector["CantidadEmpleados"];
+                    datos.setearConsulta("SELECT IdEmpresa, Empresa as Nombre, Estado, CantidadEmpleados FROM vw_EmpresasConEmpleados");
+                    datos.ejecutarLectura();
 
-                    lista.Add(empresa);
+                    while (datos.Lector.Read())
+                    {
+                        Empresa empresa = new Empresa();
+                        empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                        empresa.Nombre = (string)datos.Lector["Nombre"];
+                        empresa.Estado = (bool)datos.Lector["Estado"];
+                        empresa.CantidadEmpleados = (int)datos.Lector["CantidadEmpleados"];
+
+                        lista.Add(empresa);
+                    }
+
+                    return lista;
                 }
-
-                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "listar empresas con empleados");
             }
         }
 
-        public Empresa buscarPorId(int idEmpresa)
+        public Empresa BuscarPorId(int idEmpresa)
         {
-            Empresa empresa = null;
-
-            using (AccesoDatos datos = new AccesoDatos())
+            try
             {
-                datos.setearProcedimiento("sp_BuscarEmpresaPorId");
-                datos.setearParametro("@IdEmpresa", idEmpresa);
-                datos.ejecutarLectura();
+                Empresa empresa = null;
 
-                if (datos.Lector.Read())
+                using (AccesoDatos datos = new AccesoDatos())
                 {
-                    empresa = new Empresa();
-                    empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empresa.Nombre = (string)datos.Lector["Nombre"];
-                    empresa.Estado = (bool)datos.Lector["Estado"];
-                }
+                    datos.setearProcedimiento("sp_BuscarEmpresaPorId");
+                    datos.setearParametro("@IdEmpresa", idEmpresa);
+                    datos.ejecutarLectura();
 
-                return empresa;
+                    if (datos.Lector.Read())
+                    {
+                        empresa = new Empresa();
+                        empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                        empresa.Nombre = (string)datos.Lector["Nombre"];
+                        empresa.Estado = (bool)datos.Lector["Estado"];
+                    }
+
+                    return empresa;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "buscar empresa por ID");
             }
         }
 
-        public void eliminar(int idEmpresa)
+        public void Eliminar(int idEmpresa)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -87,12 +105,16 @@ namespace Negocio
                     datos.setearParametro("@IdEmpresa", idEmpresa);
                     datos.ejecutarAccion();
                 }
-            }, "desactivar empresa");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "desactivar empresa");
+            }
         }
 
-        public void agregar(Empresa empresa)
+        public void Agregar(Empresa empresa)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -101,12 +123,16 @@ namespace Negocio
                     datos.setearParametro("@Estado", empresa.Estado);
                     datos.ejecutarAccion();
                 }
-            }, "agregar empresa");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "agregar empresa");
+            }
         }
 
-        public void modificar(Empresa empresa)
+        public void Modificar(Empresa empresa)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -116,7 +142,11 @@ namespace Negocio
                     datos.setearParametro("@Estado", empresa.Estado);
                     datos.ejecutarAccion();
                 }
-            }, "modificar empresa");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "modificar empresa");
+            }
         }
     }
 }

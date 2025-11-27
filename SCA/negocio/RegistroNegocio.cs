@@ -1,17 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dominio;
 
 namespace Negocio
 {
     public class RegistroNegocio
     {
-        public void registrarEmpleado(int idEmpleado, int idEmpresa, int idServicio, int idLugar)
+        public void RegistrarEmpleado(int idEmpleado, int idEmpresa, int idServicio, int idLugar)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -22,12 +19,16 @@ namespace Negocio
                     datos.setearParametro("@IdLugar", idLugar);
                     datos.ejecutarAccion();
                 }
-            }, "registrar empleado");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "registrar empleado");
+            }
         }
 
-        public List<Registro> listarPorServicio(int idServicio)
+        public List<Registro> ListarPorServicio(int idServicio)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 List<Registro> lista = new List<Registro>();
 
@@ -50,12 +51,16 @@ namespace Negocio
 
                     return lista;
                 }
-            }, "listar registros por servicio");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "listar registros por servicio");
+            }
         }
 
-        public bool empleadoYaRegistrado(int idEmpleado, int idServicio)
+        public bool EmpleadoYaRegistrado(int idEmpleado, int idServicio)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -71,12 +76,16 @@ namespace Negocio
 
                     return false;
                 }
-            }, "verificar empleado registrado");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "verificar empleado registrado");
+            }
         }
 
-        public int contarRegistrosPorServicio(int idServicio)
+        public int ContarRegistrosPorServicio(int idServicio)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -91,12 +100,16 @@ namespace Negocio
 
                     return 0;
                 }
-            }, "contar registros por servicio");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "contar registros por servicio");
+            }
         }
 
-        public List<Registro> obtenerRegistrosPorEmpresaYFecha(int idEmpresa, DateTime fechaInicio, DateTime fechaFin)
+        public List<Registro> ObtenerRegistrosPorEmpresaYFecha(int idEmpresa, DateTime fechaInicio, DateTime fechaFin)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 List<Registro> lista = new List<Registro>();
 
@@ -125,7 +138,11 @@ namespace Negocio
 
                     return lista;
                 }
-            }, "obtener registros por empresa y fecha");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener registros por empresa y fecha");
+            }
         }
     }
 }

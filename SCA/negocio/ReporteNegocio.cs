@@ -8,7 +8,7 @@ namespace Negocio
     {
         public List<Servicio> ListarServiciosRango(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 var lista = new List<Servicio>();
 
@@ -17,7 +17,7 @@ namespace Negocio
                     datos.setearProcedimiento("sp_ListarServiciosRango");
                     datos.setearParametro("@FechaDesde", fechaDesde);
                     datos.setearParametro("@FechaHasta", fechaHasta);
-                    datos.setearParametro("@IdLugar", idLugar.HasValue ? (object)idLugar.Value : System.DBNull.Value);
+                    datos.setearParametro("@IdLugar", idLugar.HasValue ? (object)idLugar.Value : DBNull.Value);
                     datos.ejecutarLectura();
 
                     while (datos.Lector.Read())
@@ -34,12 +34,16 @@ namespace Negocio
                     }
                     return lista;
                 }
-            }, "listar servicios por rango");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "listar servicios por rango");
+            }
         }
 
         public List<AsistenciaPorEmpresa> AsistenciasPorEmpresas(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 var lista = new List<AsistenciaPorEmpresa>();
 
@@ -48,7 +52,7 @@ namespace Negocio
                     datos.setearProcedimiento("sp_AsistenciasPorEmpresas");
                     datos.setearParametro("@FechaDesde", fechaDesde);
                     datos.setearParametro("@FechaHasta", fechaHasta);
-                    datos.setearParametro("@IdLugar", idLugar.HasValue ? (object)idLugar.Value : System.DBNull.Value);
+                    datos.setearParametro("@IdLugar", idLugar.HasValue ? (object)idLugar.Value : DBNull.Value);
                     datos.ejecutarLectura();
 
                     while (datos.Lector.Read())
@@ -62,12 +66,16 @@ namespace Negocio
                     }
                     return lista;
                 }
-            }, "listar asistencias por empresas");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "listar asistencias por empresas");
+            }
         }
 
-        public List<CoberturaVsProyeccion> CoberturaVsProyeccion(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
+        public List<CoberturaVsProyeccion> ObtenerCoberturaVsProyeccion(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 var lista = new List<CoberturaVsProyeccion>();
 
@@ -76,7 +84,7 @@ namespace Negocio
                     datos.setearProcedimiento("sp_ReporteCoberturaVsProyeccion");
                     datos.setearParametro("@FechaDesde", fechaDesde);
                     datos.setearParametro("@FechaHasta", fechaHasta);
-                    datos.setearParametro("@IdLugar", idLugar.HasValue ? (object)idLugar.Value : System.DBNull.Value);
+                    datos.setearParametro("@IdLugar", idLugar.HasValue ? (object)idLugar.Value : DBNull.Value);
                     datos.ejecutarLectura();
 
                     while (datos.Lector.Read())
@@ -94,12 +102,16 @@ namespace Negocio
                     }
                     return lista;
                 }
-            }, "obtener cobertura vs proyeccion");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener cobertura vs proyección");
+            }
         }
 
         public List<DistribucionDiaSemana> DistribucionPorDiaSemana(DateTime fechaDesde, DateTime fechaHasta, int? idLugar = null)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 var lista = new List<DistribucionDiaSemana>();
 
@@ -108,7 +120,7 @@ namespace Negocio
                     datos.setearProcedimiento("sp_DistribucionPorDiaSemana");
                     datos.setearParametro("@FechaDesde", fechaDesde);
                     datos.setearParametro("@FechaHasta", fechaHasta);
-                    datos.setearParametro("@IdLugar", idLugar.HasValue ? (object)idLugar.Value : System.DBNull.Value);
+                    datos.setearParametro("@IdLugar", idLugar.HasValue ? (object)idLugar.Value : DBNull.Value);
                     datos.ejecutarLectura();
 
                     while (datos.Lector.Read())
@@ -123,7 +135,11 @@ namespace Negocio
                     }
                     return lista;
                 }
-            }, "obtener distribucion por dia de semana");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener distribución por día de semana");
+            }
         }
     }
 }

@@ -7,18 +7,22 @@ using Dominio;
 namespace Negocio
 {
     public class ConfiguracionNegocio
-    { 
+    {
         public string ObtenerCadenaConexion()
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 return ConfigurationManager.ConnectionStrings["BD_Control_Almuerzos"]?.ConnectionString;
-            }, "obtener cadena de conexión");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener cadena de conexión");
+            }
         }
 
         public bool GuardarCadenaConexion(string nuevaCadena)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
@@ -36,24 +40,32 @@ namespace Negocio
                 ConfigurationManager.RefreshSection("connectionStrings");
 
                 return true;
-            }, "guardar cadena de conexión");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "guardar cadena de conexión");
+            }
         }
 
         public bool ProbarConexion(string cadenaConexion)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (SqlConnection conexion = new SqlConnection(cadenaConexion))
                 {
                     conexion.Open();
                     return conexion.State == System.Data.ConnectionState.Open;
                 }
-            }, "probar conexión");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "probar conexión");
+            }
         }
 
         public InfoBaseDatos ObtenerInfoBaseDatos()
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 InfoBaseDatos info = null;
                 using (var datos = new AccesoDatos())
@@ -73,12 +85,16 @@ namespace Negocio
                     }
                 }
                 return info;
-            }, "obtener información de base de datos");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener información de base de datos");
+            }
         }
 
         public InfoRespaldo ObtenerUltimoRespaldo()
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 InfoRespaldo info = null;
                 using (var datos = new AccesoDatos())
@@ -97,12 +113,16 @@ namespace Negocio
                     }
                 }
                 return info;
-            }, "obtener último respaldo");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener último respaldo");
+            }
         }
 
         public bool CrearRespaldo(string rutaDestino)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (var datos = new AccesoDatos())
                 {
@@ -111,12 +131,16 @@ namespace Negocio
                     datos.ejecutarAccion();
                     return true;
                 }
-            }, "crear respaldo");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "crear respaldo");
+            }
         }
 
         public bool RestaurarRespaldo(string rutaArchivo)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (var datos = new AccesoDatos())
                 {
@@ -125,12 +149,16 @@ namespace Negocio
                     datos.ejecutarAccion();
                     return true;
                 }
-            }, "restaurar respaldo");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "restaurar respaldo");
+            }
         }
 
         public InfoAplicacion ObtenerInfoAplicacion()
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 var assembly = Assembly.GetExecutingAssembly();
                 var version = assembly.GetName().Version;
@@ -143,7 +171,11 @@ namespace Negocio
                     Framework = ".NET Framework 4.8",
                     UILibrary = "ReaLTaiizor & Winforms"
                 };
-            }, "obtener información de aplicación");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener información de aplicación");
+            }
         }
     }
 }

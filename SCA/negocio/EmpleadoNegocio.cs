@@ -1,17 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dominio;
 
 namespace Negocio
 {
     public class EmpleadoNegocio
     {
-        public List<Empleado> listar()
+        public List<Empleado> Listar()
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 List<Empleado> lista = new List<Empleado>();
 
@@ -38,12 +35,16 @@ namespace Negocio
 
                     return lista;
                 }
-            }, "cargar empleados");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "cargar empleados");
+            }
         }
 
-        public Empleado buscarPorCredencial(string credencial)
+        public Empleado BuscarPorCredencial(string credencial)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -66,77 +67,95 @@ namespace Negocio
 
                     return null;
                 }
-            }, "buscar empleado por credencial");
-        }
-
-        public List<Empleado> empleadosSinAlmorzar(int idServicio)
-        {
-            List<Empleado> lista = new List<Empleado>();
-
-            using (AccesoDatos datos = new AccesoDatos())
+            }
+            catch (Exception ex)
             {
-                datos.setearProcedimiento("sp_EmpleadosSinAlmorzar");
-                datos.setearParametro("@IdServicio", idServicio);
-                datos.ejecutarLectura();
-
-                while (datos.Lector.Read())
-                {
-                    Empleado empleado = new Empleado();
-                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                    empleado.Nombre = (string)datos.Lector["Nombre"];
-                    empleado.Apellido = (string)datos.Lector["Apellido"];
-                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
-                    empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
-
-                    lista.Add(empleado);
-                }
-
-                return lista;
+                throw NegocioException.FromDbException(ex, "buscar empleado por credencial");
             }
         }
 
-        public List<Empleado> filtrarEmpleadosSinAlmorzar(int idServicio, int? idEmpresa = null, string nombre = null)
+        public List<Empleado> EmpleadosSinAlmorzar(int idServicio)
         {
-            List<Empleado> lista = new List<Empleado>();
-
-            using (AccesoDatos datos = new AccesoDatos())
+            try
             {
-                datos.setearProcedimiento("sp_FiltrarEmpleadosSinAlmorzar");
-                datos.setearParametro("@IdServicio", idServicio);
-                
-                if (idEmpresa.HasValue)
-                    datos.setearParametro("@IdEmpresa", idEmpresa.Value);
-                else
-                    datos.setearParametro("@IdEmpresa", DBNull.Value);
-                    
-                if (!string.IsNullOrWhiteSpace(nombre))
-                    datos.setearParametro("@Nombre", nombre);
-                else
-                    datos.setearParametro("@Nombre", DBNull.Value);
-                
-                datos.ejecutarLectura();
+                List<Empleado> lista = new List<Empleado>();
 
-                while (datos.Lector.Read())
+                using (AccesoDatos datos = new AccesoDatos())
                 {
-                    Empleado empleado = new Empleado();
-                    empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                    empleado.Nombre = (string)datos.Lector["Nombre"];
-                    empleado.Apellido = (string)datos.Lector["Apellido"];
-                    empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
-                    empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                    empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
+                    datos.setearProcedimiento("sp_EmpleadosSinAlmorzar");
+                    datos.setearParametro("@IdServicio", idServicio);
+                    datos.ejecutarLectura();
 
-                    lista.Add(empleado);
+                    while (datos.Lector.Read())
+                    {
+                        Empleado empleado = new Empleado();
+                        empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                        empleado.Nombre = (string)datos.Lector["Nombre"];
+                        empleado.Apellido = (string)datos.Lector["Apellido"];
+                        empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
+                        empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                        empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
+
+                        lista.Add(empleado);
+                    }
+
+                    return lista;
                 }
-
-                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "obtener empleados sin almorzar");
             }
         }
 
-        public void agregar(Empleado empleado)
+        public List<Empleado> FiltrarEmpleadosSinAlmorzar(int idServicio, int? idEmpresa = null, string nombre = null)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
+            {
+                List<Empleado> lista = new List<Empleado>();
+
+                using (AccesoDatos datos = new AccesoDatos())
+                {
+                    datos.setearProcedimiento("sp_FiltrarEmpleadosSinAlmorzar");
+                    datos.setearParametro("@IdServicio", idServicio);
+
+                    if (idEmpresa.HasValue)
+                        datos.setearParametro("@IdEmpresa", idEmpresa.Value);
+                    else
+                        datos.setearParametro("@IdEmpresa", DBNull.Value);
+
+                    if (!string.IsNullOrWhiteSpace(nombre))
+                        datos.setearParametro("@Nombre", nombre);
+                    else
+                        datos.setearParametro("@Nombre", DBNull.Value);
+
+                    datos.ejecutarLectura();
+
+                    while (datos.Lector.Read())
+                    {
+                        Empleado empleado = new Empleado();
+                        empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
+                        empleado.Nombre = (string)datos.Lector["Nombre"];
+                        empleado.Apellido = (string)datos.Lector["Apellido"];
+                        empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
+                        empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
+                        empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
+
+                        lista.Add(empleado);
+                    }
+
+                    return lista;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "filtrar empleados sin almorzar");
+            }
+        }
+
+        public void Agregar(Empleado empleado)
+        {
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -146,15 +165,19 @@ namespace Negocio
                     datos.setearParametro("@Apellido", empleado.Apellido);
                     datos.setearParametro("@IdEmpresa", empleado.Empresa.IdEmpresa);
                     datos.setearParametro("@Estado", empleado.Estado);
-                    
+
                     datos.ejecutarAccion();
                 }
-            }, "agregar empleado");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "agregar empleado");
+            }
         }
 
-        public void modificar(Empleado empleado)
+        public void Modificar(Empleado empleado)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -165,15 +188,19 @@ namespace Negocio
                     datos.setearParametro("@Apellido", empleado.Apellido);
                     datos.setearParametro("@IdEmpresa", empleado.Empresa.IdEmpresa);
                     datos.setearParametro("@Estado", empleado.Estado);
-                    
+
                     datos.ejecutarAccion();
                 }
-            }, "modificar empleado");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "modificar empleado");
+            }
         }
 
-        public void eliminar(int idEmpleado)
+        public void Eliminar(int idEmpleado)
         {
-            ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
@@ -181,40 +208,48 @@ namespace Negocio
                     datos.setearParametro("@IdEmpleado", idEmpleado);
                     datos.ejecutarAccion();
                 }
-            }, "desactivar empleado");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "desactivar empleado");
+            }
         }
 
-        public bool existeCredencial(string credencial)
+        public bool ExisteCredencial(string credencial)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_VerificarCredencial");
                     datos.setearParametro("@IdCredencial", credencial);
                     datos.ejecutarLectura();
-                    
+
                     if (datos.Lector.Read())
                     {
                         return (int)datos.Lector["Registrado"] > 0;
                     }
                     return false;
                 }
-            }, "verificar credencial");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "verificar credencial");
+            }
         }
 
-        public Empleado buscarPorId(int id)
+        public Empleado BuscarPorId(int id)
         {
-            return ExceptionHelper.EjecutarConManejo(() =>
+            try
             {
                 Empleado empleado = new Empleado();
-                
+
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_BuscarEmpleadoPorId");
                     datos.setearParametro("@IdEmpleado", id);
                     datos.ejecutarLectura();
-                    
+
                     if (datos.Lector.Read())
                     {
                         empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
@@ -222,16 +257,19 @@ namespace Negocio
                         empleado.Nombre = datos.Lector["Nombre"].ToString();
                         empleado.Apellido = datos.Lector["Apellido"].ToString();
                         empleado.Estado = (bool)datos.Lector["Estado"];
-                        
+
                         empleado.Empresa = new Empresa();
                         empleado.Empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
                         empleado.Empresa.Nombre = datos.Lector["NombreEmpresa"].ToString();
                     }
-                    
+
                     return empleado;
                 }
-            }, "buscar empleado por ID");
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "buscar empleado por ID");
+            }
         }
-
     }
 }

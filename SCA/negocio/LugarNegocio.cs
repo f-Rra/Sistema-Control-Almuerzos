@@ -1,33 +1,37 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dominio;
 
 namespace Negocio
 {
     public class LugarNegocio
     {
-        public List<Lugar> listar()
+        public List<Lugar> Listar()
         {
-            List<Lugar> lista = new List<Lugar>();
-
-            using (AccesoDatos datos = new AccesoDatos())
+            try
             {
-                datos.setearProcedimiento("sp_ListarLugares");
-                datos.ejecutarLectura();
+                List<Lugar> lista = new List<Lugar>();
 
-                while (datos.Lector.Read())
+                using (AccesoDatos datos = new AccesoDatos())
                 {
-                    Lugar lugar = new Lugar();
-                    lugar.IdLugar = (int)datos.Lector["IdLugar"];
-                    lugar.Nombre = (string)datos.Lector["Nombre"];
+                    datos.setearProcedimiento("sp_ListarLugares");
+                    datos.ejecutarLectura();
 
-                    lista.Add(lugar);
+                    while (datos.Lector.Read())
+                    {
+                        Lugar lugar = new Lugar();
+                        lugar.IdLugar = (int)datos.Lector["IdLugar"];
+                        lugar.Nombre = (string)datos.Lector["Nombre"];
+
+                        lista.Add(lugar);
+                    }
+
+                    return lista;
                 }
-
-                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "listar lugares");
             }
         }
     }
