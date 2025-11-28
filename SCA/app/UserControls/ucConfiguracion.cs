@@ -72,6 +72,10 @@ namespace app.UserControls
             else
             {
                 lblEstadoConexion.Text = "Estado: No conectado";
+                lblEstadoConexion.ForeColor = Color.Red;
+            }
+        }
+
         private void ProbarConexion()
         {
             string cadenaConexion = txtCadenaConexion.Text.Trim();
@@ -116,6 +120,13 @@ namespace app.UserControls
         private bool ValidarCadenaConexion(string cadenaConexion)
         {
             if (string.IsNullOrEmpty(cadenaConexion))
+            {
+                MensajesUI.MostrarAdvertencia("Debe ingresar una cadena de conexión");
+                return false;
+            }
+            return true;
+        }
+
         private void GuardarConexion()
         {
             string nuevaCadena = txtCadenaConexion.Text.Trim();
@@ -201,17 +212,6 @@ namespace app.UserControls
             {
                 this.Cursor = Cursors.Default;
             }
-        }           MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                Application.Restart();
-            }
-            else
-            {
-                MensajesUI.MostrarError("No se pudo guardar la cadena de conexión");
-            }
-            
-            this.Cursor = Cursors.Default;
         }
 
         #endregion

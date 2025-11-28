@@ -152,7 +152,7 @@
             this.pnlRegistrosB.Controls.Add(this.lblNombre);
             this.pnlRegistrosB.Controls.Add(this.txtNombre);
             this.pnlRegistrosB.Controls.Add(this.lblEmpresa);
-            this.pnlRegistrosB.Controls.Add(this.cbLugar);
+            this.pnlRegistrosB.Controls.Add(this.cbEmpresa);
             this.pnlRegistrosB.Location = new System.Drawing.Point(3, 27);
             this.pnlRegistrosB.Name = "pnlRegistrosB";
             this.pnlRegistrosB.Size = new System.Drawing.Size(492, 69);

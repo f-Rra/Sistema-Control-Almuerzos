@@ -10,6 +10,7 @@ using app.UserControls;
 using Negocio;
 using Dominio;
 using System;
+using app.Helpers;
 
 namespace app
 {

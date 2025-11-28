@@ -393,7 +393,7 @@ namespace app.UserControls
         {
             try
             {
-                var empresa = empresaNegocio.buscarPorId(idEmpresa);
+                var empresa = empresaNegocio.BuscarPorId(idEmpresa);
                 if (empresa == null)
                 {
                     LimpiarEstadisticas();

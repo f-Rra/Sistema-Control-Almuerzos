@@ -424,7 +424,7 @@ namespace app
             this.lblProyeccion.Name = "lblProyeccion";
             this.lblProyeccion.Size = new System.Drawing.Size(69, 15);
             this.lblProyeccion.TabIndex = 15;
-            this.lblProyeccion.Text = "Proyecci�n:";
+            this.lblProyeccion.Text = "Proyección:";
             // 
             // mtxtInvitados
             // 
@@ -516,7 +516,7 @@ namespace app
             this.gbxEstadisticas.Name = "gbxEstadisticas";
             this.gbxEstadisticas.Size = new System.Drawing.Size(269, 64);
             this.gbxEstadisticas.TabIndex = 4;
-            this.gbxEstadisticas.Text = "                                  Estad�sticas";
+            this.gbxEstadisticas.Text = "                                  Estadísticas";
             // 
             // lblEstadisticas
             // 
@@ -602,7 +602,7 @@ namespace app
             this.gbxDuracion.Name = "gbxDuracion";
             this.gbxDuracion.Size = new System.Drawing.Size(160, 64);
             this.gbxDuracion.TabIndex = 4;
-            this.gbxDuracion.Text = "       Duraci�n";
+            this.gbxDuracion.Text = "       Duración";
             // 
             // lblCronometro
             // 
@@ -849,7 +849,7 @@ namespace app
             this.lblDuracion.Name = "lblDuracion";
             this.lblDuracion.Size = new System.Drawing.Size(147, 37);
             this.lblDuracion.TabIndex = 2;
-            this.lblDuracion.Text = "Duraci�n: ";
+            this.lblDuracion.Text = "Duración: ";
             this.lblDuracion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbxComensales
@@ -1009,7 +1009,7 @@ namespace app
             this.lblUproyeccion.ForeColor = System.Drawing.Color.White;
             this.lblUproyeccion.Location = new System.Drawing.Point(54, 116);
             this.lblUproyeccion.Name = "lblUproyeccion";
-            this.lblUproyeccion.Size = new System.Drawing.Size(173, 37);
+            this.lblUproyeccion.Size = new System.Drawing.Size(181, 37);
             this.lblUproyeccion.TabIndex = 2;
             this.lblUproyeccion.Text = "Proyecci�n: ";
             this.lblUproyeccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
