@@ -93,10 +93,18 @@ CREATE OR ALTER PROCEDURE sp_IniciarServicio
     @Proyeccion INT = NULL
 AS
 BEGIN
-    INSERT INTO Servicios (IdLugar, Fecha, Proyeccion, DuracionMinutos, TotalComensales, TotalInvitados)
-    VALUES (@IdLugar, CAST(GETDATE() AS DATE), @Proyeccion, NULL, 0, 0);
+    -- Verificar si ya existe un servicio activo
+    IF EXISTS (SELECT 1 FROM Servicios 
+               WHERE IdLugar = @IdLugar AND DuracionMinutos IS NULL)
+    BEGIN
+        THROW 50001, 'Ya existe un servicio activo para este lugar', 1;
+    END
     
-    SELECT CAST(SCOPE_IDENTITY() AS INT) as IdServicio;
+    -- Insertar el nuevo servicio
+    INSERT INTO Servicios (IdLugar, Fecha, Proyeccion)
+    VALUES (@IdLugar, GETDATE(), @Proyeccion);
+    
+    SELECT SCOPE_IDENTITY() AS IdServicio;
 END
 GO
 
@@ -177,20 +185,6 @@ BEGIN
     WHERE s.Fecha BETWEEN @FechaDesde AND @FechaHasta
       AND (@IdLugar IS NULL OR s.IdLugar = @IdLugar)
     ORDER BY s.Fecha DESC, s.IdServicio DESC;
-END
-GO
-
-CREATE OR ALTER PROCEDURE sp_VerificarServicioActivo
-    @IdLugar INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-    
-    SELECT COUNT(*) AS Existe
-    FROM Servicios
-    WHERE IdLugar = @IdLugar 
-      AND DuracionMinutos IS NULL
-      AND CAST(Fecha AS DATE) = CAST(GETDATE() AS DATE);
 END
 GO
 
