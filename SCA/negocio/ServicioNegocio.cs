@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Dominio;
+using negocio.Mappers;
 
 namespace Negocio
 {
@@ -17,17 +18,7 @@ namespace Negocio
 
                     if (datos.Lector.Read())
                     {
-                        Servicio servicio = new Servicio();
-                        servicio.IdServicio = (int)datos.Lector["IdServicio"];
-                        servicio.IdLugar = (int)datos.Lector["IdLugar"];
-                        servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
-                        servicio.Fecha = (DateTime)datos.Lector["Fecha"];
-                        if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
-                        if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
-                        servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
-                        servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
-
-                        return servicio;
+                        return ServicioMapper.MapFromReader(datos.Lector);
                     }
 
                     return null;
@@ -45,35 +36,11 @@ namespace Negocio
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
-                    // Validación adicional para prevenir race condition
-                    datos.setearProcedimiento("sp_VerificarServicioActivo");
-                    datos.setearParametro("@IdLugar", idLugar);
-                    datos.ejecutarLectura();
-
-                    if (datos.Lector.Read())
-                    {
-                        int existe = (int)datos.Lector["Existe"];
-                        if (existe > 0)
-                        {
-                            datos.cerrarConexion();
-                            throw new NegocioException("Ya existe un servicio activo para este lugar. Finalice el servicio actual antes de iniciar uno nuevo.", "crear servicio");
-                        }
-                    }
-                    datos.cerrarConexion();
-
-                    // Proceder con la inserción
                     datos.setearProcedimiento("sp_IniciarServicio");
                     datos.setearParametro("@IdLugar", idLugar);
-                    if (proyeccion.HasValue)
-                        datos.setearParametro("@Proyeccion", proyeccion.Value);
-                    else
-                        datos.setearParametro("@Proyeccion", DBNull.Value);
+                    datos.setearParametro("@Proyeccion", proyeccion.HasValue ? (object)proyeccion.Value : DBNull.Value);
                     return datos.ejecutarAccionReturn();
                 }
-            }
-            catch (NegocioException)
-            {
-                throw; // Re-lanzar NegocioException sin envolver
             }
             catch (Exception ex)
             {
@@ -108,8 +75,6 @@ namespace Negocio
         {
             try
             {
-                List<Servicio> lista = new List<Servicio>();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ListarServiciosPorFecha");
@@ -117,20 +82,7 @@ namespace Negocio
                     datos.setearParametro("@FechaHasta", fechaHasta);
                     datos.ejecutarLectura();
 
-                    while (datos.Lector.Read())
-                    {
-                        Servicio servicio = new Servicio();
-                        servicio.IdServicio = (int)datos.Lector["IdServicio"];
-                        servicio.Fecha = (DateTime)datos.Lector["Fecha"];
-                        if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
-                        if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
-                        servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
-                        servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
-                        servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
-                        lista.Add(servicio);
-                    }
-
-                    return lista;
+                    return ServicioMapper.MapList(datos.Lector);
                 }
             }
             catch (Exception ex)
@@ -143,27 +95,12 @@ namespace Negocio
         {
             try
             {
-                List<Servicio> lista = new List<Servicio>();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ListarServicios");
                     datos.ejecutarLectura();
 
-                    while (datos.Lector.Read())
-                    {
-                        Servicio servicio = new Servicio();
-                        servicio.IdServicio = (int)datos.Lector["IdServicio"];
-                        servicio.Fecha = (DateTime)datos.Lector["Fecha"];
-                        if (!(datos.Lector["Proyeccion"] is DBNull)) servicio.Proyeccion = (int)datos.Lector["Proyeccion"];
-                        if (!(datos.Lector["DuracionMinutos"] is DBNull)) servicio.DuracionMinutos = (int)datos.Lector["DuracionMinutos"];
-                        servicio.TotalComensales = (int)datos.Lector["TotalComensales"];
-                        servicio.TotalInvitados = (int)datos.Lector["TotalInvitados"];
-                        servicio.NombreLugar = (string)datos.Lector["NombreLugar"];
-                        lista.Add(servicio);
-                    }
-
-                    return lista;
+                    return ServicioMapper.MapList(datos.Lector);
                 }
             }
             catch (Exception ex)

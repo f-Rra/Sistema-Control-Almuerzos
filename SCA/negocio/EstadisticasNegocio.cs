@@ -122,8 +122,6 @@ namespace Negocio
             try
             {
                 var lista = new List<Estadisticas.TopEmpresa>();
-
-                // Calcular primer y último día del mes
                 var primerDia = new DateTime(fecha.Year, fecha.Month, 1);
                 var ultimoDia = primerDia.AddMonths(1).AddDays(-1);
 

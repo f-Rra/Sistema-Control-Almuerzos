@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Dominio;
+using negocio.Mappers;
 
 namespace Negocio
 {
@@ -10,23 +11,12 @@ namespace Negocio
         {
             try
             {
-                List<Empresa> lista = new List<Empresa>();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ListarEmpresas");
                     datos.ejecutarLectura();
 
-                    while (datos.Lector.Read())
-                    {
-                        Empresa empresa = new Empresa();
-                        empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                        empresa.Nombre = (string)datos.Lector["Nombre"];
-
-                        lista.Add(empresa);
-                    }
-
-                    return lista;
+                    return EmpresaMapper.MapList(datos.Lector);
                 }
             }
             catch (Exception ex)
@@ -39,25 +29,12 @@ namespace Negocio
         {
             try
             {
-                List<Empresa> lista = new List<Empresa>();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearConsulta("SELECT IdEmpresa, Empresa as Nombre, Estado, CantidadEmpleados FROM vw_EmpresasConEmpleados");
                     datos.ejecutarLectura();
 
-                    while (datos.Lector.Read())
-                    {
-                        Empresa empresa = new Empresa();
-                        empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                        empresa.Nombre = (string)datos.Lector["Nombre"];
-                        empresa.Estado = (bool)datos.Lector["Estado"];
-                        empresa.CantidadEmpleados = (int)datos.Lector["CantidadEmpleados"];
-
-                        lista.Add(empresa);
-                    }
-
-                    return lista;
+                    return EmpresaMapper.MapList(datos.Lector);
                 }
             }
             catch (Exception ex)
@@ -70,8 +47,6 @@ namespace Negocio
         {
             try
             {
-                Empresa empresa = null;
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_BuscarEmpresaPorId");
@@ -80,13 +55,10 @@ namespace Negocio
 
                     if (datos.Lector.Read())
                     {
-                        empresa = new Empresa();
-                        empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                        empresa.Nombre = (string)datos.Lector["Nombre"];
-                        empresa.Estado = (bool)datos.Lector["Estado"];
+                        return EmpresaMapper.MapFromReader(datos.Lector);
                     }
 
-                    return empresa;
+                    return null;
                 }
             }
             catch (Exception ex)

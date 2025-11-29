@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Dominio;
+using negocio.Mappers;
 
 namespace Negocio
 {
@@ -10,27 +11,20 @@ namespace Negocio
         {
             try
             {
-                List<Empleado> lista = new List<Empleado>();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ListarEmpleados");
                     datos.ejecutarLectura();
 
-                    while (datos.Lector.Read())
+                    List<Empleado> lista = EmpleadoMapper.MapList(datos.Lector);
+                    
+                    foreach (var empleado in lista)
                     {
-                        Empleado empleado = new Empleado();
-                        empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                        empleado.Nombre = (string)datos.Lector["Nombre"];
-                        empleado.Apellido = (string)datos.Lector["Apellido"];
-                        empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
-                        empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                        empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
-                        empleado.Estado = (bool)datos.Lector["Estado"];
-                        empleado.Empresa = new Empresa();
-                        empleado.Empresa.IdEmpresa = empleado.IdEmpresa;
-                        empleado.Empresa.Nombre = empleado.NombreEmpresa;
-                        lista.Add(empleado);
+                        empleado.Empresa = new Empresa
+                        {
+                            IdEmpresa = empleado.IdEmpresa,
+                            Nombre = empleado.NombreEmpresa
+                        };
                     }
 
                     return lista;
@@ -54,15 +48,7 @@ namespace Negocio
 
                     if (datos.Lector.Read())
                     {
-                        Empleado empleado = new Empleado();
-                        empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                        empleado.Nombre = (string)datos.Lector["Nombre"];
-                        empleado.Apellido = (string)datos.Lector["Apellido"];
-                        empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
-                        empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                        empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
-
-                        return empleado;
+                        return EmpleadoMapper.MapFromReader(datos.Lector);
                     }
 
                     return null;
@@ -78,28 +64,13 @@ namespace Negocio
         {
             try
             {
-                List<Empleado> lista = new List<Empleado>();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_EmpleadosSinAlmorzar");
                     datos.setearParametro("@IdServicio", idServicio);
                     datos.ejecutarLectura();
 
-                    while (datos.Lector.Read())
-                    {
-                        Empleado empleado = new Empleado();
-                        empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                        empleado.Nombre = (string)datos.Lector["Nombre"];
-                        empleado.Apellido = (string)datos.Lector["Apellido"];
-                        empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
-                        empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                        empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
-
-                        lista.Add(empleado);
-                    }
-
-                    return lista;
+                    return EmpleadoMapper.MapList(datos.Lector);
                 }
             }
             catch (Exception ex)
@@ -112,8 +83,6 @@ namespace Negocio
         {
             try
             {
-                List<Empleado> lista = new List<Empleado>();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_FiltrarEmpleadosSinAlmorzar");
@@ -131,20 +100,7 @@ namespace Negocio
 
                     datos.ejecutarLectura();
 
-                    while (datos.Lector.Read())
-                    {
-                        Empleado empleado = new Empleado();
-                        empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                        empleado.Nombre = (string)datos.Lector["Nombre"];
-                        empleado.Apellido = (string)datos.Lector["Apellido"];
-                        empleado.IdCredencial = (string)datos.Lector["IdCredencial"];
-                        empleado.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                        empleado.NombreEmpresa = (string)datos.Lector["Empresa"];
-
-                        lista.Add(empleado);
-                    }
-
-                    return lista;
+                    return EmpleadoMapper.MapList(datos.Lector);
                 }
             }
             catch (Exception ex)
@@ -242,8 +198,6 @@ namespace Negocio
         {
             try
             {
-                Empleado empleado = new Empleado();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_BuscarEmpleadoPorId");
@@ -252,18 +206,16 @@ namespace Negocio
 
                     if (datos.Lector.Read())
                     {
-                        empleado.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                        empleado.IdCredencial = datos.Lector["IdCredencial"].ToString();
-                        empleado.Nombre = datos.Lector["Nombre"].ToString();
-                        empleado.Apellido = datos.Lector["Apellido"].ToString();
-                        empleado.Estado = (bool)datos.Lector["Estado"];
-
-                        empleado.Empresa = new Empresa();
-                        empleado.Empresa.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                        empleado.Empresa.Nombre = datos.Lector["NombreEmpresa"].ToString();
+                        Empleado empleado = EmpleadoMapper.MapFromReader(datos.Lector);
+                        empleado.Empresa = new Empresa
+                        {
+                            IdEmpresa = empleado.IdEmpresa,
+                            Nombre = empleado.NombreEmpresa
+                        };
+                        return empleado;
                     }
 
-                    return empleado;
+                    return new Empleado();
                 }
             }
             catch (Exception ex)

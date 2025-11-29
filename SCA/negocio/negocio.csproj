@@ -49,6 +49,12 @@
     <Compile Include="EmpresaNegocio.cs" />
     <Compile Include="EstadisticasNegocio.cs" />
     <Compile Include="LugarNegocio.cs" />
+    <Compile Include="Mappers\ConfiguracionMapper.cs" />
+    <Compile Include="Mappers\EmpleadoMapper.cs" />
+    <Compile Include="Mappers\EmpresaMapper.cs" />
+    <Compile Include="Mappers\LugarMapper.cs" />
+    <Compile Include="Mappers\RegistroMapper.cs" />
+    <Compile Include="Mappers\ServicioMapper.cs" />
     <Compile Include="NegocioException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistroNegocio.cs" />

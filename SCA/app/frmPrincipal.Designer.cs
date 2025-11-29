@@ -1009,9 +1009,9 @@ namespace app
             this.lblUproyeccion.ForeColor = System.Drawing.Color.White;
             this.lblUproyeccion.Location = new System.Drawing.Point(54, 116);
             this.lblUproyeccion.Name = "lblUproyeccion";
-            this.lblUproyeccion.Size = new System.Drawing.Size(181, 37);
+            this.lblUproyeccion.Size = new System.Drawing.Size(173, 37);
             this.lblUproyeccion.TabIndex = 2;
-            this.lblUproyeccion.Text = "Proyecci�n: ";
+            this.lblUproyeccion.Text = "Proyección: ";
             this.lblUproyeccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cHome

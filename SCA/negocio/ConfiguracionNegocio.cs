@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Reflection;
 using Dominio;
+using negocio.Mappers;
 
 namespace Negocio
 {
@@ -67,24 +68,13 @@ namespace Negocio
         {
             try
             {
-                InfoBaseDatos info = null;
                 using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ObtenerInfoBaseDatos");
                     datos.ejecutarLectura();
 
-                    if (datos.Lector.Read())
-                    {
-                        info = new InfoBaseDatos
-                        {
-                            NombreBaseDatos = (string)datos.Lector["NombreBaseDatos"],
-                            TamañoMB = (decimal)datos.Lector["TamañoMB"],
-                            FechaCreacion = (DateTime)datos.Lector["FechaCreacion"],
-                            UltimaActualizacion = (DateTime)datos.Lector["UltimaActualizacion"]
-                        };
-                    }
+                    return ConfiguracionMapper.MapInfoBaseDatos(datos.Lector);
                 }
-                return info;
             }
             catch (Exception ex)
             {
@@ -96,23 +86,13 @@ namespace Negocio
         {
             try
             {
-                InfoRespaldo info = null;
                 using (var datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ObtenerUltimoRespaldo");
                     datos.ejecutarLectura();
 
-                    if (datos.Lector.Read())
-                    {
-                        info = new InfoRespaldo
-                        {
-                            FechaRespaldo = (DateTime)datos.Lector["FechaRespaldo"],
-                            RutaArchivo = (string)datos.Lector["RutaArchivo"],
-                            TamañoMB = (decimal)datos.Lector["TamañoMB"]
-                        };
-                    }
+                    return ConfiguracionMapper.MapInfoRespaldo(datos.Lector);
                 }
-                return info;
             }
             catch (Exception ex)
             {

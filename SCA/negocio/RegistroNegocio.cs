@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Dominio;
+using negocio.Mappers;
 
 namespace Negocio
 {
@@ -30,26 +31,13 @@ namespace Negocio
         {
             try
             {
-                List<Registro> lista = new List<Registro>();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ListarRegistrosPorServicio");
                     datos.setearParametro("@IdServicio", idServicio);
                     datos.ejecutarLectura();
 
-                    while (datos.Lector.Read())
-                    {
-                        Registro registro = new Registro();
-                        registro.IdRegistro = (int)datos.Lector["IdRegistro"];
-                        registro.Hora = (TimeSpan)datos.Lector["Hora"];
-                        registro.Fecha = (DateTime)datos.Lector["Fecha"];
-                        registro.NombreEmpleado = (string)datos.Lector["Empleado"];
-                        registro.NombreEmpresa = (string)datos.Lector["Empresa"];
-                        lista.Add(registro);
-                    }
-
-                    return lista;
+                    return RegistroMapper.MapList(datos.Lector);
                 }
             }
             catch (Exception ex)
@@ -111,8 +99,6 @@ namespace Negocio
         {
             try
             {
-                List<Registro> lista = new List<Registro>();
-
                 using (AccesoDatos datos = new AccesoDatos())
                 {
                     datos.setearProcedimiento("sp_ObtenerRegistrosPorEmpresaYFecha");
@@ -121,22 +107,7 @@ namespace Negocio
                     datos.setearParametro("@FechaFin", fechaFin);
                     datos.ejecutarLectura();
 
-                    while (datos.Lector.Read())
-                    {
-                        Registro registro = new Registro();
-                        registro.IdRegistro = (int)datos.Lector["IdRegistro"];
-                        registro.IdEmpleado = (int)datos.Lector["IdEmpleado"];
-                        registro.IdEmpresa = (int)datos.Lector["IdEmpresa"];
-                        registro.IdServicio = (int)datos.Lector["IdServicio"];
-                        registro.IdLugar = (int)datos.Lector["IdLugar"];
-                        registro.Fecha = (DateTime)datos.Lector["Fecha"];
-                        registro.Hora = (TimeSpan)datos.Lector["Hora"];
-                        registro.NombreEmpleado = (string)datos.Lector["NombreEmpleado"];
-                        registro.NombreEmpresa = (string)datos.Lector["NombreEmpresa"];
-                        lista.Add(registro);
-                    }
-
-                    return lista;
+                    return RegistroMapper.MapList(datos.Lector);
                 }
             }
             catch (Exception ex)
