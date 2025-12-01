@@ -8,7 +8,7 @@ using System.Configuration;
 
 namespace Negocio
 {
-    class AccesoDatos : IDisposable
+    internal class AccesoDatos : IDisposable
     {
         private SqlConnection conexion;
         private SqlCommand comando;
@@ -56,9 +56,20 @@ namespace Negocio
 
         public void ejecutarLectura()
         {
-            comando.Connection = conexion;
-            conexion.Open();
-            lector = comando.ExecuteReader();
+            try
+            {
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+            }
+            catch
+            {
+                if (conexion != null && conexion.State != System.Data.ConnectionState.Closed)
+                {
+                    conexion.Close();
+                }
+                throw;
+            }
         }
 
         public void ejecutarAccion()
