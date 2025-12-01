@@ -475,12 +475,12 @@ namespace app
             }
         }
 
-        private void MostrarVistaRegistroManual()
+        private bool MostrarVistaRegistroManual()
         {
             if (!idServicioActual.HasValue)
             {
                 MensajesUI.MostrarAdvertencia("El servicio no está activo");
-                return;
+                return false;
             }
 
             CargarVistaRegistroManual();
@@ -493,33 +493,36 @@ namespace app
 
             pnlSuperior.Visible = true;
             MostrarVista(vistaRegManual);
+            return true;
         }
 
-        private void MostrarVistaReportes()
+        private bool MostrarVistaReportes()
         {
             if (idServicioActual.HasValue)
             {
                 MensajesUI.MostrarAdvertencia("Reportes está disponible sólo con el servicio inactivo");
-                return;
+                return false;
             }
 
             CargarVistaReportes();
             vistaReportes.RefrescarDatos();
             pnlSuperior.Visible = false;
             MostrarVista(vistaReportes);
+            return true;
         }
 
-        private void MostrarVistaAdmin()
+        private bool MostrarVistaAdmin()
         {
             if (idServicioActual.HasValue)
             {
                 MensajesUI.MostrarAdvertencia("Admin está disponible sólo con el servicio inactivo");
-                return;
+                return false;
             }
 
             CargarVistaAdmin();
             pnlSuperior.Visible = false;
             MostrarVista(vistaAdmin);
+            return true;
         }
 
         #endregion
@@ -622,20 +625,26 @@ namespace app
 
         private void btnRegistros_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 291);
-            MostrarVistaRegistroManual();
+            if (MostrarVistaRegistroManual())
+            {
+                ssSidebar.Location = new System.Drawing.Point(9, 291);
+            }
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 373);
-            MostrarVistaReportes();
+            if (MostrarVistaReportes())
+            {
+                ssSidebar.Location = new System.Drawing.Point(9, 373);
+            }
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-            ssSidebar.Location = new System.Drawing.Point(9, 616);
-            MostrarVistaAdmin();
+            if (MostrarVistaAdmin())
+            {
+                ssSidebar.Location = new System.Drawing.Point(9, 616);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
