@@ -273,7 +273,8 @@ Sistema-Control-Almuerzos/
 │   │   └── Configuracion.cs        # Modelos de configuración (InfoBaseDatos, InfoRespaldo, InfoAplicacion)
 │   │
 │   ├── negocio/                    # Capa de Lógica de Negocio
-│   │   ├── AccesoDatos.cs          # Clase centralizada para BD
+│   │   ├── AccesoDatos.cs          # Clase centralizada para BD con IDisposable
+│   │   ├── NegocioException.cs     # Excepciones personalizadas con mensajes amigables
 │   │   ├── EmpleadoNegocio.cs      # Lógica de empleados
 │   │   ├── EmpresaNegocio.cs       # Lógica de empresas
 │   │   ├── LugarNegocio.cs         # Lógica de lugares
@@ -282,17 +283,26 @@ Sistema-Control-Almuerzos/
 │   │   ├── EstadisticasNegocio.cs  # Lógica de estadísticas
 │   │   ├── ReporteNegocio.cs       # Generación de 4 reportes avanzados
 │   │   ├── ConfiguracionNegocio.cs # Lógica de configuración y respaldos
-│   │   └── ExceptionHelper.cs      # Manejo centralizado de errores
+│   │   └── Mappers/                # Conversión de DataReader a Entidades
+│   │       ├── EmpleadoMapper.cs   # Mapeo de empleados
+│   │       ├── EmpresaMapper.cs    # Mapeo de empresas
+│   │       ├── LugarMapper.cs      # Mapeo de lugares
+│   │       ├── ServicioMapper.cs   # Mapeo de servicios
+│   │       ├── RegistroMapper.cs   # Mapeo de registros
+│   │       └── ConfiguracionMapper.cs # Mapeo de configuración
 │   │
 │   └── app/                        # Capa de Presentación
 │       ├── Program.cs              # Punto de entrada
 │       ├── frmPrincipal.cs         # Ventana principal
+│       ├── Helpers/                # Utilidades de presentación
+│       │   └── MensajesUI.cs       # Mensajes y manejo de excepciones en UI
 │       ├── UserControls/           # Controles de usuario modulares
-│       │   ├── ucVistaPrincipal.cs       # Pantalla de bienvenida
-│       │   ├── ucRegistroManual.cs       # Registro de comensales
+│       │   ├── ucVistaPrincipal.cs       # Registro por credencial RFID
+│       │   ├── ucRegistroManual.cs       # Registro manual de comensales
+│       │   ├── ucNotificacion.cs         # Notificación visual de registro
 │       │   ├── ucEmpleados.cs            # Gestión de empleados
 │       │   ├── ucEmpresas.cs             # Gestión de empresas
-│       │   ├── ucConfiguracion.cs        # Configuración de servicios
+│       │   ├── ucConfiguracion.cs        # Configuración del sistema
 │       │   ├── ucReportes.cs             # Sistema de reportes
 │       │   ├── ucEstadisticas.cs         # Análisis estadístico
 │       │   └── ucAdmin.cs                # Panel administrativo
@@ -496,14 +506,15 @@ El sistema muestra:
 
 | Módulo | Descripción |
 |--------|-------------|
-| **ucVistaPrincipal** | Pantalla de bienvenida y navegación | 
-| **ucRegistroManual** | Registro de comensales | 
+| **ucVistaPrincipal** | Registro de comensales por credencial RFID | 
+| **ucRegistroManual** | Registro manual seleccionando de lista | 
+| **ucNotificacion** | Notificación visual animada de registro exitoso |
 | **ucEmpleados** | Gestión de empleados y credenciales | 
 | **ucEmpresas** | Gestión de empresas | 
-| **ucConfiguracion** | Configuración del sistema | 
-| **ucReportes** | Generación de reportes | 
-| **ucEstadisticas** | Análisis estadístico |
-| **ucAdmin** | Panel administrativo general | 
+| **ucConfiguracion** | Configuración del sistema y respaldos | 
+| **ucReportes** | Generación de reportes con exportación PDF | 
+| **ucEstadisticas** | Dashboard de análisis estadístico |
+| **ucAdmin** | Panel administrativo (contenedor de módulos) | 
 
 ---
 
@@ -599,7 +610,9 @@ El sistema muestra:
 **Para Desarrolladores:**
 - Leer este README completo
 - Revisar arquitectura en sección correspondiente
-- Consultar `ExceptionHelper.cs` para manejo de errores
+- Consultar `NegocioException.cs` para manejo de errores en capa de negocio
+- Consultar `MensajesUI.cs` para manejo de mensajes y excepciones en UI
+- Revisar carpeta `Mappers/` para conversión de datos
 
 **Para Usuarios:**
 - Leer `MANUAL_USUARIO.md`
