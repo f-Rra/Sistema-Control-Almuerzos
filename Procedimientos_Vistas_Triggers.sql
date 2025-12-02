@@ -578,6 +578,19 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE sp_ListarEmpresasConEmpleados
+AS
+BEGIN
+    SELECT 
+        IdEmpresa,
+        Empresa as Nombre,
+        Estado,
+        CantidadEmpleados
+    FROM vw_EmpresasConEmpleados
+    ORDER BY Empresa;
+END
+GO
+
 -- =============================================
 -- VISTAS
 -- =============================================

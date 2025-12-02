@@ -31,7 +31,7 @@ namespace Negocio
             {
                 using (AccesoDatos datos = new AccesoDatos())
                 {
-                    datos.setearConsulta("SELECT IdEmpresa, Empresa as Nombre, Estado, CantidadEmpleados FROM vw_EmpresasConEmpleados");
+                    datos.setearProcedimiento("sp_ListarEmpresasConEmpleados");
                     datos.ejecutarLectura();
 
                     return EmpresaMapper.MapList(datos.Lector);
