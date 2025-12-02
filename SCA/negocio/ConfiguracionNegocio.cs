@@ -154,7 +154,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw NegocioException.FromDbException(ex, "obtener información de aplicación");
+                throw new NegocioException("Error al obtener información de la aplicación", "obtener información de aplicación", ex);
             }
         }
     }

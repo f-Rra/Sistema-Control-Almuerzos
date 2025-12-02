@@ -215,7 +215,7 @@ namespace Negocio
                         return empleado;
                     }
 
-                    return new Empleado();
+                    return null;
                 }
             }
             catch (Exception ex)
