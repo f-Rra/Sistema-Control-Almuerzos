@@ -87,16 +87,8 @@ namespace Negocio
                 {
                     datos.setearProcedimiento("sp_FiltrarEmpleadosSinAlmorzar");
                     datos.setearParametro("@IdServicio", idServicio);
-
-                    if (idEmpresa.HasValue)
-                        datos.setearParametro("@IdEmpresa", idEmpresa.Value);
-                    else
-                        datos.setearParametro("@IdEmpresa", DBNull.Value);
-
-                    if (!string.IsNullOrWhiteSpace(nombre))
-                        datos.setearParametro("@Nombre", nombre);
-                    else
-                        datos.setearParametro("@Nombre", DBNull.Value);
+                    datos.setearParametro("@IdEmpresa", idEmpresa.HasValue ? (object)idEmpresa.Value : DBNull.Value);
+                    datos.setearParametro("@Nombre", !string.IsNullOrWhiteSpace(nombre) ? (object)nombre : DBNull.Value);
 
                     datos.ejecutarLectura();
 

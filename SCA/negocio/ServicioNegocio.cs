@@ -58,10 +58,7 @@ namespace Negocio
                     datos.setearParametro("@IdServicio", idServicio);
                     datos.setearParametro("@TotalComensales", totalComensales);
                     datos.setearParametro("@TotalInvitados", totalInvitados);
-                    if (duracionMinutos.HasValue)
-                        datos.setearParametro("@DuracionMinutos", duracionMinutos.Value);
-                    else
-                        datos.setearParametro("@DuracionMinutos", DBNull.Value);
+                    datos.setearParametro("@DuracionMinutos", duracionMinutos.HasValue ? (object)duracionMinutos.Value : DBNull.Value);
                     datos.ejecutarAccion();
                 }
             }
