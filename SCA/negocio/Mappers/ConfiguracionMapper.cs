@@ -1,7 +1,7 @@
 using System.Data.SqlClient;
 using Dominio;
 
-namespace negocio.Mappers
+namespace Negocio.Mappers
 {
     public static class ConfiguracionMapper
     {

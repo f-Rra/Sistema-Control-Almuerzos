@@ -6,13 +6,30 @@ namespace app.UserControls
 {
     public partial class ucNotificacion : UserControl
     {
-        private Timer timer;
+        private Timer timerAnimacion;
+        private Timer timerEspera;
         private int yInicial, yFinal, paso;
         private bool animandoSalida;
 
         public ucNotificacion()
         {
             InitializeComponent();
+        }
+
+        private void DisponerTimers()
+        {
+            if (timerAnimacion != null)
+            {
+                timerAnimacion.Stop();
+                timerAnimacion.Dispose();
+                timerAnimacion = null;
+            }
+            if (timerEspera != null)
+            {
+                timerEspera.Stop();
+                timerEspera.Dispose();
+                timerEspera = null;
+            }
         }
 
         public void MostrarNotificacion(string nombre, string empresa, string hora, Control padre, bool ocultarTitulo = false)
@@ -72,10 +89,10 @@ namespace app.UserControls
         {
             animandoSalida = salida;
             paso = 0;
-            timer?.Dispose();
-            timer = new Timer { Interval = 20 };
-            timer.Tick += Timer_Tick;
-            timer.Start();
+            DisponerTimers();
+            timerAnimacion = new Timer { Interval = 20 };
+            timerAnimacion.Tick += Timer_Tick;
+            timerAnimacion.Start();
         }
 
         private void Timer_Tick(object s, EventArgs e)
@@ -98,22 +115,37 @@ namespace app.UserControls
 
             if (paso >= totalPasos)
             {
-                timer.Stop();
-                timer.Dispose();
-                timer = null;
+                if (timerAnimacion != null)
+                {
+                    timerAnimacion.Stop();
+                    timerAnimacion.Dispose();
+                    timerAnimacion = null;
+                }
 
                 if (animandoSalida)
                 {
+                    DisponerTimers();
                     Parent?.Controls.Remove(this);
                     Dispose();
                 }
                 else
                 {
-                    timer = new Timer { Interval = 4000 };
-                    timer.Tick += (_, __) => { timer.Stop(); IniciarAnimacion(true); };
-                    timer.Start();
+                    timerEspera = new Timer { Interval = 4000 };
+                    timerEspera.Tick += TimerEspera_Tick;
+                    timerEspera.Start();
                 }
             }
+        }
+
+        private void TimerEspera_Tick(object s, EventArgs e)
+        {
+            if (timerEspera != null)
+            {
+                timerEspera.Stop();
+                timerEspera.Dispose();
+                timerEspera = null;
+            }
+            IniciarAnimacion(true);
         }
     }
 }

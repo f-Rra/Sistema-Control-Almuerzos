@@ -15,8 +15,7 @@ namespace app.UserControls
         {
             if (disposing)
             {
-                timer?.Stop();
-                timer?.Dispose();
+                DisponerTimers();
                 
                 if (components != null)
                 {

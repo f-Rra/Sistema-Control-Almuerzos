@@ -18,6 +18,8 @@ namespace app.UserControls
         #region Variables y Constantes
 
         private EmpresaNegocio empresaNegocio;
+        private EmpleadoNegocio empleadoNegocio;
+        private RegistroNegocio registroNegocio;
         private Empresa seleccionada = null;
         private bool modoEdicion = false;
 
@@ -29,6 +31,8 @@ namespace app.UserControls
         {
             InitializeComponent();
             empresaNegocio = new EmpresaNegocio();
+            empleadoNegocio = new EmpleadoNegocio();
+            registroNegocio = new RegistroNegocio();
         }
 
         private void ucEmpresas_Load(object sender, EventArgs e)
@@ -423,7 +427,6 @@ namespace app.UserControls
 
         private int ObtenerEmpleadosInactivos(int idEmpresa)
         {
-            var empleadoNegocio = new EmpleadoNegocio();
             var todosEmpleados = empleadoNegocio.Listar();
             
             if (todosEmpleados != null)
@@ -435,7 +438,6 @@ namespace app.UserControls
 
         private int ObtenerAsistenciasMes(int idEmpresa)
         {
-            var registroNegocio = new RegistroNegocio();
             DateTime inicioMes = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime finMes = inicioMes.AddMonths(1).AddDays(-1);
             

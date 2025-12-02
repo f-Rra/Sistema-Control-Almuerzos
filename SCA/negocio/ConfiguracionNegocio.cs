@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Reflection;
 using Dominio;
-using negocio.Mappers;
+using Negocio.Mappers;
 
 namespace Negocio
 {

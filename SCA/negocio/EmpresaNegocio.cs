@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Dominio;
-using negocio.Mappers;
+using Negocio.Mappers;
 
 namespace Negocio
 {
