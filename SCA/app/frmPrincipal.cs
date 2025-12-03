@@ -288,28 +288,16 @@ namespace app
 
         private void OcultarColumnasServicios()
         {
-            var cols = dgvServicios?.Columns;
-            if (cols == null) return;
-
-            string[] aOcultar = { "IdServicio", "IdLugar", "Estado", "Proyeccion", "DuracionMinutos" };
-            foreach (var nombre in aOcultar)
-            {
-                var col = cols[nombre];
-                if (col != null) col.Visible = false;
-            }
+            ListadoHelper.OcultarColumnas(dgvServicios, 
+                "IdServicio", "IdLugar", "Estado", "Proyeccion", "DuracionMinutos");
         }
 
         private void RenombrarColumnasServicios()
         {
-            var cols = dgvServicios?.Columns;
-            if (cols == null) return;
-
-            if (cols["TotalComensales"] != null)
-                cols["TotalComensales"].HeaderText = "Comensales";
-            if (cols["TotalInvitados"] != null)
-                cols["TotalInvitados"].HeaderText = "Invitados";
-            if (cols["TotalGeneral"] != null)
-                cols["TotalGeneral"].HeaderText = "Total";
+            ListadoHelper.ConfigurarHeaders(dgvServicios,
+                ("TotalComensales", "Comensales"),
+                ("TotalInvitados", "Invitados"),
+                ("TotalGeneral", "Total"));
         }
 
         private void CargarUltimoServicio()

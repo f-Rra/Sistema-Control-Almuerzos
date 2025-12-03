@@ -106,49 +106,18 @@ namespace app.UserControls
 
         private void OcultarColumnas()
         {
-            var cols = dgvEmpleados?.Columns;
-            if (cols == null) return;
-
-            ConfigurarVisibilidadColumnas(cols);
-            ConfigurarOrdenColumnas(cols);
-        }
-
-        private void ConfigurarVisibilidadColumnas(DataGridViewColumnCollection cols)
-        {
-            string[] aMostrar = { "NombreCompleto", "Empresa" };
+            // Ocultar columnas internas
+            ListadoHelper.OcultarColumnas(dgvEmpleados, 
+                "IdEmpleado", "IdCredencial", "IdEmpresa", "Estado", "Empresa");
             
-            foreach (DataGridViewColumn col in cols)
-            {
-                if (col.Name == "Empresa")
-                {
-                    col.Visible = false;
-                    if (cols.Contains("NombreEmpresa"))
-                    {
-                        cols["NombreEmpresa"].Visible = true;
-                        cols["NombreEmpresa"].HeaderText = "Empresa";
-                    }
-                }
-                else if (!aMostrar.Contains(col.Name))
-                {
-                    col.Visible = false;
-                }
-                else
-                {
-                    col.Visible = true;
-                }
-            }
-        }
-
-        private void ConfigurarOrdenColumnas(DataGridViewColumnCollection cols)
-        {
-            string[] orden = { "NombreCompleto", "NombreEmpresa" };
-            int idx = 0;
+            // Configurar encabezados
+            ListadoHelper.ConfigurarHeaders(dgvEmpleados,
+                ("NombreCompleto", "Nombre Completo"),
+                ("NombreEmpresa", "Empresa"));
             
-            foreach (var nombre in orden)
-            {
-                if (cols.Contains(nombre))
-                    cols[nombre].DisplayIndex = idx++;
-            }
+            // Configurar orden
+            ListadoHelper.ConfigurarOrden(dgvEmpleados, "NombreCompleto", 0);
+            ListadoHelper.ConfigurarOrden(dgvEmpleados, "NombreEmpresa", 1);
         }
 
         private void CargarEmpresas()
