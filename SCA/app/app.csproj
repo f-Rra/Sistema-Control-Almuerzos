@@ -127,6 +127,12 @@
     <Compile Include="UserControls\ucReportes.Designer.cs">
       <DependentUpon>ucReportes.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucServicio.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucServicio.Designer.cs">
+      <DependentUpon>ucServicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucVistaPrincipal.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucReportes.resx">
       <DependentUpon>ucReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucServicio.resx">
+      <DependentUpon>ucServicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucVistaPrincipal.resx">
       <DependentUpon>ucVistaPrincipal.cs</DependentUpon>

@@ -19,16 +19,16 @@ namespace app
         #region Variables y Constantes
 
         private readonly Color MenuHover = Color.FromArgb(243, 229, 201);
-        private readonly Timer tmrCrono = new Timer { Interval = 1000 };
-        private readonly Stopwatch crono = new Stopwatch();
-        private int duracionMinutos = 0;
-        private LugarNegocio negL = new LugarNegocio();
-        private ServicioNegocio negS = new ServicioNegocio();
-        private ucVistaPrincipal vistaPrincipal;
-        private ucRegistroManual vistaRegManual;
-        private ucReportes vistaReportes;
-        private ucAdmin vistaAdmin;
-        private int? idServicioActual = null;
+        private readonly Timer _tmrCrono = new Timer { Interval = 1000 };
+        private readonly Stopwatch _crono = new Stopwatch();
+        private int _duracionMinutos = 0;
+        private readonly LugarNegocio _lugarNegocio = new LugarNegocio();
+        private readonly ServicioNegocio _servicioNegocio = new ServicioNegocio();
+        private ucServicio _vistaServicio;
+        private ucRegistroManual _vistaRegManual;
+        private ucReportes _vistaReportes;
+        private ucAdmin _vistaAdmin;
+        private int? _idServicioActual = null;
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace app
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            negS.FinalizarServiciosPendientes();
+            _servicioNegocio.FinalizarServiciosPendientes();
             CargarLugares();
             CargarFecha();
             IniciarCronometro();
@@ -72,7 +72,7 @@ namespace app
                 ActualizarCronometro();
                 ActualizarControles();
                 
-                vistaPrincipal.SetServicio(idServicioActual, idLugar);
+                _vistaServicio.SetServicio(_idServicioActual, idLugar);
                 ActualizarEstadisticas();
             }
             catch (NegocioException ex)
@@ -106,7 +106,7 @@ namespace app
 
         private void ToggleServicio()
         {
-            if (crono.IsRunning)
+            if (_crono.IsRunning)
                 FinalizarServicio();
             else
                 IniciarServicio();
@@ -170,16 +170,16 @@ namespace app
 
         private void CrearServicioEnBD(int idLugar, int proy)
         {
-            int nuevoId = negS.CrearServicio(idLugar, proy);
-            idServicioActual = nuevoId;
+            int nuevoId = _servicioNegocio.CrearServicio(idLugar, proy);
+            _idServicioActual = nuevoId;
         }
 
         private void ActualizarCronometro()
         {
-            duracionMinutos = 0;
-            crono.Reset();
-            crono.Start();
-            tmrCrono.Start();
+            _duracionMinutos = 0;
+            _crono.Reset();
+            _crono.Start();
+            _tmrCrono.Start();
         }
 
         private void ActualizarControles()
@@ -201,22 +201,22 @@ namespace app
 
         private void DetenerCronometro()
         {
-            tmrCrono.Stop();
-            crono.Stop();
+            _tmrCrono.Stop();
+            _crono.Stop();
             ActualizarCronometroUI();
-            duracionMinutos = (int)Math.Ceiling(crono.Elapsed.TotalMinutes);
+            _duracionMinutos = (int)Math.Ceiling(_crono.Elapsed.TotalMinutes);
             btnServicio.Text = "Iniciar Servicio";
         }
 
         private void GuardarEstadisticasEnBD()
         {
-            if (idServicioActual.HasValue)
+            if (_idServicioActual.HasValue)
             {
-                int totalComensales = vistaPrincipal?.CountRegistros() ?? 0;
+                int totalComensales = _vistaServicio?.CountRegistros() ?? 0;
                 int totalInvitados = 0;
                 int.TryParse(mtxtInvitados.Text, out totalInvitados);
 
-                negS.FinalizarServicio(idServicioActual.Value, totalComensales, totalInvitados, duracionMinutos);
+                _servicioNegocio.FinalizarServicio(_idServicioActual.Value, totalComensales, totalInvitados, _duracionMinutos);
                 ActualizarEstadisticas();
             }
         }
@@ -226,10 +226,10 @@ namespace app
             cbLugar.Enabled = true;
             mtxtProyeccion.ReadOnly = false;
             mtxtInvitados.ReadOnly = false;
-            idServicioActual = null;
+            _idServicioActual = null;
             mtxtProyeccion.Text = string.Empty;
             mtxtInvitados.Text = string.Empty;
-            crono.Reset();
+            _crono.Reset();
             lblCronometro.Text = "00:00:00";
             lblEstadisticas.Text = "Registrados: 0 │ Faltan: 0";
             lblProgreso.Text = "0%";
@@ -269,7 +269,7 @@ namespace app
         {
             try
             {
-                var lista = negS.ListarTodos();
+                var lista = _servicioNegocio.ListarTodos();
                 dgvServicios.DataSource = null;
                 dgvServicios.DataSource = lista;
 
@@ -304,7 +304,7 @@ namespace app
         {
             try
             {
-                Servicio ultimo = negS.ObtenerUltimoServicio();
+                Servicio ultimo = _servicioNegocio.ObtenerUltimoServicio();
                 if (ultimo != null)
                 {
                     lblUlugar.Text = "Lugar: " + ultimo.NombreLugar;
@@ -335,7 +335,7 @@ namespace app
         private void CargarLugares()
         {
             cbLugar.DataSource = null;
-            cbLugar.DataSource = negL.Listar();
+            cbLugar.DataSource = _lugarNegocio.Listar();
             cbLugar.ValueMember = "IdLugar";
             cbLugar.DisplayMember = "Nombre";
         }
@@ -354,7 +354,7 @@ namespace app
      
         private void CargarVistaPrincipal()
         {
-            if (idServicioActual == null)
+            if (_idServicioActual == null)
             {
                 OcultarTodasLasVistas();
                 CargarServicios();
@@ -365,54 +365,54 @@ namespace app
                 gbxServicios.Visible = false;
                 gbxUltimo.Visible = false;
 
-                if (vistaPrincipal == null)
-                    vistaPrincipal = new ucVistaPrincipal(this);
+                if (_vistaServicio == null)
+                    _vistaServicio = new ucServicio(this);
 
-                if (vistaPrincipal.Parent != pnlPrincipal)
+                if (_vistaServicio.Parent != pnlPrincipal)
                 {
-                    vistaPrincipal.Dock = DockStyle.Fill;
-                    vistaPrincipal.Visible = false;
-                    pnlPrincipal.Controls.Add(vistaPrincipal);
+                    _vistaServicio.Dock = DockStyle.Fill;
+                    _vistaServicio.Visible = false;
+                    pnlPrincipal.Controls.Add(_vistaServicio);
                 }
             }
         }
 
         private void CargarVistaRegistroManual()
         {
-            if (vistaRegManual == null)
-                vistaRegManual = new ucRegistroManual(this);
+            if (_vistaRegManual == null)
+                _vistaRegManual = new ucRegistroManual(this);
 
-            if (vistaRegManual.Parent != pnlPrincipal)
+            if (_vistaRegManual.Parent != pnlPrincipal)
             {
-                vistaRegManual.Dock = DockStyle.Fill;
-                vistaRegManual.Visible = false;
-                pnlPrincipal.Controls.Add(vistaRegManual);
+                _vistaRegManual.Dock = DockStyle.Fill;
+                _vistaRegManual.Visible = false;
+                pnlPrincipal.Controls.Add(_vistaRegManual);
             }
         }
 
         private void CargarVistaReportes()
         {
-            if (vistaReportes == null)
-                vistaReportes = new ucReportes();
+            if (_vistaReportes == null)
+                _vistaReportes = new ucReportes();
 
-            if (vistaReportes.Parent != pnlPrincipal)
+            if (_vistaReportes.Parent != pnlPrincipal)
             {
-                vistaReportes.Dock = DockStyle.Fill;
-                vistaReportes.Visible = false;
-                pnlPrincipal.Controls.Add(vistaReportes);
+                _vistaReportes.Dock = DockStyle.Fill;
+                _vistaReportes.Visible = false;
+                pnlPrincipal.Controls.Add(_vistaReportes);
             }
         }
 
         private void CargarVistaAdmin()
         {
-            if (vistaAdmin == null)
-                vistaAdmin = new ucAdmin();
+            if (_vistaAdmin == null)
+                _vistaAdmin = new ucAdmin();
 
-            if (vistaAdmin.Parent != pnlPrincipal)
+            if (_vistaAdmin.Parent != pnlPrincipal)
             {
-                vistaAdmin.Dock = DockStyle.Fill;
-                vistaAdmin.Visible = false;
-                pnlPrincipal.Controls.Add(vistaAdmin);
+                _vistaAdmin.Dock = DockStyle.Fill;
+                _vistaAdmin.Visible = false;
+                pnlPrincipal.Controls.Add(_vistaAdmin);
             }
         }
 
@@ -449,9 +449,9 @@ namespace app
             CargarVistaPrincipal();
             pnlSuperior.Visible = true;
 
-            if (idServicioActual.HasValue && vistaPrincipal != null)
+            if (_idServicioActual.HasValue && _vistaServicio != null)
             {
-                MostrarVista(vistaPrincipal);
+                MostrarVista(_vistaServicio);
             }
             else
             {
@@ -465,43 +465,43 @@ namespace app
 
         private bool MostrarVistaRegistroManual()
         {
-            if (!idServicioActual.HasValue)
+            if (!_idServicioActual.HasValue)
             {
                 MensajesUI.MostrarAdvertencia("El servicio no está activo");
                 return false;
             }
 
             CargarVistaRegistroManual();
-            vistaRegManual.RefrescarDatos();
+            _vistaRegManual.RefrescarDatos();
 
             if (cbLugar.SelectedValue is int idLugar)
             {
-                vistaRegManual.SetServicio(idServicioActual.Value, idLugar);
+                _vistaRegManual.SetServicio(_idServicioActual.Value, idLugar);
             }
 
             pnlSuperior.Visible = true;
-            MostrarVista(vistaRegManual);
+            MostrarVista(_vistaRegManual);
             return true;
         }
 
         private bool MostrarVistaReportes()
         {
-            if (idServicioActual.HasValue)
+            if (_idServicioActual.HasValue)
             {
                 MensajesUI.MostrarAdvertencia("Reportes está disponible sólo con el servicio inactivo");
                 return false;
             }
 
             CargarVistaReportes();
-            vistaReportes.RefrescarDatos();
+            _vistaReportes.RefrescarDatos();
             pnlSuperior.Visible = false;
-            MostrarVista(vistaReportes);
+            MostrarVista(_vistaReportes);
             return true;
         }
 
         private bool MostrarVistaAdmin()
         {
-            if (idServicioActual.HasValue)
+            if (_idServicioActual.HasValue)
             {
                 MensajesUI.MostrarAdvertencia("Admin está disponible sólo con el servicio inactivo");
                 return false;
@@ -509,7 +509,7 @@ namespace app
 
             CargarVistaAdmin();
             pnlSuperior.Visible = false;
-            MostrarVista(vistaAdmin);
+            MostrarVista(_vistaAdmin);
             return true;
         }
 
@@ -520,8 +520,8 @@ namespace app
         public void RefrescarTodasLasVistas()
         {
             CargarLugares();
-            vistaRegManual?.RefrescarDatos();
-            vistaReportes?.RefrescarDatos();
+            _vistaRegManual?.RefrescarDatos();
+            _vistaReportes?.RefrescarDatos();
 
             if (gbxServicios.Visible || gbxUltimo.Visible)
             {
@@ -533,13 +533,13 @@ namespace app
 
         public void RefrescarRegistros()
         {
-            vistaPrincipal?.RefrescarRegistros();
+            _vistaServicio?.RefrescarRegistros();
             ActualizarEstadisticas();
         }
 
         public void ActualizarEstadisticas()
         {
-            int registrados = vistaPrincipal?.CountRegistros() ?? 0;
+            int registrados = _vistaServicio?.CountRegistros() ?? 0;
 
             int.TryParse(mtxtProyeccion.Text, out int proyeccion);
             int.TryParse(mtxtInvitados.Text, out int invitados);
@@ -562,12 +562,12 @@ namespace app
         private void IniciarCronometro()
         {
             lblCronometro.Text = "00:00:00";
-            tmrCrono.Tick += (s, ev) => { ActualizarCronometroUI(); };
+            _tmrCrono.Tick += (s, ev) => { ActualizarCronometroUI(); };
         }
 
         private void ActualizarCronometroUI()
         {
-            lblCronometro.Text = crono.Elapsed.ToString(@"hh\:mm\:ss");
+            lblCronometro.Text = _crono.Elapsed.ToString(@"hh\:mm\:ss");
         }
 
         #endregion
@@ -637,7 +637,7 @@ namespace app
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            if (idServicioActual.HasValue)
+            if (_idServicioActual.HasValue)
             {
                 MensajesUI.MostrarAdvertencia("Debe finalizar el servicio activo antes de salir de la aplicación.");
                 return;
@@ -660,7 +660,7 @@ namespace app
 
         private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (idServicioActual.HasValue)
+            if (_idServicioActual.HasValue)
             {
                 MensajesUI.MostrarAdvertencia("Debe finalizar el servicio activo antes de cerrar la aplicación.");
                 e.Cancel = true;

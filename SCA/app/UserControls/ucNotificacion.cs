@@ -57,7 +57,7 @@ namespace app.UserControls
 
             if (pnlComensales != null && pnlRegistros != null)
             {
-                // ucVistaPrincipal
+                // ucServicio
                 yInicial = pnlComensales.Bottom;
                 yFinal = pnlRegistros.Top + 10;
             }

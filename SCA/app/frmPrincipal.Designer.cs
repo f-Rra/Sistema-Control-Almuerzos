@@ -16,39 +16,39 @@ namespace app
             if (disposing)
             {
                 // Liberar UserControls creados dinámicamente
-                if (vistaPrincipal != null)
+                if (_vistaServicio != null)
                 {
-                    vistaPrincipal.Dispose();
-                    vistaPrincipal = null;
+                    _vistaServicio.Dispose();
+                    _vistaServicio = null;
                 }
 
-                if (vistaRegManual != null)
+                if (_vistaRegManual != null)
                 {
-                    vistaRegManual.Dispose();
-                    vistaRegManual = null;
+                    _vistaRegManual.Dispose();
+                    _vistaRegManual = null;
                 }
 
-                if (vistaReportes != null)
+                if (_vistaReportes != null)
                 {
-                    vistaReportes.Dispose();
-                    vistaReportes = null;
+                    _vistaReportes.Dispose();
+                    _vistaReportes = null;
                 }
 
-                if (vistaAdmin != null)
+                if (_vistaAdmin != null)
                 {
-                    vistaAdmin.Dispose();
-                    vistaAdmin = null;
+                    _vistaAdmin.Dispose();
+                    _vistaAdmin = null;
                 }
 
                 // Liberar Timer y Stopwatch
-                if (tmrCrono != null)
+                if (_tmrCrono != null)
                 {
-                    tmrCrono.Stop();
-                    tmrCrono.Dispose();
+                    _tmrCrono.Stop();
+                    _tmrCrono.Dispose();
                 }
-                if (crono != null)
+                if (_crono != null)
                 {
-                    crono.Stop();
+                    _crono.Stop();
                 }
                 if (components != null)
                 {
