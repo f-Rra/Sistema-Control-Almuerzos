@@ -41,6 +41,16 @@ namespace Negocio.Mappers
                 empleado.Estado = (bool)reader["Estado"];
             }
 
+            // Asignar objeto Empresa si hay nombre de empresa
+            if (!string.IsNullOrEmpty(empleado.NombreEmpresa))
+            {
+                empleado.Empresa = new Empresa
+                {
+                    IdEmpresa = empleado.IdEmpresa,
+                    Nombre = empleado.NombreEmpresa
+                };
+            }
+
             return empleado;
         }
 

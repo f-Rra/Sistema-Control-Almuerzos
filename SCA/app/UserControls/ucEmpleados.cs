@@ -236,10 +236,8 @@ namespace app.UserControls
             txtApellido.Text = empleadoSeleccionado.Apellido;
             cbEmpresaEmpleado.SelectedValue = empleadoSeleccionado.Empresa.IdEmpresa;
             
-            if (empleadoSeleccionado.Estado)
-                rbActivoEmpleado.Checked = true;
-            else
-                rbInactivoEmpleado.Checked = true;
+            rbActivoEmpleado.Checked = empleadoSeleccionado.Estado;
+            rbInactivoEmpleado.Checked = !empleadoSeleccionado.Estado;
         }
 
         private void ConfigurarModoEdicion()

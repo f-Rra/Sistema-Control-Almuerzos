@@ -16,18 +16,7 @@ namespace Negocio
                     datos.setearProcedimiento("sp_ListarEmpleados");
                     datos.ejecutarLectura();
 
-                    List<Empleado> lista = EmpleadoMapper.MapList(datos.Lector);
-                    
-                    foreach (var empleado in lista)
-                    {
-                        empleado.Empresa = new Empresa
-                        {
-                            IdEmpresa = empleado.IdEmpresa,
-                            Nombre = empleado.NombreEmpresa
-                        };
-                    }
-
-                    return lista;
+                    return EmpleadoMapper.MapList(datos.Lector);
                 }
             }
             catch (Exception ex)
@@ -198,13 +187,7 @@ namespace Negocio
 
                     if (datos.Lector.Read())
                     {
-                        Empleado empleado = EmpleadoMapper.MapFromReader(datos.Lector);
-                        empleado.Empresa = new Empresa
-                        {
-                            IdEmpresa = empleado.IdEmpresa,
-                            Nombre = empleado.NombreEmpresa
-                        };
-                        return empleado;
+                        return EmpleadoMapper.MapFromReader(datos.Lector);
                     }
 
                     return null;

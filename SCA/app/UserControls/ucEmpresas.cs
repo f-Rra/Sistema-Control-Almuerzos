@@ -163,10 +163,8 @@ namespace app.UserControls
         {
             txtNombre.Text = seleccionada.Nombre;
             
-            if (seleccionada.Estado)
-                rbActivoEmpresa.Checked = true;
-            else
-                rbInactivoEmpresa.Checked = true;
+            rbActivoEmpresa.Checked = seleccionada.Estado;
+            rbInactivoEmpresa.Checked = !seleccionada.Estado;
         }
 
         private void ConfigurarModoEdicion()
