@@ -59,10 +59,13 @@ namespace app.UserControls
         {
             try
             {
-                var empleados = empleadoNegocio.Listar();
+                // Filtrado optimizado en BD
+                int? idEmpresaFiltro = idEmpresa > 0 ? (int?)idEmpresa : null;
+                string filtroTexto = string.IsNullOrWhiteSpace(filtro) ? null : filtro;
+
+                var empleados = empleadoNegocio.FiltrarEmpleados(filtroTexto, idEmpresaFiltro);
                 if (empleados == null) return;
 
-                empleados = AplicarFiltros(empleados, filtro, idEmpresa);
                 ActualizarDgvEmpleados(empleados);
                 ActualizarContadorEmpleados(empleados.Count);
             }
@@ -70,25 +73,6 @@ namespace app.UserControls
             {
                 MensajesUI.ManejarExcepcion(ex);
             }
-        }
-
-        private List<Empleado> AplicarFiltros(List<Empleado> empleados, string filtro, int idEmpresa)
-        {
-            if (!string.IsNullOrWhiteSpace(filtro))
-            {
-                empleados = empleados.FindAll(e =>
-                    e.Nombre.ToUpper().Contains(filtro.ToUpper()) ||
-                    e.Apellido.ToUpper().Contains(filtro.ToUpper()) ||
-                    e.IdCredencial.Contains(filtro)
-                );
-            }
-
-            if (idEmpresa > 0)
-            {
-                empleados = empleados.FindAll(e => e.Empresa.IdEmpresa == idEmpresa);
-            }
-
-            return empleados;
         }
 
         private void ActualizarDgvEmpleados(List<Empleado> empleados)

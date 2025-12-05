@@ -120,5 +120,29 @@ namespace Negocio
                 throw NegocioException.FromDbException(ex, "modificar empresa");
             }
         }
+
+        /// <summary>
+        /// Filtra empresas por nombre (optimizado en BD).
+        /// </summary>
+        /// <param name="filtro">Texto a buscar en el nombre de la empresa.</param>
+        /// <returns>Lista de empresas que coinciden con el filtro.</returns>
+        public List<Empresa> FiltrarEmpresas(string filtro = null)
+        {
+            try
+            {
+                using (AccesoDatos datos = new AccesoDatos())
+                {
+                    datos.setearProcedimiento("sp_FiltrarEmpresas");
+                    datos.setearParametro("@Filtro", string.IsNullOrWhiteSpace(filtro) ? (object)DBNull.Value : filtro);
+                    datos.ejecutarLectura();
+
+                    return EmpresaMapper.MapList(datos.Lector);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "filtrar empresas");
+            }
+        }
     }
 }

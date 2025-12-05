@@ -198,5 +198,31 @@ namespace Negocio
                 throw NegocioException.FromDbException(ex, "buscar empleado por ID");
             }
         }
+
+        /// <summary>
+        /// Filtra empleados por nombre/apellido/credencial y empresa (optimizado en BD).
+        /// </summary>
+        /// <param name="filtro">Texto a buscar en nombre, apellido o credencial.</param>
+        /// <param name="idEmpresa">ID de empresa para filtrar (opcional).</param>
+        /// <returns>Lista de empleados que coinciden con los filtros.</returns>
+        public List<Empleado> FiltrarEmpleados(string filtro = null, int? idEmpresa = null)
+        {
+            try
+            {
+                using (AccesoDatos datos = new AccesoDatos())
+                {
+                    datos.setearProcedimiento("sp_FiltrarEmpleados");
+                    datos.setearParametro("@Filtro", string.IsNullOrWhiteSpace(filtro) ? (object)DBNull.Value : filtro);
+                    datos.setearParametro("@IdEmpresa", idEmpresa.HasValue ? (object)idEmpresa.Value : DBNull.Value);
+                    datos.ejecutarLectura();
+
+                    return EmpleadoMapper.MapList(datos.Lector);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw NegocioException.FromDbException(ex, "filtrar empleados");
+            }
+        }
     }
 }

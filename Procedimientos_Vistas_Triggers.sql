@@ -981,6 +981,58 @@ BEGIN
 END
 GO
 
+-- =============================================
+-- PROCEDIMIENTOS DE FILTRADO OPTIMIZADO
+-- =============================================
+
+-- Filtrar empleados por nombre, apellido, credencial y empresa
+CREATE OR ALTER PROCEDURE sp_FiltrarEmpleados
+    @Filtro NVARCHAR(100) = NULL,
+    @IdEmpresa INT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT 
+        e.IdEmpleado,
+        e.IdCredencial,
+        e.Nombre,
+        e.Apellido,
+        e.IdEmpresa,
+        emp.Nombre as NombreEmpresa,
+        e.Estado
+    FROM Empleados e
+    INNER JOIN Empresas emp ON e.IdEmpresa = emp.IdEmpresa
+    WHERE 
+        (@Filtro IS NULL OR 
+         e.Nombre LIKE '%' + @Filtro + '%' OR 
+         e.Apellido LIKE '%' + @Filtro + '%' OR
+         e.IdCredencial LIKE '%' + @Filtro + '%')
+        AND (@IdEmpresa IS NULL OR e.IdEmpresa = @IdEmpresa)
+        AND e.Estado = 1
+    ORDER BY e.Apellido, e.Nombre;
+END
+GO
+
+-- Filtrar empresas por nombre
+CREATE OR ALTER PROCEDURE sp_FiltrarEmpresas
+    @Filtro NVARCHAR(100) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT 
+        e.IdEmpresa,
+        e.Nombre,
+        e.Estado,
+        (SELECT COUNT(*) FROM Empleados WHERE IdEmpresa = e.IdEmpresa AND Estado = 1) as CantidadEmpleados
+    FROM Empresas e
+    WHERE (@Filtro IS NULL OR e.Nombre LIKE '%' + @Filtro + '%')
+        AND e.Estado = 1
+    ORDER BY e.Nombre;
+END
+GO
+
 
 
 
