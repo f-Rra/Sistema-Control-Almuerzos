@@ -11,6 +11,7 @@ using Negocio;
 using Dominio;
 using System;
 using app.Helpers;
+using app.Gestores;
 
 namespace app
 {
@@ -19,11 +20,11 @@ namespace app
         #region Variables y Constantes
 
         private readonly Color MenuHover = Color.FromArgb(243, 229, 201);
-        private readonly Timer _tmrCrono = new Timer { Interval = 1000 };
-        private readonly Stopwatch _crono = new Stopwatch();
-        private int _duracionMinutos = 0;
         private readonly LugarNegocio _lugarNegocio = new LugarNegocio();
         private readonly ServicioNegocio _servicioNegocio = new ServicioNegocio();
+        private GestorCronometro _gestorCronometro;
+        private GestorEstadisticas _gestorEstadisticas;
+        private GestorNavegacion _gestorNavegacion;
         private ucServicio _vistaServicio;
         private ucRegistroManual _vistaRegManual;
         private ucReportes _vistaReportes;
@@ -41,10 +42,14 @@ namespace app
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
+            // Inicializar gestores
+            _gestorCronometro = new GestorCronometro(lblCronometro);
+            _gestorEstadisticas = new GestorEstadisticas(lblEstadisticas, lblProgreso, pbProgreso);
+            _gestorNavegacion = new GestorNavegacion(pnlPrincipal, pnlSuperior, gbxServicios, gbxUltimo);
+
             _servicioNegocio.FinalizarServiciosPendientes();
             CargarLugares();
             CargarFecha();
-            IniciarCronometro();
             ActualizarEstadisticas();
             CargarVistaPrincipal();
             gbxServicios.Visible = true;
@@ -106,7 +111,7 @@ namespace app
 
         private void ToggleServicio()
         {
-            if (_crono.IsRunning)
+            if (_gestorCronometro.EstaActivo)
                 FinalizarServicio();
             else
                 IniciarServicio();
@@ -176,10 +181,7 @@ namespace app
 
         private void ActualizarCronometro()
         {
-            _duracionMinutos = 0;
-            _crono.Reset();
-            _crono.Start();
-            _tmrCrono.Start();
+            _gestorCronometro.Iniciar();
         }
 
         private void ActualizarControles()
@@ -193,18 +195,14 @@ namespace app
             btnAdmin.Enabled = false;
             btnRegistros.Enabled = true;
             btnHome.Enabled = true;
-            gbxServicios.Visible = false;
-            gbxUltimo.Visible = false;
+            _gestorNavegacion.MostrarGroupBoxes(false);
             CargarVistaPrincipal();
             MostrarVistaPrincipal();
         }
 
         private void DetenerCronometro()
         {
-            _tmrCrono.Stop();
-            _crono.Stop();
-            ActualizarCronometroUI();
-            _duracionMinutos = (int)Math.Ceiling(_crono.Elapsed.TotalMinutes);
+            _gestorCronometro.Detener();
             btnServicio.Text = "Iniciar Servicio";
         }
 
@@ -216,7 +214,7 @@ namespace app
                 int totalInvitados = 0;
                 int.TryParse(mtxtInvitados.Text, out totalInvitados);
 
-                _servicioNegocio.FinalizarServicio(_idServicioActual.Value, totalComensales, totalInvitados, _duracionMinutos);
+                _servicioNegocio.FinalizarServicio(_idServicioActual.Value, totalComensales, totalInvitados, _gestorCronometro.DuracionMinutos);
                 ActualizarEstadisticas();
             }
         }
@@ -229,10 +227,8 @@ namespace app
             _idServicioActual = null;
             mtxtProyeccion.Text = string.Empty;
             mtxtInvitados.Text = string.Empty;
-            _crono.Reset();
-            lblCronometro.Text = "00:00:00";
-            lblEstadisticas.Text = "Registrados: 0 │ Faltan: 0";
-            lblProgreso.Text = "0%";
+            _gestorCronometro.Resetear();
+            _gestorEstadisticas.Resetear();
             SetEstadoServicio(false);
             btnReportes.Enabled = true;
             btnAdmin.Enabled = true;
@@ -241,10 +237,7 @@ namespace app
             OcultarTodasLasVistas();
             CargarServicios();
             CargarUltimoServicio();
-            gbxServicios.Visible = true;
-            gbxUltimo.Visible = true;
-            gbxServicios.BringToFront();
-            gbxUltimo.BringToFront();
+            _gestorNavegacion.MostrarGroupBoxes(true);
         }
 
         private void SetEstadoServicio(bool activo)
@@ -362,8 +355,7 @@ namespace app
             }
             else
             {
-                gbxServicios.Visible = false;
-                gbxUltimo.Visible = false;
+                _gestorNavegacion.MostrarGroupBoxes(false);
 
                 if (_vistaServicio == null)
                     _vistaServicio = new ucServicio(this);
@@ -418,36 +410,18 @@ namespace app
 
         private void MostrarVista(UserControl vista)
         {
-            if (vista == null) return;
-
-            pnlPrincipal.SuspendLayout();
-
-            foreach (Control c in pnlPrincipal.Controls)
-                c.Visible = false;
-
-            vista.Visible = true;
-            vista.BringToFront();
-
-            pnlPrincipal.ResumeLayout();
+            _gestorNavegacion.MostrarVista(vista);
         }
 
         private void OcultarTodasLasVistas()
         {
-            pnlPrincipal.SuspendLayout();
-
-            foreach (Control c in pnlPrincipal.Controls)
-                c.Visible = false;
-
-            gbxServicios.Visible = false;
-            gbxUltimo.Visible = false;
-
-            pnlPrincipal.ResumeLayout();
+            _gestorNavegacion.OcultarTodasLasVistas();
         }
 
         private void MostrarVistaPrincipal()
         {
             CargarVistaPrincipal();
-            pnlSuperior.Visible = true;
+            _gestorNavegacion.MostrarPanelSuperior(true);
 
             if (_idServicioActual.HasValue && _vistaServicio != null)
             {
@@ -456,10 +430,7 @@ namespace app
             else
             {
                 OcultarTodasLasVistas();
-                gbxServicios.Visible = true;
-                gbxUltimo.Visible = true;
-                gbxServicios.BringToFront();
-                gbxUltimo.BringToFront();
+                _gestorNavegacion.MostrarGroupBoxes(true);
             }
         }
 
@@ -479,7 +450,7 @@ namespace app
                 _vistaRegManual.SetServicio(_idServicioActual.Value, idLugar);
             }
 
-            pnlSuperior.Visible = true;
+            _gestorNavegacion.MostrarPanelSuperior(true);
             MostrarVista(_vistaRegManual);
             return true;
         }
@@ -494,7 +465,7 @@ namespace app
 
             CargarVistaReportes();
             _vistaReportes.RefrescarDatos();
-            pnlSuperior.Visible = false;
+            _gestorNavegacion.MostrarPanelSuperior(false);
             MostrarVista(_vistaReportes);
             return true;
         }
@@ -508,7 +479,7 @@ namespace app
             }
 
             CargarVistaAdmin();
-            pnlSuperior.Visible = false;
+            _gestorNavegacion.MostrarPanelSuperior(false);
             MostrarVista(_vistaAdmin);
             return true;
         }
@@ -540,37 +511,15 @@ namespace app
         public void ActualizarEstadisticas()
         {
             int registrados = _vistaServicio?.CountRegistros() ?? 0;
-
             int.TryParse(mtxtProyeccion.Text, out int proyeccion);
             int.TryParse(mtxtInvitados.Text, out int invitados);
 
-            int objetivo = proyeccion + invitados;
-            int faltan = Math.Max(0, objetivo - registrados);
-
-            int porcentaje = objetivo > 0 ? Math.Min(100, (registrados * 100) / objetivo) :
-                             registrados > 0 ? 100 : 0;
-
-            pbProgreso.Value = porcentaje;
-            lblProgreso.Text = $"{porcentaje}%";
-            lblEstadisticas.Text = $"Registrados: {registrados} │ Faltan: {faltan}";
+            _gestorEstadisticas.Actualizar(registrados, proyeccion, invitados);
         }
 
         #endregion
 
-        #region Cronómetro
 
-        private void IniciarCronometro()
-        {
-            lblCronometro.Text = "00:00:00";
-            _tmrCrono.Tick += (s, ev) => { ActualizarCronometroUI(); };
-        }
-
-        private void ActualizarCronometroUI()
-        {
-            lblCronometro.Text = _crono.Elapsed.ToString(@"hh\:mm\:ss");
-        }
-
-        #endregion
 
         #region Menú Lateral
 

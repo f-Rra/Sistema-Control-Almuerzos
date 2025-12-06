@@ -3,9 +3,6 @@ using System.Windows.Forms;
 
 namespace app.Gestores
 {
-    /// <summary>
-    /// Gestiona el cálculo y visualización de estadísticas del servicio.
-    /// </summary>
     public class GestorEstadisticas
     {
         private readonly Label _labelEstadisticas;

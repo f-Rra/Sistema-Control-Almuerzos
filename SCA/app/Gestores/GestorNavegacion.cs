@@ -3,9 +3,6 @@ using app.UserControls;
 
 namespace app.Gestores
 {
-    /// <summary>
-    /// Gestiona la navegación y visualización entre diferentes vistas de la aplicación.
-    /// </summary>
     public class GestorNavegacion
     {
         private readonly Panel _contenedorPrincipal;

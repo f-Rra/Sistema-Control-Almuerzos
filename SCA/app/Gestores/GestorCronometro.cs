@@ -4,9 +4,6 @@ using System.Windows.Forms;
 
 namespace app.Gestores
 {
-    /// <summary>
-    /// Gestiona el cronómetro del servicio de almuerzos.
-    /// </summary>
     public class GestorCronometro
     {
         private readonly Timer _timer;
