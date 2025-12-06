@@ -12,6 +12,7 @@ using Dominio;
 using System;
 using app.Helpers;
 using app.Gestores;
+using static app.Helpers.MensajesConstantes;
 
 namespace app
 {
@@ -88,7 +89,7 @@ namespace app
 
         private void FinalizarServicio()
         {
-            if (!MensajesUI.MostrarConfirmacion("¿Está seguro de finalizar el servicio? Esta acción guardará todas las estadísticas."))
+            if (!MensajesUI.MostrarConfirmacion(CONFIRMACION_FINALIZAR_SERVICIO))
             {
                 return;
             }
@@ -121,7 +122,7 @@ namespace app
         {
             if (cbLugar.SelectedValue == null)
             {
-                MensajesUI.MostrarAdvertencia("Seleccione un lugar");
+                MensajesUI.MostrarAdvertencia(VALIDACION_SELECCIONE_LUGAR);
                 return false;
             }
             return true;
@@ -134,19 +135,19 @@ namespace app
             
             if (string.IsNullOrEmpty(proyText))
             {
-                MensajesUI.MostrarAdvertencia("Ingrese una proyección de comensales");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INGRESE_PROYECCION);
                 return false;
             }
 
             if (!int.TryParse(proyText, out proyeccion))
             {
-                MensajesUI.MostrarAdvertencia("Ingrese una proyección válida (solo números)");
+                MensajesUI.MostrarAdvertencia(VALIDACION_PROYECCION_VALIDA);
                 return false;
             }
             
             if (proyeccion < 0 || proyeccion > 1000)
             {
-                MensajesUI.MostrarAdvertencia("La proyección debe estar entre 0 y 1000 comensales");
+                MensajesUI.MostrarAdvertencia(VALIDACION_PROYECCION_RANGO);
                 return false;
             }
             
@@ -160,13 +161,13 @@ namespace app
                 
             if (!int.TryParse(mtxtInvitados.Text, out int invitados))
             {
-                MensajesUI.MostrarAdvertencia("Ingrese un número válido de invitados");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INVITADOS_VALIDO);
                 return false;
             }
             
             if (invitados < 0 || invitados > 500)
             {
-                MensajesUI.MostrarAdvertencia("Los invitados deben estar entre 0 y 500");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INVITADOS_RANGO);
                 return false;
             }
             
@@ -423,7 +424,7 @@ namespace app
         {
             if (!_idServicioActual.HasValue)
             {
-                MensajesUI.MostrarAdvertencia("El servicio no está activo");
+                MensajesUI.MostrarAdvertencia(VALIDACION_SERVICIO_NO_ACTIVO);
                 return false;
             }
 
@@ -444,7 +445,7 @@ namespace app
         {
             if (_idServicioActual.HasValue)
             {
-                MensajesUI.MostrarAdvertencia("Reportes está disponible sólo con el servicio inactivo");
+                MensajesUI.MostrarAdvertencia(ADVERTENCIA_REPORTES_SERVICIO_ACTIVO);
                 return false;
             }
 
@@ -459,7 +460,7 @@ namespace app
         {
             if (_idServicioActual.HasValue)
             {
-                MensajesUI.MostrarAdvertencia("Admin está disponible sólo con el servicio inactivo");
+                MensajesUI.MostrarAdvertencia(ADVERTENCIA_ADMIN_SERVICIO_ACTIVO);
                 return false;
             }
 
@@ -573,11 +574,11 @@ namespace app
         {
             if (_idServicioActual.HasValue)
             {
-                MensajesUI.MostrarAdvertencia("Debe finalizar el servicio activo antes de salir de la aplicación.");
+                MensajesUI.MostrarAdvertencia(ADVERTENCIA_FINALIZAR_ANTES_SALIR);
                 return;
             }
 
-            if (MensajesUI.MostrarConfirmacion("¿Está seguro de salir de la aplicación?"))
+            if (MensajesUI.MostrarConfirmacion(CONFIRMACION_SALIR_APLICACION))
             {
                 Application.Exit();
             }
@@ -596,7 +597,7 @@ namespace app
         {
             if (_idServicioActual.HasValue)
             {
-                MensajesUI.MostrarAdvertencia("Debe finalizar el servicio activo antes de cerrar la aplicación.");
+                MensajesUI.MostrarAdvertencia(ADVERTENCIA_FINALIZAR_ANTES_CERRAR);
                 e.Cancel = true;
             }
         }
@@ -618,7 +619,7 @@ namespace app
                 }
                 catch (Exception ex)
                 {
-                    MensajesUI.MostrarError($"Error al cargar servicio seleccionado: {ex.Message}");
+                    MensajesUI.MostrarError(string.Format(ERROR_CARGAR_SERVICIO, ex.Message));
                 }
             }
         }

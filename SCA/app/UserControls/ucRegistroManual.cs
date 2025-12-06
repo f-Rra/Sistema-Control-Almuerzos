@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Dominio;
 using Negocio;
 using app.Helpers;
+using static app.Helpers.MensajesConstantes;
 
 namespace app.UserControls
 {
@@ -245,12 +246,12 @@ namespace app.UserControls
         {
             if (!servicioIdActual.HasValue)
             {
-                MensajesUI.MostrarAdvertencia("No hay un servicio activo");
+                MensajesUI.MostrarAdvertencia(VALIDACION_SERVICIO_INACTIVO);
                 return false;
             }
             if (dgvFaltantes.SelectedRows == null || dgvFaltantes.SelectedRows.Count == 0)
             {
-                MensajesUI.MostrarAdvertencia("Seleccione al menos un empleado de la lista");
+                MensajesUI.MostrarAdvertencia(VALIDACION_SELECCIONE_EMPLEADOS);
                 return false;
             }
             return true;

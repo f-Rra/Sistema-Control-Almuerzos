@@ -79,6 +79,7 @@
     <Compile Include="Gestores\GestorEstadisticas.cs" />
     <Compile Include="Gestores\GestorNavegacion.cs" />
     <Compile Include="Helpers\ListadoHelper.cs" />
+    <Compile Include="Helpers\MensajesConstantes.cs" />
     <Compile Include="Helpers\MensajesUI.cs" />
     <Compile Include="frmPrincipal.cs">
       <SubType>Form</SubType>

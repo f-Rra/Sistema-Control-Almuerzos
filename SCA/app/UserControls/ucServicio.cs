@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Dominio;
 using Negocio;
 using app.Helpers;
+using static app.Helpers.MensajesConstantes;
 
 namespace app.UserControls
 {
@@ -132,7 +133,7 @@ namespace app.UserControls
         {
             if (!_servicioIdActual.HasValue)
             {
-                MensajesUI.MostrarAdvertencia("No hay un servicio activo");
+                MensajesUI.MostrarAdvertencia(VALIDACION_SERVICIO_INACTIVO);
                 return false;
             }
             return true;
@@ -143,7 +144,7 @@ namespace app.UserControls
             credencial = txtRegistro.Text.Trim();
             if (string.IsNullOrEmpty(credencial))
             {
-                MensajesUI.MostrarAdvertencia("Ingrese una credencial válida");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INGRESE_CREDENCIAL_VALIDA);
                 return false;
             }
             return true;
@@ -168,7 +169,7 @@ namespace app.UserControls
             Empleado empleado = _empleadoNegocio.BuscarPorCredencial(credencial);
             if (empleado == null)
             {
-                MensajesUI.MostrarAdvertencia($"No se encontró un empleado con la credencial {credencial}");
+                MensajesUI.MostrarAdvertencia(string.Format(INFO_EMPLEADO_NO_ENCONTRADO, credencial));
                 return null;
             }
             return empleado;
@@ -178,7 +179,7 @@ namespace app.UserControls
         {
             if (_registroNegocio.EmpleadoYaRegistrado(empleado.IdEmpleado, _servicioIdActual.Value))
             {
-                MensajesUI.MostrarInformacion($"El empleado {empleado.NombreCompleto} ya está registrado en este servicio");
+                MensajesUI.MostrarInformacion(string.Format(INFO_EMPLEADO_YA_REGISTRADO, empleado.NombreCompleto));
                 return true;
             }
             return false;

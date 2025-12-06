@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Negocio;
 using Dominio;
 using app.Helpers;
+using static app.Helpers.MensajesConstantes;
 
 namespace app.UserControls
 {
@@ -100,7 +101,7 @@ namespace app.UserControls
                 }
                 else
                 {
-                    MensajesUI.MostrarError("No se pudo conectar a la base de datos");
+                    MensajesUI.MostrarError(ERROR_NO_CONECTAR_BD);
                     lblEstadoConexion.Text = "Estado: Error de conexión";
                     lblEstadoConexion.ForeColor = Color.Red;
                 }
@@ -121,7 +122,7 @@ namespace app.UserControls
         {
             if (string.IsNullOrEmpty(cadenaConexion))
             {
-                MensajesUI.MostrarAdvertencia("Debe ingresar una cadena de conexión");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INGRESE_CADENA_CONEXION);
                 return false;
             }
             return true;
@@ -161,7 +162,7 @@ namespace app.UserControls
                 {
                     if (!negocio.ProbarConexion(nuevaCadena))
                     {
-                        MensajesUI.MostrarError("No se pudo conectar con la nueva cadena de conexión");
+                        MensajesUI.MostrarError(ERROR_NO_CONECTAR_NUEVA_CADENA);
                         return false;
                     }
                 }
@@ -177,8 +178,7 @@ namespace app.UserControls
 
         private bool ConfirmarGuardado()
         {
-            return MensajesUI.MostrarConfirmacion(
-                "¿Está seguro de guardar la nueva cadena de conexión?\n\nLa aplicación se reiniciará.");
+            return MensajesUI.MostrarConfirmacion(CONFIRMACION_GUARDAR_CONEXION);
         }
 
         private void EjecutarGuardadoConexion(string nuevaCadena)
@@ -201,7 +201,7 @@ namespace app.UserControls
                 }
                 else
                 {
-                    MensajesUI.MostrarError("No se pudo guardar la cadena de conexión");
+                    MensajesUI.MostrarError(ERROR_NO_GUARDAR_CADENA);
                 }
             }
             catch (NegocioException ex)
@@ -257,7 +257,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                MensajesUI.MostrarError($"Error al cargar información de respaldos: {ex.Message}");
+                MensajesUI.MostrarError(string.Format(ERROR_CARGAR_INFO_RESPALDOS, ex.Message));
             }
         }
 
@@ -354,7 +354,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                MensajesUI.MostrarError($"Error al guardar configuración: {ex.Message}");
+                MensajesUI.MostrarError(string.Format(ERROR_GUARDAR_CONFIGURACION, ex.Message));
             }
         }
 

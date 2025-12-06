@@ -12,6 +12,7 @@ using Dominio;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using app.Helpers;
+using static app.Helpers.MensajesConstantes;
 
 namespace app.UserControls
 {
@@ -134,7 +135,7 @@ namespace app.UserControls
         {
             if (dgvReporte.DataSource == null || dgvReporte.Rows.Count == 0)
             {
-                MensajesUI.MostrarAdvertencia("No hay datos para exportar. Genere un reporte primero.");
+                MensajesUI.MostrarAdvertencia(VALIDACION_NO_HAY_DATOS_EXPORTAR);
                 return false;
             }
             return true;
@@ -175,7 +176,7 @@ namespace app.UserControls
             }
             catch (System.IO.IOException ioEx)
             {
-                MensajesUI.MostrarError($"No se pudo acceder al archivo. Asegúrese de que el archivo no esté abierto en otra aplicación.\n\nDetalle: {ioEx.Message}");
+                MensajesUI.MostrarError(string.Format(ERROR_ARCHIVO_ABIERTO, ioEx.Message));
             }
             catch (Exception ex)
             {
@@ -242,7 +243,7 @@ namespace app.UserControls
 
         private void MostrarMensajeExitoYAbrirPDF(string rutaArchivo)
         {
-            MensajesUI.MostrarExito($"Reporte guardado como PDF:\n{rutaArchivo}");
+            MensajesUI.MostrarExito(string.Format(INFO_REPORTE_GUARDADO, rutaArchivo));
             System.Diagnostics.Process.Start(rutaArchivo);
         }
 
@@ -270,7 +271,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                MensajesUI.MostrarError($"Error al exportar el reporte: {ex.Message}");
+                MensajesUI.MostrarError(string.Format(ERROR_EXPORTAR_REPORTE, ex.Message));
             }
         }
 
@@ -301,7 +302,7 @@ namespace app.UserControls
 
             if (desde > hasta)
             {
-                MensajesUI.MostrarAdvertencia("El rango de fechas es inválido (Desde > Hasta)");
+                MensajesUI.MostrarAdvertencia(VALIDACION_RANGO_FECHAS_INVALIDO);
                 return false;
             }
             return true;

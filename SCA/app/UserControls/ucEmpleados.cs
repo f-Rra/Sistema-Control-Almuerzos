@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Dominio;
 using Negocio;
 using app.Helpers;
+using static app.Helpers.MensajesConstantes;
 
 namespace app.UserControls
 {
@@ -263,12 +264,12 @@ namespace app.UserControls
         {
             if (empleadoSeleccionado == null) return;
 
-            if (MensajesUI.MostrarConfirmacion("¿Está seguro de desactivar al empleado?"))
+            if (MensajesUI.MostrarConfirmacion(CONFIRMACION_DESACTIVAR_EMPLEADO))
             {
                 try
                 {
                     empleadoNegocio.Eliminar(empleadoSeleccionado.IdEmpleado);
-                    MensajesUI.MostrarExito("Empleado desactivado correctamente");
+                    MensajesUI.MostrarExito(EXITO_EMPLEADO_DESACTIVADO);
                     CargarEmpleados();
                     LimpiarFormularioEmpleado();
                 }
@@ -287,7 +288,7 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtCredencial.Text))
             {
-                MensajesUI.MostrarAdvertencia("Ingrese un número de credencial");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INGRESE_CREDENCIAL);
                 return;
             }
 
@@ -308,16 +309,16 @@ namespace app.UserControls
             {
                 if (!modoEdicion || (modoEdicion && empleadoSeleccionado.IdCredencial != txtCredencial.Text.Trim()))
                 {
-                    MensajesUI.MostrarAdvertencia("Esta credencial ya está en uso");
+                    MensajesUI.MostrarAdvertencia(VALIDACION_CREDENCIAL_EN_USO);
                 }
                 else
                 {
-                    MensajesUI.MostrarInformacion("Credencial actual del empleado");
+                    MensajesUI.MostrarInformacion(EXITO_CREDENCIAL_ACTUAL);
                 }
             }
             else
             {
-                MensajesUI.MostrarInformacion("Credencial disponible");
+                MensajesUI.MostrarInformacion(EXITO_CREDENCIAL_DISPONIBLE);
             }
         }
 
@@ -406,7 +407,7 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtCredencial.Text))
             {
-                MensajesUI.MostrarAdvertencia("Ingrese el número de credencial");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INGRESE_CREDENCIAL_EMPLEADO);
                 txtCredencial.Focus();
                 return false;
             }
@@ -417,14 +418,14 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                MensajesUI.MostrarAdvertencia("Ingrese el nombre");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INGRESE_NOMBRE);
                 txtNombre.Focus();
                 return false;
             }
 
             if (!ValidarNombre(txtNombre.Text))
             {
-                MensajesUI.MostrarAdvertencia("El nombre solo puede contener letras, espacios, tildes y guiones");
+                MensajesUI.MostrarAdvertencia(VALIDACION_NOMBRE_SOLO_LETRAS);
                 txtNombre.Focus();
                 return false;
             }
@@ -435,14 +436,14 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtApellido.Text))
             {
-                MensajesUI.MostrarAdvertencia("Ingrese el apellido");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INGRESE_APELLIDO);
                 txtApellido.Focus();
                 return false;
             }
 
             if (!ValidarNombre(txtApellido.Text))
             {
-                MensajesUI.MostrarAdvertencia("El apellido solo puede contener letras, espacios, tildes y guiones");
+                MensajesUI.MostrarAdvertencia(VALIDACION_APELLIDO_SOLO_LETRAS);
                 txtApellido.Focus();
                 return false;
             }
@@ -453,7 +454,7 @@ namespace app.UserControls
         {
             if (cbEmpresaEmpleado.SelectedIndex == -1)
             {
-                MensajesUI.MostrarAdvertencia("Seleccione una empresa");
+                MensajesUI.MostrarAdvertencia(VALIDACION_SELECCIONE_EMPRESA);
                 return false;
             }
             return true;

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Dominio;
 using Negocio;
 using app.Helpers;
+using static app.Helpers.MensajesConstantes;
 
 namespace app.UserControls
 {
@@ -44,7 +45,7 @@ namespace app.UserControls
             }
             catch (Exception ex)
             {
-                MensajesUI.MostrarError($"Error al cargar empresas: {ex.Message}");
+                MensajesUI.MostrarError(string.Format(ERROR_CARGAR_EMPRESAS, ex.Message));
             }
         }
 
@@ -181,7 +182,7 @@ namespace app.UserControls
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                MensajesUI.MostrarAdvertencia("Ingrese el nombre de la empresa");
+                MensajesUI.MostrarAdvertencia(VALIDACION_INGRESE_NOMBRE_EMPRESA);
                 txtNombre.Focus();
                 return false;
             }
@@ -192,7 +193,7 @@ namespace app.UserControls
         {
             if (txtNombre.Text.Trim().Length < 2)
             {
-                MensajesUI.MostrarAdvertencia("El nombre debe tener al menos 2 caracteres");
+                MensajesUI.MostrarAdvertencia(VALIDACION_NOMBRE_MINIMO);
                 txtNombre.Focus();
                 return false;
             }
@@ -203,7 +204,7 @@ namespace app.UserControls
         {
             if (!ValidarNombre(txtNombre.Text))
             {
-                MensajesUI.MostrarAdvertencia("El nombre de la empresa solo puede contener letras, números, espacios y guiones");
+                MensajesUI.MostrarAdvertencia(VALIDACION_NOMBRE_EMPRESA_CARACTERES);
                 txtNombre.Focus();
                 return false;
             }
@@ -224,7 +225,7 @@ namespace app.UserControls
 
                     if (existe)
                     {
-                        MensajesUI.MostrarAdvertencia("Ya existe una empresa con ese nombre");
+                        MensajesUI.MostrarAdvertencia(VALIDACION_EMPRESA_DUPLICADA);
                         txtNombre.Focus();
                         return false;
                     }
@@ -275,7 +276,7 @@ namespace app.UserControls
                 else
                     empresaNegocio.Agregar(emp);
 
-                MensajesUI.MostrarExito("Empresa guardada correctamente");
+                MensajesUI.MostrarExito(EXITO_EMPRESA_GUARDADA);
                 CargarEmpresas();
                 LimpiarFormulario();
             }
@@ -301,12 +302,12 @@ namespace app.UserControls
 
             if (!ValidarEliminacionEmpresa()) return;
 
-            if (MensajesUI.MostrarConfirmacion($"¿Está seguro de desactivar la empresa '{seleccionada.Nombre}'?"))
+            if (MensajesUI.MostrarConfirmacion(string.Format(CONFIRMACION_DESACTIVAR_EMPRESA, seleccionada.Nombre)))
             {
                 try
                 {
                     empresaNegocio.Eliminar(seleccionada.IdEmpresa);
-                    MensajesUI.MostrarExito("Empresa desactivada correctamente");
+                    MensajesUI.MostrarExito(EXITO_EMPRESA_DESACTIVADA);
                     CargarEmpresas();
                     LimpiarFormulario();
                 }
@@ -321,11 +322,11 @@ namespace app.UserControls
         {
             if (seleccionada.CantidadEmpleados > 0)
             {
-                MensajesUI.MostrarAdvertencia(
-                    $"No se puede desactivar la empresa '{seleccionada.Nombre}' " +
-                    $"porque tiene {seleccionada.CantidadEmpleados} empleado(s) activo(s).\n\n" +
-                    "Primero desactive o transfiera los empleados a otra empresa."
-                );
+                MensajesUI.MostrarAdvertencia(string.Format(
+                    ADVERTENCIA_EMPRESA_CON_EMPLEADOS,
+                    seleccionada.Nombre,
+                    seleccionada.CantidadEmpleados
+                ));
                 return false;
             }
             return true;
