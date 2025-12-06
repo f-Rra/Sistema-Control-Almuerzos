@@ -74,7 +74,7 @@ namespace app
                 
                 CrearServicioEnBD(idLugar, proyeccion);
                 
-                ActualizarCronometro();
+                _gestorCronometro.Iniciar();
                 ActualizarControles();
                 
                 _vistaServicio.SetServicio(_idServicioActual, idLugar);
@@ -179,11 +179,6 @@ namespace app
             _idServicioActual = nuevoId;
         }
 
-        private void ActualizarCronometro()
-        {
-            _gestorCronometro.Iniciar();
-        }
-
         private void ActualizarControles()
         {
             btnServicio.Text = "Finalizar Servicio";
@@ -234,7 +229,7 @@ namespace app
             btnAdmin.Enabled = true;
             btnRegistros.Enabled = true;
             btnHome.Enabled = true;
-            OcultarTodasLasVistas();
+            _gestorNavegacion.OcultarTodasLasVistas();
             CargarServicios();
             CargarUltimoServicio();
             _gestorNavegacion.MostrarGroupBoxes(true);
@@ -349,7 +344,7 @@ namespace app
         {
             if (_idServicioActual == null)
             {
-                OcultarTodasLasVistas();
+                _gestorNavegacion.OcultarTodasLasVistas();
                 CargarServicios();
                 CargarUltimoServicio();
             }
@@ -408,16 +403,6 @@ namespace app
             }
         }
 
-        private void MostrarVista(UserControl vista)
-        {
-            _gestorNavegacion.MostrarVista(vista);
-        }
-
-        private void OcultarTodasLasVistas()
-        {
-            _gestorNavegacion.OcultarTodasLasVistas();
-        }
-
         private void MostrarVistaPrincipal()
         {
             CargarVistaPrincipal();
@@ -425,11 +410,11 @@ namespace app
 
             if (_idServicioActual.HasValue && _vistaServicio != null)
             {
-                MostrarVista(_vistaServicio);
+                _gestorNavegacion.MostrarVista(_vistaServicio);
             }
             else
             {
-                OcultarTodasLasVistas();
+                _gestorNavegacion.OcultarTodasLasVistas();
                 _gestorNavegacion.MostrarGroupBoxes(true);
             }
         }
@@ -451,7 +436,7 @@ namespace app
             }
 
             _gestorNavegacion.MostrarPanelSuperior(true);
-            MostrarVista(_vistaRegManual);
+            _gestorNavegacion.MostrarVista(_vistaRegManual);
             return true;
         }
 
@@ -466,7 +451,7 @@ namespace app
             CargarVistaReportes();
             _vistaReportes.RefrescarDatos();
             _gestorNavegacion.MostrarPanelSuperior(false);
-            MostrarVista(_vistaReportes);
+            _gestorNavegacion.MostrarVista(_vistaReportes);
             return true;
         }
 
@@ -480,7 +465,7 @@ namespace app
 
             CargarVistaAdmin();
             _gestorNavegacion.MostrarPanelSuperior(false);
-            MostrarVista(_vistaAdmin);
+            _gestorNavegacion.MostrarVista(_vistaAdmin);
             return true;
         }
 

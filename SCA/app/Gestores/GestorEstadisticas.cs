@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using ReaLTaiizor.Controls;
 
 namespace app.Gestores
 {
@@ -7,9 +8,9 @@ namespace app.Gestores
     {
         private readonly Label _labelEstadisticas;
         private readonly Label _labelProgreso;
-        private readonly ProgressBar _progressBar;
+        private readonly AloneProgressBar _progressBar;
 
-        public GestorEstadisticas(Label labelEstadisticas, Label labelProgreso, ProgressBar progressBar)
+        public GestorEstadisticas(Label labelEstadisticas, Label labelProgreso, AloneProgressBar progressBar)
         {
             _labelEstadisticas = labelEstadisticas;
             _labelProgreso = labelProgreso;

@@ -148,14 +148,14 @@ namespace app.UserControls
 
         private void ConfigurarVisibilidadColumnas(DataGridViewColumnCollection cols)
         {
-            string[] aOcultar = { "IdEmpleado", "IdEmpresa", "Empresa", "Estado", "Nombre", "Apellido" };
+            string[] aOcultar = { "IdEmpleado", "IdEmpresa", "Empresa", "Estado", "Nombre", "Apellido", "IdCredencial" };
             foreach (var nombre in aOcultar)
             {
                 var col = cols[nombre];
                 if (col != null) col.Visible = false;
             }
 
-            string[] aMostrar = { "IdCredencial", "NombreCompleto", "NombreEmpresa" };
+            string[] aMostrar = { "NombreCompleto", "NombreEmpresa" };
             foreach (var nombre in aMostrar)
             {
                 var col = cols[nombre];
@@ -165,7 +165,7 @@ namespace app.UserControls
 
         private void ConfigurarOrdenColumnas(DataGridViewColumnCollection cols)
         {
-            string[] orden = { "IdCredencial", "NombreCompleto", "NombreEmpresa" };
+            string[] orden = { "NombreCompleto", "NombreEmpresa" };
             int idx = 0;
             foreach (var nombre in orden)
             {

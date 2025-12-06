@@ -9,11 +9,6 @@ namespace app.Gestores
         private readonly Panel _panelSuperior;
         private readonly GroupBox _gbxServicios;
         private readonly GroupBox _gbxUltimo;
-        
-        private ucServicio _vistaServicio;
-        private ucRegistroManual _vistaRegistroManual;
-        private ucReportes _vistaReportes;
-        private ucAdmin _vistaAdmin;
 
         public GestorNavegacion(Panel contenedor, Panel panelSuperior, GroupBox gbxServicios, GroupBox gbxUltimo)
         {

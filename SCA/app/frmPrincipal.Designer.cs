@@ -40,16 +40,12 @@ namespace app
                     _vistaAdmin = null;
                 }
 
-                // Liberar Timer y Stopwatch
-                if (_tmrCrono != null)
+                // Liberar Gestores
+                if (_gestorCronometro != null)
                 {
-                    _tmrCrono.Stop();
-                    _tmrCrono.Dispose();
+                    _gestorCronometro.Detener();
                 }
-                if (_crono != null)
-                {
-                    _crono.Stop();
-                }
+
                 if (components != null)
                 {
                     components.Dispose();

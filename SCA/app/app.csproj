@@ -136,12 +136,6 @@
     <Compile Include="UserControls\ucServicio.Designer.cs">
       <DependentUpon>ucServicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucVistaPrincipal.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ucVistaPrincipal.Designer.cs">
-      <DependentUpon>ucVistaPrincipal.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\ucNotificacion.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -184,9 +178,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucServicio.resx">
       <DependentUpon>ucServicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ucVistaPrincipal.resx">
-      <DependentUpon>ucVistaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucNotificacion.resx">
       <DependentUpon>ucNotificacion.cs</DependentUpon>
