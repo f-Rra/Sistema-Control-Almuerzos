@@ -75,6 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gestores\GestorCronometro.cs" />
+    <Compile Include="Gestores\GestorEstadisticas.cs" />
+    <Compile Include="Gestores\GestorNavegacion.cs" />
     <Compile Include="Helpers\ListadoHelper.cs" />
     <Compile Include="Helpers\MensajesUI.cs" />
     <Compile Include="frmPrincipal.cs">
