@@ -262,42 +262,48 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 ```
 Sistema-Control-Almuerzos/
 ├── SCA/
-│   ├── dominio/                    # Capa de Entidades
-│   │   ├── Empleado.cs             # Modelo de empleados
-│   │   ├── Empresa.cs              # Modelo de empresas
-│   │   ├── Lugar.cs                # Modelo de lugares (comedor/quincho)
-│   │   ├── Servicio.cs             # Modelo de servicios por jornada
-│   │   ├── Registro.cs             # Modelo de registros de almuerzos
-│   │   ├── Estadisticas.cs         # Modelos estadísticos (Empleados, Empresas, Servicios, Asistencias, TopEmpresa)
-│   │   ├── Reportes.cs             # Modelos de reportes (AsistenciaPorEmpresa, CoberturaVsProyeccion, DistribucionDiaSemana)
-│   │   └── Configuracion.cs        # Modelos de configuración (InfoBaseDatos, InfoRespaldo, InfoAplicacion)
+│   ├── dominio/                     # Capa de Entidades
+│   │   ├── Empleado.cs              # Modelo de empleados
+│   │   ├── Empresa.cs               # Modelo de empresas
+│   │   ├── Lugar.cs                 # Modelo de lugares (comedor/quincho)
+│   │   ├── Servicio.cs              # Modelo de servicios por jornada
+│   │   ├── Registro.cs              # Modelo de registros de almuerzos
+│   │   ├── Estadisticas.cs          # Modelos estadísticos 
+│   │   ├── Reportes.cs              # Modelos de reportes 
+│   │   └── Configuracion.cs         # Modelos de configuración 
 │   │
-│   ├── negocio/                    # Capa de Lógica de Negocio
-│   │   ├── AccesoDatos.cs          # Clase centralizada para BD con IDisposable
-│   │   ├── NegocioException.cs     # Excepciones personalizadas con mensajes amigables
-│   │   ├── EmpleadoNegocio.cs      # Lógica de empleados
-│   │   ├── EmpresaNegocio.cs       # Lógica de empresas
-│   │   ├── LugarNegocio.cs         # Lógica de lugares
-│   │   ├── ServicioNegocio.cs      # Lógica de servicios
-│   │   ├── RegistroNegocio.cs      # Lógica de registros
-│   │   ├── EstadisticasNegocio.cs  # Lógica de estadísticas
-│   │   ├── ReporteNegocio.cs       # Generación de 4 reportes avanzados
-│   │   ├── ConfiguracionNegocio.cs # Lógica de configuración y respaldos
-│   │   └── Mappers/                # Conversión de DataReader a Entidades
-│   │       ├── EmpleadoMapper.cs   # Mapeo de empleados
-│   │       ├── EmpresaMapper.cs    # Mapeo de empresas
-│   │       ├── LugarMapper.cs      # Mapeo de lugares
-│   │       ├── ServicioMapper.cs   # Mapeo de servicios
-│   │       ├── RegistroMapper.cs   # Mapeo de registros
+│   ├── negocio/                       # Capa de Lógica de Negocio
+│   │   ├── AccesoDatos.cs             # Clase centralizada para BD con IDisposable
+│   │   ├── NegocioException.cs        # Excepciones personalizadas con mensajes amigables
+│   │   ├── EmpleadoNegocio.cs         # Lógica de empleados
+│   │   ├── EmpresaNegocio.cs          # Lógica de empresas
+│   │   ├── LugarNegocio.cs            # Lógica de lugares
+│   │   ├── ServicioNegocio.cs         # Lógica de servicios
+│   │   ├── RegistroNegocio.cs         # Lógica de registros
+│   │   ├── EstadisticasNegocio.cs     # Lógica de estadísticas
+│   │   ├── ReporteNegocio.cs          # Generación de 4 reportes avanzados
+│   │   ├── ConfiguracionNegocio.cs    # Lógica de configuración y respaldos
+│   │   └── Mappers/                   # Conversión de DataReader a Entidades
+│   │       ├── EmpleadoMapper.cs      # Mapeo de empleados
+│   │       ├── EmpresaMapper.cs       # Mapeo de empresas
+│   │       ├── LugarMapper.cs         # Mapeo de lugares
+│   │       ├── ServicioMapper.cs      # Mapeo de servicios
+│   │       ├── RegistroMapper.cs      # Mapeo de registros
 │   │       └── ConfiguracionMapper.cs # Mapeo de configuración
 │   │
-│   └── app/                        # Capa de Presentación
-│       ├── Program.cs              # Punto de entrada
-│       ├── frmPrincipal.cs         # Ventana principal
-│       ├── Helpers/                # Utilidades de presentación
-│       │   └── MensajesUI.cs       # Mensajes y manejo de excepciones en UI
-│       ├── UserControls/           # Controles de usuario modulares
-│       │   ├── ucVistaPrincipal.cs       # Registro por credencial RFID
+│   └── app/                          # Capa de Presentación
+│       ├── Program.cs                # Punto de entrada
+│       ├── frmPrincipal.cs           # Ventana principal
+│       ├── Gestores/                 # Componentes de gestión especializados 
+│       │   ├── GestorCronometro.cs   # Gestión de cronómetro de servicio 
+│       │   ├── GestorEstadisticas.cs # Actualización de estadísticas en tiempo real
+│       │   └── GestorNavegacion.cs   # Control de navegación entre vistas 
+│       ├── Helpers/                  # Utilidades de presentación
+│       │   ├── MensajesConstantes.cs # ~120 constantes centralizadas 
+│       │   ├── MensajesUI.cs         # Mensajes y manejo de excepciones en UI
+│       │   └── ListadoHelper.cs      # Utilidades para DataGridView 
+│       ├── UserControls/             # Controles de usuario modulares
+│       │   ├── ucServicio.cs             # Registro por credencial RFID
 │       │   ├── ucRegistroManual.cs       # Registro manual de comensales
 │       │   ├── ucNotificacion.cs         # Notificación visual de registro
 │       │   ├── ucEmpleados.cs            # Gestión de empleados
@@ -306,7 +312,7 @@ Sistema-Control-Almuerzos/
 │       │   ├── ucReportes.cs             # Sistema de reportes
 │       │   ├── ucEstadisticas.cs         # Análisis estadístico
 │       │   └── ucAdmin.cs                # Panel administrativo
-│       └── Iconos/                 # Recursos gráficos
+│       └── Iconos/                   # Recursos gráficos
 │
 ├── Script_Sistema_Control_Almuerzos.sql  # Script completo de BD
 ├── Procedimientos_Vistas_Triggers.sql    # Objetos de BD
@@ -506,7 +512,7 @@ El sistema muestra:
 
 | Módulo | Descripción |
 |--------|-------------|
-| **ucVistaPrincipal** | Registro de comensales por credencial RFID | 
+| **ucServicio** | Registro de comensales por credencial RFID | 
 | **ucRegistroManual** | Registro manual seleccionando de lista | 
 | **ucNotificacion** | Notificación visual animada de registro exitoso |
 | **ucEmpleados** | Gestión de empleados y credenciales | 
@@ -524,6 +530,7 @@ El sistema muestra:
 
 - **Validación de entrada**: Todos los inputs son validados
 - **Prevención de SQL Injection**: Uso exclusivo de parámetros y SPs
+- **Manejo específico de excepciones**: SqlException en capa de negocio 
 - **Transacciones seguras**: Rollback automático en errores
 - **Baja lógica**: No se eliminan datos, solo se desactivan
 - **Integridad referencial**: Llaves foráneas con restricciones
@@ -533,7 +540,10 @@ El sistema muestra:
 - **Índices optimizados**: En campos de búsqueda frecuente
 - **Consultas parametrizadas**: Para mejor plan de ejecución
 - **Stored Procedures**: Lógica pre-compilada en servidor
+- **Mappers optimizados**: Conversión eficiente de DataReader a entidades
+- **Filtrado en base de datos**: Reducción de datos transferidos
 - **Actualización eficiente**: Solo datos necesarios en tiempo real
+- **Gestores especializados**: Separación de responsabilidades para mejor mantenibilidad
 
 ### Validaciones Implementadas
 
@@ -553,8 +563,10 @@ El sistema muestra:
 **A Nivel de Presentación:**
 -  Campos obligatorios marcados
 -  Formato de datos validado
-- Confirmaciones antes de operaciones críticas
+-  Mensajería centralizada con constantes (MensajesConstantes)
+-  Confirmaciones antes de operaciones críticas
 -  Feedback visual inmediato
+-  Gestores especializados para cronómetro, estadísticas y navegación
 
 ##  Roadmap
 
@@ -586,8 +598,12 @@ El sistema muestra:
 
 **Calidad:**
 -  Validaciones robustas en todas las capas
--  Manejo centralizado de excepciones
+-  Manejo centralizado de excepciones 
+-  Mensajería centralizada con constantes 
 -  Interfaz moderna y profesional
+-  Gestores especializados 
+-  Helpers optimizados 
+-  Mappers eficientes 
 -  Documentación técnica completa
 -  Manual de usuario detallado
 
@@ -669,6 +685,7 @@ El uso de herramientas de IA generativa fue exclusivamente para:
 - **Documentación**: Redacción clara y profesional de guías
 - **Refactorización**: Mejora de estructura y legibilidad del código existente
 - **Consultoría**: Validación de soluciones técnicas y mejores prácticas
+- **Patrones de diseño**: Sugerencias para organización de código (Mappers, Helpers, Gestores)
 
 **Toda la lógica de negocio, arquitectura del sistema, diseño de base de datos y funcionalidades fueron desarrolladas por el autor del proyecto.**
 
