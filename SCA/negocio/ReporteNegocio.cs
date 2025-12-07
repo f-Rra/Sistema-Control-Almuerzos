@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Dominio;
 
 namespace Negocio
@@ -35,7 +36,7 @@ namespace Negocio
                     return lista;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "listar servicios por rango");
             }
@@ -67,7 +68,7 @@ namespace Negocio
                     return lista;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "listar asistencias por empresas");
             }
@@ -103,7 +104,7 @@ namespace Negocio
                     return lista;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener cobertura vs proyección");
             }
@@ -136,7 +137,7 @@ namespace Negocio
                     return lista;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener distribución por día de semana");
             }

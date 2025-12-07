@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Dominio;
 using Negocio.Mappers;
 
@@ -24,7 +25,7 @@ namespace Negocio
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener último servicio");
             }
@@ -42,7 +43,7 @@ namespace Negocio
                     return datos.ejecutarAccionReturn();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "crear servicio");
             }
@@ -62,7 +63,7 @@ namespace Negocio
                     datos.ejecutarAccion();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "finalizar servicio");
             }
@@ -82,7 +83,7 @@ namespace Negocio
                     return ServicioMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "listar servicios por fecha");
             }
@@ -100,7 +101,7 @@ namespace Negocio
                     return ServicioMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "listar servicios");
             }
@@ -119,7 +120,7 @@ namespace Negocio
                     return 0;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "finalizar servicios pendientes");
             }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Dominio;
 using Negocio.Mappers;
 
@@ -19,7 +20,7 @@ namespace Negocio
                     return EmpleadoMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "cargar empleados");
             }
@@ -43,7 +44,7 @@ namespace Negocio
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "buscar empleado por credencial");
             }
@@ -62,7 +63,7 @@ namespace Negocio
                     return EmpleadoMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener empleados sin almorzar");
             }
@@ -84,7 +85,7 @@ namespace Negocio
                     return EmpleadoMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "filtrar empleados sin almorzar");
             }
@@ -106,7 +107,7 @@ namespace Negocio
                     datos.ejecutarAccion();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "agregar empleado");
             }
@@ -129,7 +130,7 @@ namespace Negocio
                     datos.ejecutarAccion();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "modificar empleado");
             }
@@ -146,7 +147,7 @@ namespace Negocio
                     datos.ejecutarAccion();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "desactivar empleado");
             }
@@ -169,7 +170,7 @@ namespace Negocio
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "verificar credencial");
             }
@@ -193,7 +194,7 @@ namespace Negocio
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "buscar empleado por ID");
             }
@@ -219,7 +220,7 @@ namespace Negocio
                     return EmpleadoMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "filtrar empleados");
             }

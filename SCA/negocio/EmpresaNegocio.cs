@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Dominio;
 using Negocio.Mappers;
 
@@ -19,7 +20,7 @@ namespace Negocio
                     return EmpresaMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "listar empresas");
             }
@@ -37,7 +38,7 @@ namespace Negocio
                     return EmpresaMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "listar empresas con empleados");
             }
@@ -61,7 +62,7 @@ namespace Negocio
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "buscar empresa por ID");
             }
@@ -78,7 +79,7 @@ namespace Negocio
                     datos.ejecutarAccion();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "desactivar empresa");
             }
@@ -96,7 +97,7 @@ namespace Negocio
                     datos.ejecutarAccion();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "agregar empresa");
             }
@@ -115,7 +116,7 @@ namespace Negocio
                     datos.ejecutarAccion();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "modificar empresa");
             }
@@ -139,7 +140,7 @@ namespace Negocio
                     return EmpresaMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "filtrar empresas");
             }

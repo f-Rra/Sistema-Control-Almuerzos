@@ -58,7 +58,7 @@ namespace Negocio
                     return conexion.State == System.Data.ConnectionState.Open;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "probar conexión");
             }
@@ -76,7 +76,7 @@ namespace Negocio
                     return ConfiguracionMapper.MapInfoBaseDatos(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener información de base de datos");
             }
@@ -94,7 +94,7 @@ namespace Negocio
                     return ConfiguracionMapper.MapInfoRespaldo(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener último respaldo");
             }
@@ -112,7 +112,7 @@ namespace Negocio
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "crear respaldo");
             }
@@ -130,7 +130,7 @@ namespace Negocio
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "restaurar respaldo");
             }

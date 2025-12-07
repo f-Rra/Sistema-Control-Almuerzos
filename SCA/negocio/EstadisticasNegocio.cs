@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Dominio;
 
 namespace Negocio
@@ -27,7 +28,7 @@ namespace Negocio
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener estadísticas de empleados");
             }
@@ -54,7 +55,7 @@ namespace Negocio
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener estadísticas de empresas");
             }
@@ -81,7 +82,7 @@ namespace Negocio
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener estadísticas de servicios");
             }
@@ -111,7 +112,7 @@ namespace Negocio
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener asistencias y tendencias");
             }
@@ -146,7 +147,7 @@ namespace Negocio
                     return lista;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener top 5 empresas por asistencias");
             }

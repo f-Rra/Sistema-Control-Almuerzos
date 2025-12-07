@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Dominio;
 using Negocio.Mappers;
 
@@ -21,7 +22,7 @@ namespace Negocio
                     datos.ejecutarAccion();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "registrar empleado");
             }
@@ -40,7 +41,7 @@ namespace Negocio
                     return RegistroMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "listar registros por servicio");
             }
@@ -65,7 +66,7 @@ namespace Negocio
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "verificar empleado registrado");
             }
@@ -89,7 +90,7 @@ namespace Negocio
                     return 0;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "contar registros por servicio");
             }
@@ -110,7 +111,7 @@ namespace Negocio
                     return RegistroMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "obtener registros por empresa y fecha");
             }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Dominio;
 using Negocio.Mappers;
 
@@ -19,7 +20,7 @@ namespace Negocio
                     return LugarMapper.MapList(datos.Lector);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw NegocioException.FromDbException(ex, "listar lugares");
             }
