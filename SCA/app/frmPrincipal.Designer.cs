@@ -62,6 +62,7 @@ namespace app
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -133,6 +134,7 @@ namespace app
             this.cRegistros = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.cReportes = new ReaLTaiizor.Controls.ParrotControlEllipse();
             this.cAdmin = new ReaLTaiizor.Controls.ParrotControlEllipse();
+            this.toolTipMenu = new System.Windows.Forms.ToolTip(this.components);
             this.pnlBarra.SuspendLayout();
             this.pnlLateral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogo)).BeginInit();
@@ -178,6 +180,7 @@ namespace app
             this.btnSalir.Size = new System.Drawing.Size(29, 25);
             this.btnSalir.TabIndex = 1;
             this.btnSalir.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipMenu.SetToolTip(this.btnSalir, "Salir");
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // pnlLateral
@@ -253,6 +256,7 @@ namespace app
             this.btnHome.Size = new System.Drawing.Size(75, 81);
             this.btnHome.TabIndex = 1;
             this.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipMenu.SetToolTip(this.btnHome, "Inicio");
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             this.btnHome.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.btnHome.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -281,6 +285,7 @@ namespace app
             this.btnRegistros.Size = new System.Drawing.Size(75, 81);
             this.btnRegistros.TabIndex = 1;
             this.btnRegistros.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipMenu.SetToolTip(this.btnRegistros, "Registro Manual");
             this.btnRegistros.Click += new System.EventHandler(this.btnRegistros_Click);
             this.btnRegistros.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.btnRegistros.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -309,6 +314,7 @@ namespace app
             this.btnReportes.Size = new System.Drawing.Size(75, 81);
             this.btnReportes.TabIndex = 1;
             this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipMenu.SetToolTip(this.btnReportes, "Reportes");
             this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             this.btnReportes.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.btnReportes.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -337,6 +343,7 @@ namespace app
             this.btnAdmin.Size = new System.Drawing.Size(75, 81);
             this.btnAdmin.TabIndex = 1;
             this.btnAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTipMenu.SetToolTip(this.btnAdmin, "Administración");
             this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             this.btnAdmin.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.btnAdmin.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1176,5 +1183,6 @@ namespace app
         private System.Windows.Forms.Label pbxComensales;
         private System.Windows.Forms.Label pbxTootal;
         private ReaLTaiizor.Controls.ThunderGroupBox gbxConfiguracion;
+        private System.Windows.Forms.ToolTip toolTipMenu;
     }
 }
