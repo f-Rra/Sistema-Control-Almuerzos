@@ -212,13 +212,9 @@ namespace app.UserControls
 
         private int? ObtenerEmpresaIdFiltro()
         {
-            if (cbEmpresa.SelectedValue != null && cbEmpresa.SelectedValue != DBNull.Value)
+            if (cbEmpresa.SelectedValue is int selectedValue && selectedValue != 0)
             {
-                int selectedValue = (int)cbEmpresa.SelectedValue;
-                if (selectedValue != 0)
-                {
-                    return selectedValue;
-                }
+                return selectedValue;
             }
             return null;
         }

@@ -432,8 +432,6 @@ Sistema-Control-Almuerzos/
 
 ##  Sistema de Respaldos y Recuperación
 
-### Importancia de los Backups
-
 El sistema incluye un módulo completo de respaldos para proteger la información crítica del comedor.
 
 ### Tipos de Respaldo Disponibles

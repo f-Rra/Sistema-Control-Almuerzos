@@ -340,9 +340,10 @@ namespace app.UserControls
         {
             try
             {
-                if (dgvEmpresas.CurrentRow != null && dgvEmpresas.CurrentRow.Cells["IdEmpresa"].Value != null)
+                var cellValue = dgvEmpresas.CurrentRow?.Cells["IdEmpresa"]?.Value;
+                if (cellValue != null && cellValue != DBNull.Value)
                 {
-                    int idEmpresa = Convert.ToInt32(dgvEmpresas.CurrentRow.Cells["IdEmpresa"].Value);
+                    int idEmpresa = Convert.ToInt32(cellValue);
                     CargarEmpresaEnFormulario(idEmpresa);
                     CargarEstadisticasEmpresa(idEmpresa);
                 }

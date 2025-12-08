@@ -145,14 +145,14 @@ namespace app.UserControls
 
         private void RestaurarSelecciones(List<Empresa> empresas, object selectedValueFiltro, object selectedValueEmpleado)
         {
-            var empresasFiltro = (List<Empresa>)cbFiltroEmpresa.DataSource;
+            var empresasFiltro = cbFiltroEmpresa.DataSource as List<Empresa>;
             
-            if (selectedValueFiltro != null && empresasFiltro.Exists(e => e.IdEmpresa == (int)selectedValueFiltro))
+            if (selectedValueFiltro is int idFiltro && empresasFiltro != null && empresasFiltro.Exists(e => e.IdEmpresa == idFiltro))
             {
                 cbFiltroEmpresa.SelectedValue = selectedValueFiltro;
             }
             
-            if (selectedValueEmpleado != null && empresas.Exists(e => e.IdEmpresa == (int)selectedValueEmpleado))
+            if (selectedValueEmpleado is int idEmpleado && empresas.Exists(e => e.IdEmpresa == idEmpleado))
             {
                 cbEmpresaEmpleado.SelectedValue = selectedValueEmpleado;
             }
@@ -256,7 +256,12 @@ namespace app.UserControls
             emp.IdCredencial = txtCredencial.Text.Trim();
             emp.Nombre = txtNombre.Text.Trim();
             emp.Apellido = txtApellido.Text.Trim();
-            emp.Empresa = new Empresa { IdEmpresa = (int)cbEmpresaEmpleado.SelectedValue };
+            
+            if (cbEmpresaEmpleado.SelectedValue is int idEmpresa)
+            {
+                emp.Empresa = new Empresa { IdEmpresa = idEmpresa };
+            }
+            
             emp.Estado = rbActivoEmpleado.Checked;
         }
 
@@ -344,8 +349,12 @@ namespace app.UserControls
         {
             if (dgvEmpleados.CurrentRow != null)
             {
-                int idEmpleado = Convert.ToInt32(dgvEmpleados.CurrentRow.Cells["IdEmpleado"].Value);
-                CargarEmpleadoEnFormulario(idEmpleado);
+                var cellValue = dgvEmpleados.CurrentRow.Cells["IdEmpleado"]?.Value;
+                if (cellValue != null && cellValue != DBNull.Value)
+                {
+                    int idEmpleado = Convert.ToInt32(cellValue);
+                    CargarEmpleadoEnFormulario(idEmpleado);
+                }
             }
         }
 

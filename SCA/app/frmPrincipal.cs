@@ -71,7 +71,8 @@ namespace app
                 if (!ValidarLugar() || !ValidarProyeccion(out int proyeccion) || !ValidarInvitados())
                     return;
 
-                int idLugar = (int)cbLugar.SelectedValue;
+                if (!(cbLugar.SelectedValue is int idLugar))
+                    return;
                 
                 CrearServicioEnBD(idLugar, proyeccion);
                 
@@ -604,11 +605,10 @@ namespace app
 
         private void dgvServicios_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvServicios.CurrentRow != null && dgvServicios.CurrentRow.DataBoundItem != null)
+            if (dgvServicios.CurrentRow?.DataBoundItem is Servicio servicioSeleccionado)
             {
                 try
                 {
-                    Servicio servicioSeleccionado = (Servicio)dgvServicios.CurrentRow.DataBoundItem;
                     lblUlugar.Text = "Lugar: " + servicioSeleccionado.NombreLugar;
                     lblUfecha.Text = "Fecha: " + servicioSeleccionado.Fecha.ToString("dd/MM/yyyy");
                     lblUproyeccion.Text = "Proyección: " + (servicioSeleccionado.Proyeccion?.ToString() ?? "N/A");
