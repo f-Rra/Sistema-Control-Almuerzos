@@ -397,6 +397,8 @@ namespace app
             this.btnServicio.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnServicio.Image = null;
             this.btnServicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnServicio.AccessibleDescription = "Inicia o finaliza el servicio de almuerzos del día";
+            this.btnServicio.AccessibleName = "Botón de control de servicio";
             this.btnServicio.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
             this.btnServicio.Location = new System.Drawing.Point(640, 49);
             this.btnServicio.Name = "btnServicio";
@@ -404,7 +406,7 @@ namespace app
             this.btnServicio.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnServicio.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnServicio.Size = new System.Drawing.Size(152, 29);
-            this.btnServicio.TabIndex = 0;
+            this.btnServicio.TabIndex = 3;
             this.btnServicio.Text = " Iniciar Servicio";
             this.btnServicio.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnServicio.Click += new System.EventHandler(this.btnServicio_Click);
@@ -434,6 +436,8 @@ namespace app
             // 
             // cbLugar
             // 
+            this.cbLugar.AccessibleDescription = "Seleccione el lugar donde se realizará el servicio de almuerzos";
+            this.cbLugar.AccessibleName = "Selección de lugar";
             this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbLugar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -457,6 +461,8 @@ namespace app
             // 
             // mtxtInvitados
             // 
+            this.mtxtInvitados.AccessibleDescription = "Ingrese la cantidad de invitados externos al servicio";
+            this.mtxtInvitados.AccessibleName = "Campo de invitados";
             this.mtxtInvitados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.mtxtInvitados.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtxtInvitados.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -466,7 +472,7 @@ namespace app
             this.mtxtInvitados.Name = "mtxtInvitados";
             this.mtxtInvitados.ResetOnSpace = false;
             this.mtxtInvitados.Size = new System.Drawing.Size(121, 29);
-            this.mtxtInvitados.TabIndex = 0;
+            this.mtxtInvitados.TabIndex = 2;
             this.mtxtInvitados.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblInvitados
@@ -483,6 +489,8 @@ namespace app
             // 
             // mtxtProyeccion
             // 
+            this.mtxtProyeccion.AccessibleDescription = "Ingrese la cantidad estimada de comensales esperados";
+            this.mtxtProyeccion.AccessibleName = "Campo de proyección";
             this.mtxtProyeccion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.mtxtProyeccion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtxtProyeccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -492,7 +500,7 @@ namespace app
             this.mtxtProyeccion.Name = "mtxtProyeccion";
             this.mtxtProyeccion.ResetOnSpace = false;
             this.mtxtProyeccion.Size = new System.Drawing.Size(121, 29);
-            this.mtxtProyeccion.TabIndex = 0;
+            this.mtxtProyeccion.TabIndex = 1;
             this.mtxtProyeccion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblLugar

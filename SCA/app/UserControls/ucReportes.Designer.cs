@@ -128,6 +128,8 @@
             // 
             // cbTipoReporte
             // 
+            this.cbTipoReporte.AccessibleDescription = "Seleccionar el tipo de reporte a generar";
+            this.cbTipoReporte.AccessibleName = "Tipo de reporte";
             this.cbTipoReporte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.cbTipoReporte.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoReporte.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -136,7 +138,7 @@
             this.cbTipoReporte.Location = new System.Drawing.Point(396, 40);
             this.cbTipoReporte.Name = "cbTipoReporte";
             this.cbTipoReporte.Size = new System.Drawing.Size(230, 29);
-            this.cbTipoReporte.TabIndex = 7;
+            this.cbTipoReporte.TabIndex = 3;
             // 
             // lblTipoReporte
             // 
@@ -152,6 +154,8 @@
             // 
             // btnGenerar
             // 
+            this.btnGenerar.AccessibleDescription = "Generar el reporte con los filtros seleccionados";
+            this.btnGenerar.AccessibleName = "Generar reporte";
             this.btnGenerar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerar.BackColor = System.Drawing.Color.Transparent;
             this.btnGenerar.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -168,13 +172,15 @@
             this.btnGenerar.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnGenerar.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnGenerar.Size = new System.Drawing.Size(159, 32);
-            this.btnGenerar.TabIndex = 8;
+            this.btnGenerar.TabIndex = 4;
             this.btnGenerar.Text = " Generar Reporte";
             this.btnGenerar.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // cbLugar
             // 
+            this.cbLugar.AccessibleDescription = "Seleccionar el lugar para el reporte";
+            this.cbLugar.AccessibleName = "Lugar";
             this.cbLugar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.cbLugar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLugar.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -183,7 +189,7 @@
             this.cbLugar.Location = new System.Drawing.Point(270, 40);
             this.cbLugar.Name = "cbLugar";
             this.cbLugar.Size = new System.Drawing.Size(108, 29);
-            this.cbLugar.TabIndex = 5;
+            this.cbLugar.TabIndex = 2;
             // 
             // lblLugar
             // 
@@ -199,13 +205,15 @@
             // 
             // dtpDesde
             // 
+            this.dtpDesde.AccessibleDescription = "Seleccionar fecha de inicio del reporte";
+            this.dtpDesde.AccessibleName = "Fecha desde";
             this.dtpDesde.CustomFormat = "d/M/yyyy";
             this.dtpDesde.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDesde.Location = new System.Drawing.Point(18, 40);
             this.dtpDesde.Name = "dtpDesde";
             this.dtpDesde.Size = new System.Drawing.Size(108, 29);
-            this.dtpDesde.TabIndex = 1;
+            this.dtpDesde.TabIndex = 0;
             // 
             // lblDesde
             // 
@@ -221,6 +229,8 @@
             // 
             // dtpHasta
             // 
+            this.dtpHasta.AccessibleDescription = "Seleccionar fecha de fin del reporte";
+            this.dtpHasta.AccessibleName = "Fecha hasta";
             this.dtpHasta.CalendarMonthBackground = System.Drawing.Color.White;
             this.dtpHasta.CustomFormat = "d/M/yyyy";
             this.dtpHasta.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -228,7 +238,7 @@
             this.dtpHasta.Location = new System.Drawing.Point(144, 40);
             this.dtpHasta.Name = "dtpHasta";
             this.dtpHasta.Size = new System.Drawing.Size(108, 29);
-            this.dtpHasta.TabIndex = 3;
+            this.dtpHasta.TabIndex = 1;
             // 
             // lblHasta
             // 
@@ -244,6 +254,8 @@
             // 
             // btnExportar
             // 
+            this.btnExportar.AccessibleDescription = "Exportar el reporte a formato PDF";
+            this.btnExportar.AccessibleName = "Exportar a PDF";
             this.btnExportar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportar.BackColor = System.Drawing.Color.Transparent;
             this.btnExportar.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
@@ -260,13 +272,15 @@
             this.btnExportar.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnExportar.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnExportar.Size = new System.Drawing.Size(159, 32);
-            this.btnExportar.TabIndex = 9;
+            this.btnExportar.TabIndex = 5;
             this.btnExportar.Text = "Exportar PDF";
             this.btnExportar.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // dgvReporte
             // 
+            this.dgvReporte.AccessibleDescription = "Resultados del reporte generado";
+            this.dgvReporte.AccessibleName = "Reporte";
             this.dgvReporte.AllowUserToAddRows = false;
             this.dgvReporte.AllowUserToDeleteRows = false;
             this.dgvReporte.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 

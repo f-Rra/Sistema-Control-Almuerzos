@@ -126,6 +126,8 @@ namespace app.UserControls
             // 
             // btnEliminarEmpresa
             // 
+            this.btnEliminarEmpresa.AccessibleDescription = "Eliminar la empresa seleccionada";
+            this.btnEliminarEmpresa.AccessibleName = "Eliminar empresa";
             this.btnEliminarEmpresa.BackColor = System.Drawing.Color.Transparent;
             this.btnEliminarEmpresa.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnEliminarEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -141,13 +143,15 @@ namespace app.UserControls
             this.btnEliminarEmpresa.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnEliminarEmpresa.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnEliminarEmpresa.Size = new System.Drawing.Size(100, 35);
-            this.btnEliminarEmpresa.TabIndex = 2;
+            this.btnEliminarEmpresa.TabIndex = 5;
             this.btnEliminarEmpresa.Text = "Eliminar";
             this.btnEliminarEmpresa.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnEliminarEmpresa.Click += new System.EventHandler(this.btnEliminarEmpresa_Click);
             // 
             // txtNombre
             // 
+            this.txtNombre.AccessibleDescription = "Campo de texto para ingresar el nombre de la empresa";
+            this.txtNombre.AccessibleName = "Nombre de la empresa";
             this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -155,10 +159,12 @@ namespace app.UserControls
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(250, 33);
-            this.txtNombre.TabIndex = 5;
+            this.txtNombre.TabIndex = 0;
             // 
             // btnCancelarEmpresa
             // 
+            this.btnCancelarEmpresa.AccessibleDescription = "Cancelar la operación y limpiar los campos";
+            this.btnCancelarEmpresa.AccessibleName = "Cancelar";
             this.btnCancelarEmpresa.BackColor = System.Drawing.Color.Transparent;
             this.btnCancelarEmpresa.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnCancelarEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -173,7 +179,7 @@ namespace app.UserControls
             this.btnCancelarEmpresa.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnCancelarEmpresa.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnCancelarEmpresa.Size = new System.Drawing.Size(100, 35);
-            this.btnCancelarEmpresa.TabIndex = 1;
+            this.btnCancelarEmpresa.TabIndex = 4;
             this.btnCancelarEmpresa.Text = "Cancelar";
             this.btnCancelarEmpresa.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnCancelarEmpresa.Click += new System.EventHandler(this.btnCancelarEmpresa_Click);
@@ -191,6 +197,8 @@ namespace app.UserControls
             // 
             // btnGuardarEmpresa
             // 
+            this.btnGuardarEmpresa.AccessibleDescription = "Guardar los datos de la empresa";
+            this.btnGuardarEmpresa.AccessibleName = "Guardar empresa";
             this.btnGuardarEmpresa.BackColor = System.Drawing.Color.Transparent;
             this.btnGuardarEmpresa.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnGuardarEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -205,25 +213,29 @@ namespace app.UserControls
             this.btnGuardarEmpresa.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnGuardarEmpresa.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnGuardarEmpresa.Size = new System.Drawing.Size(100, 35);
-            this.btnGuardarEmpresa.TabIndex = 0;
+            this.btnGuardarEmpresa.TabIndex = 3;
             this.btnGuardarEmpresa.Text = "Guardar";
             this.btnGuardarEmpresa.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnGuardarEmpresa.Click += new System.EventHandler(this.btnGuardarEmpresa_Click);
             // 
             // rbInactivoEmpresa
             // 
+            this.rbInactivoEmpresa.AccessibleDescription = "Marcar la empresa como inactiva";
+            this.rbInactivoEmpresa.AccessibleName = "Estado inactivo";
             this.rbInactivoEmpresa.AutoSize = true;
             this.rbInactivoEmpresa.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbInactivoEmpresa.ForeColor = System.Drawing.Color.White;
             this.rbInactivoEmpresa.Location = new System.Drawing.Point(147, 82);
             this.rbInactivoEmpresa.Name = "rbInactivoEmpresa";
             this.rbInactivoEmpresa.Size = new System.Drawing.Size(70, 21);
-            this.rbInactivoEmpresa.TabIndex = 10;
+            this.rbInactivoEmpresa.TabIndex = 2;
             this.rbInactivoEmpresa.Text = "Inactivo";
             this.rbInactivoEmpresa.UseVisualStyleBackColor = true;
             // 
             // rbActivoEmpresa
             // 
+            this.rbActivoEmpresa.AccessibleDescription = "Marcar la empresa como activa";
+            this.rbActivoEmpresa.AccessibleName = "Estado activo";
             this.rbActivoEmpresa.AutoSize = true;
             this.rbActivoEmpresa.Checked = true;
             this.rbActivoEmpresa.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -231,7 +243,7 @@ namespace app.UserControls
             this.rbActivoEmpresa.Location = new System.Drawing.Point(86, 82);
             this.rbActivoEmpresa.Name = "rbActivoEmpresa";
             this.rbActivoEmpresa.Size = new System.Drawing.Size(61, 21);
-            this.rbActivoEmpresa.TabIndex = 9;
+            this.rbActivoEmpresa.TabIndex = 1;
             this.rbActivoEmpresa.TabStop = true;
             this.rbActivoEmpresa.Text = "Activo";
             this.rbActivoEmpresa.UseVisualStyleBackColor = true;

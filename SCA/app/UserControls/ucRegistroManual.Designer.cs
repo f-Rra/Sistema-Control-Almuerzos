@@ -50,6 +50,8 @@
             // 
             // cbEmpresa
             // 
+            this.cbEmpresa.AccessibleDescription = "Seleccionar la empresa del empleado";
+            this.cbEmpresa.AccessibleName = "Empresa";
             this.cbEmpresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.cbEmpresa.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -57,7 +59,7 @@
             this.cbEmpresa.Location = new System.Drawing.Point(13, 22);
             this.cbEmpresa.Name = "cbEmpresa";
             this.cbEmpresa.Size = new System.Drawing.Size(155, 33);
-            this.cbEmpresa.TabIndex = 16;
+            this.cbEmpresa.TabIndex = 0;
             this.cbEmpresa.SelectionChangeCommitted += new System.EventHandler(this.cbEmpresa_SelectionChangeCommitted);
             // 
             // lblEmpresa
@@ -86,18 +88,22 @@
             // 
             // txtNombre
             // 
+            this.txtNombre.AccessibleDescription = "Campo de texto para buscar empleado por nombre o apellido";
+            this.txtNombre.AccessibleName = "Nombre o Apellido";
             this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.txtNombre.Location = new System.Drawing.Point(180, 22);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(155, 33);
-            this.txtNombre.TabIndex = 18;
+            this.txtNombre.TabIndex = 1;
             this.txtNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // btnAgregar
             // 
+            this.btnAgregar.AccessibleDescription = "Agregar el empleado seleccionado al registro manual";
+            this.btnAgregar.AccessibleName = "Agregar empleado";
             this.btnAgregar.BackColor = System.Drawing.Color.Transparent;
             this.btnAgregar.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -113,7 +119,7 @@
             this.btnAgregar.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnAgregar.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnAgregar.Size = new System.Drawing.Size(127, 35);
-            this.btnAgregar.TabIndex = 20;
+            this.btnAgregar.TabIndex = 2;
             this.btnAgregar.Text = "Agregar ";
             this.btnAgregar.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -182,6 +188,8 @@
             // 
             // dgvFaltantes
             // 
+            this.dgvFaltantes.AccessibleDescription = "Listado de empleados que no registraron su almuerzo";
+            this.dgvFaltantes.AccessibleName = "Empleados faltantes";
             this.dgvFaltantes.AllowUserToAddRows = false;
             this.dgvFaltantes.AllowUserToDeleteRows = false;
             this.dgvFaltantes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 

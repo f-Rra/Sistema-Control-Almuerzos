@@ -187,6 +187,8 @@ namespace app.UserControls
             // 
             // btnEliminarEmpleado
             // 
+            this.btnEliminarEmpleado.AccessibleDescription = "Eliminar el empleado seleccionado del sistema";
+            this.btnEliminarEmpleado.AccessibleName = "Botón eliminar empleado";
             this.btnEliminarEmpleado.BackColor = System.Drawing.Color.Transparent;
             this.btnEliminarEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnEliminarEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -202,13 +204,15 @@ namespace app.UserControls
             this.btnEliminarEmpleado.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnEliminarEmpleado.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnEliminarEmpleado.Size = new System.Drawing.Size(100, 35);
-            this.btnEliminarEmpleado.TabIndex = 2;
+            this.btnEliminarEmpleado.TabIndex = 9;
             this.btnEliminarEmpleado.Text = "Eliminar";
             this.btnEliminarEmpleado.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnEliminarEmpleado.Click += new System.EventHandler(this.btnEliminarEmpleado_Click);
             // 
             // btnGuardarEmpleado
             // 
+            this.btnGuardarEmpleado.AccessibleDescription = "Guardar los datos del empleado en el sistema";
+            this.btnGuardarEmpleado.AccessibleName = "Botón guardar empleado";
             this.btnGuardarEmpleado.BackColor = System.Drawing.Color.Transparent;
             this.btnGuardarEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnGuardarEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -223,7 +227,7 @@ namespace app.UserControls
             this.btnGuardarEmpleado.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnGuardarEmpleado.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnGuardarEmpleado.Size = new System.Drawing.Size(100, 35);
-            this.btnGuardarEmpleado.TabIndex = 0;
+            this.btnGuardarEmpleado.TabIndex = 7;
             this.btnGuardarEmpleado.Text = "Guardar";
             this.btnGuardarEmpleado.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnGuardarEmpleado.Click += new System.EventHandler(this.btnGuardarEmpleado_Click);
@@ -241,6 +245,8 @@ namespace app.UserControls
             // 
             // btnCancelarEmpleado
             // 
+            this.btnCancelarEmpleado.AccessibleDescription = "Cancelar la operación y limpiar el formulario";
+            this.btnCancelarEmpleado.AccessibleName = "Botón cancelar";
             this.btnCancelarEmpleado.BackColor = System.Drawing.Color.Transparent;
             this.btnCancelarEmpleado.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnCancelarEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -255,13 +261,15 @@ namespace app.UserControls
             this.btnCancelarEmpleado.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnCancelarEmpleado.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnCancelarEmpleado.Size = new System.Drawing.Size(100, 35);
-            this.btnCancelarEmpleado.TabIndex = 1;
+            this.btnCancelarEmpleado.TabIndex = 8;
             this.btnCancelarEmpleado.Text = "Cancelar";
             this.btnCancelarEmpleado.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnCancelarEmpleado.Click += new System.EventHandler(this.btnCancelarEmpleado_Click);
             // 
             // btnVerificarCredencial
             // 
+            this.btnVerificarCredencial.AccessibleDescription = "Verifica si la credencial ya está registrada en el sistema";
+            this.btnVerificarCredencial.AccessibleName = "Botón verificar credencial";
             this.btnVerificarCredencial.BackColor = System.Drawing.Color.Transparent;
             this.btnVerificarCredencial.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnVerificarCredencial.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -283,6 +291,8 @@ namespace app.UserControls
             // 
             // txtCredencial
             // 
+            this.txtCredencial.AccessibleDescription = "Ingrese el número de credencial RFID del empleado";
+            this.txtCredencial.AccessibleName = "Campo de credencial";
             this.txtCredencial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.txtCredencial.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCredencial.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -305,6 +315,8 @@ namespace app.UserControls
             // 
             // txtNombre
             // 
+            this.txtNombre.AccessibleDescription = "Ingrese el nombre del empleado";
+            this.txtNombre.AccessibleName = "Campo de nombre";
             this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -312,7 +324,7 @@ namespace app.UserControls
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(250, 33);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombre.TabIndex = 2;
             // 
             // lblApellido
             // 
@@ -327,6 +339,8 @@ namespace app.UserControls
             // 
             // txtApellido
             // 
+            this.txtApellido.AccessibleDescription = "Ingrese el apellido del empleado";
+            this.txtApellido.AccessibleName = "Campo de apellido";
             this.txtApellido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.txtApellido.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtApellido.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
@@ -334,7 +348,7 @@ namespace app.UserControls
             this.txtApellido.MaxLength = 50;
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(250, 33);
-            this.txtApellido.TabIndex = 5;
+            this.txtApellido.TabIndex = 3;
             // 
             // lblEmpresa
             // 
@@ -349,6 +363,8 @@ namespace app.UserControls
             // 
             // cbEmpresaEmpleado
             // 
+            this.cbEmpresaEmpleado.AccessibleDescription = "Seleccione la empresa a la que pertenece el empleado";
+            this.cbEmpresaEmpleado.AccessibleName = "Selección de empresa";
             this.cbEmpresaEmpleado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.cbEmpresaEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEmpresaEmpleado.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -357,7 +373,7 @@ namespace app.UserControls
             this.cbEmpresaEmpleado.Location = new System.Drawing.Point(27, 257);
             this.cbEmpresaEmpleado.Name = "cbEmpresaEmpleado";
             this.cbEmpresaEmpleado.Size = new System.Drawing.Size(250, 33);
-            this.cbEmpresaEmpleado.TabIndex = 7;
+            this.cbEmpresaEmpleado.TabIndex = 4;
             // 
             // lblEstado
             // 
@@ -372,6 +388,8 @@ namespace app.UserControls
             // 
             // rbActivoEmpleado
             // 
+            this.rbActivoEmpleado.AccessibleDescription = "Marcar al empleado como activo";
+            this.rbActivoEmpleado.AccessibleName = "Estado activo";
             this.rbActivoEmpleado.AutoSize = true;
             this.rbActivoEmpleado.Checked = true;
             this.rbActivoEmpleado.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -379,13 +397,15 @@ namespace app.UserControls
             this.rbActivoEmpleado.Location = new System.Drawing.Point(88, 305);
             this.rbActivoEmpleado.Name = "rbActivoEmpleado";
             this.rbActivoEmpleado.Size = new System.Drawing.Size(61, 21);
-            this.rbActivoEmpleado.TabIndex = 9;
+            this.rbActivoEmpleado.TabIndex = 5;
             this.rbActivoEmpleado.TabStop = true;
-            this.rbActivoEmpleado.Text = "Activo";
+            this.rbActivoEmpleado.Text = "A&ctivo";
             this.rbActivoEmpleado.UseVisualStyleBackColor = true;
             // 
             // rbInactivoEmpleado
             // 
+            this.rbInactivoEmpleado.AccessibleDescription = "Marcar al empleado como inactivo";
+            this.rbInactivoEmpleado.AccessibleName = "Estado inactivo";
             this.rbInactivoEmpleado.AutoSize = true;
             this.rbInactivoEmpleado.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbInactivoEmpleado.ForeColor = System.Drawing.Color.White;

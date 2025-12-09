@@ -47,16 +47,20 @@ namespace app.UserControls
             // 
             // txtRegistro
             // 
+            this.txtRegistro.AccessibleDescription = "Escanee o ingrese el número de credencial del empleado para registrar su almuerzo";
+            this.txtRegistro.AccessibleName = "Campo de credencial para registro";
             this.txtRegistro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(225)))));
             this.txtRegistro.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRegistro.Location = new System.Drawing.Point(97, 19);
             this.txtRegistro.Name = "txtRegistro";
             this.txtRegistro.Size = new System.Drawing.Size(100, 33);
-            this.txtRegistro.TabIndex = 1;
+            this.txtRegistro.TabIndex = 0;
             this.txtRegistro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRegistro_KeyDown);
             // 
             // btnRegistro
             // 
+            this.btnRegistro.AccessibleDescription = "Registrar el almuerzo del empleado con la credencial ingresada";
+            this.btnRegistro.AccessibleName = "Botón ingresar registro";
             this.btnRegistro.BackColor = System.Drawing.Color.Transparent;
             this.btnRegistro.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnRegistro.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -72,7 +76,7 @@ namespace app.UserControls
             this.btnRegistro.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(33)))));
             this.btnRegistro.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(36)))));
             this.btnRegistro.Size = new System.Drawing.Size(179, 35);
-            this.btnRegistro.TabIndex = 2;
+            this.btnRegistro.TabIndex = 1;
             this.btnRegistro.Text = "Ingresar Registro";
             this.btnRegistro.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnRegistro.Click += new System.EventHandler(this.btnRegistro_Click);
@@ -101,6 +105,8 @@ namespace app.UserControls
             // 
             // dgvRegistros
             // 
+            this.dgvRegistros.AccessibleDescription = "Lista de todos los empleados que han registrado su almuerzo en el servicio actual";
+            this.dgvRegistros.AccessibleName = "Tabla de registros de comensales";
             this.dgvRegistros.AllowUserToAddRows = false;
             this.dgvRegistros.AllowUserToDeleteRows = false;
             this.dgvRegistros.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
