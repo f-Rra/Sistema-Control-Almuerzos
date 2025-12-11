@@ -486,9 +486,26 @@ El sistema muestra:
 - La aplicación debe cerrarse durante la restauración
 
 
-##  Instalación y Configuración
+##  Implementación y Adaptabilidad
 
-### Requisitos del Sistema
+### Flexibilidad de Implementación
+
+Este sistema está diseñado para adaptarse a diferentes escenarios de implementación:
+
+**Opción 1: Nueva Base de Datos**
+- El proyecto incluye scripts SQL completos para crear la base de datos desde cero
+- `Script_Sistema_Control_Almuerzos.sql`: Creación de tablas, relaciones y constraints
+- `Procedimientos_Vistas_Triggers.sql`: Objetos de base de datos (SPs, vistas, triggers)
+- `Datos_Iniciales.sql`: Datos de ejemplo para testing
+- Configuración de cadena de conexión desde el módulo de Configuración
+- Sistema listo para usar en minutos
+
+**Opción 2: Adaptación a Base de Datos Existente**
+- El sistema puede integrarse con una base de datos corporativa existente
+- Se pueden adaptar los procedimientos almacenados para trabajar con tablas preexistentes
+- Los mappers (`negocio/Mappers/`) facilitan la adaptación a estructuras diferente
+
+## Requisitos del Sistema
 
 **Software Requerido:**
 - **Visual Studio 2019 o superior**
@@ -506,7 +523,7 @@ El sistema muestra:
 - Conexión USB
 - Credenciales RFID compatibles
 
-### Módulos del Sistema
+## Módulos del Sistema
 
 | Módulo | Descripción |
 |--------|-------------|
@@ -604,6 +621,43 @@ El sistema muestra:
 -  Mappers eficientes 
 -  Documentación técnica completa
 -  Manual de usuario detallado
+
+---
+
+## Migración a Aplicación Web
+
+
+El sistema actual de Windows Forms podría evolucionar hacia una **aplicación web** utilizando **ASP.NET Core MVC**, lo que permitiría las siguientes mejoras:
+
+**Portal de Comensales:**
+-  **Sistema de autenticación**: Usuario y contraseña personalizado para cada comensal
+-  **Menú semanal**: Visualización del menú planificado para cada día
+-  **Reserva anticipada de lugar**: Seleccionar con antelación dónde almorzar (Comedor/Quincho)
+-  **Confirmación/Cancelación**: Gestionar reservas con anticipación para mejor proyección
+
+**Mejoras Administrativas:**
+-  **Acceso multiplataforma**: Gestión desde cualquier dispositivo 
+-  **Gestión de menús**: Módulo para planificación y publicación de menús semanales
+-  **Sistema de permisos**: Roles diferenciados (Admin, Cocina, Comensales)
+-  **Reportes en línea**: Generación y descarga de reportes sin instalación
+
+**Ventajas de la Migración:**
+-  Mayor accesibilidad y flexibilidad
+-  Reducción de costos de mantenimiento de equipos locales
+-  Mejor experiencia de usuario para comensales
+-  Escalabilidad mejorada para múltiples ubicaciones
+-  Integración más sencilla con sistemas corporativos existentes
+-  Actualizaciones centralizadas sin necesidad de redistribución
+
+### Arquitectura Propuesta
+
+La migración mantendría la actual arquitectura en 3 capas, adaptándola:
+- **Capa de Dominio**: Reutilizable sin modificaciones mayores
+- **Capa de Negocio**: Adaptable con mínimos cambios
+- **Capa de Presentación**: Reemplazo completo con tecnologías web (Razor Pages, Blazor, React, etc.)
+- **Capa adicional API**: Servicios RESTful para aplicaciones móviles
+
+**Nota**: Esta migración representa una evolución natural del proyecto y podría implementarse de manera gradual, manteniendo el sistema actual como referencia funcional.
 
 ##  Documentación
 
