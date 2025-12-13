@@ -15,29 +15,14 @@ namespace app
         {
             if (disposing)
             {
-                // Liberar UserControls creados dinámicamente
-                if (_vistaServicio != null)
+                // Liberar UserControls del diccionario
+                if (_vistas != null)
                 {
-                    _vistaServicio.Dispose();
-                    _vistaServicio = null;
-                }
-
-                if (_vistaRegManual != null)
-                {
-                    _vistaRegManual.Dispose();
-                    _vistaRegManual = null;
-                }
-
-                if (_vistaReportes != null)
-                {
-                    _vistaReportes.Dispose();
-                    _vistaReportes = null;
-                }
-
-                if (_vistaAdmin != null)
-                {
-                    _vistaAdmin.Dispose();
-                    _vistaAdmin = null;
+                    foreach (var vista in _vistas.Values)
+                    {
+                        vista?.Dispose();
+                    }
+                    _vistas.Clear();
                 }
 
                 // Liberar Gestores

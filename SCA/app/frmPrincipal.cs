@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -9,7 +11,6 @@ using System.Windows.Forms;
 using app.UserControls;
 using Negocio;
 using Dominio;
-using System;
 using app.Helpers;
 using app.Gestores;
 using static app.Helpers.MensajesConstantes;
@@ -18,7 +19,14 @@ namespace app
 {
     public partial class frmPrincipal : Form
     {
-        #region Variables y Constantes
+        #region Variables, Enums y Constantes
+        private enum TipoVista
+        {
+            Servicio,
+            RegistroManual,
+            Reportes,
+            Admin
+        }
 
         private readonly Color MenuHover = Color.FromArgb(243, 229, 201);
         private readonly LugarNegocio _lugarNegocio = new LugarNegocio();
@@ -26,10 +34,7 @@ namespace app
         private GestorCronometro _gestorCronometro;
         private GestorEstadisticas _gestorEstadisticas;
         private GestorNavegacion _gestorNavegacion;
-        private ucServicio _vistaServicio;
-        private ucRegistroManual _vistaRegManual;
-        private ucReportes _vistaReportes;
-        private ucAdmin _vistaAdmin;
+        private Dictionary<TipoVista, UserControl> _vistas;
         private int? _idServicioActual = null;
 
         #endregion
@@ -43,11 +48,10 @@ namespace app
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            // Inicializar gestores
             _gestorCronometro = new GestorCronometro(lblCronometro);
             _gestorEstadisticas = new GestorEstadisticas(lblEstadisticas, lblProgreso, pbProgreso);
             _gestorNavegacion = new GestorNavegacion(pnlPrincipal, pnlSuperior, gbxServicios, gbxUltimo);
-
+            InicializarVistas();
             _servicioNegocio.FinalizarServiciosPendientes();
             CargarLugares();
             CargarFecha();
@@ -78,8 +82,9 @@ namespace app
                 
                 _gestorCronometro.Iniciar();
                 ActualizarControles();
-                
-                _vistaServicio.SetServicio(_idServicioActual, idLugar);
+
+                var vistaServicio = ObtenerVista(TipoVista.Servicio) as ucServicio;
+                vistaServicio?.SetServicio(_idServicioActual, idLugar);
                 ActualizarEstadisticas();
             }
             catch (NegocioException ex)
@@ -207,7 +212,10 @@ namespace app
         {
             if (_idServicioActual.HasValue)
             {
-                int totalComensales = _vistaServicio?.CountRegistros() ?? 0;
+                int totalComensales = 0;
+                if (_vistas.TryGetValue(TipoVista.Servicio, out var vistaServ))
+                    totalComensales = (vistaServ as ucServicio)?.CountRegistros() ?? 0;
+
                 int totalInvitados = 0;
                 int.TryParse(mtxtInvitados.Text, out totalInvitados);
 
@@ -341,7 +349,43 @@ namespace app
 
         #region Gestión de UserControls
 
-     
+        private void InicializarVistas()
+        {
+            _vistas = new Dictionary<TipoVista, UserControl>();
+        }
+
+        private UserControl ObtenerVista(TipoVista tipo)
+        {
+            if (_vistas.TryGetValue(tipo, out UserControl vista)) return vista;
+            
+            UserControl nuevaVista = null;
+            switch (tipo)
+            {
+                case TipoVista.Servicio:
+                    nuevaVista = new ucServicio(this);
+                    break;
+                case TipoVista.RegistroManual:
+                    nuevaVista = new ucRegistroManual(this);
+                    break;
+                case TipoVista.Reportes:
+                    nuevaVista = new ucReportes();
+                    break;
+                case TipoVista.Admin:
+                    nuevaVista = new ucAdmin();
+                    break;
+            }
+
+            if (nuevaVista != null)
+            {
+                nuevaVista.Dock = DockStyle.Fill;
+                nuevaVista.Visible = false;
+                pnlPrincipal.Controls.Add(nuevaVista);
+                _vistas[tipo] = nuevaVista;
+            }
+
+            return nuevaVista;
+        }
+
         private void CargarVistaPrincipal()
         {
             if (_idServicioActual == null)
@@ -353,55 +397,7 @@ namespace app
             else
             {
                 _gestorNavegacion.MostrarGroupBoxes(false);
-
-                if (_vistaServicio == null)
-                    _vistaServicio = new ucServicio(this);
-
-                if (_vistaServicio.Parent != pnlPrincipal)
-                {
-                    _vistaServicio.Dock = DockStyle.Fill;
-                    _vistaServicio.Visible = false;
-                    pnlPrincipal.Controls.Add(_vistaServicio);
-                }
-            }
-        }
-
-        private void CargarVistaRegistroManual()
-        {
-            if (_vistaRegManual == null)
-                _vistaRegManual = new ucRegistroManual(this);
-
-            if (_vistaRegManual.Parent != pnlPrincipal)
-            {
-                _vistaRegManual.Dock = DockStyle.Fill;
-                _vistaRegManual.Visible = false;
-                pnlPrincipal.Controls.Add(_vistaRegManual);
-            }
-        }
-
-        private void CargarVistaReportes()
-        {
-            if (_vistaReportes == null)
-                _vistaReportes = new ucReportes();
-
-            if (_vistaReportes.Parent != pnlPrincipal)
-            {
-                _vistaReportes.Dock = DockStyle.Fill;
-                _vistaReportes.Visible = false;
-                pnlPrincipal.Controls.Add(_vistaReportes);
-            }
-        }
-
-        private void CargarVistaAdmin()
-        {
-            if (_vistaAdmin == null)
-                _vistaAdmin = new ucAdmin();
-
-            if (_vistaAdmin.Parent != pnlPrincipal)
-            {
-                _vistaAdmin.Dock = DockStyle.Fill;
-                _vistaAdmin.Visible = false;
-                pnlPrincipal.Controls.Add(_vistaAdmin);
+                ObtenerVista(TipoVista.Servicio);
             }
         }
 
@@ -410,9 +406,11 @@ namespace app
             CargarVistaPrincipal();
             _gestorNavegacion.MostrarPanelSuperior(true);
 
-            if (_idServicioActual.HasValue && _vistaServicio != null)
+            if (_idServicioActual.HasValue)
             {
-                _gestorNavegacion.MostrarVista(_vistaServicio);
+                var vistaServicio = ObtenerVista(TipoVista.Servicio);
+                if (vistaServicio != null)
+                    _gestorNavegacion.MostrarVista(vistaServicio);
             }
             else
             {
@@ -429,16 +427,18 @@ namespace app
                 return false;
             }
 
-            CargarVistaRegistroManual();
-            _vistaRegManual.RefrescarDatos();
+            var vistaRegManual = ObtenerVista(TipoVista.RegistroManual) as ucRegistroManual;
+            if (vistaRegManual == null) return false;
+
+            vistaRegManual.RefrescarDatos();
 
             if (cbLugar.SelectedValue is int idLugar)
             {
-                _vistaRegManual.SetServicio(_idServicioActual.Value, idLugar);
+                vistaRegManual.SetServicio(_idServicioActual.Value, idLugar);
             }
 
             _gestorNavegacion.MostrarPanelSuperior(true);
-            _gestorNavegacion.MostrarVista(_vistaRegManual);
+            _gestorNavegacion.MostrarVista(vistaRegManual);
             return true;
         }
 
@@ -450,10 +450,12 @@ namespace app
                 return false;
             }
 
-            CargarVistaReportes();
-            _vistaReportes.RefrescarDatos();
+            var vistaReportes = ObtenerVista(TipoVista.Reportes) as ucReportes;
+            if (vistaReportes == null) return false;
+
+            vistaReportes.RefrescarDatos();
             _gestorNavegacion.MostrarPanelSuperior(false);
-            _gestorNavegacion.MostrarVista(_vistaReportes);
+            _gestorNavegacion.MostrarVista(vistaReportes);
             return true;
         }
 
@@ -465,9 +467,11 @@ namespace app
                 return false;
             }
 
-            CargarVistaAdmin();
+            var vistaAdmin = ObtenerVista(TipoVista.Admin) as ucAdmin;
+            if (vistaAdmin == null) return false;
+
             _gestorNavegacion.MostrarPanelSuperior(false);
-            _gestorNavegacion.MostrarVista(_vistaAdmin);
+            _gestorNavegacion.MostrarVista(vistaAdmin);
             return true;
         }
 
@@ -478,8 +482,12 @@ namespace app
         public void RefrescarTodasLasVistas()
         {
             CargarLugares();
-            _vistaRegManual?.RefrescarDatos();
-            _vistaReportes?.RefrescarDatos();
+
+            if (_vistas.TryGetValue(TipoVista.RegistroManual, out var vistaReg))
+                (vistaReg as ucRegistroManual)?.RefrescarDatos();
+
+            if (_vistas.TryGetValue(TipoVista.Reportes, out var vistaRep))
+                (vistaRep as ucReportes)?.RefrescarDatos();
 
             if (gbxServicios.Visible || gbxUltimo.Visible)
             {
@@ -491,13 +499,17 @@ namespace app
 
         public void RefrescarRegistros()
         {
-            _vistaServicio?.RefrescarRegistros();
+            if (_vistas.TryGetValue(TipoVista.Servicio, out var vistaServ))
+                (vistaServ as ucServicio)?.RefrescarRegistros();
+
             ActualizarEstadisticas();
         }
 
         public void ActualizarEstadisticas()
         {
-            int registrados = _vistaServicio?.CountRegistros() ?? 0;
+            int registrados = 0;
+            if (_vistas.TryGetValue(TipoVista.Servicio, out var vistaServ))
+                registrados = (vistaServ as ucServicio)?.CountRegistros() ?? 0;
             int.TryParse(mtxtProyeccion.Text, out int proyeccion);
             int.TryParse(mtxtInvitados.Text, out int invitados);
 
