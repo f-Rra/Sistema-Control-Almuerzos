@@ -93,16 +93,14 @@ namespace app.UserControls
         {
             // Ocultar columnas internas
             ListadoHelper.OcultarColumnas(dgvEmpleados, 
-                "IdEmpleado", "IdCredencial", "IdEmpresa", "Estado", "Empresa");
+                "IdEmpleado", "IdCredencial", "IdEmpresa", "Estado", "Empresa", "NombreCompleto");
             
             // Configurar encabezados
             ListadoHelper.ConfigurarHeaders(dgvEmpleados,
-                ("NombreCompleto", "Nombre Completo"),
                 ("NombreEmpresa", "Empresa"));
             
             // Configurar orden
-            ListadoHelper.ConfigurarOrden(dgvEmpleados, "NombreCompleto", 0);
-            ListadoHelper.ConfigurarOrden(dgvEmpleados, "NombreEmpresa", 1);
+            ListadoHelper.ConfigurarOrden(dgvEmpleados, "NombreEmpresa", 0);
         }
 
         private void CargarEmpresas()
