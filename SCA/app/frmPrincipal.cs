@@ -105,6 +105,7 @@ namespace app
             try
             {
                 GuardarEstadisticasEnBD();
+                MensajesUI.MostrarExito("Servicio finalizado correctamente");
             }
             catch (NegocioException ex)
             {
