@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace app.Gestores
 {
-    public class GestorCronometro
+    public class GestorCronometro : IDisposable
     {
         private readonly Timer _timer;
         private readonly Stopwatch _stopwatch;

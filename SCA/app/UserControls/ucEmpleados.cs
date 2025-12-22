@@ -186,7 +186,7 @@ namespace app.UserControls
             txtCredencial.Text = empleadoSeleccionado.IdCredencial;
             txtNombre.Text = empleadoSeleccionado.Nombre;
             txtApellido.Text = empleadoSeleccionado.Apellido;
-            cbEmpresaEmpleado.SelectedValue = empleadoSeleccionado.Empresa.IdEmpresa;
+            cbEmpresaEmpleado.SelectedValue = empleadoSeleccionado.IdEmpresa;
             
             rbActivoEmpleado.Checked = empleadoSeleccionado.Estado;
             rbInactivoEmpleado.Checked = !empleadoSeleccionado.Estado;
