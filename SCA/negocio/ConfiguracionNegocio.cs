@@ -148,7 +148,7 @@ namespace Negocio
                 {
                     Version = version.ToString(),
                     FechaCompilacion = fechaCompilacion,
-                    Framework = ".NET Framework 4.8",
+                    Framework = ".NET Framework 4.8.1",
                     UILibrary = "ReaLTaiizor & Winforms"
                 };
             }

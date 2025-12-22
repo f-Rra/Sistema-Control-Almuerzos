@@ -39,7 +39,7 @@ namespace Negocio.Mappers
             {
                 Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(),
                 FechaCompilacion = System.IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location),
-                Framework = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription,
+                Framework = ".NET Framework 4.8.1",
                 UILibrary = "ReaLTaiizor 3.8.1.3"
             };
         }
