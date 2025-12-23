@@ -32,11 +32,30 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 ##  Funcionalidades del Sistema
 
 
-###  Panel Principal
+###  Menú de Navegación Lateral
 
-![Panel Principal](./docs/screenshots/panel_principal.png)
+![Menú Lateral](./docs/screenshots/menu_lateral.png)
 
-**Contenedor Principal del Sistema:**
+El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a todos los módulos:
+
+- **Inicio** : Panel de bienvenida (sin servicio activo) o Registro de Comensales (con servicio activo)
+- **Registro Manual** : Acceso al módulo de registro manual de comensales
+- **Reportes** : Sistema de reportes y análisis estadístico
+- **Administración** : Panel administrativo 
+
+**Características de Navegación:**
+- Iconos intuitivos para cada módulo
+- Tooltips informativos al pasar el cursor
+- Indicador visual de sección activa
+- Diseño minimalista que maximiza el espacio de trabajo
+- Acceso rápido sin menús desplegables
+- Navegación fluida entre módulos sin recargas
+
+###  Panel de Bienvenida
+
+![Panel de Bienvenida](./docs/screenshots/panel_principal.png)
+
+**Dashboard Principal del Sistema:**
 
 **Lista de Últimos Servicios:**
 - Visualización de los servicios más recientes
@@ -50,50 +69,102 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Lugar (Comedor/Quincho)
 - Proyección inicial de comensales
 - Total de invitados esperados
-- Duración del servicio (cronómetro en tiempo real)
-- Estadísticas actuales:
-  - Contador principal de comensales registrados
-  - Total de invitados
-  - Comparativa proyección vs real
-  - Actualización automática sin recargas
+- Duración del servicio
+- Total de comensales registrados
+- Comparativa final proyección vs real
+
+###  Gestión de Servicios
+
+![Gestión de Servicios](./docs/screenshots/gestion_servicios.png)
+
+**Control de Jornadas de Comedor:**
+
+**Inicio de Servicio:**
+- Selección de lugar (Comedor/Quincho)
+- Registro de proyección de comensales esperados
+- Total de invitados estimados
+- Inicio automático de cronómetro
+
+**Durante el Servicio:**
+-  Estado activo en tiempo real
+-  Duración y progreso del servicio
+-  Total de comensales reales vs proyectados
+-  Comparativa de eficiencia porcentual
+
+**Cierre de Servicio:**
+- Finalización del servicio activo
+- Cálculo automático de estadísticas finales
+- Registro de duración total en minutos
+- Comparación final: proyección vs realidad
 
 ###  Registro de Comensales
 
 ![Registro de Comensales](./docs/screenshots/registro_comensales.png)
 
+#### Panel Superior de Control
+
+**Información del Servicio Activo:**
+- Lugar actual (Comedor/Quincho)
+- Fecha y hora de inicio del servicio
+- Proyección inicial de comensales
+- Cronómetro en tiempo real
+- **Contador principal**: Total de comensales registrados
+- Total de invitados del día
+- Actualización automática con cada registro
+
+#### Sistema de Registro por Credencial
+
 **Método Actual: Ingreso por Teclado**
 - Campo de entrada para ID de credencial
 - Validación automática de duplicados
 - Confirmación visual inmediata con ventana temporal
-- Información mostrada:
+- Información mostrada al registrar:
   - Nombre completo del empleado
-  - Empresa
+  - Empresa de pertenencia
   - Hora exacta de registro
 - Ventana de confirmación desaparece automáticamente (4 segundos)
+- Listo para siguiente registro inmediato
 
 **Método Futuro: RFID Automático**
-- Lectura automática de credencial
+- Lectura automática de credencial al acercarla
 - Registro instantáneo (<1 segundo)
 - Cero intervención del operador
-- Guía completa de implementación incluida
+- Guía completa de implementación incluida en documentación
 
-**Visualización en Tiempo Real:**
-- Listado completo de todos los registros del servicio actual
-- Información por columnas:
+**Listado en Tiempo Real:**
+- Tabla con todos los registros del servicio actual
+- Columnas mostradas:
   - Nombre y apellido del comensal
   - Empresa de pertenencia
-  - Hora de registro (formato HH:mm:ss)
+  - Hora exacta de registro (formato HH:mm:ss)
 - Actualización automática al registrar nuevo comensal
-- Tabla optimizada para lectura rápida por personal de cocina
+- Ordenado por hora de registro (más recientes arriba)
+- Optimizado para lectura rápida por personal de cocina
 
-**Características del Sistema de Registro:**
--  Validación de empleado activo
+**Validaciones del Sistema:**
+-  Empleado debe estar activo en el sistema
 -  Detección de registros duplicados en servicio actual
--  Vinculación automática al servicio activo
--  Registro alternativo manual (sin credencial)
--  Gestión de invitados (solo cantidad, sin datos personales)
+-  Vinculación automática al servicio activo del lugar
+-  Verificación de existencia de servicio activo
 -  Contador automático de comensales
 -  Sincronización con estadísticas del panel principal
+
+###  Registro Manual de Comensales
+
+![Registro Manual de Comensales](./docs/screenshots/registro_manual.png)
+
+**Funcionalidad Alternativa:**
+- Para empleados sin credencial asignada
+- Búsqueda por nombre y/o apellido
+- Selección de empleado desde listado
+- Registro con las mismas validaciones que RFID
+- Útil para casos de pérdida o daño de credencial
+
+**Registro de Invitados:**
+- Gestión de invitados sin datos personales
+- Solo se registra la cantidad
+- No requiere información individual
+- Suma al contador total del servicio
 
 ###  Gestión de Empleados
 
@@ -109,6 +180,13 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Asignación de ID de credencial a empleados
 - Reasignación de credenciales (pérdida/daño)
 - Validación de unicidad de credenciales
+- Visualización de estado de credencial
+
+**Integración con el Sistema:**
+- Datos utilizados en registro de comensales
+- Vinculación con empresas del predio
+- Validación de estado activo para registros
+- Historial completo de asistencias
 
 
 ###  Gestión de Empresas
@@ -137,69 +215,6 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Datos utilizados en reportes de asistencia por empresa
 - Estadísticas mensuales actualizadas en tiempo real
 - Filtrado de registros por compañía
-
-###  Gestión de Servicios
-
-![Gestión de Servicios](./docs/screenshots/gestion_servicios.png)
-
-**Control de Jornadas:**
-- Inicio de servicio por lugar (Comedor/Quincho)
-- Registro de proyección de comensales
-- Total de invitados esperados
-- Cierre de servicio con estadísticas finales
-
-**Información Automática:**
--  Estado, duración y progreso del servicio
--  Total de comensales reales vs proyectados
--  Comparativa de eficiencia
-
-###  Configuración del Sistema
-
-![Configuración del Sistema](./docs/screenshots/configuracion.png)
-
-**Panel de Administración Completo:**
-
-**1. Configuración de Base de Datos**
-
-![Configuración de Base de Datos](./docs/screenshots/config_basedatos.png)
-
--  Modificar cadena de conexión en tiempo real
--  Probar conectividad antes de guardar
--  Ver información de la BD:
-  - Nombre de la base de datos
-  - Tamaño en MB
-  - Fecha de creación
-  - Última actualización
--  Estadísticas de uso del servidor
-
-**2. Sistema de Respaldos**
-
-![Sistema de Respaldos](./docs/screenshots/config_respaldos.png)
-
-**Respaldo Manual:**
-- Crear backup inmediato a ubicación específica
-- Selección de carpeta destino
-- Útil antes de actualizaciones o cambios importantes
-
-**Respaldo Automático Programado:**
--  **Mensual**: Backup cada mes
-- Configuración de ruta de destino
-- Historial de último respaldo (fecha, ubicación, tamaño)
-
-**Restauración:**
-- Restaurar desde archivo de backup (.bak)
-- Selección de archivo de respaldo
-- Proceso guiado con confirmaciones
-- Sobrescribe completamente la BD actual
-
-**3. Información de la Aplicación**
-
-![Información de la Aplicación](./docs/screenshots/config_info.png)
-
-- Versión del sistema
-- Fecha de compilación
-- Framework utilizado (.NET Framework 4.8)
-- Librerías UI (ReaLTaiizor & WinForms)
 
 ###  Reportes y Estadísticas
 
@@ -254,6 +269,54 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 -  Exportación a PDF
 -  Metadatos incluidos (fecha de generación, filtros aplicados)
 -  Encabezados corporativos personalizables
+
+###  Configuración del Sistema
+
+![Configuración del Sistema](./docs/screenshots/configuracion.png)
+
+**Panel de Administración Completo:**
+
+**1. Configuración de Base de Datos**
+
+![Configuración de Base de Datos](./docs/screenshots/config_basedatos.png)
+
+-  Modificar cadena de conexión en tiempo real
+-  Probar conectividad antes de guardar
+-  Ver información de la BD:
+  - Nombre de la base de datos
+  - Tamaño en MB
+  - Fecha de creación
+  - Última actualización
+-  Estadísticas de uso del servidor
+
+**2. Sistema de Respaldos**
+
+![Sistema de Respaldos](./docs/screenshots/config_respaldos.png)
+
+**Respaldo Manual:**
+- Crear backup inmediato a ubicación específica
+- Selección de carpeta destino
+- Útil antes de actualizaciones o cambios importantes
+
+**Respaldo Automático Programado:**
+-  **Mensual**: Backup cada mes
+- Configuración de ruta de destino
+- Historial de último respaldo (fecha, ubicación, tamaño)
+
+**Restauración:**
+- Restaurar desde archivo de backup (.bak)
+- Selección de archivo de respaldo
+- Proceso guiado con confirmaciones
+- Sobrescribe completamente la BD actual
+
+**3. Información de la Aplicación**
+
+![Información de la Aplicación](./docs/screenshots/config_info.png)
+
+- Versión del sistema
+- Fecha de compilación
+- Framework utilizado (.NET Framework 4.8)
+- Librerías UI (ReaLTaiizor & WinForms)
 
 ---
 
