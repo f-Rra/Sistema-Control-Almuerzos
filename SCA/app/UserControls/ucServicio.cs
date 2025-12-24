@@ -84,7 +84,7 @@ namespace app.UserControls
                 
                 ListadoHelper.OcultarColumnas(dgvRegistros,
                     "IdRegistro", "IdEmpleado", "IdEmpresa", "IdServicio", "IdLugar",
-                    "Hora", "NombreLugar");
+                    "Fecha", "Hora", "NombreLugar");
             }
             catch (NegocioException ex)
             {

@@ -19,6 +19,19 @@ namespace app.Helpers
             }
         }
 
+        public static void MostrarColumnas(DataGridView dgv, params string[] nombresColumnas)
+        {
+            if (dgv?.Columns == null) return;
+
+            foreach (var nombreColumna in nombresColumnas)
+            {
+                if (dgv.Columns.Contains(nombreColumna))
+                {
+                    dgv.Columns[nombreColumna].Visible = true;
+                }
+            }
+        }
+
         public static void ConfigurarHeaderText(DataGridView dgv, string nombreColumna, string headerText)
         {
             if (dgv?.Columns == null) return;

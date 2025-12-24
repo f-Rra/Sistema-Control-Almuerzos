@@ -400,19 +400,22 @@ namespace app.UserControls
             if (!dgvReporte.Columns.Contains(nombreColumna))
                 return;
 
-            var columna = dgvReporte.Columns[nombreColumna];
-
             if (headerText != null)
-                columna.HeaderText = headerText;
+                ListadoHelper.ConfigurarHeaderText(dgvReporte, nombreColumna, headerText);
 
             if (formato != null)
-                columna.DefaultCellStyle.Format = formato;
+                ListadoHelper.ConfigurarFormato(dgvReporte, nombreColumna, formato);
 
             if (visible.HasValue)
-                columna.Visible = visible.Value;
+            {
+                if (visible.Value)
+                    ListadoHelper.MostrarColumnas(dgvReporte, nombreColumna);
+                else
+                    ListadoHelper.OcultarColumnas(dgvReporte, nombreColumna);
+            }
 
             if (displayIndex.HasValue)
-                columna.DisplayIndex = displayIndex.Value;
+                ListadoHelper.ConfigurarOrden(dgvReporte, nombreColumna, displayIndex.Value);
         }
 
         #endregion

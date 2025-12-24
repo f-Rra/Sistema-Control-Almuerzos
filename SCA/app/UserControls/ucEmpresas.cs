@@ -111,14 +111,7 @@ namespace app.UserControls
 
         private void ConfigurarVisibilidadColumnas(DataGridViewColumnCollection cols)
         {
-            string[] aOcultar = { "IdEmpresa", "Estado" };
-            foreach (var nombre in aOcultar)
-            {
-                if (cols.Contains(nombre))
-                {
-                    cols[nombre].Visible = false;
-                }
-            }
+            ListadoHelper.OcultarColumnas(dgvEmpresas, "IdEmpresa", "Estado");
         }
 
         #endregion

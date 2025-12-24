@@ -149,30 +149,18 @@ namespace app.UserControls
 
         private void ConfigurarVisibilidadColumnas(DataGridViewColumnCollection cols)
         {
-            string[] aOcultar = { "IdEmpleado", "IdEmpresa", "Empresa", "Estado", "Nombre", "Apellido", "IdCredencial" };
-            foreach (var nombre in aOcultar)
-            {
-                var col = cols[nombre];
-                if (col != null) col.Visible = false;
-            }
+            ListadoHelper.OcultarColumnas(dgvFaltantes,
+                "IdEmpleado", "IdEmpresa", "Empresa", "Estado", "IdCredencial", "NombreCompleto");
 
-            string[] aMostrar = { "NombreCompleto", "NombreEmpresa" };
-            foreach (var nombre in aMostrar)
-            {
-                var col = cols[nombre];
-                if (col != null) col.Visible = true;
-            }
+            ListadoHelper.MostrarColumnas(dgvFaltantes,
+                "Nombre", "Apellido", "NombreEmpresa");
         }
 
         private void ConfigurarOrdenColumnas(DataGridViewColumnCollection cols)
         {
-            string[] orden = { "NombreCompleto", "NombreEmpresa" };
-            int idx = 0;
-            foreach (var nombre in orden)
-            {
-                var col = cols[nombre];
-                if (col != null) col.DisplayIndex = idx++;
-            }
+            ListadoHelper.ConfigurarOrden(dgvFaltantes, "Nombre", 0);
+            ListadoHelper.ConfigurarOrden(dgvFaltantes, "Apellido", 1);
+            ListadoHelper.ConfigurarOrden(dgvFaltantes, "NombreEmpresa", 2);
         }
 
         #endregion
