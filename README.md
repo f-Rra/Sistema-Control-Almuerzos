@@ -36,8 +36,33 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 ##  Funcionalidades del Sistema
 
-| <img src="./docs/menu_lateral.png" alt="Menú Lateral" width="80"/> | **Menú de Navegación Lateral**<br><br>El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a todos los módulos:<br><br>• **Inicio**: Panel de bienvenida (sin servicio activo) o Registro de Comensales (con servicio activo)<br>• **Registro Manual**: Acceso al módulo de registro manual de comensales<br>• **Reportes**: Sistema de reportes y análisis estadístico<br>• **Administración**: Panel administrativo<br><br>Características de Navegación:<br>• Iconos intuitivos para cada módulo<br>• Tooltips informativos al pasar el cursor<br>• Indicador visual de sección activa<br>• Diseño minimalista que maximiza el espacio de trabajo<br>• Acceso rápido sin menús desplegables<br>• Navegación fluida entre módulos sin recargas |
-|:---:|:---|
+
+<table>
+  <tr>
+    <td width="120" style="border-radius:6px 0 0 6px; border:1px solid #ccc; border-right:none; text-align:center; vertical-align:top; padding:0;">
+      <img src="./docs/menu_lateral.png" alt="Menú Lateral" width="100" style="display:block; margin:0; padding:0;"/>
+    </td>
+    <td style="vertical-align:top; padding-left:16px; border:none;">
+      <h3 style="margin-bottom: 0.7em;">Menú de Navegación Lateral</h3>
+      El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a todos los módulos:
+      <ul>
+        <li><b>Inicio</b>: Panel de bienvenida (sin servicio activo) o Registro de Comensales (con servicio activo)</li>
+        <li><b>Registro Manual</b>: Acceso al módulo de registro manual de comensales</li>
+        <li><b>Reportes</b>: Sistema de reportes y análisis estadístico</li>
+        <li><b>Administración</b>: Panel administrativo</li>
+      </ul>
+      <b>Características de Navegación:</b>
+      <ul>
+        <li>Iconos intuitivos para cada módulo</li>
+        <li>Tooltips informativos al pasar el cursor</li>
+        <li>Indicador visual de sección activa</li>
+        <li>Diseño minimalista que maximiza el espacio de trabajo</li>
+        <li>Acceso rápido sin menús desplegables</li>
+        <li>Navegación fluida entre módulos sin recargas</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 ###  Panel de Bienvenida
 
@@ -407,43 +432,6 @@ Sistema-Control-Almuerzos/
 - `tr_ValidarServicioActivo`: Previene múltiples servicios activos simultáneos
 
 ---
-
-##  Implementación y Adaptabilidad
-
-### Flexibilidad de Implementación
-
-Este sistema está diseñado para adaptarse a diferentes escenarios de implementación:
-
-**Opción 1: Nueva Base de Datos**
-- El proyecto incluye scripts SQL completos para crear la base de datos desde cero
-- `Script_Sistema_Control_Almuerzos.sql`: Creación de tablas, relaciones y constraints
-- `Procedimientos_Vistas_Triggers.sql`: Objetos de base de datos (SPs, vistas, triggers)
-- `Datos_Iniciales.sql`: Datos de ejemplo para testing
-- Configuración de cadena de conexión desde el módulo de Configuración
-- Sistema listo para usar en minutos
-
-**Opción 2: Adaptación a Base de Datos Existente**
-- El sistema puede integrarse con una base de datos corporativa existente
-- Se pueden adaptar los procedimientos almacenados para trabajar con tablas preexistentes
-- Los mappers (`negocio/Mappers/`) facilitan la adaptación a estructuras diferente
-
-## Requisitos del Sistema
-
-**Software Requerido:**
-- **Visual Studio 2019 o superior**
-- **.NET Framework 4.8**
-- **SQL Server 2019 o superior** 
-- **Windows 10 o superior**
-
-**Hardware Mínimo:**
-- Procesador: Intel Core i3 o equivalente
-- RAM: 4 GB (recomendado 8 GB)
-- Espacio en disco: 500 MB
-
-**Hardware Futuro (RFID):**
-- Lector RFID 
-- Conexión USB
-- Credenciales RFID compatibles
 
 ## Módulos del Sistema
 
