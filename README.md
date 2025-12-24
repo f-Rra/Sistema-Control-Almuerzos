@@ -36,35 +36,8 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 ##  Funcionalidades del Sistema
 
-<table>
-<tr>
-<td width="80" style="vertical-align: middle; padding-top: 2px;">
-
-<img src="./docs/menu_lateral.png" alt="Menú Lateral" width="80"/>
-
-</td>
-<td style="vertical-align: middle;">
-
-<h3 style="margin-top: 0;">Menú de Navegación Lateral</h3>
-
-El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a todos los módulos:
-
-- **Inicio** : Panel de bienvenida (sin servicio activo) o Registro de Comensales (con servicio activo)
-- **Registro Manual** : Acceso al módulo de registro manual de comensales
-- **Reportes** : Sistema de reportes y análisis estadístico
-- **Administración** : Panel administrativo 
-
-**Características de Navegación:**
-- Iconos intuitivos para cada módulo
-- Tooltips informativos al pasar el cursor
-- Indicador visual de sección activa
-- Diseño minimalista que maximiza el espacio de trabajo
-- Acceso rápido sin menús desplegables
-- Navegación fluida entre módulos sin recargas
-
-</td>
-</tr>
-</table>
+| <img src="./docs/menu_lateral.png" alt="Menú Lateral" width="80"/> | **Menú de Navegación Lateral**<br><br>El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a todos los módulos:<br><br>• **Inicio**: Panel de bienvenida (sin servicio activo) o Registro de Comensales (con servicio activo)<br>• **Registro Manual**: Acceso al módulo de registro manual de comensales<br>• **Reportes**: Sistema de reportes y análisis estadístico<br>• **Administración**: Panel administrativo<br><br>Características de Navegación:<br>• Iconos intuitivos para cada módulo<br>• Tooltips informativos al pasar el cursor<br>• Indicador visual de sección activa<br>• Diseño minimalista que maximiza el espacio de trabajo<br>• Acceso rápido sin menús desplegables<br>• Navegación fluida entre módulos sin recargas |
+|:---:|:---|
 
 ###  Panel de Bienvenida
 
