@@ -147,9 +147,61 @@ El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a t
 - Registro con las mismas validaciones que el sistema por credencial
 - Útil para casos de pérdida, daño o falta de credencial
 
+###  Reportes
+
+![Módulo de Reportes](./docs/reportes.png)
+
+- **Selección de tipo de reporte**: Menú desplegable con los 4 tipos disponibles
+- **Generar Reporte**: Carga los datos según los filtros aplicados
+- **Exportar a PDF**: Genera documento con formato profesional
+- **Filtros personalizables**:
+  - Rango de fechas: Desde - Hasta (con selectores de calendario)
+  - Filtro por lugar: Comedor, Quincho o Todos los lugares
+
+**Tipos de Reportes Disponibles:**
+
+**1. Lista de Servicios**
+- Todos los servicios del período seleccionado
+- Fecha, lugar, proyección, duración del servicio
+- Total de comensales reales vs proyección
+- Total de invitados
+- Total general (comensales + invitados)
+- Útil para revisión histórica y análisis día por día
+
+**2. Asistencias por Empresas**
+- Total de asistencias por cada compañía del predio
+- Comparativa y ranking entre empresas
+- Útil para facturación segmentada por empresa
+- Análisis de participación corporativa
+- Identificar empresas con mayor/menor uso del comedor
+
+**3. Cobertura vs Proyección**
+- Comparación entre proyección inicial y asistencia real
+- Porcentaje de cobertura por servicio
+- Diferencia absoluta (positiva/negativa)
+- Mejora de planificación y compras futuras
+
+**4. Distribución por Día de Semana**
+- Patrones de asistencia semanal
+- Total acumulado por cada día de la semana
+- Identificación de días pico y días bajos
+- Optimización de compras según día
+- Ajuste de proyecciones por patrón semanal
+
+###  Panel de Administrador
+
+![Panel de Administrador](./docs/panel_admin.png)
+
+Punto de acceso centralizado a todas las funciones administrativas del sistema. Presenta una interfaz que permite acceder a los siguientes módulos:
+
+- **Empleados**: Gestión completa de empleados y asignación de credenciales
+- **Empresas**: Administración de empresas del predio
+- **Estadísticas**: Dashboard de análisis y métricas del sistema
+- **Configuración**: Configuración del sistema, base de datos y respaldos
+
 ###  Gestión de Empleados
 
-![Gestión de Empleados](./docs/screenshots/gestion_empleados.png)
+![Gestión de Empleados](./docs/gestion_empleados.png)
 
 **Operaciones ABML Completas:**
 - **Alta**: Crear nuevos empleados con datos completos
@@ -159,7 +211,6 @@ El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a t
 
 **Gestión de Credenciales:**
 - Asignación de ID de credencial a empleados
-- Reasignación de credenciales (pérdida/daño)
 - Validación de unicidad de credenciales
 - Visualización de estado de credencial
 
@@ -167,12 +218,11 @@ El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a t
 - Datos utilizados en registro de comensales
 - Vinculación con empresas del predio
 - Validación de estado activo para registros
-- Historial completo de asistencias
 
 
 ###  Gestión de Empresas
 
-![Gestión de Empresas](./docs/screenshots/gestion_empresas.png)
+![Gestión de Empresas](./docs/gestion_empresas.png)
 
 **Operaciones ABML Completas:**
 - **Alta**: Crear nuevas empresas con nombre y descripción
@@ -183,121 +233,33 @@ El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a t
 **Visualización de Estadísticas:**
 - Total de empleados por empresa
 - Total de asistencias del mes actual
-- Identificación rápida de empresas sin empleados activos
-
-**Validaciones Implementadas:**
--  No se puede eliminar empresa con empleados activos
--  Nombre de empresa único (no duplicados)
--  Al desactivar empresa, se sugiere desactivar empleados asociados
--  Advertencias antes de operaciones críticas
+- Identificación de empresas sin empleados activos
 
 **Integración con el Sistema:**
 - Vinculación automática con módulo de empleados
-- Datos utilizados en reportes de asistencia por empresa
 - Estadísticas mensuales actualizadas en tiempo real
 - Filtrado de registros por compañía
 
-###  Reportes y Estadísticas
+###  Estadísticas
 
-![Módulo de Reportes](./docs/screenshots/reportes.png)
+![Módulo de Estadísticas](./docs/estadisticas.png)
 
-**Sistema de Reportes Avanzados:**
+Dashboard de análisis estadístico con visualización de métricas clave en tiempo real en cuatro áreas principales:
 
-**1. Lista de Servicios**
-
-![Reporte de Lista de Servicios](./docs/screenshots/reporte_servicios.png)
-
-- Todos los servicios del período seleccionado
-- Fecha, lugar, proyección, duración del servicio
-- Total de comensales reales vs proyección
-- Total de invitados
-- Total general (comensales + invitados)
-- Útil para revisión histórica y análisis día por día
-
-**2. Asistencias por Empresas**
-
-![Reporte de Asistencias por Empresas](./docs/screenshots/reporte_empresas.png)
-
-- Total de asistencias por cada compañía del predio
-- Comparativa y ranking entre empresas
-- Útil para facturación segmentada por empresa
-- Análisis de participación corporativa
-- Identificar empresas con mayor/menor uso del comedor
-
-**3. Cobertura vs Proyección**
-
-![Reporte de Cobertura vs Proyección](./docs/screenshots/reporte_cobertura.png)
-
-- Comparación entre proyección inicial y asistencia real
-- Porcentaje de cobertura por servicio
-- Diferencia absoluta (positiva/negativa)
-- Mejora de planificación y compras futuras
-
-**4. Distribución por Día de Semana**
-
-![Reporte de Distribución por Día](./docs/screenshots/reporte_diasemana.png)
-
-- Patrones de asistencia semanal
-- Total acumulado por cada día de la semana
-- Identificación de días pico y días bajos
-- Optimización de compras según día
-- Ajuste de proyecciones por patrón semanal
-
-**Características Comunes de Todos los Reportes:**
--  Filtros por rango de fechas (desde - hasta)
--  Filtros por lugar (Comedor/Quincho/Todos)
--  Visualización en grilla interactiva
--  Exportación a PDF
--  Metadatos incluidos (fecha de generación, filtros aplicados)
--  Encabezados corporativos personalizables
+- **Métricas Generales**: Total de servicios, asistencias registradas y promedios
+- **Análisis por Empresa**: Ranking de participación y distribución porcentual
+- **Análisis Temporal**: Patrones de asistencia y días pico
+- **Análisis de Proyección**: Precisión de estimaciones y sugerencias de mejora
 
 ###  Configuración del Sistema
 
-![Configuración del Sistema](./docs/screenshots/configuracion.png)
+![Configuración del Sistema](./docs/configuracion.png)
 
-**Panel de Administración Completo:**
+Panel de administración completo que centraliza la configuración del sistema en tres áreas principales:
 
-**1. Configuración de Base de Datos**
-
-![Configuración de Base de Datos](./docs/screenshots/config_basedatos.png)
-
--  Modificar cadena de conexión en tiempo real
--  Probar conectividad antes de guardar
--  Ver información de la BD:
-  - Nombre de la base de datos
-  - Tamaño en MB
-  - Fecha de creación
-  - Última actualización
--  Estadísticas de uso del servidor
-
-**2. Sistema de Respaldos**
-
-![Sistema de Respaldos](./docs/screenshots/config_respaldos.png)
-
-**Respaldo Manual:**
-- Crear backup inmediato a ubicación específica
-- Selección de carpeta destino
-- Útil antes de actualizaciones o cambios importantes
-
-**Respaldo Automático Programado:**
--  **Mensual**: Backup cada mes
-- Configuración de ruta de destino
-- Historial de último respaldo (fecha, ubicación, tamaño)
-
-**Restauración:**
-- Restaurar desde archivo de backup (.bak)
-- Selección de archivo de respaldo
-- Proceso guiado con confirmaciones
-- Sobrescribe completamente la BD actual
-
-**3. Información de la Aplicación**
-
-![Información de la Aplicación](./docs/screenshots/config_info.png)
-
-- Versión del sistema
-- Fecha de compilación
-- Framework utilizado (.NET Framework 4.8)
-- Librerías UI (ReaLTaiizor & WinForms)
+- **Configuración de Base de Datos**: Gestión de conexión e información del servidor SQL
+- **Sistema de Respaldos**: Backups manuales y automáticos mensuales con restauración
+- **Información de la Aplicación**: Versión del sistema y tecnologías utilizadas
 
 ---
 
@@ -473,63 +435,6 @@ Sistema-Control-Almuerzos/
 
 ---
 
-
-##  Sistema de Respaldos y Recuperación
-
-El sistema incluye un módulo completo de respaldos para proteger la información crítica del comedor.
-
-### Tipos de Respaldo Disponibles
-
-**1. Respaldo Manual**
-- Se ejecuta bajo demanda desde el módulo de Configuración
-- Requiere selección de carpeta destino
-- Ideal antes de:
-  - Actualizaciones importantes del sistema
-  - Cambios masivos de datos
-  - Migraciones de servidor
-  - Modificaciones en la estructura de BD
-
-**2. Respaldo Mensual Automático Programado**
-
-**Configuración:**
-1. Abrir módulo **Configuración**
-2. Ir a pestaña **Respaldos**
-3. Seleccionar frecuencia deseada
-4. Establecer ruta de destino para archivos
-5. Guardar configuración
-6. El sistema ejecutará backups automáticamente
-
-### Información de Respaldos
-
-El sistema muestra:
-- **Fecha del último respaldo**: Cuándo se realizó
-- **Ruta del archivo**: Ubicación del backup
-- **Tamaño del archivo**: Espacio ocupado en MB
-
-### Restauración desde Backup
-
-**¿Cuándo restaurar?**
-- Pérdida de datos por error humano
-- Corrupción de base de datos
-- Reversión a estado anterior (rollback)
-- Migración o clonación de sistema
-- Recuperación ante desastres
-
-**Pasos para Restaurar:**
-1. Ir al módulo **Configuración**
-2. Pestaña **Respaldos**
-3. Hacer clic en **"Restaurar Respaldo"**
-4. Seleccionar archivo de backup (.bak)
-5. Confirmar operación
-6. El sistema restaurará la BD automáticamente
-
-**ADVERTENCIA IMPORTANTE**: 
-- La restauración sobrescribe **completamente** la base de datos actual
-- Todos los datos posteriores al backup se perderán
-- Se recomienda crear un backup manual antes de restaurar
-- La aplicación debe cerrarse durante la restauración
-
-
 ##  Implementación y Adaptabilidad
 
 ### Flexibilidad de Implementación
@@ -625,46 +530,7 @@ Este sistema está diseñado para adaptarse a diferentes escenarios de implement
 -  Mensajería centralizada con constantes (MensajesConstantes)
 -  Confirmaciones antes de operaciones críticas
 -  Feedback visual inmediato
--  Gestores especializados para cronómetro, estadísticas y navegación
-
-##  Roadmap
-
-**Estado**: Funcional y listo para producción
-
-**Módulos:**
--  Diseño e implementación de base de datos
--  Arquitectura en 3 capas completa
--  Módulo de gestión de empleados (ABML completo)
--  Módulo de gestión de empresas y lugares
--  Sistema de servicios por jornada
--  Registro de comensales por ingreso de ID (teclado)
--  Panel de visualización en tiempo real para cocina
-
-**Sistema de Reportes:**
--  4 tipos de reportes avanzados:
-  - Lista de servicios
-  - Asistencias por empresas
-  - Cobertura vs proyección
-  - Distribución por día de semana
--  Exportación a PDF
--  Filtros por fecha y lugar
-
-**Administración:**
--  Módulo de configuración completo
--  Sistema de respaldos automáticos y manuales
--  Gestión de cadena de conexión
--  Información de base de datos y aplicación
-
-**Calidad:**
--  Validaciones robustas en todas las capas
--  Manejo centralizado de excepciones 
--  Mensajería centralizada con constantes 
--  Interfaz moderna y profesional
--  Gestores especializados 
--  Helpers optimizados 
--  Mappers eficientes 
--  Documentación técnica completa
--  Manual de usuario detallado
+-  Gestores especializados para cronómetro, estadísticas y navegació
 
 ---
 
@@ -775,7 +641,7 @@ Las siguientes herramientas fueron utilizadas para la elaboración de documentac
 - **Visual Studio Code** - Edición de archivos Markdown
 - **Markdown Preview Enhanced** - Vista previa de documentación
 
-### Nota sobre el Uso de IA
+### Nota sobre el uso de IA
 
 El uso de herramientas de IA generativa fue exclusivamente para:
 - **Documentación**: Redacción clara y profesional de guías
@@ -798,10 +664,9 @@ El uso de herramientas de IA generativa fue exclusivamente para:
 ---
 
 **Facundo Herrera**
-- 🎓 Estudiante de Tecnicatura Universitaria en Programación
-- 🏫 Universidad Tecnológica Nacional - Facultad Regional General Pacheco (UTN-FRGP)
-- 🐙 GitHub: [@f-Rra](https://github.com/f-Rra)
-- 📧 Email: Facundo.Herrera@alumnos.frgp.utn.edu.ar
+- Estudiante de Tecnicatura Universitaria en Programación
+- Universidad Tecnológica Nacional - Facultad Regional General Pacheco (UTN-FRGP)
+- Email: Facundo.herrera@alumnos.frgp.utn.edu.ar
 
 ---
 
