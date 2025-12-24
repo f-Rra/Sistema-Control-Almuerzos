@@ -1,4 +1,9 @@
-# Sistema Control de Almuerzos
+
+<div align="center">
+  <img src="./docs/SCA.png" alt="Logo SCA"/>
+</div>
+
+---
 
 Sistema completo de gestión de comedores corporativos desarrollado en C# con Windows Forms, diseñado para el registro eficiente de comensales mediante credenciales RFID y generación de reportes automáticos.
 
@@ -31,10 +36,16 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 
 ##  Funcionalidades del Sistema
 
+<table>
+<tr>
+<td width="80" style="vertical-align: middle; padding-top: 2px;">
 
-###  Menú de Navegación Lateral
+<img src="./docs/menu_lateral.png" alt="Menú Lateral" width="80"/>
 
-![Menú Lateral](./docs/screenshots/menu_lateral.png)
+</td>
+<td style="vertical-align: middle;">
+
+<h3 style="margin-top: 0;">Menú de Navegación Lateral</h3>
 
 El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a todos los módulos:
 
@@ -51,11 +62,13 @@ El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a t
 - Acceso rápido sin menús desplegables
 - Navegación fluida entre módulos sin recargas
 
+</td>
+</tr>
+</table>
+
 ###  Panel de Bienvenida
 
-![Panel de Bienvenida](./docs/screenshots/panel_principal.png)
-
-**Dashboard Principal del Sistema:**
+![Panel de Bienvenida](./docs/panel_bienvenida.png)
 
 **Lista de Últimos Servicios:**
 - Visualización de los servicios más recientes
@@ -75,96 +88,64 @@ El sistema cuenta con un menú lateral fijo que permite acceder rápidamente a t
 
 ###  Gestión de Servicios
 
-![Gestión de Servicios](./docs/screenshots/gestion_servicios.png)
+![Gestión de Servicios](./docs/gestion_servicios.png)
 
-**Control de Jornadas de Comedor:**
-
-**Inicio de Servicio:**
+**Configuración e Inicio:**
 - Selección de lugar (Comedor/Quincho)
-- Registro de proyección de comensales esperados
-- Total de invitados estimados
-- Inicio automático de cronómetro
+- Ingreso de proyección de comensales esperados
+- Registro de total de invitados estimados
+- Botón para iniciar servicio
+- Validación de datos antes de activar
 
-**Durante el Servicio:**
--  Estado activo en tiempo real
--  Duración y progreso del servicio
--  Total de comensales reales vs proyectados
--  Comparativa de eficiencia porcentual
+**Panel Informativo Durante el Servicio:**
+- Lugar actual del servicio activo
+- Fecha y hora de inicio
+- Proyección inicial configurada
+- Cronómetro de duración en tiempo real (HH:mm:ss)
+- Contador de comensales registrados (actualización automática)
+- Total de invitados esperados
+- Comparativa visual proyección vs realidad
 
-**Cierre de Servicio:**
-- Finalización del servicio activo
+**Finalización del Servicio:**
+- Botón para cerrar servicio activo
 - Cálculo automático de estadísticas finales
-- Registro de duración total en minutos
-- Comparación final: proyección vs realidad
+- Duración total, cobertura y diferencia
+- Generación de registro histórico para reportes
 
 ###  Registro de Comensales
 
-![Registro de Comensales](./docs/screenshots/registro_comensales.png)
+![Registro de Comensales](./docs/registro_comensales.png)
 
-#### Panel Superior de Control
+**Sistema de Registro por Credencial:**
+- Campo de ingreso para ID de credencial (método actual: teclado)
+- Validación inmediata al ingresar ID
+- Ventana de confirmación temporal 
+- Muestra: nombre completo, empresa y hora de registro
 
-**Información del Servicio Activo:**
-- Lugar actual (Comedor/Quincho)
-- Fecha y hora de inicio del servicio
-- Proyección inicial de comensales
-- Cronómetro en tiempo real
-- **Contador principal**: Total de comensales registrados
-- Total de invitados del día
-- Actualización automática con cada registro
-
-#### Sistema de Registro por Credencial
-
-**Método Actual: Ingreso por Teclado**
-- Campo de entrada para ID de credencial
-- Validación automática de duplicados
-- Confirmación visual inmediata con ventana temporal
-- Información mostrada al registrar:
-  - Nombre completo del empleado
-  - Empresa de pertenencia
-  - Hora exacta de registro
-- Ventana de confirmación desaparece automáticamente (4 segundos)
-- Listo para siguiente registro inmediato
-
-**Método Futuro: RFID Automático**
-- Lectura automática de credencial al acercarla
-- Registro instantáneo (<1 segundo)
-- Cero intervención del operador
-- Guía completa de implementación incluida en documentación
-
-**Listado en Tiempo Real:**
+**Listado de Registros en Tiempo Real:**
 - Tabla con todos los registros del servicio actual
-- Columnas mostradas:
-  - Nombre y apellido del comensal
-  - Empresa de pertenencia
-  - Hora exacta de registro (formato HH:mm:ss)
-- Actualización automática al registrar nuevo comensal
-- Ordenado por hora de registro (más recientes arriba)
-- Optimizado para lectura rápida por personal de cocina
+- Columnas: nombre, empresa, hora de registro (HH:mm:ss)
+- Actualización automática con cada nuevo registro
+- Ordenado cronológicamente (más recientes arriba)
+- Optimizado para consulta rápida del personal de cocina
 
-**Validaciones del Sistema:**
--  Empleado debe estar activo en el sistema
--  Detección de registros duplicados en servicio actual
--  Vinculación automática al servicio activo del lugar
--  Verificación de existencia de servicio activo
--  Contador automático de comensales
--  Sincronización con estadísticas del panel principal
+**Validaciones Automáticas:**
+- Verificación de empleado activo en el sistema
+- Detección de registros duplicados en el servicio actual
+- Vinculación automática al servicio activo del lugar
+- Sincronización con contador del panel superior
 
 ###  Registro Manual de Comensales
 
-![Registro Manual de Comensales](./docs/screenshots/registro_manual.png)
+![Registro Manual de Comensales](./docs/registro_manual.png)
 
-**Funcionalidad Alternativa:**
+**Método Alternativo de Registro:**
 - Para empleados sin credencial asignada
-- Búsqueda por nombre y/o apellido
-- Selección de empleado desde listado
-- Registro con las mismas validaciones que RFID
-- Útil para casos de pérdida o daño de credencial
-
-**Registro de Invitados:**
-- Gestión de invitados sin datos personales
-- Solo se registra la cantidad
-- No requiere información individual
-- Suma al contador total del servicio
+- Búsqueda por nombre y/o apellido del empleado
+- Filtrado en tiempo real del listado
+- Selección de empleado desde la tabla de resultados
+- Registro con las mismas validaciones que el sistema por credencial
+- Útil para casos de pérdida, daño o falta de credencial
 
 ###  Gestión de Empleados
 
