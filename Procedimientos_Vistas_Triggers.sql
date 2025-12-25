@@ -241,7 +241,7 @@ BEGIN
     INNER JOIN Empresas emp ON r.IdEmpresa = emp.IdEmpresa
     INNER JOIN Lugares l ON r.IdLugar = l.IdLugar
     WHERE r.IdServicio = @IdServicio
-    ORDER BY r.Hora;
+    ORDER BY r.IdRegistro DESC;
 END
 GO
 
