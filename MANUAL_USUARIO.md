@@ -33,8 +33,6 @@ El Sistema Control de Almuerzos es una aplicación diseñada para gestionar de f
 12. [Preguntas Frecuentes](#-preguntas-frecuentes)
 13. [Solución de Problemas](#-solución-de-problemas-comunes)
 14. [Consejos de Uso](#-consejos-para-usar-mejor-el-sistema)
-15. [Soporte Técnico](#-soporte-técnico)
-16. [Mejoras Futuras](#-mejoras-futuras-del-sistema)
 
 ---
 
@@ -1327,63 +1325,6 @@ Las estadísticas proporcionan una **visión general instantánea** del sistema 
 **Backups:**
 -  Asegurarse de que el técnico configure backups automáticos
 -  Solicitar backup manual antes de actualizaciones importantes
-
----
-
-###  Seguridad y Buenas Prácticas
-
-**Protección de Datos:**
--  No compartir acceso al módulo de administración
--  No dejar la computadora sin atender con sesión abierta
--  Registrar solo comensales reales (no registros ficticios)
-
-**Integridad de Información:**
--  Verificar datos antes de guardar
--  No editar manualmente la base de datos (puede romper el sistema)
--  Documentar cualquier situación irregular
-
-**Respaldos:**
--  Coordinar con IT backups automáticos diarios
--  Mantener respaldos de reportes importantes
--  Probar la restauración periódicamente
-
----
-
-##  Soporte Técnico
-
-### ¿Cuándo Contactar al Soporte?
-
-**Situaciones que requieren soporte:**
--  El sistema no abre o se cierra inesperadamente
--  Errores de base de datos
--  Problemas de instalación o configuración
--  Se necesita capacitación adicional
--  Solicitud de nuevas funcionalidades
--  Migración de datos
-
-**Situaciones que NO requieren soporte:**
--  Empleado olvidó credencial → Usar registro manual
--  Credencial no existe → Verificar con administrador
--  Duda sobre cómo usar un módulo → Consultar este manual
-
----
-
-##  Mejoras Futuras del Sistema
-
-### Fase 2: Integración RFID (Próximamente)
-
-**¿Qué cambiará?**
--  En lugar de ingresar el ID por teclado, el empleado solo pasará su credencial por un lector
--  El registro será **automático e instantáneo** (<1 segundo)
--  No se necesitará que el empleado diga nada
-
-**¿Qué se mantiene igual?**
--  Todas las funcionalidades actuales
--  Los mismos reportes y estadísticas
--  La misma interfaz
-
-**¿Necesitaré capacitación nueva?**
-- No, el sistema será aún más simple de usar
 
 ---
 
