@@ -495,41 +495,6 @@ Sistema-Control-Almuerzos/
 
 ---
 
-## Migración a Aplicación Web
-
-
-El sistema actual de Windows Forms podría evolucionar hacia una **aplicación web** utilizando **ASP.NET Core MVC**, lo que permitiría las siguientes mejoras:
-
-**Portal de Comensales:**
--  **Sistema de autenticación**: Usuario y contraseña personalizado para cada comensal
--  **Menú semanal**: Visualización del menú planificado para cada día
--  **Reserva anticipada de lugar**: Seleccionar con antelación dónde almorzar (Comedor/Quincho)
--  **Confirmación/Cancelación**: Gestionar reservas con anticipación para mejor proyección
-
-**Mejoras Administrativas:**
--  **Acceso multiplataforma**: Gestión desde cualquier dispositivo 
--  **Gestión de menús**: Módulo para planificación y publicación de menús semanales
--  **Sistema de permisos**: Roles diferenciados (Admin, Cocina, Comensales)
--  **Reportes en línea**: Generación y descarga de reportes sin instalación
-
-**Ventajas de la Migración:**
--  Mayor accesibilidad y flexibilidad
--  Reducción de costos de mantenimiento de equipos locales
--  Mejor experiencia de usuario para comensales
--  Escalabilidad mejorada para múltiples ubicaciones
--  Integración más sencilla con sistemas corporativos existentes
--  Actualizaciones centralizadas sin necesidad de redistribución
-
-### Arquitectura Propuesta
-
-La migración mantendría la actual arquitectura en 3 capas, adaptándola:
-- **Capa de Dominio**: Reutilizable sin modificaciones mayores
-- **Capa de Negocio**: Adaptable con mínimos cambios
-- **Capa de Presentación**: Reemplazo completo con tecnologías web (Razor Pages, Blazor, React, etc.)
-- **Capa adicional API**: Servicios RESTful para aplicaciones móviles
-
-**Nota**: Esta migración representa una evolución natural del proyecto y podría implementarse de manera gradual, manteniendo el sistema actual como referencia funcional.
-
 ##  Documentación
 
 ### Documentos Disponibles
