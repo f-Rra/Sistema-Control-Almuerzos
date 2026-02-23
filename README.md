@@ -82,7 +82,6 @@ Sistema completo de gestión de comedores corporativos desarrollado en C# con Wi
 - Total de invitados esperados
 - Duración del servicio
 - Total de comensales registrados
-- Comparativa final proyección vs real
 
 ###  Gestión de Servicios
 
@@ -563,16 +562,11 @@ Las siguientes herramientas fueron utilizadas para la elaboración de documentac
 - **Git** - Control de versiones local
 - **GitHub** - Repositorio remoto y colaboración
 
-**Edición de Documentos:**
-- **Visual Studio Code** - Edición de archivos Markdown
-- **Markdown Preview Enhanced** - Vista previa de documentación
-
 ### Nota sobre el uso de IA
 
 El uso de herramientas de IA generativa fue exclusivamente para:
 - **Documentación**: Redacción clara y profesional de guías
 - **Refactorización**: Mejora de estructura y legibilidad del código existente
-- **Consultoría**: Validación de soluciones técnicas y mejores prácticas
 - **Patrones de diseño**: Sugerencias para organización de código (Mappers, Helpers, Gestores)
 
 **Toda la lógica de negocio, arquitectura del sistema, diseño de base de datos y funcionalidades fueron desarrolladas por el autor del proyecto.**
