@@ -573,16 +573,6 @@ El uso de herramientas de IA generativa fue exclusivamente para:
 
 ---
 
-##  Enlaces Útiles
-
-- [Repositorio en GitHub](https://github.com/f-Rra/Sistema-Control-Almuerzos)
-- [Documentación de .NET Framework](https://docs.microsoft.com/en-us/dotnet/framework/)
-- [SQL Server Documentation](https://docs.microsoft.com/en-us/sql/sql-server/)
-- [ReaLTaiizor UI Components](https://github.com/Taiizor/ReaLTaiizor)
-- [iTextSharp Documentation](https://github.com/itext/itextsharp)
-
----
-
 **Facundo Herrera**
 - Estudiante de Tecnicatura Universitaria en Programación
 - Universidad Tecnológica Nacional - Facultad Regional General Pacheco (UTN-FRGP)
