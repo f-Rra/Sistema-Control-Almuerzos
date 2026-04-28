@@ -1,10 +1,3 @@
-
-<div align="center">
-  <img src="./docs/SCA.png" alt="Logo SCA"/>
-</div>
-
----
-
 Sistema completo de gestión de comedores corporativos desarrollado en C# con Windows Forms, diseñado para el registro eficiente de comensales mediante credenciales RFID y generación de reportes automáticos.
 
 ![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.8-blue)
