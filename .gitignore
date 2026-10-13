@@ -4,3 +4,6 @@
 **/obj/
 *.user
 *.suo
+
+# Paquetes de NuGet
+packages/
